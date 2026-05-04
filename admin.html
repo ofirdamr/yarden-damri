@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ניהול גלריה | ירדן דמרי</title>
+  <style>
+    :root {
+      --bg:#1a1210; --card:#231815; --border:rgba(232,200,176,.15);
+      --blush:#E8C8B0; --rose:#C4805A; --text:#F0E6DC;
+      --muted:rgba(240,230,220,.5); --green:#25D366; --red:#e05a5a; --gold:#D4AF6A;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Tahoma,sans-serif;min-height:100vh}
+    /* LOGIN */
+    #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+    .login-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;width:360px;text-align:center}
+    .login-box h1{font-size:1.4rem;margin-bottom:8px;color:var(--blush)}
+    .login-box p{font-size:.85rem;color:var(--muted);margin-bottom:28px}
+    .login-box input{width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:1rem;margin-bottom:12px;text-align:right}
+    .login-box button{width:100%;padding:13px;border-radius:10px;border:none;background:var(--rose);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:10px}
+    .login-box button.outline{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.85rem}
+    .login-error{color:var(--red);font-size:.8rem;margin-top:6px;display:none}
+    /* RESET */
+    #reset-screen{display:none;min-height:100vh;align-items:center;justify-content:center}
+    /* MAIN */
+    #admin-main{display:none}
+    header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    header h1{font-size:1rem;color:var(--blush)}
+    .header-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+    .btn-primary{background:var(--rose);color:#fff}
+    .btn-secondary{background:rgba(255,255,255,.08);color:var(--text)}
+    .btn-danger{background:var(--red);color:#fff}
+    /* TABS */
+    .tabs{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 28px}
+    .tab{padding:12px 20px;cursor:pointer;font-size:.85rem;color:var(--muted);border-bottom:2px solid transparent;transition:.2s}
+    .tab.active{color:var(--blush);border-bottom-color:var(--blush)}
+    /* TOOLBAR */
+    .toolbar{padding:14px 28px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+    .toolbar input[type=text]{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.83rem;width:220px}
+    .filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:.78rem;transition:.2s}
+    .filter-btn.active,.filter-btn:hover{background:var(--rose);color:#fff;border-color:var(--rose)}
+    .stats{font-size:.78rem;color:var(--muted);margin-right:auto}
+    /* GRID */
+    #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;padding:18px 28px}
+    .img-card{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;border:2px solid transparent;cursor:grab;transition:border-color .2s,opacity .2s}
+    .img-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+    .img-card.pinned{border-color:var(--gold)}
+    .img-card.selected{border-color:var(--blush);box-shadow:0 0 0 3px var(--blush);}
+    .img-card.dragging{opacity:.4}
+    .img-card.drag-over{border-color:var(--blush);box-shadow:0 0 0 2px var(--blush)}
+    .card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;opacity:0;transition:opacity .2s}
+    .img-card:hover .card-overlay{opacity:1}
+    .card-actions{display:flex;gap:4px;justify-content:flex-end;margin-bottom:4px}
+    .card-btn{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65)}
+    .card-btn:hover{background:rgba(0,0,0,.9)}
+    .cat-label{font-size:.65rem;background:rgba(196,128,90,.8);color:#fff;padding:2px 6px;border-radius:4px;display:inline-block;margin-top:2px;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .pin-badge{position:absolute;top:5px;right:5px;background:var(--gold);color:#000;font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:4px}
+    .hidden-badge{position:absolute;top:5px;left:5px;background:var(--red);color:#fff;font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:4px}
+    /* CATEGORIES TAB */
+    #tab-cats{display:none;padding:24px 28px}
+    .cat-manager{max-width:600px}
+    .cat-manager h2{font-size:1rem;color:var(--blush);margin-bottom:16px}
+    .cat-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+    .cat-item{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+    .cat-item span{flex:1;font-size:.9rem}
+    .cat-count{font-size:.75rem;color:var(--muted)}
+    .cat-add{display:flex;gap:8px}
+    .cat-add input{flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem}
+    /* SETTINGS TAB */
+    #tab-settings{display:none;padding:24px 28px}
+    .settings-section{max-width:500px}
+    .settings-section h2{font-size:1rem;color:var(--blush);margin-bottom:16px}
+    .field-group{margin-bottom:20px}
+    .field-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:6px}
+    .field-group input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem}
+    /* CAT MODAL */
+    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:8000;display:none;align-items:center;justify-content:center}
+    .modal-bg.open{display:flex}
+    .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:340px}
+    .modal h3{color:var(--blush);margin-bottom:16px;font-size:1rem}
+    .modal select,.modal input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem;margin-bottom:12px}
+    .modal-actions{display:flex;gap:8px;justify-content:flex-end}
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--rose);color:#fff;padding:11px 26px;border-radius:28px;font-size:.88rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+    .toast.show{opacity:1}
+    @media(max-width:600px){
+      #grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));padding:12px 14px}
+      .toolbar,.tabs,header{padding-left:14px;padding-right:14px}
+    }
+  </style>
+</head>
+<body>
+<script src="gallery-data.js"></script>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>🔐 ניהול גלריה</h1>
+    <p>ירדן דמרי | כניסה לממשק הניהול</p>
+    <input type="password" id="pwd-input" placeholder="סיסמה..." />
+    <button onclick="tryLogin()">כניסה</button>
+    <button class="outline" onclick="showReset()">שכחתי סיסמה</button>
+    <p class="login-error" id="login-err">סיסמה שגויה</p>
+  </div>
+</div>
+
+<!-- RESET SCREEN -->
+<div id="reset-screen" style="min-height:100vh;display:none;align-items:center;justify-content:center">
+  <div class="login-box">
+    <h1>🔑 איפוס סיסמה</h1>
+    <p>הזן את קוד האיפוס שקיבלת</p>
+    <input type="text" id="reset-code-input" placeholder="קוד איפוס..." />
+    <p style="font-size:.75rem;color:var(--muted);margin-bottom:16px">קוד האיפוס: <strong style="color:var(--blush)" id="reset-hint"></strong></p>
+    <input type="password" id="new-pwd-input" placeholder="סיסמה חדשה..." />
+    <input type="password" id="new-pwd-confirm" placeholder="אישור סיסמה..." />
+    <button onclick="doReset()">שמור סיסמה חדשה</button>
+    <button class="outline" onclick="document.getElementById('reset-screen').style.display='none';document.getElementById('login-screen').style.display='flex'">חזור</button>
+    <p class="login-error" id="reset-err"></p>
+  </div>
+</div>
+
+<!-- ADMIN MAIN -->
+<div id="admin-main">
+  <header>
+    <h1>✨ ניהול גלריה — ירדן דמרי</h1>
+    <div class="header-actions">
+      <button class="btn btn-primary" onclick="saveAndPublish()">💾 שמור ופרסם</button>
+      <a href="index.html" class="btn btn-secondary">← חזור לאתר</a>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('gallery',this)">🖼️ גלריה</div>
+    <div class="tab" onclick="switchTab('cats',this)">🏷️ קטגוריות</div>
+    <div class="tab" onclick="switchTab('analytics',this)">📊 ביצועים</div>
+    <div class="tab" onclick="switchTab('settings',this)">⚙️ הגדרות</div>
+  </div>
+
+  <!-- GALLERY TAB -->
+  <div id="tab-gallery">
+    <div class="toolbar">
+      <input type="text" id="search-input" placeholder="🔍 חיפוש..." oninput="filterGrid()" />
+      <button class="filter-btn active" onclick="setFilter('all',this)">הכל</button>
+      <button class="filter-btn" onclick="setFilter('pinned',this)">📌 נעוצות</button>
+      <button class="filter-btn" onclick="setFilter('hidden',this)">🚫 מוסתרות</button>
+      <div id="cat-filter-btns"></div>
+      <button class="btn btn-secondary" onclick="toggleMultiSelect()" id="multiSelectBtn" style="margin-right:auto">☑️ בחירה מרובה</button>
+      <button class="btn btn-secondary" onclick="resetOrder()">🔄 אפס סדר</button>
+      <span class="stats" id="stats-label"></span>
+    </div>
+    <!-- Multi-select action bar -->
+    <div id="multi-action-bar" style="display:none;padding:10px 28px;background:rgba(196,128,90,.12);border-bottom:1px solid var(--border);display:none;align-items:center;gap:12px;flex-wrap:wrap">
+      <span id="selected-count" style="font-size:.85rem;color:var(--blush);font-weight:600">0 נבחרו</span>
+      <button class="btn btn-secondary" onclick="selectAllVisible()">בחר הכל</button>
+      <button class="btn btn-secondary" onclick="clearSelection()">נקה בחירה</button>
+      <button class="btn" style="background:var(--gold);color:#000" onclick="bulkHide()">🚫 הסתר נבחרות</button>
+      <button class="btn btn-danger" onclick="bulkDelete()">🗑️ מחק נבחרות</button>
+      <button class="btn btn-secondary" onclick="toggleMultiSelect()">✕ ביטול</button>
+    </div>
+    <div id="grid"></div>
+  </div>
+
+  <!-- CATEGORIES TAB -->
+  <div id="tab-cats" style="display:none;padding:24px 28px">
+    <div class="cat-manager">
+      <h2>🏷️ ניהול קטגוריות</h2>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:20px">הוסיפי קטגוריות ואחר כך בגלריה לחצי על 🏷️ בכל תמונה כדי לשייך אותה.</p>
+      <div class="cat-list" id="cat-list"></div>
+      <div class="cat-add">
+        <input type="text" id="new-cat-input" placeholder="שם קטגוריה חדשה (למשל: כלות, פורים...)" />
+        <button class="btn btn-primary" onclick="addCategory()">+ הוסף</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS TAB -->
+  <div id="tab-analytics" style="display:none;padding:24px 28px">
+
+    <!-- KPI Cards -->
+    <div id="analytics-setup-msg" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:600px;margin-bottom:28px;">
+      <h2 style="color:var(--blush);font-size:1rem;margin-bottom:12px">🔗 חיבור Google Analytics</h2>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:16px">
+        כדי לראות נתונים אמיתיים יש להזין את מזהה המדידה של Google Analytics (GA4).<br>
+        נראה כך: <strong style="color:var(--blush)">G-XXXXXXXXXX</strong>
+      </p>
+      <div style="display:flex;gap:10px;">
+        <input type="text" id="ga-id-input" placeholder="G-XXXXXXXXXX" style="flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem;" />
+        <button class="btn btn-primary" onclick="saveGaId()">שמור</button>
+      </div>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:10px">
+        אין לך חשבון GA4? 👉 <a href="https://analytics.google.com" target="_blank" style="color:var(--blush)">analytics.google.com</a> → צור נכס חדש ← קבל מזהה מדידה
+      </p>
+    </div>
+
+    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px;"></div>
+
+    <!-- Charts Row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
+        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">📈 כניסות לאתר — 30 יום אחרונים</h3>
+        <canvas id="visits-chart" height="160"></canvas>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
+        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">🖱️ לחיצות על כפתורי וואטסאפ</h3>
+        <canvas id="cta-chart" height="160"></canvas>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
+        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">📱 מכשירים</h3>
+        <canvas id="device-chart" height="160"></canvas>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
+        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">🔝 עמודים פופולריים</h3>
+        <div id="top-pages" style="font-size:.82rem;color:var(--text);line-height:2.2;"></div>
+      </div>
+    </div>
+
+    <!-- GA4 Link -->
+    <div style="margin-top:20px;text-align:center;">
+      <a id="ga-link" href="https://analytics.google.com" target="_blank" class="btn btn-secondary" style="font-size:.82rem;">
+        🔗 פתח Google Analytics לדוח מלא
+      </a>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div id="tab-settings" style="display:none;padding:24px 28px">
+    <div class="settings-section">
+      <h2>⚙️ הגדרות</h2>
+      <div class="field-group">
+        <label>שינוי סיסמה</label>
+        <input type="password" id="settings-current-pwd" placeholder="סיסמה נוכחית" style="margin-bottom:8px" />
+        <input type="password" id="settings-new-pwd" placeholder="סיסמה חדשה" style="margin-bottom:8px" />
+        <input type="password" id="settings-confirm-pwd" placeholder="אישור סיסמה חדשה" style="margin-bottom:12px" />
+        <button class="btn btn-primary" onclick="changePwd()">שמור סיסמה</button>
+      </div>
+      <div class="field-group" style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border)">
+        <label style="color:var(--red)">אזור מסוכן</label>
+        <button class="btn btn-danger" onclick="clearAllSettings()">🗑️ מחק את כל הגדרות הגלריה</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div class="modal-bg" id="cat-modal">
+  <div class="modal">
+    <h3>🏷️ שייך קטגוריה לתמונה</h3>
+    <input type="hidden" id="modal-img-url" />
+    <select id="modal-cat-select">
+      <option value="">— ללא קטגוריה —</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">ביטול</button>
+      <button class="btn btn-primary" onclick="saveImageCategory()">שמור</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── PASSWORD ──────────────────────────────────────────────────
+const DEFAULT_PWD = 'yarden2025';
+const RESET_CODE  = 'makeup123';   // קוד שחזור קבוע — שמרי אותו במקום בטוח
+
+function getPwd() { return localStorage.getItem('admin_pwd') || DEFAULT_PWD; }
+function savePwd(p){ localStorage.setItem('admin_pwd', p); }
+
+function tryLogin() {
+  if (document.getElementById('pwd-input').value === getPwd()) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-main').style.display = 'block';
+    initAdmin();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+  }
+}
+document.getElementById('pwd-input').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+
+function showReset() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('reset-screen').style.display = 'flex';
+  document.getElementById('reset-hint').textContent = RESET_CODE;
+}
+function doReset() {
+  const code = document.getElementById('reset-code-input').value;
+  const np   = document.getElementById('new-pwd-input').value;
+  const nc   = document.getElementById('new-pwd-confirm').value;
+  const err  = document.getElementById('reset-err');
+  if (code !== RESET_CODE) { err.textContent='קוד שגוי'; err.style.display='block'; return; }
+  if (!np || np.length < 4) { err.textContent='סיסמה קצרה מדי'; err.style.display='block'; return; }
+  if (np !== nc) { err.textContent='הסיסמאות לא תואמות'; err.style.display='block'; return; }
+  savePwd(np);
+  showToast('✅ סיסמה שונתה בהצלחה!');
+  setTimeout(() => { document.getElementById('reset-screen').style.display='none'; document.getElementById('login-screen').style.display='flex'; }, 1500);
+}
+
+function changePwd() {
+  const cur = document.getElementById('settings-current-pwd').value;
+  const np  = document.getElementById('settings-new-pwd').value;
+  const nc  = document.getElementById('settings-confirm-pwd').value;
+  if (cur !== getPwd()) { showToast('❌ סיסמה נוכחית שגויה'); return; }
+  if (!np || np.length < 4) { showToast('❌ סיסמה קצרה מדי'); return; }
+  if (np !== nc) { showToast('❌ הסיסמאות לא תואמות'); return; }
+  savePwd(np);
+  showToast('✅ סיסמה שונתה!');
+  ['settings-current-pwd','settings-new-pwd','settings-confirm-pwd'].forEach(id => document.getElementById(id).value='');
+}
+
+// ─── STATE ─────────────────────────────────────────────────────
+let allImages = [];
+let currentFilter = 'all';
+let currentCatFilter = '';
+let searchTerm = '';
+
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem('gallery_admin') || '{"hidden":[],"pinned":[],"order":[],"cats":{},"catList":[]}'); }
+  catch(e) { return {hidden:[],pinned:[],order:[],cats:{},catList:[]}; }
+}
+function saveSettings(s) { localStorage.setItem('gallery_admin', JSON.stringify(s)); }
+
+// ─── INIT ───────────────────────────────────────────────────────
+function initAdmin() {
+  const s = getSettings();
+  allImages = [...GALLERY_IMAGES];
+  if (s.order && s.order.length > 0) {
+    const orderMap = {};
+    s.order.forEach((url,i) => orderMap[url] = i);
+    allImages.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
+  }
+  renderGrid();
+  renderCatList();
+  renderCatFilters();
+}
+
+// ─── GRID ───────────────────────────────────────────────────────
+let multiSelectMode = false;
+let selectedUrls = new Set();
+
+function toggleMultiSelect() {
+  multiSelectMode = !multiSelectMode;
+  selectedUrls.clear();
+  document.getElementById('multi-action-bar').style.display = multiSelectMode ? 'flex' : 'none';
+  document.getElementById('multiSelectBtn').style.background = multiSelectMode ? 'var(--rose)' : '';
+  document.getElementById('selected-count').textContent = '0 נבחרו';
+  renderGrid();
+}
+
+function toggleCardSelect(url) {
+  if (selectedUrls.has(url)) selectedUrls.delete(url);
+  else selectedUrls.add(url);
+  document.getElementById('selected-count').textContent = selectedUrls.size + ' נבחרו';
+  const card = document.querySelector(`.img-card[data-url="${CSS.escape(url)}"]`);
+  if (card) card.classList.toggle('selected', selectedUrls.has(url));
+}
+
+function selectAllVisible() {
+  document.querySelectorAll('.img-card').forEach(c => { selectedUrls.add(c.dataset.url); c.classList.add('selected'); });
+  document.getElementById('selected-count').textContent = selectedUrls.size + ' נבחרו';
+}
+
+function clearSelection() {
+  selectedUrls.clear();
+  document.querySelectorAll('.img-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('selected-count').textContent = '0 נבחרו';
+}
+
+function bulkHide() {
+  if (!selectedUrls.size) return;
+  const s = getSettings();
+  s.hidden = [...new Set([...(s.hidden||[]),...selectedUrls])];
+  saveSettings(s); selectedUrls.clear(); renderGrid();
+  showToast(`הוסתרו ${selectedUrls.size || s.hidden.length} תמונות`);
+}
+
+function bulkDelete() {
+  if (!selectedUrls.size) return;
+  if (!confirm(`למחוק ${selectedUrls.size} תמונות?`)) return;
+  const s = getSettings();
+  s.hidden = [...new Set([...(s.hidden||[]),...selectedUrls])];
+  saveSettings(s);
+  showToast(`נמחקו ${selectedUrls.size} תמונות`);
+  selectedUrls.clear(); renderGrid();
+}
+
+function renderGrid() {
+  const s = getSettings();
+  const hiddenSet = new Set(s.hidden||[]);
+  const pinnedSet = new Set(s.pinned||[]);
+  const catMap    = s.cats||{};
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  let imgs = allImages;
+  if (currentFilter==='hidden') imgs = imgs.filter(i=>hiddenSet.has(i.u));
+  else if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
+  if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
+  if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
+
+  imgs.forEach(img => {
+    const cat = catMap[img.u]||'';
+    const div = document.createElement('div');
+    div.className='img-card'+(hiddenSet.has(img.u)?' hidden-card':'')+(pinnedSet.has(img.u)?' pinned':'');
+    div.dataset.url=img.u; div.draggable=true;
+    div.innerHTML=`
+      <img src="${img.u}" alt="" loading="lazy"/>
+      ${pinnedSet.has(img.u)?'<span class="pin-badge">📌</span>':''}
+      ${hiddenSet.has(img.u)?'<span class="hidden-badge">🚫</span>':''}
+      <div class="card-overlay">
+        <div class="card-actions">
+          <button class="card-btn" onclick="togglePin('${img.u}')" title="נעץ">${pinnedSet.has(img.u)?'📌':'📍'}</button>
+          <button class="card-btn" onclick="toggleHide('${img.u}')" title="הסתר">${hiddenSet.has(img.u)?'👁️':'🚫'}</button>
+          <button class="card-btn" onclick="openCatModal('${img.u}')" title="קטגוריה">🏷️</button>
+        </div>
+        ${cat?`<span class="cat-label">🏷️ ${cat}</span>`:''}
+      </div>`;
+
+    if (multiSelectMode) {
+      if (selectedUrls.has(img.u)) div.classList.add('selected');
+      div.style.cursor = 'pointer';
+      div.addEventListener('click', e => { e.stopPropagation(); toggleCardSelect(img.u); });
+    }
+    div.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',img.u);div.classList.add('dragging');});
+    div.addEventListener('dragend',()=>div.classList.remove('dragging'));
+    div.addEventListener('dragover',e=>{e.preventDefault();div.classList.add('drag-over');});
+    div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
+    div.addEventListener('drop',e=>{e.preventDefault();div.classList.remove('drag-over');reorder(e.dataTransfer.getData('text/plain'),img.u);});
+    grid.appendChild(div);
+  });
+
+  // stats
+  const s2=getSettings();
+  document.getElementById('stats-label').textContent=`סה"כ: ${allImages.length} | מוסתרות: ${(s2.hidden||[]).length} | נעוצות: ${(s2.pinned||[]).length} | מוצגות: ${imgs.length}`;
+}
+
+function setFilter(f,btn) {
+  currentFilter=f; currentCatFilter='';
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+function filterGrid(){ searchTerm=document.getElementById('search-input').value; renderGrid(); }
+
+// ─── ACTIONS ────────────────────────────────────────────────────
+function togglePin(url){
+  const s=getSettings(); s.pinned=s.pinned||[];
+  const i=s.pinned.indexOf(url);
+  if(i>=0)s.pinned.splice(i,1); else s.pinned.unshift(url);
+  saveSettings(s); renderGrid(); showToast(i>=0?'הוסר הנעץ':'📌 נעוץ!');
+}
+function toggleHide(url){
+  const s=getSettings(); s.hidden=s.hidden||[];
+  const i=s.hidden.indexOf(url);
+  if(i>=0)s.hidden.splice(i,1); else s.hidden.push(url);
+  saveSettings(s); renderGrid(); showToast(i>=0?'👁️ מוצגת שוב':'🚫 הוסתרה');
+}
+function reorder(fromUrl,toUrl){
+  const fi=allImages.findIndex(i=>i.u===fromUrl), ti=allImages.findIndex(i=>i.u===toUrl);
+  if(fi<0||ti<0||fi===ti)return;
+  const item=allImages.splice(fi,1)[0]; allImages.splice(ti,0,item);
+  const s=getSettings(); s.order=allImages.map(i=>i.u); saveSettings(s);
+  renderGrid(); showToast('✅ סדר עודכן');
+}
+function resetOrder(){
+  if(!confirm('לאפס סדר?'))return;
+  const s=getSettings(); s.order=[]; saveSettings(s); initAdmin(); showToast('🔄 סדר אופס');
+}
+function saveAndPublish(){
+  showToast('✅ שינויים נשמרו! רפרש את האתר הראשי.');
+}
+function clearAllSettings(){
+  if(!confirm('למחוק את כל הגדרות הגלריה (הסתרות, נעוצים, קטגוריות, סדר)?'))return;
+  localStorage.removeItem('gallery_admin'); initAdmin(); showToast('🗑️ אופס הכל');
+}
+
+// ─── CATEGORIES ─────────────────────────────────────────────────
+function renderCatList(){
+  const s=getSettings(); const cats=s.catList||[]; const catMap=s.cats||{};
+  const list=document.getElementById('cat-list'); if(!list)return;
+  list.innerHTML='';
+  if(cats.length===0){list.innerHTML='<p style="color:var(--muted);font-size:.85rem">אין קטגוריות עדיין. הוסיפי למטה.</p>';return;}
+  cats.forEach(cat=>{
+    const count=Object.values(catMap).filter(c=>c===cat).length;
+    const div=document.createElement('div'); div.className='cat-item';
+    div.innerHTML=`<span>${cat}</span><span class="cat-count">${count} תמונות</span>
+      <button class="btn btn-secondary" style="padding:5px 10px;font-size:.75rem" onclick="deleteCat('${cat}')">🗑️</button>`;
+    list.appendChild(div);
+  });
+}
+function renderCatFilters(){
+  const s=getSettings(); const cats=s.catList||[];
+  const container=document.getElementById('cat-filter-btns'); if(!container)return;
+  container.innerHTML='';
+  cats.forEach(cat=>{
+    const btn=document.createElement('button'); btn.className='filter-btn'; btn.textContent='🏷️ '+cat;
+    btn.onclick=()=>{ currentCatFilter=cat; currentFilter='all'; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderGrid(); };
+    container.appendChild(btn);
+  });
+}
+function addCategory(){
+  const inp=document.getElementById('new-cat-input'); const name=inp.value.trim(); if(!name)return;
+  const s=getSettings(); s.catList=s.catList||[];
+  if(s.catList.includes(name)){showToast('קטגוריה כבר קיימת');return;}
+  s.catList.push(name); saveSettings(s); inp.value='';
+  renderCatList(); renderCatFilters(); showToast('✅ קטגוריה נוספה');
+}
+function deleteCat(name){
+  if(!confirm(`למחוק קטגוריה "${name}"? התמונות ישארו אבל ייאבד הסיווג.`))return;
+  const s=getSettings();
+  s.catList=(s.catList||[]).filter(c=>c!==name);
+  Object.keys(s.cats||{}).forEach(url=>{ if(s.cats[url]===name)delete s.cats[url]; });
+  saveSettings(s); renderCatList(); renderCatFilters(); showToast('🗑️ קטגוריה נמחקה');
+}
+function openCatModal(url){
+  const s=getSettings(); const cats=s.catList||[];
+  document.getElementById('modal-img-url').value=url;
+  const sel=document.getElementById('modal-cat-select');
+  sel.innerHTML='<option value="">— ללא קטגוריה —</option>';
+  cats.forEach(cat=>{ const opt=document.createElement('option'); opt.value=opt.textContent=cat; if((s.cats||{})[url]===cat)opt.selected=true; sel.appendChild(opt); });
+  document.getElementById('cat-modal').classList.add('open');
+}
+function closeModal(){ document.getElementById('cat-modal').classList.remove('open'); }
+function saveImageCategory(){
+  const url=document.getElementById('modal-img-url').value;
+  const cat=document.getElementById('modal-cat-select').value;
+  const s=getSettings(); s.cats=s.cats||{};
+  if(cat) s.cats[url]=cat; else delete s.cats[url];
+  saveSettings(s); closeModal(); renderGrid(); showToast(cat?`🏷️ שויך ל${cat}`:'🏷️ סיווג הוסר');
+}
+document.getElementById('cat-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('cat-modal'))closeModal(); });
+
+// ─── TABS ────────────────────────────────────────────────────────
+function switchTab(name,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  ['gallery','cats','settings'].forEach(t=>{
+    const el=document.getElementById('tab-'+t); if(el) el.style.display=t===name?'block':'none';
+  });
+  if(name==='cats') renderCatList();
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
+</script>
+</body>
+</html>
