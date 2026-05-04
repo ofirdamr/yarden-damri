@@ -266,14 +266,23 @@
 
 <script>
 // ─── PASSWORD ──────────────────────────────────────────────────
-const DEFAULT_PWD = 'yarden2025';
-const RESET_CODE  = 'makeup123';   // קוד שחזור קבוע — שמרי אותו במקום בטוח
+// סיסמא מאוחסנת כ-hash בלבד — לא ניתן לקרוא מהקוד
+// DEFAULT_HASH = sha256('yarden2025') — שיני סיסמא מתוך האדמין לאחר כניסה
+const DEFAULT_HASH = '9e02cbdc92e469004659aeddc066d4d17054cc3797cccf08938c59ca45cb222f';
 
-function getPwd() { return localStorage.getItem('admin_pwd') || DEFAULT_PWD; }
-function savePwd(p){ localStorage.setItem('admin_pwd', p); }
+async function hashPwd(pwd) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 
-function tryLogin() {
-  if (document.getElementById('pwd-input').value === getPwd()) {
+function getSavedHash() { return localStorage.getItem('admin_pwd_hash') || DEFAULT_HASH; }
+function savePwd(p){ hashPwd(p).then(h => localStorage.setItem('admin_pwd_hash', h)); }
+function getPwd() { return null; }
+
+async function tryLogin() {
+  const input = document.getElementById('pwd-input').value;
+  const hash = await hashPwd(input);
+  if (hash === getSavedHash()) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-main').style.display = 'block';
     initAdmin();
@@ -283,17 +292,20 @@ function tryLogin() {
 }
 document.getElementById('pwd-input').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
 
+// קוד שחזור — hash של 'makeup2026' — שמרי את הקוד המקורי במקום בטוח
+const RESET_HASH = '6b771e8d9ca4345d4217c9af5e4cf278cb1067a89abbdb1a374436ad26b39f73';
+
 function showReset() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('reset-screen').style.display = 'flex';
-  document.getElementById('reset-hint').textContent = RESET_CODE;
 }
-function doReset() {
+async function doReset() {
   const code = document.getElementById('reset-code-input').value;
   const np   = document.getElementById('new-pwd-input').value;
   const nc   = document.getElementById('new-pwd-confirm').value;
   const err  = document.getElementById('reset-err');
-  if (code !== RESET_CODE) { err.textContent='קוד שגוי'; err.style.display='block'; return; }
+  const codeHash = await hashPwd(code);
+  if (codeHash !== RESET_HASH) { err.textContent='קוד שגוי'; err.style.display='block'; return; }
   if (!np || np.length < 4) { err.textContent='סיסמה קצרה מדי'; err.style.display='block'; return; }
   if (np !== nc) { err.textContent='הסיסמאות לא תואמות'; err.style.display='block'; return; }
   savePwd(np);
@@ -301,11 +313,12 @@ function doReset() {
   setTimeout(() => { document.getElementById('reset-screen').style.display='none'; document.getElementById('login-screen').style.display='flex'; }, 1500);
 }
 
-function changePwd() {
+async function changePwd() {
   const cur = document.getElementById('settings-current-pwd').value;
   const np  = document.getElementById('settings-new-pwd').value;
   const nc  = document.getElementById('settings-confirm-pwd').value;
-  if (cur !== getPwd()) { showToast('❌ סיסמה נוכחית שגויה'); return; }
+  const curHash = await hashPwd(cur);
+  if (curHash !== getSavedHash()) { showToast('❌ סיסמה נוכחית שגויה'); return; }
   if (!np || np.length < 4) { showToast('❌ סיסמה קצרה מדי'); return; }
   if (np !== nc) { showToast('❌ הסיסמאות לא תואמות'); return; }
   savePwd(np);
