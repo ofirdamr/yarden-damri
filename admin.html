@@ -538,10 +538,56 @@ document.getElementById('cat-modal').addEventListener('click',e=>{ if(e.target==
 // ─── TABS ────────────────────────────────────────────────────────
 function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
-  ['gallery','cats','settings'].forEach(t=>{
+  ['gallery','cats','settings','analytics'].forEach(t=>{
     const el=document.getElementById('tab-'+t); if(el) el.style.display=t===name?'block':'none';
   });
   if(name==='cats') renderCatList();
+  if(name==='analytics') initAnalytics();
+}
+
+// ─── ANALYTICS ───────────────────────────────────────────────────
+function saveGaId(){
+  const id=document.getElementById('ga-id-input').value.trim();
+  if(!id) return;
+  localStorage.setItem('ga4_id',id);
+  initAnalytics();
+}
+
+function initAnalytics(){
+  const gaId = localStorage.getItem('ga4_id');
+  const setupMsg = document.getElementById('analytics-setup-msg');
+  const kpiCards = document.getElementById('kpi-cards');
+
+  if(!gaId){
+    setupMsg.style.display='block';
+    kpiCards.innerHTML='';
+    return;
+  }
+  setupMsg.style.display='none';
+
+  // מציג נתוני localStorage (ביקורים, לייקים, תגובות)
+  const likes = JSON.parse(localStorage.getItem('img_likes')||'{}');
+  const comments = JSON.parse(localStorage.getItem('img_comments')||'{}');
+  const reviews = JSON.parse(localStorage.getItem('site_reviews')||'[]');
+  const totalLikes = Object.values(likes).reduce((a,b)=>a+b,0);
+  const totalComments = Object.values(comments).reduce((a,c)=>a+c.length,0);
+
+  const kpis = [
+    {label:'לייקים על תמונות', value: totalLikes, icon:'❤️'},
+    {label:'תגובות על תמונות', value: totalComments, icon:'💬'},
+    {label:'ביקורות באתר', value: reviews.length, icon:'⭐'},
+    {label:'תמונות בגלריה', value: allImages.length, icon:'🖼️'},
+    {label:'תמונות מוסתרות', value: (getSettings().hidden||[]).length, icon:'🚫'},
+  ];
+
+  kpiCards.innerHTML = kpis.map(k=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:center;">
+      <div style="font-size:1.8rem">${k.icon}</div>
+      <div style="font-size:1.6rem;font-weight:700;color:var(--blush);margin:6px 0">${k.value}</div>
+      <div style="font-size:.78rem;color:var(--muted)">${k.label}</div>
+    </div>`).join('');
+
+  document.getElementById('ga-link').href=`https://analytics.google.com/analytics/web/#/p${gaId.replace('G-','')}/reports/reportinghub`;
 }
 
 // ─── TOAST ───────────────────────────────────────────────────────
