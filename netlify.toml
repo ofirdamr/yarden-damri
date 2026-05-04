@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+# הפעלת sync אוטומטי כל לילה בחצות (UTC)
+[functions."sync-instagram"]
+  schedule = "0 0 * * *"
