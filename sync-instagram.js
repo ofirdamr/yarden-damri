@@ -102,21 +102,40 @@ function uploadToCloudinary(imageUrl, publicId) {
     process.exit(0);
   }
 
-  // 4. העלה לCloudinary
+  // 4. העלה לCloudinary — כולל תמונות carousel
   const newEntries = [];
   for (const post of newPosts) {
-    try {
-      const publicId = `yarden_makeup_${post.id}`;
-      console.log(`⬆️  Uploading ${publicId}...`);
-      const result = await uploadToCloudinary(post.media_url, publicId);
-      if (result.secure_url) {
-        newEntries.push({ u: result.secure_url, a: (post.caption || "").substring(0, 200) });
-        console.log(`✅ ${publicId}`);
-      } else {
-        console.warn(`⚠️ Upload failed for ${publicId}:`, result.error?.message);
+    const imagesToUpload = [];
+
+    if (post.media_type === "CAROUSEL_ALBUM") {
+      // שלוף את כל תמונות הcarousel
+      try {
+        const children = await get(
+          `https://graph.instagram.com/${post.id}/children?fields=id,media_type,media_url&access_token=${IG_TOKEN}`
+        );
+        if (children.data) {
+          for (const child of children.data) {
+            if (child.media_url) imagesToUpload.push({ url: child.media_url, id: child.id });
+          }
+        }
+      } catch(e) {
+        imagesToUpload.push({ url: post.media_url, id: post.id });
       }
-    } catch (e) {
-      console.error(`❌ ${post.id}:`, e.message);
+    } else {
+      imagesToUpload.push({ url: post.media_url, id: post.id });
+    }
+
+    for (const img of imagesToUpload) {
+      try {
+        const publicId = `yarden_makeup_${img.id}`;
+        console.log(`⬆️  Uploading ${publicId}...`);
+        const result = await uploadToCloudinary(img.url, publicId);
+        if (result.secure_url) {
+          newEntries.push({ u: result.secure_url, a: (post.caption || "").substring(0, 200) });
+        }
+      } catch(e) {
+        console.error(`❌ ${img.id}:`, e.message);
+      }
     }
   }
 
