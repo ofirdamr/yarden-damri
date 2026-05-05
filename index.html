@@ -366,7 +366,7 @@
     <div id="google-reviews-strip" style="max-width:1100px;margin:0 auto 40px;"></div>
 
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:40px;" class="reveal">
-      <a href="https://g.page/r/ChIJCT7WZcVzABUR-tcZLqfCp1c/review" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:20px;border:1px solid rgba(232,200,176,.2);color:var(--blush);text-decoration:none;font-size:.85rem;">🌐 כתבי ביקורת ב-Google</a>
+      <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:20px;border:1px solid rgba(232,200,176,.2);color:var(--blush);text-decoration:none;font-size:.85rem;">🌐 כתבי ביקורת ב-Google</a>
       <a href="https://www.d.co.il/" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:20px;border:1px solid rgba(232,200,176,.2);color:var(--blush);text-decoration:none;font-size:.85rem;">📒 דפי זהב</a>
       <a href="https://www.b144.co.il/" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:20px;border:1px solid rgba(232,200,176,.2);color:var(--blush);text-decoration:none;font-size:.85rem;">📋 B144</a>
       <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:20px;border:1px solid rgba(232,200,176,.2);color:var(--blush);text-decoration:none;font-size:.85rem;">📘 פייסבוק</a>
@@ -399,55 +399,20 @@
 
   function loadGoogleReviews() {
     const strip = document.getElementById('google-reviews-strip');
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=name,rating,user_ratings_total,reviews&language=he&key=${GAPI_KEY}`;
-    // Note: direct call to Places API from frontend requires CORS proxy or Places JS SDK
-    // Using the Places JS SDK approach (loads via script tag):
-    loadPlacesSDK();
+    // Google Places API דורש הפעלת Billing — מציג iframe של גוגל מפות במקום
+    strip.innerHTML = `
+      <div style="text-align:center;margin-bottom:20px;">
+        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer"
+           class="social-pill social-ig" style="display:inline-flex;margin:0 auto;">
+          ⭐ כתבי ביקורת ב-Google
+        </a>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDNcZjqQI84Zp-O4zJKyCdkdSh-ov0pwoQ&place_id=ChIJCT7WZcVzABUR-tcZLqfCp1c&language=he"
+        width="100%" height="300" style="border:0;border-radius:16px;max-width:700px;display:block;margin:0 auto;"
+        allowfullscreen loading="lazy">
+      </iframe>`;
   }
-
-  function loadPlacesSDK() {
-    if (window._placesLoaded) return;
-    window._placesLoaded = true;
-    const s = document.createElement('script');
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${GAPI_KEY}&libraries=places&callback=initPlaces`;
-    s.async = true;
-    document.head.appendChild(s);
-  }
-
-  window.initPlaces = function() {
-    const svc = new google.maps.places.PlacesService(document.createElement('div'));
-    svc.getDetails({ placeId: PLACE_ID, fields: ['name','rating','user_ratings_total','reviews'], language: 'he' }, (place, status) => {
-      if (status !== 'OK' || !place) return;
-      const strip = document.getElementById('google-reviews-strip');
-
-      // Overall rating badge
-      const badge = document.createElement('div');
-      badge.style.cssText = 'text-align:center;margin-bottom:24px;';
-      badge.innerHTML = `<span style="font-size:1.1rem;color:var(--blush)">Google ⭐ ${place.rating} / 5 <span style="opacity:.5;font-size:.85rem">(${place.user_ratings_total} ביקורות)</span></span>`;
-      strip.appendChild(badge);
-
-      if (!place.reviews || !place.reviews.length) return;
-      const grid = document.createElement('div');
-      grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;';
-      place.reviews.forEach(r => {
-        const card = document.createElement('div');
-        card.style.cssText = 'background:var(--card,#231815);border:1px solid rgba(232,200,176,.12);border-radius:16px;padding:18px;';
-        card.innerHTML = `
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <img src="${r.profile_photo_url}" alt="${r.author_name}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
-            <div><strong style="color:var(--blush);font-size:.9rem">${r.author_name}</strong><div style="color:var(--gold);font-size:.85rem">${'⭐'.repeat(r.rating)}</div></div>
-            <span style="margin-right:auto;font-size:.72rem;color:rgba(240,230,220,.4)">${r.relative_time_description}</span>
-          </div>
-          <p style="font-size:.88rem;line-height:1.6;color:rgba(240,230,220,.8)">${r.text}</p>`;
-        grid.appendChild(card);
-      });
-      strip.appendChild(grid);
-
-      // Update avg rating in header
-      const avg = place.rating;
-      document.getElementById('avg-rating').innerHTML = '⭐'.repeat(Math.round(avg)) + ` <span style="font-size:.9rem;color:rgba(240,230,220,.6)">${avg}/5 (${place.user_ratings_total})</span>`;
-    });
-  };
 
   // ---- Manual Reviews (localStorage) ----
   let chosenRating = 0;
