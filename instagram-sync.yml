@@ -23,7 +23,7 @@ jobs:
           CLOUDINARY_CLOUD: ${{ secrets.CLOUDINARY_CLOUD }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-        run: node scripts/sync-instagram.js
+        run: node sync-instagram.js
 
       - name: Commit and push if changed
         run: |
