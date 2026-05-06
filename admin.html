@@ -267,23 +267,17 @@
 
 <script>
 // ─── PASSWORD ──────────────────────────────────────────────────
-// סיסמא מאוחסנת כ-hash בלבד — לא ניתן לקרוא מהקוד
-// DEFAULT_HASH = sha256('yarden2025') — שיני סיסמא מתוך האדמין לאחר כניסה
-const DEFAULT_HASH = '9e02cbdc92e469004659aeddc066d4d17054cc3797cccf08938c59ca45cb222f';
+const DEFAULT_PWD = 'yarden2025';
 
-async function hashPwd(pwd) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+function getSavedHash() { return null; }
+function savePwd(p){ localStorage.setItem('admin_pwd', p); }
+function getPwd() { return localStorage.getItem('admin_pwd') || DEFAULT_PWD; }
 
-function getSavedHash() { return localStorage.getItem('admin_pwd_hash') || DEFAULT_HASH; }
-function savePwd(p){ hashPwd(p).then(h => localStorage.setItem('admin_pwd_hash', h)); }
-function getPwd() { return null; }
+async function hashPwd(pwd) { return pwd; }
 
 async function tryLogin() {
   const input = document.getElementById('pwd-input').value;
-  const hash = await hashPwd(input);
-  if (hash === getSavedHash()) {
+  if (input === getPwd()) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-main').style.display = 'block';
     initAdmin();
