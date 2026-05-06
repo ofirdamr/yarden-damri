@@ -741,7 +741,10 @@
         const igCmtCount = igStats ? igStats.comments.length : 0;
         const localCmtCount = ((JSON.parse(localStorage.getItem('img_comments')||'{}')||{})[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
-        div.innerHTML = `<img src="${item.u}" alt="${item.a}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;" />
+        const mediaEl = item.video
+          ? `<video src="${item.u}" poster="${item.thumb||''}" muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;" onmouseenter="this.play()" onmouseleave="this.pause()"></video>`
+          : `<img src="${item.u}" alt="${item.a}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;" />`;
+        div.innerHTML = `${mediaEl}
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.85) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:10px 12px;gap:8px;">
             <p style="color:#fff;font-size:.75rem;line-height:1.5;flex:1;">${item.a.substring(0,60)}</p>
             <button onclick="event.stopPropagation();toggleLike('${item.u}')" style="background:rgba(255,255,255,.15);border:none;border-radius:20px;padding:5px 10px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.8rem;backdrop-filter:blur(4px);">❤️ ${totalLikes}</button>
