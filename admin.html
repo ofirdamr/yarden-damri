@@ -156,6 +156,7 @@
       <button class="btn btn-secondary" onclick="selectAllVisible()">בחר הכל</button>
       <button class="btn btn-secondary" onclick="clearSelection()">נקה בחירה</button>
       <button class="btn" style="background:var(--gold);color:#000" onclick="bulkHide()">🚫 הסתר נבחרות</button>
+      <button class="btn" style="background:#4CAF50;color:#fff" onclick="bulkShow()">👁️ הצג נבחרות</button>
       <button class="btn btn-danger" onclick="bulkDelete()">🗑️ מחק נבחרות</button>
       <button class="btn btn-secondary" onclick="toggleMultiSelect()">✕ ביטול</button>
     </div>
@@ -384,7 +385,14 @@ function clearSelection() {
   document.getElementById('selected-count').textContent = '0 נבחרו';
 }
 
-function bulkHide() {
+function bulkShow() {
+  if (!selectedUrls.size) return;
+  const s = getSettings();
+  s.hidden = (s.hidden||[]).filter(u => !selectedUrls.has(u));
+  saveSettings(s);
+  showToast(`הוצגו ${selectedUrls.size} תמונות`);
+  selectedUrls.clear(); renderGrid();
+}
   if (!selectedUrls.size) return;
   const s = getSettings();
   s.hidden = [...new Set([...(s.hidden||[]),...selectedUrls])];
