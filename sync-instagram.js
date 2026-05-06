@@ -70,7 +70,7 @@ function uploadToCloudinary(imageUrl, publicId) {
   }
 
   // 1. קרא gallery-data.js הנוכחי
-  const galleryPath = path.join(__dirname, "..", "gallery-data.js");
+  const galleryPath = path.join(__dirname, "gallery-data.js");
   const currentContent = fs.readFileSync(galleryPath, "utf-8");
 
   // חלץ IDs קיימים
