@@ -21,6 +21,8 @@ const fs = require("fs");
 
 const app = express();
 app.use(express.json());
+app.use((_, res, next) => { res.set("Access-Control-Allow-Origin", "*"); res.set("Access-Control-Allow-Headers", "Content-Type"); next(); });
+app.options("*", (_, res) => res.sendStatus(200));
 
 const {
   INSTAGRAM_TOKEN, WEBHOOK_VERIFY_TOKEN,
@@ -161,6 +163,29 @@ app.post("/webhook", async (req, res) => {
 
 // Health check
 app.get("/", (_, res) => res.send("✅ Yarden webhook server running"));
+
+// Instagram feed — תמונות אחרונות
+app.get("/instagram-feed", async (_, res) => {
+  try {
+    const data = await get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&limit=12&access_token=${INSTAGRAM_TOKEN}`);
+    const posts = (data.data || []).filter(p => p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM").map(p => ({ u: p.media_url, a: p.caption || "", id: p.id }));
+    res.set("Cache-Control", "s-maxage=3600").json(posts);
+  } catch(e) { res.status(500).json([]); }
+});
+
+// ig-stats — לייקים ותגובות
+app.post("/ig-stats", async (req, res) => {
+  const ids = req.body?.ids || [];
+  if (!ids.length) return res.status(400).json({});
+  const results = {};
+  for (const id of ids.slice(0, 50)) {
+    try {
+      const data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${INSTAGRAM_TOKEN}`);
+      results[id] = { likes: data.like_count || 0, comments: (data.comments?.data || []).map(c => ({ user: c.username || "משתמש", text: c.text, date: c.timestamp })) };
+    } catch(e) { results[id] = { likes: 0, comments: [] }; }
+  }
+  res.set("Cache-Control", "s-maxage=1800").json(results);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server on port ${PORT}`));

@@ -630,7 +630,7 @@
     // טעינת פוסטים חדשים מ-Instagram (מופיעים ראשונים)
     (async () => {
       try {
-        const res = await fetch('/.netlify/functions/instagram-feed');
+        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
         if (!res.ok) return;
         const fresh = await res.json();
         if (!Array.isArray(fresh) || !fresh.length) return;
@@ -674,7 +674,7 @@
       const missing = ids.filter(id => !igStatsCache[id]);
       if (!missing.length) return;
       try {
-        const res = await fetch('/.netlify/functions/ig-stats', {
+        const res = await fetch('https://yarden-damri.onrender.com/ig-stats', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ids: missing.slice(0, 50) })
