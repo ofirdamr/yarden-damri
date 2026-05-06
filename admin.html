@@ -267,11 +267,11 @@
 
 <script>
 // ─── PASSWORD ──────────────────────────────────────────────────
-const DEFAULT_PWD = 'yarden2025';
+const DEFAULT_PWD = 'makeup2026';
 
 function getSavedHash() { return null; }
-function savePwd(p){ localStorage.setItem('admin_pwd', p); }
-function getPwd() { return localStorage.getItem('admin_pwd') || DEFAULT_PWD; }
+function savePwd(p){ localStorage.setItem('admin_pwd_v2', p); }
+function getPwd() { return localStorage.getItem('admin_pwd_v2') || DEFAULT_PWD; }
 
 async function hashPwd(pwd) { return pwd; }
 
