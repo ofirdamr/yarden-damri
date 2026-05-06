@@ -273,9 +273,9 @@ function getSavedHash() { return null; }
 function savePwd(p){ localStorage.setItem('admin_pwd_v2', p); }
 function getPwd() { return localStorage.getItem('admin_pwd_v2') || DEFAULT_PWD; }
 
-async function hashPwd(pwd) { return pwd; }
+function hashPwd(pwd) { return pwd; }
 
-async function tryLogin() {
+function tryLogin() {
   const input = document.getElementById('pwd-input').value;
   if (input === getPwd()) {
     document.getElementById('login-screen').style.display = 'none';
@@ -294,7 +294,7 @@ function showReset() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('reset-screen').style.display = 'flex';
 }
-async function doReset() {
+function doReset() {
   const code = document.getElementById('reset-code-input').value;
   const np   = document.getElementById('new-pwd-input').value;
   const nc   = document.getElementById('new-pwd-confirm').value;
@@ -307,7 +307,7 @@ async function doReset() {
   setTimeout(() => { document.getElementById('reset-screen').style.display='none'; document.getElementById('login-screen').style.display='flex'; }, 1500);
 }
 
-async function changePwd() {
+function changePwd() {
   const cur = document.getElementById('settings-current-pwd').value;
   const np  = document.getElementById('settings-new-pwd').value;
   const nc  = document.getElementById('settings-confirm-pwd').value;
@@ -385,11 +385,13 @@ function bulkShow() {
   showToast(`הוצגו ${selectedUrls.size} תמונות`);
   selectedUrls.clear(); renderGrid();
 }
+
+function bulkHide() {
   if (!selectedUrls.size) return;
   const s = getSettings();
   s.hidden = [...new Set([...(s.hidden||[]),...selectedUrls])];
   saveSettings(s); selectedUrls.clear(); renderGrid();
-  showToast(`הוסתרו ${selectedUrls.size || s.hidden.length} תמונות`);
+  showToast('הוסתרו תמונות');
 }
 
 function bulkDelete() {
