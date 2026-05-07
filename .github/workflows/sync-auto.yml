@@ -1,5 +1,4 @@
-yaml
-name: Instagram Sync
+name: Instagram Auto Sync
 
 on:
   schedule:
@@ -15,7 +14,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install cloudinary
-      - name: Run sync
+      - name: Sync Instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           CLOUDINARY_CLOUD: ${{ secrets.CLOUDINARY_CLOUD }}
