@@ -33,39 +33,62 @@ async function fetchAllMedia() {
 async function uploadToCloudinary(item) {
   const isVideo = item.media_type === "VIDEO";
   const publicId = `yarden_makeup_${item.id}`;
-  const result = await cloudinary.uploader.upload(item.media_url, {
-    public_id: publicId,
-    folder: "yarden_makeup",
-    resource_type: isVideo ? "video" : "image",
-  });
-  return {
+  
+  let result;
+  try {
+    result = await cloudinary.uploader.upload(item.media_url, {
+      public_id: publicId,
+      folder: "yarden_makeup",
+      resource_type: isVideo ? "video" : "image",
+    });
+  } catch (err) {
+    console.error(`Upload failed for ${item.id}:`, err.message);
+    return null;
+  }
+
+  const entry = {
     u: result.secure_url,
     a: item.caption?.substring(0, 200) || "",
-    video: isVideo || undefined,
-    thumb: isVideo ? item.thumbnail_url : undefined,
   };
+  
+  if (isVideo) {
+    entry.video = true;
+    if (item.thumbnail_url) entry.thumb = item.thumbnail_url;
+  }
+  
+  return entry;
 }
 
 (async () => {
+  console.log("Fetching media from Instagram...");
   const media = await fetchAllMedia();
-  const existing = JSON.parse(fs.readFileSync("./gallery-data.js", "utf-8").match(/const GALLERY_IMAGES = (\[[\s\S]*?\]);/)[1]);
-  const existingIds = new Set(existing.map(e => e.u.match(/yarden_makeup_(\d+)/)?.[1]).filter(Boolean));
+  console.log(`Total media items: ${media.length}`);
 
-  const newMedia = [];
+  const galleryPath = "./gallery-data.js";
+  const existingContent = fs.readFileSync(galleryPath, "utf-8");
+  const existingMatch = existingContent.match(/const GALLERY_IMAGES = (\[[\s\S]*?\]);/);
+  const existing = JSON.parse(existingMatch[1]);
+  const existingIds = new Set(existing.map(e => e.u?.match(/yarden_makeup_(\d+)/)?.[1]).filter(Boolean));
+
+  const newItems = [];
   for (const item of media) {
     if (!existingIds.has(item.id)) {
       console.log(`Uploading ${item.id} (${item.media_type})`);
       const uploaded = await uploadToCloudinary(item);
-      newMedia.push(uploaded);
-      existingIds.add(item.id);
+      if (uploaded) {
+        newItems.push(uploaded);
+        existingIds.add(item.id);
+      }
+    } else {
+      console.log(`Skipping ${item.id} (already exists)`);
     }
   }
 
-  if (newMedia.length) {
-    const updated = [...newMedia, ...existing];
-    fs.writeFileSync("./gallery-data.js", `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(updated, null, 2)};`);
-    console.log(`Added ${newMedia.length} new items.`);
+  if (newItems.length) {
+    const updated = [...newItems, ...existing];
+    fs.writeFileSync(galleryPath, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(updated, null, 2)};`);
+    console.log(`✅ Added ${newItems.length} new items (${newItems.filter(i => i.video).length} videos).`);
   } else {
-    console.log("No new items.");
+    console.log("✅ No new items.");
   }
 })();
