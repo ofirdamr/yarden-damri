@@ -4,7 +4,14 @@ window.igIdFromUrl = function(url) {
     const match = url.match(/yarden_makeup_(\d+)/);
     return match ? match[1] : null;
 };
-
+window.isVideoUrl = function(url) {
+    if (!url) return false;
+    // סרטונים מ-Cloudinary
+    if (url.includes('/video/upload/')) return true;
+    // סיומות נפוצות
+    if (url.match(/\.(mp4|mov|webm|avi)$/i)) return true;
+    return false;
+};
 window.openLightbox = function(url, alt, isVideo, thumb) {
     const lb = document.getElementById('lightbox');
     if (!lb.querySelector('.lb-media')) {
