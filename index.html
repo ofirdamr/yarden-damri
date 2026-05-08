@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
  
-</script><head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
+<head>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -22,7 +21,7 @@
   <meta name="author" content="ירדן דמרי" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content= ירדן דמרי | מאפרת כלות וערב" />
+  <meta property="og:title" content="ירדן דמרי | מאפרת כלות וערב" />
   <meta property="og:description" content="מאפרת כלות ואירועים מאילת. ניסיון עשיר, סגנון עדין וטבעי. מגיעה לכל הארץ. 054-7276716" />
   <meta property="og:image" content="https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527589/yarden_makeup/yarden_makeup_18404043595145595.jpg" />
   <meta property="og:locale" content="he_IL" />
@@ -763,8 +762,8 @@
             <button onclick="event.stopPropagation();toggleLike('${item.u}')" style="background:rgba(255,255,255,.15);border:none;border-radius:20px;padding:5px 10px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.8rem;backdrop-filter:blur(4px);">❤️ ${totalLikes}</button>
             <button onclick="event.stopPropagation();openComments('${item.u}','${item.a.substring(0,30).replace(/'/g,"")}')" style="background:rgba(255,255,255,.15);border:none;border-radius:20px;padding:5px 10px;color:#fff;cursor:pointer;font-size:.8rem;backdrop-filter:blur(4px);">💬 ${cmtCount}</button>
           </div>`;
-        div.onmouseenter = () => { div.style.transform='scale(1.02)'; div.querySelector('.overlay').style.opacity='1'; div.querySelector('img').style.transform='scale(1.05)'; };
-        div.onmouseleave = () => { div.style.transform='scale(1)'; div.querySelector('.overlay').style.opacity='0'; div.querySelector('img').style.transform='scale(1)'; };
+        div.onmouseenter = () => { div.style.transform='scale(1.02)'; div.querySelector('.overlay').style.opacity='1'; const imgEl=div.querySelector('img'); if(imgEl) imgEl.style.transform='scale(1.05)'; };
+        div.onmouseleave = () => { div.style.transform='scale(1)'; div.querySelector('.overlay').style.opacity='0'; const imgEl=div.querySelector('img'); if(imgEl) imgEl.style.transform='scale(1)'; };
         div.onclick = () => openLightbox(item.u, item.a);
         gallery.appendChild(div);
       });
