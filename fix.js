@@ -24,11 +24,12 @@ function get(url) {
     return;
   }
 
+  console.log("Fetching media...");
   let media = [];
   let url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,caption,timestamp&limit=100&access_token=${token}`;
 
   while (url) {
-    console.log("Fetching", url);
+    console.log("Fetching batch...");
     const res = await get(url);
     if (!res.data) break;
     for (const item of res.data) {
@@ -45,6 +46,8 @@ function get(url) {
     }
     url = res.paging?.next || null;
   }
+
+  console.log(`Total items: ${media.length}`);
 
   const gallery = media.map((m) => ({
     u: m.media_url,
