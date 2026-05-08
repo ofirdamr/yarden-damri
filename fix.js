@@ -55,10 +55,8 @@ function get(url) {
     ...(m.media_type === "VIDEO" && { video: true, thumb: m.thumbnail_url }),
   }));
 
-  fs.writeFileSync(
-    "./gallery-data.js",
-    `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`
-  );
-
+  const content = `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`;
+  fs.writeFileSync("gallery-data.js", content);
   console.log(`✅ Saved ${gallery.length} items (${gallery.filter((i) => i.video).length} videos)`);
+  console.log(`File size: ${content.length} characters`);
 })();
