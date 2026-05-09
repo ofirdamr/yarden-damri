@@ -758,7 +758,7 @@
         const localCmtCount = ((JSON.parse(localStorage.getItem('img_comments')||'{}')||{})[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
         const mediaEl = item.video
-          ? `<video src="${item.u}" poster="${item.thumb||''}" muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;" onmouseenter="this.play()" onmouseleave="this.pause()"></video>`
+         ? `<video src="${item.u}" poster="${item.thumb||''}" autoplay muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`
           : `<img src="${item.u}" alt="${item.a}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;" />`;
         div.innerHTML = `${mediaEl}
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.85) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:10px 12px;gap:8px;">
