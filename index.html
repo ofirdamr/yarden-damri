@@ -643,40 +643,45 @@
     }
 
     const PER_PAGE = 48;
-    let currentPage = 1;
-    let filteredImages = applyAdminSettings(GALLERY_IMAGES);
+ let currentImageIndex = 0;
+let currentFilteredImages = [];
 
-    const gallery = document.getElementById('ig-gallery');
-    const pagination = document.getElementById('pagination');
+function updateLightbox(index) {
+  const item = currentFilteredImages[index];
+  if (!item) return;
+  const container = document.getElementById('lb-media-container');
+  const isVideo = item.video === true || (item.u && item.u.includes('/video/upload/'));
+  container.innerHTML = isVideo
+    ? `<video src="${item.u}" poster="${item.thumb||''}" controls autoplay style="max-width:90vw;max-height:72vh;object-fit:contain;border-radius:12px;"></video>`
+    : `<img src="${item.u}" alt="${item.a}" style="max-width:90vw;max-height:72vh;object-fit:contain;border-radius:12px;">`;
+  document.querySelector('.lb-caption').textContent = item.a.substring(0, 200);
+  currentImageIndex = index;
+}
 
-    // טעינת פוסטים חדשים מ-Instagram (מופיעים ראשונים)
-    (async () => {
-      try {
-        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
-        if (!res.ok) return;
-        const fresh = await res.json();
-        if (!Array.isArray(fresh) || !fresh.length) return;
-        // סנן כאלה שכבר קיימים ב-gallery-data.js
-        const existingUrls = new Set(GALLERY_IMAGES.map(i => i.u));
-        const newOnes = fresh.filter(p => !existingUrls.has(p.u));
-        if (!newOnes.length) return;
-        filteredImages = applyAdminSettings([...newOnes, ...GALLERY_IMAGES]);
-        renderPage(1);
-      } catch(e) { /* אין חיבור לפונקציה */ }
-    })();
+function nextImage() {
+  if (currentImageIndex + 1 < currentFilteredImages.length) {
+    updateLightbox(currentImageIndex + 1);
+  }
+}
 
-    function openLightbox(url, alt) {
-      const lb = document.getElementById('lightbox');
-      lb.querySelector('img').src = url;
-      lb.querySelector('img').alt = alt;
-      lb.querySelector('.lb-caption').textContent = alt.substring(0, 120);
-      lb.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-      document.body.style.overflow = '';
-    }
+function prevImage() {
+  if (currentImageIndex - 1 >= 0) {
+    updateLightbox(currentImageIndex - 1);
+  }
+}
+
+function openLightbox(url, alt) {
+  const index = filteredImages.findIndex(item => item.u === url);
+  if (index !== -1) currentImageIndex = index;
+  updateLightbox(currentImageIndex);
+  lightbox.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
     function getLikes() { return JSON.parse(localStorage.getItem('img_likes')||'{}'); }
