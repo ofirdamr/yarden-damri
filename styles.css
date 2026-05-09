@@ -276,4 +276,32 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   z-index: 200;
+  /* חצים בלייטבקס */
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 9100;
+}
+.lb-nav button {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 2.5rem;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: 0.2s;
+}
+.lb-nav button:hover {
+  background: rgba(0,0,0,0.9);
+  transform: scale(1.05);
 }
