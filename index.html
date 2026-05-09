@@ -600,16 +600,22 @@
   </a>
 
   <!-- LIGHTBOX -->
-  <div id="lightbox" onclick="if(event.target===this)closeLightbox()" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;">
-    <button onclick="closeLightbox()" style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.8rem;width:44px;height:44px;border-radius:50%;cursor:pointer;line-height:1;">✕</button>
-    <img src="" alt="" style="max-width:90vw;max-height:72vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);" />
-    <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.8rem;margin-top:12px;max-width:600px;text-align:center;line-height:1.6;display:none;"></p>
-    <a id="lb-wa-btn" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%AA%D7%9E%D7%95%D7%A0%D7%94%20%D7%91%D7%92%D7%9C%D7%A8%D7%99%D7%94%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%F0%9F%92%8D" target="_blank"
-      style="margin-top:16px;background:#25D366;color:#fff;border:none;padding:12px 28px;border-radius:30px;font-size:.95rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:8px;cursor:pointer;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.825.737 5.469 2.027 7.77L0 32l8.453-2.007A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.261 20.094c-.398-.199-2.352-1.16-2.716-1.293-.364-.132-.629-.199-.894.199-.265.398-1.028 1.293-1.26 1.558-.232.265-.464.298-.862.1-.398-.199-1.68-.619-3.2-1.977-1.183-1.057-1.98-2.362-2.212-2.76-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.132-.265.066-.497-.033-.696-.099-.199-.894-2.152-1.226-2.947-.322-.773-.649-.668-.894-.68l-.762-.013c-.265 0-.696.099-1.061.497-.364.398-1.392 1.36-1.392 3.314s1.425 3.845 1.624 4.11c.199.265 2.803 4.277 6.79 5.997.949.41 1.69.655 2.268.839.953.304 1.82.261 2.505.158.764-.114 2.352-.961 2.683-1.889.33-.928.33-1.723.232-1.889-.099-.166-.364-.265-.762-.464z"/></svg>
-      💬 רוצה לוק כזה? דברי איתי
-    </a>
+<div id="lightbox" onclick="if(event.target===this)closeLightbox()" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;">
+  <button onclick="closeLightbox()" style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.8rem;width:44px;height:44px;border-radius:50%;cursor:pointer;line-height:1;">✕</button>
+  
+  <div style="position:relative;display:flex;align-items:center;justify-content:center;">
+    <button onclick="prevImage()" style="position:absolute;left:-50px;background:rgba(0,0,0,.6);border:none;color:#fff;font-size:2rem;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:9100;">❮</button>
+    <div id="lb-media-container" style="max-width:90vw;max-height:72vh;"></div>
+    <button onclick="nextImage()" style="position:absolute;right:-50px;background:rgba(0,0,0,.6);border:none;color:#fff;font-size:2rem;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:9100;">❯</button>
   </div>
+  
+  <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.8rem;margin-top:12px;max-width:600px;text-align:center;line-height:1.6;"></p>
+  <a id="lb-wa-btn" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%AA%D7%9E%D7%95%D7%A0%D7%94%20%D7%91%D7%92%D7%9C%D7%A8%D7%99%D7%94%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%F0%9F%92%8D" target="_blank"
+    style="margin-top:16px;background:#25D366;color:#fff;border:none;padding:12px 28px;border-radius:30px;font-size:.95rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.825.737 5.469 2.027 7.77L0 32l8.453-2.007A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.261 20.094c-.398-.199-2.352-1.16-2.716-1.293-.364-.132-.629-.199-.894.199-.265.398-1.028 1.293-1.26 1.558-.232.265-.464.298-.862.1-.398-.199-1.68-.619-3.2-1.977-1.183-1.057-1.98-2.362-2.212-2.76-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.132-.265.066-.497-.033-.696-.099-.199-.894-2.152-1.226-2.947-.322-.773-.649-.668-.894-.68l-.762-.013c-.265 0-.696.099-1.061.497-.364.398-1.392 1.36-1.392 3.314s1.425 3.845 1.624 4.11c.199.265 2.803 4.277 6.79 5.997.949.41 1.69.655 2.268.839.953.304 1.82.261 2.505.158.764-.114 2.352-.961 2.683-1.889.33-.928.33-1.723.232-1.889-.099-.166-.364-.265-.762-.464z"/></svg>
+    💬 רוצה לוק כזה? דברי איתי
+  </a>
+</div>
 
   <script src="gallery-data.js"></script>
   <script>
