@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /admin
 
-Sitemap: https://yarden-damri.co.il/sitemap.xml
+Sitemap: https://yardendamri.co.il/sitemap.xml

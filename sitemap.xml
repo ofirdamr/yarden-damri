@@ -3,15 +3,15 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://yarden-damri.co.il/</loc>
+    <loc>https://yardendamri.co.il/</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://yarden-damri.co.il/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://yardendamri.co.il/"/>
   </url>
 
   <url>
-    <loc>https://yarden-damri.co.il/accessibility-statement.html</loc>
+    <loc>https://yardendamri.co.il/accessibility-statement.html</loc>
     <lastmod>2025-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
