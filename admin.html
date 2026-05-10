@@ -153,6 +153,7 @@
     <!-- Multi-select action bar -->
     <div id="multi-action-bar" style="padding:10px 28px;background:rgba(196,128,90,.12);border-bottom:1px solid var(--border);display:none;align-items:center;gap:12px;flex-wrap:wrap">
       <span id="selected-count" style="font-size:.85rem;color:var(--blush);font-weight:600">0 נבחרו</span>
+      <span style="font-size:.75rem;color:var(--muted)">Shift+לחיצה לבחירת טווח</span>
       <button class="btn btn-secondary" onclick="selectAllVisible()">בחר הכל</button>
       <button class="btn btn-secondary" onclick="clearSelection()">נקה בחירה</button>
       <button class="btn" style="background:var(--gold);color:#000" onclick="bulkHide()">🚫 הסתר נבחרות</button>
@@ -348,22 +349,38 @@ function initAdmin() {
 // ─── GRID ───────────────────────────────────────────────────────
 let multiSelectMode = false;
 let selectedUrls = new Set();
+let lastClickedIdx = -1;
 
 function toggleMultiSelect() {
   multiSelectMode = !multiSelectMode;
   selectedUrls.clear();
+  lastClickedIdx = -1;
   document.getElementById('multi-action-bar').style.display = multiSelectMode ? 'flex' : 'none';
   document.getElementById('multiSelectBtn').style.background = multiSelectMode ? 'var(--rose)' : '';
   document.getElementById('selected-count').textContent = '0 נבחרו';
   renderGrid();
 }
 
-function toggleCardSelect(url) {
-  if (selectedUrls.has(url)) selectedUrls.delete(url);
-  else selectedUrls.add(url);
+function toggleCardSelect(url, idx, e) {
+  if (e && e.shiftKey && lastClickedIdx >= 0) {
+    // Range select
+    const cards = [...document.querySelectorAll('.img-card')];
+    const minI = Math.min(lastClickedIdx, idx);
+    const maxI = Math.max(lastClickedIdx, idx);
+    cards.forEach((c, i) => {
+      if (i >= minI && i <= maxI) {
+        selectedUrls.add(c.dataset.url);
+        c.classList.add('selected');
+      }
+    });
+  } else {
+    if (selectedUrls.has(url)) selectedUrls.delete(url);
+    else selectedUrls.add(url);
+    const card = document.querySelector(`.img-card[data-url="${CSS.escape(url)}"]`);
+    if (card) card.classList.toggle('selected', selectedUrls.has(url));
+    lastClickedIdx = idx;
+  }
   document.getElementById('selected-count').textContent = selectedUrls.size + ' נבחרו';
-  const card = document.querySelector(`.img-card[data-url="${CSS.escape(url)}"]`);
-  if (card) card.classList.toggle('selected', selectedUrls.has(url));
 }
 
 function selectAllVisible() {
@@ -418,7 +435,9 @@ function renderGrid() {
   if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
   if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
 
+  let cardIdx = 0;
   imgs.forEach(img => {
+    const myIdx = cardIdx++;
     const cat = catMap[img.u]||'';
     const div = document.createElement('div');
     div.className='img-card'+(hiddenSet.has(img.u)?' hidden-card':'')+(pinnedSet.has(img.u)?' pinned':'');
@@ -439,7 +458,7 @@ function renderGrid() {
     if (multiSelectMode) {
       if (selectedUrls.has(img.u)) div.classList.add('selected');
       div.style.cursor = 'pointer';
-      div.addEventListener('click', e => { e.stopPropagation(); toggleCardSelect(img.u); });
+      div.addEventListener('click', e => { e.stopPropagation(); toggleCardSelect(img.u, myIdx, e); });
     }
     div.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',img.u);div.classList.add('dragging');});
     div.addEventListener('dragend',()=>div.classList.remove('dragging'));
