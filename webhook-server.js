@@ -1,34 +1,42 @@
 /**
- * webhook-server/index.js
- * שרת Express חינמי על Render.com
- * מקבל webhooks ממטא → מעלה לCloudinary → מעדכן gallery-data.js ב-GitHub → מפעיל Netlify rebuild
+ * webhook-server.js
+ * Render.com backend for Yarden Damri makeup site
  * 
- * ENV VARS ב-Render:
- *   INSTAGRAM_TOKEN        - טוקן Instagram Graph
- *   WEBHOOK_VERIFY_TOKEN   - מחרוזת שרירותית שתבחרי (לדוגמה: yarden_secret_123)
+ * ENV VARS on Render:
+ *   INSTAGRAM_TOKEN        - Long-lived Instagram Graph token
+ *   WEBHOOK_VERIFY_TOKEN   - Any string you choose
  *   CLOUDINARY_CLOUD       - dfjwxc1cw
  *   CLOUDINARY_API_KEY     - 918422887842789
  *   CLOUDINARY_API_SECRET  - BbPBPuX5u0QqOqFTOOiiA9SvWMk
  *   GITHUB_TOKEN           - Personal Access Token (scope: repo)
- *   GITHUB_REPO            - username/repo-name
- *   NETLIFY_BUILD_HOOK     - URL מ-Netlify Build Hooks
+ *   GITHUB_REPO            - ofirdamr/yarden-damri
+ *   NETLIFY_BUILD_HOOK     - URL from Netlify Build Hooks (optional)
+ *   REFRESH_SECRET         - Any secret string to protect /refresh-token endpoint
  */
 
 const express = require("express");
 const https = require("https");
 const crypto = require("crypto");
-const fs = require("fs");
 
 const app = express();
 app.use(express.json());
-app.use((_, res, next) => { res.set("Access-Control-Allow-Origin", "*"); res.set("Access-Control-Allow-Headers", "Content-Type"); next(); });
+app.use((_, res, next) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 app.options("*", (_, res) => res.sendStatus(200));
 
 const {
-  INSTAGRAM_TOKEN, WEBHOOK_VERIFY_TOKEN,
+  WEBHOOK_VERIFY_TOKEN,
   CLOUDINARY_CLOUD, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET,
-  GITHUB_TOKEN, GITHUB_REPO, NETLIFY_BUILD_HOOK
+  GITHUB_TOKEN, GITHUB_REPO, NETLIFY_BUILD_HOOK,
+  REFRESH_SECRET
 } = process.env;
+
+// Token stored in memory — refreshed automatically
+let INSTAGRAM_TOKEN = process.env.INSTAGRAM_TOKEN;
+let tokenRefreshedAt = Date.now();
 
 // ── helpers ──────────────────────────────────
 
@@ -112,7 +120,52 @@ async function addToGallery(secureUrl, caption) {
   console.log("✅ Gallery updated + rebuild triggered");
 }
 
+// ── Token auto-refresh ────────────────────────
+
+async function refreshToken() {
+  try {
+    console.log("🔄 Refreshing Instagram token...");
+    const data = await get(
+      `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${INSTAGRAM_TOKEN}`
+    );
+    if (data.access_token) {
+      INSTAGRAM_TOKEN = data.access_token;
+      tokenRefreshedAt = Date.now();
+      const expiresIn = Math.floor(data.expires_in / 86400);
+      console.log(`✅ Token refreshed! Expires in ${expiresIn} days`);
+      console.log(`📋 NEW TOKEN (update in Render env): ${INSTAGRAM_TOKEN}`);
+    } else {
+      console.error("❌ Token refresh failed:", JSON.stringify(data));
+    }
+  } catch(e) {
+    console.error("❌ Token refresh error:", e.message);
+  }
+}
+
+// Auto-refresh every 45 days
+const FORTY_FIVE_DAYS = 45 * 24 * 60 * 60 * 1000;
+setInterval(refreshToken, FORTY_FIVE_DAYS);
+// Also refresh on startup if token is older than 30 days (can't know, so refresh after 1 hour to be safe on redeploy)
+setTimeout(async () => {
+  console.log("⏰ Startup token check — refreshing to get max lifetime...");
+  await refreshToken();
+}, 60 * 60 * 1000); // 1 hour after start
+
 // ── Routes ───────────────────────────────────
+
+app.get("/", (_, res) => res.json({
+  status: "✅ Yarden webhook server running",
+  tokenAge: Math.floor((Date.now() - tokenRefreshedAt) / 86400000) + " days"
+}));
+
+// Manual token refresh (protected)
+app.get("/refresh-token", async (req, res) => {
+  if (req.query.secret !== (REFRESH_SECRET || "yarden_refresh_secret")) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+  await refreshToken();
+  res.json({ success: true, message: "Token refreshed — check Render logs for new token" });
+});
 
 // Meta webhook verification
 app.get("/webhook", (req, res) => {
@@ -127,32 +180,24 @@ app.get("/webhook", (req, res) => {
 
 // Meta webhook events
 app.post("/webhook", async (req, res) => {
-  res.sendStatus(200); // מענה מיידי למטא
+  res.sendStatus(200);
   try {
     const body = req.body;
     if (body.object !== "instagram") return;
-
     for (const entry of body.entry || []) {
       for (const change of entry.changes || []) {
         if (change.field !== "media") continue;
         const mediaId = change.value?.media_id;
         if (!mediaId) continue;
-
         console.log(`📸 New Instagram media: ${mediaId}`);
-
-        // שלוף פרטי התמונה
         const media = await get(
           `https://graph.instagram.com/${mediaId}?fields=id,media_type,media_url,caption&access_token=${INSTAGRAM_TOKEN}`
         );
         if (!media.media_url || !["IMAGE","CAROUSEL_ALBUM"].includes(media.media_type)) continue;
-
-        // העלה לCloudinary
         const publicId = `yarden_makeup_${media.id}`;
         console.log(`⬆️ Uploading ${publicId}...`);
         const uploaded = await uploadToCloudinary(media.media_url, publicId);
         if (!uploaded.secure_url) { console.error("Upload failed:", uploaded.error); continue; }
-
-        // עדכן גלריה
         await addToGallery(uploaded.secure_url, media.caption);
       }
     }
@@ -161,28 +206,50 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Health check
-app.get("/", (_, res) => res.send("✅ Yarden webhook server running"));
-
-// Instagram feed — תמונות אחרונות
+// Instagram feed — latest posts
 app.get("/instagram-feed", async (_, res) => {
   try {
-    const data = await get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&limit=12&access_token=${INSTAGRAM_TOKEN}`);
-    const posts = (data.data || []).filter(p => p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM").map(p => ({ u: p.media_url, a: p.caption || "", id: p.id }));
+    const data = await get(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp,like_count,comments_count&limit=24&access_token=${INSTAGRAM_TOKEN}`
+    );
+    const posts = (data.data || [])
+      .filter(p => p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM")
+      .map(p => ({
+        u: p.media_url,
+        a: p.caption || "",
+        id: p.id,
+        likes: p.like_count || 0,
+        comments: p.comments_count || 0
+      }));
     res.set("Cache-Control", "s-maxage=3600").json(posts);
-  } catch(e) { res.status(500).json([]); }
+  } catch(e) {
+    console.error("Feed error:", e.message);
+    res.status(500).json([]);
+  }
 });
 
-// ig-stats — לייקים ותגובות
+// ig-stats — likes & comments for specific post IDs
 app.post("/ig-stats", async (req, res) => {
   const ids = req.body?.ids || [];
   if (!ids.length) return res.status(400).json({});
   const results = {};
   for (const id of ids.slice(0, 50)) {
     try {
-      const data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${INSTAGRAM_TOKEN}`);
-      results[id] = { likes: data.like_count || 0, comments: (data.comments?.data || []).map(c => ({ user: c.username || "משתמש", text: c.text, date: c.timestamp })) };
-    } catch(e) { results[id] = { likes: 0, comments: [] }; }
+      const data = await get(
+        `https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${INSTAGRAM_TOKEN}`
+      );
+      results[id] = {
+        likes: data.like_count || 0,
+        comments_count: data.comments_count || 0,
+        comments: (data.comments?.data || []).map(c => ({
+          user: c.username || "משתמש",
+          text: c.text,
+          date: c.timestamp
+        }))
+      };
+    } catch(e) {
+      results[id] = { likes: 0, comments_count: 0, comments: [] };
+    }
   }
   res.set("Cache-Control", "s-maxage=1800").json(results);
 });
