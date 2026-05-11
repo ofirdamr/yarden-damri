@@ -752,43 +752,43 @@
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
-    let igFeedCache = JSON.parse(sessionStorage.getItem('ig_feed')||'{}'); // url→{likes,comments_count,id}
+    let igCaptionMap = {}; // caption_key → stats
+
+    function captionKey(str) {
+      return (str||'').substring(0,40).replace(/\s+/g,'').toLowerCase();
+    }
+
+    function getIgStats(item) {
+      // Try by Cloudinary ID first
+      const id = igIdFromUrl(item.u);
+      if (id && igStatsCache[id]) return igStatsCache[id];
+      // Try by caption match
+      const ck = captionKey(item.a);
+      if (ck && igCaptionMap[ck]) return igCaptionMap[ck];
+      return null;
+    }
 
     // Load from /instagram-feed (has likes+comments_count directly)
     async function loadIgFeed() {
-      if (Object.keys(igFeedCache).length) return;
+      if (Object.keys(igCaptionMap).length) return;
       try {
         const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
         if (!res.ok) return;
         const posts = await res.json();
         posts.forEach(p => {
-          igFeedCache[p.id] = { likes: p.likes || 0, comments_count: p.comments || 0, comments: [] };
-          // also map by cloudinary pattern
-          igStatsCache[p.id] = igFeedCache[p.id];
+          const stats = { likes: p.likes || 0, comments_count: p.comments || 0, comments: [] };
+          igStatsCache[p.id] = stats;
+          const ck = captionKey(p.a);
+          if (ck) igCaptionMap[ck] = stats;
         });
-        sessionStorage.setItem('ig_feed', JSON.stringify(igFeedCache));
         sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-        renderPage(currentPage);
+        renderPage(currentPage); // silent update after load
       } catch(e) {}
     }
 
     async function loadIgStats(images) {
-      await loadIgFeed();
-      const ids = images.map(i => igIdFromUrl(i.u)).filter(Boolean);
-      const missing = ids.filter(id => !igStatsCache[id]);
-      if (!missing.length) return;
-      try {
-        const res = await fetch('https://yarden-damri.onrender.com/ig-stats', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ids: missing.slice(0, 50) })
-        });
-        if (!res.ok) return;
-        const data = await res.json();
-        Object.assign(igStatsCache, data);
-        sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-        renderPage(currentPage);
-      } catch(e) {}
+      // Fire and forget — don't await, gallery shows immediately
+      loadIgFeed().catch(()=>{});
     }
 
     function toggleLike(url) {
@@ -803,8 +803,8 @@
 
     function openComments(url, alt) {
       const key = btoa(url).substring(0,12);
-      const igId = igIdFromUrl(url);
-      const igComments = igId && igStatsCache[igId] ? igStatsCache[igId].comments : [];
+      const igStats = getIgStats({u: url, a: alt});
+      const igComments = igStats ? (igStats.comments || []) : [];
       const localComments = getComments()[key]||[];
       const allComments = [
         ...igComments.map(c=>({name:'@'+c.user, text:c.text, date: new Date(c.date).toLocaleDateString('he-IL'), ig:true})),
@@ -862,10 +862,9 @@
         const key = btoa(item.u).substring(0,12);
         const liked = localStorage.getItem('liked_'+key);
         const localLikes = (JSON.parse(localStorage.getItem('img_likes')||'{}')||{})[key]||0;
-        const igId = igIdFromUrl(item.u);
-        const igStats = igId && igStatsCache[igId];
+        const igStats = getIgStats(item);
         const totalLikes = (igStats ? igStats.likes : 0) + localLikes;
-        const igCmtCount = igStats ? igStats.comments.length : 0;
+        const igCmtCount = igStats ? (igStats.comments_count || igStats.comments?.length || 0) : 0;
         const localCmtCount = ((JSON.parse(localStorage.getItem('img_comments')||'{}')||{})[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
 
