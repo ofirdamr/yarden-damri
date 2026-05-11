@@ -752,8 +752,28 @@
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
+    let igFeedCache = JSON.parse(sessionStorage.getItem('ig_feed')||'{}'); // url→{likes,comments_count,id}
+
+    // Load from /instagram-feed (has likes+comments_count directly)
+    async function loadIgFeed() {
+      if (Object.keys(igFeedCache).length) return;
+      try {
+        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
+        if (!res.ok) return;
+        const posts = await res.json();
+        posts.forEach(p => {
+          igFeedCache[p.id] = { likes: p.likes || 0, comments_count: p.comments || 0, comments: [] };
+          // also map by cloudinary pattern
+          igStatsCache[p.id] = igFeedCache[p.id];
+        });
+        sessionStorage.setItem('ig_feed', JSON.stringify(igFeedCache));
+        sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
+        renderPage(currentPage);
+      } catch(e) {}
+    }
 
     async function loadIgStats(images) {
+      await loadIgFeed();
       const ids = images.map(i => igIdFromUrl(i.u)).filter(Boolean);
       const missing = ids.filter(id => !igStatsCache[id]);
       if (!missing.length) return;
@@ -862,10 +882,12 @@
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;" />`;
 
         div.innerHTML = `${mediaEl}
-          <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:10px 12px;gap:8px;" aria-hidden="true">
-            <p style="color:#fff;font-size:.82rem;line-height:1.5;flex:1;">${item.a ? item.a.substring(0,60) : ''}</p>
-            <button onclick="event.stopPropagation();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(255,255,255,.15);border:none;border-radius:20px;padding:6px 11px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.85rem;backdrop-filter:blur(4px);">❤️ ${totalLikes}</button>
-            <button onclick="event.stopPropagation();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(255,255,255,.15);border:none;border-radius:20px;padding:6px 11px;color:#fff;cursor:pointer;font-size:.85rem;backdrop-filter:blur(4px);">💬 ${cmtCount}</button>
+          <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none;" aria-hidden="true">
+            <p style="color:#fff;font-size:.82rem;line-height:1.5;padding:10px 12px;">${item.a ? item.a.substring(0,60) : ''}</p>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;">
+            <button onclick="event.stopPropagation();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
+            <button onclick="event.stopPropagation();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
           </div>`;
 
         div.setAttribute('tabindex', '0');
