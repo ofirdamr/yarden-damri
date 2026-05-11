@@ -206,22 +206,27 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Instagram feed — latest posts
+// Instagram feed — ALL posts with pagination
 app.get("/instagram-feed", async (_, res) => {
   try {
-    const data = await get(
-      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp,like_count,comments_count&limit=24&access_token=${INSTAGRAM_TOKEN}`
-    );
-    const posts = (data.data || [])
-      .filter(p => p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM")
-      .map(p => ({
-        u: p.media_url,
-        a: p.caption || "",
-        id: p.id,
-        likes: p.like_count || 0,
-        comments: p.comments_count || 0
-      }));
-    res.set("Cache-Control", "s-maxage=3600").json(posts);
+    let allPosts = [];
+    let url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp,like_count,comments_count&limit=100&access_token=${INSTAGRAM_TOKEN}`;
+    while (url && allPosts.length < 2000) {
+      const data = await get(url);
+      const posts = (data.data || [])
+        .filter(p => p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM")
+        .map(p => ({
+          u: p.media_url,
+          a: p.caption || "",
+          id: p.id,
+          likes: p.like_count || 0,
+          comments: p.comments_count || 0
+        }));
+      allPosts = allPosts.concat(posts);
+      url = data.paging?.next || null;
+    }
+    console.log(`Returning ${allPosts.length} posts`);
+    res.set("Cache-Control", "s-maxage=3600").json(allPosts);
   } catch(e) {
     console.error("Feed error:", e.message);
     res.status(500).json([]);
