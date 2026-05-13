@@ -783,6 +783,30 @@
         });
         sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
         renderPage(currentPage); // silent update after load
+
+        // Now fetch actual comments for all posts
+        const ids = posts.map(p => p.id).filter(Boolean);
+        if (ids.length) {
+          try {
+            const r2 = await fetch('https://yarden-damri.onrender.com/ig-stats', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ids })
+            });
+            if (r2.ok) {
+              const detailMap = await r2.json();
+              Object.entries(detailMap).forEach(([id, detail]) => {
+                if (igStatsCache[id]) {
+                  igStatsCache[id].comments = detail.comments || [];
+                  igStatsCache[id].comments_count = detail.comments_count || igStatsCache[id].comments_count;
+                  igStatsCache[id].likes = detail.likes || igStatsCache[id].likes;
+                }
+              });
+              sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
+              renderPage(currentPage);
+            }
+          } catch(e) {}
+        }
       } catch(e) {}
     }
 
@@ -1142,7 +1166,7 @@
   </a>
   <style>
     @keyframes waPulse { 0%{transform:scale(1);opacity:1} 100%{transform:scale(1.5);opacity:0} }
-    @media(max-width:480px){ #wa-fab{width:52px;height:52px;bottom:18px;left:18px;} }
+    @media(max-width:480px){ #wa-fab{display:none;} }
   </style>
 
 </body>
