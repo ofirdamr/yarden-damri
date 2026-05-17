@@ -25,5 +25,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add gallery-data.js instagram-stats.json
-          git diff --staged --quiet || (git commit -m "Update Instagram data" && git pull --rebase origin main && git push)
+          git diff --staged --quiet || git commit -m "Update Instagram data"
+          git push origin main
