@@ -80,7 +80,7 @@ async function uploadToCloudinary(item) {
   const gallery = [];
   for (const item of rawPosts) {
     const postId = item.post_id || item.id;
-    if (existingMap[postId]) {
+    if (existingMap[postId] && existingMap[postId].u && existingMap[postId].u.includes('cloudinary')) {
       gallery.push(existingMap[postId]);
       process.stdout.write(".");
     } else {
