@@ -37,7 +37,7 @@ async function uploadToCloudinary(item) {
     if (isVideo) { entry.video = true; entry.thumb = item.thumbnail_url || ""; }
     return entry;
   } catch (err) {
-    console.error(`Upload failed for ${item.id}:`, err.message);
+    console.error(`Upload failed for ${item.id}:`, err.message, JSON.stringify(err.error || err));
     return null;
   }
 }
