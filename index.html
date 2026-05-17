@@ -759,54 +759,24 @@
     }
 
     function getIgStats(item) {
-      // Try by Cloudinary ID first
-      const id = igIdFromUrl(item.u);
-      if (id && igStatsCache[id]) return igStatsCache[id];
+      // Try by Instagram post ID stored in gallery-data.js
+      if (item.id && igStatsCache[item.id]) return igStatsCache[item.id];
       // Try by caption match
       const ck = captionKey(item.a);
       if (ck && igCaptionMap[ck]) return igCaptionMap[ck];
       return null;
     }
 
-    // Load from /instagram-feed (has likes+comments_count directly)
+    // Load from instagram-stats.json (pre-built by GitHub Actions every 6 hours)
     async function loadIgFeed() {
-      if (Object.keys(igCaptionMap).length) return;
+      if (Object.keys(igStatsCache).length > 0) return;
       try {
-        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
+        const res = await fetch('instagram-stats.json?v=' + Math.floor(Date.now()/3600000));
         if (!res.ok) return;
-        const posts = await res.json();
-        posts.forEach(p => {
-          const stats = { likes: p.likes || 0, comments_count: p.comments || 0, comments: [] };
-          igStatsCache[p.id] = stats;
-          const ck = captionKey(p.a);
-          if (ck) igCaptionMap[ck] = stats;
-        });
+        const stats = await res.json();
+        Object.assign(igStatsCache, stats);
         sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-        renderPage(currentPage); // silent update after load
-
-        // Now fetch actual comments for all posts
-        const ids = posts.map(p => p.id).filter(Boolean);
-        if (ids.length) {
-          try {
-            const r2 = await fetch('https://yarden-damri.onrender.com/ig-stats', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ids })
-            });
-            if (r2.ok) {
-              const detailMap = await r2.json();
-              Object.entries(detailMap).forEach(([id, detail]) => {
-                if (igStatsCache[id]) {
-                  igStatsCache[id].comments = detail.comments || [];
-                  igStatsCache[id].comments_count = detail.comments_count || igStatsCache[id].comments_count;
-                  igStatsCache[id].likes = detail.likes || igStatsCache[id].likes;
-                }
-              });
-              sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-              renderPage(currentPage);
-            }
-          } catch(e) {}
-        }
+        renderPage(currentPage);
       } catch(e) {}
     }
 
@@ -831,7 +801,7 @@
       const igComments = igStats ? (igStats.comments || []) : [];
       const localComments = getComments()[key]||[];
       const allComments = [
-        ...igComments.map(c=>({name:'@'+c.user, text:c.text, date: new Date(c.date).toLocaleDateString('he-IL'), ig:true})),
+        ...igComments.map(c=>({name:'@'+(c.username||c.user||''), text:c.text||'', date: c.timestamp ? new Date(c.timestamp).toLocaleDateString('he-IL') : (c.date||''), ig:true})),
         ...localComments
       ];
       const modal = document.createElement('div');
