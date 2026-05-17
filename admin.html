@@ -607,7 +607,7 @@ function saveGaId(){
 }
 
 function initAnalytics(){
-  const gaId = localStorage.getItem('ga4_id');
+  const gaId = localStorage.getItem('ga4_id') || 'G-68XM6LS4HX';
   const setupMsg = document.getElementById('analytics-setup-msg');
   const kpiCards = document.getElementById('kpi-cards');
 
