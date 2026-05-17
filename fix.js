@@ -1,81 +1,114 @@
 const https = require("https");
 const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 function get(url) {
   return new Promise((resolve) => {
     https.get(url, (res) => {
       let data = "";
-      res.on("data", (chunk) => (data += chunk));
+      res.on("data", (c) => (data += c));
       res.on("end", () => { try { resolve(JSON.parse(data)); } catch (e) { resolve({}); } });
     }).on("error", () => resolve({}));
   });
 }
 
+async function uploadToCloudinary(item) {
+  const isVideo = item.media_type === "VIDEO";
+  const publicId = `yarden_makeup_${item.id}`;
+  try {
+    // Check if already uploaded
+    const existing = await cloudinary.api.resource(`yarden_makeup/${publicId}`, { resource_type: isVideo ? "video" : "image" }).catch(() => null);
+    if (existing) {
+      const entry = { u: existing.secure_url, a: (item.caption || "").substring(0, 200), id: item.post_id || item.id };
+      if (isVideo) { entry.video = true; entry.thumb = item.thumbnail_url || ""; }
+      return entry;
+    }
+    const result = await cloudinary.uploader.upload(item.media_url, {
+      public_id: publicId, folder: "yarden_makeup",
+      resource_type: isVideo ? "video" : "image",
+    });
+    const entry = { u: result.secure_url, a: (item.caption || "").substring(0, 200), id: item.post_id || item.id };
+    if (isVideo) { entry.video = true; entry.thumb = item.thumbnail_url || ""; }
+    return entry;
+  } catch (err) {
+    console.error(`Upload failed for ${item.id}:`, err.message);
+    return null;
+  }
+}
+
 (async () => {
   const token = process.env.INSTAGRAM_TOKEN;
-  if (!token) { console.log("❌ No token"); return; }
+  if (!token) { console.log("No token"); return; }
 
+  // 1. Fetch all media from Instagram
   console.log("Fetching media...");
-  let posts = [];
+  let rawPosts = [];
   let url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count&limit=100&access_token=${token}`;
-
   while (url) {
-    console.log("Fetching batch...");
     const res = await get(url);
     if (!res.data) break;
     for (const item of res.data) {
       if (item.media_type === "CAROUSEL_ALBUM") {
-        const children = await get(
-          `https://graph.instagram.com/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`
-        );
+        const children = await get(`https://graph.instagram.com/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`);
         for (const child of children.data || []) {
-          posts.push({ ...child, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id });
+          rawPosts.push({ ...child, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id });
         }
       } else {
-        posts.push({ ...item, post_id: item.id });
+        rawPosts.push({ ...item, post_id: item.id });
       }
     }
     url = res.paging?.next || null;
   }
+  console.log(`Fetched ${rawPosts.length} items`);
 
-  console.log(`Total items: ${posts.length}`);
+  // 2. Load existing gallery-data.js to avoid re-uploading
+  let existing = [];
+  try {
+    const raw = fs.readFileSync("gallery-data.js", "utf8").replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
+    existing = JSON.parse(raw);
+  } catch(e) {}
+  const existingMap = {};
+  existing.forEach(e => { if (e.id) existingMap[e.id] = e; });
 
-  // Build gallery-data.js (images)
-  const gallery = posts.map((m) => ({
-    u: m.media_url,
-    a: (m.caption || "").substring(0, 200),
-    id: m.post_id || m.id,
-    ...(m.media_type === "VIDEO" && { video: true, thumb: m.thumbnail_url }),
-  }));
-  const content = `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`;
-  fs.writeFileSync("gallery-data.js", content);
-  console.log(`✅ Saved ${gallery.length} items to gallery-data.js`);
+  // 3. Upload new items to Cloudinary
+  const gallery = [];
+  for (const item of rawPosts) {
+    const postId = item.post_id || item.id;
+    if (existingMap[postId]) {
+      gallery.push(existingMap[postId]);
+      process.stdout.write(".");
+    } else {
+      console.log(`\nUploading ${item.id}...`);
+      const entry = await uploadToCloudinary(item);
+      if (entry) gallery.push(entry);
+    }
+  }
+  console.log(`\nSaving ${gallery.length} items to gallery-data.js`);
+  fs.writeFileSync("gallery-data.js", `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
 
-  // Fetch comments for each unique post
-  console.log("Fetching comments...");
-  const uniquePostIds = [...new Set(posts.map(p => p.post_id || p.id).filter(Boolean))];
+  // 4. Fetch stats (likes + comments) per post
+  console.log("Fetching Instagram stats...");
+  const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
   const stats = {};
-
   for (const id of uniquePostIds) {
     try {
-      const data = await get(
-        `https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`
-      );
+      const data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
       stats[id] = {
         likes: data.like_count || 0,
         comments_count: data.comments_count || 0,
-        comments: (data.comments?.data || []).map(c => ({
-          username: c.username || "",
-          text: c.text || "",
-          timestamp: c.timestamp || ""
-        }))
+        comments: (data.comments?.data || []).map(c => ({ username: c.username || "", text: c.text || "", timestamp: c.timestamp || "" }))
       };
-      console.log(`  ✓ ${id}: ${stats[id].likes} likes, ${stats[id].comments_count} comments`);
+      console.log(`  ${id}: ${stats[id].likes} likes, ${stats[id].comments_count} comments`);
     } catch(e) {
       stats[id] = { likes: 0, comments_count: 0, comments: [] };
     }
   }
-
   fs.writeFileSync("instagram-stats.json", JSON.stringify(stats, null, 2));
-  console.log(`✅ Saved stats for ${uniquePostIds.length} posts to instagram-stats.json`);
+  console.log(`✅ Done. Saved stats for ${uniquePostIds.length} posts.`);
 })();
