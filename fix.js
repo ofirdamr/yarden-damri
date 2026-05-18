@@ -33,7 +33,7 @@ async function uploadToCloudinary(item) {
       public_id: publicId, folder: "yarden_makeup",
       resource_type: isVideo ? "video" : "image",
     });
-    const entry = { u: result.secure_url, a: (item.caption || "").substring(0, 200), id: item.post_id || item.id };
+    const entry = { u: result.secure_url, a: (item.caption || "").substring(0, 80), id: item.post_id || item.id };
     if (isVideo) { entry.video = true; entry.thumb = item.thumbnail_url || ""; }
     return entry;
   } catch (err) {
