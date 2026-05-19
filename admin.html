@@ -83,6 +83,8 @@
     .modal h3{color:var(--blush);margin-bottom:16px;font-size:1rem}
     .modal select,.modal input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem;margin-bottom:12px}
     .modal-actions{display:flex;gap:8px;justify-content:flex-end}
+    .period-btn{padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:.78rem;transition:all .2s}
+    .period-btn.active{background:var(--blush);color:#fff;border-color:var(--blush)}
     /* TOAST */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--rose);color:#fff;padding:11px 26px;border-radius:28px;font-size:.88rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
     .toast.show{opacity:1}
@@ -179,59 +181,66 @@
   </div>
 
   <!-- ANALYTICS TAB -->
-  <div id="tab-analytics" style="display:none;padding:24px 28px">
+  <div id="tab-analytics" style="display:none;padding:24px 16px">
+
+    <!-- Period Selector -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
+      <h2 style="font-size:1.05rem;color:var(--text);margin:0">📊 Analytics Dashboard</h2>
+      <div style="display:flex;gap:6px;">
+        <button class="period-btn active" onclick="setPeriod(7,this)">7 ימים</button>
+        <button class="period-btn" onclick="setPeriod(30,this)">30 יום</button>
+        <button class="period-btn" onclick="setPeriod(90,this)">90 יום</button>
+      </div>
+    </div>
 
     <!-- KPI Cards -->
-    <div id="analytics-setup-msg" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:600px;margin-bottom:28px;">
-      <h2 style="color:var(--blush);font-size:1rem;margin-bottom:12px">🔗 חיבור Google Analytics</h2>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:16px">
-        כדי לראות נתונים אמיתיים יש להזין את מזהה המדידה של Google Analytics (GA4).<br>
-        נראה כך: <strong style="color:var(--blush)">G-XXXXXXXXXX</strong>
-      </p>
-      <div style="display:flex;gap:10px;">
-        <input type="text" id="ga-id-input" placeholder="G-XXXXXXXXXX" style="flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:.9rem;" />
-        <button class="btn btn-primary" onclick="saveGaId()">שמור</button>
-      </div>
-      <p style="font-size:.75rem;color:var(--muted);margin-top:10px">
-        אין לך חשבון GA4? 👉 <a href="https://analytics.google.com" target="_blank" style="color:var(--blush)">analytics.google.com</a> → צור נכס חדש ← קבל מזהה מדידה
-      </p>
+    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:20px;"></div>
+
+    <!-- Traffic Over Time -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
+      <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">📈 ביקורים לאתר</h3>
+      <canvas id="visits-chart" height="120"></canvas>
     </div>
 
-    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px;"></div>
-
-    <!-- Charts Row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
-        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">📈 כניסות לאתר — 30 יום אחרונים</h3>
-        <canvas id="visits-chart" height="160"></canvas>
+    <!-- Sources + Devices -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+        <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">🌐 מקורות תנועה</h3>
+        <div id="sources-list"></div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
-        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">🖱️ לחיצות על כפתורי וואטסאפ</h3>
-        <canvas id="cta-chart" height="160"></canvas>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+        <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">📱 מכשירים</h3>
+        <div id="devices-list"></div>
       </div>
     </div>
 
-    <!-- Bottom Row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
-        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">📱 מכשירים</h3>
-        <canvas id="device-chart" height="160"></canvas>
+    <!-- Languages + Instagram -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+        <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">🗣️ שפות</h3>
+        <div id="langs-list"></div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
-        <h3 style="font-size:.85rem;color:var(--muted);margin-bottom:16px">🔝 עמודים פופולריים</h3>
-        <div id="top-pages" style="font-size:.82rem;color:var(--text);line-height:2.2;"></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+        <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">❤️ Instagram Engagement</h3>
+        <div id="ig-engagement"></div>
       </div>
     </div>
 
-    <!-- GA4 Links -->
-    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-      <a id="ga-link" href="https://analytics.google.com" target="_blank" class="btn btn-secondary" style="font-size:.82rem;">
-        📊 דוחות GA4
-      </a>
-      <a id="ga-realtime-link" href="https://analytics.google.com" target="_blank" class="btn btn-secondary" style="font-size:.82rem;">
-        ⚡ Real-Time
-      </a>
+    <!-- GA4 Deep Links -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
+      <h3 style="font-size:.82rem;color:var(--muted);margin:0 0 14px">🔗 Google Analytics — דוחות מפורטים</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/reportinghub" target="_blank" class="btn btn-secondary" style="font-size:.78rem;">📊 Overview</a>
+        <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/realtime" target="_blank" class="btn btn-secondary" style="font-size:.78rem;">⚡ Real-Time</a>
+        <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/explorer?params=_u..nav%3Dmaui%26_r.explorerCard..selmet%3D%5B%22sessions%22%5D%26_r.explorerCard..seldim%3D%5B%22sessionSource%22%5D" target="_blank" class="btn btn-secondary" style="font-size:.78rem;">🌐 Traffic Sources</a>
+        <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/explorer?params=_u..nav%3Dmaui%26_r.explorerCard..selmet%3D%5B%22sessions%22%5D%26_r.explorerCard..seldim%3D%5B%22deviceCategory%22%5D" target="_blank" class="btn btn-secondary" style="font-size:.78rem;">📱 Devices</a>
+        <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/explorer?params=_u..nav%3Dmaui%26_r.explorerCard..selmet%3D%5B%22sessions%22%5D%26_r.explorerCard..seldim%3D%5B%22country%22%5D" target="_blank" class="btn btn-secondary" style="font-size:.78rem;">🌍 Countries</a>
+      </div>
     </div>
+
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;">
+      נתוני ביקורים מבוססים על טעינות דף שנשמרו בדפדפן הזה בלבד. לנתונים גלובליים ומלאים — השתמש בכפתורי GA4 למעלה.
+    </p>
   </div>
 
   <!-- SETTINGS TAB -->
@@ -605,50 +614,149 @@ function switchTab(name,el){
 }
 
 // ─── ANALYTICS ───────────────────────────────────────────────────
-function saveGaId(){
-  const id=document.getElementById('ga-id-input').value.trim();
-  if(!id) return;
-  localStorage.setItem('ga4_id',id);
+let analyticsPeriod = 7;
+
+function setPeriod(days, btn) {
+  analyticsPeriod = days;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
   initAnalytics();
 }
 
-function initAnalytics(){
-  const gaId = localStorage.getItem('ga4_id') || 'G-68XM6LS4HX';
-  const setupMsg = document.getElementById('analytics-setup-msg');
-  const kpiCards = document.getElementById('kpi-cards');
+function initAnalytics() {
+  const days = analyticsPeriod || 7;
+  const cutoff = Date.now() - days * 86400000;
 
-  if(!gaId){
-    setupMsg.style.display='block';
-    kpiCards.innerHTML='';
-    return;
-  }
-  setupMsg.style.display='none';
+  // Load visit data
+  let visits = [];
+  try { visits = JSON.parse(localStorage.getItem('yd_visits') || '[]'); } catch(e) {}
+  const filtered = visits.filter(v => v.t > cutoff);
 
-  // מציג נתוני localStorage (ביקורים, לייקים, תגובות)
-  const likes = JSON.parse(localStorage.getItem('img_likes')||'{}');
-  const comments = JSON.parse(localStorage.getItem('img_comments')||'{}');
-  const reviews = JSON.parse(localStorage.getItem('site_reviews')||'[]');
-  const totalLikes = Object.values(likes).reduce((a,b)=>a+b,0);
-  const totalComments = Object.values(comments).reduce((a,c)=>a+c.length,0);
+  // Load site data
+  const likes = JSON.parse(localStorage.getItem('img_likes') || '{}');
+  const reviews = JSON.parse(localStorage.getItem('site_reviews') || '[]');
+  const igStats = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
+  const totalIgLikes = Object.values(igStats).reduce((a, b) => a + (b.likes || 0), 0);
+  const totalIgComments = Object.values(igStats).reduce((a, b) => a + (b.comments_count || 0), 0);
 
+  // Today vs yesterday
+  const todayCutoff = Date.now() - 86400000;
+  const yesterdayCutoff = Date.now() - 172800000;
+  const todayVisits = visits.filter(v => v.t > todayCutoff).length;
+  const yesterdayVisits = visits.filter(v => v.t > yesterdayCutoff && v.t <= todayCutoff).length;
+  const trend = yesterdayVisits > 0 ? Math.round(((todayVisits - yesterdayVisits) / yesterdayVisits) * 100) : 0;
+
+  // KPIs
   const kpis = [
-    {label:'לייקים על תמונות', value: totalLikes, icon:'❤️'},
-    {label:'תגובות על תמונות', value: totalComments, icon:'💬'},
-    {label:'ביקורות באתר', value: reviews.length, icon:'⭐'},
-    {label:'תמונות בגלריה', value: allImages.length, icon:'🖼️'},
-    {label:'תמונות מוסתרות', value: (getSettings().hidden||[]).length, icon:'🚫'},
+    { icon: '👁️', value: filtered.length, label: `ביקורים (${days} ימים)`, sub: trend !== 0 ? (trend > 0 ? `▲ ${trend}% מאתמול` : `▼ ${Math.abs(trend)}% מאתמול`) : '' },
+    { icon: '📅', value: todayVisits, label: 'ביקורים היום', sub: '' },
+    { icon: '🖼️', value: allImages.length, label: 'תמונות בגלריה', sub: '' },
+    { icon: '❤️', value: totalIgLikes.toLocaleString(), label: 'IG Likes סה"כ', sub: '' },
+    { icon: '💬', value: totalIgComments.toLocaleString(), label: 'IG תגובות סה"כ', sub: '' },
+    { icon: '⭐', value: reviews.length, label: 'ביקורות באתר', sub: '' },
   ];
 
-  kpiCards.innerHTML = kpis.map(k=>`
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:center;">
-      <div style="font-size:1.8rem">${k.icon}</div>
-      <div style="font-size:1.6rem;font-weight:700;color:var(--blush);margin:6px 0">${k.value}</div>
-      <div style="font-size:.78rem;color:var(--muted)">${k.label}</div>
+  document.getElementById('kpi-cards').innerHTML = kpis.map(k => `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 12px;text-align:center;">
+      <div style="font-size:1.5rem">${k.icon}</div>
+      <div style="font-size:1.4rem;font-weight:700;color:var(--blush);margin:4px 0">${k.value}</div>
+      <div style="font-size:.72rem;color:var(--muted)">${k.label}</div>
+      ${k.sub ? `<div style="font-size:.68rem;color:var(--gold);margin-top:2px">${k.sub}</div>` : ''}
     </div>`).join('');
 
-  const propId = gaId.replace('G-','');
-  document.getElementById('ga-link').href=`https://analytics.google.com/analytics/web/#/p${propId}/reports/reportinghub`;
-  document.getElementById('ga-realtime-link').href=`https://analytics.google.com/analytics/web/#/p${propId}/reports/realtime`;
+  // Visits chart — daily buckets
+  const buckets = {};
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const key = `${d.getDate()}/${d.getMonth() + 1}`;
+    buckets[key] = 0;
+  }
+  filtered.forEach(v => {
+    const d = new Date(v.t);
+    const key = `${d.getDate()}/${d.getMonth() + 1}`;
+    if (buckets[key] !== undefined) buckets[key]++;
+  });
+  renderBarChart('visits-chart', Object.keys(buckets), Object.values(buckets), '#C49A6C');
+
+  // Traffic sources
+  const srcCount = {};
+  filtered.forEach(v => { srcCount[v.src] = (srcCount[v.src] || 0) + 1; });
+  renderListBars('sources-list', srcCount, filtered.length);
+
+  // Devices
+  const devCount = {};
+  filtered.forEach(v => { devCount[v.device || 'Unknown'] = (devCount[v.device || 'Unknown'] || 0) + 1; });
+  renderListBars('devices-list', devCount, filtered.length);
+
+  // Languages
+  const langCount = {};
+  filtered.forEach(v => { langCount[v.lang || 'unknown'] = (langCount[v.lang || 'unknown'] || 0) + 1; });
+  renderListBars('langs-list', langCount, filtered.length);
+
+  // Instagram engagement top posts
+  const igArr = Object.entries(igStats)
+    .map(([id, s]) => ({ id, likes: s.likes || 0, comments: s.comments_count || 0 }))
+    .sort((a, b) => (b.likes + b.comments) - (a.likes + a.comments))
+    .slice(0, 5);
+  document.getElementById('ig-engagement').innerHTML = igArr.length
+    ? igArr.map(p => `<div style="display:flex;justify-content:space-between;font-size:.75rem;padding:4px 0;border-bottom:1px solid var(--border);">
+        <span style="color:var(--muted)">...${p.id.slice(-6)}</span>
+        <span>❤️ ${p.likes} &nbsp; 💬 ${p.comments}</span>
+      </div>`).join('')
+    : '<p style="font-size:.75rem;color:var(--muted)">טוען נתוני Instagram...</p>';
+}
+
+function renderBarChart(canvasId, labels, values, color) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 300;
+  const H = canvas.height;
+  canvas.width = W;
+  ctx.clearRect(0, 0, W, H);
+  const max = Math.max(...values, 1);
+  const barW = Math.floor((W - 20) / labels.length) - 2;
+  const showLabels = labels.length <= 14;
+  values.forEach((v, i) => {
+    const barH = Math.round(((H - 24) * v) / max);
+    const x = 10 + i * (barW + 2);
+    const y = H - 20 - barH;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.roundRect(x, y, barW, barH, 3);
+    ctx.fill();
+    if (showLabels && i % Math.ceil(labels.length / 10) === 0) {
+      ctx.fillStyle = '#888';
+      ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(labels[i], x + barW / 2, H - 4);
+    }
+    if (v > 0) {
+      ctx.fillStyle = '#ccc';
+      ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(v, x + barW / 2, y - 2);
+    }
+  });
+}
+
+function renderListBars(elId, countObj, total) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const sorted = Object.entries(countObj).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  if (!sorted.length) { el.innerHTML = '<p style="font-size:.75rem;color:var(--muted)">אין נתונים עדיין</p>'; return; }
+  el.innerHTML = sorted.map(([label, count]) => {
+    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+    return `<div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:3px;">
+        <span style="color:var(--text)">${label}</span>
+        <span style="color:var(--muted)">${count} (${pct}%)</span>
+      </div>
+      <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;">
+        <div style="height:6px;width:${pct}%;background:var(--blush);border-radius:3px;transition:width .4s;"></div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // ─── TOAST ───────────────────────────────────────────────────────

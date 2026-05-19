@@ -1148,5 +1148,43 @@
     @media(max-width:480px){ #wa-fab{display:none !important;} }
   </style>
 
+
+<script>
+// ── VISIT TRACKER ─────────────────────────────────────────────
+(function(){
+  try {
+    const ref = document.referrer || '';
+    const src = ref.includes('instagram') ? 'Instagram' :
+                ref.includes('facebook') || ref.includes('fb.com') ? 'Facebook' :
+                ref.includes('tiktok') ? 'TikTok' :
+                ref.includes('google') ? 'Google' :
+                ref.includes('whatsapp') ? 'WhatsApp' :
+                ref.includes('t.co') || ref.includes('twitter') ? 'Twitter/X' :
+                ref === '' ? 'Direct' : 'Other (' + (new URL(ref).hostname) + ')';
+
+    const ua = navigator.userAgent;
+    const device = /Mobile|Android|iPhone|iPad/.test(ua) ? 'Mobile' : 'Desktop';
+    const lang = (navigator.language || 'unknown').substring(0,5);
+
+    const visit = { t: Date.now(), src, device, lang, path: location.pathname };
+
+    // Store rolling 90-day visits (max 2000 entries)
+    let visits = [];
+    try { visits = JSON.parse(localStorage.getItem('yd_visits') || '[]'); } catch(e){}
+    const cutoff = Date.now() - 90 * 86400000;
+    visits = visits.filter(v => v.t > cutoff);
+    visits.push(visit);
+    if (visits.length > 2000) visits = visits.slice(-2000);
+    localStorage.setItem('yd_visits', JSON.stringify(visits));
+
+    // Track scroll depth
+    let maxScroll = 0;
+    window.addEventListener('scroll', function() {
+      const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      if (pct > maxScroll) { maxScroll = pct; localStorage.setItem('yd_scroll_' + Date.now().toString(36), maxScroll); }
+    }, { passive: true });
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
