@@ -95,7 +95,7 @@
   </style>
 </head>
 <body>
-<script src="gallery-data.js"></script>
+<script src="gallery-data.js?v=1779190747"></script>
 
 <!-- LOGIN -->
 <div id="login-screen">
@@ -330,6 +330,10 @@ function saveSettings(s) { localStorage.setItem('gallery_admin', JSON.stringify(
 // ─── INIT ───────────────────────────────────────────────────────
 function initAdmin() {
   const s = getSettings();
+  if (typeof GALLERY_IMAGES === 'undefined') {
+    document.getElementById('grid').innerHTML = '<p style="padding:20px;color:red">שגיאה: קובץ הגלריה לא נטען. רענן את הדף.</p>';
+    return;
+  }
   allImages = [...GALLERY_IMAGES];
   if (s.order && s.order.length > 0) {
     const orderMap = {};
