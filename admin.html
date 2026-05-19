@@ -350,7 +350,8 @@ let multiSelectMode = false;
 let selectedUrls = new Set();
 let lastClickedIdx = -1;
 
-function generateAltText(img) {
+function generateAltText(img, catMap) {
+  catMap = catMap || {};
   const cat = catMap[img.u] || '';
   const isVid = img.u.includes('/video/upload/') || img.u.match(/\.(mp4|mov|webm)$/i);
   const mediaType = isVid ? 'סרטון' : 'תמונה';
@@ -480,7 +481,7 @@ function renderGrid() {
       return url.replace('/upload/', '/upload/f_auto,q_auto,w_300,h_300,c_fill/');
     }
     const thumbSrc = adminThumb(img.u, isVid);
-    const altTxt = generateAltText(img);
+    const altTxt = generateAltText(img, catMap);
     div.innerHTML=`
       ${isVid ? '<span class="video-badge">▶</span>' : ''}
       <img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async"/>
