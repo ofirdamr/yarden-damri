@@ -694,6 +694,7 @@
         let vid = lb.querySelector('video');
         if (!vid) {
           vid = document.createElement('video');
+          vid.preload = 'metadata';
           vid.style.cssText = 'max-width:88vw;max-height:80vh;border-radius:12px;';
           vid.controls = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
@@ -758,6 +759,16 @@
     function cdnUrl(url, w) {
       if (!url || !url.includes('cloudinary.com')) return url;
       return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_fill/`);
+    }
+    function cdnVideo(url, w) {
+      if (!url || !url.includes('cloudinary.com')) return url;
+      // Reduce to 480p max, auto quality, strip audio
+      return url.replace('/video/upload/', `/video/upload/q_auto:low,w_${w},c_fill,vc_auto/`);
+    }
+    function cdnVideoPoster(url) {
+      if (!url || !url.includes('cloudinary.com')) return '';
+      // Get first frame as jpg poster
+      return url.replace('/video/upload/', '/video/upload/so_0,f_jpg,w_400,c_fill/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
@@ -875,7 +886,7 @@
 
         // VIDEO: autoplay muted in grid, controls in lightbox
         const mediaEl = isVideo
-          ? `<video src="${item.u}" poster="${item.thumb||''}" muted loop playsinline autoplay
+          ? `<video data-src="${cdnVideo(item.u, 480)}" poster="${item.thumb ? cdnVideoPoster(item.u) : ''}" muted loop playsinline
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;"
                onerror="this.style.display='none'"></video>
@@ -950,14 +961,22 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Auto-play videos in viewport (IntersectionObserver)
+    // Lazy-load + auto-play videos only when in viewport
     const videoObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const vid = e.target;
-        if (e.isIntersecting) { vid.play().catch(()=>{}); }
-        else { vid.pause(); }
+        if (e.isIntersecting) {
+          // Load src from data-src on first entry
+          if (vid.dataset.src && !vid.src) {
+            vid.src = vid.dataset.src;
+            vid.load();
+          }
+          vid.play().catch(()=>{});
+        } else {
+          vid.pause();
+        }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2, rootMargin: '100px' });
 
     // Apply to gallery videos when rendered (called from renderPage)
     function observeGalleryVideos() {
