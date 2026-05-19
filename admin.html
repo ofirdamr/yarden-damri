@@ -205,13 +205,13 @@
       <div id="sources-list"></div>
     </div>
 
-    <!-- Mobile vs Desktop -->
+    <!-- נייד או מחשב -->
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
       <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">📱 נייד או מחשב?</div>
       <div id="devices-list"></div>
     </div>
 
-    <!-- Instagram -->
+    <!-- אינסטגרם -->
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:20px;">
       <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">📸 הכי פופולרי באינסטגרם</div>
       <div id="ig-engagement"></div>
@@ -220,7 +220,7 @@
     <!-- GA4 Button -->
     <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/reportinghub" target="_blank"
        style="display:block;text-align:center;background:var(--blush);color:#fff;padding:14px;border-radius:12px;text-decoration:none;font-size:.9rem;font-weight:600;">
-      📊 לכל הנתונים המפורטים — פתח Google Analytics
+      📊 לכל הנתונים המפורטים — פתח גוגל אנליטיקס
     </a>
 
   </div>
@@ -647,7 +647,7 @@ function initAnalytics() {
   });
   renderBarChart('visits-chart', Object.keys(buckets), Object.values(buckets));
 
-  // Traffic sources — plain Hebrew
+  // מקורות תנועה
   const srcLabels = { 'Instagram': '📸 אינסטגרם', 'Google': '🔍 גוגל', 'Direct': '🔗 הקליד ישירות', 'WhatsApp': '💬 וואצאפ', 'Facebook': '👤 פייסבוק', 'TikTok': '🎵 טיקטוק' };
   const srcCount = {};
   filtered.forEach(v => {
@@ -656,7 +656,7 @@ function initAnalytics() {
   });
   renderBars('sources-list', srcCount, filtered.length, 'אין נתונים עדיין — הנתונים יצטברו מביקורים חדשים');
 
-  // Devices
+  // מכשירים
   const devLabels = { 'Mobile': '📱 נייד', 'Desktop': '💻 מחשב' };
   const devCount = {};
   filtered.forEach(v => {
@@ -665,7 +665,7 @@ function initAnalytics() {
   });
   renderBars('devices-list', devCount, filtered.length, 'אין נתונים עדיין');
 
-  // Instagram top posts
+  // פוסטים פופולריים באינסטגרם
   const igArr = Object.entries(igStats)
     .map(([id, s]) => ({ id, likes: s.likes || 0, comments: s.comments_count || 0 }))
     .sort((a, b) => (b.likes + b.comments) - (a.likes + a.comments))
