@@ -442,8 +442,28 @@ function renderGrid() {
   if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
   if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
 
+  // Pagination — show 60 at a time
+  const ADMIN_PAGE_SIZE = 60;
+  if (!window._adminPage) window._adminPage = 0;
+  const totalPages = Math.ceil(imgs.length / ADMIN_PAGE_SIZE);
+  const pageImgs = imgs.slice(0, (window._adminPage + 1) * ADMIN_PAGE_SIZE);
+
+  // Pagination controls
+  let pagCtrl = document.getElementById('admin-pagination');
+  if (!pagCtrl) {
+    pagCtrl = document.createElement('div');
+    pagCtrl.id = 'admin-pagination';
+    pagCtrl.style.cssText = 'text-align:center;padding:16px;';
+    grid.parentNode.insertBefore(pagCtrl, grid.nextSibling);
+  }
+  if ((window._adminPage + 1) < totalPages) {
+    pagCtrl.innerHTML = `<button onclick="window._adminPage++;renderGrid();" style="background:var(--blush);color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;font-size:.9rem;">טען עוד תמונות (${imgs.length - pageImgs.length} נותרו)</button>`;
+  } else {
+    pagCtrl.innerHTML = '';
+  }
+
   let cardIdx = 0;
-  imgs.forEach(img => {
+  pageImgs.forEach(img => {
     const myIdx = cardIdx++;
     const cat = catMap[img.u]||'';
     const div = document.createElement('div');
@@ -490,12 +510,12 @@ function renderGrid() {
 }
 
 function setFilter(f,btn) {
-  currentFilter=f; currentCatFilter='';
+  window._adminPage=0; currentFilter=f; currentCatFilter='';
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderGrid();
 }
-function filterGrid(){ searchTerm=document.getElementById('search-input').value; renderGrid(); }
+function filterGrid(){ window._adminPage=0; searchTerm=document.getElementById('search-input').value; renderGrid(); }
 
 // ─── ACTIONS ────────────────────────────────────────────────────
 function togglePin(url){
