@@ -300,12 +300,12 @@
 
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 6px; align-items: center; }
-    .social-pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 50px; font-size: .82rem; font-weight: 600; letter-spacing: .02em; text-decoration: none; transition: transform .2s, box-shadow .2s; white-space: nowrap; }
+    .social-pill { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 13px; border-radius: 50px; font-size: .82rem; font-weight: 600; letter-spacing: .02em; text-decoration: none; transition: transform .2s, box-shadow .2s; white-space: nowrap; }
     .social-pill:hover, .social-pill:focus { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
     .social-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff !important; }
     .social-tt { background: #000; color: #fff !important; border: 1px solid rgba(255,255,255,.12); }
     .social-tt svg { fill: #fff; }
-    .social-pill-sm { padding: 5px 10px; font-size: .72rem; }
+    .social-pill-sm { padding: 7px 10px; font-size: .72rem; min-width: 36px; min-height: 36px; }
     .social-pill-sm span { display: none; }
 
     /* ── MOBILE MENU ── */
