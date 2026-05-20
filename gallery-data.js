@@ -1,6 +1,30 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg",
+    "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
+    "id": "18121741381726046",
+    "item_id": "18119542276602555"
+  },
+  {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307032/yarden_makeup/yarden_makeup_18081283535147280.jpg",
+    "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
+    "id": "18121741381726046",
+    "item_id": "18081283535147280"
+  },
+  {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307032/yarden_makeup/yarden_makeup_18097478162143234.jpg",
+    "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
+    "id": "18121741381726046",
+    "item_id": "18097478162143234"
+  },
+  {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307034/yarden_makeup/yarden_makeup_17909674623407297.jpg",
+    "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
+    "id": "18121741381726046",
+    "item_id": "17909674623407297"
+  },
+  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050230/yarden_makeup/yarden_makeup_18071074559663632.jpg",
     "a": "⁨\tיש משהו בלוק נקי שתמיד מרגיש נכון ✨\nעדין, קלאסי ופשוט יפה.\n\nאם גם את אוהבת איפור שמרגיש כמו הגרסה הכי יפה של עצמך —\nשלחי לי הודעה 🤍\n‪@korenmalihe‬‪@galifergan‬an⁩ @isabella_eilat",
     "id": "18118348276673071",
