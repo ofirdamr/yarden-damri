@@ -148,6 +148,7 @@
       <button class="filter-btn active" onclick="setFilter('all',this)">הכל</button>
       <button class="filter-btn" onclick="setFilter('pinned',this)">📌 נעוצות</button>
       <button class="filter-btn" onclick="setFilter('hidden',this)">🚫 מוסתרות</button>
+      <button class="filter-btn" style="border-color:#e07b54;color:#e07b54" onclick="showDuplicates(this)">🔁 כפולות</button>
       <div id="cat-filter-btns"></div>
       <button class="btn btn-secondary" onclick="toggleMultiSelect()" id="multiSelectBtn" style="margin-right:auto">☑️ בחירה מרובה</button>
       <button class="btn btn-secondary" onclick="resetOrder()">🔄 אפס סדר</button>
@@ -444,6 +445,7 @@ function renderGrid() {
   let imgs = allImages;
   if (currentFilter==='hidden') imgs = imgs.filter(i=>hiddenSet.has(i.u));
   else if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
+  else if (currentFilter==='duplicates') { const uc={}; allImages.forEach(i=>{uc[i.u]=(uc[i.u]||0)+1;}); imgs=allImages.filter(i=>uc[i.u]>1); }
   if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
   if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
 
@@ -512,6 +514,15 @@ function renderGrid() {
   // stats
   const s2=getSettings();
   document.getElementById('stats-label').textContent=`סה"כ: ${allImages.length} | מוסתרות: ${(s2.hidden||[]).length} | נעוצות: ${(s2.pinned||[]).length} | מוצגות: ${imgs.length}`;
+}
+
+function showDuplicates(btn) {
+  window._adminPage = 0;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = 'duplicates';
+  currentCatFilter = '';
+  renderGrid();
 }
 
 function setFilter(f,btn) {

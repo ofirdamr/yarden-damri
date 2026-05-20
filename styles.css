@@ -83,8 +83,8 @@
     .nav-links a:hover, .nav-links a:focus { opacity: 1; color: var(--rose); }
     .nav-cta {
       background: var(--rose); color: #fff !important;
-      opacity: 1 !important; padding: 9px 20px; border-radius: 30px;
-      transition: background .3s !important; white-space: nowrap;
+      opacity: 1 !important; padding: 0 20px; height: 36px; line-height: 36px; border-radius: 30px;
+      transition: background .3s !important; white-space: nowrap; display: inline-flex; align-items: center;
     }
     .nav-cta:hover, .nav-cta:focus { background: var(--deep) !important; }
 
@@ -300,7 +300,7 @@
 
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 6px; align-items: center; }
-    .social-pill { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 13px; border-radius: 50px; font-size: .82rem; font-weight: 600; letter-spacing: .02em; text-decoration: none; transition: transform .2s, box-shadow .2s; white-space: nowrap; }
+    .social-pill { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 36px; border-radius: 50px; font-size: .82rem; font-weight: 600; letter-spacing: .02em; text-decoration: none; transition: transform .2s, box-shadow .2s; white-space: nowrap; box-sizing: border-box; }
     .social-pill:hover, .social-pill:focus { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
     .social-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff !important; }
     .social-tt { background: #000; color: #fff !important; border: 1px solid rgba(255,255,255,.12); }

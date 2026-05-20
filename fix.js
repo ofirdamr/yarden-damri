@@ -74,20 +74,26 @@ async function uploadToCloudinary(item) {
     const raw = fs.readFileSync("gallery-data.js", "utf8").replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
     existing = JSON.parse(raw);
   } catch(e) {}
-  const existingMap = {};
-  existing.forEach(e => { if (e.id) existingMap[e.id] = e; });
+  // Key by item.id (child ID for carousels, post ID for singles)
+  const existingByItemId = {};
+  existing.forEach(e => { if (e.item_id) existingByItemId[e.item_id] = e; });
 
-  // 3. Upload new items to Cloudinary
+  // 3. Upload new items to Cloudinary — deduplicate by item URL
   const gallery = [];
+  const seenUrls = new Set();
   for (const item of rawPosts) {
-    const postId = item.post_id || item.id;
-    if (existingMap[postId] && existingMap[postId].u && existingMap[postId].u.includes('cloudinary')) {
-      gallery.push(existingMap[postId]);
+    if (existingByItemId[item.id] && existingByItemId[item.id].u.includes('cloudinary')) {
+      const e = existingByItemId[item.id];
+      if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
       process.stdout.write(".");
     } else {
       console.log(`\nUploading ${item.id}...`);
       const entry = await uploadToCloudinary(item);
-      if (entry) gallery.push(entry);
+      if (entry && !seenUrls.has(entry.u)) {
+        entry.item_id = item.id;
+        seenUrls.add(entry.u);
+        gallery.push(entry);
+      }
     }
   }
   console.log(`\nSaving ${gallery.length} items to gallery-data.js`);

@@ -6,36 +6,6 @@ const GALLERY_IMAGES = [
     "id": "18118348276673071"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg",
-    "a": "\tיש משהו בלוק נקי שתמיד מרגיש נכון ✨\nעדין, קלאסי ופשוט יפה.\n\nאם גם את אוהבת איפ",
-    "id": "18118348276673071"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg",
-    "a": "\tיש משהו בלוק נקי שתמיד מרגיש נכון ✨\nעדין, קלאסי ופשוט יפה.\n\nאם גם את אוהבת איפ",
-    "id": "18118348276673071"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg",
-    "a": "\tיש משהו בלוק נקי שתמיד מרגיש נכון ✨\nעדין, קלאסי ופשוט יפה.\n\nאם גם את אוהבת איפ",
-    "id": "18118348276673071"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050237/yarden_makeup/yarden_makeup_18110517241722013.jpg",
-    "a": "יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨\nזוהר עדין, גימור נקי וט",
-    "id": "18082350416408746"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050237/yarden_makeup/yarden_makeup_18110517241722013.jpg",
-    "a": "יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨\nזוהר עדין, גימור נקי וט",
-    "id": "18082350416408746"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050237/yarden_makeup/yarden_makeup_18110517241722013.jpg",
-    "a": "יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨\nזוהר עדין, גימור נקי וט",
-    "id": "18082350416408746"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050237/yarden_makeup/yarden_makeup_18110517241722013.jpg",
     "a": "יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨\nזוהר עדין, גימור נקי וט",
     "id": "18082350416408746"
@@ -60,21 +30,6 @@ const GALLERY_IMAGES = [
     "id": "18367966876204021"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134466/yarden_makeup/yarden_makeup_18066257132361400.jpg",
-    "a": "אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.\nעמידות, דיוק, וגימור",
-    "id": "18367966876204021"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134466/yarden_makeup/yarden_makeup_18066257132361400.jpg",
-    "a": "אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.\nעמידות, דיוק, וגימור",
-    "id": "18367966876204021"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134466/yarden_makeup/yarden_makeup_18066257132361400.jpg",
-    "a": "אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.\nעמידות, דיוק, וגימור",
-    "id": "18367966876204021"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134467/yarden_makeup/yarden_makeup_18107538146490385.jpg",
     "a": "\tאיפרתי את עופרה גוזלן לליכודיאדה באילת ✨\nמראה זוהר, אלגנטי ונוכח – כזה שמצטלם",
     "id": "18107538146490385"
@@ -85,51 +40,11 @@ const GALLERY_IMAGES = [
     "id": "18404043595145595"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134470/yarden_makeup/yarden_makeup_18438927877138557.jpg",
-    "a": "יש לוקים שלא נועדו להשתלב — הם נועדו למשוך מבט ❤️\n\nמשחק של אדומים, עומק וניקיון",
-    "id": "18404043595145595"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178363/yarden_makeup/yarden_makeup_17923237620299374.mp4",
     "a": "לוק כלה נקי, מדויק וזוהר ✨ \n\nאיפור שמדגיש את היופי שלך — בלי להעמיס \nומחזיק איתך",
     "id": "17988685346980055",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/681262296_18584714314037829_4936446305755701812_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=fAz7I-ivCnYQ7kNvwENYEja&_nc_oc=AdorTRkYGBtTDeLM7vQ8MaTZzhTnxpc75KBQ3Wza-GwhY0djUCafZPvUFgK_AUAaTks&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=pNFfkHNC-4NttbYEqMorbA&_nc_tpa=Q5bMBQFqKps6Ilu1xR9uUm6YGWXxVWLYRTM6xoQyU3W5zwbLTdf8EJliYw1EZrWJzljfd2hZpSSRSGPWjA&oh=00_Af74dZc5RcxZRiFvxOphy2CKFCt25sQXDfk6UbEma4B5Jg&oe=6A10D52A"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178363/yarden_makeup/yarden_makeup_17923237620299374.mp4",
-    "a": "לוק כלה נקי, מדויק וזוהר ✨ \n\nאיפור שמדגיש את היופי שלך — בלי להעמיס \nומחזיק איתך",
-    "id": "17988685346980055",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/681262296_18584714314037829_4936446305755701812_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=fAz7I-ivCnYQ7kNvwENYEja&_nc_oc=AdorTRkYGBtTDeLM7vQ8MaTZzhTnxpc75KBQ3Wza-GwhY0djUCafZPvUFgK_AUAaTks&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=pNFfkHNC-4NttbYEqMorbA&_nc_tpa=Q5bMBQFqKps6Ilu1xR9uUm6YGWXxVWLYRTM6xoQyU3W5zwbLTdf8EJliYw1EZrWJzljfd2hZpSSRSGPWjA&oh=00_Af74dZc5RcxZRiFvxOphy2CKFCt25sQXDfk6UbEma4B5Jg&oe=6A10D52A"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178363/yarden_makeup/yarden_makeup_17923237620299374.mp4",
-    "a": "לוק כלה נקי, מדויק וזוהר ✨ \n\nאיפור שמדגיש את היופי שלך — בלי להעמיס \nומחזיק איתך",
-    "id": "17988685346980055",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/681262296_18584714314037829_4936446305755701812_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=fAz7I-ivCnYQ7kNvwENYEja&_nc_oc=AdorTRkYGBtTDeLM7vQ8MaTZzhTnxpc75KBQ3Wza-GwhY0djUCafZPvUFgK_AUAaTks&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=pNFfkHNC-4NttbYEqMorbA&_nc_tpa=Q5bMBQFqKps6Ilu1xR9uUm6YGWXxVWLYRTM6xoQyU3W5zwbLTdf8EJliYw1EZrWJzljfd2hZpSSRSGPWjA&oh=00_Af74dZc5RcxZRiFvxOphy2CKFCt25sQXDfk6UbEma4B5Jg&oe=6A10D52A"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178365/yarden_makeup/yarden_makeup_18080335340527795.mp4",
-    "a": "מראה כלתי קלאסי, נקי ועל-זמני ✨\nאיפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עד",
-    "id": "17921662467293318",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/671301656_18582512776037829_2215242745481171165_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=RGbxiDPgZIkQ7kNvwEgg1Hq&_nc_oc=AdoGADEJmL4L5GuKpBHf5pt4QuBE6gNFvczFNeKW0ODtY0gkUBSB5AYCOz_0Pixom8w&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=h-Q4eTIUfaBsB63MwiFUTw&_nc_tpa=Q5bMBQFV3T8BQHse7Pg31Cv8zFniWa19bMOz8B5mUBA-_UYuaBf2ARjy5YSrE2_gamvGVBppBQPjkLXEMw&oh=00_Af7uGaA2rlAvcJplL5U6hqExCoHDw4QXaNAEuCr-dC0MFg&oe=6A10B690"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178365/yarden_makeup/yarden_makeup_18080335340527795.mp4",
-    "a": "מראה כלתי קלאסי, נקי ועל-זמני ✨\nאיפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עד",
-    "id": "17921662467293318",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/671301656_18582512776037829_2215242745481171165_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=RGbxiDPgZIkQ7kNvwEgg1Hq&_nc_oc=AdoGADEJmL4L5GuKpBHf5pt4QuBE6gNFvczFNeKW0ODtY0gkUBSB5AYCOz_0Pixom8w&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=h-Q4eTIUfaBsB63MwiFUTw&_nc_tpa=Q5bMBQFV3T8BQHse7Pg31Cv8zFniWa19bMOz8B5mUBA-_UYuaBf2ARjy5YSrE2_gamvGVBppBQPjkLXEMw&oh=00_Af7uGaA2rlAvcJplL5U6hqExCoHDw4QXaNAEuCr-dC0MFg&oe=6A10B690"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178365/yarden_makeup/yarden_makeup_18080335340527795.mp4",
-    "a": "מראה כלתי קלאסי, נקי ועל-זמני ✨\nאיפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עד",
-    "id": "17921662467293318",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/671301656_18582512776037829_2215242745481171165_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=RGbxiDPgZIkQ7kNvwEgg1Hq&_nc_oc=AdoGADEJmL4L5GuKpBHf5pt4QuBE6gNFvczFNeKW0ODtY0gkUBSB5AYCOz_0Pixom8w&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=h-Q4eTIUfaBsB63MwiFUTw&_nc_tpa=Q5bMBQFV3T8BQHse7Pg31Cv8zFniWa19bMOz8B5mUBA-_UYuaBf2ARjy5YSrE2_gamvGVBppBQPjkLXEMw&oh=00_Af7uGaA2rlAvcJplL5U6hqExCoHDw4QXaNAEuCr-dC0MFg&oe=6A10B690"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178365/yarden_makeup/yarden_makeup_18080335340527795.mp4",
@@ -158,36 +73,11 @@ const GALLERY_IMAGES = [
     "id": "18113103523706881"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134484/yarden_makeup/yarden_makeup_18070209767647052.jpg",
-    "a": "\tלפני שנסעתי 3 \nמעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה ש",
-    "id": "18113103523706881"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134484/yarden_makeup/yarden_makeup_18070209767647052.jpg",
-    "a": "\tלפני שנסעתי 3 \nמעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה ש",
-    "id": "18113103523706881"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178371/yarden_makeup/yarden_makeup_17951003097110919.mp4",
     "a": "שלייי אמנם אני רחוקה בתאילנד אבל בטוחה שאת מועמדת ראויה! \nוכמה שאת יפההההה זה לא",
     "id": "17951003097110919",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/655612486_18575329078037829_1784335686520182838_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=PnP1Cc_NVMIQ7kNvwHZA_EL&_nc_oc=Adpoza86EIcN38xXRiXStfH111JerfF7gN36ipy9T5LZKrQCBRyCjeFqu40b_AwA5L0&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQEOZ3fOMJSSRwDPJQfJ3dkOtkHPNJN1J0yoboBa5xk6QKzDkBp5SESbnZshYzQCEPOqmvY7jcQKkQ&oh=00_Af5B49Ee8Q812RbEqgY1vS673z-cKNP36yvKJhQes2gvzQ&oe=6A10C906"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134490/yarden_makeup/yarden_makeup_18119257351554372.jpg",
-    "a": "לפני שטסתי 2 😍\nהייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש \nכיף ענקי ואני מ",
-    "id": "18055038962705833"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134490/yarden_makeup/yarden_makeup_18119257351554372.jpg",
-    "a": "לפני שטסתי 2 😍\nהייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש \nכיף ענקי ואני מ",
-    "id": "18055038962705833"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134490/yarden_makeup/yarden_makeup_18119257351554372.jpg",
-    "a": "לפני שטסתי 2 😍\nהייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש \nכיף ענקי ואני מ",
-    "id": "18055038962705833"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134490/yarden_makeup/yarden_makeup_18119257351554372.jpg",
@@ -214,36 +104,6 @@ const GALLERY_IMAGES = [
     "id": "17947502906960338"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134498/yarden_makeup/yarden_makeup_18101816960499992.jpg",
-    "a": "🦢🦢🦢\nMUA @yarden_damri_makeup \n@_sharonstefan \n@korenmalihe \n@sharon_nhamani \n@sh",
-    "id": "17947502906960338"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134498/yarden_makeup/yarden_makeup_18101816960499992.jpg",
-    "a": "🦢🦢🦢\nMUA @yarden_damri_makeup \n@_sharonstefan \n@korenmalihe \n@sharon_nhamani \n@sh",
-    "id": "17947502906960338"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134498/yarden_makeup/yarden_makeup_18101816960499992.jpg",
-    "a": "🦢🦢🦢\nMUA @yarden_damri_makeup \n@_sharonstefan \n@korenmalihe \n@sharon_nhamani \n@sh",
-    "id": "17947502906960338"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134498/yarden_makeup/yarden_makeup_18101816960499992.jpg",
-    "a": "🦢🦢🦢\nMUA @yarden_damri_makeup \n@_sharonstefan \n@korenmalihe \n@sharon_nhamani \n@sh",
-    "id": "17947502906960338"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134503/yarden_makeup/yarden_makeup_18086723618275248.jpg",
-    "a": "MUA @yarden_damri_makeup ✨✨\nHair @korenmalihe \n@starwgvrl",
-    "id": "18548497549041411"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134503/yarden_makeup/yarden_makeup_18086723618275248.jpg",
-    "a": "MUA @yarden_damri_makeup ✨✨\nHair @korenmalihe \n@starwgvrl",
-    "id": "18548497549041411"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134503/yarden_makeup/yarden_makeup_18086723618275248.jpg",
     "a": "MUA @yarden_damri_makeup ✨✨\nHair @korenmalihe \n@starwgvrl",
     "id": "18548497549041411"
@@ -254,26 +114,6 @@ const GALLERY_IMAGES = [
     "id": "18041005787725479",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/625097000_18558370540037829_3461993374480020571_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=n2F4gxXldPwQ7kNvwGQVMFz&_nc_oc=Adrv8ssJqttwdi7cjwPRLTH1ZX4aZLHRcyjGGmmUgBeSi2IAetRzE_i8qGx3YYUwtjY&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQE8Q3qcASei22VBzMPRBZO1W-WbC1e87E5n6Y0el0z3eIIJ5Sqq6daww18QKlf6RWbpilZUGsMRLQ&oh=00_Af4a1YFm-Bppf13KJeUgv7TeSRFQObvsl9vVRxeS5p9WEQ&oe=6A10BC6C"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg",
-    "a": "LIOR ✨✨\nMUA @yarden_damri_makeup \n@korenmalihe \n@lior_petito",
-    "id": "18077154716604888"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg",
-    "a": "LIOR ✨✨\nMUA @yarden_damri_makeup \n@korenmalihe \n@lior_petito",
-    "id": "18077154716604888"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg",
-    "a": "LIOR ✨✨\nMUA @yarden_damri_makeup \n@korenmalihe \n@lior_petito",
-    "id": "18077154716604888"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg",
-    "a": "LIOR ✨✨\nMUA @yarden_damri_makeup \n@korenmalihe \n@lior_petito",
-    "id": "18077154716604888"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg",
@@ -293,16 +133,6 @@ const GALLERY_IMAGES = [
     "id": "17976837860985622"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134515/yarden_makeup/yarden_makeup_18070904519129535.jpg",
-    "a": "איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.\nושיער שאי אפשר להישאר אד",
-    "id": "17976837860985622"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134515/yarden_makeup/yarden_makeup_18070904519129535.jpg",
-    "a": "איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.\nושיער שאי אפשר להישאר אד",
-    "id": "17976837860985622"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178380/yarden_makeup/yarden_makeup_18007958420674760.mp4",
     "a": "אם יש לך עיניים בהירות — זה הטרנד שאת חייבת לראות!!\nקארן בתהליך איפור מהיר, שימו",
     "id": "18007958420674760",
@@ -315,50 +145,11 @@ const GALLERY_IMAGES = [
     "id": "18145760704454556"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134521/yarden_makeup/yarden_makeup_18416545831143970.jpg",
-    "a": "אליז הכלה היפה שלי \nזכיתי להיות חלק מהיום המרגש שלכם 🩷\n@laguna_elise \n\n#מאפרתבאי",
-    "id": "18145760704454556"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134521/yarden_makeup/yarden_makeup_18416545831143970.jpg",
-    "a": "אליז הכלה היפה שלי \nזכיתי להיות חלק מהיום המרגש שלכם 🩷\n@laguna_elise \n\n#מאפרתבאי",
-    "id": "18145760704454556"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178382/yarden_makeup/yarden_makeup_18052203428680514.mp4",
     "a": "כמה שזה עוצמתי אודם אדום! \nואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס ל",
     "id": "18047006876704042",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/612111937_18553915669037829_5455853649491824437_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=aobKTyBVKuIQ7kNvwGrJcRu&_nc_oc=Ado6Ld0ntPLqx6y2_Y8jwhX3fMLHQlXasiX0THhj7fZyxKUD9ci9VMWaut4EhUIxe-0&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=_q_BUu6eRvKbPmIN8rVGhg&_nc_tpa=Q5bMBQHLien_tTyip1w1LXOExa0jkOMy6NYKbju0bKgU71kxPneUUSfRjbTutinGF7aXRmhcOurDwsP8Qw&oh=00_Af66XUOeli5mI8iyg3Ps4GQbZWnPi0CcBAhTkXtvMlmYDQ&oe=6A10C764"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178382/yarden_makeup/yarden_makeup_18052203428680514.mp4",
-    "a": "כמה שזה עוצמתי אודם אדום! \nואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס ל",
-    "id": "18047006876704042",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/612111937_18553915669037829_5455853649491824437_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=aobKTyBVKuIQ7kNvwGrJcRu&_nc_oc=Ado6Ld0ntPLqx6y2_Y8jwhX3fMLHQlXasiX0THhj7fZyxKUD9ci9VMWaut4EhUIxe-0&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=_q_BUu6eRvKbPmIN8rVGhg&_nc_tpa=Q5bMBQHLien_tTyip1w1LXOExa0jkOMy6NYKbju0bKgU71kxPneUUSfRjbTutinGF7aXRmhcOurDwsP8Qw&oh=00_Af66XUOeli5mI8iyg3Ps4GQbZWnPi0CcBAhTkXtvMlmYDQ&oe=6A10C764"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178382/yarden_makeup/yarden_makeup_18052203428680514.mp4",
-    "a": "כמה שזה עוצמתי אודם אדום! \nואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס ל",
-    "id": "18047006876704042",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/612111937_18553915669037829_5455853649491824437_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=aobKTyBVKuIQ7kNvwGrJcRu&_nc_oc=Ado6Ld0ntPLqx6y2_Y8jwhX3fMLHQlXasiX0THhj7fZyxKUD9ci9VMWaut4EhUIxe-0&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=_q_BUu6eRvKbPmIN8rVGhg&_nc_tpa=Q5bMBQHLien_tTyip1w1LXOExa0jkOMy6NYKbju0bKgU71kxPneUUSfRjbTutinGF7aXRmhcOurDwsP8Qw&oh=00_Af66XUOeli5mI8iyg3Ps4GQbZWnPi0CcBAhTkXtvMlmYDQ&oe=6A10C764"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg",
-    "a": "כמה שזה כיף לצאת מאיזור הנוחות.\nללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד",
-    "id": "18397725892132248"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg",
-    "a": "כמה שזה כיף לצאת מאיזור הנוחות.\nללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד",
-    "id": "18397725892132248"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg",
-    "a": "כמה שזה כיף לצאת מאיזור הנוחות.\nללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד",
-    "id": "18397725892132248"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg",
@@ -371,21 +162,6 @@ const GALLERY_IMAGES = [
     "id": "18112186504545212",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/609080973_811949335139082_3946674946954945666_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=hi_DrEmnbcwQ7kNvwF0K76A&_nc_oc=AdqXDrE1PnGf-k_1bES0-WDkR3vCMaHzJGGSi5QZdreaGgaJI7Z4-ig3ddEe01d0JnY&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQEIxlR2m2bQ423Di-imlnGzjg-2t-lYu1RpsU3LweYcsWHpucyXUQfdEcT42GnvZNBNrkyNNhwCOA&oh=00_Af433z8ioDnxD_ADz7gA0j3VZ2A239JhSHFLIq-GpxBHDg&oe=6A10B545"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134536/yarden_makeup/yarden_makeup_18315541324301400.jpg",
-    "a": "RON 🤍\nMAU @yarden_damri_makeup \nHair @korenmalihe \n@ron_kotek \n\n#איפורשיער #מאפר",
-    "id": "18112479550611613"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134536/yarden_makeup/yarden_makeup_18315541324301400.jpg",
-    "a": "RON 🤍\nMAU @yarden_damri_makeup \nHair @korenmalihe \n@ron_kotek \n\n#איפורשיער #מאפר",
-    "id": "18112479550611613"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134536/yarden_makeup/yarden_makeup_18315541324301400.jpg",
-    "a": "RON 🤍\nMAU @yarden_damri_makeup \nHair @korenmalihe \n@ron_kotek \n\n#איפורשיער #מאפר",
-    "id": "18112479550611613"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134536/yarden_makeup/yarden_makeup_18315541324301400.jpg",
@@ -407,18 +183,6 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/604039960_18551195470037829_4350215297454491420_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wGHM81OSBKgQ7kNvwH-Yukx&_nc_oc=AdpnzC5Okdv9ythIWM89KYPsbZSGNA9a2l_Xos2O5YsYrG6p3xhvXP9ibZp147PZllg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=bJW857L2m-FN4UN1ulRQuA&_nc_tpa=Q5bMBQFhPtI5D0qq9rrEVJrv0E4RWkjuOQGo6Q0qlr3jPUxuPPSDkbcfntttJYumKpTcL3LZEUt3mqZ-8A&oh=00_Af6QpOIosy76JhVIn1zFsbgKHBjEJmoTpb-wtip2SWyBiA&oe=6A10C018"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178389/yarden_makeup/yarden_makeup_18089170315804159.mp4",
-    "a": "@__galor איזה יפה את!!!!!\nMUA @yarden_damri_makeup \n\n#מאפרתבאילת #איפורמקצועי",
-    "id": "18547912003014324",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/604039960_18551195470037829_4350215297454491420_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wGHM81OSBKgQ7kNvwH-Yukx&_nc_oc=AdpnzC5Okdv9ythIWM89KYPsbZSGNA9a2l_Xos2O5YsYrG6p3xhvXP9ibZp147PZllg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=bJW857L2m-FN4UN1ulRQuA&_nc_tpa=Q5bMBQFhPtI5D0qq9rrEVJrv0E4RWkjuOQGo6Q0qlr3jPUxuPPSDkbcfntttJYumKpTcL3LZEUt3mqZ-8A&oh=00_Af6QpOIosy76JhVIn1zFsbgKHBjEJmoTpb-wtip2SWyBiA&oe=6A10C018"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134541/yarden_makeup/yarden_makeup_18270352198305064.jpg",
-    "a": "\tאיפור ללא איפור במראה הכי טבעי ונקי שיש \nאבל עדיין מאופר והכי חשוב מחמיא! \nאיפ",
-    "id": "17872250343398579"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134541/yarden_makeup/yarden_makeup_18270352198305064.jpg",
     "a": "\tאיפור ללא איפור במראה הכי טבעי ונקי שיש \nאבל עדיין מאופר והכי חשוב מחמיא! \nאיפ",
     "id": "17872250343398579"
@@ -427,20 +191,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527606/yarden_makeup/yarden_makeup_17943878376066368.jpg",
     "a": "Tal 🧡\n@tal_mila \n\nMUA @yarden_damri_makeup",
     "id": "17943878376066368"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178392/yarden_makeup/yarden_makeup_18415963129136635.mp4",
-    "a": "הלקוחות שלנו הכי יפות שיש !! \n@korenmalihe \nMUA @yarden_damri_makeup",
-    "id": "17842918917648713",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/600552954_18549280516037829_3745176847662339644_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9fjZ-3Eqr8IQ7kNvwEIGpiy&_nc_oc=AdqOUvR8LTn4CxtnVs1eco4SjkRy_s_FlvciCjakZO2VR0vY0rBz0722Zq02DK8kdUc&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=x-gtY43Q6r50VvG4LKWqWw&_nc_tpa=Q5bMBQHKSR6cOd4fI9ZyHF22vsUEkWn46q1jc4vFeQDOSFjA23HLyFwk-qIi5xHtLU2rzPx7ZC7W8l9ynA&oh=00_Af5Sq94UVeQ-qnh_fJkoOoXmUnioGr8O_cQYYtzAoVh9Jg&oe=6A10D4C0"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178392/yarden_makeup/yarden_makeup_18415963129136635.mp4",
-    "a": "הלקוחות שלנו הכי יפות שיש !! \n@korenmalihe \nMUA @yarden_damri_makeup",
-    "id": "17842918917648713",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/600552954_18549280516037829_3745176847662339644_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9fjZ-3Eqr8IQ7kNvwEIGpiy&_nc_oc=AdqOUvR8LTn4CxtnVs1eco4SjkRy_s_FlvciCjakZO2VR0vY0rBz0722Zq02DK8kdUc&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=x-gtY43Q6r50VvG4LKWqWw&_nc_tpa=Q5bMBQHKSR6cOd4fI9ZyHF22vsUEkWn46q1jc4vFeQDOSFjA23HLyFwk-qIi5xHtLU2rzPx7ZC7W8l9ynA&oh=00_Af5Sq94UVeQ-qnh_fJkoOoXmUnioGr8O_cQYYtzAoVh9Jg&oe=6A10D4C0"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178392/yarden_makeup/yarden_makeup_18415963129136635.mp4",
@@ -469,88 +219,6 @@ const GALLERY_IMAGES = [
     "id": "18073435061344859"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg",
-    "a": "Baku 🇦🇿 2025 \n@damriofir 🫶",
-    "id": "18073435061344859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178400/yarden_makeup/yarden_makeup_17863480359456013.mp4",
-    "a": "\t\tלאחרונה אני מאוהבת באיפור על גווני הוורוד \nזה משהו שבא לי עם החורף 🩷\nמה אתן",
-    "id": "18167753632388448",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/590416416_18547387903037829_5676194374731961382_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9sVMcbO-_OUQ7kNvwHJFK6K&_nc_oc=AdormBKz-iz7rJ08350njQB60uWn6vQYU52ovZyAJStRD5J_nQ-Jz2e-W-A-LC1fUw0&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=wGfaUR23UwCjJ72iUXtnJg&_nc_tpa=Q5bMBQHlAsUBawQfemNwd4Li6nA5pqN116xKrXaVZoI6ctf96YQ7XNnAWNgcPXa7gvvtPbKlQddI0SuSng&oh=00_Af70gAbrZ7Oobmc18fI9ZgaGyC2RDamvTVsDqjs-07GGNw&oe=6A10CDD7"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178400/yarden_makeup/yarden_makeup_17863480359456013.mp4",
     "a": "\t\tלאחרונה אני מאוהבת באיפור על גווני הוורוד \nזה משהו שבא לי עם החורף 🩷\nמה אתן",
     "id": "18167753632388448",
@@ -570,26 +238,6 @@ const GALLERY_IMAGES = [
     "id": "18075476966028948"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134580/yarden_makeup/yarden_makeup_18390380635178717.jpg",
-    "a": "Shelly 🦢🤍\n\n@yarden_damri_makeup \n@shelly_.s \n@korenmalihe \n@sharon.bridal",
-    "id": "18075476966028948"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134580/yarden_makeup/yarden_makeup_18390380635178717.jpg",
-    "a": "Shelly 🦢🤍\n\n@yarden_damri_makeup \n@shelly_.s \n@korenmalihe \n@sharon.bridal",
-    "id": "18075476966028948"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134580/yarden_makeup/yarden_makeup_18390380635178717.jpg",
-    "a": "Shelly 🦢🤍\n\n@yarden_damri_makeup \n@shelly_.s \n@korenmalihe \n@sharon.bridal",
-    "id": "18075476966028948"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134580/yarden_makeup/yarden_makeup_18390380635178717.jpg",
-    "a": "Shelly 🦢🤍\n\n@yarden_damri_makeup \n@shelly_.s \n@korenmalihe \n@sharon.bridal",
-    "id": "18075476966028948"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178402/yarden_makeup/yarden_makeup_18083562146044840.mp4",
     "a": "Emma 🩷\nMUA @yarden_damri_makeup \n\n#מאפרתמקצועית #מאפרתבאילת #איפורעדין",
     "id": "18083562146044840",
@@ -600,16 +248,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527613/yarden_makeup/yarden_makeup_18077899397239126.jpg",
     "a": "MAY 👰🏼♀️\n\n@yarden_damri_makeup \n@korenmalihe \n@maychuli",
     "id": "18077899397239126"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134585/yarden_makeup/yarden_makeup_17973310709952270.jpg",
-    "a": "לא רגועה ממנה!! \n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup",
-    "id": "18231392269306846"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134585/yarden_makeup/yarden_makeup_17973310709952270.jpg",
-    "a": "לא רגועה ממנה!! \n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup",
-    "id": "18231392269306846"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134585/yarden_makeup/yarden_makeup_17973310709952270.jpg",
@@ -643,31 +281,11 @@ const GALLERY_IMAGES = [
     "id": "18511613332068128"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134588/yarden_makeup/yarden_makeup_17979284855776273.jpg",
-    "a": "Makeup for hina \n@galifergan \n@yarden_damri_makeup \n\n#מאפרתבאילת #איפורערב #מאפר",
-    "id": "18511613332068128"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178410/yarden_makeup/yarden_makeup_18009919301642250.mp4",
     "a": "\tמותג האיפור הבינלאומי NYX נחת בישראל \nבואו לייצר איתי לוק מהמוצרים הכי שווים ❤",
     "id": "18009919301642250",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/574361656_710307835427259_2075275979698011833_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=EhejkCzN_SoQ7kNvwEzTlz8&_nc_oc=AdrJgOKLGpf6UzO2V2G0KCdmfTuBTR-oWlSK7813HbjOrzM4JjxOrpvm2vrp0wNWdeg&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQGomZEob68VlXGHh5EOfJXyuR543iDYV0zQHZU0DiqR3QIhd-7Z8jasozMjEG1xtl-K6ItondebVQ&oh=00_Af7LjlPQcl-ugnU1vKwykRLFrv7ho56a2jo26vkLHaODGw&oe=6A10D932"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134594/yarden_makeup/yarden_makeup_17970370295953886.jpg",
-    "a": "כמה שהיא יפה 😍\n@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup",
-    "id": "18066767987525597"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134594/yarden_makeup/yarden_makeup_17970370295953886.jpg",
-    "a": "כמה שהיא יפה 😍\n@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup",
-    "id": "18066767987525597"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134594/yarden_makeup/yarden_makeup_17970370295953886.jpg",
-    "a": "כמה שהיא יפה 😍\n@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup",
-    "id": "18066767987525597"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134594/yarden_makeup/yarden_makeup_17970370295953886.jpg",
@@ -694,13 +312,6 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/571013663_18539423416037829_610270150897419907_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=w_Sb5_dUlbAQ7kNvwEUpBZ7&_nc_oc=AdqSDthcl6haq3Q3h12kkut_yJkMuLZH3e02SVR_DoyHGfllK23NCHsy09haSZtbXcw&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=-y6GBXbvZlmI_xf2jYIW3Q&_nc_tpa=Q5bMBQE-trCt04sAY4HX5N90T7yYF_-oqZdMmuzJlGz8HarUW5BK8I4Mhtt0-Vtk4cBXr-9YRzr4jcE8pg&oh=00_Af5YNd0y2C6JYw0Cialsr0raVJ3iKcT3LGM2wx04SacGZQ&oe=6A10B5ED"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178414/yarden_makeup/yarden_makeup_18044662028688001.mp4",
-    "a": "LIAN 🦢\n\n@yarden_damri_makeup \n@bartzanani_hair \n@lianyoseff \n@yardenderhi @byard",
-    "id": "17991573404714514",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/571013663_18539423416037829_610270150897419907_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=w_Sb5_dUlbAQ7kNvwEUpBZ7&_nc_oc=AdqSDthcl6haq3Q3h12kkut_yJkMuLZH3e02SVR_DoyHGfllK23NCHsy09haSZtbXcw&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=-y6GBXbvZlmI_xf2jYIW3Q&_nc_tpa=Q5bMBQE-trCt04sAY4HX5N90T7yYF_-oqZdMmuzJlGz8HarUW5BK8I4Mhtt0-Vtk4cBXr-9YRzr4jcE8pg&oh=00_Af5YNd0y2C6JYw0Cialsr0raVJ3iKcT3LGM2wx04SacGZQ&oe=6A10B5ED"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527459/yarden_makeup/yarden_makeup_18081898010071597.jpg",
     "a": "@yifatmarziano ❤️\n@yarden_damri_makeup \n\n#איפורערב #מאפרתמקצועית #מאפרתבאילת",
     "id": "18081898010071597"
@@ -709,35 +320,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134603/yarden_makeup/yarden_makeup_18043787870444529.jpg",
     "a": "Obsessed 🖤\n\n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup \n\n#paris #stayl #",
     "id": "18542387137011549"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134603/yarden_makeup/yarden_makeup_18043787870444529.jpg",
-    "a": "Obsessed 🖤\n\n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup \n\n#paris #stayl #",
-    "id": "18542387137011549"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134603/yarden_makeup/yarden_makeup_18043787870444529.jpg",
-    "a": "Obsessed 🖤\n\n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup \n\n#paris #stayl #",
-    "id": "18542387137011549"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134603/yarden_makeup/yarden_makeup_18043787870444529.jpg",
-    "a": "Obsessed 🖤\n\n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup \n\n#paris #stayl #",
-    "id": "18542387137011549"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178418/yarden_makeup/yarden_makeup_17887425150245663.mp4",
-    "a": "Raz 🩷\n@raz_turgeman_ \n\n#מאפרתבאילת #מאפרתמקצועית #איפור #איפורטבעי",
-    "id": "17913227031212383",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/564756448_18536313589037829_1085531878170562041_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=0DlaEHG2KEYQ7kNvwHNZ5yF&_nc_oc=AdrKI9HpBczOOXufbNjiQ4xiStXj61KkUm69h-1zCjG4j2mjG3-_h-RyX_QKQVaKy_E&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=G_GqAfqWK_pDp-xqjKuCww&_nc_tpa=Q5bMBQH1OEgZn9WqNvCRh9hEDs2_FLZsgmGP33FWVK3ugwFuMDqPvVVYZZFzuQ3rjvk5qJh5qLL6_MXAtA&oh=00_Af5yv5bqOe23bZnZV02M0NbxvRV0rfCPBbdzSZ_6dG7URQ&oe=6A10B13D"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178418/yarden_makeup/yarden_makeup_17887425150245663.mp4",
-    "a": "Raz 🩷\n@raz_turgeman_ \n\n#מאפרתבאילת #מאפרתמקצועית #איפור #איפורטבעי",
-    "id": "17913227031212383",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/564756448_18536313589037829_1085531878170562041_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=0DlaEHG2KEYQ7kNvwHNZ5yF&_nc_oc=AdrKI9HpBczOOXufbNjiQ4xiStXj61KkUm69h-1zCjG4j2mjG3-_h-RyX_QKQVaKy_E&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=G_GqAfqWK_pDp-xqjKuCww&_nc_tpa=Q5bMBQH1OEgZn9WqNvCRh9hEDs2_FLZsgmGP33FWVK3ugwFuMDqPvVVYZZFzuQ3rjvk5qJh5qLL6_MXAtA&oh=00_Af5yv5bqOe23bZnZV02M0NbxvRV0rfCPBbdzSZ_6dG7URQ&oe=6A10B13D"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178418/yarden_makeup/yarden_makeup_17887425150245663.mp4",
@@ -752,16 +334,6 @@ const GALLERY_IMAGES = [
     "id": "17995033085726232",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/561609732_1436006834150238_9202579239120598927_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=BFtEZBuaorEQ7kNvwFx1w8m&_nc_oc=AdpMhH8oOrARFm8Gew2YA9bmWL_pYK4GMpfSLKUYfGuMWG2HEJbdluXF8P566rg035g&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQHNkYt6PJmjlgct-Cl2emW4CmQ2hU4CJGky2OsEMBbspZdtUP4telGy9nAbFTbot_qgVIeRKPxC6A&oh=00_Af4n_rJTnaFzEJ3bAOAaeAOD5tfhdXxqr96JA3zOLvVnXA&oe=6A10AFF9"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134611/yarden_makeup/yarden_makeup_18045091307656647.jpg",
-    "a": "כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תוד",
-    "id": "18106159150580442"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134611/yarden_makeup/yarden_makeup_18045091307656647.jpg",
-    "a": "כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תוד",
-    "id": "18106159150580442"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134611/yarden_makeup/yarden_makeup_18045091307656647.jpg",
@@ -788,45 +360,11 @@ const GALLERY_IMAGES = [
     "id": "18357494716087686"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134614/yarden_makeup/yarden_makeup_18051403415639956.jpg",
-    "a": "חג שמח ושנה טובה 🍯🍏\nמשפחה שלי ❤️\n@damriofir",
-    "id": "18357494716087686"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178430/yarden_makeup/yarden_makeup_17984385209733654.mp4",
     "a": "Anat 💍\n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
     "id": "17872066089429173",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/551450955_18531083305037829_4303190287379573962_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=1EXbrlatLwYQ7kNvwHx-tpm&_nc_oc=AdoNTBm5vmPZ0XNxdzNElZNDa1Akl66RAxU2d3Wrky7oiGXgK0nnqHY7Zk8RrljB9M0&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=b7hX7NrYybnrDEFRPEE8vQ&_nc_tpa=Q5bMBQE0ktO3mgNuoi0PLaw3n0yuH_fUakjsEb59OfkGxjl98dixg3dFDP1M9nkq18mY5iwkk7UnggMZSQ&oh=00_Af4MqzAS7sfzNUTOrHY2Vjx0pD0_VsNPS_bgiNagW7k50Q&oe=6A10B649"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178430/yarden_makeup/yarden_makeup_17984385209733654.mp4",
-    "a": "Anat 💍\n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
-    "id": "17872066089429173",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/551450955_18531083305037829_4303190287379573962_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=1EXbrlatLwYQ7kNvwHx-tpm&_nc_oc=AdoNTBm5vmPZ0XNxdzNElZNDa1Akl66RAxU2d3Wrky7oiGXgK0nnqHY7Zk8RrljB9M0&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=b7hX7NrYybnrDEFRPEE8vQ&_nc_tpa=Q5bMBQE0ktO3mgNuoi0PLaw3n0yuH_fUakjsEb59OfkGxjl98dixg3dFDP1M9nkq18mY5iwkk7UnggMZSQ&oh=00_Af4MqzAS7sfzNUTOrHY2Vjx0pD0_VsNPS_bgiNagW7k50Q&oe=6A10B649"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178430/yarden_makeup/yarden_makeup_17984385209733654.mp4",
-    "a": "Anat 💍\n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
-    "id": "17872066089429173",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/551450955_18531083305037829_4303190287379573962_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=1EXbrlatLwYQ7kNvwHx-tpm&_nc_oc=AdoNTBm5vmPZ0XNxdzNElZNDa1Akl66RAxU2d3Wrky7oiGXgK0nnqHY7Zk8RrljB9M0&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=b7hX7NrYybnrDEFRPEE8vQ&_nc_tpa=Q5bMBQE0ktO3mgNuoi0PLaw3n0yuH_fUakjsEb59OfkGxjl98dixg3dFDP1M9nkq18mY5iwkk7UnggMZSQ&oh=00_Af4MqzAS7sfzNUTOrHY2Vjx0pD0_VsNPS_bgiNagW7k50Q&oe=6A10B649"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134623/yarden_makeup/yarden_makeup_18089383435836495.jpg",
-    "a": "🖤🖤🖤\n@yarden_damri_makeup \n@korenmalihe \n\n#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת",
-    "id": "18104567200580444"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134623/yarden_makeup/yarden_makeup_18089383435836495.jpg",
-    "a": "🖤🖤🖤\n@yarden_damri_makeup \n@korenmalihe \n\n#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת",
-    "id": "18104567200580444"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134623/yarden_makeup/yarden_makeup_18089383435836495.jpg",
-    "a": "🖤🖤🖤\n@yarden_damri_makeup \n@korenmalihe \n\n#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת",
-    "id": "18104567200580444"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134623/yarden_makeup/yarden_makeup_18089383435836495.jpg",
@@ -837,21 +375,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134626/yarden_makeup/yarden_makeup_17947054785043173.jpg",
     "a": "מתוך צילומי תדמית @valeriya.astafyeva \nסטיילינג @inbalv.styling \nצלמת @liranyoha",
     "id": "18067789828970688"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134626/yarden_makeup/yarden_makeup_17947054785043173.jpg",
-    "a": "מתוך צילומי תדמית @valeriya.astafyeva \nסטיילינג @inbalv.styling \nצלמת @liranyoha",
-    "id": "18067789828970688"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134632/yarden_makeup/yarden_makeup_17845081647554043.jpg",
-    "a": "\tהמצלמה פשוט אוהבת אותך!! \n@yanashtein_ @korenmalihe@yarden_damri_makeupkeup\n@",
-    "id": "18074498573030491"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134632/yarden_makeup/yarden_makeup_17845081647554043.jpg",
-    "a": "\tהמצלמה פשוט אוהבת אותך!! \n@yanashtein_ @korenmalihe@yarden_damri_makeupkeup\n@",
-    "id": "18074498573030491"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134632/yarden_makeup/yarden_makeup_17845081647554043.jpg",
@@ -864,16 +387,6 @@ const GALLERY_IMAGES = [
     "id": "18066648758006007",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/541944708_1100766335360821_2544521850819720441_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=osjzkwdblvcQ7kNvwHojmwC&_nc_oc=AdqaPs-IrwtTQIoFxFNmj69_-rU0T19QFFXrEWFNcCUYSerl59Vrfi1I9Kt-eQNyBFs&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQEZLHt59uXWD2eJjkkLLgJiQ8HUWhqcgAygfXsq8wm5TJ0b2o1KjBtGZcKh0Wz8LvKxCdJ2TSfr_g&oh=00_Af61hnCIiUtqlqmQJ4ek4m831GyezduBdhzd5SJMXbC21w&oe=6A10C50C"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134636/yarden_makeup/yarden_makeup_17861063388468102.jpg",
-    "a": "For @tictaceilat \n@valeriya.astafyeva 🦢\n@yarden_damri_makeup \n@valeria__vision",
-    "id": "18062919026591725"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134636/yarden_makeup/yarden_makeup_17861063388468102.jpg",
-    "a": "For @tictaceilat \n@valeriya.astafyeva 🦢\n@yarden_damri_makeup \n@valeria__vision",
-    "id": "18062919026591725"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134636/yarden_makeup/yarden_makeup_17861063388468102.jpg",
@@ -926,59 +439,9 @@ const GALLERY_IMAGES = [
     "id": "18045972305307303"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134645/yarden_makeup/yarden_makeup_18516273853045851.jpg",
-    "a": "\tשיר הכלה המתוקה שלי \nביום הכי מאושר שלה 💍\n\nאיפור @yarden_damri_makeup \nשיער @k",
-    "id": "18045972305307303"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134645/yarden_makeup/yarden_makeup_18516273853045851.jpg",
-    "a": "\tשיר הכלה המתוקה שלי \nביום הכי מאושר שלה 💍\n\nאיפור @yarden_damri_makeup \nשיער @k",
-    "id": "18045972305307303"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134645/yarden_makeup/yarden_makeup_18516273853045851.jpg",
-    "a": "\tשיר הכלה המתוקה שלי \nביום הכי מאושר שלה 💍\n\nאיפור @yarden_damri_makeup \nשיער @k",
-    "id": "18045972305307303"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134645/yarden_makeup/yarden_makeup_18516273853045851.jpg",
-    "a": "\tשיר הכלה המתוקה שלי \nביום הכי מאושר שלה 💍\n\nאיפור @yarden_damri_makeup \nשיער @k",
-    "id": "18045972305307303"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134651/yarden_makeup/yarden_makeup_18373045861181385.jpg",
     "a": "TITI FOR @bebyshufersal 🌟\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
     "id": "17905702284211191"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134651/yarden_makeup/yarden_makeup_18373045861181385.jpg",
-    "a": "TITI FOR @bebyshufersal 🌟\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
-    "id": "17905702284211191"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134651/yarden_makeup/yarden_makeup_18373045861181385.jpg",
-    "a": "TITI FOR @bebyshufersal 🌟\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
-    "id": "17905702284211191"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134651/yarden_makeup/yarden_makeup_18373045861181385.jpg",
-    "a": "TITI FOR @bebyshufersal 🌟\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
-    "id": "17905702284211191"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134659/yarden_makeup/yarden_makeup_17951040593862052.jpg",
-    "a": "מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! \n\n@korenmalihe \n@yarden_damri_makeup",
-    "id": "17846548695535919"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134659/yarden_makeup/yarden_makeup_17951040593862052.jpg",
-    "a": "מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! \n\n@korenmalihe \n@yarden_damri_makeup",
-    "id": "17846548695535919"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134659/yarden_makeup/yarden_makeup_17951040593862052.jpg",
-    "a": "מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! \n\n@korenmalihe \n@yarden_damri_makeup",
-    "id": "17846548695535919"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134659/yarden_makeup/yarden_makeup_17951040593862052.jpg",
@@ -989,21 +452,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134663/yarden_makeup/yarden_makeup_17974272674906745.jpg",
     "a": "כל הצבעים יפים לך ❤️\n@limor_edri \n\n@natibenmargi \n@korenmalihe \n@yarden_damri_ma",
     "id": "18330374182200383"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134663/yarden_makeup/yarden_makeup_17974272674906745.jpg",
-    "a": "כל הצבעים יפים לך ❤️\n@limor_edri \n\n@natibenmargi \n@korenmalihe \n@yarden_damri_ma",
-    "id": "18330374182200383"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134668/yarden_makeup/yarden_makeup_18060193937248692.jpg",
-    "a": "לוק מחרפן שאני לא רגועה ממנו! \n\nשיער של המוכשרת הזו @korenmalihe \nאיפור שלי @yar",
-    "id": "18085072915654222"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134668/yarden_makeup/yarden_makeup_18060193937248692.jpg",
-    "a": "לוק מחרפן שאני לא רגועה ממנו! \n\nשיער של המוכשרת הזו @korenmalihe \nאיפור שלי @yar",
-    "id": "18085072915654222"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134668/yarden_makeup/yarden_makeup_18060193937248692.jpg",
@@ -1030,11 +478,6 @@ const GALLERY_IMAGES = [
     "id": "18064392191332222"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134671/yarden_makeup/yarden_makeup_17874524694389444.jpg",
-    "a": "YANA 🎀 \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @_jeen_b",
-    "id": "18064392191332222"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178454/yarden_makeup/yarden_makeup_17942192087901078.mp4",
     "a": "\tמצאתי את הליהוק החדש לברבי 2 הסרט 🎀\n@limor_edri@limed_socialal \n\nאי@yarden_dam",
     "id": "17942192087901078",
@@ -1054,11 +497,6 @@ const GALLERY_IMAGES = [
     "id": "18113737726445564"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134674/yarden_makeup/yarden_makeup_18007823300784109.jpg",
-    "a": "🌺\n\n@yarden_damri_makeup \n@kesem_david1 \n\n#מאפרתבאילת #מאפרתמקצועית #איפורארט #ma",
-    "id": "18113737726445564"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178459/yarden_makeup/yarden_makeup_18085593385774043.mp4",
     "a": "prom 2025 🌟\n\n@korenmalihe \n@yarden_damri_makeup",
     "id": "18085593385774043",
@@ -1071,16 +509,6 @@ const GALLERY_IMAGES = [
     "id": "18481222096070029",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/516850625_4194030357520634_1637588872793932884_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=-bzI8tC1KHYQ7kNvwFsDATF&_nc_oc=AdrOckt9F9SaEVOu4ezv9KYnQFhdn4Twy6l_5Hmd8Y54eUEprC5OiSxbjK81PpzmDCM&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQHZPDRjC_FWAcZaAOtA1Ik806f_U3rU_-eoPN-KK3ea44ztVkxbum0QGvdtAyyFBb89qDBrSATQjg&oh=00_Af5jLqp4YRUM1UMvipLiDuJfa7WnGj6UiZZclRzI2CxrCQ&oe=6A10BADC"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134679/yarden_makeup/yarden_makeup_17949607904861027.jpg",
-    "a": "“איפור כלה שמתאים בדיוק לך – מחמיא, עמיד, וזוהר בטבעיות שלו ✨\nכי ביום שלך – מגיע",
-    "id": "18083865877831321"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134679/yarden_makeup/yarden_makeup_17949607904861027.jpg",
-    "a": "“איפור כלה שמתאים בדיוק לך – מחמיא, עמיד, וזוהר בטבעיות שלו ✨\nכי ביום שלך – מגיע",
-    "id": "18083865877831321"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134679/yarden_makeup/yarden_makeup_17949607904861027.jpg",
@@ -1126,11 +554,6 @@ const GALLERY_IMAGES = [
     "id": "18041520479310506"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134682/yarden_makeup/yarden_makeup_17953837232971494.jpg",
-    "a": "\tאיפור ושיער טבעי שמדגיש את כל מה שיפה 💖\nתהליך מותאם אישית, תוצאה מדויקת.\n\nשיער",
-    "id": "18041520479310506"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178470/yarden_makeup/yarden_makeup_18074812873915154.mp4",
     "a": "\tבואו לראות איך מייצרים לוק מדוייק לצילומי אופנה \nעבור @soygata.il",
     "id": "18074812873915154",
@@ -1150,11 +573,6 @@ const GALLERY_IMAGES = [
     "id": "18062040937949080",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/504032772_1251713549950499_5128746922683210590_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=3LnyPB7VRNYQ7kNvwHfxJF7&_nc_oc=AdoPxfqnY-_yHILNUJ3Y2ldXWj7hddE-LsqcMYG0b5-avKrk3EeCKyzsF4Dwu5CMdKw&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=QasEXYrfArK6XMLgkhPoBg&_nc_tpa=Q5bMBQFzdP3z_whIErTA4V3e5h6BwRHrRP5FoCZRNURcEz5UBbZCXLi3WWwa7S_5DBU95vmffVeJu7ZElA&oh=00_Af6_CYbt9Rvh5RkF0Xpgw3cxwh3Fz_ExtfNSXu1Y6LlHwA&oe=6A10DCEC"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134685/yarden_makeup/yarden_makeup_18044930687217742.jpg",
-    "a": "אהובתי היפה באיפור שלי 🌸\n@ziv.interiordesign",
-    "id": "17960770013943608"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134685/yarden_makeup/yarden_makeup_18044930687217742.jpg",
@@ -1186,54 +604,9 @@ const GALLERY_IMAGES = [
     "id": "17955187244953870"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134692/yarden_makeup/yarden_makeup_17894050482123155.jpg",
-    "a": "שהפנים שלך מדויקות ברמות!! \nזה פשוט יוצא משוגעעעע 🪬\n\nאיפור שלי \nשיער @korenmalih",
-    "id": "17955187244953870"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134692/yarden_makeup/yarden_makeup_17894050482123155.jpg",
-    "a": "שהפנים שלך מדויקות ברמות!! \nזה פשוט יוצא משוגעעעע 🪬\n\nאיפור שלי \nשיער @korenmalih",
-    "id": "17955187244953870"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134692/yarden_makeup/yarden_makeup_17894050482123155.jpg",
-    "a": "שהפנים שלך מדויקות ברמות!! \nזה פשוט יוצא משוגעעעע 🪬\n\nאיפור שלי \nשיער @korenmalih",
-    "id": "17955187244953870"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg",
     "a": "זכינו להכניס בבריתו של אברהם אבינו 🙏\nמשפחה שלי ❤️\nויקרא שמו בישראל - אליה דמרי 💙",
     "id": "18101706751533800"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg",
-    "a": "זכינו להכניס בבריתו של אברהם אבינו 🙏\nמשפחה שלי ❤️\nויקרא שמו בישראל - אליה דמרי 💙",
-    "id": "18101706751533800"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg",
-    "a": "זכינו להכניס בבריתו של אברהם אבינו 🙏\nמשפחה שלי ❤️\nויקרא שמו בישראל - אליה דמרי 💙",
-    "id": "18101706751533800"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg",
-    "a": "זכינו להכניס בבריתו של אברהם אבינו 🙏\nמשפחה שלי ❤️\nויקרא שמו בישראל - אליה דמרי 💙",
-    "id": "18101706751533800"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg",
-    "a": "זכינו להכניס בבריתו של אברהם אבינו 🙏\nמשפחה שלי ❤️\nויקרא שמו בישראל - אליה דמרי 💙",
-    "id": "18101706751533800"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134704/yarden_makeup/yarden_makeup_18004457042773144.jpg",
-    "a": "כל תמונה שלך יותר יפה מהשניה ! \n@sarai_mamane \n\nשמלה של @sharon.bridal \nשיער @ko",
-    "id": "18010843883685323"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134704/yarden_makeup/yarden_makeup_18004457042773144.jpg",
-    "a": "כל תמונה שלך יותר יפה מהשניה ! \n@sarai_mamane \n\nשמלה של @sharon.bridal \nשיער @ko",
-    "id": "18010843883685323"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134704/yarden_makeup/yarden_makeup_18004457042773144.jpg",
@@ -1246,11 +619,6 @@ const GALLERY_IMAGES = [
     "id": "18016465199519964",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.75761-15/497841288_18506918002037829_257839013604205984_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Hz_g5kUhazsQ7kNvwFemJBY&_nc_oc=AdquDX3jHbpliWLm7PlNEvjRDyUfrN-39kYuEhAvRDS7rH1wlqdsa4jFR4iM1L_9Zzs&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=E_TCQL1163-JYm2DJPPFzQ&_nc_tpa=Q5bMBQF_LAVqp3JWdA-YBleOnwxH6esdt3YN0DKqTyYe-9LPxxzlUJh_yRBNZpgfzNQJooLZrST6jCh1nQ&oh=00_Af51B8fUpaQv2yzmGQvCwZogbkGf9YJLazAKEub15YRdlQ&oe=6A10E261"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134708/yarden_makeup/yarden_makeup_18156611506363317.jpg",
-    "a": "BRIDE 2025 🦢\n\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by @yarden_d",
-    "id": "17860592733409039"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134708/yarden_makeup/yarden_makeup_18156611506363317.jpg",
@@ -1275,34 +643,9 @@ const GALLERY_IMAGES = [
     "id": "18138111118400902"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134713/yarden_makeup/yarden_makeup_18023749538489323.jpg",
-    "a": "Yana 🦋\n\nHair by @korenmalihe \nMakeup by @yarden_damri_makeup \nDress by @_jeen_bo",
-    "id": "18138111118400902"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134713/yarden_makeup/yarden_makeup_18023749538489323.jpg",
-    "a": "Yana 🦋\n\nHair by @korenmalihe \nMakeup by @yarden_damri_makeup \nDress by @_jeen_bo",
-    "id": "18138111118400902"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134716/yarden_makeup/yarden_makeup_18042370706212264.jpg",
     "a": "לפעמים אני פשוט חסרת מילים 😍\nאיפור שלי \nשיער @korenmalihe \nשמלה @sharon.bridal",
     "id": "18062219378027855"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134716/yarden_makeup/yarden_makeup_18042370706212264.jpg",
-    "a": "לפעמים אני פשוט חסרת מילים 😍\nאיפור שלי \nשיער @korenmalihe \nשמלה @sharon.bridal",
-    "id": "18062219378027855"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134721/yarden_makeup/yarden_makeup_17903267574155848.jpg",
-    "a": "GORGEOUS SHAKED 🦢🦢\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress",
-    "id": "18060465113122900"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134721/yarden_makeup/yarden_makeup_17903267574155848.jpg",
-    "a": "GORGEOUS SHAKED 🦢🦢\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress",
-    "id": "18060465113122900"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134721/yarden_makeup/yarden_makeup_17903267574155848.jpg",
@@ -1322,25 +665,6 @@ const GALLERY_IMAGES = [
     "id": "18065426771058881"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134724/yarden_makeup/yarden_makeup_18308296435233262.jpg",
-    "a": "כל כך יפה ועדינה 🦋\nאיפור שלי \nשיער @korenmalihe \n\n#מאפרתבאילת #מסרקתבאילת #איפור",
-    "id": "18065426771058881"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178487/yarden_makeup/yarden_makeup_17917007199085444.mp4",
-    "a": "🤍🤍🤍\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.brida",
-    "id": "18074261548857834",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/622675447_824566297270278_3616120129582776079_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kD-NEx-huPcQ7kNvwGpeIgz&_nc_oc=AdqIgUBfsLvbaVJGxwG2SVFO9auAd_2GU0cLm6b3T-RXEPUZTJ7POWj4cIPjSS2YW-E&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=lNph3A5X0mwz795tYY08PQ&_nc_tpa=Q5bMBQGL5mSfeuIGnUFOUjeBvQXj5_AdXyJF_55ctM5-dHKfMJl9K7diY3W_Mkqa1kFynGzDunsAMk3hWQ&oh=00_Af4fKIdQmkgLl2EbHe17CUkmlRdjqSQC3uw3BvjxeiHKWQ&oe=6A10E356"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178487/yarden_makeup/yarden_makeup_17917007199085444.mp4",
-    "a": "🤍🤍🤍\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.brida",
-    "id": "18074261548857834",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/622675447_824566297270278_3616120129582776079_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kD-NEx-huPcQ7kNvwGpeIgz&_nc_oc=AdqIgUBfsLvbaVJGxwG2SVFO9auAd_2GU0cLm6b3T-RXEPUZTJ7POWj4cIPjSS2YW-E&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=lNph3A5X0mwz795tYY08PQ&_nc_tpa=Q5bMBQGL5mSfeuIGnUFOUjeBvQXj5_AdXyJF_55ctM5-dHKfMJl9K7diY3W_Mkqa1kFynGzDunsAMk3hWQ&oh=00_Af4fKIdQmkgLl2EbHe17CUkmlRdjqSQC3uw3BvjxeiHKWQ&oe=6A10E356"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178487/yarden_makeup/yarden_makeup_17917007199085444.mp4",
     "a": "🤍🤍🤍\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.brida",
     "id": "18074261548857834",
@@ -1351,16 +675,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134731/yarden_makeup/yarden_makeup_18123022534439713.jpg",
     "a": "So pretty 🤩 \n@valeriya.astafyeva",
     "id": "18153192229368912"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134731/yarden_makeup/yarden_makeup_18123022534439713.jpg",
-    "a": "So pretty 🤩 \n@valeriya.astafyeva",
-    "id": "18153192229368912"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134734/yarden_makeup/yarden_makeup_18009933605710220.jpg",
-    "a": "נעמי המושלמת!! \nכמה כיף לאפר אותך ❤️\n\n#מאפרתמקצועית #מאפרתבאילת #איפור #makeup",
-    "id": "18066213922781339"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134734/yarden_makeup/yarden_makeup_18009933605710220.jpg",
@@ -1387,16 +701,6 @@ const GALLERY_IMAGES = [
     "id": "17978034209827420"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134739/yarden_makeup/yarden_makeup_17858907972330887.jpg",
-    "a": "\tSoo pretty 😍 \nאיפור שלי \nשיער @korenmalihe\nשמל@dorin_dress_s_",
-    "id": "17978034209827420"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134739/yarden_makeup/yarden_makeup_17858907972330887.jpg",
-    "a": "\tSoo pretty 😍 \nאיפור שלי \nשיער @korenmalihe\nשמל@dorin_dress_s_",
-    "id": "17978034209827420"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178492/yarden_makeup/yarden_makeup_17961679754904787.mp4",
     "a": "כמה שאת יפה 🤩\n@naomilevi148 \n\n#מאפרתבאילת #איפורערב",
     "id": "17961679754904787",
@@ -1407,16 +711,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134742/yarden_makeup/yarden_makeup_17961615737908246.jpg",
     "a": "לאחרונה אני מאוהבת באיפור שהוא מאט\nאיזה סוג אנשים אתם? \nMakeup by @yarden_damri_",
     "id": "18060479930046181"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134742/yarden_makeup/yarden_makeup_17961615737908246.jpg",
-    "a": "לאחרונה אני מאוהבת באיפור שהוא מאט\nאיזה סוג אנשים אתם? \nMakeup by @yarden_damri_",
-    "id": "18060479930046181"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134745/yarden_makeup/yarden_makeup_18122998831427410.jpg",
-    "a": "Sooo pretty 💗\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \n@shaked_est",
-    "id": "18088375558520535"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134745/yarden_makeup/yarden_makeup_18122998831427410.jpg",
@@ -1450,29 +744,9 @@ const GALLERY_IMAGES = [
     "id": "18056452472164937"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134749/yarden_makeup/yarden_makeup_17895651612075920.jpg",
-    "a": "Nofia 🖤🐈⬛\nאיזה מהממת את 😍😍 גם מבפנים \nוגם מבחוץ 🪬\n\nאיפור @yarden_damri_makeup \nש",
-    "id": "18056452472164937"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134749/yarden_makeup/yarden_makeup_17895651612075920.jpg",
-    "a": "Nofia 🖤🐈⬛\nאיזה מהממת את 😍😍 גם מבפנים \nוגם מבחוץ 🪬\n\nאיפור @yarden_damri_makeup \nש",
-    "id": "18056452472164937"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134753/yarden_makeup/yarden_makeup_17941465907974051.jpg",
     "a": "Mali Levi ❤️\n\n@malilevi \nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hai",
     "id": "18033143618553122"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134753/yarden_makeup/yarden_makeup_17941465907974051.jpg",
-    "a": "Mali Levi ❤️\n\n@malilevi \nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hai",
-    "id": "18033143618553122"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134756/yarden_makeup/yarden_makeup_18158683732346334.jpg",
-    "a": "So beautiful 🤩 \n@lizamarkolov \n\n#מאפרתמקצועית💄💋 #מאפרתבאילת #איפורכלות",
-    "id": "18121848208390077"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134756/yarden_makeup/yarden_makeup_18158683732346334.jpg",
@@ -1499,11 +773,6 @@ const GALLERY_IMAGES = [
     "id": "18085374367581726"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134760/yarden_makeup/yarden_makeup_17923246013973474.jpg",
-    "a": "🖤\n\n@ivetta_berkovich \n@korenmalihe",
-    "id": "18085374367581726"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178501/yarden_makeup/yarden_makeup_18051459217977595.mp4",
     "a": "שקד את אמלהההה!! 😍\n@shaked_esterin \n\nסטיק קונטור של @lazorgan \n#מאפרתבאילת #איפו",
     "id": "18051459217977595",
@@ -1521,16 +790,6 @@ const GALLERY_IMAGES = [
     "id": "18019082264677508",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.75761-15/481212617_18490120579037829_4144388117520627557_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=JxcJhtKbm0QQ7kNvwFit6A9&_nc_oc=AdpJyq0Eope1qi_xXj-ApH1o-DsVYqJqDfgiLfmYxbzMoVqpuCiYQwJ9T_0zqza2dQk&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=E_TCQL1163-JYm2DJPPFzQ&_nc_tpa=Q5bMBQFTxxrmF6BGJ0RX3ZRu8hHxXbOIlrQ7ObJrMMCYZWvizOmBRqUbD0EanvZM2kH8-2aMcs5W0haJtQ&oh=00_Af7n4xZHd_UKkXy68ugZiKG7Cu_w-nl8Ht3qZjbNlyDKDQ&oe=6A10BD91"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134765/yarden_makeup/yarden_makeup_18076711984633435.jpg",
-    "a": "SHAKED 🖤🖤\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @dorin",
-    "id": "18073596133685992"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134765/yarden_makeup/yarden_makeup_18076711984633435.jpg",
-    "a": "SHAKED 🖤🖤\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @dorin",
-    "id": "18073596133685992"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134765/yarden_makeup/yarden_makeup_18076711984633435.jpg",
@@ -1564,16 +823,6 @@ const GALLERY_IMAGES = [
     "id": "18062241163745184"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134768/yarden_makeup/yarden_makeup_18394793506099276.jpg",
-    "a": "לא רגועה מהיופי הזה 😍😍\n@ivetta_berkovich \n\nאיפור שלי @yarden_damri_makeup \nשיער",
-    "id": "18062241163745184"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134771/yarden_makeup/yarden_makeup_17882315253220526.jpg",
-    "a": "מתוך סדנת איפור אישית ל @hayanoufi \nכמה שיפה לה איפור 😍 ואיזה מהממת את 🪬",
-    "id": "17894392470168145"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134771/yarden_makeup/yarden_makeup_17882315253220526.jpg",
     "a": "מתוך סדנת איפור אישית ל @hayanoufi \nכמה שיפה לה איפור 😍 ואיזה מהממת את 🪬",
     "id": "17894392470168145"
@@ -1582,16 +831,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134774/yarden_makeup/yarden_makeup_17969935763833227.jpg",
     "a": "YAEL & GUY \nכמה שאתם יפים 🪬\n@guyzu_aretz @yaelbarzohar \n\nאיפור שלי @yarden_damri",
     "id": "17931314598002701"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134774/yarden_makeup/yarden_makeup_17969935763833227.jpg",
-    "a": "YAEL & GUY \nכמה שאתם יפים 🪬\n@guyzu_aretz @yaelbarzohar \n\nאיפור שלי @yarden_damri",
-    "id": "17931314598002701"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134777/yarden_makeup/yarden_makeup_17854284546378060.jpg",
-    "a": "Assi Azar 🧡\nassiazar \n\nMakeup by @yarden_damri_makeup \n@fox_israel",
-    "id": "18086474806561604"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134777/yarden_makeup/yarden_makeup_17854284546378060.jpg",
@@ -1618,26 +857,6 @@ const GALLERY_IMAGES = [
     "id": "18337082557157422"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134783/yarden_makeup/yarden_makeup_18052026023490451.jpg",
-    "a": "Tamar ✨✨\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by me ❤️",
-    "id": "18337082557157422"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134783/yarden_makeup/yarden_makeup_18052026023490451.jpg",
-    "a": "Tamar ✨✨\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by me ❤️",
-    "id": "18337082557157422"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134783/yarden_makeup/yarden_makeup_18052026023490451.jpg",
-    "a": "Tamar ✨✨\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by me ❤️",
-    "id": "18337082557157422"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134787/yarden_makeup/yarden_makeup_18032925302451674.jpg",
-    "a": "GLAM BY @yarden_damri_makeup \n@lizamarkolov 🦢🦢\n\n#מאפרתבאילת",
-    "id": "17869948875205908"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134787/yarden_makeup/yarden_makeup_18032925302451674.jpg",
     "a": "GLAM BY @yarden_damri_makeup \n@lizamarkolov 🦢🦢\n\n#מאפרתבאילת",
     "id": "17869948875205908"
@@ -1653,26 +872,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134791/yarden_makeup/yarden_makeup_18014284766681312.jpg",
     "a": "MARGO 🦢\n\nכמה שאת יפה מאמי 🪬🪬\n@margo.sourpine \n\nאיפור @yarden_damri_makeup \nשיער",
     "id": "17891254767165024"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134791/yarden_makeup/yarden_makeup_18014284766681312.jpg",
-    "a": "MARGO 🦢\n\nכמה שאת יפה מאמי 🪬🪬\n@margo.sourpine \n\nאיפור @yarden_damri_makeup \nשיער",
-    "id": "17891254767165024"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134791/yarden_makeup/yarden_makeup_18014284766681312.jpg",
-    "a": "MARGO 🦢\n\nכמה שאת יפה מאמי 🪬🪬\n@margo.sourpine \n\nאיפור @yarden_damri_makeup \nשיער",
-    "id": "17891254767165024"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134796/yarden_makeup/yarden_makeup_18057781630795879.jpg",
-    "a": "Adi 🤍\n\nGlam by @yarden_damri_makeup \nDress by @sharon.bridal \nHair by @korenmali",
-    "id": "18084515470564103"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134796/yarden_makeup/yarden_makeup_18057781630795879.jpg",
-    "a": "Adi 🤍\n\nGlam by @yarden_damri_makeup \nDress by @sharon.bridal \nHair by @korenmali",
-    "id": "18084515470564103"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134796/yarden_makeup/yarden_makeup_18057781630795879.jpg",
@@ -1706,11 +905,6 @@ const GALLERY_IMAGES = [
     "id": "18032105345185895"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134800/yarden_makeup/yarden_makeup_18048011891147321.jpg",
-    "a": "DJ @hadarslutsky 🎧\nMakeup by @yarden_damri_makeup",
-    "id": "18032105345185895"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527524/yarden_makeup/yarden_makeup_18016507784648237.jpg",
     "a": "Glam by @yarden_damri_makeup \nDress by @dorin_dress_",
     "id": "18016507784648237"
@@ -1721,16 +915,6 @@ const GALLERY_IMAGES = [
     "id": "18476521378063827",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.75761-15/470689322_18478515262037829_8399788670680652524_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Rv4o_nTK-cYQ7kNvwHNpikB&_nc_oc=AdoqSpqlJSBh8tgxumDCAqFyxUJCOdX5WCWVunlOvfPwA-GU6fALnFkRtHpm_YiNTUQ&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=E_TCQL1163-JYm2DJPPFzQ&_nc_tpa=Q5bMBQFlXUSe27rUnAZmr6EuEjmxlcJVdA2hCSXUvaMXQatq3Z_U9YQ_ahiYOxDb518esut3MiGQUgQzZw&oh=00_Af5wIkLAo6XWtBIpO0-1F6x4bIgDFyz6nwZSrIapT_Qz9g&oe=6A10E1D4"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134805/yarden_makeup/yarden_makeup_18049349437894175.jpg",
-    "a": "ELLA 🦢\n@ella_ben_nun \n\nMakeup by @yarden_damri_makeup \n\n#מאפרתבאילת #איפורכלה #מ",
-    "id": "18047646497122564"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134805/yarden_makeup/yarden_makeup_18049349437894175.jpg",
-    "a": "ELLA 🦢\n@ella_ben_nun \n\nMakeup by @yarden_damri_makeup \n\n#מאפרתבאילת #איפורכלה #מ",
-    "id": "18047646497122564"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134805/yarden_makeup/yarden_makeup_18049349437894175.jpg",
@@ -1772,21 +956,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134808/yarden_makeup/yarden_makeup_18052303553501663.jpg",
     "a": "Makeup by @yarden_damri_makeup \n✨✨✨ @jadounaitte",
     "id": "18053306836814714"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134808/yarden_makeup/yarden_makeup_18052303553501663.jpg",
-    "a": "Makeup by @yarden_damri_makeup \n✨✨✨ @jadounaitte",
-    "id": "18053306836814714"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134813/yarden_makeup/yarden_makeup_18084188071531169.jpg",
-    "a": "ORIA ✨✨✨\n@oriamayedri \n\nMakeup by @yarden_damri_makeup \nDress by @dorin_dress_ @",
-    "id": "18038851271040725"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134813/yarden_makeup/yarden_makeup_18084188071531169.jpg",
-    "a": "ORIA ✨✨✨\n@oriamayedri \n\nMakeup by @yarden_damri_makeup \nDress by @dorin_dress_ @",
-    "id": "18038851271040725"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134813/yarden_makeup/yarden_makeup_18084188071531169.jpg",
@@ -1832,26 +1001,6 @@ const GALLERY_IMAGES = [
     "id": "18032231297114364"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134818/yarden_makeup/yarden_makeup_18065350441675674.jpg",
-    "a": "OREL 💍 \n@orel_hasson_derei \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalih",
-    "id": "18032231297114364"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134818/yarden_makeup/yarden_makeup_18065350441675674.jpg",
-    "a": "OREL 💍 \n@orel_hasson_derei \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalih",
-    "id": "18032231297114364"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134823/yarden_makeup/yarden_makeup_18081447901548679.jpg",
-    "a": "KESEM ❤️\n@kesemraz \nDress by @dorin_dress_ \n\nMakeup by @yarden_damri_makeup",
-    "id": "17855211282309621"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134823/yarden_makeup/yarden_makeup_18081447901548679.jpg",
-    "a": "KESEM ❤️\n@kesemraz \nDress by @dorin_dress_ \n\nMakeup by @yarden_damri_makeup",
-    "id": "17855211282309621"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134823/yarden_makeup/yarden_makeup_18081447901548679.jpg",
     "a": "KESEM ❤️\n@kesemraz \nDress by @dorin_dress_ \n\nMakeup by @yarden_damri_makeup",
     "id": "17855211282309621"
@@ -1860,21 +1009,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134826/yarden_makeup/yarden_makeup_17884371375150287.jpg",
     "a": "MOR 🖤🖤 \n@_morfadlon_ \n\nMakeup by @yarden_damri_makeup",
     "id": "18361258270136335"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134826/yarden_makeup/yarden_makeup_17884371375150287.jpg",
-    "a": "MOR 🖤🖤 \n@_morfadlon_ \n\nMakeup by @yarden_damri_makeup",
-    "id": "18361258270136335"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134831/yarden_makeup/yarden_makeup_18040983775961161.jpg",
-    "a": "כמה שהיא יפה 😍\n@sapirazulay1",
-    "id": "18332531338149322"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134831/yarden_makeup/yarden_makeup_18040983775961161.jpg",
-    "a": "כמה שהיא יפה 😍\n@sapirazulay1",
-    "id": "18332531338149322"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134831/yarden_makeup/yarden_makeup_18040983775961161.jpg",
@@ -1887,11 +1021,6 @@ const GALLERY_IMAGES = [
     "id": "17981433710765861",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/501271907_1074903831150632_8315952211889091308_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=mz6YWNU-738Q7kNvwEPFZoL&_nc_oc=Adpy2cpmORqMxwrgrKj42EdJxYRnLbDImPC4Fk34UpMRsQVCQcfq25QyGKKwwwKKEnk&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=E_TCQL1163-JYm2DJPPFzQ&_nc_tpa=Q5bMBQGrAt8gSePMMB8zxys7-wZ4HS9Dq8q2PrSHJUnMku1-rPpK-_iHcJZKSMivRB1ezO3BKg8Yk4ATew&oh=00_Af7ml_tD02zxyBz8ld5VWYJDGu-PQRVhce5HjBwMBXKJQA&oe=6A10B7E2"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134834/yarden_makeup/yarden_makeup_18031291988364296.jpg",
-    "a": "SHAKED 🖤🖤\n\nMakeup by @yarden_damri_makeup",
-    "id": "18081550360526559"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134834/yarden_makeup/yarden_makeup_18031291988364296.jpg",
@@ -1916,11 +1045,6 @@ const GALLERY_IMAGES = [
     "id": "18069051325609045"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134837/yarden_makeup/yarden_makeup_18058767313738284.jpg",
-    "a": "כלת החינה המהממת שלי ❤️\n@chentshuva 🪬\n\nשיער @korenmalihe \nאיפור @yarden_damri_ma",
-    "id": "18069051325609045"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527701/yarden_makeup/yarden_makeup_17850700965293189.jpg",
     "a": "סיימתי לאפר את המהממת הזו \nפתחנו מצלמה וישר קלטתי שיש לנו את הכלב המתוק הזה \nובו",
     "id": "17850700965293189"
@@ -1931,24 +1055,9 @@ const GALLERY_IMAGES = [
     "id": "18014502581330638"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134840/yarden_makeup/yarden_makeup_18018903461260379.jpg",
-    "a": "NATALY BRIDE 💍\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
-    "id": "18014502581330638"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134844/yarden_makeup/yarden_makeup_18017686943577175.jpg",
     "a": "So pretty 🖤🖤\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
     "id": "18076301980546521"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134844/yarden_makeup/yarden_makeup_18017686943577175.jpg",
-    "a": "So pretty 🖤🖤\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe",
-    "id": "18076301980546521"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134848/yarden_makeup/yarden_makeup_18240517885275727.jpg",
-    "a": "Gorgeoussss ✨✨\n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
-    "id": "18084658423447318"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134848/yarden_makeup/yarden_makeup_18240517885275727.jpg",
@@ -1997,11 +1106,6 @@ const GALLERY_IMAGES = [
     "id": "18451929247003687"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134851/yarden_makeup/yarden_makeup_17974762760739729.jpg",
-    "a": "הודיה המושלמת 🌸\nמתוך השתלמות איפור ל @yarin_biton__makeupartist \n@hodaya.mizrahi",
-    "id": "18451929247003687"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527713/yarden_makeup/yarden_makeup_17847895695243516.jpg",
     "a": "SHOVAL 💜\n\n@shovi.haziza \nMakeup by @yarden_damri_makeup",
     "id": "17847895695243516"
@@ -2010,16 +1114,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134855/yarden_makeup/yarden_makeup_18132189760358422.jpg",
     "a": "YAEL 💙\n\n@yael.timsit \nMakeup by @yarden_damri_makeup",
     "id": "17858235978212933"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134855/yarden_makeup/yarden_makeup_18132189760358422.jpg",
-    "a": "YAEL 💙\n\n@yael.timsit \nMakeup by @yarden_damri_makeup",
-    "id": "17858235978212933"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134858/yarden_makeup/yarden_makeup_17902936152001049.jpg",
-    "a": "ORIA 🦢🦢🦢\n\n@oriyabar1 \nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDres",
-    "id": "18015414479395800"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134858/yarden_makeup/yarden_makeup_17902936152001049.jpg",
@@ -2042,24 +1136,9 @@ const GALLERY_IMAGES = [
     "id": "18037597798839604"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134862/yarden_makeup/yarden_makeup_17930819543880491.jpg",
-    "a": "NOY 🖤\n\nMakeup by @yarden_damri_makeup \n@noyz_tattoos 🐈⬛",
-    "id": "18037597798839604"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134865/yarden_makeup/yarden_makeup_17864425536168357.jpg",
     "a": "LIA ✨\n\n@lia.mashkovov1 \nMakeup by @yarden_damri_makeup\nDress by @nikarehani",
     "id": "18041221207748231"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134865/yarden_makeup/yarden_makeup_17864425536168357.jpg",
-    "a": "LIA ✨\n\n@lia.mashkovov1 \nMakeup by @yarden_damri_makeup\nDress by @nikarehani",
-    "id": "18041221207748231"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134868/yarden_makeup/yarden_makeup_18055690444713655.jpg",
-    "a": "LIAT 💙\n\n@liatzino \nMakeup by @yarden_damri_makeup",
-    "id": "18030290621283900"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134868/yarden_makeup/yarden_makeup_18055690444713655.jpg",
@@ -2075,16 +1154,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134871/yarden_makeup/yarden_makeup_18025644791016328.jpg",
     "a": "YAHALOM 💎\n\nMakeup by @yarden_damri_makeup \n@yahalom.shachrur",
     "id": "18015943670169648"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134871/yarden_makeup/yarden_makeup_18025644791016328.jpg",
-    "a": "YAHALOM 💎\n\nMakeup by @yarden_damri_makeup \n@yahalom.shachrur",
-    "id": "18015943670169648"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134874/yarden_makeup/yarden_makeup_17982917996547156.jpg",
-    "a": "אוריה כלת החינה שלי 🪬\n\n@oriyabar1 \nאיפור @yarden_damri_makeup \nשיער @korenmalihe",
-    "id": "18232930894284290"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134874/yarden_makeup/yarden_makeup_17982917996547156.jpg",
@@ -2123,11 +1192,6 @@ const GALLERY_IMAGES = [
     "id": "18022662380213458"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134878/yarden_makeup/yarden_makeup_18155593303309305.jpg",
-    "a": "Talor 💜 \n\nMakeup by @yarden_damri_makeup \nDress by @nani_gal17\nHair by @tevel_ha",
-    "id": "18022662380213458"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178544/yarden_makeup/yarden_makeup_17870093871128603.mp4",
     "a": "Congratulations SHAY 🦢\n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
     "id": "17870093871128603",
@@ -2143,16 +1207,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134881/yarden_makeup/yarden_makeup_17908149797968548.jpg",
     "a": "Sooo gorgeous 🤩\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by",
     "id": "18036260407823195"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134881/yarden_makeup/yarden_makeup_17908149797968548.jpg",
-    "a": "Sooo gorgeous 🤩\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by",
-    "id": "18036260407823195"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134885/yarden_makeup/yarden_makeup_18026315684128787.jpg",
-    "a": "Ariel 💫\n\nMakeup by @yarden_damri_makeup \n@arielshulga",
-    "id": "18300187390084698"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134885/yarden_makeup/yarden_makeup_18026315684128787.jpg",
@@ -2172,21 +1226,6 @@ const GALLERY_IMAGES = [
     "id": "18043330117834556"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134888/yarden_makeup/yarden_makeup_18168167320306847.jpg",
-    "a": "Oriya bride 💍\nLook 1 \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \n@or",
-    "id": "18043330117834556"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134892/yarden_makeup/yarden_makeup_17995385186634322.jpg",
-    "a": "speechless 😍\nMakeup by @yarden_damri_makeup",
-    "id": "18300828244086425"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134892/yarden_makeup/yarden_makeup_17995385186634322.jpg",
-    "a": "speechless 😍\nMakeup by @yarden_damri_makeup",
-    "id": "18300828244086425"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134892/yarden_makeup/yarden_makeup_17995385186634322.jpg",
     "a": "speechless 😍\nMakeup by @yarden_damri_makeup",
     "id": "18300828244086425"
@@ -2195,26 +1234,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134898/yarden_makeup/yarden_makeup_18007822169448426.jpg",
     "a": "NOFAR 🖤\nSo beautiful \n\nMakeup by @yarden_damri_makeup \n@nofar_tall",
     "id": "17866744821127356"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134898/yarden_makeup/yarden_makeup_18007822169448426.jpg",
-    "a": "NOFAR 🖤\nSo beautiful \n\nMakeup by @yarden_damri_makeup \n@nofar_tall",
-    "id": "17866744821127356"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134898/yarden_makeup/yarden_makeup_18007822169448426.jpg",
-    "a": "NOFAR 🖤\nSo beautiful \n\nMakeup by @yarden_damri_makeup \n@nofar_tall",
-    "id": "17866744821127356"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134898/yarden_makeup/yarden_makeup_18007822169448426.jpg",
-    "a": "NOFAR 🖤\nSo beautiful \n\nMakeup by @yarden_damri_makeup \n@nofar_tall",
-    "id": "17866744821127356"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134902/yarden_makeup/yarden_makeup_18037509043917699.jpg",
-    "a": "NOA bride 💍\nMAZAL TOV! \n\nMakeup by @yarden_damri_makeup \nHair by @karmasamorai",
-    "id": "18283558498201424"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134902/yarden_makeup/yarden_makeup_18037509043917699.jpg",
@@ -2244,21 +1263,6 @@ const GALLERY_IMAGES = [
     "id": "18002196461322570"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134905/yarden_makeup/yarden_makeup_18017916536056629.jpg",
-    "a": "ALISA 💖\n\nMakeup by @yarden_damri_makeup \nStyling by @inbalv.styling \n@isrotelhot",
-    "id": "18002196461322570"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134910/yarden_makeup/yarden_makeup_17925491051856970.jpg",
-    "a": "💚\n\nMakeup by @yarden_damri_makeup \n\n@odeliaozel \n@michelle_algrabli",
-    "id": "17999786006542225"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134910/yarden_makeup/yarden_makeup_17925491051856970.jpg",
-    "a": "💚\n\nMakeup by @yarden_damri_makeup \n\n@odeliaozel \n@michelle_algrabli",
-    "id": "17999786006542225"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134910/yarden_makeup/yarden_makeup_17925491051856970.jpg",
     "a": "💚\n\nMakeup by @yarden_damri_makeup \n\n@odeliaozel \n@michelle_algrabli",
     "id": "17999786006542225"
@@ -2272,21 +1276,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134915/yarden_makeup/yarden_makeup_17886360201037674.jpg",
     "a": "Gorgeous 🤍\n@gellerrita",
     "id": "17855625312163876"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134915/yarden_makeup/yarden_makeup_17886360201037674.jpg",
-    "a": "Gorgeous 🤍\n@gellerrita",
-    "id": "17855625312163876"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134915/yarden_makeup/yarden_makeup_17886360201037674.jpg",
-    "a": "Gorgeous 🤍\n@gellerrita",
-    "id": "17855625312163876"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134919/yarden_makeup/yarden_makeup_18033132550918226.jpg",
-    "a": "ARIEL 💙\n\nMakeup by @yarden_damri_makeup",
-    "id": "18025853800891055"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134919/yarden_makeup/yarden_makeup_18033132550918226.jpg",
@@ -2304,16 +1293,6 @@ const GALLERY_IMAGES = [
     "id": "18035065390851610"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134923/yarden_makeup/yarden_makeup_18090113902422285.jpg",
-    "a": "SOL 💖\n\nMakeup by @yarden_damri_makeup \n@solsilberstein",
-    "id": "18035065390851610"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134926/yarden_makeup/yarden_makeup_18038868337745791.jpg",
-    "a": "רונית שבירו באיפור שלי לכבוד מרכז הנדל״ן \nאחת הנשים היותר חזקות שפגשתי - שמחתי 💛",
-    "id": "18041597722685385"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134926/yarden_makeup/yarden_makeup_18038868337745791.jpg",
     "a": "רונית שבירו באיפור שלי לכבוד מרכז הנדל״ן \nאחת הנשים היותר חזקות שפגשתי - שמחתי 💛",
     "id": "18041597722685385"
@@ -2322,26 +1301,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134932/yarden_makeup/yarden_makeup_17998166243572164.jpg",
     "a": "יופי לא חוקי! \n@gellerrita \nאיפור - @yarden_damri_makeup",
     "id": "18109672120374995"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134932/yarden_makeup/yarden_makeup_17998166243572164.jpg",
-    "a": "יופי לא חוקי! \n@gellerrita \nאיפור - @yarden_damri_makeup",
-    "id": "18109672120374995"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134932/yarden_makeup/yarden_makeup_17998166243572164.jpg",
-    "a": "יופי לא חוקי! \n@gellerrita \nאיפור - @yarden_damri_makeup",
-    "id": "18109672120374995"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134937/yarden_makeup/yarden_makeup_18038828818824455.jpg",
-    "a": "Ma ma miaaaa 🤩\n@gellerrita \nMakeup by @yarden_damri_makeup",
-    "id": "18031102294903444"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134937/yarden_makeup/yarden_makeup_18038828818824455.jpg",
-    "a": "Ma ma miaaaa 🤩\n@gellerrita \nMakeup by @yarden_damri_makeup",
-    "id": "18031102294903444"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134937/yarden_makeup/yarden_makeup_18038828818824455.jpg",
@@ -2354,16 +1313,6 @@ const GALLERY_IMAGES = [
     "id": "18055035478561599"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134940/yarden_makeup/yarden_makeup_17876940137999653.jpg",
-    "a": "HILA 🖤\nMakeup by @yarden_damri_makeup",
-    "id": "18055035478561599"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134943/yarden_makeup/yarden_makeup_17977880807661266.jpg",
-    "a": "Princess 🎀\nFor @odeliaozel \n\nModel @princess.haziza \n\nMakeup @yarden_damri_makeu",
-    "id": "18035125111857383"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134943/yarden_makeup/yarden_makeup_17977880807661266.jpg",
     "a": "Princess 🎀\nFor @odeliaozel \n\nModel @princess.haziza \n\nMakeup @yarden_damri_makeu",
     "id": "18035125111857383"
@@ -2374,59 +1323,9 @@ const GALLERY_IMAGES = [
     "id": "18038519563814462"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134948/yarden_makeup/yarden_makeup_18003094451407561.jpg",
-    "a": "יעל בר זוהר ✨\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
-    "id": "18038519563814462"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134948/yarden_makeup/yarden_makeup_18003094451407561.jpg",
-    "a": "יעל בר זוהר ✨\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
-    "id": "18038519563814462"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134951/yarden_makeup/yarden_makeup_17916774914897998.jpg",
     "a": "החתול במגפיים 😸\nפורים 2024 \n\nדומה?",
     "id": "17858192505130886"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134951/yarden_makeup/yarden_makeup_17916774914897998.jpg",
-    "a": "החתול במגפיים 😸\nפורים 2024 \n\nדומה?",
-    "id": "17858192505130886"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
-    "a": "Happy porim 🥳\n2024",
-    "id": "17971332305694516"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg",
@@ -2442,31 +1341,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134969/yarden_makeup/yarden_makeup_18061975744525562.jpg",
     "a": "Keren 🧡\nMakeup by @yarden_damri_makeup \n@keren_grinberger",
     "id": "18012415466203019"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134969/yarden_makeup/yarden_makeup_18061975744525562.jpg",
-    "a": "Keren 🧡\nMakeup by @yarden_damri_makeup \n@keren_grinberger",
-    "id": "18012415466203019"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134969/yarden_makeup/yarden_makeup_18061975744525562.jpg",
-    "a": "Keren 🧡\nMakeup by @yarden_damri_makeup \n@keren_grinberger",
-    "id": "18012415466203019"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134969/yarden_makeup/yarden_makeup_18061975744525562.jpg",
-    "a": "Keren 🧡\nMakeup by @yarden_damri_makeup \n@keren_grinberger",
-    "id": "18012415466203019"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134974/yarden_makeup/yarden_makeup_18001833914528112.jpg",
-    "a": "Pretty women ❤️\nMakeup by @yarden_damri_makeup \n@ofek_esterin",
-    "id": "18029908753903493"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134974/yarden_makeup/yarden_makeup_18001833914528112.jpg",
-    "a": "Pretty women ❤️\nMakeup by @yarden_damri_makeup \n@ofek_esterin",
-    "id": "18029908753903493"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134974/yarden_makeup/yarden_makeup_18001833914528112.jpg",
@@ -2486,16 +1360,6 @@ const GALLERY_IMAGES = [
     "id": "17952692570750751",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/500826715_1227062535716829_2586976504238684698_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=LoGzdWNvwGgQ7kNvwEk3GtD&_nc_oc=Adqdlsqg3KpaOeBNqn5kz0h3UcFdpDNf0XhVZq9g0qFFY7h17g3g-h7CXeSbmuKWjI8&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=MPy_U6KoLCt15i9w54SCJg&_nc_tpa=Q5bMBQG6kk6PPo_SU0ie8UeGlgnGaS1P3l9vwtVWKNAtt6Xf4Y9agdi61q51tLCNAiyweWTCPwOLanvDOQ&oh=00_Af4D42PhJHe5YDfnpLx3q1KzrHrmLl981_UoupkeGZzaSQ&oe=6A10C86A"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134978/yarden_makeup/yarden_makeup_18001480442430320.jpg",
-    "a": "AMAZING MICHELLE 🌸 \n\n@michelle_algrabli \nMakeup by @yarden_damri_makeup \n@odelia",
-    "id": "18030060295822519"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134978/yarden_makeup/yarden_makeup_18001480442430320.jpg",
-    "a": "AMAZING MICHELLE 🌸 \n\n@michelle_algrabli \nMakeup by @yarden_damri_makeup \n@odelia",
-    "id": "18030060295822519"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134978/yarden_makeup/yarden_makeup_18001480442430320.jpg",
@@ -2542,11 +1406,6 @@ const GALLERY_IMAGES = [
     "id": "18003158426183019"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134981/yarden_makeup/yarden_makeup_17999830196434312.jpg",
-    "a": "Happy valentine day 🌹\nMakeup by @yarden_damri_makeup \n@ofek_esterin ❤️",
-    "id": "18003158426183019"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178556/yarden_makeup/yarden_makeup_18019392137050513.mp4",
     "a": "GALI 🖤\nLipstick by @dior @diorbeauty \nMakeup by @yarden_damri_makeup \nHair by @b",
     "id": "18019392137050513",
@@ -2564,16 +1423,6 @@ const GALLERY_IMAGES = [
     "id": "18008512670332716"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134984/yarden_makeup/yarden_makeup_18004084436516202.jpg",
-    "a": "Amazing Gali 🤩 \n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair \n@gali",
-    "id": "18008512670332716"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134987/yarden_makeup/yarden_makeup_18040955896644887.jpg",
-    "a": "Obsessed 🤩 \n\n@yesenia_kaliner \nMakeup by @yarden_damri_makeup",
-    "id": "18018233747041182"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134987/yarden_makeup/yarden_makeup_18040955896644887.jpg",
     "a": "Obsessed 🤩 \n\n@yesenia_kaliner \nMakeup by @yarden_damri_makeup",
     "id": "18018233747041182"
@@ -2589,26 +1438,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134991/yarden_makeup/yarden_makeup_17968605458676413.jpg",
     "a": "SHIRAZ 🌸\n\n@shirazlevy__ \nMakeup by @yarden_damri_makeup",
     "id": "18251540374171951"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134991/yarden_makeup/yarden_makeup_17968605458676413.jpg",
-    "a": "SHIRAZ 🌸\n\n@shirazlevy__ \nMakeup by @yarden_damri_makeup",
-    "id": "18251540374171951"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134997/yarden_makeup/yarden_makeup_18294177742199017.jpg",
-    "a": "Beautiful Shira 💜\n\n@shira_almoznino \nMakeup by @yarden_damri_makeup",
-    "id": "18024403060777369"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134997/yarden_makeup/yarden_makeup_18294177742199017.jpg",
-    "a": "Beautiful Shira 💜\n\n@shira_almoznino \nMakeup by @yarden_damri_makeup",
-    "id": "18024403060777369"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134997/yarden_makeup/yarden_makeup_18294177742199017.jpg",
-    "a": "Beautiful Shira 💜\n\n@shira_almoznino \nMakeup by @yarden_damri_makeup",
-    "id": "18024403060777369"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134997/yarden_makeup/yarden_makeup_18294177742199017.jpg",
@@ -2635,21 +1464,11 @@ const GALLERY_IMAGES = [
     "id": "18405054301004151"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135000/yarden_makeup/yarden_makeup_18198947998304618.jpg",
-    "a": "Obsessed 🤩 \n\nMakeup by @yarden_damri_makeup \n@yesenia_kaliner",
-    "id": "18405054301004151"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178563/yarden_makeup/yarden_makeup_18000387995159407.mp4",
     "a": "Alma 🤍\n \nLipstick @diorbeauty @dior \nMakeup by @yarden_damri_makeup \n@almaazoula",
     "id": "18000387995159407",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/503748308_1206051690762981_528612826154908174_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=QNiWN7gsWYYQ7kNvwGVMSeS&_nc_oc=AdozhV8f28IySZmsM8oNhIbRpMaRJnJs2xCf_eewlJXhoJscN1ReWFyH9PGwmSdsKt0&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=MPy_U6KoLCt15i9w54SCJg&_nc_tpa=Q5bMBQHKXLzYSBcDY8FJ5OJSylUupucKVco_7q0mSedCdSg9wOoY7tKkwSIFHYuoD594SjG34geIRSWKjQ&oh=00_Af6Qk8RlxDZV6iJHMH_Gd7x_oOG4YhSsHbiDilPkR_Uk1w&oe=6A10D5E8"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135003/yarden_makeup/yarden_makeup_17999367599458966.jpg",
-    "a": "✨GORGEOUS SARI 🖤\n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair \n@sar",
-    "id": "18030297238672251"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135003/yarden_makeup/yarden_makeup_17999367599458966.jpg",
@@ -2676,11 +1495,6 @@ const GALLERY_IMAGES = [
     "id": "18034819795671837"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135006/yarden_makeup/yarden_makeup_17848124172119942.jpg",
-    "a": "JULIA 🩷\n@juliapikun.promanic \n\nאיפור שלי \nשיער @bartzanani_hair",
-    "id": "18034819795671837"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178567/yarden_makeup/yarden_makeup_18036019414640625.mp4",
     "a": "ROTEM 🩷\n@rotem.bendor",
     "id": "18036019414640625",
@@ -2698,11 +1512,6 @@ const GALLERY_IMAGES = [
     "id": "17931717392697260",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/504251378_1010496221246027_4890160627398354264_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=C8Db5nwcyoQQ7kNvwEfuX09&_nc_oc=AdpvOhdpILyJEXC6Cy2NtwM1WWIOmamPdS25kt2pZIZDEROdYOAPIQg_cySbWZMMgvo&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=MPy_U6KoLCt15i9w54SCJg&_nc_tpa=Q5bMBQGuwyNtiZLtpkyVaGfnTfLAJ8GEGiJ_vA7eMzBMJCe9dne11Zb5gH89UV4eAY4bQerqOd1sB65YsQ&oh=00_Af6m-dmDFM3LF-HvvhqzTjRAMlmPcQSBPG4IJj2dSsxSqg&oe=6A10B647"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135009/yarden_makeup/yarden_makeup_17894609798938856.jpg",
-    "a": "ALMA 🤎\n\n@almaazoulay",
-    "id": "17991003674295016"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135009/yarden_makeup/yarden_makeup_17894609798938856.jpg",
@@ -2741,36 +1550,6 @@ const GALLERY_IMAGES = [
     "id": "18396815296046972"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135018/yarden_makeup/yarden_makeup_17898480161907541.jpg",
-    "a": "יום הולדת 30 🎂🎈🥳\nתודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️\n@damriofi",
-    "id": "18396815296046972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135018/yarden_makeup/yarden_makeup_17898480161907541.jpg",
-    "a": "יום הולדת 30 🎂🎈🥳\nתודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️\n@damriofi",
-    "id": "18396815296046972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135018/yarden_makeup/yarden_makeup_17898480161907541.jpg",
-    "a": "יום הולדת 30 🎂🎈🥳\nתודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️\n@damriofi",
-    "id": "18396815296046972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135018/yarden_makeup/yarden_makeup_17898480161907541.jpg",
-    "a": "יום הולדת 30 🎂🎈🥳\nתודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️\n@damriofi",
-    "id": "18396815296046972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135018/yarden_makeup/yarden_makeup_17898480161907541.jpg",
-    "a": "יום הולדת 30 🎂🎈🥳\nתודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️\n@damriofi",
-    "id": "18396815296046972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135022/yarden_makeup/yarden_makeup_17854429215017108.jpg",
-    "a": "איריס המושלמת😍 \n@irislevy1 \n\n__________________\nירדן דמרי | איפור כלות וערב \nלפר",
-    "id": "18034636597577576"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135022/yarden_makeup/yarden_makeup_17854429215017108.jpg",
     "a": "איריס המושלמת😍 \n@irislevy1 \n\n__________________\nירדן דמרי | איפור כלות וערב \nלפר",
     "id": "18034636597577576"
@@ -2791,19 +1570,9 @@ const GALLERY_IMAGES = [
     "id": "17978127086523569"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135025/yarden_makeup/yarden_makeup_17886280559848874.jpg",
-    "a": "תמיד כיף לשתף תמונות שאני אוהבת \nלפעמים יוצא שאני גם מתאפרת 😅\n\nהסנדלר הולך יחף ☺",
-    "id": "17978127086523569"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527800/yarden_makeup/yarden_makeup_17996434240956357.jpg",
     "a": "הפעם זאת אני 🖤\nעוד רגע חוזרים לשגרה והחופש הגדול נגמר \n\nרציתי להגיד תודה לכל הלק",
     "id": "17996434240956357"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135029/yarden_makeup/yarden_makeup_18019327168683232.jpg",
-    "a": "שרה המדהימה באיפור שלי \nנכון שהיא כמו בובה!! \n\n@sarah_zalzman \n_________________",
-    "id": "18311967805100281"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135029/yarden_makeup/yarden_makeup_18019327168683232.jpg",
@@ -2819,11 +1588,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527804/yarden_makeup/yarden_makeup_18008215273734825.jpg",
     "a": "הכי יפות אצלי 😍😍 כמה שיפה לה האיפור העדין והבובתי הזה 🤩 \n\n_____________________",
     "id": "18008215273734825"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135032/yarden_makeup/yarden_makeup_18362349754066048.jpg",
-    "a": "NOA AMAZING 🤩 \n\nHair by @bartzanani_hair \nMakeup by @yarden_damri_makeup",
-    "id": "17933924693707364"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135032/yarden_makeup/yarden_makeup_18362349754066048.jpg",
@@ -2903,21 +1667,11 @@ const GALLERY_IMAGES = [
     "id": "18034342780463826"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135035/yarden_makeup/yarden_makeup_17985700829032917.jpg",
-    "a": "Beautiful girl 🌸\nPROM 2023\n\n_____________________\n\nירדן דמרי | איפור כלות וערב",
-    "id": "18034342780463826"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178586/yarden_makeup/yarden_makeup_17852120351995004.mp4",
     "a": "נועה הקסומה באיפור שלי \nPROM 2023\n@noa._.scheriber \n\n________________________\nיר",
     "id": "17852120351995004",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/497585066_4094260577478433_7777402406772106361_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=5DdRz0vhyQgQ7kNvwF4Ef_U&_nc_oc=Adr_f9mYZlYf1h5wsnl9NT19jTihn6WhFfWiYbgvKMutcmaC0QnVQzMSF0vJbk1Eqhg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=MPy_U6KoLCt15i9w54SCJg&_nc_tpa=Q5bMBQEzzHtEaXRVJAmRUF8qjUEeGrk_5jiaNeHVO6dSKKlZJgeW1BtaP1vOd9COcqMWHl7DVOxCNEbrQg&oh=00_Af561_bbvnlASNoYQDeKpVQLs23_i5qVbWVpUPZgxZWe8w&oe=6A10B815"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135039/yarden_makeup/yarden_makeup_17986664705304989.jpg",
-    "a": "NOA GORGEOUS 💙\n@noa._.scheriber\n\nHair by @zenzura_eilat \nMakeup Yarden Damri \n\n_",
-    "id": "18275555194126353"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135039/yarden_makeup/yarden_makeup_17986664705304989.jpg",
@@ -2935,16 +1689,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135042/yarden_makeup/yarden_makeup_17952801959499916.jpg",
     "a": "איפור שלי לנועם 🌸\nפשוט בובה אמיתית 💗\n\nאני מהופנטת מהעיניים שלה! גם אתם?!!! \n\n___",
     "id": "17940029024563966"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135042/yarden_makeup/yarden_makeup_17952801959499916.jpg",
-    "a": "איפור שלי לנועם 🌸\nפשוט בובה אמיתית 💗\n\nאני מהופנטת מהעיניים שלה! גם אתם?!!! \n\n___",
-    "id": "17940029024563966"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135045/yarden_makeup/yarden_makeup_18336833401078276.jpg",
-    "a": "NOAM 🖤\nmakeup - Yarden Damri \n\n_____________________\nירדן דמרי | איפור כלות וערב",
-    "id": "17952154748500999"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135045/yarden_makeup/yarden_makeup_18336833401078276.jpg",
@@ -2967,16 +1711,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135048/yarden_makeup/yarden_makeup_18365136022063276.jpg",
     "a": "Almog gorgeous ✨\n@almog.shaloka \n\n___________________\nירדן דמרי | איפור כלול וער",
     "id": "17988074795089362"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135048/yarden_makeup/yarden_makeup_18365136022063276.jpg",
-    "a": "Almog gorgeous ✨\n@almog.shaloka \n\n___________________\nירדן דמרי | איפור כלול וער",
-    "id": "17988074795089362"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135052/yarden_makeup/yarden_makeup_17936354888577620.jpg",
-    "a": "🖤\nSHAVUA TOV 😎\n\n______________________\nירדן דמרי | איפור כלות וערב \n054-7276716",
-    "id": "17879401862873843"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135052/yarden_makeup/yarden_makeup_17936354888577620.jpg",
@@ -3077,11 +1811,6 @@ const GALLERY_IMAGES = [
     "id": "17976314807319495"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135055/yarden_makeup/yarden_makeup_17886198131818348.jpg",
-    "a": "מיכל ❤️ \n@mykl.stvn \n\nאין כיף יותר גדול מזה שלקוחה מחליטה לחזור אליי פעמיים באות",
-    "id": "17976314807319495"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527841/yarden_makeup/yarden_makeup_17993434828850519.jpg",
     "a": "מיכל באיפור שלי ❤️\n@mykl.stvn \n\n_______________________\nירדן דמרי | איפור כלות ו",
     "id": "17993434828850519"
@@ -3107,21 +1836,6 @@ const GALLERY_IMAGES = [
     "id": "17960673059249802"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135058/yarden_makeup/yarden_makeup_18351311242060048.jpg",
-    "a": "דליה באיפור שלי - לכבוד עליה לתורה של בנה ❤️\n@dalia70374 \n@korenmalihe - שיער\n\n#",
-    "id": "17960673059249802"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135063/yarden_makeup/yarden_makeup_17996182405774531.jpg",
-    "a": "YUVAL 🌸\n@yuvalbilya \n___________________________\n\nירדן דמרי |איפור כלות וערב \n05",
-    "id": "17918254064623170"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135063/yarden_makeup/yarden_makeup_17996182405774531.jpg",
-    "a": "YUVAL 🌸\n@yuvalbilya \n___________________________\n\nירדן דמרי |איפור כלות וערב \n05",
-    "id": "17918254064623170"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135063/yarden_makeup/yarden_makeup_17996182405774531.jpg",
     "a": "YUVAL 🌸\n@yuvalbilya \n___________________________\n\nירדן דמרי |איפור כלות וערב \n05",
     "id": "17918254064623170"
@@ -3130,16 +1844,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135066/yarden_makeup/yarden_makeup_17998890322703967.jpg",
     "a": "יובל הכלה המושלמת שלי \nבצילומי זוגיות 💗\n@yuvalbilya \n_______________________\n\nיר",
     "id": "17887446551756556"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135066/yarden_makeup/yarden_makeup_17998890322703967.jpg",
-    "a": "יובל הכלה המושלמת שלי \nבצילומי זוגיות 💗\n@yuvalbilya \n_______________________\n\nיר",
-    "id": "17887446551756556"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135070/yarden_makeup/yarden_makeup_17863035086904576.jpg",
-    "a": "Julia🤍\nMakeup - @yarden_damri_makeup \nHair - @bartzanani_hair \n\n#bride #כלות2023",
-    "id": "18202473376219908"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135070/yarden_makeup/yarden_makeup_17863035086904576.jpg",
@@ -3186,16 +1890,6 @@ const GALLERY_IMAGES = [
     "id": "18277836661128859"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135073/yarden_makeup/yarden_makeup_17957755808421462.jpg",
-    "a": "לירון המושלמת באיפור שלי ✨\nאחראית על השיער - @bartzanani_hair \n_________________",
-    "id": "18277836661128859"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135076/yarden_makeup/yarden_makeup_17964005240138774.jpg",
-    "a": "לירון ויצמן המדהימה באיפור שלי ליום אילת ✨\n@lironweizman \nHair - @bartzanani_hai",
-    "id": "17998453189655122"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135076/yarden_makeup/yarden_makeup_17964005240138774.jpg",
     "a": "לירון ויצמן המדהימה באיפור שלי ליום אילת ✨\n@lironweizman \nHair - @bartzanani_hai",
     "id": "17998453189655122"
@@ -3229,11 +1923,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527868/yarden_makeup/yarden_makeup_17983936984757205.jpg",
     "a": "ORTAL BRIDE 🌟\n\nלאפר כלה זה פשוט זכות . \nאז תודה על הבחירה בי 🙏\n_________________",
     "id": "17983936984757205"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135079/yarden_makeup/yarden_makeup_17923171799655671.jpg",
-    "a": "EDEN 💕\n\nעדן המקסימה הגיעה אליי מבנימינה עד אילת לאיפור 🌟\nעבור צילומי היריון שעשה",
-    "id": "18257670310123218"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135079/yarden_makeup/yarden_makeup_17923171799655671.jpg",
@@ -3276,11 +1965,6 @@ const GALLERY_IMAGES = [
     "id": "17991592048666685"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135082/yarden_makeup/yarden_makeup_17978751409817989.jpg",
-    "a": "היא פשוט מהממת 🤩\nARIEL @ariel_ganon_5\n\nהפעם עשיתי שימוש במוצרים החדשים של @bobbi",
-    "id": "17991592048666685"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527881/yarden_makeup/yarden_makeup_17847492947914780.jpg",
     "a": "אריאל המדהימה באיפור שלי 🤍\n\nירדן דמרי - איפור כלות ערב \n@ariel_ganon_5",
     "id": "17847492947914780"
@@ -3293,26 +1977,9 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/625121714_2686351371706934_2909868070104245697_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9qCFA1dQDnQQ7kNvwED7kRe&_nc_oc=Adqmy9gdKua_r_0VED4p1KJHUgSt-aVkngGSBfdF1igZQh7IqCPPH07GukL2x39xDUg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Xjugo24Vsg6NYjhDPDigMw&_nc_tpa=Q5bMBQGOHVrAMzLU0cyavDUIPKlSAK92A4L__0OzklfG8xhC2Afb5DPUFLRGFfOewg6pAq5x3eOr34kMRQ&oh=00_Af4-fsbK0W3jZnkG4VTkFSubAoB-CLxSS-p9AfqZcq4v5Q&oe=6A10CE3B"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178599/yarden_makeup/yarden_makeup_18265004014189100.mp4",
-    "a": "לירון ויצמן המהממת באיפור שלי \n\n#מאפרתבאילת #איפורמקצועי #לירוןויצמן",
-    "id": "17950739612412086",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/625121714_2686351371706934_2909868070104245697_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9qCFA1dQDnQQ7kNvwED7kRe&_nc_oc=Adqmy9gdKua_r_0VED4p1KJHUgSt-aVkngGSBfdF1igZQh7IqCPPH07GukL2x39xDUg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Xjugo24Vsg6NYjhDPDigMw&_nc_tpa=Q5bMBQGOHVrAMzLU0cyavDUIPKlSAK92A4L__0OzklfG8xhC2Afb5DPUFLRGFfOewg6pAq5x3eOr34kMRQ&oh=00_Af4-fsbK0W3jZnkG4VTkFSubAoB-CLxSS-p9AfqZcq4v5Q&oe=6A10CE3B"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135087/yarden_makeup/yarden_makeup_17919851123575752.jpg",
     "a": "פורים 2023 אני מחכה לך 🫶🫶\nלמה אתם מתחפשים? \n\n#פורים2023 #איפורפציעות #ארט #איפור",
     "id": "17884562759731806"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135087/yarden_makeup/yarden_makeup_17919851123575752.jpg",
-    "a": "פורים 2023 אני מחכה לך 🫶🫶\nלמה אתם מתחפשים? \n\n#פורים2023 #איפורפציעות #ארט #איפור",
-    "id": "17884562759731806"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135091/yarden_makeup/yarden_makeup_17972135534050659.jpg",
-    "a": "לפעמים אני אוהבת לאפר את עצמי.\nלעצמי אני אוהבת משהו טבעי, צבעים חמים ובעיקר עדין",
-    "id": "18344394700020108"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135091/yarden_makeup/yarden_makeup_17972135534050659.jpg",
@@ -3330,16 +1997,6 @@ const GALLERY_IMAGES = [
     "id": "18339280513025862"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135094/yarden_makeup/yarden_makeup_18163648936280026.jpg",
-    "a": "🖤 @meshi_levy \nהאודם המושלם ❤️",
-    "id": "18339280513025862"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135097/yarden_makeup/yarden_makeup_17940730715398330.jpg",
-    "a": "משי המושלמת🌹",
-    "id": "17899957115720996"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135097/yarden_makeup/yarden_makeup_17940730715398330.jpg",
     "a": "משי המושלמת🌹",
     "id": "17899957115720996"
@@ -3350,21 +2007,6 @@ const GALLERY_IMAGES = [
     "id": "17915643626592992"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135101/yarden_makeup/yarden_makeup_17965226414152262.jpg",
-    "a": "איפור ערב ללימור המושלמת 🖤\n@limor_edri",
-    "id": "17915643626592992"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135105/yarden_makeup/yarden_makeup_17917921613578188.jpg",
-    "a": "LIMOR ✨\nYarden Damri- makeup",
-    "id": "17908600277619640"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135105/yarden_makeup/yarden_makeup_17917921613578188.jpg",
-    "a": "LIMOR ✨\nYarden Damri- makeup",
-    "id": "17908600277619640"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135105/yarden_makeup/yarden_makeup_17917921613578188.jpg",
     "a": "LIMOR ✨\nYarden Damri- makeup",
     "id": "17908600277619640"
@@ -3373,21 +2015,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135109/yarden_makeup/yarden_makeup_17973127162878803.jpg",
     "a": "לימור המושלמת באיפור ערב 🤩\n@limor_edri",
     "id": "18197334982239217"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135109/yarden_makeup/yarden_makeup_17973127162878803.jpg",
-    "a": "לימור המושלמת באיפור ערב 🤩\n@limor_edri",
-    "id": "18197334982239217"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135114/yarden_makeup/yarden_makeup_17995509319610826.jpg",
-    "a": "דורין המושלמת בלוק מספר #2 \n@dorintrabelsi 🤩",
-    "id": "18041598472394695"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135114/yarden_makeup/yarden_makeup_17995509319610826.jpg",
-    "a": "דורין המושלמת בלוק מספר #2 \n@dorintrabelsi 🤩",
-    "id": "18041598472394695"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135114/yarden_makeup/yarden_makeup_17995509319610826.jpg",
@@ -3407,11 +2034,6 @@ const GALLERY_IMAGES = [
     "id": "18018026884471408",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/503053970_1044595074312370_6204126321838627798_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=UoBY6pLItGEQ7kNvwHF9Jj1&_nc_oc=AdpRBufEk2DbCe89grBZhipS0_uiPBAsehd53skD0upwgRTK_MsxTNpUzVg5mAV6XQw&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=H_CS9UN_bDPeWnw62oQRzQ&_nc_tpa=Q5bMBQF5CrEnT_7jZlne-ckxgvubjbs7Cu_-iWOldjWcPXZjQnEF2RumypbTwCfJCwILP1DPaeJG9eihbg&oh=00_Af6QSkfYLOkso1_sEsVHucA6SVNXtACyGVaM8Ki_G9qXQg&oe=6A10D69C"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135117/yarden_makeup/yarden_makeup_17972232538954220.jpg",
-    "a": "דורין המושלמת באיפור שלי 😍\n@dorintrabelsi",
-    "id": "18024642625452351"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135117/yarden_makeup/yarden_makeup_17972232538954220.jpg",
@@ -3439,16 +2061,6 @@ const GALLERY_IMAGES = [
     "id": "17979573757724721"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135120/yarden_makeup/yarden_makeup_18084482386313831.jpg",
-    "a": "איפור לליליאנה אמא של כלה 🌸\nפשוט אישה שהיא יפה אני רק הדגשתי את החן שלה ☺️",
-    "id": "17979573757724721"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135123/yarden_makeup/yarden_makeup_18006293947474815.jpg",
-    "a": "איפור ברית לשלי המהממת 🤩\n#לפניואחרי ➡️\n\nהחבילה המושלמת! \nאיפור - ירדן דמרי \nצלם",
-    "id": "17972197063812342"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135123/yarden_makeup/yarden_makeup_18006293947474815.jpg",
     "a": "איפור ברית לשלי המהממת 🤩\n#לפניואחרי ➡️\n\nהחבילה המושלמת! \nאיפור - ירדן דמרי \nצלם",
     "id": "17972197063812342"
@@ -3467,16 +2079,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527908/yarden_makeup/yarden_makeup_17970611593915420.jpg",
     "a": "🌸",
     "id": "17970611593915420"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135128/yarden_makeup/yarden_makeup_17912116436568350.jpg",
-    "a": "ירדן דמרי- אמנית ומאפרת מקצועית \n\nלירן יוחאי האלופה שלי אחראית על התמונה ❤️\n@lir",
-    "id": "18325044781008476"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135128/yarden_makeup/yarden_makeup_17912116436568350.jpg",
-    "a": "ירדן דמרי- אמנית ומאפרת מקצועית \n\nלירן יוחאי האלופה שלי אחראית על התמונה ❤️\n@lir",
-    "id": "18325044781008476"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135128/yarden_makeup/yarden_makeup_17912116436568350.jpg",
@@ -3508,29 +2110,9 @@ const GALLERY_IMAGES = [
     "id": "17927443058557184"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135133/yarden_makeup/yarden_makeup_17974953112825544.jpg",
-    "a": "ספיר באיפור שלי 😍\n\nיש לכלות את הלחץ הקבוע הזה של לפני בחתונה - יש את זה לכולן! 🤯",
-    "id": "17927443058557184"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135133/yarden_makeup/yarden_makeup_17974953112825544.jpg",
-    "a": "ספיר באיפור שלי 😍\n\nיש לכלות את הלחץ הקבוע הזה של לפני בחתונה - יש את זה לכולן! 🤯",
-    "id": "17927443058557184"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527914/yarden_makeup/yarden_makeup_17937160949405686.jpg",
     "a": "🖤",
     "id": "17937160949405686"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135138/yarden_makeup/yarden_makeup_17989381057604534.jpg",
-    "a": "חג שמח לכולם ❤️",
-    "id": "17945259059493746"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135138/yarden_makeup/yarden_makeup_17989381057604534.jpg",
-    "a": "חג שמח לכולם ❤️",
-    "id": "17945259059493746"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135138/yarden_makeup/yarden_makeup_17989381057604534.jpg",
@@ -3543,11 +2125,6 @@ const GALLERY_IMAGES = [
     "id": "18047147005366668",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/491434019_4113879925549593_1058340144260183212_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=S3eSX4eqfP0Q7kNvwF8ycXQ&_nc_oc=AdrilSzb5AOJ8yUKIcKoDw_XLJlB50GUfsQKZiRMLGrQXwGUvtk6uouiE2WgxVHQJTI&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=H_CS9UN_bDPeWnw62oQRzQ&_nc_tpa=Q5bMBQG3O8b2ktjKoGLAHCKjCpUCiGtkZ86EvAbpXVkqZajdt-yZrMGI_stPPfbt07K7DnCWQQK3E7-sNQ&oh=00_Af4xklnpY_rLWPD0hH25jKkL_MzxQlX3K76bOvC_yfotMQ&oe=6A10B157"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135141/yarden_makeup/yarden_makeup_17895878156618190.jpg",
-    "a": "איפור שלי לסנדרה אברהם - בוליווד. \nאיפור הודי עם טאצ שלי 💙\n@sandrabolliwood \n\nאת",
-    "id": "18003861064490399"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135141/yarden_makeup/yarden_makeup_17895878156618190.jpg",
@@ -3598,16 +2175,6 @@ const GALLERY_IMAGES = [
     "id": "17987608798510179"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135146/yarden_makeup/yarden_makeup_17918659670573730.jpg",
-    "a": "על גיפט קארד לסדנת איפור כבר שמעתם⁉️\nמהיום❗️ ניתן להזמין דרכי גיפט מתנה לבת הזוג",
-    "id": "17987608798510179"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135146/yarden_makeup/yarden_makeup_17918659670573730.jpg",
-    "a": "על גיפט קארד לסדנת איפור כבר שמעתם⁉️\nמהיום❗️ ניתן להזמין דרכי גיפט מתנה לבת הזוג",
-    "id": "17987608798510179"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527922/yarden_makeup/yarden_makeup_17904518621636200.jpg",
     "a": "חמישי שמח לכל החוגגים🥰🙏\nירדן דמרי - makeup \n\n#כלותאורבניות #פפארצי #בפעולה #איפו",
     "id": "17904518621636200"
@@ -3616,55 +2183,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527924/yarden_makeup/yarden_makeup_17931394988426743.jpg",
     "a": "Shir 🥰\nאיפור שלי לשיר המהממת 🫶🫶",
     "id": "17931394988426743"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
-    "a": "שארם היית טובה אלינו! תודה 🙏\n\nטעימה קטנה ממה שהיה לנו שם, \nפשוט החופשה המושלמת!",
-    "id": "18314230861062402",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624265912_1215463760139590_3394368068678663706_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=CVgczHvsJSIQ7kNvwHKb2vy&_nc_oc=AdrKUMKa-F6A25T3qpBGo22limlqoZaU2AyLqrMMykrQPdRjWU7JWtS-NCfmMARFNPA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Q0ZBBzf8C7JGacJkuTm0ZQ&_nc_tpa=Q5bMBQEGGBOML9HMO-Gij-gJEPwythGi3h2iSs7KTx1iN67QKoI1PLndLCUzcpv8CYk5gynfXyIDrzEX9Q&oh=00_Af6fhWTVos1akWrJp-vGqdBosIrUjOuoG79hO46qIcQ2JA&oe=6A10C811"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178615/yarden_makeup/yarden_makeup_18141808198275847.mp4",
@@ -3691,29 +2209,9 @@ const GALLERY_IMAGES = [
     "id": "17871780206696636"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135163/yarden_makeup/yarden_makeup_18177668845230860.jpg",
-    "a": "איפור שלי לצילומי היריון בנוסח אילתי מושלם! טבע וחופש 🌴⛱🐪\n@hilashai \nמה שלי היה",
-    "id": "17871780206696636"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135163/yarden_makeup/yarden_makeup_18177668845230860.jpg",
-    "a": "איפור שלי לצילומי היריון בנוסח אילתי מושלם! טבע וחופש 🌴⛱🐪\n@hilashai \nמה שלי היה",
-    "id": "17871780206696636"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527930/yarden_makeup/yarden_makeup_17910295673614562.jpg",
     "a": "הילה המדהימה ❣️בים האדום ❣️איפור שלי \n@hilashai",
     "id": "17910295673614562"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135167/yarden_makeup/yarden_makeup_18004478983461457.jpg",
-    "a": "הילה שי המיוחדת במינה! \nבאיפור שיער שלי לכבוד צילומי היריון ❤️🤰👶\n@hilashai \n\n⠀⠀⠀",
-    "id": "17961930193860413"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135167/yarden_makeup/yarden_makeup_18004478983461457.jpg",
-    "a": "הילה שי המיוחדת במינה! \nבאיפור שיער שלי לכבוד צילומי היריון ❤️🤰👶\n@hilashai \n\n⠀⠀⠀",
-    "id": "17961930193860413"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135167/yarden_makeup/yarden_makeup_18004478983461457.jpg",
@@ -3726,11 +2224,6 @@ const GALLERY_IMAGES = [
     "id": "17933985842208595",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/496870367_1411049180246959_2717566016622743929_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=8kUXj1Q6ElsQ7kNvwGrRvLL&_nc_oc=AdqEhQtr8zP4DOIxZ_yyltwEdUFUbIk3golTCDMKeUqCqk3MsyeFujaqm62p2Wjd5ok&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=H_CS9UN_bDPeWnw62oQRzQ&_nc_tpa=Q5bMBQHZkM5fbGuiel6Chd5t39StSIwl9W-lLeZ1NZSBJx-DII1TgqXIkJZghjnjZ8RtMVYQR_emV9ZtUQ&oh=00_Af4vngilI7w_oJkcXHu5uddQotlBcjIOS4wABPoO1Bv4Hg&oe=6A10D6B4"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135170/yarden_makeup/yarden_makeup_18169866022241241.jpg",
-    "a": "לפני 👈 ואחרי \nספרו לי אם אהבתם 🙏❤️\n\nMakeup- yarden damri ⠀⠀⠀⠀\n\n⠀⠀⠀⠀ ⠀⠀⠀⠀\n\n⠀⠀⠀⠀ ⠀",
-    "id": "17922456968524774"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135170/yarden_makeup/yarden_makeup_18169866022241241.jpg",
@@ -3751,11 +2244,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527937/yarden_makeup/yarden_makeup_18207693469090806.jpg",
     "a": "חלק מתהליך. איך אני אוהבת שעושים לי פפראצי 😅\n\nהחיוך שלה והרוגע שיש בה אומר הכל מ",
     "id": "18207693469090806"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135173/yarden_makeup/yarden_makeup_17919043010408815.jpg",
-    "a": "הבחירה שלכם - האיפור שלי ! \nספרו לי אם אהבתם, איפור שהוא מאוד מאוד מעודן ונקי.",
-    "id": "17898999572635348"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135173/yarden_makeup/yarden_makeup_17919043010408815.jpg",
@@ -3858,11 +2346,6 @@ const GALLERY_IMAGES = [
     "id": "18214847323179627"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135177/yarden_makeup/yarden_makeup_17981163859532733.jpg",
-    "a": "הילה שי המיוחדת באיפור שלי לצילומי היריון ❤️\n@hilashai \n#איפורהיריון #איפור #ציל",
-    "id": "18214847323179627"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527956/yarden_makeup/yarden_makeup_18001546240443127.jpg",
     "a": "איפור לרינתי 🖤 חתונת צהריים \n@rinat_vaki \n\n#makeup #makeupartist #makeuptutorial",
     "id": "18001546240443127"
@@ -3888,11 +2371,6 @@ const GALLERY_IMAGES = [
     "id": "17925450455510186"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135180/yarden_makeup/yarden_makeup_17913746318417169.jpg",
-    "a": "הילה שי המדהימה באיפור שלי לצילומי היריון, בקרוב התמונות 😍\n@hilashai \n\n#צילומיהי",
-    "id": "17925450455510186"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527963/yarden_makeup/yarden_makeup_17945599036991475.jpg",
     "a": "חג שבועות שמח 🌾🤍\n\n#חגשמח #שבועות #סיציליה",
     "id": "17945599036991475"
@@ -3910,63 +2388,9 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623387432_1585202699273280_1792424338483532545_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=C8JkWWmD5o0Q7kNvwGb_Zd3&_nc_oc=AdoNnuD7tcm7K6GPFeOUanSniz2RgOxHxM7xDRYYW_ccespio_PaXA3cN6X8Vjqk7yc&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=NZy9Xl1jaMSBZYV-Tik3TQ&_nc_tpa=Q5bMBQHDec9ModWB7DH6CAUfkDoVzzC4fQb43jWfVToigVpJX0l0K3ZUtaNgHcEqb0UNTalTyRsOr3mmmA&oh=00_Af5s4JFUs45KLyVv_pRBt6e8UQOehsWbIIIaxZQuCYNZHA&oe=6A10D8D8"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178627/yarden_makeup/yarden_makeup_17950112326823309.mp4",
-    "a": "Sicily 🌸 Italy 🇮🇹",
-    "id": "17961084997695046",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623387432_1585202699273280_1792424338483532545_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=C8JkWWmD5o0Q7kNvwGb_Zd3&_nc_oc=AdoNnuD7tcm7K6GPFeOUanSniz2RgOxHxM7xDRYYW_ccespio_PaXA3cN6X8Vjqk7yc&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=NZy9Xl1jaMSBZYV-Tik3TQ&_nc_tpa=Q5bMBQHDec9ModWB7DH6CAUfkDoVzzC4fQb43jWfVToigVpJX0l0K3ZUtaNgHcEqb0UNTalTyRsOr3mmmA&oh=00_Af5s4JFUs45KLyVv_pRBt6e8UQOehsWbIIIaxZQuCYNZHA&oe=6A10D8D8"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178627/yarden_makeup/yarden_makeup_17950112326823309.mp4",
-    "a": "Sicily 🌸 Italy 🇮🇹",
-    "id": "17961084997695046",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623387432_1585202699273280_1792424338483532545_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=C8JkWWmD5o0Q7kNvwGb_Zd3&_nc_oc=AdoNnuD7tcm7K6GPFeOUanSniz2RgOxHxM7xDRYYW_ccespio_PaXA3cN6X8Vjqk7yc&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=NZy9Xl1jaMSBZYV-Tik3TQ&_nc_tpa=Q5bMBQHDec9ModWB7DH6CAUfkDoVzzC4fQb43jWfVToigVpJX0l0K3ZUtaNgHcEqb0UNTalTyRsOr3mmmA&oh=00_Af5s4JFUs45KLyVv_pRBt6e8UQOehsWbIIIaxZQuCYNZHA&oe=6A10D8D8"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135186/yarden_makeup/yarden_makeup_17927550455485241.jpg",
     "a": "נופש חברה @danel.team \n#סיצילה 🇮🇹",
     "id": "17899673828612934"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135186/yarden_makeup/yarden_makeup_17927550455485241.jpg",
-    "a": "נופש חברה @danel.team \n#סיצילה 🇮🇹",
-    "id": "17899673828612934"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135186/yarden_makeup/yarden_makeup_17927550455485241.jpg",
-    "a": "נופש חברה @danel.team \n#סיצילה 🇮🇹",
-    "id": "17899673828612934"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
-    "a": "Sicily 🇮🇹",
-    "id": "17948952727928765"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135196/yarden_makeup/yarden_makeup_17931761144269734.jpg",
@@ -4013,24 +2437,9 @@ const GALLERY_IMAGES = [
     "id": "18016277260391376"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135199/yarden_makeup/yarden_makeup_17968736512602832.jpg",
-    "a": "כמה שהיא יפה! @mishelinaim \nאיפור טבעי לנערה מתבגרת 🫶",
-    "id": "18016277260391376"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135202/yarden_makeup/yarden_makeup_17943227332858929.jpg",
     "a": "אלה באיפור הכי עדין שיש כי בתכלס היא מושלמת! \nיום הולדת שמח בובה 🎈\n@bennunella_o",
     "id": "17945614267914807"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135202/yarden_makeup/yarden_makeup_17943227332858929.jpg",
-    "a": "אלה באיפור הכי עדין שיש כי בתכלס היא מושלמת! \nיום הולדת שמח בובה 🎈\n@bennunella_o",
-    "id": "17945614267914807"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135206/yarden_makeup/yarden_makeup_17961707863712790.jpg",
-    "a": "נשים יפות מגיעות רק אלי!! \nכמה כיף זה עוד בוגר. \n\nהפעם איפור מאוד מעודן ותואם את",
-    "id": "17954189089753570"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135206/yarden_makeup/yarden_makeup_17961707863712790.jpg",
@@ -4041,11 +2450,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527981/yarden_makeup/yarden_makeup_17902147292577047.jpg",
     "a": "@talprivner המדהימה \nבאיפור שלי בהרצאה נוספת - ממליצה לעקוב אחריה היא אלופה 💕",
     "id": "17902147292577047"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135209/yarden_makeup/yarden_makeup_17937042490962111.jpg",
-    "a": "ליאת ההורסת! גם היא הייתה אצלי בסדנת איפור קסומה במיוחד 😍\nהכי כיף שזה סדנאות איש",
-    "id": "17920739831215861"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135209/yarden_makeup/yarden_makeup_17937042490962111.jpg",
@@ -4090,21 +2494,11 @@ const GALLERY_IMAGES = [
     "id": "17941052560947342"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135212/yarden_makeup/yarden_makeup_17919118559496871.jpg",
-    "a": "Istanbul 🇹🇷",
-    "id": "17941052560947342"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178638/yarden_makeup/yarden_makeup_17938414978992953.mp4",
     "a": "טל פריבנר המרצה המדהימה להעצמה, נשיות, כוח וביטחון. \nפשוט כיף גדול לפגוש ולאפר א",
     "id": "17938414978992953",
     "video": true,
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/496634818_1085482586727007_5633377732970063767_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Yub46hqmAjcQ7kNvwFfauj3&_nc_oc=AdqYOUHeA8XFHLvdy4QG_6C--N3dZtpzzAEFcbKwK6os4MDaFkAZij46OhykQ6ABwCs&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=RzmvRNe4F-vpOzoYxKgqeg&_nc_tpa=Q5bMBQFx4yFOZaSxw33q9OuIiQFBZQ50zWNk8YTjCU2pZWyWNJ1RMezt0jlbbGtZAtByrdkh29lRdq9E6Q&oh=00_Af7mR7fAh5UAp_qwRXnxrqJI_2uLkxgQDVxXk4piQ7Jarw&oe=6A10DB4A"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135216/yarden_makeup/yarden_makeup_18199580260153593.jpg",
-    "a": "איפור שלי לסיון קפרי המתוקה ❣️\n\n@sivanbeautician \n\n#טיפוח #טיפוחאישי #ביוטי #מאפ",
-    "id": "17913149822396347"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135216/yarden_makeup/yarden_makeup_18199580260153593.jpg",
@@ -4129,11 +2523,6 @@ const GALLERY_IMAGES = [
     "id": "18227347861107010",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/491432469_9849110161814408_6497857151979512227_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ivEmvpyrJusQ7kNvwGoYYIY&_nc_oc=AdrCbQzK86bMAFV7Ctr72_LugaYJcnCuqGnxJNMON02elVfDilXjEhqmOHzUIwTMCic&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=RzmvRNe4F-vpOzoYxKgqeg&_nc_tpa=Q5bMBQHUMZ2EBFj9nL4gXkd2j_637UDPF35BCTCoKKtXmkt56BJ8Uj6mJw27vcpN8g67pFzdRmcHYY63zA&oh=00_Af5pVm1ZkHdf9L8ShnjPHBMzqtp9cLINJkLxWntwNx8_XQ&oe=6A10D6EE"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135219/yarden_makeup/yarden_makeup_17905646999382884.jpg",
-    "a": "הכי כיף זה לאפר אישה יפה עם נוכחות וביטחון, ולראות כמה האיפור רק הוסיף ושיפר לה",
-    "id": "17872239692663196"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135219/yarden_makeup/yarden_makeup_17905646999382884.jpg",
@@ -4204,16 +2593,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528005/yarden_makeup/yarden_makeup_18280102912007955.jpg",
     "a": "פורים 2022 בקו אחד. \n\n#פורים2022 #פורים #מאפרתבאילת #אילת #מאפרת #מאפרתמקצועית #",
     "id": "18280102912007955"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135223/yarden_makeup/yarden_makeup_17896568333532845.jpg",
-    "a": "להגיש חזקה ונשית בו זמנית - צילומי תדמית עם הסטייל המטורף של @_jeen_boutique_ \nה",
-    "id": "17913797552499170"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135223/yarden_makeup/yarden_makeup_17896568333532845.jpg",
-    "a": "להגיש חזקה ונשית בו זמנית - צילומי תדמית עם הסטייל המטורף של @_jeen_boutique_ \nה",
-    "id": "17913797552499170"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135223/yarden_makeup/yarden_makeup_17896568333532845.jpg",
@@ -4314,16 +2693,6 @@ const GALLERY_IMAGES = [
     "id": "17964643468508317"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135228/yarden_makeup/yarden_makeup_17913132239225159.jpg",
-    "a": "מלווה של כלה מהממת \nהחליקו הצידה לראות עוד.. ➡️\nכתבו לי למטה ⬇️ אם אהבתם",
-    "id": "17964643468508317"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135228/yarden_makeup/yarden_makeup_17913132239225159.jpg",
-    "a": "מלווה של כלה מהממת \nהחליקו הצידה לראות עוד.. ➡️\nכתבו לי למטה ⬇️ אם אהבתם",
-    "id": "17964643468508317"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528026/yarden_makeup/yarden_makeup_17999053660387363.jpg",
     "a": "אורטל הכלה המהממת באיפור שלי \nהכי מרגש להיות חלק מיום החתונה של הלקוחות שלי 😍\n@o",
     "id": "17999053660387363"
@@ -4342,11 +2711,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528031/yarden_makeup/yarden_makeup_18207942058118840.jpg",
     "a": "איפור למירי המהממת שלי 😍😍",
     "id": "18207942058118840"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135231/yarden_makeup/yarden_makeup_18271540609025221.jpg",
-    "a": "איפור לנערה צעירה, מאוד טבעי מתוך סדנת האיפור שלי @soofsoof_eilat @travel_to_eil",
-    "id": "17921448215069057"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135231/yarden_makeup/yarden_makeup_18271540609025221.jpg",
@@ -4522,44 +2886,11 @@ const GALLERY_IMAGES = [
     "id": "18169414363157664"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135233/yarden_makeup/yarden_makeup_17866673423583566.jpg",
-    "a": "איך אני אוהבת שחוזרים אליי 😍\nזה פשוט אומר לי הכל ונותן לי את התחושה הכי טובה שיש",
-    "id": "18169414363157664"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178689/yarden_makeup/yarden_makeup_17931562918644910.mp4",
     "a": "איפור מקצועי לליאור המדהימה 🎀\n@_liorbuskila_",
     "id": "17895080429162987",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/625095107_4334425613460104_6015531080060672760_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=VCz2cVwpYk0Q7kNvwEm88Bo&_nc_oc=Ado2RF3nYTCSmZDnYZ3wMWTwwovBlUmicJsKXytqx_9zAbA0XRKlprSQTDJmb-KpwiQ&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=c4om-6kY6GRKkUWP6UQYUg&_nc_tpa=Q5bMBQHHMrHCVguWDG0_M_vxsJz_F8gmjHooH8mjSXbgZkopitxFvF_OlIigCFq_E7RYk4OXAnCw_I4A_w&oh=00_Af4B-gSGnORgpSn0d-9RoTgu8_df5EHj2TuVZtvRDkoxtA&oe=6A10CAF1"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178689/yarden_makeup/yarden_makeup_17931562918644910.mp4",
-    "a": "איפור מקצועי לליאור המדהימה 🎀\n@_liorbuskila_",
-    "id": "17895080429162987",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/625095107_4334425613460104_6015531080060672760_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=VCz2cVwpYk0Q7kNvwEm88Bo&_nc_oc=Ado2RF3nYTCSmZDnYZ3wMWTwwovBlUmicJsKXytqx_9zAbA0XRKlprSQTDJmb-KpwiQ&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=c4om-6kY6GRKkUWP6UQYUg&_nc_tpa=Q5bMBQHHMrHCVguWDG0_M_vxsJz_F8gmjHooH8mjSXbgZkopitxFvF_OlIigCFq_E7RYk4OXAnCw_I4A_w&oh=00_Af4B-gSGnORgpSn0d-9RoTgu8_df5EHj2TuVZtvRDkoxtA&oe=6A10CAF1"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178689/yarden_makeup/yarden_makeup_17931562918644910.mp4",
-    "a": "איפור מקצועי לליאור המדהימה 🎀\n@_liorbuskila_",
-    "id": "17895080429162987",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/625095107_4334425613460104_6015531080060672760_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=VCz2cVwpYk0Q7kNvwEm88Bo&_nc_oc=Ado2RF3nYTCSmZDnYZ3wMWTwwovBlUmicJsKXytqx_9zAbA0XRKlprSQTDJmb-KpwiQ&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=c4om-6kY6GRKkUWP6UQYUg&_nc_tpa=Q5bMBQHHMrHCVguWDG0_M_vxsJz_F8gmjHooH8mjSXbgZkopitxFvF_OlIigCFq_E7RYk4OXAnCw_I4A_w&oh=00_Af4B-gSGnORgpSn0d-9RoTgu8_df5EHj2TuVZtvRDkoxtA&oe=6A10CAF1"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178690/yarden_makeup/yarden_makeup_17987996179364374.mp4",
-    "a": "איפור ערב לנשף 2021 \nהמון זמן לא העלתי איפור שלי.. אז תפרגנו לי 😁\nרק אם באמת אהב",
-    "id": "17883974216338558",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/624908255_26488115837443401_5465252316288326025_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=dhaaFRhb7fQQ7kNvwFNnchV&_nc_oc=AdqZbA_H8jX9XQADMVU5Kfb0a1Cv94JT2kc1A4aE1uasSlFqiqh0avTfQK1m_n7h2GE&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=wL5yTcSHHiiYD8zBsx590w&_nc_tpa=Q5bMBQHBvnZ9YH0cWVr6-EqqXZwhZDNKz_6oCvPLWGkrnxtHL2vJdCijJlGainxidUSkz1G45FhmPounbA&oh=00_Af44cwFZpElY16ul-wYTHtMvO-B68CLZXTNk5C0Dyd4RWQ&oe=6A10C341"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178690/yarden_makeup/yarden_makeup_17987996179364374.mp4",
-    "a": "איפור ערב לנשף 2021 \nהמון זמן לא העלתי איפור שלי.. אז תפרגנו לי 😁\nרק אם באמת אהב",
-    "id": "17883974216338558",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/624908255_26488115837443401_5465252316288326025_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=dhaaFRhb7fQQ7kNvwFNnchV&_nc_oc=AdqZbA_H8jX9XQADMVU5Kfb0a1Cv94JT2kc1A4aE1uasSlFqiqh0avTfQK1m_n7h2GE&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=wL5yTcSHHiiYD8zBsx590w&_nc_tpa=Q5bMBQHBvnZ9YH0cWVr6-EqqXZwhZDNKz_6oCvPLWGkrnxtHL2vJdCijJlGainxidUSkz1G45FhmPounbA&oh=00_Af44cwFZpElY16ul-wYTHtMvO-B68CLZXTNk5C0Dyd4RWQ&oe=6A10C341"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178690/yarden_makeup/yarden_makeup_17987996179364374.mp4",
@@ -4584,31 +2915,6 @@ const GALLERY_IMAGES = [
     "id": "17877142082441956"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135244/yarden_makeup/yarden_makeup_17858299355605933.jpg",
-    "a": "אריאל שלי מדגמנת את בובינקה @bubinka_official\n@liranyohay_photography 📸\nהיה מהמם",
-    "id": "17877142082441956"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135244/yarden_makeup/yarden_makeup_17858299355605933.jpg",
-    "a": "אריאל שלי מדגמנת את בובינקה @bubinka_official\n@liranyohay_photography 📸\nהיה מהמם",
-    "id": "17877142082441956"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135250/yarden_makeup/yarden_makeup_17909386243925370.jpg",
-    "a": "#therme ☀️",
-    "id": "17887087370222921"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135250/yarden_makeup/yarden_makeup_17909386243925370.jpg",
-    "a": "#therme ☀️",
-    "id": "17887087370222921"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135250/yarden_makeup/yarden_makeup_17909386243925370.jpg",
-    "a": "#therme ☀️",
-    "id": "17887087370222921"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135250/yarden_makeup/yarden_makeup_17909386243925370.jpg",
     "a": "#therme ☀️",
     "id": "17887087370222921"
@@ -4617,51 +2923,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
     "a": "חוויות טובות 🥰",
     "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135259/yarden_makeup/yarden_makeup_17897325236136031.jpg",
-    "a": "חוויות טובות 🥰",
-    "id": "17919732211741654"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135265/yarden_makeup/yarden_makeup_17892704186298264.jpg",
-    "a": "Sunflower 🌻 \n#עוצרנשימה #מדהים #חמניה",
-    "id": "17925663559718870"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135265/yarden_makeup/yarden_makeup_17892704186298264.jpg",
-    "a": "Sunflower 🌻 \n#עוצרנשימה #מדהים #חמניה",
-    "id": "17925663559718870"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135265/yarden_makeup/yarden_makeup_17892704186298264.jpg",
-    "a": "Sunflower 🌻 \n#עוצרנשימה #מדהים #חמניה",
-    "id": "17925663559718870"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135265/yarden_makeup/yarden_makeup_17892704186298264.jpg",
@@ -4781,13 +3042,6 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/623465937_1200864408703397_7568402015087656621_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=igJTAVKvwWUQ7kNvwFIUOvH&_nc_oc=AdpVwnVL-LULRAQj-ecX_DyWppLXj4jYim3ipZwDlt5f-bmSUgIr81jtc5ljtOX4dMc&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Wcg8GLVzcgitqPcDgRDCdA&_nc_tpa=Q5bMBQFwZSarmQ_P0YAgBdwvdWcCYIlHaAFEzTHfMSGxFRGYE37KMURhJe1bZBEH3VRp71MBDqPupLUT0g&oh=00_Af6Hqpx1vr-jNct1vmQjYdxk_RPNlxXdyMqSjMqn9gQSRQ&oe=6A10B5DC"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178711/yarden_makeup/yarden_makeup_17889761240132259.mp4",
-    "a": "נעליים בעיצוב אישי 😍\nמה אתם חושבים? \nאני כבר מאוהבת 🧡🧡",
-    "id": "17850689711534666",
-    "video": true,
-    "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/623465937_1200864408703397_7568402015087656621_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=igJTAVKvwWUQ7kNvwFIUOvH&_nc_oc=AdpVwnVL-LULRAQj-ecX_DyWppLXj4jYim3ipZwDlt5f-bmSUgIr81jtc5ljtOX4dMc&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=Wcg8GLVzcgitqPcDgRDCdA&_nc_tpa=Q5bMBQFwZSarmQ_P0YAgBdwvdWcCYIlHaAFEzTHfMSGxFRGYE37KMURhJe1bZBEH3VRp71MBDqPupLUT0g&oh=00_Af6Hqpx1vr-jNct1vmQjYdxk_RPNlxXdyMqSjMqn9gQSRQ&oe=6A10B5DC"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178712/yarden_makeup/yarden_makeup_18073754857279139.mp4",
     "a": "חכו לסוף 😍😍\nמה אומרים על הנעל האילתית שלי? \n@nike \n#nike #nikeshoes #nikeair",
     "id": "18073754857279139",
@@ -4823,23 +3077,9 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624725036_1436756074647585_7852172760762914955_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kRW9D3ZANwQQ7kNvwHYSyZv&_nc_oc=Ado6cyRDOFLdaITFBego0Vrqas_wIX6Aa-qSOzqx-PnSog2ZlA9GisqFU_9BDDyqK0Y&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=L9IrphRwmzZjj7vEtJbtnw&_nc_tpa=Q5bMBQGY_tGTIFQp5x3L94xCuZ6kulDT3NveLNOUCJ1v1RWbKdNVM5YTV4H_dqvBTbSM0dUAGZXYxWInow&oh=00_Af4_Zs0cXRgIyYpAyiL0vIv3maUcJeD3I3W2usRIQDI9rA&oe=6A10DF80"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178722/yarden_makeup/yarden_makeup_17911725718687483.mp4",
-    "a": "👑\nLavi \nMy art - you’re name",
-    "id": "17869502129489516",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624725036_1436756074647585_7852172760762914955_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kRW9D3ZANwQQ7kNvwHYSyZv&_nc_oc=Ado6cyRDOFLdaITFBego0Vrqas_wIX6Aa-qSOzqx-PnSog2ZlA9GisqFU_9BDDyqK0Y&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=L9IrphRwmzZjj7vEtJbtnw&_nc_tpa=Q5bMBQGY_tGTIFQp5x3L94xCuZ6kulDT3NveLNOUCJ1v1RWbKdNVM5YTV4H_dqvBTbSM0dUAGZXYxWInow&oh=00_Af4_Zs0cXRgIyYpAyiL0vIv3maUcJeD3I3W2usRIQDI9rA&oe=6A10DF80"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528068/yarden_makeup/yarden_makeup_17893434754973640.jpg",
     "a": "Your name\nMy art ❤️",
     "id": "17893434754973640"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178725/yarden_makeup/yarden_makeup_17958998770414518.mp4",
-    "a": "מתנה מושלמת לתינוקת מתוקה \n@shahardanino_ 💕\n#lian",
-    "id": "17881936034299125",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/624519231_1594716038212385_7914819244474568519_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=PbWe2DN21WYQ7kNvwFxIujH&_nc_oc=AdodTwmGoUD1Y3kn7s-x9TWeIC2RYKzicpuc_SzFgf594Wke6mWpoxl5miEkBW83_IY&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=VzkoQZkmPol3hNcyhfxV5g&_nc_tpa=Q5bMBQEfASrDjXDZQCTRWX2ZYrbABh9AwQ9rC_v4aAusUs6-TAu3_GhubIM6EHnDTEy53aGQhGGvkrtnjA&oh=00_Af7MGH3Ri2wlYKDKKHACEMNuNJUmyexL0TmWirjz8ET8rA&oe=6A10BDF3"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178725/yarden_makeup/yarden_makeup_17958998770414518.mp4",
@@ -4885,16 +3125,6 @@ const GALLERY_IMAGES = [
     "id": "17875299389247534"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135276/yarden_makeup/yarden_makeup_17867324861365795.jpg",
-    "a": "ג׳קט ג׳ינס בעיצוב ובחירה אישית \nלקחנו השראה מקעקועים שיש ללקוחה \n@morans76 תתחדש",
-    "id": "17875299389247534"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135276/yarden_makeup/yarden_makeup_17867324861365795.jpg",
-    "a": "ג׳קט ג׳ינס בעיצוב ובחירה אישית \nלקחנו השראה מקעקועים שיש ללקוחה \n@morans76 תתחדש",
-    "id": "17875299389247534"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528075/yarden_makeup/yarden_makeup_18094839694227731.jpg",
     "a": "🦋",
     "id": "18094839694227731"
@@ -4917,11 +3147,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528076/yarden_makeup/yarden_makeup_17880072788135752.jpg",
     "a": "⚡️",
     "id": "17880072788135752"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135280/yarden_makeup/yarden_makeup_17951710681414608.jpg",
-    "a": "קסדה שעשיתי לה מייקאובר מחשמל \nתחליקו הצידה ➡️ לראות את הלפני.\nהלקוח לא אהב את ה",
-    "id": "17901512815787298"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135280/yarden_makeup/yarden_makeup_17951710681414608.jpg",
@@ -4978,11 +3203,6 @@ const GALLERY_IMAGES = [
     "id": "17863703162344652"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135283/yarden_makeup/yarden_makeup_17871662045244262.jpg",
-    "a": "מתנה מיוחדת ליום הולדת 😍\nהבקשה הייתה לצייר את החתול שבתמונה השניה, מה אומרים עמד",
-    "id": "17863703162344652"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528090/yarden_makeup/yarden_makeup_17886906769899771.jpg",
     "a": "My painting and my jacket ❤️",
     "id": "17886906769899771"
@@ -5001,13 +3221,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528094/yarden_makeup/yarden_makeup_17905566472655519.jpg",
     "a": "#elsa #frozen",
     "id": "17905566472655519"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178738/yarden_makeup/yarden_makeup_17896809682790857.mp4",
-    "a": "𝐸𝑙𝑠𝑎 & 𝑀𝑖𝑐ℎ𝑎𝑒𝑙𝑎 ♥︎\nאוהבים? רוצים גם לילד/ה שלכם \nאו אפילו לכם? \nרישמו לי או שלחו",
-    "id": "17857351025460427",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/622979591_1559177241959697_3341403014903984427_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=SmlxIlMo8yoQ7kNvwHCbNd3&_nc_oc=Adq13Pi3qTafyLPvFoTmnNRshiegX72uh01rVQpJhB_5JPkxNHl7QpIP42HXOPofFpg&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=LYuC9-fb4B4oXlbsSyzxzw&_nc_tpa=Q5bMBQF7FZ9dd0Z9eGDDHWg8qfeKw_XI2ojY1NOnaJJa5H_yaJQrCa4dBi9kXe5KMzUlfDAziDtoF2hoKQ&oh=00_Af6d4uGilyciht3pwSLmLL4RZJ0de3uRJaulfGBlicLjAg&oe=6A10D94E"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178738/yarden_makeup/yarden_makeup_17896809682790857.mp4",
@@ -5394,11 +3607,6 @@ const GALLERY_IMAGES = [
     "id": "17854726994207903"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135288/yarden_makeup/yarden_makeup_17859219647137676.jpg",
-    "a": "📷🖤Pregnancy photo \n\nPhoto by @liranyohay_photography \n#girl #babygirl #pregnancy",
-    "id": "17854726994207903"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528203/yarden_makeup/yarden_makeup_17893726345608276.jpg",
     "a": "💗🌸Pregnancy photo \n\nPhoto by @liranyohay_photography \n#girl #babygirl #pregnancy",
     "id": "17893726345608276"
@@ -5460,11 +3668,6 @@ const GALLERY_IMAGES = [
     "id": "18096469381193206"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135292/yarden_makeup/yarden_makeup_17861750545763324.jpg",
-    "a": "עיצוב אישי לנעליים ישנות 👈 לחדשות \nבמחווה ל @kobebryant \nאהבתם? פרגנו ♥️♥️\nתתחדש",
-    "id": "18096469381193206"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528215/yarden_makeup/yarden_makeup_17919027220377777.jpg",
     "a": "Purim 2020 comics makeup 🎭\n\n#makeup #makeupartist #amkeuplook #purim #purim2020",
     "id": "17919027220377777"
@@ -5485,11 +3688,6 @@ const GALLERY_IMAGES = [
     "id": "17869204735596377",
     "video": true,
     "thumb": "https://scontent-ord5-2.cdninstagram.com/v/t51.71878-15/527434334_3158341104328220_8687950554959970609_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=ipz-3QDcJQAQ7kNvwFSSpJA&_nc_oc=Adp0Jv77DS3uR4gxFgJ22M98rWeht97pqN7-aEo3jcA0Efl6BjFsn_ckqeRA01UiKzs&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=mfacUxHYjHZair1RlXpqhQ&_nc_tpa=Q5bMBQFKyFew15PAeR85h0NWWQ4016-1XzlDU9fW4YQ-Iqjwlbb_9yaaQ7Dy6IBwrJ9XRyPuoDNUKeXlBg&oh=00_Af4oL4QNCSZwYqM57gBIJ6_v-nCt4xIPbm1GMbMLaNLF5A&oe=6A10B3FE"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135295/yarden_makeup/yarden_makeup_17865163732617846.jpg",
-    "a": "𝗕𝗲𝗳𝗼𝗿𝗲 & 𝗮𝗳𝘁𝗲𝗿 \n#paintingshoes #painting #shoes #snikers #painting #art #artist",
-    "id": "17883127645493904"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135295/yarden_makeup/yarden_makeup_17865163732617846.jpg",
@@ -5608,11 +3806,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528248/yarden_makeup/yarden_makeup_17897738296394086.jpg",
     "a": "הדמות המסודרת יותר, שהחיים מחייכים אליה. \nאקריל על קנבס 80/80 \nאקריל על קנבס 80/",
     "id": "17897738296394086"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135298/yarden_makeup/yarden_makeup_17862641605558271.jpg",
-    "a": "הדמות היותר מופנמת, שיש לה יותר צרות על הראש.\nמעצבת פנים- @dvir_nirit \nבסלון בית",
-    "id": "17848765009677252"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135298/yarden_makeup/yarden_makeup_17862641605558271.jpg",
@@ -6117,11 +4310,6 @@ const GALLERY_IMAGES = [
     "id": "17960337316216299"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135301/yarden_makeup/yarden_makeup_17861067292314978.jpg",
-    "a": "Zebra 🦓 \n#🦓 #zebra #zoo #makeup #purim #2019 #israel #eilat #beautiful",
-    "id": "17960337316216299"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528353/yarden_makeup/yarden_makeup_17893996072290855.jpg",
     "a": "Zebra 🦓 mood \n#makeup #eilat #israel #beautiful #zebra #makeuptutorial #purim #פ",
     "id": "17893996072290855"
@@ -6188,18 +4376,6 @@ const GALLERY_IMAGES = [
     "id": "17971103665179660"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135305/yarden_makeup/yarden_makeup_17899730383267771.jpg",
-    "a": "⚡️my makeup ⚡️\n@keilidhmua \n#mymakeup #artist #makeuptutorial #yardendamrimakeup",
-    "id": "17971103665179660"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178811/yarden_makeup/yarden_makeup_17998536949050853.mp4",
-    "a": "⚡️⚡️⚡️\n#strom #makeup #artist #artface #faceart #makeupartis #yardendamrimakeupa",
-    "id": "17937119608200968",
-    "video": true,
-    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/625219042_1199781778933765_3303129123548282144_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=tb1VzVsBVH8Q7kNvwGNFO45&_nc_oc=AdqOcVnydTlO5mWhG_wkZFxiewjijWwlBVpBLh1NaVW-POCKR8KBlpRPfQkO0_BuCQo&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=VLZCknHdbPWveFKfiWPYpA&_nc_tpa=Q5bMBQGEQu3tV0XzKwLENl99o8bFP2G3tBq2iE7LV9m-_qWpCtNNd-ORtkCBGsfGr6ACZW2EIOshvEGvEw&oh=00_Af69PPf-9SchGl0vpOWXyR8Z-7lqKHkCv4gexcLNvOryzw&oe=6A10C142"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178811/yarden_makeup/yarden_makeup_17998536949050853.mp4",
     "a": "⚡️⚡️⚡️\n#strom #makeup #artist #artface #faceart #makeupartis #yardendamrimakeupa",
     "id": "17937119608200968",
@@ -6212,51 +4388,6 @@ const GALLERY_IMAGES = [
     "id": "17974012057095972"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135314/yarden_makeup/yarden_makeup_17963196487160632.jpg",
-    "a": "Vacation 🇮🇹",
-    "id": "17974012057095972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135314/yarden_makeup/yarden_makeup_17963196487160632.jpg",
-    "a": "Vacation 🇮🇹",
-    "id": "17974012057095972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135314/yarden_makeup/yarden_makeup_17963196487160632.jpg",
-    "a": "Vacation 🇮🇹",
-    "id": "17974012057095972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135314/yarden_makeup/yarden_makeup_17963196487160632.jpg",
-    "a": "Vacation 🇮🇹",
-    "id": "17974012057095972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135314/yarden_makeup/yarden_makeup_17963196487160632.jpg",
-    "a": "Vacation 🇮🇹",
-    "id": "17974012057095972"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135321/yarden_makeup/yarden_makeup_17978774158127607.jpg",
-    "a": "משפחה שלי ❤️\n#family #baby #myboys #italy #🇮🇹",
-    "id": "17995782862037122"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135321/yarden_makeup/yarden_makeup_17978774158127607.jpg",
-    "a": "משפחה שלי ❤️\n#family #baby #myboys #italy #🇮🇹",
-    "id": "17995782862037122"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135321/yarden_makeup/yarden_makeup_17978774158127607.jpg",
-    "a": "משפחה שלי ❤️\n#family #baby #myboys #italy #🇮🇹",
-    "id": "17995782862037122"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135321/yarden_makeup/yarden_makeup_17978774158127607.jpg",
-    "a": "משפחה שלי ❤️\n#family #baby #myboys #italy #🇮🇹",
-    "id": "17995782862037122"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135321/yarden_makeup/yarden_makeup_17978774158127607.jpg",
     "a": "משפחה שלי ❤️\n#family #baby #myboys #italy #🇮🇹",
     "id": "17995782862037122"
@@ -6265,36 +4396,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135329/yarden_makeup/yarden_makeup_17981543296096376.jpg",
     "a": "Italy 🇮🇹 2018 \n#italy #family #familyvacation",
     "id": "17932925029221501"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135329/yarden_makeup/yarden_makeup_17981543296096376.jpg",
-    "a": "Italy 🇮🇹 2018 \n#italy #family #familyvacation",
-    "id": "17932925029221501"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135329/yarden_makeup/yarden_makeup_17981543296096376.jpg",
-    "a": "Italy 🇮🇹 2018 \n#italy #family #familyvacation",
-    "id": "17932925029221501"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135329/yarden_makeup/yarden_makeup_17981543296096376.jpg",
-    "a": "Italy 🇮🇹 2018 \n#italy #family #familyvacation",
-    "id": "17932925029221501"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135329/yarden_makeup/yarden_makeup_17981543296096376.jpg",
-    "a": "Italy 🇮🇹 2018 \n#italy #family #familyvacation",
-    "id": "17932925029221501"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135334/yarden_makeup/yarden_makeup_17985124555077131.jpg",
-    "a": "אורטל הכלה המהממת שלי 💍\n#makeupbyme #makeup #makeuptutorial #makeupartist #love",
-    "id": "17903537347250625"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135334/yarden_makeup/yarden_makeup_17985124555077131.jpg",
-    "a": "אורטל הכלה המהממת שלי 💍\n#makeupbyme #makeup #makeuptutorial #makeupartist #love",
-    "id": "17903537347250625"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135334/yarden_makeup/yarden_makeup_17985124555077131.jpg",
@@ -6398,11 +4499,6 @@ const GALLERY_IMAGES = [
     "id": "17947799749110729"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135338/yarden_makeup/yarden_makeup_17901024898210368.jpg",
-    "a": "💄♥️\n.\n.\n.\n#highlights #beauty #makeup #beautiful #makeupbyme #makeuplover #makeu",
-    "id": "17947799749110729"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178824/yarden_makeup/yarden_makeup_17935409320191670.mp4",
     "a": "Hodaya ❤️\n#beauty #makeup #beautiful #highlights #maccosmetics #mac #makeupbyme",
     "id": "17935409320191670",
@@ -6452,16 +4548,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135341/yarden_makeup/yarden_makeup_17926454188131388.jpg",
     "a": "Makeup by me - meital ♥️\n#makeuptutorial #makeuplover #workmakeup #best #dress #",
     "id": "17937726931117133"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135341/yarden_makeup/yarden_makeup_17926454188131388.jpg",
-    "a": "Makeup by me - meital ♥️\n#makeuptutorial #makeuplover #workmakeup #best #dress #",
-    "id": "17937726931117133"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135345/yarden_makeup/yarden_makeup_17924155609188301.jpg",
-    "a": "Makeup is life! 1/2???\n#🔥 #❤️ #mac #makeupartist #makeup #mascara #highlights#li",
-    "id": "17937931522129461"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135345/yarden_makeup/yarden_makeup_17924155609188301.jpg",
@@ -6532,23 +4618,9 @@ const GALLERY_IMAGES = [
     "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623192218_1449786896569382_8954946665921328584_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=n5lfYPBtNz8Q7kNvwFyjrCj&_nc_oc=AdplR0xSIql9NyVqmYqq5Vy1ZScATeqDSD1yNVvzoWz9JEWlc52qBAmckxlpUT8czoU&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=4G9m6srRDfUvKa2ADJQ35w&_nc_tpa=Q5bMBQF-VPYopqMDdhzqvljObQUF5FjtcMsnjZp6Kn9Q6ByECC5X9nFRENpyEqyaDAS7SqYRwVz7CIhJvw&oh=00_Af5fqTqUqpJHrxwXa8MLrjoOm4M9iHTNHr3dvKAMnB91pQ&oe=6A10D839"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178839/yarden_makeup/yarden_makeup_17919091804154802.mp4",
-    "a": "🔥🔥🔥\n#artist #best #eyes #beautiful #art #🔥 #mac #makeup #mascara #makeupbyme #ma",
-    "id": "17933244481104716",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623192218_1449786896569382_8954946665921328584_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=n5lfYPBtNz8Q7kNvwFyjrCj&_nc_oc=AdplR0xSIql9NyVqmYqq5Vy1ZScATeqDSD1yNVvzoWz9JEWlc52qBAmckxlpUT8czoU&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=4G9m6srRDfUvKa2ADJQ35w&_nc_tpa=Q5bMBQF-VPYopqMDdhzqvljObQUF5FjtcMsnjZp6Kn9Q6ByECC5X9nFRENpyEqyaDAS7SqYRwVz7CIhJvw&oh=00_Af5fqTqUqpJHrxwXa8MLrjoOm4M9iHTNHr3dvKAMnB91pQ&oe=6A10D839"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528408/yarden_makeup/yarden_makeup_17931202225112268.jpg",
     "a": "תוצאת הסרטון 🔥🔥🔥\n#🔥 #❤️ #mac #makeupartist #makeup #mascara #highlights #glam #g",
     "id": "17931202225112268"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178843/yarden_makeup/yarden_makeup_17918673349181580.mp4",
-    "a": "New video ♥️♥️\n#סרטוןחדש #makeup #video #videomakeup #makeupvideo #mac #nyx #cos",
-    "id": "17944595215045042",
-    "video": true,
-    "thumb": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/623402137_1236454401915575_3050595597320101906_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=NkbG6KxWe5MQ7kNvwHb-w2d&_nc_oc=AdpHrwZJ2o4mbtQuii3tXF89ZPlpMPn88wbCtYeIVZRmz0qiJlJ_mQWjlFl4eHBRroU&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&edm=ABbrh9MEAAAA&_nc_gid=vavcFVyYM_hQJLcrT_VvPg&_nc_tpa=Q5bMBQGVwq4sCtES47K6FIKhy5d1BZBA1IkeXrS-59TTqcFWMK6UJxBplpUrfpNBjV-GIrrj82y8m9x7hA&oh=00_Af5JmXsxd_In6UrkHTxjSM3zUDaTtoMmKGauOdxlsRzVdA&oe=6A10B086"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178843/yarden_makeup/yarden_makeup_17918673349181580.mp4",
@@ -6570,21 +4642,11 @@ const GALLERY_IMAGES = [
     "id": "17939212141064433"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135349/yarden_makeup/yarden_makeup_17917227931134639.jpg",
-    "a": "#makeupartist #makeup #mac #makeupbyme #makeuptutorial #yellow #cosmetics #color",
-    "id": "17939212141064433"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178847/yarden_makeup/yarden_makeup_17938682089070714.mp4",
     "a": "New look 💛💛\n#makeupartist #mossad #mac #makeupbyme #makeuptutorial #yellow #cosm",
     "id": "17938682089070714",
     "video": true,
     "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.71878-15/531840808_609717612198798_7482074680508763943_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=gPz8VtCkqmcQ7kNvwEVkn7b&_nc_oc=AdqzUjiMMzD6dUj0KnMw8QQmkGJjxQm82i3qWE5VIJDCpb4Ulw5e6iR2FeAY5ubkVT4&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=MtBZxFnD_db0Cv5X5Ivr8A&_nc_tpa=Q5bMBQFtLLMRkRIS-DB5jyglI4q8fBIJqT9tWXZwnKCQlKTOKOcjUmkyaLYCbbeYghCT399RIr6IjHrZzQ&oh=00_Af50BDDqI1Rdvr55tEaBpZWTFwEqlAZ98Pgitt81sbnmtg&oe=6A10CEDF"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135353/yarden_makeup/yarden_makeup_17923322305090666.jpg",
-    "a": "איפור לצילומי היריון 🤰💟\n#🤰 #💟 #makeup #makeupartist #mascara #maccosmetics #mac",
-    "id": "17934777202073238"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135353/yarden_makeup/yarden_makeup_17923322305090666.jpg",
@@ -6614,11 +4676,6 @@ const GALLERY_IMAGES = [
     "id": "17852214673248679"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135357/yarden_makeup/yarden_makeup_17940793426008737.jpg",
-    "a": "Meital 💟\n#meital_boutique #makeup #makeupbyme #dress #girl #instagram #glam #hig",
-    "id": "17852214673248679"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528420/yarden_makeup/yarden_makeup_17898157150194648.jpg",
     "a": "My logo 💘\n#my #logo #makeuplogo #mac #makeup #top #art #artist #artistsoninstagr",
     "id": "17898157150194648"
@@ -6629,24 +4686,9 @@ const GALLERY_IMAGES = [
     "id": "17925932740071040"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135360/yarden_makeup/yarden_makeup_17932002577021167.jpg",
-    "a": "Adar 💕\n#eilat #eyebrows #mac #makeup #mascara #makeupbyme #makeuplover #makeuptu",
-    "id": "17925932740071040"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135364/yarden_makeup/yarden_makeup_17930568280009436.jpg",
     "a": "Makeup for me 💕\n#eilatcity #eilat #eyebrows #makeup #mac #mascara #makeupartist",
     "id": "17916512530101926"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135364/yarden_makeup/yarden_makeup_17930568280009436.jpg",
-    "a": "Makeup for me 💕\n#eilatcity #eilat #eyebrows #makeup #mac #mascara #makeupartist",
-    "id": "17916512530101926"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135369/yarden_makeup/yarden_makeup_17920547782072515.jpg",
-    "a": "Indian 💝\n#אינדיאנית #instagram #indian #america #art #eilat #purim2018 #purim #m",
-    "id": "17930143876045363"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135369/yarden_makeup/yarden_makeup_17920547782072515.jpg",
@@ -6657,11 +4699,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528427/yarden_makeup/yarden_makeup_17900699290152526.jpg",
     "a": "Tigers 🐯\n#tiger #פורים #🐯 #purim2018 #purim #פורים2018 #נמרה #makeup #makeupbyme",
     "id": "17900699290152526"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135372/yarden_makeup/yarden_makeup_17928192466022274.jpg",
-    "a": "שלגיה והזאב לשרון ❤️\n#eyebrows #pink #red #makeup #makeupartist #mac #makeupbyyo",
-    "id": "17928436321047203"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135372/yarden_makeup/yarden_makeup_17928192466022274.jpg",
@@ -6682,26 +4719,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135376/yarden_makeup/yarden_makeup_17926411861039699.jpg",
     "a": "🥕🐰🎭\n#makeup #makeupbyme #makeuplover #makeuptutorial #wow #rabbit #rabbit🐰 #🥕 #🐰",
     "id": "17900299915179008"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135376/yarden_makeup/yarden_makeup_17926411861039699.jpg",
-    "a": "🥕🐰🎭\n#makeup #makeupbyme #makeuplover #makeuptutorial #wow #rabbit #rabbit🐰 #🥕 #🐰",
-    "id": "17900299915179008"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135383/yarden_makeup/yarden_makeup_17922569014067192.jpg",
-    "a": "Happy Purim 👻\n#👻 #☠️ #💀 #halloween #highlights #video #filpagram #instagram #ins",
-    "id": "17900140393159566"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135383/yarden_makeup/yarden_makeup_17922569014067192.jpg",
-    "a": "Happy Purim 👻\n#👻 #☠️ #💀 #halloween #highlights #video #filpagram #instagram #ins",
-    "id": "17900140393159566"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135383/yarden_makeup/yarden_makeup_17922569014067192.jpg",
-    "a": "Happy Purim 👻\n#👻 #☠️ #💀 #halloween #highlights #video #filpagram #instagram #ins",
-    "id": "17900140393159566"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135383/yarden_makeup/yarden_makeup_17922569014067192.jpg",
@@ -6736,11 +4753,6 @@ const GALLERY_IMAGES = [
     "id": "17926030957015253"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135387/yarden_makeup/yarden_makeup_17908487377087775.jpg",
-    "a": "Clown 🤡 makeup by me \n#makeup #makeupbyme #clown #clownmakeup #colors #fashion #",
-    "id": "17926030957015253"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528443/yarden_makeup/yarden_makeup_17868262951202883.jpg",
     "a": "Golden ✨✨\n#פורים #golden #gold #glamour #highlights #highlighter #hippiestyle #i",
     "id": "17868262951202883"
@@ -6749,36 +4761,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135396/yarden_makeup/yarden_makeup_17907357520095981.jpg",
     "a": "Gold ✨✨\n#פורים #workmakeup #golden #gold #✨ #glitter #highlights #purim2018 #פור",
     "id": "17898496915181108"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135396/yarden_makeup/yarden_makeup_17907357520095981.jpg",
-    "a": "Gold ✨✨\n#פורים #workmakeup #golden #gold #✨ #glitter #highlights #purim2018 #פור",
-    "id": "17898496915181108"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135396/yarden_makeup/yarden_makeup_17907357520095981.jpg",
-    "a": "Gold ✨✨\n#פורים #workmakeup #golden #gold #✨ #glitter #highlights #purim2018 #פור",
-    "id": "17898496915181108"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135396/yarden_makeup/yarden_makeup_17907357520095981.jpg",
-    "a": "Gold ✨✨\n#פורים #workmakeup #golden #gold #✨ #glitter #highlights #purim2018 #פור",
-    "id": "17898496915181108"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135396/yarden_makeup/yarden_makeup_17907357520095981.jpg",
-    "a": "Gold ✨✨\n#פורים #workmakeup #golden #gold #✨ #glitter #highlights #purim2018 #פור",
-    "id": "17898496915181108"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135401/yarden_makeup/yarden_makeup_17893463236175461.jpg",
-    "a": "clown alice in wonderland \n#פורים #pink #workmakeup #purim2018 #mac #makeup #mas",
-    "id": "17923752895014215"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135401/yarden_makeup/yarden_makeup_17893463236175461.jpg",
-    "a": "clown alice in wonderland \n#פורים #pink #workmakeup #purim2018 #mac #makeup #mas",
-    "id": "17923752895014215"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135401/yarden_makeup/yarden_makeup_17893463236175461.jpg",
@@ -6803,16 +4785,6 @@ const GALLERY_IMAGES = [
     "id": "17905437790088485"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135407/yarden_makeup/yarden_makeup_17914906186075963.jpg",
-    "a": "🖤\n#workmakeup #🖤 #mac #makeupartist #makeupbyme #makeup #blackandwhite #black #i",
-    "id": "17905437790088485"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135407/yarden_makeup/yarden_makeup_17914906186075963.jpg",
-    "a": "🖤\n#workmakeup #🖤 #mac #makeupartist #makeupbyme #makeup #blackandwhite #black #i",
-    "id": "17905437790088485"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528450/yarden_makeup/yarden_makeup_17904823621086449.jpg",
     "a": "🦄🦄\n#פורים2018 #makeupbyme #workmakeup #unicorn #🦄 #purim2018 #purim #🎭 #colors #",
     "id": "17904823621086449"
@@ -6826,11 +4798,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528453/yarden_makeup/yarden_makeup_17903938876094197.jpg",
     "a": "Makeup by me 💄 \n@suzan.zohar 👗\n#makeupbyme #makeupartist #dress #highlights #top",
     "id": "17903938876094197"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135412/yarden_makeup/yarden_makeup_17921773552012416.jpg",
-    "a": "Purim 2018 🎭\n#purim #purim2018 #פורים #פורים2018 #halloween #makeupbyme #makeupa",
-    "id": "17906293849125171"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135412/yarden_makeup/yarden_makeup_17921773552012416.jpg",
@@ -6882,21 +4849,6 @@ const GALLERY_IMAGES = [
     "id": "17889605140192892"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135417/yarden_makeup/yarden_makeup_17891028565142745.jpg",
-    "a": "🖤makeup by me 🖤\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17889605140192892"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135417/yarden_makeup/yarden_makeup_17891028565142745.jpg",
-    "a": "🖤makeup by me 🖤\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17889605140192892"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135417/yarden_makeup/yarden_makeup_17891028565142745.jpg",
-    "a": "🖤makeup by me 🖤\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17889605140192892"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178858/yarden_makeup/yarden_makeup_17908782673068295.mp4",
     "a": "✨✨✨\n#makeup #instamakeup #cosmetic #cosmetics #instagrams.co.il #TFLers #fashion",
     "id": "17908782673068295",
@@ -6926,11 +4878,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528468/yarden_makeup/yarden_makeup_17912894281036395.jpg",
     "a": "כלת חינה❤️ איפור שלי 💄\n#mac #eyeshadow #highlights #israel #natural #freshmakeup",
     "id": "17912894281036395"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135420/yarden_makeup/yarden_makeup_17912760385007688.jpg",
-    "a": "צילום- @stal1610 📽\n🖤#oshridamri 👣#myson \n#mymense #love #🖤",
-    "id": "17882663443175095"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135420/yarden_makeup/yarden_makeup_17912760385007688.jpg",
@@ -6975,16 +4922,6 @@ const GALLERY_IMAGES = [
     "id": "17879232730184888"
   },
   {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135425/yarden_makeup/yarden_makeup_17880594556140711.jpg",
-    "a": "איפור שלי💄ליאן המהממת!! מעצבת 👗- סוזן זוהר \n#art #makeup #makeuptutorial #makeup",
-    "id": "17879232730184888"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135425/yarden_makeup/yarden_makeup_17880594556140711.jpg",
-    "a": "איפור שלי💄ליאן המהממת!! מעצבת 👗- סוזן זוהר \n#art #makeup #makeuptutorial #makeup",
-    "id": "17879232730184888"
-  },
-  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528480/yarden_makeup/yarden_makeup_17907103555012296.jpg",
     "a": "Makeup 💄 by me \n@suzan.zohar 👗\n#art #makeuptutorial #makeup #makeupbyme #makeupa",
     "id": "17907103555012296"
@@ -7022,21 +4959,6 @@ const GALLERY_IMAGES = [
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528486/yarden_makeup/yarden_makeup_17873247067139583.jpg",
     "a": "אוהבת את האחיינית שלי!! ❤️❤️\n#מושלמתכלכך #נועםהמלכה",
     "id": "17873247067139583"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135431/yarden_makeup/yarden_makeup_17893750393032422.jpg",
-    "a": "Makeup by me 💄💋\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17894156050036945"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135431/yarden_makeup/yarden_makeup_17893750393032422.jpg",
-    "a": "Makeup by me 💄💋\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17894156050036945"
-  },
-  {
-    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135431/yarden_makeup/yarden_makeup_17893750393032422.jpg",
-    "a": "Makeup by me 💄💋\n#fashion #style #stylish #love #me #cute #photooftheday #nails #",
-    "id": "17894156050036945"
   },
   {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135431/yarden_makeup/yarden_makeup_17893750393032422.jpg",
