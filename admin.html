@@ -160,9 +160,13 @@
       <span style="font-size:.75rem;color:var(--muted)">Shift+לחיצה לבחירת טווח</span>
       <button class="btn btn-secondary" onclick="selectAllVisible()">בחר הכל</button>
       <button class="btn btn-secondary" onclick="clearSelection()">נקה בחירה</button>
-      <button class="btn" style="background:var(--gold);color:#000" onclick="bulkHide()">🚫 הסתר נבחרות</button>
-      <button class="btn" style="background:#4CAF50;color:#fff" onclick="bulkShow()">👁️ הצג נבחרות</button>
-      <button class="btn btn-danger" onclick="bulkDelete()">🗑️ מחק נבחרות</button>
+      <button class="btn" style="background:var(--gold);color:#000" onclick="bulkHide()">🚫 הסתר</button>
+      <button class="btn" style="background:#4CAF50;color:#fff" onclick="bulkShow()">👁️ הצג</button>
+      <button class="btn" style="background:var(--blush);color:#fff" onclick="bulkPin()">📌 נעץ</button>
+      <button class="btn" style="background:#6366f1;color:#fff" onclick="bulkCatModal()">🏷️ קטגוריה</button>
+      <button class="btn" style="background:#0891b2;color:#fff" onclick="bulkRotate()">🔄 סובב</button>
+      <button class="btn" style="background:#64748b;color:#fff" onclick="bulkMoveToTop()">⬆️ הזז לראש</button>
+      <button class="btn btn-danger" onclick="bulkDelete()">🗑️ מחק</button>
       <button class="btn btn-secondary" onclick="toggleMultiSelect()">✕ ביטול</button>
     </div>
     <div id="grid"></div>
@@ -184,44 +188,64 @@
   <!-- ANALYTICS TAB -->
   <div id="tab-analytics" style="display:none;padding:20px 16px">
 
-    <!-- Period -->
-    <div style="display:flex;gap:6px;margin-bottom:20px;">
-      <button class="period-btn active" onclick="setPeriod(7,this)">שבוע אחרון</button>
-      <button class="period-btn" onclick="setPeriod(30,this)">חודש אחרון</button>
-      <button class="period-btn" onclick="setPeriod(90,this)">3 חודשים</button>
+    <!-- Connect / Period row -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+      <button id="ga4-connect-btn" onclick="ga4Connect()" style="background:var(--blush);color:#fff;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;font-size:.85rem;font-weight:600;">🔗 התחבר לגוגל אנליטיקס</button>
+      <div style="display:flex;gap:6px;">
+        <button class="period-btn active" onclick="setPeriod(7,this)">7 ימים</button>
+        <button class="period-btn" onclick="setPeriod(30,this)">30 יום</button>
+        <button class="period-btn" onclick="setPeriod(90,this)">90 יום</button>
+      </div>
     </div>
 
-    <!-- Big Numbers -->
-    <div id="kpi-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;"></div>
+    <div id="ga4-status" style="font-size:.78rem;color:var(--muted);margin-bottom:14px;min-height:18px;"></div>
+
+    <!-- KPI Cards -->
+    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;"></div>
 
     <!-- Visits Chart -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
-      <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">📈 כמה אנשים נכנסו לאתר — לפי יום</div>
-      <canvas id="visits-chart" height="110"></canvas>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📈 ביקורים יומיים</div>
+      <canvas id="visits-chart" height="100"></canvas>
     </div>
 
-    <!-- Where did they come from -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
-      <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">🔍 מאיפה הגיעו המבקרים?</div>
-      <div id="sources-list"></div>
+    <!-- 2-col grid for breakdowns -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔍 מקורות תנועה</div>
+        <div id="sources-list"></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📱 מכשירים</div>
+        <div id="devices-list"></div>
+      </div>
     </div>
 
-    <!-- נייד או מחשב -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;">
-      <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">📱 נייד או מחשב?</div>
-      <div id="devices-list"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🌍 ערים</div>
+        <div id="cities-list"></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">👤 גיל ומגדר</div>
+        <div id="demographics-list"></div>
+      </div>
     </div>
 
-    <!-- אינסטגרם -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:20px;">
-      <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">📸 הכי פופולרי באינסטגרם</div>
-      <div id="ig-engagement"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔑 מילות חיפוש (SEO)</div>
+        <div id="keywords-list"></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📄 עמודים פופולריים</div>
+        <div id="pages-list"></div>
+      </div>
     </div>
 
-    <!-- GA4 Button -->
     <a href="https://analytics.google.com/analytics/web/#/p536415544/reports/reportinghub" target="_blank"
-       style="display:block;text-align:center;background:var(--blush);color:#fff;padding:14px;border-radius:12px;text-decoration:none;font-size:.9rem;font-weight:600;">
-      📊 לכל הנתונים המפורטים — פתח גוגל אנליטיקס
+       style="display:block;text-align:center;background:rgba(255,255,255,.07);color:var(--muted);padding:12px;border-radius:12px;text-decoration:none;font-size:.82rem;border:1px solid var(--border);">
+      📊 פתח גוגל אנליטיקס לדוחות מלאים
     </a>
 
   </div>
@@ -434,6 +458,44 @@ function bulkDelete() {
   selectedUrls.clear(); renderGrid();
 }
 
+// ─── BULK ACTIONS ────────────────────────────────────────────────
+function bulkPin() {
+  if (!selectedUrls.size) return;
+  const s = getSettings(); s.pinned = s.pinned || [];
+  const allPinned = selectedUrls.size > 0 && [...selectedUrls].every(u => s.pinned.includes(u));
+  if (allPinned) { s.pinned = s.pinned.filter(u => !selectedUrls.has(u)); showToast('הוסר נעץ מ-' + selectedUrls.size + ' פריטים'); }
+  else { s.pinned = [...new Set([...s.pinned, ...selectedUrls])]; showToast('📌 נעוץ ' + selectedUrls.size + ' פריטים'); }
+  saveSettings(s); renderGrid();
+}
+
+function bulkCatModal() {
+  if (!selectedUrls.size) return;
+  const s = getSettings(); const cats = s.catList || [];
+  if (!cats.length) { showToast('הוסיפי קטגוריות תחילה בלשונית קטגוריות'); return; }
+  const cat = prompt('קטגוריה עבור ' + selectedUrls.size + ' פריטים נבחרים:
+' + cats.join(', '));
+  if (!cat) return;
+  if (!s.cats) s.cats = {};
+  selectedUrls.forEach(u => { s.cats[u] = cat; });
+  saveSettings(s); showToast('🏷️ קטגוריה  + cat +  הוגדרה ל-' + selectedUrls.size + ' פריטים'); renderGrid();
+}
+
+function bulkRotate() {
+  if (!selectedUrls.size) return;
+  const s = getSettings(); if (!s.rotations) s.rotations = {};
+  selectedUrls.forEach(u => { s.rotations[u] = ((s.rotations[u] || 0) + 90) % 360; });
+  saveSettings(s); showToast('🔄 סובבו ' + selectedUrls.size + ' פריטים'); renderGrid();
+}
+
+function bulkMoveToTop() {
+  if (!selectedUrls.size) return;
+  const selected = allImages.filter(i => selectedUrls.has(i.u));
+  const rest = allImages.filter(i => !selectedUrls.has(i.u));
+  allImages = [...selected, ...rest];
+  const s = getSettings(); s.order = allImages.map(i => i.u); saveSettings(s);
+  showToast('⬆️ ' + selectedUrls.size + ' פריטים הוזזו לראש'); renderGrid();
+}
+
 function renderGrid() {
   const s = getSettings();
   const hiddenSet = new Set(s.hidden||[]);
@@ -484,9 +546,10 @@ function renderGrid() {
     }
     const thumbSrc = adminThumb(img.u, isVid);
     const altTxt = generateAltText(img, catMap);
+    const rotation = (s.rotations||{})[img.u] || 0;
     div.innerHTML=`
       ${isVid ? '<span class="video-badge">▶</span>' : ''}
-      <img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async"/>
+      <img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async" style="transform:rotate(${rotation}deg);transition:transform .3s;"/>
       ${pinnedSet.has(img.u)?'<span class="pin-badge">📌</span>':''}
       ${hiddenSet.has(img.u)?'<span class="hidden-badge">🚫</span>':''}
       <div class="card-overlay">
@@ -632,6 +695,9 @@ function switchTab(name,el){
 }
 
 // ─── ANALYTICS ───────────────────────────────────────────────────
+const GA4_CLIENT_ID = '243162243510-kdto966o5fofbu62rbvfegvstp9nlmnm.apps.googleusercontent.com';
+const GA4_PROPERTY  = '536415544';
+let ga4Token = localStorage.getItem('ga4_token') || null;
 let analyticsPeriod = 7;
 
 function setPeriod(days, btn) {
@@ -641,84 +707,237 @@ function setPeriod(days, btn) {
   initAnalytics();
 }
 
-function initAnalytics() {
-  const days = analyticsPeriod || 7;
-  const cutoff = Date.now() - days * 86400000;
-  const todayCutoff = Date.now() - 86400000;
+// ── OAuth connect ──────────────────────────────────────
+function ga4Connect() {
+  const scope = 'https://www.googleapis.com/auth/analytics.readonly';
+  const redirect = encodeURIComponent(location.href.split('?')[0].split('#')[0]);
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GA4_CLIENT_ID}&redirect_uri=${redirect}&response_type=token&scope=${encodeURIComponent(scope)}&prompt=select_account`;
+  window.location.href = url;
+}
 
-  let visits = [];
-  try { visits = JSON.parse(localStorage.getItem('yd_visits') || '[]'); } catch(e) {}
-  const filtered = visits.filter(v => v.t > cutoff);
-  const todayVisits = visits.filter(v => v.t > todayCutoff).length;
-
-  const igStats = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
-  const totalIgLikes = Object.values(igStats).reduce((a, b) => a + (b.likes || 0), 0);
-  const reviews = JSON.parse(localStorage.getItem('site_reviews') || '[]');
-
-  // Big simple numbers
-  const kpis = [
-    { icon: '👁️', value: filtered.length, label: 'ביקורים בתקופה' },
-    { icon: '📅', value: todayVisits, label: 'ביקורים היום' },
-    { icon: '❤️', value: totalIgLikes.toLocaleString(), label: 'לייקים באינסטגרם' },
-    { icon: '⭐', value: reviews.length, label: 'ביקורות באתר' },
-  ];
-
-  document.getElementById('kpi-cards').innerHTML = kpis.map(k => `
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 12px;text-align:center;">
-      <div style="font-size:2rem">${k.icon}</div>
-      <div style="font-size:1.8rem;font-weight:800;color:var(--blush);margin:6px 0">${k.value}</div>
-      <div style="font-size:.8rem;color:var(--muted)">${k.label}</div>
-    </div>`).join('');
-
-  // Daily visits chart
-  const buckets = {};
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 86400000);
-    buckets[`${d.getDate()}/${d.getMonth()+1}`] = 0;
+// Handle token from OAuth redirect
+(function() {
+  const hash = window.location.hash;
+  if (hash.includes('access_token=')) {
+    const params = new URLSearchParams(hash.substring(1));
+    const token = params.get('access_token');
+    const exp = parseInt(params.get('expires_in') || '3600');
+    if (token) {
+      localStorage.setItem('ga4_token', token);
+      localStorage.setItem('ga4_token_exp', Date.now() + exp * 1000);
+      ga4Token = token;
+      history.replaceState(null, '', location.pathname);
+    }
   }
-  filtered.forEach(v => {
-    const d = new Date(v.t);
-    const key = `${d.getDate()}/${d.getMonth()+1}`;
-    if (key in buckets) buckets[key]++;
+  // Check expiry
+  const exp = parseInt(localStorage.getItem('ga4_token_exp') || '0');
+  if (Date.now() > exp) { localStorage.removeItem('ga4_token'); localStorage.removeItem('ga4_token_exp'); ga4Token = null; }
+})();
+
+// ── GA4 Data API call ─────────────────────────────────
+async function ga4Report(dimensions, metrics, dateRange, orderBy) {
+  const body = {
+    dateRanges: [dateRange],
+    dimensions: dimensions.map(n => ({ name: n })),
+    metrics: metrics.map(n => ({ name: n })),
+    limit: 10
+  };
+  if (orderBy) body.orderBys = orderBy;
+  const res = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY}:runReport`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${ga4Token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
   });
+  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || res.status); }
+  return res.json();
+}
+
+function ga4DateRange(days) {
+  const end = new Date(); const start = new Date(Date.now() - days * 86400000);
+  const fmt = d => d.toISOString().split('T')[0];
+  return { startDate: fmt(start), endDate: fmt(end) };
+}
+
+// ── Main init ─────────────────────────────────────────
+async function initAnalytics() {
+  const btn = document.getElementById('ga4-connect-btn');
+  const status = document.getElementById('ga4-status');
+
+  if (!ga4Token) {
+    btn.style.display = 'inline-block';
+    status.textContent = '⚠️ לא מחובר — לחץ "התחבר" כדי לראות נתוני אמת';
+    renderLocalFallback();
+    return;
+  }
+
+  btn.textContent = '✅ מחובר לגוגל';
+  btn.style.background = '#2d7a4f';
+  status.textContent = '⏳ טוען נתונים...';
+
+  try {
+    const days = analyticsPeriod;
+    const dr = ga4DateRange(days);
+
+    // Run all reports in parallel
+    const [overviewRes, sourceRes, deviceRes, cityRes, demoRes, pageRes, dailyRes] = await Promise.all([
+      ga4Report(['date'], ['sessions','activeUsers','newUsers','bounceRate','averageSessionDuration'], dr,
+        [{ dimension: { dimensionName: 'date' }, desc: false }]),
+      ga4Report(['sessionDefaultChannelGroup'], ['sessions'], dr,
+        [{ metric: { metricName: 'sessions' }, desc: true }]),
+      ga4Report(['deviceCategory'], ['sessions'], dr,
+        [{ metric: { metricName: 'sessions' }, desc: true }]),
+      ga4Report(['city'], ['sessions'], dr,
+        [{ metric: { metricName: 'sessions' }, desc: true }]),
+      ga4Report(['userAgeBracket','userGender'], ['activeUsers'], dr,
+        [{ metric: { metricName: 'activeUsers' }, desc: true }]),
+      ga4Report(['pagePath'], ['screenPageViews'], dr,
+        [{ metric: { metricName: 'screenPageViews' }, desc: true }]),
+      ga4Report(['date'], ['sessions'], dr,
+        [{ dimension: { dimensionName: 'date' }, desc: false }])
+    ]);
+
+    status.textContent = `✅ נתונים עדכניים — ${days} הימים האחרונים`;
+
+    // KPIs from overview
+    let totalSessions=0, totalUsers=0, newUsers=0, avgBounce=0, avgDur=0, count=0;
+    (overviewRes.rows||[]).forEach(r => {
+      totalSessions += parseInt(r.metricValues[0].value||0);
+      totalUsers    += parseInt(r.metricValues[1].value||0);
+      newUsers      += parseInt(r.metricValues[2].value||0);
+      avgBounce     += parseFloat(r.metricValues[3].value||0);
+      avgDur        += parseFloat(r.metricValues[4].value||0);
+      count++;
+    });
+    avgBounce = count ? Math.round(avgBounce/count*100) : 0;
+    const avgDurSec = count ? Math.round(avgDur/count) : 0;
+    const durStr = `${Math.floor(avgDurSec/60)}:${String(avgDurSec%60).padStart(2,'0')}`;
+
+    renderKpis([
+      { icon:'👥', value: totalUsers.toLocaleString(), label:'משתמשים ייחודיים' },
+      { icon:'📊', value: totalSessions.toLocaleString(), label:'סשנים' },
+      { icon:'🆕', value: newUsers.toLocaleString(), label:'משתמשים חדשים' },
+      { icon:'↩️', value: avgBounce+'%', label:'שיעור נטישה' },
+      { icon:'⏱️', value: durStr, label:'זמן ממוצע' },
+      { icon:'📈', value: Math.round(newUsers/Math.max(totalUsers,1)*100)+'%', label:'% חדשים' },
+    ]);
+
+    // Daily chart
+    const labels=[], vals=[];
+    (dailyRes.rows||[]).forEach(r => {
+      const d = r.dimensionValues[0].value; // YYYYMMDD
+      labels.push(`${d.slice(6)}/${d.slice(4,6)}`);
+      vals.push(parseInt(r.metricValues[0].value||0));
+    });
+    renderBarChart('visits-chart', labels, vals);
+
+    // Traffic sources — Hebrew labels
+    const srcHe = { 'Organic Search':'🔍 חיפוש גוגל', 'Direct':'🔗 ישיר', 'Organic Social':'📱 סושיאל', 'Referral':'🌐 אתרים אחרים', 'Email':'📧 אימייל', 'Paid Search':'💰 פרסום', 'Paid Social':'💰 סושיאל ממומן', 'Unassigned':'❓ לא ידוע' };
+    const srcObj = {};
+    let srcTotal = 0;
+    (sourceRes.rows||[]).forEach(r => {
+      const ch = r.dimensionValues[0].value;
+      const v = parseInt(r.metricValues[0].value||0);
+      srcObj[srcHe[ch]||('🌐 '+ch)] = v;
+      srcTotal += v;
+    });
+    renderBars('sources-list', srcObj, srcTotal, 'אין נתונים');
+
+    // Devices
+    const devHe = { 'mobile':'📱 נייד', 'desktop':'💻 מחשב', 'tablet':'📲 טאבלט' };
+    const devObj = {}; let devTotal=0;
+    (deviceRes.rows||[]).forEach(r => {
+      const d = r.dimensionValues[0].value;
+      const v = parseInt(r.metricValues[0].value||0);
+      devObj[devHe[d]||d] = v; devTotal+=v;
+    });
+    renderBars('devices-list', devObj, devTotal, 'אין נתונים');
+
+    // Cities
+    const cityObj = {}; let cityTotal=0;
+    (cityRes.rows||[]).forEach(r => {
+      const c = r.dimensionValues[0].value;
+      if (c && c !== '(not set)') { cityObj['📍 '+c] = parseInt(r.metricValues[0].value||0); cityTotal+=parseInt(r.metricValues[0].value||0); }
+    });
+    renderBars('cities-list', cityObj, cityTotal, 'אין נתוני ערים');
+
+    // Demographics (age + gender)
+    const demoObj = {}; let demoTotal=0;
+    (demoRes.rows||[]).forEach(r => {
+      const age = r.dimensionValues[0].value;
+      const gen = r.dimensionValues[1].value === 'male' ? '♂️ גבר' : r.dimensionValues[1].value === 'female' ? '♀️ אישה' : '?';
+      const v = parseInt(r.metricValues[0].value||0);
+      if (age && age !== '(not set)') { demoObj[`${gen} ${age}`] = v; demoTotal+=v; }
+    });
+    if (Object.keys(demoObj).length)
+      renderBars('demographics-list', demoObj, demoTotal, 'הפעל דמוגרפיה ב-GA4');
+    else
+      document.getElementById('demographics-list').innerHTML = '<p style="font-size:.75rem;color:var(--muted)">הפעל דוחות דמוגרפיה ב-GA4:<br><a href="https://analytics.google.com/analytics/web/#/p536415544/admin/business-objectives" target="_blank" style="color:var(--blush)">הגדרות → איסוף נתונים</a></p>';
+
+    // Pages
+    const pagesObj = {}; let pagesTotal=0;
+    (pageRes.rows||[]).forEach(r => {
+      const p = r.dimensionValues[0].value.replace(/\/$/, '') || '/';
+      const v = parseInt(r.metricValues[0].value||0);
+      pagesObj['📄 '+(p.length>25?p.substring(0,25)+'…':p)] = v; pagesTotal+=v;
+    });
+    renderBars('pages-list', pagesObj, pagesTotal, 'אין נתונים');
+
+    // Hide keywords note (Search Console data not in GA4 Data API)
+    document.getElementById('keywords-list').innerHTML = '<p style="font-size:.75rem;color:var(--muted)">מילות חיפוש זמינות ב-<a href="https://search.google.com/search-console" target="_blank" style="color:var(--blush)">Google Search Console</a></p>';
+
+  } catch(err) {
+    console.error('GA4 error:', err);
+    if (err.message.includes('401') || err.message.includes('403')) {
+      localStorage.removeItem('ga4_token');
+      ga4Token = null;
+      status.innerHTML = '⚠️ הטוקן פג תוקף — <a href="#" onclick="ga4Connect()" style="color:var(--blush)">התחבר שוב</a>';
+      btn.textContent = '🔗 התחבר לגוגל אנליטיקס';
+      btn.style.background = 'var(--blush)';
+    } else {
+      status.textContent = '❌ שגיאה: ' + err.message;
+    }
+    renderLocalFallback();
+  }
+}
+
+function renderLocalFallback() {
+  let visits = [];
+  try { visits = JSON.parse(localStorage.getItem('yd_visits')||'[]'); } catch(e){}
+  const days = analyticsPeriod;
+  const cutoff = Date.now() - days*86400000;
+  const filtered = visits.filter(v=>v.t>cutoff);
+  const reviews = JSON.parse(localStorage.getItem('site_reviews')||'[]');
+
+  renderKpis([
+    { icon:'👁️', value: filtered.length, label:`ביקורים (${days} ימים)` },
+    { icon:'📅', value: visits.filter(v=>v.t>Date.now()-86400000).length, label:'היום' },
+    { icon:'⭐', value: reviews.length, label:'ביקורות' },
+    { icon:'🔗', value:'–', label:'חבר GA4 לנתונים אמיתיים' },
+    { icon:'🌍', value:'–', label:'ערים' },
+    { icon:'👤', value:'–', label:'גיל/מגדר' },
+  ]);
+
+  const buckets={}; for(let i=days-1;i>=0;i--){const d=new Date(Date.now()-i*86400000);buckets[`${d.getDate()}/${d.getMonth()+1}`]=0;}
+  filtered.forEach(v=>{const d=new Date(v.t);const k=`${d.getDate()}/${d.getMonth()+1}`;if(k in buckets)buckets[k]++;});
   renderBarChart('visits-chart', Object.keys(buckets), Object.values(buckets));
 
-  // מקורות תנועה
-  const srcLabels = { 'Instagram': '📸 אינסטגרם', 'Google': '🔍 גוגל', 'Direct': '🔗 הקליד ישירות', 'WhatsApp': '💬 וואצאפ', 'Facebook': '👤 פייסבוק', 'TikTok': '🎵 טיקטוק' };
-  const srcCount = {};
-  filtered.forEach(v => {
-    const label = srcLabels[v.src] || ('🌐 ' + (v.src || 'אחר'));
-    srcCount[label] = (srcCount[label] || 0) + 1;
-  });
-  renderBars('sources-list', srcCount, filtered.length, 'אין נתונים עדיין — הנתונים יצטברו מביקורים חדשים');
+  const srcHe={'Instagram':'📸 אינסטגרם','Google':'🔍 גוגל','Direct':'🔗 ישיר','WhatsApp':'💬 וואצאפ','Facebook':'👤 פייסבוק','TikTok':'🎵 טיקטוק'};
+  const srcObj={}; filtered.forEach(v=>{const l=srcHe[v.src]||('🌐 '+(v.src||'אחר'));srcObj[l]=(srcObj[l]||0)+1;});
+  renderBars('sources-list', srcObj, filtered.length, 'חבר GA4 לנתונים אמיתיים');
+  renderBars('devices-list', {}, 0, 'חבר GA4');
+  renderBars('cities-list', {}, 0, 'חבר GA4 לראות ערים');
+  document.getElementById('demographics-list').innerHTML='<p style="font-size:.75rem;color:var(--muted)">חבר GA4 לנתוני גיל ומגדר</p>';
+  document.getElementById('pages-list').innerHTML='<p style="font-size:.75rem;color:var(--muted)">חבר GA4 לנתוני עמודים</p>';
+  document.getElementById('keywords-list').innerHTML='<p style="font-size:.75rem;color:var(--muted)">זמין ב-<a href="https://search.google.com/search-console" target="_blank" style="color:var(--blush)">Search Console</a></p>';
+}
 
-  // מכשירים
-  const devLabels = { 'Mobile': '📱 נייד', 'Desktop': '💻 מחשב' };
-  const devCount = {};
-  filtered.forEach(v => {
-    const label = devLabels[v.device] || v.device || 'לא ידוע';
-    devCount[label] = (devCount[label] || 0) + 1;
-  });
-  renderBars('devices-list', devCount, filtered.length, 'אין נתונים עדיין');
-
-  // פוסטים פופולריים באינסטגרם
-  const igArr = Object.entries(igStats)
-    .map(([id, s]) => ({ id, likes: s.likes || 0, comments: s.comments_count || 0 }))
-    .sort((a, b) => (b.likes + b.comments) - (a.likes + a.comments))
-    .slice(0, 5);
-  document.getElementById('ig-engagement').innerHTML = igArr.length
-    ? `<div style="font-size:.75rem;color:var(--muted);margin-bottom:8px">5 הפוסטים עם הכי הרבה אינטראקציות</div>` +
-      igArr.map((p, i) => `
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
-          <span style="font-size:1.1rem;font-weight:700;color:var(--blush);width:20px">${i+1}</span>
-          <div style="flex:1">
-            <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;">
-              <div style="height:6px;width:${Math.round(((p.likes+p.comments)/(igArr[0].likes+igArr[0].comments+1))*100)}%;background:var(--blush);border-radius:3px;"></div>
-            </div>
-          </div>
-          <span style="font-size:.78rem;color:var(--text)">❤️ ${p.likes} &nbsp; 💬 ${p.comments}</span>
-        </div>`).join('')
-    : '<p style="font-size:.8rem;color:var(--muted)">טוען נתוני אינסטגרם...</p>';
+function renderKpis(kpis) {
+  document.getElementById('kpi-cards').innerHTML = kpis.map(k=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;">
+      <div style="font-size:1.4rem">${k.icon}</div>
+      <div style="font-size:1.3rem;font-weight:800;color:var(--blush);margin:4px 0">${k.value}</div>
+      <div style="font-size:.7rem;color:var(--muted)">${k.label}</div>
+    </div>`).join('');
 }
 
 function renderBarChart(canvasId, labels, values) {
@@ -736,42 +955,31 @@ function renderBarChart(canvasId, labels, values) {
     const x = 10 + i * (barW + 2);
     const y = H - 24 - barH;
     ctx.fillStyle = v > 0 ? '#C49A6C' : 'rgba(255,255,255,.06)';
-    ctx.beginPath();
-    ctx.roundRect(x, y, barW, Math.max(barH, 2), 2);
-    ctx.fill();
-    if (v > 0 && barW >= 14) {
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 9px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(v, x + barW/2, y - 2);
-    }
-    if (i % Math.ceil(labels.length / 7) === 0) {
-      ctx.fillStyle = '#666';
-      ctx.font = '9px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(labels[i], x + barW/2, H - 6);
-    }
+    ctx.beginPath(); ctx.roundRect(x, y, barW, Math.max(barH, 2), 2); ctx.fill();
+    if (v > 0 && barW >= 14) { ctx.fillStyle='#fff'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center'; ctx.fillText(v, x+barW/2, y-2); }
+    if (i % Math.ceil(labels.length/7) === 0) { ctx.fillStyle='#666'; ctx.font='9px sans-serif'; ctx.textAlign='center'; ctx.fillText(labels[i], x+barW/2, H-6); }
   });
 }
 
 function renderBars(elId, countObj, total, emptyMsg) {
   const el = document.getElementById(elId);
   if (!el) return;
-  const sorted = Object.entries(countObj).sort((a, b) => b[1] - a[1]).slice(0, 6);
-  if (!sorted.length) { el.innerHTML = `<p style="font-size:.8rem;color:var(--muted)">${emptyMsg}</p>`; return; }
-  el.innerHTML = sorted.map(([label, count]) => {
-    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-    return `<div style="margin-bottom:10px;">
-      <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+  const sorted = Object.entries(countObj).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  if (!sorted.length) { el.innerHTML=`<p style="font-size:.75rem;color:var(--muted)">${emptyMsg}</p>`; return; }
+  el.innerHTML = sorted.map(([label,count])=>{
+    const pct = total>0 ? Math.round((count/total)*100) : 0;
+    return `<div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:3px;">
         <span style="color:var(--text)">${label}</span>
         <span style="color:var(--blush);font-weight:600">${pct}%</span>
       </div>
-      <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;">
-        <div style="height:8px;width:${pct}%;background:var(--blush);border-radius:4px;transition:width .5s;"></div>
+      <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;">
+        <div style="height:6px;width:${pct}%;background:var(--blush);border-radius:3px;"></div>
       </div>
     </div>`;
   }).join('');
 }
+
 
 // ─── TOAST ───────────────────────────────────────────────────────
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
