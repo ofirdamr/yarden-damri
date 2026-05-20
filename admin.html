@@ -504,8 +504,7 @@ function bulkCatModal() {
   if (!selectedUrls.size) return;
   const s = getSettings(); const cats = s.catList || [];
   if (!cats.length) { showToast('הוסיפי קטגוריות תחילה בלשונית קטגוריות'); return; }
-  const cat = prompt('קטגוריה עבור ' + selectedUrls.size + ' פריטים נבחרים:
-' + cats.join(', '));
+  const cat = prompt('בחר קטגוריה עבור ' + selectedUrls.size + ' פריטים. אפשרויות: ' + cats.join(', '));
   if (!cat) return;
   if (!s.cats) s.cats = {};
   selectedUrls.forEach(u => { s.cats[u] = cat; });
