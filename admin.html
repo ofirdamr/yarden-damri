@@ -102,10 +102,13 @@
   <div class="login-box">
     <h1>🔐 ניהול גלריה</h1>
     <p>ירדן דמרי | כניסה לממשק הניהול</p>
-    <input type="password" id="pwd-input" placeholder="סיסמה..." />
-    <button onclick="tryLogin()">כניסה</button>
+    <div style="position:relative;width:100%;">
+      <input type="password" id="pwd-input" placeholder="סיסמה..." style="padding-left:44px;width:100%;box-sizing:border-box;" />
+      <button type="button" onclick="togglePwdVis()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--muted);" id="pwd-eye">👁️</button>
+    </div>
+    <button onclick="tryLogin()" style="margin-top:8px;">כניסה</button>
     <button class="outline" onclick="showReset()">שכחתי סיסמה</button>
-    <p class="login-error" id="login-err">סיסמה שגויה</p>
+    <p class="login-error" id="login-err" style="display:none;">❌ סיסמה שגויה. נסה שוב.</p>
   </div>
 </div>
 
@@ -296,14 +299,25 @@ function getPwd() { return localStorage.getItem('admin_pwd_v2') || DEFAULT_PWD; 
 
 function hashPwd(pwd) { return pwd; }
 
+function togglePwdVis() {
+  const inp = document.getElementById('pwd-input');
+  const eye = document.getElementById('pwd-eye');
+  if (inp.type === 'password') { inp.type = 'text'; eye.textContent = '🙈'; }
+  else { inp.type = 'password'; eye.textContent = '👁️'; }
+}
+
 function tryLogin() {
-  const input = document.getElementById('pwd-input').value;
+  const input = document.getElementById('pwd-input').value.trim();
+  const errEl = document.getElementById('login-err');
+  errEl.style.display = 'none';
+  if (!input) { errEl.textContent = '❌ נא להזין סיסמה'; errEl.style.display = 'block'; return; }
   if (input === getPwd()) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-main').style.display = 'block';
-    initAdmin();
+    try { initAdmin(); } catch(e) { console.error('initAdmin error:', e); alert('שגיאה בטעינה: ' + e.message); }
   } else {
-    document.getElementById('login-err').style.display = 'block';
+    errEl.textContent = '❌ סיסמה שגויה. הסיסמה הדיפולטית היא: makeup2026';
+    errEl.style.display = 'block';
   }
 }
 document.getElementById('pwd-input').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
@@ -715,8 +729,8 @@ function ga4Connect() {
   window.location.href = url;
 }
 
-// Handle token from OAuth redirect
-(function() {
+// Handle token from OAuth redirect (safe - wrapped in try/catch)
+try {
   const hash = window.location.hash;
   if (hash.includes('access_token=')) {
     const params = new URLSearchParams(hash.substring(1));
@@ -729,10 +743,9 @@ function ga4Connect() {
       history.replaceState(null, '', location.pathname);
     }
   }
-  // Check expiry
   const exp = parseInt(localStorage.getItem('ga4_token_exp') || '0');
   if (Date.now() > exp) { localStorage.removeItem('ga4_token'); localStorage.removeItem('ga4_token_exp'); ga4Token = null; }
-})();
+} catch(e) { console.warn('OAuth init error:', e); }
 
 // ── GA4 Data API call ─────────────────────────────────
 async function ga4Report(dimensions, metrics, dateRange, orderBy) {
