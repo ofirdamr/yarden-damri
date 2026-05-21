@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Disallow: /admin
+
+# Image crawling — allow Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /
+Allow: https://res.cloudinary.com/dfjwxc1cw/
 
 Sitemap: https://yardendamri.co.il/sitemap.xml

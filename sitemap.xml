@@ -1,20 +1,3179 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://yardendamri.co.il/</loc>
-    <lastmod>2025-05-10</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://yardendamri.co.il/"/>
   </url>
-
+  <url>
+    <loc>https://yardendamri.co.il/bride.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/services.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/gallery.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/reviews.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/contact.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/bridal-guide.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/pricing.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yardendamri.co.il/disclaimer.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
   <url>
     <loc>https://yardendamri.co.il/accessibility-statement.html</loc>
-    <lastmod>2025-05-10</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://yardendamri.co.il/gallery.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg</image:loc>
+      <image:title>לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨
+אם גם את חולמת על לוק שירגיש בדיוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779307032/yarden_makeup/yarden_makeup_18081283535147280.jpg</image:loc>
+      <image:title>לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨
+אם גם את חולמת על לוק שירגיש בדיוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779307032/yarden_makeup/yarden_makeup_18097478162143234.jpg</image:loc>
+      <image:title>לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨
+אם גם את חולמת על לוק שירגיש בדיוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779307034/yarden_makeup/yarden_makeup_17909674623407297.jpg</image:loc>
+      <image:title>לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨
+אם גם את חולמת על לוק שירגיש בדיוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050230/yarden_makeup/yarden_makeup_18071074559663632.jpg</image:loc>
+      <image:title>⁨	יש משהו בלוק נקי שתמיד מרגיש נכון ✨
+עדין, קלאסי ופשוט יפה.
 
+אם גם את אוהבת איפור שמרגיש כמו הגרסה </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050231/yarden_makeup/yarden_makeup_17913397584389406.jpg</image:loc>
+      <image:title>⁨	יש משהו בלוק נקי שתמיד מרגיש נכון ✨
+עדין, קלאסי ופשוט יפה.
+
+אם גם את אוהבת איפור שמרגיש כמו הגרסה </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050232/yarden_makeup/yarden_makeup_17860070175691454.jpg</image:loc>
+      <image:title>⁨	יש משהו בלוק נקי שתמיד מרגיש נכון ✨
+עדין, קלאסי ופשוט יפה.
+
+אם גם את אוהבת איפור שמרגיש כמו הגרסה </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg</image:loc>
+      <image:title>⁨	יש משהו בלוק נקי שתמיד מרגיש נכון ✨
+עדין, קלאסי ופשוט יפה.
+
+אם גם את אוהבת איפור שמרגיש כמו הגרסה </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050234/yarden_makeup/yarden_makeup_18359465857225096.jpg</image:loc>
+      <image:title>יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨
+זוהר עדין, גימור נקי וטאץ׳ אופנתי שנותן תחו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050235/yarden_makeup/yarden_makeup_17963724306118155.jpg</image:loc>
+      <image:title>יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨
+זוהר עדין, גימור נקי וטאץ׳ אופנתי שנותן תחו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050236/yarden_makeup/yarden_makeup_18098676005027942.jpg</image:loc>
+      <image:title>יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨
+זוהר עדין, גימור נקי וטאץ׳ אופנתי שנותן תחו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1779050237/yarden_makeup/yarden_makeup_18110517241722013.jpg</image:loc>
+      <image:title>יש לוקים שלא צריכים יותר מדי כדי למשוך את כל תשומת הלב ✨
+זוהר עדין, גימור נקי וטאץ׳ אופנתי שנותן תחו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134461/yarden_makeup/yarden_makeup_18113142562769799.jpg</image:loc>
+      <image:title>אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.
+עמידות, דיוק, וגימור טבעי-יוקרתי שלא יוצא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134463/yarden_makeup/yarden_makeup_17936714931219688.jpg</image:loc>
+      <image:title>אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.
+עמידות, דיוק, וגימור טבעי-יוקרתי שלא יוצא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134464/yarden_makeup/yarden_makeup_18085750199612088.jpg</image:loc>
+      <image:title>אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.
+עמידות, דיוק, וגימור טבעי-יוקרתי שלא יוצא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134466/yarden_makeup/yarden_makeup_18066257132361400.jpg</image:loc>
+      <image:title>אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.
+עמידות, דיוק, וגימור טבעי-יוקרתי שלא יוצא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134467/yarden_makeup/yarden_makeup_18107538146490385.jpg</image:loc>
+      <image:title>⁨	איפרתי את עופרה גוזלן לליכודיאדה באילת ✨
+מראה זוהר, אלגנטי ונוכח – כזה שמצטלם מושלם ונשאר מדויק לא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134469/yarden_makeup/yarden_makeup_17972163857995115.jpg</image:loc>
+      <image:title>יש לוקים שלא נועדו להשתלב — הם נועדו למשוך מבט ❤️
+
+משחק של אדומים, עומק וניקיון בעור,
+עם איזון מדויק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134470/yarden_makeup/yarden_makeup_18438927877138557.jpg</image:loc>
+      <image:title>יש לוקים שלא נועדו להשתלב — הם נועדו למשוך מבט ❤️
+
+משחק של אדומים, עומק וניקיון בעור,
+עם איזון מדויק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134472/yarden_makeup/yarden_makeup_17855000790649300.jpg</image:loc>
+      <image:title>לוק כלה נקי, מדויק וזוהר ✨ 
+
+איפור שמדגיש את היופי שלך — בלי להעמיס 
+ומחזיק איתך כל היום, מהצילומים </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134473/yarden_makeup/yarden_makeup_17970289263029665.jpg</image:loc>
+      <image:title>לוק כלה נקי, מדויק וזוהר ✨ 
+
+איפור שמדגיש את היופי שלך — בלי להעמיס 
+ומחזיק איתך כל היום, מהצילומים </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134475/yarden_makeup/yarden_makeup_18083543753077608.jpg</image:loc>
+      <image:title>מראה כלתי קלאסי, נקי ועל-זמני ✨
+איפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עדינה
+
+מתאים לכלות שאו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134476/yarden_makeup/yarden_makeup_18047656448743041.jpg</image:loc>
+      <image:title>מראה כלתי קלאסי, נקי ועל-זמני ✨
+איפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עדינה
+
+מתאים לכלות שאו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134478/yarden_makeup/yarden_makeup_17877017613568349.jpg</image:loc>
+      <image:title>מראה כלתי קלאסי, נקי ועל-זמני ✨
+איפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עדינה
+
+מתאים לכלות שאו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134481/yarden_makeup/yarden_makeup_18073663340406769.jpg</image:loc>
+      <image:title>⁨	לפני שנסעתי 3 
+מעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה שאני מתגעגעת לעבודה ש</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134482/yarden_makeup/yarden_makeup_18401320069177670.jpg</image:loc>
+      <image:title>⁨	לפני שנסעתי 3 
+מעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה שאני מתגעגעת לעבודה ש</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134484/yarden_makeup/yarden_makeup_18070209767647052.jpg</image:loc>
+      <image:title>⁨	לפני שנסעתי 3 
+מעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה שאני מתגעגעת לעבודה ש</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134485/yarden_makeup/yarden_makeup_18099599461749203.jpg</image:loc>
+      <image:title>לפני שטסתי 2 😍
+הייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש 
+כיף ענקי ואני מתגעגעת לשמוע אותך כל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134487/yarden_makeup/yarden_makeup_18319175497254394.jpg</image:loc>
+      <image:title>לפני שטסתי 2 😍
+הייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש 
+כיף ענקי ואני מתגעגעת לשמוע אותך כל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134488/yarden_makeup/yarden_makeup_18059674982398561.jpg</image:loc>
+      <image:title>לפני שטסתי 2 😍
+הייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש 
+כיף ענקי ואני מתגעגעת לשמוע אותך כל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134490/yarden_makeup/yarden_makeup_18119257351554372.jpg</image:loc>
+      <image:title>לפני שטסתי 2 😍
+הייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש 
+כיף ענקי ואני מתגעגעת לשמוע אותך כל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134491/yarden_makeup/yarden_makeup_17852854302593480.jpg</image:loc>
+      <image:title>🦢🦢🦢
+MUA @yarden_damri_makeup 
+@_sharonstefan 
+@korenmalihe 
+@sharon_nhamani 
+@sharon.bridal 
+
+#כלות2</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134493/yarden_makeup/yarden_makeup_17847468291681336.jpg</image:loc>
+      <image:title>🦢🦢🦢
+MUA @yarden_damri_makeup 
+@_sharonstefan 
+@korenmalihe 
+@sharon_nhamani 
+@sharon.bridal 
+
+#כלות2</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134495/yarden_makeup/yarden_makeup_17897272932246179.jpg</image:loc>
+      <image:title>🦢🦢🦢
+MUA @yarden_damri_makeup 
+@_sharonstefan 
+@korenmalihe 
+@sharon_nhamani 
+@sharon.bridal 
+
+#כלות2</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134496/yarden_makeup/yarden_makeup_17866647147475870.jpg</image:loc>
+      <image:title>🦢🦢🦢
+MUA @yarden_damri_makeup 
+@_sharonstefan 
+@korenmalihe 
+@sharon_nhamani 
+@sharon.bridal 
+
+#כלות2</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134498/yarden_makeup/yarden_makeup_18101816960499992.jpg</image:loc>
+      <image:title>🦢🦢🦢
+MUA @yarden_damri_makeup 
+@_sharonstefan 
+@korenmalihe 
+@sharon_nhamani 
+@sharon.bridal 
+
+#כלות2</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134500/yarden_makeup/yarden_makeup_18115546036547007.jpg</image:loc>
+      <image:title>MUA @yarden_damri_makeup ✨✨
+Hair @korenmalihe 
+@starwgvrl</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134501/yarden_makeup/yarden_makeup_18114900814527163.jpg</image:loc>
+      <image:title>MUA @yarden_damri_makeup ✨✨
+Hair @korenmalihe 
+@starwgvrl</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134503/yarden_makeup/yarden_makeup_18086723618275248.jpg</image:loc>
+      <image:title>MUA @yarden_damri_makeup ✨✨
+Hair @korenmalihe 
+@starwgvrl</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134505/yarden_makeup/yarden_makeup_18057020018367161.jpg</image:loc>
+      <image:title>LIOR ✨✨
+MUA @yarden_damri_makeup 
+@korenmalihe 
+@lior_petito</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134506/yarden_makeup/yarden_makeup_18068366813529570.jpg</image:loc>
+      <image:title>LIOR ✨✨
+MUA @yarden_damri_makeup 
+@korenmalihe 
+@lior_petito</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134508/yarden_makeup/yarden_makeup_18093444875486552.jpg</image:loc>
+      <image:title>LIOR ✨✨
+MUA @yarden_damri_makeup 
+@korenmalihe 
+@lior_petito</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134509/yarden_makeup/yarden_makeup_18028806278784189.jpg</image:loc>
+      <image:title>LIOR ✨✨
+MUA @yarden_damri_makeup 
+@korenmalihe 
+@lior_petito</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134510/yarden_makeup/yarden_makeup_18132425707501657.jpg</image:loc>
+      <image:title>LIOR ✨✨
+MUA @yarden_damri_makeup 
+@korenmalihe 
+@lior_petito</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134512/yarden_makeup/yarden_makeup_18208481125316258.jpg</image:loc>
+      <image:title>איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.
+ושיער שאי אפשר להישאר אדישים כלפיו, תמיד לוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134514/yarden_makeup/yarden_makeup_18184538992360250.jpg</image:loc>
+      <image:title>איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.
+ושיער שאי אפשר להישאר אדישים כלפיו, תמיד לוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134515/yarden_makeup/yarden_makeup_18070904519129535.jpg</image:loc>
+      <image:title>איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.
+ושיער שאי אפשר להישאר אדישים כלפיו, תמיד לוק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134517/yarden_makeup/yarden_makeup_18107937169595688.jpg</image:loc>
+      <image:title>אליז הכלה היפה שלי 
+זכיתי להיות חלק מהיום המרגש שלכם 🩷
+@laguna_elise 
+
+#מאפרתבאילת #מאפרתכלות #איפור</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134519/yarden_makeup/yarden_makeup_17845574352649298.jpg</image:loc>
+      <image:title>אליז הכלה היפה שלי 
+זכיתי להיות חלק מהיום המרגש שלכם 🩷
+@laguna_elise 
+
+#מאפרתבאילת #מאפרתכלות #איפור</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134521/yarden_makeup/yarden_makeup_18416545831143970.jpg</image:loc>
+      <image:title>אליז הכלה היפה שלי 
+זכיתי להיות חלק מהיום המרגש שלכם 🩷
+@laguna_elise 
+
+#מאפרתבאילת #מאפרתכלות #איפור</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134523/yarden_makeup/yarden_makeup_18094863208741117.jpg</image:loc>
+      <image:title>כמה שזה עוצמתי אודם אדום! 
+ואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס לעשות כל פעם אותו דבר</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134524/yarden_makeup/yarden_makeup_18099248878678045.jpg</image:loc>
+      <image:title>כמה שזה עוצמתי אודם אדום! 
+ואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס לעשות כל פעם אותו דבר</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134526/yarden_makeup/yarden_makeup_18192241663338433.jpg</image:loc>
+      <image:title>כמה שזה כיף לצאת מאיזור הנוחות.
+ללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד. 
+קצת רטרו, נגיעות </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134528/yarden_makeup/yarden_makeup_18090406978814702.jpg</image:loc>
+      <image:title>כמה שזה כיף לצאת מאיזור הנוחות.
+ללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד. 
+קצת רטרו, נגיעות </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134529/yarden_makeup/yarden_makeup_18087354422028802.jpg</image:loc>
+      <image:title>כמה שזה כיף לצאת מאיזור הנוחות.
+ללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד. 
+קצת רטרו, נגיעות </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg</image:loc>
+      <image:title>כמה שזה כיף לצאת מאיזור הנוחות.
+ללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד. 
+קצת רטרו, נגיעות </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134533/yarden_makeup/yarden_makeup_18101284834831611.jpg</image:loc>
+      <image:title>RON 🤍
+MAU @yarden_damri_makeup 
+Hair @korenmalihe 
+@ron_kotek 
+
+#איפורשיער #מאפרתבאילת #fashionista</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134534/yarden_makeup/yarden_makeup_17843143494667175.jpg</image:loc>
+      <image:title>RON 🤍
+MAU @yarden_damri_makeup 
+Hair @korenmalihe 
+@ron_kotek 
+
+#איפורשיער #מאפרתבאילת #fashionista</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134536/yarden_makeup/yarden_makeup_18315541324301400.jpg</image:loc>
+      <image:title>RON 🤍
+MAU @yarden_damri_makeup 
+Hair @korenmalihe 
+@ron_kotek 
+
+#איפורשיער #מאפרתבאילת #fashionista</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134538/yarden_makeup/yarden_makeup_18077253407209474.jpg</image:loc>
+      <image:title>@__galor איזה יפה את!!!!!
+MUA @yarden_damri_makeup 
+
+#מאפרתבאילת #איפורמקצועי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134539/yarden_makeup/yarden_makeup_18544459075031721.jpg</image:loc>
+      <image:title>⁨	איפור ללא איפור במראה הכי טבעי ונקי שיש 
+אבל עדיין מאופר והכי חשוב מחמיא! 
+איפור לברית לספיר המהממ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134541/yarden_makeup/yarden_makeup_18270352198305064.jpg</image:loc>
+      <image:title>⁨	איפור ללא איפור במראה הכי טבעי ונקי שיש 
+אבל עדיין מאופר והכי חשוב מחמיא! 
+איפור לברית לספיר המהממ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527606/yarden_makeup/yarden_makeup_17943878376066368.jpg</image:loc>
+      <image:title>Tal 🧡
+@tal_mila 
+
+MUA @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134543/yarden_makeup/yarden_makeup_18085763666078804.jpg</image:loc>
+      <image:title>הלקוחות שלנו הכי יפות שיש !! 
+@korenmalihe 
+MUA @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134545/yarden_makeup/yarden_makeup_18213833419310605.jpg</image:loc>
+      <image:title>הלקוחות שלנו הכי יפות שיש !! 
+@korenmalihe 
+MUA @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134547/yarden_makeup/yarden_makeup_17916083346232511.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134548/yarden_makeup/yarden_makeup_18162284464395521.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134550/yarden_makeup/yarden_makeup_17974217405798563.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134551/yarden_makeup/yarden_makeup_18113640148604880.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134554/yarden_makeup/yarden_makeup_17982792587922790.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134555/yarden_makeup/yarden_makeup_18316800238218788.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134557/yarden_makeup/yarden_makeup_18187670983352798.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134558/yarden_makeup/yarden_makeup_18379779829151733.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134560/yarden_makeup/yarden_makeup_18085182479028640.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134561/yarden_makeup/yarden_makeup_18075226433520784.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134563/yarden_makeup/yarden_makeup_17856496125571153.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134565/yarden_makeup/yarden_makeup_18078329515961047.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134567/yarden_makeup/yarden_makeup_18066947834145040.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134569/yarden_makeup/yarden_makeup_18138510778412661.jpg</image:loc>
+      <image:title>Baku 🇦🇿 2025 
+@damriofir 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134571/yarden_makeup/yarden_makeup_18080499317171461.jpg</image:loc>
+      <image:title>⁨	⁨	לאחרונה אני מאוהבת באיפור על גווני הוורוד 
+זה משהו שבא לי עם החורף 🩷
+מה אתן חושבות על זה? 
+‪‬
+
+#</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134573/yarden_makeup/yarden_makeup_18084391139042604.jpg</image:loc>
+      <image:title>Shelly 🦢🤍
+
+@yarden_damri_makeup 
+@shelly_.s 
+@korenmalihe 
+@sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134575/yarden_makeup/yarden_makeup_18160829446401395.jpg</image:loc>
+      <image:title>Shelly 🦢🤍
+
+@yarden_damri_makeup 
+@shelly_.s 
+@korenmalihe 
+@sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134577/yarden_makeup/yarden_makeup_18109096657717526.jpg</image:loc>
+      <image:title>Shelly 🦢🤍
+
+@yarden_damri_makeup 
+@shelly_.s 
+@korenmalihe 
+@sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134578/yarden_makeup/yarden_makeup_17857669446504662.jpg</image:loc>
+      <image:title>Shelly 🦢🤍
+
+@yarden_damri_makeup 
+@shelly_.s 
+@korenmalihe 
+@sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134580/yarden_makeup/yarden_makeup_18390380635178717.jpg</image:loc>
+      <image:title>Shelly 🦢🤍
+
+@yarden_damri_makeup 
+@shelly_.s 
+@korenmalihe 
+@sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527613/yarden_makeup/yarden_makeup_18077899397239126.jpg</image:loc>
+      <image:title>MAY 👰🏼‍♀️
+
+@yarden_damri_makeup 
+@korenmalihe 
+@maychuli</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134581/yarden_makeup/yarden_makeup_17846996697604514.jpg</image:loc>
+      <image:title>לא רגועה ממנה!! 
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134583/yarden_makeup/yarden_makeup_18096477499646049.jpg</image:loc>
+      <image:title>לא רגועה ממנה!! 
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134585/yarden_makeup/yarden_makeup_17973310709952270.jpg</image:loc>
+      <image:title>לא רגועה ממנה!! 
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134587/yarden_makeup/yarden_makeup_18163505596390829.jpg</image:loc>
+      <image:title>Makeup for hina 
+@galifergan 
+@yarden_damri_makeup 
+
+#מאפרתבאילת #איפורערב #מאפרתמקצועית</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134588/yarden_makeup/yarden_makeup_17979284855776273.jpg</image:loc>
+      <image:title>Makeup for hina 
+@galifergan 
+@yarden_damri_makeup 
+
+#מאפרתבאילת #איפורערב #מאפרתמקצועית</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134590/yarden_makeup/yarden_makeup_18065095100112579.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134591/yarden_makeup/yarden_makeup_18082683695088792.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134593/yarden_makeup/yarden_makeup_18380097424150024.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134594/yarden_makeup/yarden_makeup_17970370295953886.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sharon.bridal @korenmalihe @tslilbass @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527617/yarden_makeup/yarden_makeup_17880029799307061.jpg</image:loc>
+      <image:title>@yarden_damri_makeup 💄
+@shaked_b22 
+
+#מאפרתבאילת #מאפרת_מקצועית</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134596/yarden_makeup/yarden_makeup_18066760163370790.jpg</image:loc>
+      <image:title>LIAN 🦢
+
+@yarden_damri_makeup 
+@bartzanani_hair 
+@lianyoseff 
+@yardenderhi @byarden_dresses</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527459/yarden_makeup/yarden_makeup_18081898010071597.jpg</image:loc>
+      <image:title>@yifatmarziano ❤️
+@yarden_damri_makeup 
+
+#איפורערב #מאפרתמקצועית #מאפרתבאילת</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134598/yarden_makeup/yarden_makeup_17916638037191779.jpg</image:loc>
+      <image:title>Obsessed 🖤
+
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup 
+
+#paris #stayl #makeup #איפורמקצועי </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134599/yarden_makeup/yarden_makeup_17970353777799066.jpg</image:loc>
+      <image:title>Obsessed 🖤
+
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup 
+
+#paris #stayl #makeup #איפורמקצועי </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134601/yarden_makeup/yarden_makeup_18002242286668966.jpg</image:loc>
+      <image:title>Obsessed 🖤
+
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup 
+
+#paris #stayl #makeup #איפורמקצועי </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134603/yarden_makeup/yarden_makeup_18043787870444529.jpg</image:loc>
+      <image:title>Obsessed 🖤
+
+@chaya_hartung 
+@korenmalihe 
+@yarden_damri_makeup 
+
+#paris #stayl #makeup #איפורמקצועי </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134604/yarden_makeup/yarden_makeup_18426234625111239.jpg</image:loc>
+      <image:title>Raz 🩷
+@raz_turgeman_ 
+
+#מאפרתבאילת #מאפרתמקצועית #איפור #איפורטבעי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134606/yarden_makeup/yarden_makeup_18298442599271312.jpg</image:loc>
+      <image:title>Raz 🩷
+@raz_turgeman_ 
+
+#מאפרתבאילת #מאפרתמקצועית #איפור #איפורטבעי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134607/yarden_makeup/yarden_makeup_18098408797653834.jpg</image:loc>
+      <image:title>כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תודה שבחרת בי להיות חלק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134609/yarden_makeup/yarden_makeup_18079027163096517.jpg</image:loc>
+      <image:title>כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תודה שבחרת בי להיות חלק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134611/yarden_makeup/yarden_makeup_18045091307656647.jpg</image:loc>
+      <image:title>כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תודה שבחרת בי להיות חלק</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134612/yarden_makeup/yarden_makeup_18094300474736832.jpg</image:loc>
+      <image:title>חג שמח ושנה טובה 🍯🍏
+משפחה שלי ❤️
+@damriofir</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134614/yarden_makeup/yarden_makeup_18051403415639956.jpg</image:loc>
+      <image:title>חג שמח ושנה טובה 🍯🍏
+משפחה שלי ❤️
+@damriofir</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134616/yarden_makeup/yarden_makeup_18104486080523110.jpg</image:loc>
+      <image:title>Anat 💍
+
+@yarden_damri_makeup 
+@korenmalihe 
+@sharon.bridal 
+@anatnassi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134618/yarden_makeup/yarden_makeup_18131214016460111.jpg</image:loc>
+      <image:title>🖤🖤🖤
+@yarden_damri_makeup 
+@korenmalihe 
+
+#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת #מאפרתבדרום #makeupa</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134619/yarden_makeup/yarden_makeup_17947853832042203.jpg</image:loc>
+      <image:title>🖤🖤🖤
+@yarden_damri_makeup 
+@korenmalihe 
+
+#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת #מאפרתבדרום #makeupa</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134621/yarden_makeup/yarden_makeup_17982022130903846.jpg</image:loc>
+      <image:title>🖤🖤🖤
+@yarden_damri_makeup 
+@korenmalihe 
+
+#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת #מאפרתבדרום #makeupa</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134623/yarden_makeup/yarden_makeup_18089383435836495.jpg</image:loc>
+      <image:title>🖤🖤🖤
+@yarden_damri_makeup 
+@korenmalihe 
+
+#איפורמקצועי #מאפרתמקצועית #מאפרתבאילת #מאפרתבדרום #makeupa</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134624/yarden_makeup/yarden_makeup_18078205039799250.jpg</image:loc>
+      <image:title>מתוך צילומי תדמית @valeriya.astafyeva 
+סטיילינג @inbalv.styling 
+צלמת @liranyohay_photography אפשר ל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134626/yarden_makeup/yarden_makeup_17947054785043173.jpg</image:loc>
+      <image:title>מתוך צילומי תדמית @valeriya.astafyeva 
+סטיילינג @inbalv.styling 
+צלמת @liranyohay_photography אפשר ל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134628/yarden_makeup/yarden_makeup_18054652661187695.jpg</image:loc>
+      <image:title>⁨	המצלמה פשוט אוהבת אותך!! 
+‪@yanashtein_‬ ‪@korenmalihe‬‪@yarden_damri_makeup‬keup⁩
+@natibenmargi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134630/yarden_makeup/yarden_makeup_18064537163032821.jpg</image:loc>
+      <image:title>⁨	המצלמה פשוט אוהבת אותך!! 
+‪@yanashtein_‬ ‪@korenmalihe‬‪@yarden_damri_makeup‬keup⁩
+@natibenmargi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134632/yarden_makeup/yarden_makeup_17845081647554043.jpg</image:loc>
+      <image:title>⁨	המצלמה פשוט אוהבת אותך!! 
+‪@yanashtein_‬ ‪@korenmalihe‬‪@yarden_damri_makeup‬keup⁩
+@natibenmargi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134634/yarden_makeup/yarden_makeup_18074521808109339.jpg</image:loc>
+      <image:title>For @tictaceilat 
+@valeriya.astafyeva 🦢
+@yarden_damri_makeup 
+@valeria__vision 
+@photographer_eilat </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134635/yarden_makeup/yarden_makeup_18095806135643631.jpg</image:loc>
+      <image:title>For @tictaceilat 
+@valeriya.astafyeva 🦢
+@yarden_damri_makeup 
+@valeria__vision 
+@photographer_eilat </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134636/yarden_makeup/yarden_makeup_17861063388468102.jpg</image:loc>
+      <image:title>For @tictaceilat 
+@valeriya.astafyeva 🦢
+@yarden_damri_makeup 
+@valeria__vision 
+@photographer_eilat </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527469/yarden_makeup/yarden_makeup_17912696106193072.jpg</image:loc>
+      <image:title>MAY ❤️
+
+@may.el25 
+
+#איפורעדין #איפורערב #מאפרתבאילת #מאפרתמקצועית</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134638/yarden_makeup/yarden_makeup_18281915932257730.jpg</image:loc>
+      <image:title>⁨	שיר הכלה המתוקה שלי 
+ביום הכי מאושר שלה 💍
+
+איפור ‪@yarden_damri_makeup‬ 
+שיער ‪@korenmalihe‬he 
+שמ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134641/yarden_makeup/yarden_makeup_18020409782535476.jpg</image:loc>
+      <image:title>⁨	שיר הכלה המתוקה שלי 
+ביום הכי מאושר שלה 💍
+
+איפור ‪@yarden_damri_makeup‬ 
+שיער ‪@korenmalihe‬he 
+שמ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134642/yarden_makeup/yarden_makeup_18049764326237517.jpg</image:loc>
+      <image:title>⁨	שיר הכלה המתוקה שלי 
+ביום הכי מאושר שלה 💍
+
+איפור ‪@yarden_damri_makeup‬ 
+שיער ‪@korenmalihe‬he 
+שמ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134644/yarden_makeup/yarden_makeup_18135511204391074.jpg</image:loc>
+      <image:title>⁨	שיר הכלה המתוקה שלי 
+ביום הכי מאושר שלה 💍
+
+איפור ‪@yarden_damri_makeup‬ 
+שיער ‪@korenmalihe‬he 
+שמ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134645/yarden_makeup/yarden_makeup_18516273853045851.jpg</image:loc>
+      <image:title>⁨	שיר הכלה המתוקה שלי 
+ביום הכי מאושר שלה 💍
+
+איפור ‪@yarden_damri_makeup‬ 
+שיער ‪@korenmalihe‬he 
+שמ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134647/yarden_makeup/yarden_makeup_18094007473713241.jpg</image:loc>
+      <image:title>TITI FOR @bebyshufersal 🌟
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@titiayenew</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134649/yarden_makeup/yarden_makeup_18075710626813897.jpg</image:loc>
+      <image:title>TITI FOR @bebyshufersal 🌟
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@titiayenew</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134650/yarden_makeup/yarden_makeup_17876897946384117.jpg</image:loc>
+      <image:title>TITI FOR @bebyshufersal 🌟
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@titiayenew</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134651/yarden_makeup/yarden_makeup_18373045861181385.jpg</image:loc>
+      <image:title>TITI FOR @bebyshufersal 🌟
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@titiayenew</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134654/yarden_makeup/yarden_makeup_18081401650709583.jpg</image:loc>
+      <image:title>מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! 
+
+@korenmalihe 
+@yarden_damri_makeup 
+#איפורשיער #מאפרתבא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134656/yarden_makeup/yarden_makeup_18307222285173593.jpg</image:loc>
+      <image:title>מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! 
+
+@korenmalihe 
+@yarden_damri_makeup 
+#איפורשיער #מאפרתבא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134657/yarden_makeup/yarden_makeup_17879498640362972.jpg</image:loc>
+      <image:title>מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! 
+
+@korenmalihe 
+@yarden_damri_makeup 
+#איפורשיער #מאפרתבא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134659/yarden_makeup/yarden_makeup_17951040593862052.jpg</image:loc>
+      <image:title>מאי באיפור שיער שפשוט מפיל לסטות לרצפה!!!! 
+
+@korenmalihe 
+@yarden_damri_makeup 
+#איפורשיער #מאפרתבא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134661/yarden_makeup/yarden_makeup_18075119995796460.jpg</image:loc>
+      <image:title>כל הצבעים יפים לך ❤️
+@limor_edri 
+
+@natibenmargi 
+@korenmalihe 
+@yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134663/yarden_makeup/yarden_makeup_17974272674906745.jpg</image:loc>
+      <image:title>כל הצבעים יפים לך ❤️
+@limor_edri 
+
+@natibenmargi 
+@korenmalihe 
+@yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134665/yarden_makeup/yarden_makeup_17954854127843921.jpg</image:loc>
+      <image:title>לוק מחרפן שאני לא רגועה ממנו! 
+
+שיער של המוכשרת הזו @korenmalihe 
+איפור שלי @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134666/yarden_makeup/yarden_makeup_17925669917984300.jpg</image:loc>
+      <image:title>לוק מחרפן שאני לא רגועה ממנו! 
+
+שיער של המוכשרת הזו @korenmalihe 
+איפור שלי @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134668/yarden_makeup/yarden_makeup_18060193937248692.jpg</image:loc>
+      <image:title>לוק מחרפן שאני לא רגועה ממנו! 
+
+שיער של המוכשרת הזו @korenmalihe 
+איפור שלי @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134669/yarden_makeup/yarden_makeup_18073871527977213.jpg</image:loc>
+      <image:title>YANA 🎀 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @_jeen_boutique_ 
+Photograph</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134671/yarden_makeup/yarden_makeup_17874524694389444.jpg</image:loc>
+      <image:title>YANA 🎀 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @_jeen_boutique_ 
+Photograph</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134673/yarden_makeup/yarden_makeup_18037732355372175.jpg</image:loc>
+      <image:title>🌺
+
+@yarden_damri_makeup 
+@kesem_david1 
+
+#מאפרתבאילת #מאפרתמקצועית #איפורארט #makeuppro #makeuptutor</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134674/yarden_makeup/yarden_makeup_18007823300784109.jpg</image:loc>
+      <image:title>🌺
+
+@yarden_damri_makeup 
+@kesem_david1 
+
+#מאפרתבאילת #מאפרתמקצועית #איפורארט #makeuppro #makeuptutor</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134676/yarden_makeup/yarden_makeup_18470304967079488.jpg</image:loc>
+      <image:title>“איפור כלה שמתאים בדיוק לך – מחמיא, עמיד, וזוהר בטבעיות שלו ✨
+כי ביום שלך – מגיע לך להרגיש הכי את, ר</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134677/yarden_makeup/yarden_makeup_18034555211412874.jpg</image:loc>
+      <image:title>“איפור כלה שמתאים בדיוק לך – מחמיא, עמיד, וזוהר בטבעיות שלו ✨
+כי ביום שלך – מגיע לך להרגיש הכי את, ר</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134679/yarden_makeup/yarden_makeup_17949607904861027.jpg</image:loc>
+      <image:title>“איפור כלה שמתאים בדיוק לך – מחמיא, עמיד, וזוהר בטבעיות שלו ✨
+כי ביום שלך – מגיע לך להרגיש הכי את, ר</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527641/yarden_makeup/yarden_makeup_17974347077744838.jpg</image:loc>
+      <image:title>TAMAR 🦢🦢
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal 
+
+#איפורכלה </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134681/yarden_makeup/yarden_makeup_18510763915001883.jpg</image:loc>
+      <image:title>⁨	איפור ושיער טבעי שמדגיש את כל מה שיפה 💖
+תהליך מותאם אישית, תוצאה מדויקת.
+
+שיער ‪@korenmalihe‬ 
+איפ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134682/yarden_makeup/yarden_makeup_17953837232971494.jpg</image:loc>
+      <image:title>⁨	איפור ושיער טבעי שמדגיש את כל מה שיפה 💖
+תהליך מותאם אישית, תוצאה מדויקת.
+
+שיער ‪@korenmalihe‬ 
+איפ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134684/yarden_makeup/yarden_makeup_18176260213332650.jpg</image:loc>
+      <image:title>אהובתי היפה באיפור שלי 🌸
+@ziv.interiordesign</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134685/yarden_makeup/yarden_makeup_18044930687217742.jpg</image:loc>
+      <image:title>אהובתי היפה באיפור שלי 🌸
+@ziv.interiordesign</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527645/yarden_makeup/yarden_makeup_18509820733019524.jpg</image:loc>
+      <image:title>שיופי פוגש עוצמה! 
+ומלא בסטייל. 
+שיער אסוף תמיד נותן לנו להרגיש אצילית ונשית ברמות 
+והפעם תבל מראה ל</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134687/yarden_makeup/yarden_makeup_18082571668705639.jpg</image:loc>
+      <image:title>שהפנים שלך מדויקות ברמות!! 
+זה פשוט יוצא משוגעעעע 🪬
+
+איפור שלי 
+שיער @korenmalihe 
+שמלה מהממת @_jeen</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134689/yarden_makeup/yarden_makeup_17887328739275691.jpg</image:loc>
+      <image:title>שהפנים שלך מדויקות ברמות!! 
+זה פשוט יוצא משוגעעעע 🪬
+
+איפור שלי 
+שיער @korenmalihe 
+שמלה מהממת @_jeen</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134690/yarden_makeup/yarden_makeup_17910009483138056.jpg</image:loc>
+      <image:title>שהפנים שלך מדויקות ברמות!! 
+זה פשוט יוצא משוגעעעע 🪬
+
+איפור שלי 
+שיער @korenmalihe 
+שמלה מהממת @_jeen</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134692/yarden_makeup/yarden_makeup_17894050482123155.jpg</image:loc>
+      <image:title>שהפנים שלך מדויקות ברמות!! 
+זה פשוט יוצא משוגעעעע 🪬
+
+איפור שלי 
+שיער @korenmalihe 
+שמלה מהממת @_jeen</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134693/yarden_makeup/yarden_makeup_18093553645595613.jpg</image:loc>
+      <image:title>זכינו להכניס בבריתו של אברהם אבינו 🙏
+משפחה שלי ❤️
+ויקרא שמו בישראל - אליה דמרי 💙
+
+עיצוב של @roni_had</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134696/yarden_makeup/yarden_makeup_18297317680217354.jpg</image:loc>
+      <image:title>זכינו להכניס בבריתו של אברהם אבינו 🙏
+משפחה שלי ❤️
+ויקרא שמו בישראל - אליה דמרי 💙
+
+עיצוב של @roni_had</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134697/yarden_makeup/yarden_makeup_18013049237554044.jpg</image:loc>
+      <image:title>זכינו להכניס בבריתו של אברהם אבינו 🙏
+משפחה שלי ❤️
+ויקרא שמו בישראל - אליה דמרי 💙
+
+עיצוב של @roni_had</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134699/yarden_makeup/yarden_makeup_18385219537187329.jpg</image:loc>
+      <image:title>זכינו להכניס בבריתו של אברהם אבינו 🙏
+משפחה שלי ❤️
+ויקרא שמו בישראל - אליה דמרי 💙
+
+עיצוב של @roni_had</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134700/yarden_makeup/yarden_makeup_18189182008311756.jpg</image:loc>
+      <image:title>זכינו להכניס בבריתו של אברהם אבינו 🙏
+משפחה שלי ❤️
+ויקרא שמו בישראל - אליה דמרי 💙
+
+עיצוב של @roni_had</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134702/yarden_makeup/yarden_makeup_18142178746395312.jpg</image:loc>
+      <image:title>כל תמונה שלך יותר יפה מהשניה ! 
+@sarai_mamane 
+
+שמלה של @sharon.bridal 
+שיער @korenmalihe 
+איפור שלי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134703/yarden_makeup/yarden_makeup_17907876546118492.jpg</image:loc>
+      <image:title>כל תמונה שלך יותר יפה מהשניה ! 
+@sarai_mamane 
+
+שמלה של @sharon.bridal 
+שיער @korenmalihe 
+איפור שלי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134704/yarden_makeup/yarden_makeup_18004457042773144.jpg</image:loc>
+      <image:title>כל תמונה שלך יותר יפה מהשניה ! 
+@sarai_mamane 
+
+שמלה של @sharon.bridal 
+שיער @korenmalihe 
+איפור שלי</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134706/yarden_makeup/yarden_makeup_18075458080892182.jpg</image:loc>
+      <image:title>BRIDE 2025 🦢
+
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by @yarden_damri_makeup 
+@nissim</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134708/yarden_makeup/yarden_makeup_18156611506363317.jpg</image:loc>
+      <image:title>BRIDE 2025 🦢
+
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by @yarden_damri_makeup 
+@nissim</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527652/yarden_makeup/yarden_makeup_17874288609244698.jpg</image:loc>
+      <image:title>So pretty 😍 for @tictaceilat 
+Makeup by @yarden_damri_makeup 
+
+#מאפרתכלות #איפורכלות #איפור #מאפרתבא</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134710/yarden_makeup/yarden_makeup_18043901993451443.jpg</image:loc>
+      <image:title>Yana 🦋
+
+Hair by @korenmalihe 
+Makeup by @yarden_damri_makeup 
+Dress by @_jeen_boutique_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134711/yarden_makeup/yarden_makeup_18088871992536110.jpg</image:loc>
+      <image:title>Yana 🦋
+
+Hair by @korenmalihe 
+Makeup by @yarden_damri_makeup 
+Dress by @_jeen_boutique_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134713/yarden_makeup/yarden_makeup_18023749538489323.jpg</image:loc>
+      <image:title>Yana 🦋
+
+Hair by @korenmalihe 
+Makeup by @yarden_damri_makeup 
+Dress by @_jeen_boutique_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134715/yarden_makeup/yarden_makeup_18190831090309506.jpg</image:loc>
+      <image:title>לפעמים אני פשוט חסרת מילים 😍
+איפור שלי 
+שיער @korenmalihe 
+שמלה @sharon.bridal 
+צילום @natibenmargi </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134716/yarden_makeup/yarden_makeup_18042370706212264.jpg</image:loc>
+      <image:title>לפעמים אני פשוט חסרת מילים 😍
+איפור שלי 
+שיער @korenmalihe 
+שמלה @sharon.bridal 
+צילום @natibenmargi </image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134718/yarden_makeup/yarden_makeup_18291278365217409.jpg</image:loc>
+      <image:title>GORGEOUS SHAKED 🦢🦢
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal 
+p</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134720/yarden_makeup/yarden_makeup_18065054087494231.jpg</image:loc>
+      <image:title>GORGEOUS SHAKED 🦢🦢
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal 
+p</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134721/yarden_makeup/yarden_makeup_17903267574155848.jpg</image:loc>
+      <image:title>GORGEOUS SHAKED 🦢🦢
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal 
+p</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134723/yarden_makeup/yarden_makeup_18084661123568172.jpg</image:loc>
+      <image:title>כל כך יפה ועדינה 🦋
+איפור שלי 
+שיער @korenmalihe 
+
+#מאפרתבאילת #מסרקתבאילת #איפורערב</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134724/yarden_makeup/yarden_makeup_18308296435233262.jpg</image:loc>
+      <image:title>כל כך יפה ועדינה 🦋
+איפור שלי 
+שיער @korenmalihe 
+
+#מאפרתבאילת #מסרקתבאילת #איפורערב</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134726/yarden_makeup/yarden_makeup_18055217213331031.jpg</image:loc>
+      <image:title>🤍🤍🤍
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134728/yarden_makeup/yarden_makeup_18086147194625807.jpg</image:loc>
+      <image:title>🤍🤍🤍
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.bridal</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134730/yarden_makeup/yarden_makeup_18014984033511955.jpg</image:loc>
+      <image:title>So pretty 🤩 
+@valeriya.astafyeva</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134731/yarden_makeup/yarden_makeup_18123022534439713.jpg</image:loc>
+      <image:title>So pretty 🤩 
+@valeriya.astafyeva</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134733/yarden_makeup/yarden_makeup_18167861581335375.jpg</image:loc>
+      <image:title>נעמי המושלמת!! 
+כמה כיף לאפר אותך ❤️
+
+#מאפרתמקצועית #מאפרתבאילת #איפור #makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134734/yarden_makeup/yarden_makeup_18009933605710220.jpg</image:loc>
+      <image:title>נעמי המושלמת!! 
+כמה כיף לאפר אותך ❤️
+
+#מאפרתמקצועית #מאפרתבאילת #איפור #makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134736/yarden_makeup/yarden_makeup_18451318717072445.jpg</image:loc>
+      <image:title>⁨	Soo pretty 😍 
+איפור שלי 
+שיער ‪@korenmalihe‬
+שמל‪@dorin_dress_‬s_⁩</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134737/yarden_makeup/yarden_makeup_18356432671182407.jpg</image:loc>
+      <image:title>⁨	Soo pretty 😍 
+איפור שלי 
+שיער ‪@korenmalihe‬
+שמל‪@dorin_dress_‬s_⁩</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134739/yarden_makeup/yarden_makeup_17858907972330887.jpg</image:loc>
+      <image:title>⁨	Soo pretty 😍 
+איפור שלי 
+שיער ‪@korenmalihe‬
+שמל‪@dorin_dress_‬s_⁩</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134740/yarden_makeup/yarden_makeup_18060998279046029.jpg</image:loc>
+      <image:title>לאחרונה אני מאוהבת באיפור שהוא מאט
+איזה סוג אנשים אתם? 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134742/yarden_makeup/yarden_makeup_17961615737908246.jpg</image:loc>
+      <image:title>לאחרונה אני מאוהבת באיפור שהוא מאט
+איזה סוג אנשים אתם? 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134744/yarden_makeup/yarden_makeup_18096076879545055.jpg</image:loc>
+      <image:title>Sooo pretty 💗
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@shaked_esterin 
+
+#מאפרתבאילת #</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134745/yarden_makeup/yarden_makeup_18122998831427410.jpg</image:loc>
+      <image:title>Sooo pretty 💗
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@shaked_esterin 
+
+#מאפרתבאילת #</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134747/yarden_makeup/yarden_makeup_18158032123347058.jpg</image:loc>
+      <image:title>Nofia 🖤🐈‍⬛
+איזה מהממת את 😍😍 גם מבפנים 
+וגם מבחוץ 🪬
+
+איפור @yarden_damri_makeup 
+שיער @bartzanani_hai</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134748/yarden_makeup/yarden_makeup_17846215773415591.jpg</image:loc>
+      <image:title>Nofia 🖤🐈‍⬛
+איזה מהממת את 😍😍 גם מבפנים 
+וגם מבחוץ 🪬
+
+איפור @yarden_damri_makeup 
+שיער @bartzanani_hai</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134749/yarden_makeup/yarden_makeup_17895651612075920.jpg</image:loc>
+      <image:title>Nofia 🖤🐈‍⬛
+איזה מהממת את 😍😍 גם מבפנים 
+וגם מבחוץ 🪬
+
+איפור @yarden_damri_makeup 
+שיער @bartzanani_hai</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134751/yarden_makeup/yarden_makeup_18059803612856142.jpg</image:loc>
+      <image:title>Mali Levi ❤️
+
+@malilevi 
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+
+#מאפרתבאילת #איפ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134753/yarden_makeup/yarden_makeup_17941465907974051.jpg</image:loc>
+      <image:title>Mali Levi ❤️
+
+@malilevi 
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+
+#מאפרתבאילת #איפ</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134755/yarden_makeup/yarden_makeup_17990428256791950.jpg</image:loc>
+      <image:title>So beautiful 🤩 
+@lizamarkolov 
+
+#מאפרתמקצועית💄💋 #מאפרתבאילת #איפורכלות</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134756/yarden_makeup/yarden_makeup_18158683732346334.jpg</image:loc>
+      <image:title>So beautiful 🤩 
+@lizamarkolov 
+
+#מאפרתמקצועית💄💋 #מאפרתבאילת #איפורכלות</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134758/yarden_makeup/yarden_makeup_18006486551540020.jpg</image:loc>
+      <image:title>🖤
+
+@ivetta_berkovich 
+@korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134760/yarden_makeup/yarden_makeup_17923246013973474.jpg</image:loc>
+      <image:title>🖤
+
+@ivetta_berkovich 
+@korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527509/yarden_makeup/yarden_makeup_17972293742825499.jpg</image:loc>
+      <image:title>Yael bar Zohar ✨
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+
+#מאפרתבאילת</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134762/yarden_makeup/yarden_makeup_17896759932054612.jpg</image:loc>
+      <image:title>SHAKED 🖤🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @dorin_dress_ 
+@shaked_est</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134763/yarden_makeup/yarden_makeup_18061199623780435.jpg</image:loc>
+      <image:title>SHAKED 🖤🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @dorin_dress_ 
+@shaked_est</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134765/yarden_makeup/yarden_makeup_18076711984633435.jpg</image:loc>
+      <image:title>SHAKED 🖤🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @dorin_dress_ 
+@shaked_est</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134766/yarden_makeup/yarden_makeup_18030994454537916.jpg</image:loc>
+      <image:title>לא רגועה מהיופי הזה 😍😍
+@ivetta_berkovich 
+
+איפור שלי @yarden_damri_makeup 
+שיער @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134768/yarden_makeup/yarden_makeup_18394793506099276.jpg</image:loc>
+      <image:title>לא רגועה מהיופי הזה 😍😍
+@ivetta_berkovich 
+
+איפור שלי @yarden_damri_makeup 
+שיער @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134769/yarden_makeup/yarden_makeup_18101169727494677.jpg</image:loc>
+      <image:title>מתוך סדנת איפור אישית ל @hayanoufi 
+כמה שיפה לה איפור 😍 ואיזה מהממת את 🪬</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134771/yarden_makeup/yarden_makeup_17882315253220526.jpg</image:loc>
+      <image:title>מתוך סדנת איפור אישית ל @hayanoufi 
+כמה שיפה לה איפור 😍 ואיזה מהממת את 🪬</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134772/yarden_makeup/yarden_makeup_17928193706904009.jpg</image:loc>
+      <image:title>YAEL and GUY 
+כמה שאתם יפים 🪬
+@guyzu_aretz @yaelbarzohar 
+
+איפור שלי @yarden_damri_makeup 
+שיער @koren</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134774/yarden_makeup/yarden_makeup_17969935763833227.jpg</image:loc>
+      <image:title>YAEL and GUY 
+כמה שאתם יפים 🪬
+@guyzu_aretz @yaelbarzohar 
+
+איפור שלי @yarden_damri_makeup 
+שיער @koren</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134776/yarden_makeup/yarden_makeup_18038717747139100.jpg</image:loc>
+      <image:title>Assi Azar 🧡
+assiazar 
+
+Makeup by @yarden_damri_makeup 
+@fox_israel</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134777/yarden_makeup/yarden_makeup_17854284546378060.jpg</image:loc>
+      <image:title>Assi Azar 🧡
+assiazar 
+
+Makeup by @yarden_damri_makeup 
+@fox_israel</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134779/yarden_makeup/yarden_makeup_17921601366014641.jpg</image:loc>
+      <image:title>Tamar ✨✨
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by me ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134780/yarden_makeup/yarden_makeup_18019968992426627.jpg</image:loc>
+      <image:title>Tamar ✨✨
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by me ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134782/yarden_makeup/yarden_makeup_17891835501071956.jpg</image:loc>
+      <image:title>Tamar ✨✨
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by me ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134783/yarden_makeup/yarden_makeup_18052026023490451.jpg</image:loc>
+      <image:title>Tamar ✨✨
+Dress by @sharon.bridal 
+Hair by @korenmalihe 
+Makeup by me ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134785/yarden_makeup/yarden_makeup_18079558831559249.jpg</image:loc>
+      <image:title>GLAM BY @yarden_damri_makeup 
+@lizamarkolov 🦢🦢
+
+#מאפרתבאילת</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134787/yarden_makeup/yarden_makeup_18032925302451674.jpg</image:loc>
+      <image:title>GLAM BY @yarden_damri_makeup 
+@lizamarkolov 🦢🦢
+
+#מאפרתבאילת</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134789/yarden_makeup/yarden_makeup_18117872557438067.jpg</image:loc>
+      <image:title>MARGO 🦢
+
+כמה שאת יפה מאמי 🪬🪬
+@margo.sourpine 
+
+איפור @yarden_damri_makeup 
+שיער @korenmalihe 
+שמלה @</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134790/yarden_makeup/yarden_makeup_18053855501492493.jpg</image:loc>
+      <image:title>MARGO 🦢
+
+כמה שאת יפה מאמי 🪬🪬
+@margo.sourpine 
+
+איפור @yarden_damri_makeup 
+שיער @korenmalihe 
+שמלה @</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134791/yarden_makeup/yarden_makeup_18014284766681312.jpg</image:loc>
+      <image:title>MARGO 🦢
+
+כמה שאת יפה מאמי 🪬🪬
+@margo.sourpine 
+
+איפור @yarden_damri_makeup 
+שיער @korenmalihe 
+שמלה @</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134793/yarden_makeup/yarden_makeup_18081888688600707.jpg</image:loc>
+      <image:title>Adi 🤍
+
+Glam by @yarden_damri_makeup 
+Dress by @sharon.bridal 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134795/yarden_makeup/yarden_makeup_17988146768777277.jpg</image:loc>
+      <image:title>Adi 🤍
+
+Glam by @yarden_damri_makeup 
+Dress by @sharon.bridal 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134796/yarden_makeup/yarden_makeup_18057781630795879.jpg</image:loc>
+      <image:title>Adi 🤍
+
+Glam by @yarden_damri_makeup 
+Dress by @sharon.bridal 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134798/yarden_makeup/yarden_makeup_18096528205491100.jpg</image:loc>
+      <image:title>DJ @hadarslutsky 🎧
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134800/yarden_makeup/yarden_makeup_18048011891147321.jpg</image:loc>
+      <image:title>DJ @hadarslutsky 🎧
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527524/yarden_makeup/yarden_makeup_18016507784648237.jpg</image:loc>
+      <image:title>Glam by @yarden_damri_makeup 
+Dress by @dorin_dress_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134802/yarden_makeup/yarden_makeup_18259152247281025.jpg</image:loc>
+      <image:title>ELLA 🦢
+@ella_ben_nun 
+
+Makeup by @yarden_damri_makeup 
+
+#מאפרתבאילת #איפורכלה #מאפרתכלות</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134803/yarden_makeup/yarden_makeup_17869119942184186.jpg</image:loc>
+      <image:title>ELLA 🦢
+@ella_ben_nun 
+
+Makeup by @yarden_damri_makeup 
+
+#מאפרתבאילת #איפורכלה #מאפרתכלות</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134805/yarden_makeup/yarden_makeup_18049349437894175.jpg</image:loc>
+      <image:title>ELLA 🦢
+@ella_ben_nun 
+
+Makeup by @yarden_damri_makeup 
+
+#מאפרתבאילת #איפורכלה #מאפרתכלות</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527527/yarden_makeup/yarden_makeup_18041409875022460.jpg</image:loc>
+      <image:title>@dahankell ❤️
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527529/yarden_makeup/yarden_makeup_17950654229883412.jpg</image:loc>
+      <image:title>✨✨✨
+Glam by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134807/yarden_makeup/yarden_makeup_18031379714419736.jpg</image:loc>
+      <image:title>Makeup by @yarden_damri_makeup 
+✨✨✨ @jadounaitte</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134808/yarden_makeup/yarden_makeup_18052303553501663.jpg</image:loc>
+      <image:title>Makeup by @yarden_damri_makeup 
+✨✨✨ @jadounaitte</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134810/yarden_makeup/yarden_makeup_18021450413327215.jpg</image:loc>
+      <image:title>ORIA ✨✨✨
+@oriamayedri 
+
+Makeup by @yarden_damri_makeup 
+Dress by @dorin_dress_ @dorintrabelsi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134812/yarden_makeup/yarden_makeup_18047639402094148.jpg</image:loc>
+      <image:title>ORIA ✨✨✨
+@oriamayedri 
+
+Makeup by @yarden_damri_makeup 
+Dress by @dorin_dress_ @dorintrabelsi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134813/yarden_makeup/yarden_makeup_18084188071531169.jpg</image:loc>
+      <image:title>ORIA ✨✨✨
+@oriamayedri 
+
+Makeup by @yarden_damri_makeup 
+Dress by @dorin_dress_ @dorintrabelsi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527535/yarden_makeup/yarden_makeup_18012122501443933.jpg</image:loc>
+      <image:title>HODAYA GORGEOUS ✨✨
+@hodaya_benshimon_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134815/yarden_makeup/yarden_makeup_18024804956605697.jpg</image:loc>
+      <image:title>OREL 💍 
+@orel_hasson_derei 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134817/yarden_makeup/yarden_makeup_18016672139354489.jpg</image:loc>
+      <image:title>OREL 💍 
+@orel_hasson_derei 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134818/yarden_makeup/yarden_makeup_18065350441675674.jpg</image:loc>
+      <image:title>OREL 💍 
+@orel_hasson_derei 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @sharon.</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134820/yarden_makeup/yarden_makeup_18029946512145857.jpg</image:loc>
+      <image:title>KESEM ❤️
+@kesemraz 
+Dress by @dorin_dress_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134821/yarden_makeup/yarden_makeup_18082180750547187.jpg</image:loc>
+      <image:title>KESEM ❤️
+@kesemraz 
+Dress by @dorin_dress_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134823/yarden_makeup/yarden_makeup_18081447901548679.jpg</image:loc>
+      <image:title>KESEM ❤️
+@kesemraz 
+Dress by @dorin_dress_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134824/yarden_makeup/yarden_makeup_18037267304029696.jpg</image:loc>
+      <image:title>MOR 🖤🖤 
+@_morfadlon_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134826/yarden_makeup/yarden_makeup_17884371375150287.jpg</image:loc>
+      <image:title>MOR 🖤🖤 
+@_morfadlon_ 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134828/yarden_makeup/yarden_makeup_18287313283233523.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sapirazulay1</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134829/yarden_makeup/yarden_makeup_18015690806342864.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sapirazulay1</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134831/yarden_makeup/yarden_makeup_18040983775961161.jpg</image:loc>
+      <image:title>כמה שהיא יפה 😍
+@sapirazulay1</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134832/yarden_makeup/yarden_makeup_18056638180880145.jpg</image:loc>
+      <image:title>SHAKED 🖤🖤
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134834/yarden_makeup/yarden_makeup_18031291988364296.jpg</image:loc>
+      <image:title>SHAKED 🖤🖤
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527699/yarden_makeup/yarden_makeup_18314720182093428.jpg</image:loc>
+      <image:title>אני מאוהבת באיפור עיניים הזה! 
+וזו ההזדמנות לומר לכל הלקוחות שלי תודה על שנה מדהימה יחד❤️🙏
+
+שיער @ba</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134836/yarden_makeup/yarden_makeup_18262679125247767.jpg</image:loc>
+      <image:title>כלת החינה המהממת שלי ❤️
+@chentshuva 🪬
+
+שיער @korenmalihe 
+איפור @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134837/yarden_makeup/yarden_makeup_18058767313738284.jpg</image:loc>
+      <image:title>כלת החינה המהממת שלי ❤️
+@chentshuva 🪬
+
+שיער @korenmalihe 
+איפור @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527701/yarden_makeup/yarden_makeup_17850700965293189.jpg</image:loc>
+      <image:title>סיימתי לאפר את המהממת הזו 
+פתחנו מצלמה וישר קלטתי שיש לנו את הכלב המתוק הזה 
+ובום! - קיילי ג׳נר בגרס</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134839/yarden_makeup/yarden_makeup_18010700513632045.jpg</image:loc>
+      <image:title>NATALY BRIDE 💍
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134840/yarden_makeup/yarden_makeup_18018903461260379.jpg</image:loc>
+      <image:title>NATALY BRIDE 💍
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134842/yarden_makeup/yarden_makeup_18124943023344313.jpg</image:loc>
+      <image:title>So pretty 🖤🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134844/yarden_makeup/yarden_makeup_18017686943577175.jpg</image:loc>
+      <image:title>So pretty 🖤🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134845/yarden_makeup/yarden_makeup_17867655537193763.jpg</image:loc>
+      <image:title>Gorgeoussss ✨✨
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134848/yarden_makeup/yarden_makeup_18240517885275727.jpg</image:loc>
+      <image:title>Gorgeoussss ✨✨
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527707/yarden_makeup/yarden_makeup_17923712759844949.jpg</image:loc>
+      <image:title>בעלי היקר חוגג יום הולדת ❤️🥳
+מאחלת לנו חיים מאושרים יחד 
+שתמיד נהיה  בשמחה, מאושרים יחד 🙏
+ולהגדיל את</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527708/yarden_makeup/yarden_makeup_18035124422507465.jpg</image:loc>
+      <image:title>TANIA 🌟
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527710/yarden_makeup/yarden_makeup_18351200494115751.jpg</image:loc>
+      <image:title>So pretty 💍
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134850/yarden_makeup/yarden_makeup_17874033198117555.jpg</image:loc>
+      <image:title>הודיה המושלמת 🌸
+מתוך השתלמות איפור ל @yarin_biton__makeupartist 
+@hodaya.mizrahi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134851/yarden_makeup/yarden_makeup_17974762760739729.jpg</image:loc>
+      <image:title>הודיה המושלמת 🌸
+מתוך השתלמות איפור ל @yarin_biton__makeupartist 
+@hodaya.mizrahi</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527713/yarden_makeup/yarden_makeup_17847895695243516.jpg</image:loc>
+      <image:title>SHOVAL 💜
+
+@shovi.haziza 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134853/yarden_makeup/yarden_makeup_18305219191088020.jpg</image:loc>
+      <image:title>YAEL 💙
+
+@yael.timsit 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134855/yarden_makeup/yarden_makeup_18132189760358422.jpg</image:loc>
+      <image:title>YAEL 💙
+
+@yael.timsit 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134857/yarden_makeup/yarden_makeup_18008942123535129.jpg</image:loc>
+      <image:title>ORIA 🦢🦢🦢
+
+@oriyabar1 
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @atellieruth</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134858/yarden_makeup/yarden_makeup_17902936152001049.jpg</image:loc>
+      <image:title>ORIA 🦢🦢🦢
+
+@oriyabar1 
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @atellieruth</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527717/yarden_makeup/yarden_makeup_18040044217802499.jpg</image:loc>
+      <image:title>מישל 🌸 
+הכי מיוחדת שיש! 
+
+@michelle_algrabli 
+איפור @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527718/yarden_makeup/yarden_makeup_18033018434083695.jpg</image:loc>
+      <image:title>Obsessed 💚💚
+
+@sarai_mamane 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134860/yarden_makeup/yarden_makeup_17843713698267726.jpg</image:loc>
+      <image:title>NOY 🖤
+
+Makeup by @yarden_damri_makeup 
+@noyz_tattoos 🐈‍⬛</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134862/yarden_makeup/yarden_makeup_17930819543880491.jpg</image:loc>
+      <image:title>NOY 🖤
+
+Makeup by @yarden_damri_makeup 
+@noyz_tattoos 🐈‍⬛</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134863/yarden_makeup/yarden_makeup_18035935703055312.jpg</image:loc>
+      <image:title>LIA ✨
+
+@lia.mashkovov1 
+Makeup by @yarden_damri_makeup
+Dress by @nikarehani</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134865/yarden_makeup/yarden_makeup_17864425536168357.jpg</image:loc>
+      <image:title>LIA ✨
+
+@lia.mashkovov1 
+Makeup by @yarden_damri_makeup
+Dress by @nikarehani</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134866/yarden_makeup/yarden_makeup_18305860933081047.jpg</image:loc>
+      <image:title>LIAT 💙
+
+@liatzino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134868/yarden_makeup/yarden_makeup_18055690444713655.jpg</image:loc>
+      <image:title>LIAT 💙
+
+@liatzino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527723/yarden_makeup/yarden_makeup_18006504566537498.jpg</image:loc>
+      <image:title>תהילה המהממת 🧡🧡 איזה עיניים מושלמת יש לך! 
+@tehilahano21 
+
+איפור - @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134870/yarden_makeup/yarden_makeup_18060025129546323.jpg</image:loc>
+      <image:title>YAHALOM 💎
+
+Makeup by @yarden_damri_makeup 
+@yahalom.shachrur</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134871/yarden_makeup/yarden_makeup_18025644791016328.jpg</image:loc>
+      <image:title>YAHALOM 💎
+
+Makeup by @yarden_damri_makeup 
+@yahalom.shachrur</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134873/yarden_makeup/yarden_makeup_18424259920066688.jpg</image:loc>
+      <image:title>אוריה כלת החינה שלי 🪬
+
+@oriyabar1 
+איפור @yarden_damri_makeup 
+שיער @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134874/yarden_makeup/yarden_makeup_17982917996547156.jpg</image:loc>
+      <image:title>אוריה כלת החינה שלי 🪬
+
+@oriyabar1 
+איפור @yarden_damri_makeup 
+שיער @korenmalihe</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527727/yarden_makeup/yarden_makeup_18021723191076282.jpg</image:loc>
+      <image:title>Pnina 🌸
+Makeup by @yarden_damri_makeup 
+Hair by @tevel_hair_design</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134876/yarden_makeup/yarden_makeup_18036961057939724.jpg</image:loc>
+      <image:title>Talor 💜 
+
+Makeup by @yarden_damri_makeup 
+Dress by @nani_gal17
+Hair by @tevel_hair_design</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134878/yarden_makeup/yarden_makeup_18155593303309305.jpg</image:loc>
+      <image:title>Talor 💜 
+
+Makeup by @yarden_damri_makeup 
+Dress by @nani_gal17
+Hair by @tevel_hair_design</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527730/yarden_makeup/yarden_makeup_18029108069122365.jpg</image:loc>
+      <image:title>Makeup by me 🖤</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134880/yarden_makeup/yarden_makeup_18035072164831534.jpg</image:loc>
+      <image:title>Sooo gorgeous 🤩
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @atellieruth 
+@oriya</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134881/yarden_makeup/yarden_makeup_17908149797968548.jpg</image:loc>
+      <image:title>Sooo gorgeous 🤩
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+Dress by @atellieruth 
+@oriya</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134883/yarden_makeup/yarden_makeup_18050894923729549.jpg</image:loc>
+      <image:title>Ariel 💫
+
+Makeup by @yarden_damri_makeup 
+@arielshulga</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134885/yarden_makeup/yarden_makeup_18026315684128787.jpg</image:loc>
+      <image:title>Ariel 💫
+
+Makeup by @yarden_damri_makeup 
+@arielshulga</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134886/yarden_makeup/yarden_makeup_18047757481701525.jpg</image:loc>
+      <image:title>Oriya bride 💍
+Look 1 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@oriyarahamimrefael</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134888/yarden_makeup/yarden_makeup_18168167320306847.jpg</image:loc>
+      <image:title>Oriya bride 💍
+Look 1 
+
+Makeup by @yarden_damri_makeup 
+Hair by @korenmalihe 
+@oriyarahamimrefael</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134890/yarden_makeup/yarden_makeup_18011508641389119.jpg</image:loc>
+      <image:title>speechless 😍
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134891/yarden_makeup/yarden_makeup_17934520280844936.jpg</image:loc>
+      <image:title>speechless 😍
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134892/yarden_makeup/yarden_makeup_17995385186634322.jpg</image:loc>
+      <image:title>speechless 😍
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134894/yarden_makeup/yarden_makeup_18032573188956787.jpg</image:loc>
+      <image:title>NOFAR 🖤
+So beautiful 
+
+Makeup by @yarden_damri_makeup 
+@nofar_tall</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134896/yarden_makeup/yarden_makeup_17999686850347704.jpg</image:loc>
+      <image:title>NOFAR 🖤
+So beautiful 
+
+Makeup by @yarden_damri_makeup 
+@nofar_tall</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134897/yarden_makeup/yarden_makeup_18068692957521617.jpg</image:loc>
+      <image:title>NOFAR 🖤
+So beautiful 
+
+Makeup by @yarden_damri_makeup 
+@nofar_tall</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134898/yarden_makeup/yarden_makeup_18007822169448426.jpg</image:loc>
+      <image:title>NOFAR 🖤
+So beautiful 
+
+Makeup by @yarden_damri_makeup 
+@nofar_tall</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134900/yarden_makeup/yarden_makeup_18069562042518761.jpg</image:loc>
+      <image:title>NOA bride 💍
+MAZAL TOV! 
+
+Makeup by @yarden_damri_makeup 
+Hair by @karmasamorai</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134902/yarden_makeup/yarden_makeup_18037509043917699.jpg</image:loc>
+      <image:title>NOA bride 💍
+MAZAL TOV! 
+
+Makeup by @yarden_damri_makeup 
+Hair by @karmasamorai</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527740/yarden_makeup/yarden_makeup_17942578640716162.jpg</image:loc>
+      <image:title>💙
+
+@yuvalbeider9 
+Makeup by @yarden_damri_makeup 
+Style by @inbalv.styling</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527742/yarden_makeup/yarden_makeup_18033384559814733.jpg</image:loc>
+      <image:title>YUVAL 🦋
+
+Makeup by @yarden_damri_makeup 
+Style by @inbalv.styling 
+@isrotelhotels 
+@yuvalbeider9 @yu</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134904/yarden_makeup/yarden_makeup_18022305737179460.jpg</image:loc>
+      <image:title>ALISA 💖
+
+Makeup by @yarden_damri_makeup 
+Styling by @inbalv.styling 
+@isrotelhotels 
+@alisavais_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134905/yarden_makeup/yarden_makeup_18017916536056629.jpg</image:loc>
+      <image:title>ALISA 💖
+
+Makeup by @yarden_damri_makeup 
+Styling by @inbalv.styling 
+@isrotelhotels 
+@alisavais_</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134907/yarden_makeup/yarden_makeup_18056146525592366.jpg</image:loc>
+      <image:title>💚
+
+Makeup by @yarden_damri_makeup 
+
+@odeliaozel 
+@michelle_algrabli</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134909/yarden_makeup/yarden_makeup_18008939549184358.jpg</image:loc>
+      <image:title>💚
+
+Makeup by @yarden_damri_makeup 
+
+@odeliaozel 
+@michelle_algrabli</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134910/yarden_makeup/yarden_makeup_17925491051856970.jpg</image:loc>
+      <image:title>💚
+
+Makeup by @yarden_damri_makeup 
+
+@odeliaozel 
+@michelle_algrabli</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527746/yarden_makeup/yarden_makeup_18433354522007010.jpg</image:loc>
+      <image:title>So pretty 🤩 
+@michelle_algrabli 
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134912/yarden_makeup/yarden_makeup_17930559494762007.jpg</image:loc>
+      <image:title>Gorgeous 🤍
+@gellerrita</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134913/yarden_makeup/yarden_makeup_18018505208240230.jpg</image:loc>
+      <image:title>Gorgeous 🤍
+@gellerrita</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134915/yarden_makeup/yarden_makeup_17886360201037674.jpg</image:loc>
+      <image:title>Gorgeous 🤍
+@gellerrita</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134918/yarden_makeup/yarden_makeup_18042082726699829.jpg</image:loc>
+      <image:title>ARIEL 💙
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134919/yarden_makeup/yarden_makeup_18033132550918226.jpg</image:loc>
+      <image:title>ARIEL 💙
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527750/yarden_makeup/yarden_makeup_18347267236104956.jpg</image:loc>
+      <image:title>NOGA 🎀
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134921/yarden_makeup/yarden_makeup_18031447174784281.jpg</image:loc>
+      <image:title>SOL 💖
+
+Makeup by @yarden_damri_makeup 
+@solsilberstein</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134923/yarden_makeup/yarden_makeup_18090113902422285.jpg</image:loc>
+      <image:title>SOL 💖
+
+Makeup by @yarden_damri_makeup 
+@solsilberstein</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134924/yarden_makeup/yarden_makeup_18111128065370174.jpg</image:loc>
+      <image:title>רונית שבירו באיפור שלי לכבוד מרכז הנדל״ן 
+אחת הנשים היותר חזקות שפגשתי - שמחתי 💛
+
+#רוניתשבירו @shbir</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134926/yarden_makeup/yarden_makeup_18038868337745791.jpg</image:loc>
+      <image:title>רונית שבירו באיפור שלי לכבוד מרכז הנדל״ן 
+אחת הנשים היותר חזקות שפגשתי - שמחתי 💛
+
+#רוניתשבירו @shbir</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134928/yarden_makeup/yarden_makeup_17971458293573363.jpg</image:loc>
+      <image:title>יופי לא חוקי! 
+@gellerrita 
+איפור - @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134930/yarden_makeup/yarden_makeup_18098492914400894.jpg</image:loc>
+      <image:title>יופי לא חוקי! 
+@gellerrita 
+איפור - @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134932/yarden_makeup/yarden_makeup_17998166243572164.jpg</image:loc>
+      <image:title>יופי לא חוקי! 
+@gellerrita 
+איפור - @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134934/yarden_makeup/yarden_makeup_18018827117504359.jpg</image:loc>
+      <image:title>Ma ma miaaaa 🤩
+@gellerrita 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134935/yarden_makeup/yarden_makeup_17884615298963082.jpg</image:loc>
+      <image:title>Ma ma miaaaa 🤩
+@gellerrita 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134937/yarden_makeup/yarden_makeup_18038828818824455.jpg</image:loc>
+      <image:title>Ma ma miaaaa 🤩
+@gellerrita 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134939/yarden_makeup/yarden_makeup_18016010432033371.jpg</image:loc>
+      <image:title>HILA 🖤
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134940/yarden_makeup/yarden_makeup_17876940137999653.jpg</image:loc>
+      <image:title>HILA 🖤
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134942/yarden_makeup/yarden_makeup_18425856988027396.jpg</image:loc>
+      <image:title>Princess 🎀
+For @odeliaozel 
+
+Model @princess.haziza 
+
+Makeup @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134943/yarden_makeup/yarden_makeup_17977880807661266.jpg</image:loc>
+      <image:title>Princess 🎀
+For @odeliaozel 
+
+Model @princess.haziza 
+
+Makeup @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134945/yarden_makeup/yarden_makeup_18283595386165774.jpg</image:loc>
+      <image:title>יעל בר זוהר ✨
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134946/yarden_makeup/yarden_makeup_18082429165450618.jpg</image:loc>
+      <image:title>יעל בר זוהר ✨
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134948/yarden_makeup/yarden_makeup_18003094451407561.jpg</image:loc>
+      <image:title>יעל בר זוהר ✨
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134950/yarden_makeup/yarden_makeup_18331372822142968.jpg</image:loc>
+      <image:title>החתול במגפיים 😸
+פורים 2024 
+
+דומה?</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134951/yarden_makeup/yarden_makeup_17916774914897998.jpg</image:loc>
+      <image:title>החתול במגפיים 😸
+פורים 2024 
+
+דומה?</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134953/yarden_makeup/yarden_makeup_18029246806797920.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134954/yarden_makeup/yarden_makeup_18007985702366904.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134955/yarden_makeup/yarden_makeup_18016146683186052.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134957/yarden_makeup/yarden_makeup_18428493745034051.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134958/yarden_makeup/yarden_makeup_18059393107539772.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134960/yarden_makeup/yarden_makeup_18007713923372398.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134961/yarden_makeup/yarden_makeup_18259473673230756.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134963/yarden_makeup/yarden_makeup_17852786895155905.jpg</image:loc>
+      <image:title>Happy porim 🥳
+2024</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527764/yarden_makeup/yarden_makeup_18001202495526163.jpg</image:loc>
+      <image:title>פורים 2024 
+ברבי andקן 🩷 @damriofir</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134965/yarden_makeup/yarden_makeup_18031084762921528.jpg</image:loc>
+      <image:title>Keren 🧡
+Makeup by @yarden_damri_makeup 
+@keren_grinberger</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134966/yarden_makeup/yarden_makeup_18251631139243656.jpg</image:loc>
+      <image:title>Keren 🧡
+Makeup by @yarden_damri_makeup 
+@keren_grinberger</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134968/yarden_makeup/yarden_makeup_18292542331082988.jpg</image:loc>
+      <image:title>Keren 🧡
+Makeup by @yarden_damri_makeup 
+@keren_grinberger</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134969/yarden_makeup/yarden_makeup_18061975744525562.jpg</image:loc>
+      <image:title>Keren 🧡
+Makeup by @yarden_damri_makeup 
+@keren_grinberger</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134971/yarden_makeup/yarden_makeup_17998524443593268.jpg</image:loc>
+      <image:title>Pretty women ❤️
+Makeup by @yarden_damri_makeup 
+@ofek_esterin</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134972/yarden_makeup/yarden_makeup_18037778767795540.jpg</image:loc>
+      <image:title>Pretty women ❤️
+Makeup by @yarden_damri_makeup 
+@ofek_esterin</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134974/yarden_makeup/yarden_makeup_18001833914528112.jpg</image:loc>
+      <image:title>Pretty women ❤️
+Makeup by @yarden_damri_makeup 
+@ofek_esterin</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134975/yarden_makeup/yarden_makeup_18423219484056776.jpg</image:loc>
+      <image:title>AMAZING MICHELLE 🌸 
+
+@michelle_algrabli 
+Makeup by @yarden_damri_makeup 
+@odeliaozel</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134977/yarden_makeup/yarden_makeup_18124271452339715.jpg</image:loc>
+      <image:title>AMAZING MICHELLE 🌸 
+
+@michelle_algrabli 
+Makeup by @yarden_damri_makeup 
+@odeliaozel</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134978/yarden_makeup/yarden_makeup_18001480442430320.jpg</image:loc>
+      <image:title>AMAZING MICHELLE 🌸 
+
+@michelle_algrabli 
+Makeup by @yarden_damri_makeup 
+@odeliaozel</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527770/yarden_makeup/yarden_makeup_18001280708586588.jpg</image:loc>
+      <image:title>Obsessed 🌸
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527771/yarden_makeup/yarden_makeup_17957341355729693.jpg</image:loc>
+      <image:title>Shira 💙
+
+Makeup by @yarden_damri_makeup 
+@shira_almoznino</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527773/yarden_makeup/yarden_makeup_18098639503384236.jpg</image:loc>
+      <image:title>Makeup by @yarden_damri_makeup 🖤</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527774/yarden_makeup/yarden_makeup_17940892451792414.jpg</image:loc>
+      <image:title>ALMA 🌸
+
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134980/yarden_makeup/yarden_makeup_18013915130173373.jpg</image:loc>
+      <image:title>Happy valentine day 🌹
+Makeup by @yarden_damri_makeup 
+@ofek_esterin ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134981/yarden_makeup/yarden_makeup_17999830196434312.jpg</image:loc>
+      <image:title>Happy valentine day 🌹
+Makeup by @yarden_damri_makeup 
+@ofek_esterin ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527777/yarden_makeup/yarden_makeup_18011342957220355.jpg</image:loc>
+      <image:title>NOGA 🌸
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134983/yarden_makeup/yarden_makeup_17991928898576036.jpg</image:loc>
+      <image:title>Amazing Gali 🤩 
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+@gali_ben_david__</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134984/yarden_makeup/yarden_makeup_18004084436516202.jpg</image:loc>
+      <image:title>Amazing Gali 🤩 
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+@gali_ben_david__</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134986/yarden_makeup/yarden_makeup_18026303470752215.jpg</image:loc>
+      <image:title>Obsessed 🤩 
+
+@yesenia_kaliner 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134987/yarden_makeup/yarden_makeup_18040955896644887.jpg</image:loc>
+      <image:title>Obsessed 🤩 
+
+@yesenia_kaliner 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134989/yarden_makeup/yarden_makeup_18034192918759884.jpg</image:loc>
+      <image:title>SHIRAZ 🌸
+
+@shirazlevy__ 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134991/yarden_makeup/yarden_makeup_17968605458676413.jpg</image:loc>
+      <image:title>SHIRAZ 🌸
+
+@shirazlevy__ 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134992/yarden_makeup/yarden_makeup_18062360953495778.jpg</image:loc>
+      <image:title>Beautiful Shira 💜
+
+@shira_almoznino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134994/yarden_makeup/yarden_makeup_18088538602373995.jpg</image:loc>
+      <image:title>Beautiful Shira 💜
+
+@shira_almoznino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134996/yarden_makeup/yarden_makeup_18246735556243442.jpg</image:loc>
+      <image:title>Beautiful Shira 💜
+
+@shira_almoznino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134997/yarden_makeup/yarden_makeup_18294177742199017.jpg</image:loc>
+      <image:title>Beautiful Shira 💜
+
+@shira_almoznino 
+Makeup by @yarden_damri_makeup</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778134999/yarden_makeup/yarden_makeup_18062434963445208.jpg</image:loc>
+      <image:title>Obsessed 🤩 
+
+Makeup by @yarden_damri_makeup 
+@yesenia_kaliner</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135000/yarden_makeup/yarden_makeup_18198947998304618.jpg</image:loc>
+      <image:title>Obsessed 🤩 
+
+Makeup by @yarden_damri_makeup 
+@yesenia_kaliner</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135002/yarden_makeup/yarden_makeup_17998193537519957.jpg</image:loc>
+      <image:title>✨GORGEOUS SARI 🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+@sarai_mamane 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135003/yarden_makeup/yarden_makeup_17999367599458966.jpg</image:loc>
+      <image:title>✨GORGEOUS SARI 🖤
+
+Makeup by @yarden_damri_makeup 
+Hair by @bartzanani_hair 
+@sarai_mamane 🫶</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135005/yarden_makeup/yarden_makeup_17998711664377785.jpg</image:loc>
+      <image:title>JULIA 🩷
+@juliapikun.promanic 
+
+איפור שלי 
+שיער @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135006/yarden_makeup/yarden_makeup_17848124172119942.jpg</image:loc>
+      <image:title>JULIA 🩷
+@juliapikun.promanic 
+
+איפור שלי 
+שיער @bartzanani_hair</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527788/yarden_makeup/yarden_makeup_18049254109541920.jpg</image:loc>
+      <image:title>שבת שלום עם בעלי אהובי ❤️</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135008/yarden_makeup/yarden_makeup_17919375854755418.jpg</image:loc>
+      <image:title>ALMA 🤎
+
+@almaazoulay</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135009/yarden_makeup/yarden_makeup_17894609798938856.jpg</image:loc>
+      <image:title>ALMA 🤎
+
+@almaazoulay</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1777527791/yarden_makeup/yarden_makeup_17988271130313555.jpg</image:loc>
+      <image:title>יוליה בלוק הכי עוצמתי שיש! 
+
+איפור - @yarden_damri_makeup 
+שיער - @bartzanani_hair 
+@juliapikun.prom</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_400,c_fill/v1778135011/yarden_makeup/yarden_makeup_18010957042996442.jpg</image:loc>
+      <image:title>יום הולדת 30 🎂🎈🥳
+תודה לבעלי האלוף שהצליח להפתיע אותי ולגרום לי אושר ❤️
+@damriofir 
+
+תודה על כל הברכו</image:title>
+      <image:caption>איפור מקצועי מאת ירדן דמרי, מאפרת כלות באילת</image:caption>
+    </image:image>
+  </url>
 </urlset>
