@@ -151,6 +151,7 @@
     <div class="tab active" onclick="switchTab('gallery',this)">🖼️ גלריה</div>
     <div class="tab" onclick="switchTab('cats',this)">🏷️ קטגוריות</div>
     <div class="tab" onclick="switchTab('analytics',this)">📊 ביצועים</div>
+    <div class="tab" onclick="switchTab('pricing',this)">💰 מחירון</div>
     <div class="tab" onclick="switchTab('settings',this)">⚙️ הגדרות</div>
   </div>
 
@@ -261,6 +262,15 @@
       📊 פתח גוגל אנליטיקס לדוחות מלאים
     </a>
 
+  </div>
+
+  <!-- PRICING TAB -->
+  <div id="tab-pricing" style="display:none;padding:24px 16px">
+    <h2 style="font-size:1rem;margin-bottom:20px;color:var(--text)">💰 עריכת מחירון</h2>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px">כל שינוי כאן יופיע אוטומטית בדף המחירון באתר.</p>
+    <div id="pricing-editor"></div>
+    <button class="btn btn-primary" onclick="addPricingItem()" style="margin-top:16px">+ הוסף שירות</button>
+    <button class="btn" style="background:#2d7a4f;color:#fff;margin-top:8px" onclick="savePricingItems()">💾 שמור ופרסם</button>
   </div>
 
   <!-- SETTINGS TAB -->
@@ -723,6 +733,7 @@ function switchTab(name,el){
   });
   if(name==='cats') renderCatList();
   if(name==='analytics') initAnalytics();
+  if(name==='pricing') { _pricingItems = null; renderPricingEditor(); }
 }
 
 // ─── ANALYTICS ───────────────────────────────────────────────────
@@ -1010,6 +1021,61 @@ function renderBars(elId, countObj, total, emptyMsg) {
   }).join('');
 }
 
+
+// ─── PRICING EDITOR ──────────────────────────────────────────────
+const DEFAULT_PRICING = [
+  {icon:'💍',name:'מאפרת כלות',desc:'כולל ניסוי + יום החתונה',price:'לפי הצעה',featured:true,includes:['ניסוי איפור מקצועי','יום החתונה','Touch-Up Kit','מגיעה אלייך']},
+  {icon:'🌙',name:'איפור ערב',desc:'לאירועים ומסיבות',price:'החל מ-₪350',featured:false,includes:['התאמה אישית','מוצרים פרימיום','עמיד לאורך הלילה']},
+  {icon:'🎬',name:'הפקות',desc:'צילומים ופרסומות',price:'לפי הצעה',featured:false,includes:['מקצוע כלפי מצלמה','לפי שעות']},
+  {icon:'🎂',name:'איפור יום הולדת',desc:'כלה של היום',price:'החל מ-₪280',featured:false,includes:['מראה חגיגי']},
+  {icon:'🖌️',name:'סדנת איפור',desc:'ללמוד לבד',price:'לפי הצעה',featured:false,includes:['אישית/קבוצתית','טכניקות מקצועיות']},
+];
+
+function getPricingItems() {
+  try { return JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; } catch(e) { return DEFAULT_PRICING; }
+}
+
+function renderPricingEditor() {
+  const items = getPricingItems();
+  document.getElementById('pricing-editor').innerHTML = items.map((item, i) => `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <input value="${item.icon}" placeholder="אייקון" style="width:50px;text-align:center;padding:8px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)" onchange="updatePricingItem(${i},'icon',this.value)"/>
+        <input value="${item.name}" placeholder="שם השירות" style="flex:1;min-width:120px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)" onchange="updatePricingItem(${i},'name',this.value)"/>
+        <input value="${item.price}" placeholder="מחיר" style="width:130px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)" onchange="updatePricingItem(${i},'price',this.value)"/>
+      </div>
+      <input value="${item.desc}" placeholder="תיאור קצר" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);margin-bottom:6px;box-sizing:border-box" onchange="updatePricingItem(${i},'desc',this.value)"/>
+      <textarea placeholder="מה כלול (שורה לכל פריט)" rows="2" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);resize:vertical;box-sizing:border-box" onchange="updatePricingItem(${i},'includes',this.value.split('\n').filter(Boolean))">${(item.includes||[]).join('\n')}</textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+        <label style="font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="checkbox" ${item.featured?'checked':''} onchange="updatePricingItem(${i},'featured',this.checked)"/> הכי פופולרי
+        </label>
+        <button onclick="removePricingItem(${i})" style="background:rgba(255,80,80,.15);border:1px solid rgba(255,80,80,.3);color:#ff6b6b;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:.78rem">מחק</button>
+      </div>
+    </div>`).join('');
+}
+
+let _pricingItems = null;
+function updatePricingItem(i, field, value) {
+  if (!_pricingItems) _pricingItems = getPricingItems();
+  _pricingItems[i][field] = value;
+}
+function removePricingItem(i) {
+  if (!_pricingItems) _pricingItems = getPricingItems();
+  _pricingItems.splice(i, 1);
+  localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems));
+  renderPricingEditor();
+}
+function addPricingItem() {
+  if (!_pricingItems) _pricingItems = getPricingItems();
+  _pricingItems.push({icon:'✨',name:'שירות חדש',desc:'תיאור',price:'לפי הצעה',featured:false,includes:[]});
+  renderPricingEditor();
+}
+function savePricingItems() {
+  if (!_pricingItems) _pricingItems = getPricingItems();
+  localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems));
+  showToast('✅ מחירון נשמר! מופיע באתר עכשיו.');
+}
 
 // ─── TOAST ───────────────────────────────────────────────────────
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
