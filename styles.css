@@ -382,7 +382,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       /* NAV */
-      nav { padding: 13px 18px; }
+      nav, .main-nav { padding: 13px 18px; background: rgba(26,16,8,.97); border-bottom-color: rgba(196,154,108,.15); }
+      .nav-logo { color: var(--text) !important; }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .nav-mobile-group { display: flex; }
