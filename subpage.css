@@ -1,13 +1,13 @@
 /* Sub-page shared styles — dark luxury theme */
 :root {
-  --bg: #0d0805;
-  --bg2: #150e09;
+  --bg: #FAF6F1;
+  --bg2: #F2E8DC;
   --blush: #C49A6C;
   --rose: #A0644A;
-  --text: #FAF6F1;
-  --muted: rgba(250,246,241,.55);
+  --text: #3E2A1A;
+  --muted: rgba(62,42,26,.65);
   --border: rgba(196,154,108,.15);
-  --card: rgba(255,255,255,.04);
+  --card: rgba(62,42,26,.05);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
