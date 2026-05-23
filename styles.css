@@ -63,33 +63,31 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       padding: 18px 60px;
       display: flex; justify-content: space-between; align-items: center;
-      background: rgba(26,16,8,.96);
+      background: rgba(26,16,8,.95);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(196,154,108,.15);
+      border-bottom: 1px solid rgba(196,154,108,.12);
       transition: all .4s ease;
     }
-    .nav-logo { color: #FAF6F1 !important; }
-    .nav-links a { color: rgba(255,255,255,.75) !important; }
-    .nav-links a:hover, .nav-links a:focus { color: var(--blush) !important; opacity: 1; }
     .nav-logo {
       font-size: 1.5rem; font-weight: 300;
-      letter-spacing: .12em; color: var(--deep); flex-shrink: 0;
+      letter-spacing: .12em; color: #FAF6F1; flex-shrink: 0;
+      text-decoration: none;
     }
-    .nav-logo span { font-style: italic; color: var(--rose); }
+    .nav-logo span { font-style: italic; color: var(--blush); }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; font-size: .78rem; font-weight: 600;
       letter-spacing: .12em; text-transform: uppercase;
-      color: var(--text); opacity: .7;
-      transition: opacity .3s, color .3s; white-space: nowrap;
+      color: rgba(255,255,255,.65);
+      transition: color .3s; white-space: nowrap;
     }
-    .nav-links a:hover, .nav-links a:focus { opacity: 1; color: var(--rose); }
+    .nav-links a:hover, .nav-links a:focus { color: var(--blush); }
     .nav-cta {
       background: var(--rose); color: #fff !important;
-      opacity: 1 !important; padding: 0 20px; height: 36px; line-height: 36px; border-radius: 30px;
+      padding: 0 20px; height: 36px; border-radius: 30px;
       transition: background .3s !important; white-space: nowrap; display: inline-flex; align-items: center;
     }
-    .nav-cta:hover, .nav-cta:focus { background: var(--deep) !important; }
+    .nav-cta:hover, .nav-cta:focus { background: var(--blush) !important; }
 
     /* ── HERO ── */
     #hero {
