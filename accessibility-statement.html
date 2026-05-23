@@ -83,6 +83,17 @@
       header { padding:14px 18px; }
     }
   </style>
+  <style>
+    /* Mobile nav override — must be inline to beat cached external CSS */
+    @media (max-width: 1080px) {
+      .nav-links { display: none !important; }
+      .menu-toggle { display: flex !important; flex-direction: column; gap: 5px; }
+    }
+    @media (min-width: 1081px) {
+      .nav-links { display: flex !important; }
+      .menu-toggle { display: none !important; }
+    }
+  </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
