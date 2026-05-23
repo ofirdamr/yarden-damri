@@ -18,6 +18,17 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Service","name":"מאפרת כלות באילת","description":"שירות איפור כלות מקצועי באילת ובכל הארץ.","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"},"areaServed":{"@type":"City","name":"אילת"},"serviceType":"איפור כלות","telephone":"+972547276716"}
   </script>
+  <style>
+    /* Mobile nav override — must be inline to beat cached external CSS */
+    @media (max-width: 1080px) {
+      .nav-links { display: none !important; }
+      .menu-toggle { display: flex !important; flex-direction: column; gap: 5px; }
+    }
+    @media (min-width: 1081px) {
+      .nav-links { display: flex !important; }
+      .menu-toggle { display: none !important; }
+    }
+  </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
