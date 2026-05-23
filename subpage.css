@@ -19,7 +19,7 @@ body { background:var(--bg); color:var(--text); font-family:Arial,'Helvetica Neu
 .nav-logo em { font-style:italic; color:var(--blush); }
 .menu-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
 .menu-toggle span { display:block; width:24px; height:1.5px; background:var(--text); border-radius:2px; transition:.3s; }
-.nav-links { display:flex; gap:24px; list-style:none; align-items:center; }
+.nav-links { list-style:none; align-items:center; display:none; gap:24px; }
 .nav-links a { text-decoration:none; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.55); transition:color .3s; white-space:nowrap; }
 .nav-links a:hover, .nav-links a:focus { color:var(--blush); }
 .nav-cta { background:var(--rose); color:#fff !important; padding:0 18px; height:34px; border-radius:30px; display:inline-flex; align-items:center; transition:background .3s !important; }
@@ -35,7 +35,7 @@ body { background:var(--bg); color:var(--text); font-family:Arial,'Helvetica Neu
 .mobile-menu-wa { margin-top:32px; color:var(--blush); font-size:.9rem; text-decoration:none; }
 
 /* HERO */
-.page-hero { padding:140px 24px 80px; text-align:center; position:relative; }
+.page-hero { padding:140px 24px 80px; text-align:center; position:relative; background:linear-gradient(180deg,rgba(26,16,8,.07) 0%,transparent 40%); }
 .page-eyebrow { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blush); margin-bottom:16px; display:block; }
 .page-title { font-family:serif; font-size:clamp(2.4rem,6vw,4.5rem); font-weight:300; color:var(--text); line-height:1.15; margin-bottom:20px; }
 .page-title em { font-style:italic; color:var(--blush); }
@@ -74,8 +74,14 @@ section { padding:80px 24px; }
 .skip-link { position:absolute; top:-100px; left:0; background:var(--blush); color:#fff; padding:10px 20px; border-radius:0 0 8px 0; font-size:.9rem; text-decoration:none; z-index:10000; transition:top .2s; }
 .skip-link:focus { top:0; }
 
+@media(min-width:901px) {
+  .nav-links { display:flex !important; }
+  .menu-toggle { display:none !important; }
+}
 @media(max-width:900px) {
   .main-nav { padding:14px 20px; }
-  .nav-links { display:none; }
-  .menu-toggle { display:flex; }
+  .nav-links { display:none !important; }
+  .menu-toggle { display:flex !important; }
 }
+
+.nav-social { display:flex; gap:6px; align-items:center; }
