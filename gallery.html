@@ -40,6 +40,17 @@
     .load-more{display:block;margin:40px auto;background:transparent;border:1px solid var(--blush);color:var(--blush);padding:12px 40px;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
     .load-more:hover{background:var(--blush);color:#fff}
   </style>
+  <style>
+    /* Mobile nav override — must be inline to beat cached external CSS */
+    @media (max-width: 1080px) {
+      .nav-links { display: none !important; }
+      .menu-toggle { display: flex !important; flex-direction: column; gap: 5px; }
+    }
+    @media (min-width: 1081px) {
+      .nav-links { display: flex !important; }
+      .menu-toggle { display: none !important; }
+    }
+  </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
