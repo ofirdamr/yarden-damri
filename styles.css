@@ -312,7 +312,7 @@
     /* ── MOBILE MENU ── */
     .nav-mobile-group { display: none; align-items: center; gap: 10px; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
-    .nav-hamburger span { display: block; width: 26px; height: 2px; background: var(--deep); border-radius: 2px; transition: .3s; }
+    .nav-hamburger span { display: block; width: 26px; height: 2px; background: var(--cream); border-radius: 2px; transition: .3s; }
     .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -381,11 +381,11 @@
     input, textarea, select { -webkit-user-select: text; user-select: text; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    @media (max-width: 1080px) {
       /* NAV */
       nav, .main-nav { padding: 13px 18px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      .nav-links { display: none !important; }
+      .nav-hamburger { display: flex !important; }
       .nav-mobile-group { display: flex; }
       .nav-mobile-icons { display: none; } /* hide social pills from nav on mobile - already in mobile menu */
       .mobile-menu { display: flex; }
