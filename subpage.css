@@ -17,9 +17,9 @@ body { background:var(--bg); color:var(--text); font-family:Arial,'Helvetica Neu
 .main-nav { position:fixed; top:0; width:100%; z-index:100; padding:18px 60px; display:flex; justify-content:space-between; align-items:center; background:rgba(13,8,5,.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); transition:all .4s; }
 .nav-logo { font-size:1.4rem; font-weight:300; letter-spacing:.14em; color:var(--text); text-decoration:none; flex-shrink:0; }
 .nav-logo em { font-style:italic; color:var(--blush); }
-.menu-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
-.menu-toggle span { display:block; width:24px; height:1.5px; background:var(--text); border-radius:2px; transition:.3s; }
-.nav-links { list-style:none; align-items:center; display:none; gap:24px; }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+.nav-hamburger span { display:block; width:24px; height:1.5px; background:var(--text); border-radius:2px; transition:.3s; }
+.nav-links { list-style:none; align-items:center; gap:24px; }
 .nav-links a { text-decoration:none; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.55); transition:color .3s; white-space:nowrap; }
 .nav-links a:hover, .nav-links a:focus { color:var(--blush); }
 .nav-cta { background:var(--rose); color:#fff !important; padding:0 18px; height:34px; border-radius:30px; display:inline-flex; align-items:center; transition:background .3s !important; }
@@ -76,12 +76,12 @@ section { padding:80px 24px; }
 
 @media(min-width:1081px) {
   .nav-links { display:flex !important; }
-  .menu-toggle { display:none !important; }
+  .nav-hamburger { display:none !important; }
 }
 @media(max-width:1080px) {
   .main-nav { padding:14px 20px; }
   .nav-links { display:none !important; }
-  .menu-toggle { display:flex !important; }
+  .nav-hamburger { display:flex !important; }
 }
 
 .nav-social { display:flex; gap:6px; align-items:center; }
