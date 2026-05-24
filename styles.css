@@ -506,3 +506,24 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
+
+
+/* ── SUB-PAGES ── */
+body.subpage {
+  background: #FAF6F1;
+  color: #3E2A1A;
+}
+body.subpage .page-hero { padding:140px 24px 80px; text-align:center; }
+body.subpage .page-eyebrow { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blush); margin-bottom:16px; display:block; }
+body.subpage .page-title { font-family:serif; font-size:clamp(2.4rem,6vw,4.5rem); font-weight:300; color:#3E2A1A; line-height:1.15; margin-bottom:20px; }
+body.subpage .page-title em { font-style:italic; color:var(--blush); }
+body.subpage .page-lead { color:rgba(62,42,26,.7); max-width:560px; margin:0 auto; font-size:1rem; line-height:1.85; }
+body.subpage .luxury-card { background:rgba(62,42,26,.05); border:1px solid rgba(196,154,108,.2); border-radius:2px; padding:36px 28px; transition:border-color .3s,transform .3s; }
+body.subpage .luxury-card:hover { border-color:rgba(196,154,108,.4); transform:translateY(-2px); }
+body.subpage .luxury-card h3 { color:#3E2A1A; }
+body.subpage .luxury-card p { color:rgba(62,42,26,.7); }
+body.subpage .section-label { font-size:.7rem; letter-spacing:.22em; text-transform:uppercase; color:var(--blush); display:block; margin-bottom:12px; }
+body.subpage .section-h2 { font-family:serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:300; color:#3E2A1A; margin-bottom:16px; }
+body.subpage .section-h2 em { font-style:italic; color:var(--blush); }
+body.subpage .service-name { color:#3E2A1A; }
+body.subpage .service-desc { color:rgba(62,42,26,.75); }
