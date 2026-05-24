@@ -388,7 +388,6 @@
       .nav-hamburger { display: flex !important; }
       .nav-mobile-group { display: flex; }
       .nav-mobile-icons { display: none; } /* hide social pills from nav on mobile - already in mobile menu */
-      .mobile-menu { display: flex; }
       .nav-logo { font-size: 1.3rem; }
 
       /* HERO — image banner on top, text below */
