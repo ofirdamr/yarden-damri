@@ -45,63 +45,199 @@
 </head>
 <body class="subpage">
 <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
-<nav role="navigation" aria-label="ניווט ראשי">
-    <div class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">ירדן <span>דמרי</span></div>
+<nav class="site-nav" role="navigation" aria-label="ניווט ראשי">
+  <a href="/" class="nav-logo">ירדן <span>דמרי</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="/">דף הבית</a></li>
+    <li><a href="/bride.html">מאפרת כלות</a></li>
+    <li><a href="/services.html">שירותים</a></li>
+    <li><a href="/gallery.html">גלריה</a></li>
+    <li><a href="/bridal-guide.html">מדריך כלות</a></li>
+    <li><a href="#contact">צרי קשר</a></li>
+    <li><a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener" aria-label="Instagram" class="nav-ig"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    <li><a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener" aria-label="TikTok" class="nav-tt"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg></a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="תפריט" aria-expanded="false" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="navDrawer" style="display:none;position:fixed;top:64px;right:0;left:0;background:rgba(26,16,8,.97);z-index:998;padding:24px 32px;flex-direction:column;gap:0;">
+  <ul style="list-style:none;margin:0;padding:0;">
+    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">דף הבית</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/bride.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">מאפרת כלות</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/services.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">שירותים</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/gallery.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">גלריה</a></li>
+    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/bridal-guide.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">מדריך כלות</a></li>
+    <li style="padding:14px 0;"><a href="#contact" style="color:var(--blush);text-decoration:none;font-size:.9rem;letter-spacing:.06em;font-weight:700;">צרי קשר</a></li>
+  </ul>
+</div>
+<script>
+  function toggleNav() {
+    var d = document.getElementById('navDrawer');
+    var btn = document.getElementById('navHamburger');
+    var open = d.style.display === 'flex';
+    d.style.display = open ? 'none' : 'flex';
+    btn.setAttribute('aria-expanded', !open);
+  }
+  window.addEventListener('scroll', function() {
+    document.querySelector('nav.site-nav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,.4)' : '';
+  }, {passive: true});
+</script>
 
-    <!-- Mobile hamburger -->
-    <button class="nav-hamburger" id="navHamburger"
-      aria-label="פתיחת תפריט ניווט"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
-      onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
 
-    <!-- Desktop nav links -->
-    <ul class="nav-links" role="list">
-      <li><a href="#about">אודות</a></li>
-      <li><a href="/bride.html">מאפרת כלות</a></li>
-      <li><a href="/services.html">שירותים</a></li>
-      <li><a href="/gallery.html">גלריה</a></li>
-      <li><a href="/pricing.html">מחירון</a></li>
-      <li><a href="#contact" class="nav-cta">צרי קשר</a></li>
-      <li class="nav-social">
-        <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram של ירדן דמרי" class="social-pill social-ig">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          
-        </a>
-        <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok של ירדן דמרי" class="social-pill social-tt">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
-          
-        </a>
-      </li>
-    </ul>
-  </nav>
 
-<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="תפריט ניווט נייד" aria-hidden="true">
-    <ul role="list">
-      <li><a href="#about" onclick="closeMobileMenu()">אודות</a></li>
-      <li><a href="#services" onclick="closeMobileMenu()">שירותים</a></li>
-      <li><a href="#gallery" onclick="closeMobileMenu()">גלריה</a></li>
-      <li><a href="#area" onclick="closeMobileMenu()">אזור פעילות</a></li>
-      <li><a href="#reviews" onclick="closeMobileMenu()">ביקורות</a></li>
-      <li><a href="#contact" onclick="closeMobileMenu()">צרי קשר</a></li>
-    </ul>
-    <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="mobile-menu-wa" onclick="closeMobileMenu()">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-      שלחי הודעה בוואטסאפ
-    </a>
-    <div class="mobile-social">
-      <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-pill social-ig">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        <span>Instagram</span>
-      </a>
-      <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-pill social-tt">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
-        <span>TikTok</span>
-      </a>
+
+
+<main id="main-content">
+  <section class="page-hero">
+    <span class="page-eyebrow">עבודות אמיתיות</span>
+    <h1 class="page-title">גלריית <em>עבודות</em></h1>
+    <p class="page-lead">מעל 1,000 לוקים — כלות, ערב, הפקות ואירועים. כל תמונה היא סיפור של אישה שהרגישה בדיוק כמו שרצתה.</p>
+  </section>
+
+  <section style="padding:0 0 60px;">
+    <div class="filter-bar" role="tablist" aria-label="סינון גלריה">
+      <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
+      <button class="filter-btn" data-cat="bride" role="tab" aria-selected="false">כלות 💍</button>
+      <button class="filter-btn" data-cat="evening" role="tab" aria-selected="false">ערב 🌙</button>
+      <button class="filter-btn" data-cat="production" role="tab" aria-selected="false">הפקות 🎬</button>
     </div>
-  </div>
+    <div class="gallery-grid" id="galleryGrid" role="list"></div>
+    <button class="load-more" id="loadMoreBtn" aria-label="טעיני עוד תמונות">טעיני עוד ↓</button>
+  </section>
+
+  <section style="padding:40px 24px 60px;text-align:center;">
+    <p style="color:rgba(255,255,255,.4);font-size:.82rem;">ראי גם: <a href="/bride.html" style="color:var(--blush)">מאפרת כלות</a> | <a href="/reviews.html" style="color:var(--blush)">ביקורות לקוחות</a> | <a href="/services.html" style="color:var(--blush)">כל השירותים</a></p>
+  </section>
+</main>
+
+<footer style="background:#1a1008;border-top:1px solid rgba(255,255,255,.07);padding:40px 24px;text-align:center;">
+  <p style="color:rgba(255,255,255,.3);font-size:.8rem;margin-bottom:16px">© 2025 ירדן דמרי — מאפרת כלות וערב באילת</p>
+  <nav aria-label="ניווט תחתון" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:.8rem;">
+    <a href="/" style="color:rgba(255,255,255,.4);text-decoration:none">דף הבית</a>
+    <a href="/bride.html" style="color:rgba(255,255,255,.4);text-decoration:none">מאפרת כלות</a>
+    <a href="/services.html" style="color:rgba(255,255,255,.4);text-decoration:none">שירותים</a>
+    <a href="/gallery.html" style="color:rgba(255,255,255,.4);text-decoration:none">גלריה</a>
+    <a href="/reviews.html" style="color:rgba(255,255,255,.4);text-decoration:none">ביקורות</a>
+    <a href="/contact.html" style="color:rgba(255,255,255,.4);text-decoration:none">צרי קשר</a>
+  </nav>
+</footer>
+
+<a href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="וואטסאפ">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="תצוגת תמונה">
+  <button class="lb-close" id="lbClose" aria-label="סגור">✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="הקודמת">›</button>
+  <img class="lb-img" id="lbImg" src="" alt=""/>
+  <button class="lb-next" id="lbNext" aria-label="הבאה">‹</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script src="gallery-data.js?v=2"></script>
+<script>
+const menuToggle=document.getElementById('menuToggle');
+const mobileMenu=document.getElementById('mobileMenu');
+);
+  page++;
+  const btn = document.getElementById('loadMoreBtn');
+  btn.style.display = page * PAGE_SIZE >= filteredImages.length ? 'none' : 'block';
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+    applyFilter(btn.dataset.cat);
+  });
+});
+document.getElementById('loadMoreBtn').addEventListener('click', loadPage);
+
+// Lightbox
+function openLb(idx) {
+  lbIndex = idx;
+  showLb();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLb() {
+  const img = filteredImages[lbIndex];
+  const url = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_1200/');
+  document.getElementById('lbImg').src = url;
+  document.getElementById('lbImg').alt = (img.a||'').split('\n')[0].substring(0,80);
+  document.getElementById('lbCounter').textContent = `${lbIndex+1} / ${filteredImages.length}`;
+}
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1) % filteredImages.length; showLb(); });
+document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex - 1 + filteredImages.length) % filteredImages.length; showLb(); });
+document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex+1) % filteredImages.length; showLb(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex-1+filteredImages.length) % filteredImages.length; showLb(); }
+});
+
+// Init
+applyFilter('all');
+OCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-68XM6LS4HX');</script>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>גלריה | ירדן דמרי – מאפרת כלות וערב באילת</title>
+  <meta name="description" content="גלריית עבודות של ירדן דמרי – מאפרת מקצועית באילת. איפור כלות, ערב, הפקות ואירועים. מעל 1000 תמונות אמיתיות מעבודות שנתיים."/>
+  <meta name="keywords" content="גלריה מאפרת אילת, תמונות איפור כלות, עבודות ירדן דמרי, איפור מקצועי תמונות"/>
+  <meta property="og:title" content="גלריה | ירדן דמרי מאפרת"/>
+  <meta property="og:url" content="https://yardendamri.co.il/gallery.html"/>
+  <link rel="canonical" href="https://yardendamri.co.il/gallery.html"/>
+  <link rel="stylesheet" href="main.css"/>
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"גלריית עבודות ירדן דמרי","url":"https://yardendamri.co.il/gallery.html","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"}}</script>
+  <style>
+    .filter-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+    .filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 20px;border-radius:30px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
+    .filter-btn.active,.filter-btn:hover{background:var(--blush);border-color:var(--blush);color:#fff}
+    .gallery-grid{columns:2;gap:10px;max-width:1100px;margin:0 auto;padding:0 16px}
+    @media(min-width:640px){.gallery-grid{columns:3}}
+    @media(min-width:960px){.gallery-grid{columns:4}}
+    .gallery-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:4px;cursor:pointer;background:#1a1008}
+    .gallery-item img{width:100%;display:block;transition:transform .4s,opacity .3s;opacity:0}
+    .gallery-item img.loaded{opacity:1}
+    .gallery-item:hover img{transform:scale(1.04)}
+    .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px}
+    .gallery-item:hover .overlay{opacity:1}
+    .overlay-text{font-size:.72rem;color:rgba(255,255,255,.85);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+    /* LIGHTBOX */
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
+    .lb.open{display:flex}
+    .lb-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s}
+    .lb-close:hover{opacity:1}
+    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;padding:16px 12px;cursor:pointer;border-radius:4px;transition:background .2s}
+    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
+    .lb-prev{right:12px}.lb-next{left:12px}
+    .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
+    .load-more{display:block;margin:40px auto;background:transparent;border:1px solid var(--blush);color:var(--blush);padding:12px 40px;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
+    .load-more:hover{background:var(--blush);color:#fff}
+  </style>
+  <style>
+  </style>
+</head>
+<body class="subpage">
+<a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
+
+
 
 <main id="main-content">
   <section class="page-hero">
