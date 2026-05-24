@@ -62,7 +62,7 @@
     nav, .main-nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
       padding: 18px 60px;
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap;
       background: rgba(26,16,8,.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(196,154,108,.12);
