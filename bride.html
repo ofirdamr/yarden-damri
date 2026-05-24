@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_1200/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg"/>
   <meta property="og:url" content="https://yardendamri.co.il/bride.html"/>
   <link rel="canonical" href="https://yardendamri.co.il/bride.html"/>
-  <link rel="stylesheet" href="main.css"/>
+  <link rel="stylesheet" href="styles.css?v=3"/>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Service","name":"מאפרת כלות באילת","description":"שירות איפור כלות מקצועי באילת ובכל הארץ.","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"},"areaServed":{"@type":"City","name":"אילת"},"serviceType":"איפור כלות","telephone":"+972547276716"}
   </script>
@@ -23,247 +23,64 @@
 </head>
 <body class="subpage">
 <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
-<nav class="site-nav" role="navigation" aria-label="ניווט ראשי">
-  <a href="/" class="nav-logo">ירדן <span>דמרי</span></a>
-  <ul class="nav-links" role="list">
-    <li><a href="/">דף הבית</a></li>
-    <li><a href="/bride.html">מאפרת כלות</a></li>
-    <li><a href="/services.html">שירותים</a></li>
-    <li><a href="/gallery.html">גלריה</a></li>
-    <li><a href="/bridal-guide.html">מדריך כלות</a></li>
-    <li><a href="#contact">צרי קשר</a></li>
-    <li><a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener" aria-label="Instagram" class="nav-ig"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
-    <li><a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener" aria-label="TikTok" class="nav-tt"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg></a></li>
-  </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="תפריט" aria-expanded="false" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div id="navDrawer" style="display:none;position:fixed;top:64px;right:0;left:0;background:rgba(26,16,8,.97);z-index:998;padding:24px 32px;flex-direction:column;gap:0;">
-  <ul style="list-style:none;margin:0;padding:0;">
-    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">דף הבית</a></li>
-    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/bride.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">מאפרת כלות</a></li>
-    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/services.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">שירותים</a></li>
-    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/gallery.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">גלריה</a></li>
-    <li style="border-bottom:1px solid rgba(255,255,255,.07);padding:14px 0;"><a href="/bridal-guide.html" style="color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;letter-spacing:.06em;">מדריך כלות</a></li>
-    <li style="padding:14px 0;"><a href="#contact" style="color:var(--blush);text-decoration:none;font-size:.9rem;letter-spacing:.06em;font-weight:700;">צרי קשר</a></li>
-  </ul>
-</div>
-<script>
-  function toggleNav() {
-    var d = document.getElementById('navDrawer');
-    var btn = document.getElementById('navHamburger');
-    var open = d.style.display === 'flex';
-    d.style.display = open ? 'none' : 'flex';
-    btn.setAttribute('aria-expanded', !open);
-  }
-  window.addEventListener('scroll', function() {
-    document.querySelector('nav.site-nav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,.4)' : '';
-  }, {passive: true});
-</script>
 
+<nav role="navigation" aria-label="ניווט ראשי">
+    <div class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">ירדן <span>דמרי</span></div>
 
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="navHamburger"
+      aria-label="פתיחת תפריט ניווט"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+      onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
 
-
-
-
-<main id="main-content">
-
-  <section style="padding:120px 24px 80px;text-align:center;background:linear-gradient(180deg,rgba(196,154,108,.08) 0%,transparent 100%);">
-    <p class="section-eyebrow" style="justify-content:center">💍 ביום המיוחד שלך</p>
-    <h1 class="section-title" style="font-size:clamp(2.2rem,6vw,3.8rem);margin-bottom:20px">מאפרת כלות<br/><em>באילת</em></h1>
-    <p style="font-size:1.05rem;color:var(--text);max-width:560px;margin:0 auto 36px;line-height:1.8">המראה המושלם ביום הכי חשוב בחייך. איפור כלה מקצועי שמחזיק מהבוקר ועד רגע האחרון — עדין, זוהר ובלתי נשכח.</p>
-    <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת באיפור כלות" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:linear-gradient(135deg,var(--rose),var(--blush));color:#fff;padding:16px 36px;border-radius:50px;text-decoration:none;font-size:1rem;font-weight:700;">📲 לתיאום פגישת היכרות</a>
-  </section>
-
-  <section style="padding:60px 24px;max-width:960px;margin:0 auto;">
-    <p class="section-eyebrow" style="justify-content:center">למה לבחור בירדן?</p>
-    <h2 class="section-title" style="text-align:center;margin-bottom:48px">מה <em>מייחד</em> את השירות</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;">
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">✨</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מאות כלות מאושרות</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">שנים של ניסיון עם כלות בסגנונות שונים — כל אחת קיבלה מראה ייחודי שמתאים לה.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">💄</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מוצרים פרימיום</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">עובדת רק עם מוצרי איפור מהשורה הראשונה — עמידים, עדינים לעור.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">🕐</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">עמיד כל היום</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">האיפור מחזיק מהכנסת שבת ועד שעות הלילה — גם בחום אילת.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">🚗</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מגיעה עד אלייך</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">מגיעה לבית, לאולם, למלון — בכל מקום שנוח לך. מאילת ועד כל הארץ.</p></div>
-    </div>
-  </section>
-
-  <section style="padding:60px 24px;background:rgba(196,154,108,.04);border-top:1px solid rgba(196,154,108,.1);border-bottom:1px solid rgba(196,154,108,.1);">
-    <div style="max-width:800px;margin:0 auto;text-align:center;">
-      <h2 class="section-title" style="margin-bottom:48px">תהליך <em>העבודה</em></h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;">
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">1</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">שיחת היכרות</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">מדברות על הסגנון, השמלה, האירוע — מבינות מה ייחודי בך.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">2</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">פגישת ניסוי</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">ניסוי מקצועי — בוחרים את המראה המושלם ביחד.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">3</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">יום החתונה</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">מגיעה אלייך, עובדת בשקט ומקצועיות. תוצאה מושלמת.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">4</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">נוזרים מאושרים</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">האיפור נשמר מושלם לכל אורך הערב.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding:60px 24px;text-align:center;">
-    <h2 class="section-title" style="margin-bottom:16px">מוכנה לקבל הצעת <em>מחיר?</em></h2>
-    <p style="color:var(--text);max-width:500px;margin:0 auto 32px;font-size:.95rem;line-height:1.7">שלחי הודעה ונקבע פגישת היכרות ללא התחייבות. מחירים הוגנים, שירות מקצועי.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת באיפור כלות" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:linear-gradient(135deg,var(--rose),var(--blush));color:#fff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:.95rem;font-weight:700;">📲 וואטסאפ</a>
-      <a href="tel:0547276716" style="display:inline-block;border:1px solid var(--blush);color:var(--blush);padding:16px 32px;border-radius:50px;text-decoration:none;font-size:.95rem;font-weight:700;">📞 התקשרי</a>
-    </div>
-  </section>
-
-  <section style="padding:20px 24px 60px;text-align:center;">
-    <p style="color:rgba(62,42,26,.45);font-size:.82rem;">ראי גם: <a href="/gallery.html" style="color:var(--blush)">גלריה עבודות</a> | <a href="/reviews.html" style="color:var(--blush)">ביקורות לקוחות</a> | <a href="/services.html" style="color:var(--blush)">כל השירותים</a></p>
-  </section>
-
-</main>
-
-<footer style="background:#1a1008;border-top:1px solid rgba(255,255,255,.07);padding:40px 24px;text-align:center;">
-  <p style="color:rgba(62,42,26,.35);font-size:.8rem;margin-bottom:16px">© 2025 ירדן דמרי — מאפרת כלות וערב באילת</p>
-  <nav aria-label="ניווט תחתון" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:.8rem;">
-    <a href="/" style="color:rgba(62,42,26,.45);text-decoration:none">דף הבית</a>
-    <a href="/bride.html" style="color:rgba(62,42,26,.45);text-decoration:none">מאפרת כלות</a>
-    <a href="/services.html" style="color:rgba(62,42,26,.45);text-decoration:none">שירותים</a>
-    <a href="/gallery.html" style="color:rgba(62,42,26,.45);text-decoration:none">גלריה</a>
-    <a href="/reviews.html" style="color:rgba(62,42,26,.45);text-decoration:none">ביקורות</a>
-    <a href="/contact.html" style="color:rgba(62,42,26,.45);text-decoration:none">צרי קשר</a>
+    <!-- Desktop nav links -->
+    <ul class="nav-links" role="list">
+      <li><a href="#about">אודות</a></li>
+      <li><a href="/bride.html">מאפרת כלות</a></li>
+      <li><a href="/services.html">שירותים</a></li>
+      <li><a href="/gallery.html">גלריה</a></li>
+      <li><a href="/pricing.html">מחירון</a></li>
+      <li><a href="#contact" class="nav-cta">צרי קשר</a></li>
+      <li class="nav-social">
+        <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram של ירדן דמרי" class="social-pill social-ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok של ירדן דמרי" class="social-pill social-tt">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+          <span>TikTok</span>
+        </a>
+      </li>
+    </ul>
   </nav>
-</footer>
 
-<a href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="וואטסאפ">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-</a>
-
-<script>
-  const menuToggle=document.getElementById('menuToggle');
-  const mobileMenu=document.getElementById('mobileMenu');
-  OCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-68XM6LS4HX');</script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>מאפרת כלות באילת | ירדן דמרי – איפור כלות מקצועי</title>
-  <meta name="description" content="ירדן דמרי – מאפרת כלות מקצועית באילת. איפור כלה עדין, זוהר ועמיד לכל היום. מאות כלות מרוצות. לתיאום: 054-7276716"/>
-  <meta name="keywords" content="מאפרת כלות אילת, איפור כלות אילת, מאפרת כלות, איפור כלה, ירדן דמרי מאפרת"/>
-  <meta property="og:title" content="מאפרת כלות באילת | ירדן דמרי"/>
-  <meta property="og:description" content="מאפרת כלות מקצועית באילת. איפור כלה עדין וזוהר שמחזיק כל היום."/>
-  <meta property="og:image" content="https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_1200/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg"/>
-  <meta property="og:url" content="https://yardendamri.co.il/bride.html"/>
-  <link rel="canonical" href="https://yardendamri.co.il/bride.html"/>
-  <link rel="stylesheet" href="main.css"/>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Service","name":"מאפרת כלות באילת","description":"שירות איפור כלות מקצועי באילת ובכל הארץ.","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"},"areaServed":{"@type":"City","name":"אילת"},"serviceType":"איפור כלות","telephone":"+972547276716"}
-  </script>
-  <style>
-  </style>
-</head>
-<body class="subpage">
-<a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
-
-
-
-
-
-<main id="main-content">
-
-  <section style="padding:120px 24px 80px;text-align:center;background:linear-gradient(180deg,rgba(196,154,108,.08) 0%,transparent 100%);">
-    <p class="section-eyebrow" style="justify-content:center">💍 ביום המיוחד שלך</p>
-    <h1 class="section-title" style="font-size:clamp(2.2rem,6vw,3.8rem);margin-bottom:20px">מאפרת כלות<br/><em>באילת</em></h1>
-    <p style="font-size:1.05rem;color:var(--text);max-width:560px;margin:0 auto 36px;line-height:1.8">המראה המושלם ביום הכי חשוב בחייך. איפור כלה מקצועי שמחזיק מהבוקר ועד רגע האחרון — עדין, זוהר ובלתי נשכח.</p>
-    <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת באיפור כלות" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:linear-gradient(135deg,var(--rose),var(--blush));color:#fff;padding:16px 36px;border-radius:50px;text-decoration:none;font-size:1rem;font-weight:700;">📲 לתיאום פגישת היכרות</a>
-  </section>
-
-  <section style="padding:60px 24px;max-width:960px;margin:0 auto;">
-    <p class="section-eyebrow" style="justify-content:center">למה לבחור בירדן?</p>
-    <h2 class="section-title" style="text-align:center;margin-bottom:48px">מה <em>מייחד</em> את השירות</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;">
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">✨</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מאות כלות מאושרות</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">שנים של ניסיון עם כלות בסגנונות שונים — כל אחת קיבלה מראה ייחודי שמתאים לה.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">💄</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מוצרים פרימיום</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">עובדת רק עם מוצרי איפור מהשורה הראשונה — עמידים, עדינים לעור.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">🕐</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">עמיד כל היום</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">האיפור מחזיק מהכנסת שבת ועד שעות הלילה — גם בחום אילת.</p></div>
-      <div class="service-card reveal" style="text-align:center;padding:32px 20px"><div style="font-size:2.5rem;margin-bottom:12px">🚗</div><h3 style="color:var(--blush);font-size:.95rem;margin-bottom:8px">מגיעה עד אלייך</h3><p style="font-size:.83rem;color:var(--text);line-height:1.7">מגיעה לבית, לאולם, למלון — בכל מקום שנוח לך. מאילת ועד כל הארץ.</p></div>
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="תפריט ניווט נייד" aria-hidden="true">
+    <ul role="list">
+      <li><a href="#about" onclick="closeMobileMenu()">אודות</a></li>
+      <li><a href="#services" onclick="closeMobileMenu()">שירותים</a></li>
+      <li><a href="#gallery" onclick="closeMobileMenu()">גלריה</a></li>
+      <li><a href="#area" onclick="closeMobileMenu()">אזור פעילות</a></li>
+      <li><a href="#reviews" onclick="closeMobileMenu()">ביקורות</a></li>
+      <li><a href="#contact" onclick="closeMobileMenu()">צרי קשר</a></li>
+    </ul>
+    <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="mobile-menu-wa" onclick="closeMobileMenu()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      שלחי הודעה בוואטסאפ
+    </a>
+    <div class="mobile-social">
+      <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-pill social-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-pill social-tt">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+        <span>TikTok</span>
+      </a>
     </div>
-  </section>
-
-  <section style="padding:60px 24px;background:rgba(196,154,108,.04);border-top:1px solid rgba(196,154,108,.1);border-bottom:1px solid rgba(196,154,108,.1);">
-    <div style="max-width:800px;margin:0 auto;text-align:center;">
-      <h2 class="section-title" style="margin-bottom:48px">תהליך <em>העבודה</em></h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;">
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">1</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">שיחת היכרות</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">מדברות על הסגנון, השמלה, האירוע — מבינות מה ייחודי בך.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">2</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">פגישת ניסוי</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">ניסוי מקצועי — בוחרים את המראה המושלם ביחד.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">3</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">יום החתונה</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">מגיעה אלייך, עובדת בשקט ומקצועיות. תוצאה מושלמת.</p></div>
-        <div class="reveal"><div style="width:44px;height:44px;border-radius:50%;background:var(--blush);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 12px">4</div><h3 style="font-size:.88rem;color:var(--blush);margin-bottom:8px">נוזרים מאושרים</h3><p style="font-size:.78rem;color:var(--text);line-height:1.6">האיפור נשמר מושלם לכל אורך הערב.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding:60px 24px;text-align:center;">
-    <h2 class="section-title" style="margin-bottom:16px">מוכנה לקבל הצעת <em>מחיר?</em></h2>
-    <p style="color:var(--text);max-width:500px;margin:0 auto 32px;font-size:.95rem;line-height:1.7">שלחי הודעה ונקבע פגישת היכרות ללא התחייבות. מחירים הוגנים, שירות מקצועי.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת באיפור כלות" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:linear-gradient(135deg,var(--rose),var(--blush));color:#fff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:.95rem;font-weight:700;">📲 וואטסאפ</a>
-      <a href="tel:0547276716" style="display:inline-block;border:1px solid var(--blush);color:var(--blush);padding:16px 32px;border-radius:50px;text-decoration:none;font-size:.95rem;font-weight:700;">📞 התקשרי</a>
-    </div>
-  </section>
-
-  <section style="padding:20px 24px 60px;text-align:center;">
-    <p style="color:rgba(62,42,26,.45);font-size:.82rem;">ראי גם: <a href="/gallery.html" style="color:var(--blush)">גלריה עבודות</a> | <a href="/reviews.html" style="color:var(--blush)">ביקורות לקוחות</a> | <a href="/services.html" style="color:var(--blush)">כל השירותים</a></p>
-  </section>
-
-</main>
-
-<footer style="background:#1a1008;border-top:1px solid rgba(255,255,255,.07);padding:40px 24px;text-align:center;">
-  <p style="color:rgba(62,42,26,.35);font-size:.8rem;margin-bottom:16px">© 2025 ירדן דמרי — מאפרת כלות וערב באילת</p>
-  <nav aria-label="ניווט תחתון" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:.8rem;">
-    <a href="/" style="color:rgba(62,42,26,.45);text-decoration:none">דף הבית</a>
-    <a href="/bride.html" style="color:rgba(62,42,26,.45);text-decoration:none">מאפרת כלות</a>
-    <a href="/services.html" style="color:rgba(62,42,26,.45);text-decoration:none">שירותים</a>
-    <a href="/gallery.html" style="color:rgba(62,42,26,.45);text-decoration:none">גלריה</a>
-    <a href="/reviews.html" style="color:rgba(62,42,26,.45);text-decoration:none">ביקורות</a>
-    <a href="/contact.html" style="color:rgba(62,42,26,.45);text-decoration:none">צרי קשר</a>
-  </nav>
-</footer>
-
-<a href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="וואטסאפ">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-</a>
-
-<script>
-  const menuToggle=document.getElementById('menuToggle');
-  const mobileMenu=document.getElementById('mobileMenu');
-  function closeMobileMenu(){mobileMenu.classList.remove('open');mobileMenu.setAttribute('aria-hidden','true');menuToggle.setAttribute('aria-expanded','false');}
-  menuToggle.addEventListener('click',()=>{const o=mobileMenu.classList.toggle('open');mobileMenu.setAttribute('aria-hidden',!o);menuToggle.setAttribute('aria-expanded',o);});
-  const nav=document.querySelector('.main-nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
-  const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}}),{threshold:0.1});
-  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-OCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-68XM6LS4HX');</script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>מאפרת כלות באילת | ירדן דמרי – איפור כלות מקצועי</title>
-  <meta name="description" content="ירדן דמרי – מאפרת כלות מקצועית באילת. איפור כלה עדין, זוהר ועמיד לכל היום. מאות כלות מרוצות. לתיאום: 054-7276716"/>
-  <meta name="keywords" content="מאפרת כלות אילת, איפור כלות אילת, מאפרת כלות, איפור כלה, ירדן דמרי מאפרת"/>
-  <meta property="og:title" content="מאפרת כלות באילת | ירדן דמרי"/>
-  <meta property="og:description" content="מאפרת כלות מקצועית באילת. איפור כלה עדין וזוהר שמחזיק כל היום."/>
-  <meta property="og:image" content="https://res.cloudinary.com/dfjwxc1cw/image/upload/f_auto,q_auto,w_1200/v1779050233/yarden_makeup/yarden_makeup_18528298267079544.jpg"/>
-  <meta property="og:url" content="https://yardendamri.co.il/bride.html"/>
-  <link rel="canonical" href="https://yardendamri.co.il/bride.html"/>
-  <link rel="stylesheet" href="main.css"/>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Service","name":"מאפרת כלות באילת","description":"שירות איפור כלות מקצועי באילת ובכל הארץ.","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"},"areaServed":{"@type":"City","name":"אילת"},"serviceType":"איפור כלות","telephone":"+972547276716"}
-  </script>
-  <style>
-  </style>
-</head>
-<body class="subpage">
-<a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
-
-
-
-
+  </div>
 
 <main id="main-content">
 
