@@ -215,9 +215,9 @@
     .services-header .section-title { color: var(--cream); }
     .services-header .section-title em { color: var(--blush); }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .service-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 40px 32px; transition: background .3s, transform .3s, border-color .3s; position: relative; overflow: hidden; }
+    .service-card { background: rgba(62,42,26,.05); border: 1px solid rgba(62,42,26,.12); border-radius: 24px; padding: 40px 32px; transition: background .3s, transform .3s, border-color .3s; position: relative; overflow: hidden; }
     .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rose), var(--gold)); transform: scaleX(0); transform-origin: right; transition: transform .4s ease; }
-    .service-card:hover, .service-card:focus-within { background: rgba(255,255,255,.07); transform: translateY(-6px); border-color: rgba(196,134,106,.25); }
+    .service-card:hover, .service-card:focus-within { background: rgba(62,42,26,.09); transform: translateY(-6px); border-color: rgba(196,134,106,.25); }
     .service-card:hover::before, .service-card:focus-within::before { transform: scaleX(1); transform-origin: left; }
     .service-icon { font-size: 2.4rem; margin-bottom: 20px; display: block; }
     .service-name { font-size: 1.3rem; font-weight: 500; color: var(--cream); margin-bottom: 12px; }
