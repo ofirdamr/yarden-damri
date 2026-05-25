@@ -386,6 +386,7 @@
       nav[role="navigation"], .main-nav { padding: 13px 18px; }
       .nav-links { display: none !important; }
       .nav-hamburger { display: flex !important; }
+      .mobile-menu { display: flex; }   /* enable slide-in transform on mobile only */
       .nav-mobile-group { display: flex; }
       .nav-mobile-icons { display: none; } /* hide social pills from nav on mobile - already in mobile menu */
       .nav-logo { font-size: 1.3rem; }
