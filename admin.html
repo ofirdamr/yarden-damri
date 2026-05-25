@@ -728,7 +728,7 @@ document.getElementById('cat-modal').addEventListener('click',e=>{ if(e.target==
 // ─── TABS ────────────────────────────────────────────────────────
 function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
-  ['gallery','cats','settings','analytics'].forEach(t=>{
+  ['gallery','cats','settings','analytics','pricing'].forEach(t=>{
     const el=document.getElementById('tab-'+t); if(el) el.style.display=t===name?'block':'none';
   });
   if(name==='cats') renderCatList();
