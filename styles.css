@@ -402,6 +402,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
+      /* Sections with max-width should expand to full width on mobile */
+      section[style*="max-width"] { max-width: 100% !important; }
       /* NAV */
       nav[role="navigation"], .main-nav { padding: 13px 18px; }
       .nav-links { display: none !important; }
