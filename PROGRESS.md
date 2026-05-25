@@ -164,3 +164,11 @@
 
 ## 2026-05-25 (disclaimer)
 - Fixed disclaimer.html: text colors (white→dark), nav (added bridal-guide, removed pricing), footer (canonical markup)
+
+## 2026-05-25 (SEO fixes)
+- Fixed sitemap: removed duplicate gallery.html plain entry, kept image-rich entry
+- Added about.html to sitemap
+- Created reviews.html — full page with review form + Google Maps + JSONBin integration
+- Added SEO keyword paragraph to gallery.html
+- Canonicals confirmed already present on all 4 pages (SEO specialist was looking at old version)
+- Pricing.html: still redirect placeholder — waiting for admin content
