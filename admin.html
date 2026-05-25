@@ -730,9 +730,11 @@ document.getElementById('cat-modal').addEventListener('click',e=>{ if(e.target==
 
 // ─── TABS ────────────────────────────────────────────────────────
 function switchTab(name,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
-  ['gallery','cats','settings','analytics','pricing'].forEach(t=>{
-    const el=document.getElementById('tab-'+t); if(el) el.style.display=t===name?'block':'none';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  // Hide all tab panels (find by id pattern, not hardcoded list)
+  document.querySelectorAll('[id^="tab-"]').forEach(panel=>{
+    panel.style.display = (panel.id === 'tab-'+name) ? 'block' : 'none';
   });
   if(name==='cats') renderCatList();
   if(name==='analytics') initAnalytics();
