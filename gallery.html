@@ -241,7 +241,10 @@ function loadPage() {
     const url = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_400/');
     const caption = (img.a || '').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
     item.innerHTML = `<img src="${url}" alt="${caption||'תמונת איפור'}" loading="lazy"/><div class="overlay"><div class="overlay-text">${caption}</div></div>`;
-    item.querySelector('img').addEventListener('load', function(){ this.classList.add('loaded'); });
+    const imgEl = item.querySelector('img');
+    imgEl.addEventListener('load', function(){ this.classList.add('loaded'); });
+    imgEl.addEventListener('error', function(){ this.classList.add('loaded'); });
+    if (imgEl.complete) imgEl.classList.add('loaded');
     item.addEventListener('click', () => openLb(idx));
     grid.appendChild(item);
   });
