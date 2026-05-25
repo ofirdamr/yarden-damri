@@ -24,3 +24,8 @@
 ### ❌ Admin pricing tab was empty
 - **Cause:** switchTab() only looped over ['gallery','cats','settings','analytics'] — 'pricing' was missing, so tab-pricing div was never shown.
 - **Fix:** Added 'pricing' to the array.
+
+### ❌ Push failures went undetected — 5 commits never reached GitHub
+- **Cause:** Instagram Auto Sync GitHub Action committed to remote main. My local push got rejected ("fetch first"). Git showed a hint but I missed it — kept committing locally for 5 commits without noticing the pushes were rejected.
+- **Fix:** Pulled with merge, pushed.
+- **Rule:** ALWAYS check 'tail -3' of git push output for 'rejected' or 'fetch first' warnings. If push appears to succeed but says 'fetch first', it FAILED.
