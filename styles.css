@@ -58,8 +58,8 @@
       border-radius: 4px;
     }
 
-    /* ── NAVIGATION ── */
-    nav, .main-nav {
+    /* ── NAVIGATION ── (scoped to role=navigation so footer nav is not affected) */
+    nav[role="navigation"], .main-nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
       padding: 18px 60px;
       display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap;
@@ -383,7 +383,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
       /* NAV */
-      nav, .main-nav { padding: 13px 18px; }
+      nav[role="navigation"], .main-nav { padding: 13px 18px; }
       .nav-links { display: none !important; }
       .nav-hamburger { display: flex !important; }
       .nav-mobile-group { display: flex; }
@@ -482,7 +482,7 @@
       .hero-title { font-size: 1.85rem; }
       .hero-right { max-height: 320px; }
       .ig-gallery-grid { gap: 6px; }
-      nav { padding: 12px 14px; }
+      nav[role="navigation"] { padding: 12px 14px; }
       .nav-logo { font-size: 1.2rem; }
     }
 
