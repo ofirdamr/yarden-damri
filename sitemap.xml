@@ -21,15 +21,15 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yardendamri.co.il/gallery.html</loc>
+    <loc>https://yardendamri.co.il/reviews.html</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yardendamri.co.il/reviews.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://yardendamri.co.il/about.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
