@@ -161,3 +161,6 @@
 - index.html keeps #about and #contact anchors for homepage scrolling
 - Fixed bridal-guide.html nav (removed pricing, fixed mobile menu, replaced footer)
 - Nav is now consistent across all 7 pages: אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | צרי קשר
+
+## 2026-05-25 (disclaimer)
+- Fixed disclaimer.html: text colors (white→dark), nav (added bridal-guide, removed pricing), footer (canonical markup)
