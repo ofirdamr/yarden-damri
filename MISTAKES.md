@@ -10,3 +10,8 @@
 ### ❌ Did not update PROGRESS.md after gallery fix
 - **What happened:** Fixed gallery cached-image bug but forgot to append to PROGRESS.md.
 - **Rule:** Every fix → update PROGRESS.md in same commit or immediately after.
+
+### ❌ services.html had dark footer text on dark background (invisible)
+- **What happened:** Footer in services.html used inline styles `color:rgba(62,42,26,.45)` (dark brown) on dark background — completely unreadable.
+- **Rule:** When copying footer markup between pages, use the canonical `<footer role="contentinfo">` from index.html — no custom inline styles. Let styles.css handle it.
+- **Fixed:** Replaced services.html footer with index.html footer markup.
