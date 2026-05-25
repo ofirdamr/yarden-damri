@@ -59,6 +59,7 @@
     }
 
     /* ── NAVIGATION ── */
+    body.subpage nav, body.subpage nav * { color: inherit; }
     nav, .main-nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
       padding: 18px 60px;
@@ -70,7 +71,7 @@
     }
     .nav-logo {
       font-size: 1.5rem; font-weight: 300;
-      letter-spacing: .12em; color: #FAF6F1; flex-shrink: 0;
+      letter-spacing: .12em; color: #FAF6F1 !important; flex-shrink: 0;
       text-decoration: none;
     }
     .nav-logo span { font-style: italic; color: var(--blush); }
@@ -78,7 +79,7 @@
     .nav-links a {
       text-decoration: none; font-size: .78rem; font-weight: 600;
       letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.65);
+      color: rgba(255,255,255,.65) !important;
       transition: color .3s; white-space: nowrap;
     }
     .nav-links a:hover, .nav-links a:focus { color: var(--blush); }
