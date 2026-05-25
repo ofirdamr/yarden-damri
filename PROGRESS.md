@@ -149,3 +149,6 @@
 - Bug: mobile menu had old anchor links (#services, #gallery etc.) instead of page links (/services.html etc.)
 - All pages now have consistent mobile menu: אודות | מאפרת כלות | שירותים | גלריה | מחירון | צרי קשר
 - Note: pricing.html is empty (redirect to /), needs to be built
+
+## 2026-05-25 (cont.)
+- Fixed services.html color scheme — section was missing id=services so dark charcoal background wasn't applied, leaving white text on cream background
