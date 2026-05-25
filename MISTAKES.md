@@ -20,3 +20,7 @@
 - **What happened:** Inline style `.legal-body{color:rgba(255,255,255,.75)}` (white) used while body bg is var(--cream) — invisible.
 - **Rule:** Subpages use `var(--text)` for body text. White text is only for dark sections (footer, charcoal bg).
 - **Fixed:** Replaced all rgba(255,255,255,...) text colors with var(--text), updated nav/footer to canonical.
+
+### ❌ Admin pricing tab was empty
+- **Cause:** switchTab() only looped over ['gallery','cats','settings','analytics'] — 'pricing' was missing, so tab-pricing div was never shown.
+- **Fix:** Added 'pricing' to the array.
