@@ -143,3 +143,9 @@
 - **GA4 Measurement ID**: G-68XM6LS4HX
 - **Cloudinary cloud**: dfjwxc1cw
 - **Instagram token**: stored in GitHub Secrets (INSTAGRAM_TOKEN)
+
+## 2026-05-25
+- Fixed mobile menu links in index.html, services.html, gallery.html, bride.html
+- Bug: mobile menu had old anchor links (#services, #gallery etc.) instead of page links (/services.html etc.)
+- All pages now have consistent mobile menu: אודות | מאפרת כלות | שירותים | גלריה | מחירון | צרי קשר
+- Note: pricing.html is empty (redirect to /), needs to be built
