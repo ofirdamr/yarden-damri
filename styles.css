@@ -82,7 +82,7 @@
       transition: color .3s; white-space: nowrap;
     }
     .nav-links a:hover, .nav-links a:focus { color: var(--blush); }
-    .nav-social .social-pill span { display: none; }
+    .nav-social .social-pill { padding: 0 10px; background: none; box-shadow: none; }
     .nav-cta {
       background: var(--rose); color: #fff !important;
       padding: 0 20px; height: 36px; border-radius: 30px;
