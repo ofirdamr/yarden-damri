@@ -152,3 +152,12 @@
 
 ## 2026-05-25 (cont.)
 - Fixed services.html color scheme — section was missing id=services so dark charcoal background wasn't applied, leaving white text on cream background
+
+## 2026-05-25 (pages)
+- Created about.html — extracts about section from index.html
+- Created contact.html — extracts contact section + form from index.html
+- Added bridal-guide.html to nav on all pages
+- Updated all nav links: /#about → /about.html, /#contact → /contact.html (subpages only)
+- index.html keeps #about and #contact anchors for homepage scrolling
+- Fixed bridal-guide.html nav (removed pricing, fixed mobile menu, replaced footer)
+- Nav is now consistent across all 7 pages: אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | צרי קשר
