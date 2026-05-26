@@ -44,3 +44,8 @@
 **Mistake:** Kept patching `.mobile-social .social-pill` and `.footer-social-pills .social-pill` with overrides (min-width, max-width, !important attempts). Old CSS rules and inconsistent SVG attributes kept causing visual differences.
 **Fix:** Deleted old classes entirely (`mobile-social`, `footer-social-pills`, related `.social-pill` overrides) from HTML and CSS. Built fresh `.social-circles` + `.social-circle` with one clean rule. Same block reused in mobile menu and footer.
 **Lesson:** When patches stack and still fail, delete and rebuild from scratch with new class names — no chance of cascade conflicts.
+
+## Mismatched viewBoxes caused visual size difference
+**Mistake:** Used Instagram SVG with 24x24 viewBox (path fills full area) and TikTok SVG with 32x32 viewBox (path only fills ~75% of area). When both rendered at 20x20 in CSS, the TikTok logo appeared visually smaller. Also the radial-gradient bright spot made IG circle look larger.
+**Fix:** Both SVGs now use 24x24 viewBox with paths filling the full area. Both icons are pure white (still authentic — both brands use white logos at small sizes). Added max-width/max-height + line-height: 0 + padding: 0 to fully lock circle dimensions.
+**Lesson:** When matching two icons visually, viewBox dimensions and path coverage matter more than CSS width/height. Check actual SVG path bounds, not just the viewBox numbers.

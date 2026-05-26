@@ -202,3 +202,9 @@
 - TikTok: replaced SVG with authentic 3-layer glitch logo (cyan #25F4EE + red #FE2C55 + white)
 - Sized 42x42 (was 48x48) — better fit for mobile UI
 - Updated across all 10 pages with one script
+
+## Matched SVG viewBoxes for identical visual size
+- Both IG and TT now use 24x24 viewBox with paths filling full area
+- Both icons white (consistent visual weight)
+- Hard-locked circle to 42px (min/max width+height, line-height 0, padding 0)
+- IG keeps authentic radial gradient background; TT keeps black
