@@ -190,3 +190,9 @@
 - Forced inner SVG to 18x18 via CSS (overrides inconsistent 15/16px HTML attributes)
 - Centered both pairs (`justify-content: center`) for visual alignment consistency
 - File: styles.css lines 346-352
+
+## Rebuilt social buttons from scratch
+- Deleted `mobile-social`, `footer-social-pills`, `social-pill ig/tt` (in mobile/footer contexts)
+- Created new `.social-circles` (wrapper) + `.social-circle.ig/.tt` (button) — 48x48 circles, 22px SVG, centered
+- One identical block in mobile menu + footer across all 10 HTML pages
+- Cleaner code, no cascade conflicts possible

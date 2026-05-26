@@ -39,3 +39,8 @@
 **Mistake:** Used only `width/height: 44px` without `min-width/max-width` locks, so SVG sizes inside (15px vs 16px in HTML attributes) and flex parent behavior caused visual size differences between mobile menu social pills and footer social pills.
 **Fix:** Added `min-width/min-height/max-width/max-height: 44px` + `flex-grow: 0` + forced SVG to 18px via CSS. Both pairs now identical regardless of HTML attribute differences.
 **Lesson:** When two elements with same class must look identical across different parent containers, lock all size dimensions (min/max) and standardize inner element sizes via CSS, not HTML attributes.
+
+## Repeated patching of social pills failed
+**Mistake:** Kept patching `.mobile-social .social-pill` and `.footer-social-pills .social-pill` with overrides (min-width, max-width, !important attempts). Old CSS rules and inconsistent SVG attributes kept causing visual differences.
+**Fix:** Deleted old classes entirely (`mobile-social`, `footer-social-pills`, related `.social-pill` overrides) from HTML and CSS. Built fresh `.social-circles` + `.social-circle` with one clean rule. Same block reused in mobile menu and footer.
+**Lesson:** When patches stack and still fail, delete and rebuild from scratch with new class names — no chance of cascade conflicts.
