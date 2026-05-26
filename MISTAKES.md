@@ -49,3 +49,8 @@
 **Mistake:** Used Instagram SVG with 24x24 viewBox (path fills full area) and TikTok SVG with 32x32 viewBox (path only fills ~75% of area). When both rendered at 20x20 in CSS, the TikTok logo appeared visually smaller. Also the radial-gradient bright spot made IG circle look larger.
 **Fix:** Both SVGs now use 24x24 viewBox with paths filling the full area. Both icons are pure white (still authentic — both brands use white logos at small sizes). Added max-width/max-height + line-height: 0 + padding: 0 to fully lock circle dimensions.
 **Lesson:** When matching two icons visually, viewBox dimensions and path coverage matter more than CSS width/height. Check actual SVG path bounds, not just the viewBox numbers.
+
+## Irradiation illusion — bright IG made it look bigger
+**Mistake:** Used IG radial gradient with bright yellow corner. Bright colors appear larger than dark ones of equal physical size (irradiation optical illusion), so IG circle looked bigger than TT even though both were 42px.
+**Fix:** Switched IG to muted linear gradient (purple → magenta → orange, no bright yellow bloom). Bumped SVG to 22px so the white icon dominates the circle and equalizes visual weight with TT.
+**Lesson:** When two same-sized elements look different, check for color brightness/contrast differences. Bright vs dark of same size always looks unequal.

@@ -208,3 +208,8 @@
 - Both icons white (consistent visual weight)
 - Hard-locked circle to 42px (min/max width+height, line-height 0, padding 0)
 - IG keeps authentic radial gradient background; TT keeps black
+
+## Eliminated irradiation illusion on social circles
+- IG: muted linear gradient (#515BD4 → #8134AF → #DD2A7B → #FEDA77)
+- Icons bumped 20→22px so white logo dominates
+- Both circles now have equal visual weight at 42px
