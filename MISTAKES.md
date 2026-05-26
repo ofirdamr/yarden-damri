@@ -34,3 +34,8 @@
 - **What happened:** Both pages used `<footer style="background:#1a1008...">` with inline styles. bride.html had dark brown text `rgba(62,42,26,.45)` on dark background `#1a1008` — links were invisible. gallery.html used `rgba(255,255,255,.4)` which was visible but still non-canonical.
 - **Rule:** ALL pages must use `<footer role="contentinfo">` without inline background/color styles. Only the canonical markup from index.html. This applies even if the page previously had a dark-themed custom footer.
 - **Fixed:** Replaced both footers with canonical markup.
+
+## Social pills size mismatch (mobile menu vs footer)
+**Mistake:** Used only `width/height: 44px` without `min-width/max-width` locks, so SVG sizes inside (15px vs 16px in HTML attributes) and flex parent behavior caused visual size differences between mobile menu social pills and footer social pills.
+**Fix:** Added `min-width/min-height/max-width/max-height: 44px` + `flex-grow: 0` + forced SVG to 18px via CSS. Both pairs now identical regardless of HTML attribute differences.
+**Lesson:** When two elements with same class must look identical across different parent containers, lock all size dimensions (min/max) and standardize inner element sizes via CSS, not HTML attributes.

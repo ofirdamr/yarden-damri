@@ -184,3 +184,9 @@
 - gallery.html: full port of homepage gallery — now has likes/comments, Instagram stats sync, video autoplay via IntersectionObserver, admin settings (hidden/pinned/order respected via gallery_admin localStorage key), cdnUrl/cdnVideo/cdnVideoPoster for f_auto+q_auto on all media.
 - index.html: homepage gallery now shows images only, capped at 48 items (no videos). Replaced pagination with "לכל הגלריה ←" link to gallery.html. Reduces Cloudinary bandwidth on homepage.
 - TODO: sync gallery_admin settings to JSONBin so admin curation applies for all visitors (JSONBin was down at time of implementation).
+
+## $(date +%Y-%m-%d) - Fixed mobile social pills size mismatch
+- Locked `.mobile-social .social-pill` and `.footer-social-pills .social-pill` to exact 44x44 with min/max width/height
+- Forced inner SVG to 18x18 via CSS (overrides inconsistent 15/16px HTML attributes)
+- Centered both pairs (`justify-content: center`) for visual alignment consistency
+- File: styles.css lines 346-352
