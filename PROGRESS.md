@@ -196,3 +196,9 @@
 - Created new `.social-circles` (wrapper) + `.social-circle.ig/.tt` (button) — 48x48 circles, 22px SVG, centered
 - One identical block in mobile menu + footer across all 10 HTML pages
 - Cleaner code, no cascade conflicts possible
+
+## Authentic brand styling for social buttons
+- Instagram: switched to official radial-gradient (yellow→orange→pink→purple→blue, like real IG app icon)
+- TikTok: replaced SVG with authentic 3-layer glitch logo (cyan #25F4EE + red #FE2C55 + white)
+- Sized 42x42 (was 48x48) — better fit for mobile UI
+- Updated across all 10 pages with one script

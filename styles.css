@@ -344,13 +344,15 @@
     .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: #fff; }
     .mobile-menu-wa { display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; text-decoration: none; padding: 16px 20px; border-radius: 14px; font-weight: 700; font-size: 1rem; margin-top: 28px; justify-content: center; }
 
-    /* ── SOCIAL CIRCLES (mobile menu + footer, identical) ── */
-    .social-circles { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 18px; }
-    .social-circle { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; text-decoration: none; flex: 0 0 48px; box-sizing: border-box; transition: transform .2s, box-shadow .2s; }
-    .social-circle svg { width: 22px; height: 22px; display: block; }
-    .social-circle.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
-    .social-circle.tt { background: #000; color: #fff; }
-    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+    /* ── SOCIAL CIRCLES (authentic brand styles, mobile menu + footer) ── */
+    .social-circles { display: flex; gap: 12px; justify-content: center; align-items: center; margin-top: 18px; }
+    .social-circle { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; text-decoration: none; flex: 0 0 42px; box-sizing: border-box; transition: transform .2s, box-shadow .2s; overflow: hidden; }
+    .social-circle svg { width: 20px; height: 20px; display: block; }
+    /* Authentic Instagram brand gradient (radial, as used in their app icon) */
+    .social-circle.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #fff; }
+    /* Authentic TikTok: black bg, colored glitch logo handled inside SVG */
+    .social-circle.tt { background: #000; }
+    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
 
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; backdrop-filter: blur(2px); }
     .mobile-overlay.open { display: block; }
