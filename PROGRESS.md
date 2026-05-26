@@ -172,3 +172,8 @@
 - Added SEO keyword paragraph to gallery.html
 - Canonicals confirmed already present on all 4 pages (SEO specialist was looking at old version)
 - Pricing.html: still redirect placeholder — waiting for admin content
+
+## 2026-05-26
+- Fixed bride.html footer: was using custom dark footer with rgba(62,42,26,.45) dark brown text on #1a1008 dark background — completely invisible. Replaced with canonical <footer role="contentinfo"> markup.
+- Fixed gallery.html footer: was using custom dark footer instead of canonical markup. Replaced with <footer role="contentinfo">.
+- Both footers now use white text (rgba(255,255,255,.45)) on dark background, consistent with all other pages.
