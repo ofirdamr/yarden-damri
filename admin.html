@@ -218,7 +218,10 @@
     <div id="ga4-status" style="font-size:.78rem;color:var(--muted);margin-bottom:14px;min-height:18px;"></div>
 
     <!-- KPI Cards -->
-    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;"></div>
+    <div id="kpi-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;"></div>
+
+    <!-- Bounce rate insight -->
+    <div id="bounce-insight" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:.82rem;min-height:36px;"></div>
 
     <!-- Visits Chart -->
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;">
@@ -226,37 +229,46 @@
       <canvas id="visits-chart" height="100"></canvas>
     </div>
 
-    <!-- 2-col grid for breakdowns -->
+    <!-- Traffic sources: channel + specific -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
-        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔍 מקורות תנועה</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔍 ערוצי תנועה</div>
         <div id="sources-list"></div>
       </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🌐 מקורות ספציפיים</div>
+        <div id="specific-sources-list"></div>
+      </div>
+    </div>
+
+    <!-- Devices + Cities -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
         <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📱 מכשירים</div>
         <div id="devices-list"></div>
       </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
-        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🌍 ערים</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📍 ערים ואזורים</div>
         <div id="cities-list"></div>
       </div>
+    </div>
+
+    <!-- Demographics + Pages -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
         <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">👤 גיל ומגדר</div>
         <div id="demographics-list"></div>
       </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
-        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔑 מילות חיפוש (SEO)</div>
-        <div id="keywords-list"></div>
-      </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
         <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">📄 עמודים פופולריים</div>
         <div id="pages-list"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;">
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;">🔑 מילות חיפוש (SEO)</div>
+        <div id="keywords-list"></div>
       </div>
     </div>
 
@@ -825,14 +837,16 @@ async function initAnalytics() {
     const dr = ga4DateRange(days);
 
     // Run all reports in parallel
-    const [overviewRes, sourceRes, deviceRes, cityRes, demoRes, pageRes, dailyRes] = await Promise.all([
+    const [overviewRes, sourceRes, specificSrcRes, deviceRes, cityRes, demoRes, pageRes, dailyRes] = await Promise.all([
       ga4Report(['date'], ['sessions','activeUsers','newUsers','bounceRate','averageSessionDuration'], dr,
         [{ dimension: { dimensionName: 'date' }, desc: false }]),
       ga4Report(['sessionDefaultChannelGroup'], ['sessions'], dr,
         [{ metric: { metricName: 'sessions' }, desc: true }]),
+      ga4Report(['sessionSource'], ['sessions'], dr,
+        [{ metric: { metricName: 'sessions' }, desc: true }]),
       ga4Report(['deviceCategory'], ['sessions'], dr,
         [{ metric: { metricName: 'sessions' }, desc: true }]),
-      ga4Report(['city'], ['sessions'], dr,
+      ga4Report(['country','region','city'], ['sessions'], dr,
         [{ metric: { metricName: 'sessions' }, desc: true }]),
       ga4Report(['userAgeBracket','userGender'], ['activeUsers'], dr,
         [{ metric: { metricName: 'activeUsers' }, desc: true }]),
@@ -867,6 +881,24 @@ async function initAnalytics() {
       { icon:'📈', value: Math.round(newUsers/Math.max(totalUsers,1)*100)+'%', label:'% חדשים' },
     ]);
 
+    // Bounce rate insight
+    const bounceEl = document.getElementById('bounce-insight');
+    let bounceColor, bounceMsg, bounceAction;
+    if (avgBounce >= 70) {
+      bounceColor='#c0392b'; bounceMsg=`שיעור נטישה גבוה (${avgBounce}%) — רוב הגולשים עוזבים מיד`;
+      bounceAction='בדקי: מהירות טעינה, רלוונטיות תוכן, כפתור WhatsApp בולט';
+    } else if (avgBounce >= 50) {
+      bounceColor='#e67e22'; bounceMsg=`שיעור נטישה בינוני (${avgBounce}%) — יש מה לשפר`;
+      bounceAction='הוסיפי CTA ברור בכל עמוד — "שליחת הודעה", "לקביעת תור"';
+    } else if (avgBounce > 0) {
+      bounceColor='#2d7a4f'; bounceMsg=`שיעור נטישה טוב (${avgBounce}%) — גולשים מתעניינים`;
+      bounceAction='המשיכי לפרסם תוכן חדש לשמור על המעורבות';
+    } else {
+      bounceColor='var(--muted)'; bounceMsg='אין עדיין נתוני נטישה'; bounceAction='';
+    }
+    bounceEl.innerHTML = `<span style="color:${bounceColor};font-weight:600">${bounceMsg}</span>${bounceAction?`<br><span style="font-size:.75rem;color:var(--muted);margin-top:4px;display:block">💡 ${bounceAction}</span>`:''}`;
+
+
     // Daily chart
     const labels=[], vals=[];
     (dailyRes.rows||[]).forEach(r => {
@@ -898,11 +930,31 @@ async function initAnalytics() {
     });
     renderBars('devices-list', devObj, devTotal, 'אין נתונים');
 
-    // Cities
+    // Specific sources (instagram, google, etc.)
+    const specSrcObj = {}; let specSrcTotal=0;
+    (specificSrcRes.rows||[]).slice(0,8).forEach(r => {
+      const src = r.dimensionValues[0].value;
+      const v = parseInt(r.metricValues[0].value||0);
+      if (src && src !== '(not set)' && src !== '(direct)') {
+        const icon = src.includes('instagram')?'📸':src.includes('google')?'🔍':src.includes('facebook')?'👥':src.includes('whatsapp')?'💬':'🌐';
+        specSrcObj[`${icon} ${src}`] = v; specSrcTotal+=v;
+      } else if (src === '(direct)') {
+        specSrcObj['🔗 ישיר'] = v; specSrcTotal+=v;
+      }
+    });
+    renderBars('specific-sources-list', specSrcObj, specSrcTotal, 'אין נתונים');
+
+    // Cities with region+country
     const cityObj = {}; let cityTotal=0;
     (cityRes.rows||[]).forEach(r => {
-      const c = r.dimensionValues[0].value;
-      if (c && c !== '(not set)') { cityObj['📍 '+c] = parseInt(r.metricValues[0].value||0); cityTotal+=parseInt(r.metricValues[0].value||0); }
+      const country = r.dimensionValues[0].value;
+      const region  = r.dimensionValues[1].value;
+      const city    = r.dimensionValues[2].value;
+      if (city && city !== '(not set)') {
+        const label = city + (region && region !== '(not set)' && region !== city ? ', '+region : '');
+        cityObj['📍 '+label] = parseInt(r.metricValues[0].value||0);
+        cityTotal += parseInt(r.metricValues[0].value||0);
+      }
     });
     renderBars('cities-list', cityObj, cityTotal, 'אין נתוני ערים');
 
@@ -928,8 +980,21 @@ async function initAnalytics() {
     });
     renderBars('pages-list', pagesObj, pagesTotal, 'אין נתונים');
 
-    // Hide keywords note (Search Console data not in GA4 Data API)
-    document.getElementById('keywords-list').innerHTML = '<p style="font-size:.75rem;color:var(--muted)">מילות חיפוש זמינות ב-<a href="https://search.google.com/search-console" target="_blank" style="color:var(--blush)">Google Search Console</a></p>';
+    // Search Console setup guide in keywords section
+    document.getElementById('keywords-list').innerHTML = `
+      <p style="font-size:.8rem;color:var(--text);margin-bottom:8px;">מילות חיפוש מגיעות מ-<strong>Google Search Console</strong> — לא מ-GA4.</p>
+      <div style="font-size:.75rem;color:var(--muted);line-height:1.7;">
+        <strong style="color:var(--text);">הגדרה חד-פעמית (5 דקות):</strong><br>
+        1. כנסי ל-<a href="https://search.google.com/search-console" target="_blank" style="color:var(--blush)">search.google.com/search-console</a><br>
+        2. הוסיפי נכס → <strong>URL Prefix</strong> → הכניסי <code>https://yardendamri.co.il</code><br>
+        3. בחרי אימות <strong>HTML Tag</strong> → העתיקי את ה-meta tag<br>
+        4. שלחי לי את ה-meta tag ואני אוסיף לאתר<br>
+        5. לאחר אימות → <a href="https://search.google.com/search-console/performance/search-analytics" target="_blank" style="color:var(--blush)">ביצועים → שאילתות</a> = כל מילות החיפוש
+      </div>
+      <a href="https://search.google.com/search-console" target="_blank"
+         style="display:inline-block;margin-top:10px;background:var(--blush);color:#fff;padding:7px 14px;border-radius:8px;text-decoration:none;font-size:.78rem;">
+        📊 פתח Search Console
+      </a>`;
 
   } catch(err) {
     console.error('GA4 error:', err);
