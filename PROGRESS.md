@@ -213,3 +213,9 @@
 - IG: muted linear gradient (#515BD4 → #8134AF → #DD2A7B → #FEDA77)
 - Icons bumped 20→22px so white logo dominates
 - Both circles now have equal visual weight at 42px
+
+## Final design: site-matched social circles
+- Both circles identical: 44px, `var(--deep)` background, `var(--blush)` icon + border
+- Only icon SVG path differs (IG camera vs TT note)
+- Matches site palette — elegant brown/blush instead of clashing bright brand colors
+- `all: unset` + 12 `!important` size locks — bulletproof against any CSS conflict

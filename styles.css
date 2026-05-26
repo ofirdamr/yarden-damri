@@ -344,14 +344,11 @@
     .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: #fff; }
     .mobile-menu-wa { display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; text-decoration: none; padding: 16px 20px; border-radius: 14px; font-weight: 700; font-size: 1rem; margin-top: 28px; justify-content: center; }
 
-    /* ── SOCIAL CIRCLES (matched 24x24 SVGs, white icons, identical 42px circles) ── */
-    .social-circles { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 18px; }
-    .social-circle { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; min-width: 42px; min-height: 42px; max-width: 42px; max-height: 42px; border-radius: 50%; text-decoration: none; flex: 0 0 42px; box-sizing: border-box; overflow: hidden; transition: transform .2s, box-shadow .2s; padding: 0; line-height: 0; }
-    .social-circle svg { width: 22px; height: 22px; display: block; flex-shrink: 0; }
-    /* Instagram official linear brand gradient (purple → magenta → orange) — no bright bloom */
-    .social-circle.ig { background: linear-gradient(135deg, #515BD4 0%, #8134AF 25%, #DD2A7B 50%, #FEDA77 100%); }
-    .social-circle.tt { background: #000; }
-    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+    /* ── SOCIAL CIRCLES (identical structure, fits site palette) ── */
+    .social-circles { display: flex !important; gap: 16px !important; justify-content: center !important; align-items: center !important; margin-top: 18px !important; flex-direction: row !important; }
+    .social-circle { all: unset; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; min-width: 44px !important; min-height: 44px !important; max-width: 44px !important; max-height: 44px !important; flex: 0 0 44px !important; border-radius: 50% !important; background: var(--deep) !important; box-sizing: border-box !important; padding: 0 !important; margin: 0 !important; line-height: 0 !important; overflow: hidden !important; cursor: pointer; transition: transform .2s, background .2s; border: 1.5px solid var(--blush) !important; }
+    .social-circle svg { width: 20px !important; height: 20px !important; display: block !important; flex-shrink: 0 !important; fill: var(--blush) !important; }
+    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); background: var(--rose) !important; }
 
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; backdrop-filter: blur(2px); }
     .mobile-overlay.open { display: block; }

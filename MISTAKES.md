@@ -54,3 +54,8 @@
 **Mistake:** Used IG radial gradient with bright yellow corner. Bright colors appear larger than dark ones of equal physical size (irradiation optical illusion), so IG circle looked bigger than TT even though both were 42px.
 **Fix:** Switched IG to muted linear gradient (purple → magenta → orange, no bright yellow bloom). Bumped SVG to 22px so the white icon dominates the circle and equalizes visual weight with TT.
 **Lesson:** When two same-sized elements look different, check for color brightness/contrast differences. Bright vs dark of same size always looks unequal.
+
+## Brand colors caused unfixable visual mismatch
+**Mistake:** Tried to keep brand colors (bright IG gradient vs solid black TT) — different brightness creates "irradiation illusion" that makes them look unequal sizes regardless of CSS dimensions.
+**Fix:** Both circles now use the SITE's brown palette (`var(--deep)` background, `var(--blush)` icon + 1.5px blush border). Identical bg, identical border, identical icon color → guaranteed equal visual size. Bonus: matches the site's elegant warm aesthetic instead of clashing.
+**Lesson:** When two elements must visually match, make them visually identical first, then differentiate only by minimal content (icon shape). Brand colors mid-button are a luxury that fights visual consistency.
