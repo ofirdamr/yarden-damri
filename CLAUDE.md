@@ -29,7 +29,7 @@ The workflow is `.github/workflows/sync-auto.yml`. It calls `node fix.js` using 
 | `fix.js` | Node.js: Instagram API → Cloudinary upload → writes `gallery-data.js` |
 | `netlify/functions/ig-stats.js` | Legacy Netlify function — no longer used |
 
-Subpages (`about.html`, `services.html`, `gallery.html`, `bride.html`, `bridal-guide.html`, `contact.html`, `reviews.html`, `disclaimer.html`, `accessibility-statement.html`) each have their own inline `<style>` blocks but rely on shared patterns from `styles.css`.
+Subpages (`about.html`, `services.html`, `gallery.html`, `bride.html`, `bridal-guide.html`, `pricing.html`, `contact.html`, `reviews.html`, `disclaimer.html`, `accessibility-statement.html`) each have their own inline `<style>` blocks but rely on shared patterns from `styles.css`.
 
 ## CSS conventions
 
@@ -42,11 +42,11 @@ Subpages (`about.html`, `services.html`, `gallery.html`, `bride.html`, `bridal-g
 ## Nav consistency
 
 All pages share the same nav links (desktop + mobile):
-**אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | צרי קשר**
+**אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | מחירון | צרי קשר**
 
 - `index.html` uses anchor links (`#about`, `#contact`) for its own sections
 - All other pages use full page links (`/about.html`, `/contact.html`)
-- **`/pricing.html` is NOT in any nav** — the page is not ready; never add it to navigation without being told it's ready
+- `pricing.html` is live with real content and is included in the nav
 
 ## Footer
 
@@ -69,3 +69,20 @@ Update `PROGRESS.md` in the same commit or immediately after — every fix shoul
 ## Git push — always verify
 
 After pushing, check the last few lines of output for `rejected` or `fetch first`. The GitHub Actions workflow commits directly to `main` every 6 hours; if it ran between your last pull and push, the push will be silently rejected. Pull with merge before pushing.
+
+## Special work instructions
+
+1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
+2. Change only the content of the new page. Never change the nav.
+3. Don't rewrite code from scratch. Find the relevant block inside the file and change only that block.
+4. Never create patches. When something is broken, find the root cause in the source file and fix it there directly.
+5. Read only what is needed to find the necessary context. You don't need full context all the time.
+6. Don't explain what you did. Just do it.
+7. Give instructions step by step, one at a time, simply.
+8. When you make a mistake, log it in `MISTAKES.md` immediately. After every change, update `PROGRESS.md` with what was done.
+9. When the user writes **"summary"**, create a new file `SUMMARY.md` with: what was started, what is done, and what still needs to be done. At the start of a new conversation, read `SUMMARY.md` first — only read `PROGRESS.md` if more detail is needed.
+10. GitHub remote: `https://github.com/ofirdamr/yarden-damri.git` (token stored in git credential store — never hardcode it in files).
+11. You are a senior full-stack developer with UX/UI expertise and information security knowledge.
+12. If there is a better way or tool to accomplish what the user asks, say so before doing it.
+13. Token efficiency matters — minimize unnecessary file reads.
+14. You write in English. The site is in Hebrew, RTL.
