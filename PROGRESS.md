@@ -177,3 +177,4 @@
 - Fixed bride.html footer: was using custom dark footer with rgba(62,42,26,.45) dark brown text on #1a1008 dark background — completely invisible. Replaced with canonical <footer role="contentinfo"> markup.
 - Fixed gallery.html footer: was using custom dark footer instead of canonical markup. Replaced with <footer role="contentinfo">.
 - Both footers now use white text (rgba(255,255,255,.45)) on dark background, consistent with all other pages.
+- Fixed gallery.html: 289 video entries were invisible (loadPage rendered .mp4 URLs as <img> → failed to load). Now uses Cloudinary video-to-JPEG thumbnail for grid (so_0 frame). Lightbox updated to show <video> element for video entries with autoplay controls, pauses on close/navigate.

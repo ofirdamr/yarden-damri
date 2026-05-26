@@ -85,6 +85,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
     .load-more{display:block;margin:40px auto;background:transparent;border:1px solid var(--blush);color:var(--blush);padding:12px 40px;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
     .load-more:hover{background:var(--blush);color:#fff}
+    .video-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .video-play svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));opacity:.9}
+    .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}
   </style>
   <style>
   </style>
@@ -261,6 +264,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <button class="lb-close" id="lbClose" aria-label="סגור">✕</button>
   <button class="lb-prev" id="lbPrev" aria-label="הקודמת">›</button>
   <img class="lb-img" id="lbImg" src="" alt=""/>
+  <video class="lb-video" id="lbVideo" controls playsinline style="display:none"></video>
   <button class="lb-next" id="lbNext" aria-label="הבאה">‹</button>
   <div class="lb-counter" id="lbCounter"></div>
 </div>
@@ -298,9 +302,15 @@ function loadPage() {
     const item = document.createElement('div');
     item.className = 'gallery-item';
     item.setAttribute('role', 'listitem');
-    const url = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_400/');
     const caption = (img.a || '').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
-    item.innerHTML = `<img src="${url}" alt="${caption||'תמונת איפור'}" loading="lazy"/><div class="overlay"><div class="overlay-text">${caption}</div></div>`;
+    let thumbUrl;
+    if (img.video) {
+      thumbUrl = img.u.replace('/video/upload/', '/video/upload/f_jpg,q_auto,w_400,so_0/').replace(/\.mp4$/i, '.jpg');
+    } else {
+      thumbUrl = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_400/');
+    }
+    const playIcon = img.video ? `<div class="video-play"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(0,0,0,.45)"/><polygon points="21,16 38,26 21,36" fill="white"/></svg></div>` : '';
+    item.innerHTML = `<img src="${thumbUrl}" alt="${caption||'תמונת איפור'}" loading="lazy"/>${playIcon}<div class="overlay"><div class="overlay-text">${caption}</div></div>`;
     const imgEl = item.querySelector('img');
     imgEl.addEventListener('load', function(){ this.classList.add('loaded'); });
     imgEl.addEventListener('error', function(){ this.classList.add('loaded'); });
@@ -333,14 +343,30 @@ function openLb(idx) {
 }
 function showLb() {
   const img = filteredImages[lbIndex];
-  const url = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_1200/');
-  document.getElementById('lbImg').src = url;
-  document.getElementById('lbImg').alt = (img.a||'').split('\n')[0].substring(0,80);
+  const lbImg = document.getElementById('lbImg');
+  const lbVideo = document.getElementById('lbVideo');
+  if (img.video) {
+    lbVideo.src = img.u;
+    lbVideo.style.display = '';
+    lbImg.style.display = 'none';
+    lbImg.src = '';
+  } else {
+    const url = img.u.replace('/upload/', '/upload/f_auto,q_auto,w_1200/');
+    lbImg.src = url;
+    lbImg.alt = (img.a||'').split('\n')[0].substring(0,80);
+    lbImg.style.display = '';
+    lbVideo.style.display = 'none';
+    lbVideo.pause && lbVideo.pause();
+    lbVideo.src = '';
+  }
   document.getElementById('lbCounter').textContent = `${lbIndex+1} / ${filteredImages.length}`;
 }
 function closeLb() {
   document.getElementById('lb').classList.remove('open');
   document.body.style.overflow = '';
+  const lbVideo = document.getElementById('lbVideo');
+  lbVideo.pause && lbVideo.pause();
+  lbVideo.src = '';
 }
 document.getElementById('lbClose').addEventListener('click', closeLb);
 document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1) % filteredImages.length; showLb(); });
