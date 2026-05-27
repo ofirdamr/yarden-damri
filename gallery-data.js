@@ -1,6 +1,14 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1779906389/yarden_makeup/yarden_makeup_18103958203807211.mp4",
+    "a": "יש משהו יותר מספק מלראות לוק נבנה שלב אחרי שלב? \nנועה את משהו מיוחד 🤍\n@noa.naim",
+    "id": "18103958203807211",
+    "video": true,
+    "thumb": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/709266340_18593780233037829_9146168995474069432_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=krnXWzQ67RAQ7kNvwHTX0cg&_nc_oc=AdqpExT_Jpj_i0R3X6t9qQcLW2dlHpkZVY17R8UYxKSZgg9TzTRBQCuvW20NxerxGzY&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=zwhVT5DNdde_s0EkOblxsg&_nc_tpa=Q5bMBQEQx_yoMCl3D9E2rjal-MmpOe0zzrqi0di7LFa5pJdt8uTpS27_B787lOwfBQp_Es2zRErfe8pm6g&oh=00_Af7NaD2RrRminOFAYscu5DHWAfrwrpUIMEbnAEOhDnEOpw&oe=6A1D204A",
+    "item_id": "18103958203807211"
+  },
+  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg",
     "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
     "id": "18121741381726046",
