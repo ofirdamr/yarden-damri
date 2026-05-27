@@ -226,3 +226,16 @@
 - GitHub Pages already serves main → preview will be live at yardendamri.co.il/preview/
 - Non-destructive: only adds folder, does not touch existing files
 - After review, user can delete preview/ folder
+
+## 2026-05-27 - Reviews page editorial overhaul (preview/)
+Fixed all dark-theme leftovers + UX issues on reviews.html:
+- Replaced all `var(--card)` (#111 black) and dark rgba colors with cream editorial palette
+- New scoped CSS classes (`.rv-hero`, `.rv-rating`, `.rv-card`, `.rv-cta`, `.rv-skel`) — no inline styles
+- Skeleton loaders (shimmer animation) instead of "טוענת ביקורות..." text
+- Larger editorial rating display (4rem rating number, gold stars on cream)
+- White cards on cream bg with subtle hover lift + shadow
+- CTA box now light editorial (white + thin cream border) — was a black block
+- XSS-safe rendering with escapeHtml() helper
+- aria-busy + aria-live for screen readers during loading
+- Better fallback: shows 5.0 rating + clean Google link, never an empty page
+- Security comment block above API key with required Google Cloud restrictions

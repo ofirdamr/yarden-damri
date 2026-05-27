@@ -59,3 +59,8 @@
 **Mistake:** Tried to keep brand colors (bright IG gradient vs solid black TT) — different brightness creates "irradiation illusion" that makes them look unequal sizes regardless of CSS dimensions.
 **Fix:** Both circles now use the SITE's brown palette (`var(--deep)` background, `var(--blush)` icon + 1.5px blush border). Identical bg, identical border, identical icon color → guaranteed equal visual size. Bonus: matches the site's elegant warm aesthetic instead of clashing.
 **Lesson:** When two elements must visually match, make them visually identical first, then differentiate only by minimal content (icon shape). Brand colors mid-button are a luxury that fights visual consistency.
+
+## Reviews.html had dark-theme leftovers after cream redesign
+- When migrating to a new color theme, audit ALL inline styles + JS innerHTML templates, not just the CSS file
+- `var(--card)` was redefined to #111 (still dark) but used on cream pages → ugly contrast
+- Lesson: when changing palette, scoped page-specific styles are safer than global var redefinitions
