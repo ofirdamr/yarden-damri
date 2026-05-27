@@ -191,3 +191,18 @@
 - gallery.html: full port of homepage gallery — now has likes/comments, Instagram stats sync, video autoplay via IntersectionObserver, admin settings (hidden/pinned/order respected via gallery_admin localStorage key), cdnUrl/cdnVideo/cdnVideoPoster for f_auto+q_auto on all media.
 - index.html: homepage gallery now shows images only, capped at 48 items (no videos). Replaced pagination with "לכל הגלריה ←" link to gallery.html. Reduces Cloudinary bandwidth on homepage.
 - TODO: sync gallery_admin settings to JSONBin so admin curation applies for all visitors (JSONBin was down at time of implementation).
+
+## 2026-05-27 — Emoji cleanup & pricing redesign
+- Removed ALL decorative emoji from every page (📱💬🎬🌙🎂🎭💍✨💄🏠✈️📍⭐✨)
+- Pricing cards: redesigned from dark black (#111) to clean white with thin border
+  - Featured "מאפרת כלות" has black border + "הכי פופולרי" badge
+  - All text now black on white, price in Frank Ruhl Libre serif
+  - Bullet items use "—" dash, clean gray text
+- Bride feature cards: removed emoji, added proper serif headings in black
+- Bride step circles: changed from rose (#D4A898) to black (#111)
+- Bride step titles: rose color → black
+- Bride CTA button: changed from rose gradient to clean black
+- Area section: removed house/airplane emoji from points
+- Footer across all pages: removed 📱💬 emoji from phone/whatsapp line
+- Contact biz card: removed 📱📍💄📸 icon spans
+- Committed as ef25923, pushed to ui-redesign

@@ -1,0 +1,12 @@
+{
+  "terminal.integrated.defaultProfile.linux": "sessions",
+  "terminal.integrated.profiles.linux": {
+    "sessions": {
+      "path": "bash",
+      "args": ["-c", "tmux attach -t back 2>/dev/null || /home/codespace/bin/back"]
+    },
+    "bash": {
+      "path": "bash"
+    }
+  }
+}

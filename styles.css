@@ -152,12 +152,13 @@
       letter-spacing: -.01em;
     }
     .hero-subtitle {
-      font-family: 'Frank Ruhl Libre', serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-weight: 300;
-      color: var(--blush);
-      margin-bottom: 20px;
-      letter-spacing: .04em;
+      font-family: 'Heebo', sans-serif;
+      font-size: clamp(.85rem, 1.5vw, 1rem);
+      font-weight: 400;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 40px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
     }
     .hero-desc {
       font-size: 1rem; line-height: 1.85;
@@ -190,33 +191,33 @@
     .about-small-card { display: none; }
     .small-card-num { display: none; }
     .small-card-label { display: none; }
-    .section-eyebrow { font-size: .72rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #999; margin-bottom: 20px; display: block; }
+    .section-eyebrow { font-size: .72rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #666; margin-bottom: 20px; display: block; }
     .section-title { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 300; line-height: 1.08; color: var(--charcoal); margin-bottom: 28px; letter-spacing: -.01em; }
-    .section-title em { font-style: italic; color: var(--rose); }
+    .section-title em { font-style: italic; color: inherit; }
     .section-body { font-size: 1.05rem; line-height: 2; color: #555; margin-bottom: 36px; }
     .about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
     .pill { border: 1px solid #ddd; color: #555; padding: 8px 18px; border-radius: 2px; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; background: transparent; }
 
     /* ── SERVICES ── */
-    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--light); }
+    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; }
     #services::before { display: none; }
     .services-header { text-align: center; margin-bottom: 70px; }
     .services-header .section-eyebrow { text-align: center; }
     .services-header .section-title { color: var(--charcoal); }
-    .services-header .section-title em { color: var(--rose); }
+    .services-header .section-title em { color: inherit; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
     .service-card { background: #fff; border: none; border-radius: 0; padding: 48px 36px; transition: background .3s, transform .3s; position: relative; overflow: hidden; }
     .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--charcoal); transform: scaleX(0); transform-origin: right; transition: transform .4s ease; }
-    .service-card:hover, .service-card:focus-within { background: var(--warm); transform: translateY(-4px); }
+    .service-card:hover, .service-card:focus-within { background: #f8f8f8; transform: translateY(-4px); }
     .service-card:hover::before, .service-card:focus-within::before { transform: scaleX(1); transform-origin: left; }
     .service-icon { font-size: 2rem; margin-bottom: 24px; display: block; }
     .service-name { font-family: 'Frank Ruhl Libre', serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 14px; }
     .service-desc { font-size: .95rem; line-height: 1.85; color: #666; }
-    .service-card.featured { background: var(--charcoal); }
-    .service-card.featured .service-name { color: #fff; }
-    .service-card.featured .service-desc { color: rgba(255,255,255,.6); }
+    .service-card.featured { background: #fff; border-top: 3px solid #111; }
+    .service-card.featured .service-name { color: #111; }
+    .service-card.featured .service-desc { color: #555; }
     .service-cta { display: inline-block; margin-top: 22px; color: var(--charcoal); padding: 0; font-size: .88rem; font-weight: 700; text-decoration: none; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--charcoal); padding-bottom: 2px; transition: opacity .2s; }
-    .service-card.featured .service-cta { color: #fff; border-color: #fff; }
+    .service-card.featured .service-cta { color: #111; border-color: #111; }
     .service-cta:hover, .service-cta:focus { opacity: .6; }
 
     /* ── PHILOSOPHY ── */
@@ -227,11 +228,11 @@
     .attr { text-align: center; padding: 48px 60px; border-left: 1px solid #eee; }
     .attr:first-child { border-left: none; }
     .attr-num { font-family: 'Frank Ruhl Libre', serif; font-size: 4rem; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 10px; }
-    .attr-label { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #999; }
+    .attr-label { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #666; }
     .attr-divider { display: none; }
 
     /* ── AREA ── */
-    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--light); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; }
+    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: 1px solid #eee; }
     .area-map-visual { background: #000; border-radius: 2px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
     .area-map-visual::before { content: ''; }
     .map-label { position: absolute; bottom: 24px; background: rgba(0,0,0,.6); color: #fff; padding: 10px 24px; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-align: center; max-width: 88%; }
@@ -242,7 +243,7 @@
     .area-text span { font-size: .9rem; color: #777; line-height: 1.6; }
 
     /* ── CONTACT ── */
-    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--light); }
+    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; border-top: 1px solid #eee; }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .biz-card { width: 100%; max-width: 460px; background: #111; border-radius: 2px; padding: 48px; position: relative; overflow: hidden; color: #fff; }
     .biz-card::before, .biz-card::after { display: none; }
@@ -290,20 +291,20 @@
 
     /* Filter buttons */
     .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 20px 24px; background: rgba(62,42,26,.02); border-bottom: 1px solid rgba(196,154,108,.08); margin-bottom: 20px; }
-    .filter-btn { background: transparent; border: 2px solid rgba(196,154,108,.3); color: var(--text); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-family: inherit; font-size: .95rem; font-weight: 500; transition: all .3s; }
-    .filter-btn:hover { border-color: var(--blush); }
-    .filter-btn.active { background: var(--blush); color: var(--charcoal); border-color: var(--blush); }
+    .filter-btn { background: transparent; border: 1px solid #ddd; color: #555; padding: 9px 20px; border-radius: 2px; cursor: pointer; font-family: inherit; font-size: .82rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: all .2s; }
+    .filter-btn:hover { border-color: #111; color: #111; }
+    .filter-btn.active { background: #111; color: #fff; border-color: #111; }
 
     /* Load more button */
-    .load-more { width: 100%; max-width: 300px; margin: 40px auto; display: block; padding: 14px 24px; background: linear-gradient(135deg, var(--rose), var(--blush)); color: #fff; border: none; border-radius: 50px; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform .2s, box-shadow .2s; }
-    .load-more:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,154,108,.25); }
+    .load-more { width: 100%; max-width: 240px; margin: 40px auto; display: block; padding: 14px 24px; background: #111; color: #fff; border: none; border-radius: 2px; font-family: inherit; font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: opacity .2s; }
+    .load-more:hover { opacity: .75; }
 
     /* ── FOOTER ── */
     footer { background: #111; color: rgba(255,255,255,.4); text-align: center; padding: 48px 40px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; }
     footer strong { color: rgba(255,255,255,.7); font-weight: 400; }
 
     /* ── SCROLL TOP ── */
-    #scroll-top { position: fixed; bottom: 90px; left: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--rose); color: white; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.2); opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s; z-index: 9999; }
+    #scroll-top { position: fixed; bottom: 90px; left: 24px; width: 44px; height: 44px; border-radius: 50%; background: #111; color: #fff; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.2); opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s; z-index: 9999; }
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
@@ -333,7 +334,7 @@
     .mobile-menu ul { list-style: none; display: flex; flex-direction: column; }
     .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
     .mobile-menu ul a { display: block; color: #222; text-decoration: none; font-size: 1rem; font-weight: 600; padding: 16px 0; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; font-family: 'Heebo', sans-serif; }
-    .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: var(--rose); }
+    .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: #000; }
     .mobile-menu-wa { display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; text-decoration: none; padding: 16px 20px; border-radius: 2px; font-weight: 700; font-size: 1rem; margin-top: 28px; justify-content: center; }
     .mobile-social { display: flex; gap: 10px; margin-top: 16px; }
     .mobile-social .social-pill,
@@ -560,7 +561,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 }
 .page-title em {
   font-style: italic;
-  color: var(--rose);
+  color: inherit;
 }
 .page-lead {
   max-width: 580px;
@@ -663,7 +664,7 @@ footer a[href^="tel:"][style],
 p > a[href^="https://wa.me"][style],
 p > a[href^="tel:"][style] {
   background: transparent !important;
-  color: var(--blush) !important;
+  color: inherit !important;
   border: none !important;
   padding: 0 !important;
   letter-spacing: normal !important;
