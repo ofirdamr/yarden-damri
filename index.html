@@ -125,11 +125,11 @@
     <!-- Desktop nav links -->
     <ul class="nav-links" role="list">
       <li><a href="#about">אודות</a></li>
-      <li><a href="/bride.html">מאפרת כלות</a></li>
-      <li><a href="/services.html">שירותים</a></li>
-      <li><a href="/gallery.html">גלריה</a></li>
-      <li><a href="/bridal-guide.html">מדריך כלות</a></li>
-      <li><a href="/pricing.html">מחירון</a></li>
+      <li><a href="bride.html">מאפרת כלות</a></li>
+      <li><a href="services.html">שירותים</a></li>
+      <li><a href="gallery.html">גלריה</a></li>
+      <li><a href="bridal-guide.html">מדריך כלות</a></li>
+      <li><a href="pricing.html">מחירון</a></li>
       <li><a href="#contact" class="nav-cta">צרי קשר</a></li>
       <li class="nav-social">
         <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram של ירדן דמרי" class="social-pill social-ig">
@@ -148,11 +148,11 @@
   <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="תפריט ניווט נייד" aria-hidden="true">
     <ul role="list">
       <li><a href="#about" onclick="closeMobileMenu()">אודות</a></li>
-      <li><a href="/bride.html" onclick="closeMobileMenu()">מאפרת כלות</a></li>
-      <li><a href="/services.html" onclick="closeMobileMenu()">שירותים</a></li>
-      <li><a href="/gallery.html" onclick="closeMobileMenu()">גלריה</a></li>
-      <li><a href="/bridal-guide.html" onclick="closeMobileMenu()">מדריך כלות</a></li>
-      <li><a href="/pricing.html" onclick="closeMobileMenu()">מחירון</a></li>
+      <li><a href="bride.html" onclick="closeMobileMenu()">מאפרת כלות</a></li>
+      <li><a href="services.html" onclick="closeMobileMenu()">שירותים</a></li>
+      <li><a href="gallery.html" onclick="closeMobileMenu()">גלריה</a></li>
+      <li><a href="bridal-guide.html" onclick="closeMobileMenu()">מדריך כלות</a></li>
+      <li><a href="pricing.html" onclick="closeMobileMenu()">מחירון</a></li>
       <li><a href="#contact" onclick="closeMobileMenu()">צרי קשר</a></li>
     </ul>
     <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="mobile-menu-wa" onclick="closeMobileMenu()">
@@ -488,13 +488,13 @@
     <p>© 2025 <strong>ירדן דמרי</strong> | מאפרת מקצועית | אילת וכל הארץ</p>
     <p style="margin-top:10px;"><a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="התקשרי אל ירדן דמרי">054-7276716</a> &nbsp;·&nbsp; <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">וואטסאפ</a></p>
     <nav aria-label="ניווט תחתון" style="margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin-bottom:16px;">
-      <a href="/bride.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מאפרת כלות</a>
-      <a href="/services.html" style="color:rgba(255,255,255,.45);text-decoration:none;">שירותים</a>
-      <a href="/gallery.html" style="color:rgba(255,255,255,.45);text-decoration:none;">גלריה</a>
-      <a href="/reviews.html" style="color:rgba(255,255,255,.45);text-decoration:none;">ביקורות</a>
-      <a href="/bridal-guide.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מדריך כלות</a>
-      <a href="/contact.html" style="color:rgba(255,255,255,.45);text-decoration:none;">צרי קשר</a>
-      <a href="/disclaimer.html" style="color:rgba(255,255,255,.25);text-decoration:none;">תנאי שימוש</a>
+      <a href="bride.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מאפרת כלות</a>
+      <a href="services.html" style="color:rgba(255,255,255,.45);text-decoration:none;">שירותים</a>
+      <a href="gallery.html" style="color:rgba(255,255,255,.45);text-decoration:none;">גלריה</a>
+      <a href="reviews.html" style="color:rgba(255,255,255,.45);text-decoration:none;">ביקורות</a>
+      <a href="bridal-guide.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מדריך כלות</a>
+      <a href="contact.html" style="color:rgba(255,255,255,.45);text-decoration:none;">צרי קשר</a>
+      <a href="disclaimer.html" style="color:rgba(255,255,255,.25);text-decoration:none;">תנאי שימוש</a>
     </nav>
     <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px;align-items:center;">
       <div class="footer-social-pills">
@@ -912,7 +912,7 @@
     function renderPagination() {
       const total = Math.ceil(filteredImages.length / PER_PAGE);
       if (total <= 1) {
-        pagination.innerHTML = `<a href="/gallery.html" style="display:inline-block;margin-top:12px;padding:12px 32px;border-radius:30px;border:1px solid var(--blush);color:var(--blush);text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s;" onmouseover="this.style.background='var(--blush)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--blush)'">לכל הגלריה ←</a>`;
+        pagination.innerHTML = `<a href="gallery.html" style="display:inline-block;margin-top:12px;padding:12px 32px;border-radius:30px;border:1px solid var(--blush);color:var(--blush);text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s;" onmouseover="this.style.background='var(--blush)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--blush)'">לכל הגלריה ←</a>`;
         return;
       }
       let html = '';
