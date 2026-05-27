@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
     window.addEventListener('scroll', function(){
+      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -56,17 +57,20 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <meta property="og:title" content="גלריה | ירדן דמרי מאפרת"/>
   <meta property="og:url" content="https://yardendamri.co.il/gallery.html"/>
   <link rel="canonical" href="https://yardendamri.co.il/gallery.html"/>
-  <link rel="stylesheet" href="styles.css?v=5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4"/>
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"גלריית עבודות ירדן דמרי","url":"https://yardendamri.co.il/gallery.html","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"}}</script>
   <style>
     .filter-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-    .filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 20px;border-radius:30px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
-    .filter-btn.active,.filter-btn:hover{background:var(--blush);border-color:var(--blush);color:#fff}
+    .filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 20px;border-radius:2px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
+    .filter-btn.active,.filter-btn:hover{background:#111;border-color:#111;color:#fff}
     .gallery-grid{columns:2;gap:10px;max-width:1100px;margin:0 auto;padding:0 16px}
     @media(min-width:640px){.gallery-grid{columns:3}}
     @media(min-width:960px){.gallery-grid{columns:4}}
-    .gallery-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:4px;cursor:pointer;background:#1a1008}
+    .gallery-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:0;cursor:pointer;background:#1a1008}
     .gallery-item img{width:100%;display:block;transition:transform .4s,opacity .3s;opacity:0}
     .gallery-item img.loaded{opacity:1}
     .gallery-item:hover img{transform:scale(1.04)}
@@ -83,8 +87,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
     .lb-prev{right:12px}.lb-next{left:12px}
     .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
-    .load-more{display:block;margin:40px auto;background:transparent;border:1px solid var(--blush);color:var(--blush);padding:12px 40px;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
-    .load-more:hover{background:var(--blush);color:#fff}
+    .load-more{display:block;margin:40px auto;background:transparent;border:1px solid var(--blush);color:var(--blush);padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.85rem;font-weight:600;letter-spacing:.06em;transition:all .25s}
+    .load-more:hover{background:#111;color:#fff}
     .video-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .video-play svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));opacity:.9}
     .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}

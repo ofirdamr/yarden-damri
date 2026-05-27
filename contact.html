@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
     window.addEventListener('scroll', function(){
+      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -52,7 +53,10 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <meta property="og:title" content="צרי קשר | ירדן דמרי – מאפרת"/>
   <meta property="og:url" content="https://yardendamri.co.il/contact.html"/>
   <link rel="canonical" href="https://yardendamri.co.il/contact.html"/>
-  <link rel="stylesheet" href="styles.css?v=5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"צרי קשר – ירדן דמרי","url":"https://yardendamri.co.il/contact.html"}</script>
 </head>
 <body>

@@ -526,37 +526,57 @@
 
 
 /* ==============================================
-   SUB-PAGE LAYOUT (used by gallery, etc.)
-   Same dark theme as homepage — no body class needed.
+   SUB-PAGE LAYOUT
    ============================================== */
+
+/* Subpages: nav always shows white (no dark hero) */
+.subpage nav[role="navigation"],
+nav[role="navigation"].subpage-nav {
+  background: rgba(255,255,255,.97) !important;
+  border-bottom: 1px solid #eee !important;
+}
+.subpage nav[role="navigation"] .nav-logo,
+nav[role="navigation"].subpage-nav .nav-logo { color: var(--charcoal) !important; }
+.subpage nav[role="navigation"] .nav-links a,
+nav[role="navigation"].subpage-nav .nav-links a { color: #555 !important; }
+.subpage nav[role="navigation"] .nav-links a:hover,
+nav[role="navigation"].subpage-nav .nav-links a:hover { color: #000 !important; }
+.subpage nav[role="navigation"] .nav-cta,
+nav[role="navigation"].subpage-nav .nav-cta { background: var(--charcoal) !important; color: #fff !important; }
+.subpage nav[role="navigation"] .nav-hamburger span,
+nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charcoal) !important; }
+
 .page-hero {
-  padding: 140px 24px 60px;
+  padding: 160px clamp(24px,8vw,100px) 80px;
   text-align: center;
+  background: #fff;
+  border-bottom: 1px solid #eee;
 }
 .page-eyebrow {
   display: block;
   font-size: .72rem;
-  letter-spacing: .2em;
+  letter-spacing: .28em;
   text-transform: uppercase;
-  color: var(--blush);
-  margin-bottom: 16px;
+  color: #999;
+  margin-bottom: 20px;
 }
 .page-title {
-  font-family: serif;
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
   font-weight: 300;
-  color: var(--text);
-  line-height: 1.15;
-  margin-bottom: 20px;
+  color: var(--charcoal);
+  line-height: 1.08;
+  margin-bottom: 24px;
+  letter-spacing: -.01em;
 }
 .page-title em {
   font-style: italic;
-  color: var(--blush);
+  color: var(--rose);
 }
 .page-lead {
-  max-width: 560px;
+  max-width: 580px;
   margin: 0 auto;
-  font-size: 1rem;
-  line-height: 1.85;
-  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #666;
 }

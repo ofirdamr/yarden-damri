@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
     window.addEventListener('scroll', function(){
+      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -56,7 +57,10 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <meta property="og:title" content="שירותי איפור מקצועי | ירדן דמרי"/>
   <meta property="og:url" content="https://yardendamri.co.il/services.html"/>
   <link rel="canonical" href="https://yardendamri.co.il/services.html"/>
-  <link rel="stylesheet" href="styles.css?v=5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BeautySalon","name":"ירדן דמרי – מאפרת","url":"https://yardendamri.co.il","telephone":"+972547276716","address":{"@type":"PostalAddress","addressLocality":"אילת","addressCountry":"IL"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"שירותי איפור","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"איפור כלות"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"איפור ערב"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"הפקות"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"סדנאות איפור"}}]}}</script>
   
 </head>
@@ -132,7 +136,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   </div>
 
   <main id="main-content">
-  <section style="padding:120px 24px 60px;text-align:center;background:linear-gradient(180deg,rgba(196,154,108,.08) 0%,transparent 100%);">
+  <section style="padding:160px clamp(24px,8vw,100px) 80px;text-align:center;background:#fff;border-bottom:1px solid #eee;">
     <p class="section-eyebrow" style="justify-content:center">מה אני מציעה</p>
     <h1 class="section-title" style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:16px">שירותי <em>איפור מקצועי</em><br/>באילת</h1>
     <p style="color:var(--text);max-width:540px;margin:0 auto;font-size:1rem;line-height:1.8">כל שירות מותאם אישית — מאפרת שמגיעה אלייך, עם ניסיון עשיר ותוצאות שמדברות בעד עצמן.</p>

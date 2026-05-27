@@ -26,7 +26,8 @@ function closeMobileMenu() {
 function trackEvent(n,c,l) { if(typeof gtag==='function') gtag('event',n,{event_category:c,event_label:l}); }
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
-  if (nav) window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  if (nav) window.addEventListener('scroll', function(){ nav.classList.add('subpage-nav');
+      nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
   var els = document.querySelectorAll('.reveal');
   if (els.length && ('IntersectionObserver' in window)) {
     var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
@@ -44,7 +45,10 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <meta property="og:title" content="מחירון | ירדן דמרי – מאפרת"/>
   <meta property="og:url" content="https://yardendamri.co.il/pricing.html"/>
   <link rel="canonical" href="https://yardendamri.co.il/pricing.html"/>
-  <link rel="stylesheet" href="styles.css?v=5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4"/>
 </head>
 <body>
 
@@ -104,7 +108,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   </div>
 
   <main id="main-content">
-    <section style="padding:120px 24px 60px;text-align:center;background:linear-gradient(180deg,rgba(196,154,108,.08) 0%,transparent 100%);">
+    <section style="padding:160px clamp(24px,8vw,100px) 80px;text-align:center;background:#fff;border-bottom:1px solid #eee;">
       <p class="section-eyebrow" style="justify-content:center;">כמה זה עולה</p>
       <h1 class="section-title">מחירון <em>שירותים</em></h1>
       <p style="max-width:500px;margin:16px auto 0;font-size:.95rem;color:var(--text);opacity:.75;line-height:1.8;">
@@ -163,8 +167,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
       catch(e) { items = DEFAULT_PRICING; }
 
       document.getElementById('pricing-grid').innerHTML = items.map(item => `
-        <article style="background:var(--card,#231815);border:1px solid ${item.featured ? 'rgba(196,154,108,.5)' : 'rgba(232,200,176,.12)'};border-radius:20px;padding:28px 24px;position:relative;${item.featured ? 'box-shadow:0 0 0 2px rgba(196,154,108,.2);' : ''}">
-          ${item.featured ? '<div style="position:absolute;top:-12px;right:20px;background:var(--rose,#C4805A);color:#fff;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.05em;">הכי פופולרי ⭐</div>' : ''}
+        <article style="background:#111;border:1px solid ${item.featured ? 'rgba(196,154,108,.5)' : 'rgba(232,200,176,.12)'};border-radius:2px;padding:28px 24px;position:relative;${item.featured ? 'box-shadow:0 0 0 2px rgba(196,154,108,.2);' : ''}">
+          ${item.featured ? '<div style="position:absolute;top:-12px;right:20px;background:#111;color:#fff;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:2px;letter-spacing:.05em;">הכי פופולרי ⭐</div>' : ''}
           <div style="font-size:2rem;margin-bottom:12px;">${item.icon}</div>
           <h2 style="color:var(--blush,#E8C8B0);font-size:1.1rem;margin-bottom:6px;">${item.name}</h2>
           <p style="color:rgba(240,230,220,.6);font-size:.85rem;margin-bottom:16px;">${item.desc}</p>
