@@ -80,3 +80,10 @@
 - I told user "admin needs Cloudflare Worker" when in fact they already had JSONBin (used for reviews) AND a GitHub Action running every 6 hours
 - Lesson: when user pushes back on "X doesn't work", investigate the actual infrastructure FIRST (GitHub secrets, workflows, existing API integrations) before recommending big changes
 - User had: GitHub Secrets (CLOUDINARY_*, INSTAGRAM_TOKEN, NETLIFY_BUILD_HOOK), GitHub Action "Instagram Auto Sync", JSONBin for reviews, Render.com for IG feed proxy. None of these were obvious from a quick file listing.
+
+## Inline onclick attributes break when interpolating data with newlines
+- Instagram captions contain literal \n characters
+- Embedded in `onclick="...openComments('${caption}')..."` the newline becomes an invalid JS string literal (single-quoted strings can't span lines)
+- Result: SyntaxError → handler never runs → click bubbles to parent → wrong action triggers
+- Fix: sanitize with `.replace(/['"\\\n\r]/g,' ')` to strip ALL chars that break inline JS string literals
+- Better fix (for future): don't use inline onclick — use addEventListener with closure over the data

@@ -424,11 +424,12 @@ function renderGallery() {
         style="width:100%;display:block;transition:transform .4s;opacity:0;"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
+    const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
     div.innerHTML = `${mediaHtml}
       <div class="overlay"><div class="overlay-text">${caption}</div></div>
       <div class="item-actions">
         <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
-        <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
+        <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
       </div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
