@@ -219,3 +219,10 @@
 - Only icon SVG path differs (IG camera vs TT note)
 - Matches site palette — elegant brown/blush instead of clashing bright brand colors
 - `all: unset` + 12 `!important` size locks — bulletproof against any CSS conflict
+
+## 2026-05-27 - Preview deploy via GitHub Pages
+- Netlify is suspended → no branch previews available
+- Solution: created /preview/ folder on main branch with ui-redesign content
+- GitHub Pages already serves main → preview will be live at yardendamri.co.il/preview/
+- Non-destructive: only adds folder, does not touch existing files
+- After review, user can delete preview/ folder
