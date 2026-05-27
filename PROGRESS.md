@@ -268,3 +268,12 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 **fix.js update:** Added permalink to per-post stats fetch + warning log when comments are requested but unavailable (token permission issue).
 
 **Result:** Hide/pin/order/category/heroVideo changes in admin are now visible to ALL visitors within ~1 minute (cache TTL).
+
+## 2026-05-27 - IS 5568 accessibility widget on ALL pages
+- Created preview/a11y.js — self-contained widget that auto-injects ♿ button + panel on any page that includes the script
+- Added <script src="a11y.js" defer> to: about, bridal-guide, bride, contact, disclaimer, gallery, pricing, reviews, services, accessibility-statement
+- Index.html already has inline widget (kept as-is for now; a11y.js detects existing #a11y-trigger and skips injection to avoid duplicates)
+- Settings (contrast/text size/links/animations) sync across all pages via localStorage 'a11y_prefs_v1'
+- Alt+A keyboard shortcut works everywhere
+- FOUC prevention: prefs applied BEFORE first paint via inline IIFE in a11y.js
+- IS 5568 / WCAG 2.1 AA compliance restored across the entire preview site
