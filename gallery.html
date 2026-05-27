@@ -32,8 +32,9 @@ function trackEvent(event_name, category, label) {
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
+    nav.classList.add('subpage-nav');
+    nav.classList.add('scrolled');
     window.addEventListener('scroll', function(){
-      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }

@@ -165,22 +165,11 @@
       max-width: 420px; margin-bottom: 44px;
     }
     .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      background: #fff; color: var(--charcoal); padding: 16px 40px;
-      border-radius: 2px; text-decoration: none; font-size: .85rem;
-      font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      transition: background .3s, color .3s, transform .2s; display: inline-block;
-      font-family: 'Heebo', sans-serif;
-    }
-    .btn-primary:hover, .btn-primary:focus { background: var(--blush); color: var(--charcoal); transform: translateY(-2px); }
-    .btn-outline {
-      border: 1px solid rgba(255,255,255,.6); color: #fff; padding: 16px 40px;
-      border-radius: 2px; text-decoration: none; font-size: .85rem;
-      font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      transition: all .3s; display: inline-block;
-      font-family: 'Heebo', sans-serif;
-    }
-    .btn-outline:hover, .btn-outline:focus { background: rgba(255,255,255,.15); transform: translateY(-2px); }
+    /* Hero sits on dark video — invert the button colors there only */
+    #hero .btn-primary { background: #fff; color: var(--charcoal); }
+    #hero .btn-primary:hover, #hero .btn-primary:focus { background: #f0e6df; color: var(--charcoal); }
+    #hero .btn-outline { border-color: rgba(255,255,255,.6); color: #fff; }
+    #hero .btn-outline:hover, #hero .btn-outline:focus { background: rgba(255,255,255,.15); color: #fff; }
 
     @media (prefers-reduced-motion: reduce) {
       .hero-video { display: none; }
@@ -579,4 +568,121 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   font-size: 1.05rem;
   line-height: 1.9;
   color: #666;
+}
+
+/* ════════════════════════════════════════════════════════════
+   EDITORIAL BUTTON SYSTEM — one shape, three variants
+   Black fill / black outline / WhatsApp green. Square (2px) corners.
+   ════════════════════════════════════════════════════════════ */
+.btn-primary,
+.btn-outline,
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 40px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: 'Heebo', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background .25s, color .25s, border-color .25s, transform .2s;
+}
+
+.btn-primary {
+  background: var(--charcoal);
+  color: #fff;
+  border-color: var(--charcoal);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background: #000;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+.btn-outline:hover, .btn-outline:focus {
+  background: var(--charcoal);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-wa {
+  background: #25D366;
+  color: #fff;
+  border-color: #25D366;
+}
+.btn-wa:hover, .btn-wa:focus {
+  background: #1da851;
+  border-color: #1da851;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── PILL / ROUNDED INLINE OVERRIDE — no round buttons anywhere ── */
+[style*="border-radius:50px"], [style*="border-radius: 50px"],
+[style*="border-radius:30px"], [style*="border-radius: 30px"],
+[style*="border-radius:25px"], [style*="border-radius: 25px"],
+[style*="border-radius:20px"], [style*="border-radius: 20px"] {
+  border-radius: 2px !important;
+}
+.filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
+/* keep genuinely-circular UI bits round */
+.wa-float, #scroll-top, .footer-social-pills .social-pill,
+[style*="border-radius:50%"], [style*="border-radius: 50%"] {
+  border-radius: 50% !important;
+}
+
+/* ── INLINE CTA-LINK NORMALISER ──
+   Old subpages have hand-styled <a> CTA buttons with brown / gradient
+   fills. Normalise every wa.me / tel: action link to the black system. */
+a[href^="https://wa.me"][style],
+a[href^="tel:"][style] {
+  background: var(--charcoal) !important;
+  background-image: none !important;
+  color: #fff !important;
+  border: 1px solid var(--charcoal) !important;
+  border-radius: 2px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+}
+/* keep plain footer / inline text links untouched */
+footer a[href^="https://wa.me"][style],
+footer a[href^="tel:"][style],
+p > a[href^="https://wa.me"][style],
+p > a[href^="tel:"][style] {
+  background: transparent !important;
+  color: var(--blush) !important;
+  border: none !important;
+  padding: 0 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  font-weight: inherit !important;
+}
+/* pricing cards sit on a dark #111 background — use a light button there */
+#pricing-grid a[href^="https://wa.me"][style] {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1px solid #fff !important;
+}
+/* review CTA button sits inside a dark card — invert to white fill */
+#write-review-btn {
+  background: #fff;
+  color: var(--charcoal);
+  border-color: #fff;
+}
+#write-review-btn:hover, #write-review-btn:focus {
+  background: #f0e6df;
+  color: var(--charcoal);
 }

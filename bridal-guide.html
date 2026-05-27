@@ -32,8 +32,9 @@ function trackEvent(event_name, category, label) {
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
+    nav.classList.add('subpage-nav');
+    nav.classList.add('scrolled');
     window.addEventListener('scroll', function(){
-      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -68,8 +69,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   {"@context":"https://schema.org","@type":"Article","headline":"המדריך המלא לכלה — עור מושלם ביום החתונה","author":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"},"publisher":{"@type":"Organization","name":"ירדן דמרי – מאפרת","url":"https://yardendamri.co.il"},"datePublished":"2025-01-01","description":"מדריך מקצועי לכלות להכנת עור מושלם לחתונה"}
   </script>
   <style>
-    .guide-header{padding:160px clamp(24px,8vw,100px) 80px 60px;text-align:center;background:linear-gradient(180deg,rgba(196,154,108,.1) 0%,transparent 100%)}
-    .guide-subtitle{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blush);margin-bottom:12px;display:block}
+    .guide-header{padding:160px clamp(24px,8vw,100px) 80px;text-align:center;background:#fff;border-bottom:1px solid #eee}
+    .guide-subtitle{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#999;margin-bottom:20px;display:block}
     .guide-intro{font-size:1rem;color:var(--text);max-width:620px;margin:0 auto;line-height:1.9}
     .timeline{max-width:800px;margin:0 auto;padding:0 24px 80px;position:relative}
     .timeline::before{content:'';position:absolute;right:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blush),transparent);opacity:.3}

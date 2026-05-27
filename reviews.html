@@ -29,8 +29,9 @@ function trackEvent(event_name, category, label) {
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
+    nav.classList.add('subpage-nav');
+    nav.classList.add('scrolled');
     window.addEventListener('scroll', function(){
-      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -152,7 +153,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
         </p>
         <a id="write-review-btn" href="#" target="_blank" rel="noopener noreferrer"
            onclick="trackEvent('review_click','engagement','write_review')"
-           class="btn-primary">⭐ כתבי ביקורת בגוגל</a>
+           class="btn-primary">כתבי ביקורת בגוגל</a>
       </div>
 
     </section>

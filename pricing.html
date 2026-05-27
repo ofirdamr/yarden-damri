@@ -26,8 +26,11 @@ function closeMobileMenu() {
 function trackEvent(n,c,l) { if(typeof gtag==='function') gtag('event',n,{event_category:c,event_label:l}); }
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
-  if (nav) window.addEventListener('scroll', function(){ nav.classList.add('subpage-nav');
-      nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  if (nav) {
+    nav.classList.add('subpage-nav');
+    nav.classList.add('scrolled');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  }
   var els = document.querySelectorAll('.reveal');
   if (els.length && ('IntersectionObserver' in window)) {
     var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
@@ -133,7 +136,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
       <div id="pricing-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;"></div>
       <div style="text-align:center;margin-top:48px;">
         <p style="color:var(--text);opacity:.6;font-size:.88rem;margin-bottom:20px;">מחפשת הצעת מחיר אישית?</p>
-        <a href="https://wa.me/9720547276716?text=היי ירדן, אני מעוניינת לשמוע על מחירים" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="trackEvent('whatsapp_click','conversion','pricing_page')">💬 שלחי הודעה בוואטסאפ</a>
+        <a href="https://wa.me/9720547276716?text=היי ירדן, אני מעוניינת לשמוע על מחירים" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="trackEvent('whatsapp_click','conversion','pricing_page')">שלחי הודעה בוואטסאפ</a>
       </div>
     </section>
   </main>
@@ -175,7 +178,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
           <div style="font-size:1.4rem;font-weight:700;color:var(--gold,#D4AF6A);margin-bottom:16px;">${item.price}</div>
           ${item.includes && item.includes.length ? `<ul style="list-style:none;padding:0;margin-bottom:12px;">${item.includes.map(inc => `<li style="font-size:.85rem;color:rgba(240,230,220,.75);padding:4px 0;display:flex;align-items:center;gap:8px;"><span style="color:var(--blush)">✓</span>${inc}</li>`).join('')}</ul>` : ''}
           ${item.addons && item.addons.length ? `<div style="border-top:1px solid rgba(232,200,176,.1);padding-top:12px;margin-bottom:16px;"><div style="font-size:.75rem;color:var(--muted,rgba(240,230,220,.5));margin-bottom:8px;letter-spacing:.04em;">➕ תוספות אפשריות</div><ul style="list-style:none;padding:0;">${item.addons.map(a => `<li style="font-size:.82rem;color:rgba(240,230,220,.65);padding:3px 0;display:flex;justify-content:space-between;gap:8px;"><span>${a.name}</span><span style="color:var(--gold,#D4AF6A);white-space:nowrap;">${a.price}</span></li>`).join('')}</ul></div>` : ''}
-          <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת ב${encodeURIComponent(item.name)}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('whatsapp_click','conversion','pricing_${item.name}')" style="display:block;text-align:center;padding:12px;border-radius:12px;background:${item.featured ? 'var(--rose,#C4805A)' : 'rgba(255,255,255,.08)'};color:${item.featured ? '#fff' : 'var(--blush,#E8C8B0)'};text-decoration:none;font-size:.88rem;font-weight:600;border:1px solid ${item.featured ? 'transparent' : 'rgba(232,200,176,.2)'};transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">📲 לתיאום</a>
+          <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת ב${encodeURIComponent(item.name)}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('whatsapp_click','conversion','pricing_${item.name}')" style="display:block;text-align:center;padding:14px;border-radius:2px;background:#fff;color:#111;text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid #fff;transition:opacity .2s;" onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">לתיאום</a>
         </article>`).join('');
     }
   </script>

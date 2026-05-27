@@ -2,6 +2,13 @@
 
 ## ✅ Completed
 
+- fix: editorial redesign consistency pass (branch `ui-redesign`)
+  - Nav was invisible on all 8 subpages — `nav.classList.add('subpage-nav')` was inside the scroll listener so it never fired on load. Moved it (plus `scrolled`) outside the listener in about/bride/services/gallery/pricing/contact/reviews/bridal-guide so the white nav applies immediately.
+  - Established ONE button system in `styles.css`: `.btn-primary` (black fill/white text), `.btn-outline` (transparent/black border), `.btn-wa` (WhatsApp green) — all 2px radius, uppercase, letter-spaced. Hero buttons inverted via `#hero` scope only.
+  - Added global overrides: pill/30px/50px inline radii forced to 2px (circular UI controls kept round); inline `wa.me`/`tel:` CTA links normalised to the black system (gradient/brown fills removed); footer/inline text links exempted.
+  - Pricing JS template CTA buttons unified to white-fill/black-text (dark cards); dark-card buttons (`#pricing-grid`, `#write-review-btn`) scoped to white fill so they stay visible.
+  - bridal-guide `.guide-header` warm gradient hero replaced with white bg + grey eyebrow + border-bottom (matches `.page-hero`).
+  - Removed emoji prefixes from all CTA button text (contact submit, reviews CTA, bride/about/services/pricing/index CTAs).
 - fix: mobile menu social buttons (Instagram/TikTok) now equal height + width — `.mobile-social .social-pill` set to `flex:1 1 0; min-width:0; height:44px; padding:0 11px` and removed `flex-wrap:wrap` from `.mobile-social` (prevented uneven sizing/wrapping); previous `flex:1` alone was undercut by base `height:36px` and the wrap allowing the longer "Instagram" label to size differently
 - fix: mobile menu social buttons (Instagram/TikTok) equal width via `flex:1` on `.mobile-social .social-pill`
 

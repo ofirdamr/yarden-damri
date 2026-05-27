@@ -29,8 +29,9 @@ function trackEvent(event_name, category, label) {
 document.addEventListener('DOMContentLoaded', function(){
   var nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
+    nav.classList.add('subpage-nav');
+    nav.classList.add('scrolled');
     window.addEventListener('scroll', function(){
-      nav.classList.add('subpage-nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
   }
@@ -191,7 +192,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
                 const msg = encodeURIComponent('היי ירדן! 😊\nשם: ' + name + '\nטלפון: ' + phone + '\nסוג שירות: ' + service + '\nתאריך אירוע: ' + date + (notes ? '\nהערות: ' + notes : ''));
                 window.open('https://wa.me/9720547276716?text='+msg,'_blank');
               })()">
-              📲 שלחי בוואטסאפ
+              שלחי בוואטסאפ
             </button>
           </form>
         </div>
