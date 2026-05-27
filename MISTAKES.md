@@ -75,3 +75,8 @@
 - `data-src` + IntersectionObserver works only if observer fires reliably on first render
 - For above-the-fold videos: just use direct `src` + `autoplay preload="metadata"`
 - Lazy loading is for below-the-fold, not for visible-on-load videos
+
+## Assumed admin was localStorage-only without checking infrastructure
+- I told user "admin needs Cloudflare Worker" when in fact they already had JSONBin (used for reviews) AND a GitHub Action running every 6 hours
+- Lesson: when user pushes back on "X doesn't work", investigate the actual infrastructure FIRST (GitHub secrets, workflows, existing API integrations) before recommending big changes
+- User had: GitHub Secrets (CLOUDINARY_*, INSTAGRAM_TOKEN, NETLIFY_BUILD_HOOK), GitHub Action "Instagram Auto Sync", JSONBin for reviews, Render.com for IG feed proxy. None of these were obvious from a quick file listing.

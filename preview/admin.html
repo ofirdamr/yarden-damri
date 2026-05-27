@@ -107,6 +107,7 @@
   </style>
 </head>
 <body>
+<script src="remote-state.js"></script>
 <script src="gallery-data.js?v=1779253059"></script>
 
 <!-- LOGIN -->
@@ -296,7 +297,7 @@
       <h2>🎬 וידאו ראשי בדף הבית</h2>
       <div class="field-group">
         <label>בחרי וידאו לכותרת הראשית (Hero) של דף הבית</label>
-        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">בחרי וידאו מתוך הוידאוים בגלריה. ההגדרה נשמרת בדפדפן הזה בלבד.</p>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">בחרי וידאו מתוך הוידאוים בגלריה. הבחירה תהיה גלויה לכל המבקרים באתר (תוך כדקה).</p>
         <select id="hero-video-select" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;margin-bottom:10px;">
           <option value="">— ברירת מחדל —</option>
         </select>
@@ -304,9 +305,6 @@
           <button class="btn btn-primary" onclick="saveHeroVideo()">שמור</button>
           <button class="btn btn-secondary" onclick="clearHeroVideo()">חזרה לברירת מחדל</button>
           <span id="hero-video-status" style="font-size:.85rem;color:var(--text-muted,#888);"></span>
-        </div>
-        <div style="margin-top:14px;padding:10px;background:rgba(196,134,106,.08);border-right:3px solid #C4866A;border-radius:6px;font-size:.82rem;line-height:1.6;">
-          <strong>שים לב:</strong> הבחירה כאן נשמרת רק בדפדפן הנוכחי. כדי שתחול לכל המבקרים, צרי קובץ <code>hero-config.json</code> בתיקיית האתר עם התוכן: <code>{"url":"..."}</code> — או בקשי מהמפתח להגדיר זאת.
         </div>
       </div>
     </div>
@@ -374,7 +372,7 @@ async function tryLogin() {
   if (inputHash === getStoredHash()) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-main').style.display = 'block';
-    try { initAdmin(); } catch(e) { console.error('initAdmin error:', e); }
+    initAdmin().catch(e => console.error('initAdmin error:', e));
   } else {
     errEl.textContent = 'סיסמה שגויה — נסה שוב';
     errEl.style.display = 'block';
@@ -425,13 +423,62 @@ let currentCatFilter = '';
 let searchTerm = '';
 
 function getSettings() {
+  // Prefer RemoteState (synced to all visitors via JSONBin).
+  // RemoteState.getAdmin() returns sensible defaults. The 'rotations' and 'heroVideo' keys are also synced.
+  if (window.RemoteState && window.RemoteState.getAdmin) {
+    const a = window.RemoteState.getAdmin();
+    // include heroVideo from top-level so admin can read/write it via this object
+    const s = window.RemoteState.getCached() || {};
+    return { ...a, heroVideo: s.heroVideo || '' };
+  }
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{"hidden":[],"pinned":[],"order":[],"cats":{},"catList":[]}'); }
   catch(e) { return {hidden:[],pinned:[],order:[],cats:{},catList:[]}; }
 }
-function saveSettings(s) { localStorage.setItem('gallery_admin', JSON.stringify(s)); }
+let _pendingSave = null;
+function saveSettings(s) {
+  // Always update local cache first so UI reflects change instantly.
+  // Persist to localStorage as a redundant local backup.
+  try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
+
+  if (window.RemoteState && window.RemoteState.update) {
+    // Split: admin keys vs heroVideo (top-level)
+    const { heroVideo, ...adminFields } = s;
+    const payload = { admin: adminFields };
+    if (heroVideo !== undefined) payload.heroVideo = heroVideo;
+
+    // Debounce rapid saves
+    clearTimeout(_pendingSave);
+    _pendingSave = setTimeout(async () => {
+      const result = await window.RemoteState.update(payload);
+      if (!result.ok) {
+        showToast('⚠️ שמירה לענן נכשלה — שמור שוב או בדוק חיבור');
+      }
+    }, 300);
+  }
+}
 
 // ─── INIT ───────────────────────────────────────────────────────
-function initAdmin() {
+async function initAdmin() {
+  // 1. Load remote state first (so getSettings returns synced data)
+  if (window.RemoteState) {
+    await window.RemoteState.fetch();
+
+    // Migration: if remote has no admin data but localStorage does, push localStorage up to remote
+    const remoteCached = window.RemoteState.getCached() || {};
+    if (!remoteCached.admin) {
+      try {
+        const local = JSON.parse(localStorage.getItem('gallery_admin') || '{}');
+        if (Object.keys(local).length > 0 && (local.hidden?.length || local.pinned?.length || local.order?.length || Object.keys(local.cats||{}).length)) {
+          const { heroVideo, ...adminFields } = local;
+          const payload = { admin: adminFields };
+          if (heroVideo) payload.heroVideo = heroVideo;
+          await window.RemoteState.update(payload);
+          showToast && showToast('☁️ הגדרות מקומיות הועלו לענן');
+        }
+      } catch(e) {}
+    }
+  }
+
   const s = getSettings();
   if (typeof GALLERY_IMAGES === 'undefined') {
     document.getElementById('grid').innerHTML = '<p style="padding:20px;color:red">שגיאה: קובץ הגלריה לא נטען. רענן את הדף.</p>';
@@ -696,14 +743,22 @@ function reorder(fromUrl,toUrl){
 }
 function resetOrder(){
   if(!confirm('לאפס סדר?'))return;
-  const s=getSettings(); s.order=[]; saveSettings(s); initAdmin(); showToast('🔄 סדר אופס');
+  const s=getSettings(); s.order=[]; saveSettings(s);
+  initAdmin().then(()=>showToast('🔄 סדר אופס'));
 }
 function saveAndPublish(){
   showToast('✅ שינויים נשמרו! רפרש את האתר הראשי.');
 }
 function clearAllSettings(){
-  if(!confirm('למחוק את כל הגדרות הגלריה (הסתרות, נעוצים, קטגוריות, סדר)?'))return;
-  localStorage.removeItem('gallery_admin'); initAdmin(); showToast('🗑️ אופס הכל');
+  if(!confirm('למחוק את כל הגדרות הגלריה (הסתרות, נעוצים, קטגוריות, סדר)? פעולה זו תשפיע על כל המבקרים באתר!'))return;
+  localStorage.removeItem('gallery_admin');
+  if (window.RemoteState && window.RemoteState.update) {
+    window.RemoteState.update({ admin: {hidden:[],pinned:[],order:[],cats:{},catList:[]} }).then(()=>{
+      initAdmin(); showToast('🗑️ אופס הכל (גם בענן)');
+    });
+  } else {
+    initAdmin(); showToast('🗑️ אופס הכל');
+  }
 }
 
 // ─── HERO VIDEO PICKER ──────────────────────────────────────────
@@ -730,7 +785,7 @@ function saveHeroVideo(){
   const s = getSettings();
   if (sel.value) s.heroVideo = sel.value; else delete s.heroVideo;
   saveSettings(s);
-  showToast('🎬 וידאו ראשי עודכן! רפרשי את דף הבית לראות.');
+  showToast('🎬 וידאו ראשי עודכן! גלוי לכל המבקרים תוך כדקה.');
   populateHeroVideoSelect();
 }
 function clearHeroVideo(){

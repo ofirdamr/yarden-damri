@@ -278,10 +278,14 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
+<script src="remote-state.js"></script>
 <script src="gallery-data.js?v=2"></script>
 <script>
-// ── ADMIN SETTINGS (kept in localStorage, survives gallery-data.js regenerations) ──
+// ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
 function getAdminSettings() {
+  if (window.RemoteState && window.RemoteState.getAdmin) {
+    return window.RemoteState.getAdmin();
+  }
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e) { return {}; }
 }
 function applyAdminSettings(images) {
@@ -521,8 +525,15 @@ document.addEventListener('keydown', e => {
 });
 
 // ── INIT ──
+// Initial render — apply with whatever cached state we have, then refresh from remote
 applyFilter('all');
 loadIgFeed();
+(async () => {
+  if (window.RemoteState) {
+    await window.RemoteState.fetch();
+    applyFilter(activeFilter);
+  }
+})();
 </script>
 </body>
 </html>

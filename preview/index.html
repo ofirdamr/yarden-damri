@@ -182,21 +182,30 @@
         <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
       <script>
-        // Hero video override: admin can set via localStorage `gallery_admin.heroVideo`
-        // OR via committed config file `hero-config.json` (priority: server file > localStorage > default)
+        // Hero video override: admin sets via RemoteState (synced to all visitors via JSONBin).
+        // Falls back to hero-config.json (committed) then default.
         (async function applyHeroVideo(){
           let url = null;
+          // 1. RemoteState (admin choice, public)
           try {
-            const cfg = await fetch('hero-config.json',{cache:'no-cache'}); 
-            if (cfg.ok) { const j = await cfg.json(); if (j && j.url) url = j.url; }
+            if (window.RemoteState) {
+              await window.RemoteState.fetch();
+              url = window.RemoteState.getHeroVideo();
+            }
           } catch(e){}
+          // 2. Committed config file (manual override)
           if (!url) {
-            try { const a = JSON.parse(localStorage.getItem('gallery_admin')||'{}'); if (a.heroVideo) url = a.heroVideo; } catch(e){}
+            try {
+              const cfg = await fetch('hero-config.json',{cache:'no-cache'});
+              if (cfg.ok) { const j = await cfg.json(); if (j && j.url) url = j.url; }
+            } catch(e){}
           }
           if (url) {
             const v = document.getElementById('heroVideo');
             const s = document.getElementById('heroVideoSource');
-            const cloudUrl = url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/');
+            const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
+              ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
+              : url;
             s.src = cloudUrl; v.load(); v.play().catch(()=>{});
           }
         })();
@@ -594,6 +603,7 @@
   <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="a11y-live"></div>
 
   <!-- Gallery data -->
+  <script src="remote-state.js"></script>
   <script src="gallery-data.js"></script>
 
   <script>
@@ -629,6 +639,10 @@
 
     // ── GALLERY ───────────────────────────────────
     function getAdminSettings() {
+      // Prefer remote (public, synced). Fallback to legacy localStorage for backward compat during transition.
+      if (window.RemoteState && window.RemoteState.getAdmin) {
+        return window.RemoteState.getAdmin();
+      }
       try { return JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e) { return {}; }
     }
     function applyAdminSettings(images) {
@@ -654,6 +668,17 @@
 
     const gallery = document.getElementById('ig-gallery');
     const pagination = document.getElementById('pagination');
+
+    // Load remote state (admin settings, hero video, reviews). On success, re-render with applied settings.
+    (async () => {
+      if (!window.RemoteState) return;
+      await window.RemoteState.fetch();
+      // Re-apply settings and re-render gallery
+      if (typeof GALLERY_IMAGES !== 'undefined') {
+        filteredImages = applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE);
+        if (typeof renderPage === 'function') renderPage(currentPage);
+      }
+    })();
 
     // Fetch fresh posts from server
     (async () => {
@@ -1006,9 +1031,14 @@
 
     async function loadReviews() {
       try {
-        const r = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_KEY } });
-        const d = await r.json();
-        reviewsCache = d.record?.reviews || [];
+        if (window.RemoteState) {
+          await window.RemoteState.fetch();
+          reviewsCache = window.RemoteState.getReviews();
+        } else {
+          const r = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_KEY } });
+          const d = await r.json();
+          reviewsCache = d.record?.reviews || [];
+        }
       } catch(e) {
         reviewsCache = JSON.parse(localStorage.getItem('site_reviews')||'[]');
       }
@@ -1028,11 +1058,15 @@
       reviewsCache.unshift(newReview);
       localStorage.setItem('site_reviews', JSON.stringify(reviewsCache));
       try {
-        await fetch(JSONBIN_URL, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-          body: JSON.stringify({ reviews: reviewsCache })
-        });
+        if (window.RemoteState) {
+          await window.RemoteState.update({ reviews: reviewsCache });
+        } else {
+          await fetch(JSONBIN_URL, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+            body: JSON.stringify({ reviews: reviewsCache })
+          });
+        }
       } catch(e) {}
       document.getElementById('rev-name').value = '';
       document.getElementById('rev-text').value = '';

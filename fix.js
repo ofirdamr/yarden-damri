@@ -105,13 +105,22 @@ async function uploadToCloudinary(item) {
   const stats = {};
   for (const id of uniquePostIds) {
     try {
-      const data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
+      // First try with full comment fields. If empty/error, log the response for debugging.
+      let data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
+      let commentsArr = data.comments?.data || [];
+      // If we got comments_count > 0 but no comments returned, the token lacks instagram_manage_comments permission.
+      // Log once so the issue is visible in Action logs.
+      if ((data.comments_count || 0) > 0 && commentsArr.length === 0 && !global._loggedCommentWarn) {
+        console.log(`⚠️ Comments unavailable (token lacks permissions?). Sample response for ${id}:`, JSON.stringify(data).substring(0, 300));
+        global._loggedCommentWarn = true;
+      }
       stats[id] = {
         likes: data.like_count || 0,
         comments_count: data.comments_count || 0,
-        comments: (data.comments?.data || []).map(c => ({ username: c.username || "", text: c.text || "", timestamp: c.timestamp || "" }))
+        comments: commentsArr.map(c => ({ username: c.username || "", text: c.text || "", timestamp: c.timestamp || "" })),
+        permalink: data.permalink || ''
       };
-      console.log(`  ${id}: ${stats[id].likes} likes, ${stats[id].comments_count} comments`);
+      console.log(`  ${id}: ${stats[id].likes} likes, ${stats[id].comments_count} comments (${commentsArr.length} fetched)`);
     } catch(e) {
       stats[id] = { likes: 0, comments_count: 0, comments: [] };
     }

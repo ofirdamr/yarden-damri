@@ -249,3 +249,22 @@ Fixed 5 issues:
 5. Homepage hero: Added selectable hero video — admin panel has new "Hero Video" picker in Settings tab. Priority chain: hero-config.json (committed file, all visitors) > localStorage gallery_admin.heroVideo (this browser only) > default.
 
 Files touched: preview/gallery.html, preview/index.html, preview/admin.html
+
+## 2026-05-27 - MAJOR: Admin settings now public via JSONBin (preview/)
+**Discovery:** The site already uses JSONBin (for customer reviews), Render.com (IG feed), Cloudinary, and a GitHub Action that auto-syncs Instagram every 6 hours. So infrastructure exists — just admin gallery settings were stuck in localStorage.
+
+**Changes:**
+1. Created `preview/remote-state.js` — shared module that loads/saves admin state via JSONBin. Includes:
+   - 1-minute cache to reduce API calls
+   - Optimistic local update (UI feels instant)
+   - Auto-merge so other bin keys (reviews) are preserved on writes
+   - In-flight dedup so concurrent fetches don't race
+2. Admin.html: `getSettings/saveSettings` now read/write via RemoteState. On init, migrates existing localStorage data to remote (one-time, if remote is empty).
+3. Index.html: applyAdminSettings reads from RemoteState. After remote loads, re-renders gallery with synced state.
+4. Gallery.html: same pattern as index.
+5. Hero video: now stored in `record.heroVideo` of the same bin. All visitors see admin's choice.
+6. Reviews continue to work — same bin, same `reviews` key, just routed through RemoteState.
+
+**fix.js update:** Added permalink to per-post stats fetch + warning log when comments are requested but unavailable (token permission issue).
+
+**Result:** Hide/pin/order/category/heroVideo changes in admin are now visible to ALL visitors within ~1 minute (cache TTL).
