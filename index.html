@@ -71,7 +71,10 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -173,46 +176,19 @@
 
     <!-- HERO -->
     <section id="hero" aria-label="כותרת ראשית">
-      <div class="hero-bg-circle c1" aria-hidden="true"></div>
-      <div class="hero-bg-circle c2" aria-hidden="true"></div>
-
-      <div class="hero-left">
-        <h1 class="hero-title">
-          ירדן דמרי
-          <span class="hero-he-sub">מאפרת כלות וערב</span>
-          <em class="hero-en-sub">Makeup Artist</em>
-        </h1>
-        <p class="hero-desc">
-          מאפרת כלות ואירועים מאילת עם ניסיון עשיר בהפקות מקצועיות.
-          מתמחה בסגנון עדין וטבעי שמדגיש את היופי הייחודי שלך —
-          עור זוהר, גימור נקי ומראה אלגנטי שמצטלם בצורה מושלמת.
-        </p>
+      <video class="hero-video" autoplay muted loop playsinline
+        poster="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_face,w_1280,h_720,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu">
+        <source src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">מאפרת כלות וערב · אילת</p>
+        <h1 class="hero-title">ירדן דמרי</h1>
+        <p class="hero-subtitle">מאפרת כלות וערב</p>
+        <p class="hero-desc">סגנון עדין וטבעי שמדגיש את היופי הייחודי שלך — עור זוהר, גימור נקי, מראה שמצטלם בצורה מושלמת.</p>
         <div class="hero-btns">
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%AA%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="btn-primary">📲 לתיאום תור</a>
-          <a href="#gallery" class="btn-outline">הגלריה שלי ←</a>
-        </div>
-      </div>
-
-      <div class="hero-right" aria-hidden="true">
-        <div class="hero-image-frame">
-          <div class="hero-image-bg"></div>
-          <div class="hero-image-placeholder">
-            <img
-              src="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_north,w_420,h_540,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu"
-              alt="ירדן דמרי מאפרת מקצועית"
-              loading="eager"
-              style="width:100%;height:100%;object-fit:cover;" />
-          </div>
-          <div class="hero-badge">
-            <span class="badge-icon">💍</span>
-            <div class="badge-text">
-              <strong>כלות &amp; אירועים</strong>
-              מאילת לכל הארץ
-            </div>
-          </div>
-          <div class="hero-tag">
-            ✦ ניסיון<br/>מקצועי<br/>מוכח
-          </div>
+          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%AA%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="btn-primary">לתיאום תור</a>
+          <a href="#gallery" class="btn-outline">הגלריה שלי</a>
         </div>
       </div>
     </section>
