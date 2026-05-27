@@ -293,6 +293,25 @@
   <!-- SETTINGS TAB -->
   <div id="tab-settings" style="display:none;padding:24px 28px">
     <div class="settings-section">
+      <h2>🎬 וידאו ראשי בדף הבית</h2>
+      <div class="field-group">
+        <label>בחרי וידאו לכותרת הראשית (Hero) של דף הבית</label>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">בחרי וידאו מתוך הוידאוים בגלריה. ההגדרה נשמרת בדפדפן הזה בלבד.</p>
+        <select id="hero-video-select" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;margin-bottom:10px;">
+          <option value="">— ברירת מחדל —</option>
+        </select>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="saveHeroVideo()">שמור</button>
+          <button class="btn btn-secondary" onclick="clearHeroVideo()">חזרה לברירת מחדל</button>
+          <span id="hero-video-status" style="font-size:.85rem;color:var(--text-muted,#888);"></span>
+        </div>
+        <div style="margin-top:14px;padding:10px;background:rgba(196,134,106,.08);border-right:3px solid #C4866A;border-radius:6px;font-size:.82rem;line-height:1.6;">
+          <strong>שים לב:</strong> הבחירה כאן נשמרת רק בדפדפן הנוכחי. כדי שתחול לכל המבקרים, צרי קובץ <code>hero-config.json</code> בתיקיית האתר עם התוכן: <code>{"url":"..."}</code> — או בקשי מהמפתח להגדיר זאת.
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section" style="margin-top:30px;">
       <h2>⚙️ הגדרות</h2>
       <div class="field-group">
         <label>שינוי סיסמה</label>
@@ -427,6 +446,7 @@ function initAdmin() {
   renderGrid();
   renderCatList();
   renderCatFilters();
+  populateHeroVideoSelect();
 }
 
 // ─── GRID ───────────────────────────────────────────────────────
@@ -684,6 +704,41 @@ function saveAndPublish(){
 function clearAllSettings(){
   if(!confirm('למחוק את כל הגדרות הגלריה (הסתרות, נעוצים, קטגוריות, סדר)?'))return;
   localStorage.removeItem('gallery_admin'); initAdmin(); showToast('🗑️ אופס הכל');
+}
+
+// ─── HERO VIDEO PICKER ──────────────────────────────────────────
+function populateHeroVideoSelect(){
+  const sel = document.getElementById('hero-video-select'); if(!sel) return;
+  if (typeof GALLERY_IMAGES === 'undefined') return;
+  const videos = GALLERY_IMAGES.filter(i => i.video || (i.u && i.u.includes('/video/upload/')));
+  const current = (getSettings().heroVideo) || '';
+  // Reset options
+  sel.innerHTML = '<option value="">— ברירת מחדל —</option>';
+  videos.forEach((v, idx) => {
+    const opt = document.createElement('option');
+    opt.value = v.u;
+    const caption = (v.a || '').substring(0, 60).replace(/\n/g, ' ').trim();
+    opt.textContent = `🎬 ${caption || 'וידאו ' + (idx+1)}`;
+    if (v.u === current) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  const status = document.getElementById('hero-video-status');
+  if (status) status.textContent = current ? '✓ וידאו מותאם נבחר' : '';
+}
+function saveHeroVideo(){
+  const sel = document.getElementById('hero-video-select');
+  const s = getSettings();
+  if (sel.value) s.heroVideo = sel.value; else delete s.heroVideo;
+  saveSettings(s);
+  showToast('🎬 וידאו ראשי עודכן! רפרשי את דף הבית לראות.');
+  populateHeroVideoSelect();
+}
+function clearHeroVideo(){
+  const s = getSettings();
+  delete s.heroVideo;
+  saveSettings(s);
+  showToast('🎬 חזרה לוידאו ברירת מחדל');
+  populateHeroVideoSelect();
 }
 
 // ─── CATEGORIES ─────────────────────────────────────────────────

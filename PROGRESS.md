@@ -239,3 +239,13 @@ Fixed all dark-theme leftovers + UX issues on reviews.html:
 - aria-busy + aria-live for screen readers during loading
 - Better fallback: shows 5.0 rating + clean Google link, never an empty page
 - Security comment block above API key with required Google Cloud restrictions
+
+## 2026-05-27 - Gallery + Homepage video & comment fixes (preview/)
+Fixed 5 issues:
+1. Gallery: Removed play SVG overlay (videos autoplay)
+2. Gallery: Comment button "opened big video" bug → action buttons were opacity:0 (hover-only) so mobile users couldn't tap. Now always visible on touch devices (media hover:none), with pointer-events isolated to buttons + event.preventDefault on click handlers.
+3. Comment modal: Added direct IG link (uses igStats.permalink). Honest about IG comment limitation — actual comment text requires Instagram Graph API + business token + server-side fetcher (currently instagram-stats.json has empty comments arrays). For now, link redirects users to IG to read all comments.
+4. Homepage gallery: Video autoplay was broken because video used data-src (lazy) and observer was sometimes failing to fire on first render. Changed to direct `src` + `autoplay preload="metadata"`. Same mobile-button fix as gallery.
+5. Homepage hero: Added selectable hero video — admin panel has new "Hero Video" picker in Settings tab. Priority chain: hero-config.json (committed file, all visitors) > localStorage gallery_admin.heroVideo (this browser only) > default.
+
+Files touched: preview/gallery.html, preview/index.html, preview/admin.html

@@ -91,9 +91,12 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
     .load-more{display:block;margin:40px auto;background:#111;border:none;color:#fff;padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
     .load-more:hover{background:#111;color:#fff}
-    .video-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-    .video-play svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));opacity:.9}
+    .video-play{display:none}
     .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}
+    .item-actions{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;opacity:0;transition:opacity .3s;pointer-events:none}
+    .item-actions button{pointer-events:auto}
+    .gallery-item:hover .item-actions,.gallery-item:focus-within .item-actions{opacity:1}
+    @media (hover:none){.item-actions{opacity:1}}
   </style>
   <style>
   </style>
@@ -353,11 +356,12 @@ function openComments(url, alt) {
   modal.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.85);display:flex;align-items:flex-end;justify-content:center;';
   modal.innerHTML=`<div style="background:#231815;border-radius:20px 20px 0 0;width:100%;max-width:500px;padding:24px;max-height:70vh;overflow-y:auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-      <strong style="color:#E8C8B0;font-size:1.05rem;">תגובות</strong>
+      <strong style="color:#E8C8B0;font-size:1.05rem;">תגובות${igStats && igStats.comments_count ? ` <span style="opacity:.6;font-size:.85rem;font-weight:400;">(${igStats.comments_count} באינסטגרם)</span>` : ''}</strong>
       <button onclick="this.closest('div[role=dialog]').remove()" style="background:none;border:none;color:#E8C8B0;font-size:1.4rem;cursor:pointer;padding:4px 8px;">✕</button>
     </div>
+    ${igStats && igStats.permalink ? `<a href="${igStats.permalink}" target="_blank" rel="noopener noreferrer" style="display:block;padding:10px 14px;border-radius:10px;background:rgba(228,64,95,.15);border:1px solid rgba(228,64,95,.4);color:#E4405F;text-decoration:none;text-align:center;font-size:.88rem;margin-bottom:12px;font-weight:600;">📸 צפי בכל התגובות באינסטגרם ←</a>` : ''}
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
-      ${allComments.length?allComments.map(c=>`<div style="background:rgba(255,255,255,.05);border-radius:10px;padding:10px 12px;"><strong style="color:var(--blush);font-size:.88rem">${c.name}${c.ig?' <span style="font-size:.7rem;opacity:.5">📸 IG</span>':''}</strong><p style="font-size:.92rem;color:rgba(240,230,220,.8);margin-top:4px;">${c.text}</p></div>`).join(''):'<p style="opacity:.5;font-size:.9rem">אין תגובות עדיין</p>'}
+      ${allComments.length?allComments.map(c=>`<div style="background:rgba(255,255,255,.05);border-radius:10px;padding:10px 12px;"><strong style="color:var(--blush);font-size:.88rem">${c.name}${c.ig?' <span style="font-size:.7rem;opacity:.5">📸 IG</span>':''}</strong><p style="font-size:.92rem;color:rgba(240,230,220,.8);margin-top:4px;">${c.text}</p></div>`).join(''):'<p style="opacity:.5;font-size:.9rem">אין תגובות עדיין — כתבי את הראשונה!</p>'}
     </div>
     <label for="cmt-name" style="display:block;font-size:.8rem;opacity:.6;margin-bottom:4px;">שמך</label>
     <input id="cmt-name" placeholder="שם" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;margin-bottom:8px;font-family:inherit;"/>
@@ -408,10 +412,9 @@ function renderGallery() {
     let mediaHtml;
     if (isVideo) {
       const poster = cdnVideoPoster(item.u);
-      mediaHtml = `<video data-src="${cdnVideo(item.u,480)}" poster="${poster}" muted loop playsinline
+      mediaHtml = `<video data-src="${cdnVideo(item.u,480)}" poster="${poster}" muted loop playsinline autoplay
         aria-label="${caption||'סרטון'}" style="width:100%;display:block;transition:transform .4s;"
-        onerror="this.style.display='none'"></video>
-        <div class="video-play"><svg width="44" height="44" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(0,0,0,.45)"/><polygon points="21,16 38,26 21,36" fill="white"/></svg></div>`;
+        onerror="this.style.display='none'"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;"
@@ -419,19 +422,17 @@ function renderGallery() {
     }
     div.innerHTML = `${mediaHtml}
       <div class="overlay"><div class="overlay-text">${caption}</div></div>
-      <div class="item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;opacity:0;transition:opacity .3s;">
-        <button onclick="event.stopPropagation();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
-        <button onclick="event.stopPropagation();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
+      <div class="item-actions">
+        <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
+        <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
       </div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
-      div.querySelector('.item-actions').style.opacity = '1';
       const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1.04)';
       if (isVideo) { const v = div.querySelector('video'); if (v && v.src) v.play().catch(()=>{}); }
     };
     div.onmouseleave = () => {
       div.querySelector('.overlay').style.opacity = '0';
-      div.querySelector('.item-actions').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1)';
     };
     div.onclick = () => openLb(idx);

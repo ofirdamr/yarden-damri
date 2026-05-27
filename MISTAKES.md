@@ -64,3 +64,14 @@
 - When migrating to a new color theme, audit ALL inline styles + JS innerHTML templates, not just the CSS file
 - `var(--card)` was redefined to #111 (still dark) but used on cream pages → ugly contrast
 - Lesson: when changing palette, scoped page-specific styles are safer than global var redefinitions
+
+## Hover-only UI breaks on mobile
+- `.item-actions { opacity: 0 }` with `:hover { opacity: 1 }` makes buttons UNCLICKABLE on touch devices because they have no visual target
+- Result: user thinks they're clicking the button, but actually taps the image area → wrong action triggers
+- Fix: `@media (hover: none) { .item-actions { opacity: 1 } }` to always show buttons on touch devices
+- Also: `event.preventDefault()` belt-and-suspenders alongside `event.stopPropagation()` in onclick handlers
+
+## Lazy loading videos via data-src is fragile
+- `data-src` + IntersectionObserver works only if observer fires reliably on first render
+- For above-the-fold videos: just use direct `src` + `autoplay preload="metadata"`
+- Lazy loading is for below-the-fold, not for visible-on-load videos

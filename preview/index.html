@@ -177,10 +177,30 @@
 
     <!-- HERO -->
     <section id="hero" aria-label="כותרת ראשית">
-      <video class="hero-video" autoplay muted loop playsinline
+      <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto"
         poster="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_face,w_1280,h_720,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu">
-        <source src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
+      <script>
+        // Hero video override: admin can set via localStorage `gallery_admin.heroVideo`
+        // OR via committed config file `hero-config.json` (priority: server file > localStorage > default)
+        (async function applyHeroVideo(){
+          let url = null;
+          try {
+            const cfg = await fetch('hero-config.json',{cache:'no-cache'}); 
+            if (cfg.ok) { const j = await cfg.json(); if (j && j.url) url = j.url; }
+          } catch(e){}
+          if (!url) {
+            try { const a = JSON.parse(localStorage.getItem('gallery_admin')||'{}'); if (a.heroVideo) url = a.heroVideo; } catch(e){}
+          }
+          if (url) {
+            const v = document.getElementById('heroVideo');
+            const s = document.getElementById('heroVideoSource');
+            const cloudUrl = url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/');
+            s.src = cloudUrl; v.load(); v.play().catch(()=>{});
+          }
+        })();
+      </script>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="hero-title">ירדן דמרי</h1>
@@ -862,13 +882,12 @@
 
         const isVideo = item.video || item.u.includes('/video/upload/');
 
-        // VIDEO: autoplay muted in grid, controls in lightbox
+        // VIDEO: autoplay muted in grid. Use src directly (not data-src) so it loads + autoplays immediately.
         const mediaEl = isVideo
-          ? `<video data-src="${cdnVideo(item.u, 480)}" poster="${item.thumb ? cdnVideoPoster(item.u) : ''}" muted loop playsinline
+          ? `<video src="${cdnVideo(item.u, 480)}" poster="${item.thumb ? cdnVideoPoster(item.u) : ''}" muted loop playsinline autoplay preload="metadata"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;"
-               onerror="this.style.display='none'"></video>
-             <span class="gallery-item-video-badge" aria-hidden="true">▶ סרטון</span>`
+               onerror="this.style.display='none'"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;" />`;
 
@@ -876,9 +895,9 @@
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none;" aria-hidden="true">
             <p style="position:absolute;bottom:40px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>
-          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;">
-            <button onclick="event.stopPropagation();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
-            <button onclick="event.stopPropagation();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);">${cmtCount}</button>
+          <div class="hp-item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;pointer-events:none;">
+            <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">❤️ ${totalLikes}</button>
+            <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">💬 ${cmtCount}</button>
           </div>`;
 
         div.setAttribute('tabindex', '0');
