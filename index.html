@@ -609,10 +609,12 @@
 
     // ── SCROLL TOP ────────────────────────────────
     const scrollBtn = document.getElementById('scroll-top');
+    const mainNav = document.querySelector('nav[role="navigation"]');
     window.addEventListener('scroll', () => {
       const show = window.scrollY > 400;
       scrollBtn.style.opacity = show ? '1' : '0';
       scrollBtn.style.pointerEvents = show ? 'auto' : 'none';
+      if (mainNav) mainNav.classList.toggle('scrolled', window.scrollY > 80);
     }, { passive: true });
 
     // ── GALLERY ───────────────────────────────────
