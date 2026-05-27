@@ -2,7 +2,7 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --cream:   #FFFFFF;
+      --cream:   #fdf8f5;
       --warm:    #F5F0EB;
       --blush:   #D4A898;
       --rose:    #B07060;
@@ -18,7 +18,7 @@
 
     body {
       font-family: 'Heebo', Arial, sans-serif;
-      background: #fff;
+      background: var(--cream);
       color: var(--text);
       overflow-x: hidden;
       width: 100%;
@@ -184,7 +184,7 @@
     @keyframes slide { from { transform: translateX(0) } to { transform: translateX(-50%) } }
 
     /* ── ABOUT ── */
-    #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; background: #fff; }
+    #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; background: var(--cream); }
     .about-visual { position: relative; }
     .about-card { border-radius: 2px; aspect-ratio: 3/4; max-height: 600px; position: relative; overflow: hidden; }
     .about-accent { display: none; }
@@ -199,7 +199,7 @@
     .pill { border: 1px solid #ddd; color: #555; padding: 8px 18px; border-radius: 2px; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; background: transparent; }
 
     /* ── SERVICES ── */
-    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; }
+    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); }
     #services::before { display: none; }
     .services-header { text-align: center; margin-bottom: 70px; }
     .services-header .section-eyebrow { text-align: center; }
@@ -221,7 +221,7 @@
     .service-cta:hover, .service-cta:focus { opacity: .6; }
 
     /* ── PHILOSOPHY ── */
-    #philosophy { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); text-align: center; background: #fff; }
+    #philosophy { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); text-align: center; background: var(--cream); }
     .philosophy-quote { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--charcoal); max-width: 860px; margin: 0 auto 60px; position: relative; }
     .philosophy-quote::before { content: none; }
     .philosophy-attrs { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 80px; border-top: 1px solid #eee; }
@@ -232,7 +232,7 @@
     .attr-divider { display: none; }
 
     /* ── AREA ── */
-    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: 1px solid #eee; }
+    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: 1px solid #eee; }
     .area-map-visual { background: #000; border-radius: 2px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
     .area-map-visual::before { content: ''; }
     .map-label { position: absolute; bottom: 24px; background: rgba(0,0,0,.6); color: #fff; padding: 10px 24px; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-align: center; max-width: 88%; }
@@ -243,7 +243,7 @@
     .area-text span { font-size: .9rem; color: #777; line-height: 1.6; }
 
     /* ── CONTACT ── */
-    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: #fff; border-top: 1px solid #eee; }
+    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); border-top: 1px solid #eee; }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .biz-card { width: 100%; max-width: 460px; background: #111; border-radius: 2px; padding: 48px; position: relative; overflow: hidden; color: #fff; }
     .biz-card::before, .biz-card::after { display: none; }
@@ -276,7 +276,7 @@
     .cta-strip-btn-outline:hover, .cta-strip-btn-outline:focus { background: rgba(255,255,255,.08); }
 
     /* ── GALLERY ── */
-    .gallery-section { padding: clamp(60px,8vw,100px) clamp(24px,6vw,60px); background: #fff; }
+    .gallery-section { padding: clamp(60px,8vw,100px) clamp(24px,6vw,60px); background: var(--cream); }
     .gallery-filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 32px; }
     .ig-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; max-width: 1200px; margin: 0 auto; }
 
