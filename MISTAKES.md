@@ -87,3 +87,9 @@
 - Result: SyntaxError → handler never runs → click bubbles to parent → wrong action triggers
 - Fix: sanitize with `.replace(/['"\\\n\r]/g,' ')` to strip ALL chars that break inline JS string literals
 - Better fix (for future): don't use inline onclick — use addEventListener with closure over the data
+
+## Partial migration to RemoteState — missed pricing + rotation rendering
+- When migrating admin settings to JSONBin, I migrated hide/pin/order/cats/heroVideo but missed:
+  - Pricing (had its own separate localStorage key 'pricing_packages')
+  - Rotation rendering on public pages (was saved but never read by gallery/index)
+- Lesson: when making settings "public", enumerate EVERY admin feature and trace it end-to-end: (1) admin saves it, (2) it reaches the shared store, (3) public page reads it, (4) public page renders it. A setting can be saved publicly but still invisible if step 3 or 4 is missing.

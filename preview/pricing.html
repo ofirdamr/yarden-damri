@@ -54,6 +54,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=4"/>
   <script src="a11y.js" defer></script>
+  <script src="remote-state.js"></script>
 </head>
 <body>
 
@@ -169,8 +170,15 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 
     function renderPricing() {
       let items;
-      try { items = JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; }
-      catch(e) { items = DEFAULT_PRICING; }
+      // Prefer RemoteState (public, synced). Fallback to localStorage, then defaults.
+      if (window.RemoteState && window.RemoteState.getCached) {
+        const s = window.RemoteState.getCached() || {};
+        if (s.pricing && Array.isArray(s.pricing) && s.pricing.length) items = s.pricing;
+      }
+      if (!items) {
+        try { items = JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; }
+        catch(e) { items = DEFAULT_PRICING; }
+      }
 
       document.getElementById('pricing-grid').innerHTML = items.map(item => `
         <article style="background:#fff;border:1px solid ${item.featured ? '#111' : '#e0dbd6'};border-radius:2px;padding:32px 28px;position:relative;${item.featured ? 'box-shadow:0 4px 24px rgba(0,0,0,.08);' : ''}">
@@ -183,6 +191,12 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
           <a href="https://wa.me/9720547276716?text=היי ירדן, אני מתעניינת ב${encodeURIComponent(item.name)}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('whatsapp_click','conversion','pricing_${item.name}')" style="display:block;text-align:center;padding:14px;border-radius:2px;background:#111;color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">לתיאום</a>
         </article>`).join('');
     }
+
+    // Initial render with defaults/cache, then refresh from remote
+    renderPricing();
+    (async () => {
+      if (window.RemoteState) { await window.RemoteState.fetch(); renderPricing(); }
+    })();
   </script>
 </body>
 </html>

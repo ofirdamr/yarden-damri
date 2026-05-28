@@ -415,15 +415,17 @@ function renderGallery() {
     const cmtCount = igCmtCount+((getComments()[key]||[]).length);
     const caption = (item.a||'').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
     const isVideo = item.video || item.u.includes('/video/upload/');
+    const rot = (getAdminSettings().rotations || {})[item.u] || 0;
+    const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
     if (isVideo) {
       const poster = cdnVideoPoster(item.u);
       mediaHtml = `<video data-src="${cdnVideo(item.u,480)}" poster="${poster}" muted loop playsinline autoplay
-        aria-label="${caption||'סרטון'}" style="width:100%;display:block;transition:transform .4s;"
+        aria-label="${caption||'סרטון'}" style="width:100%;display:block;transition:transform .4s;${rotStyle}"
         onerror="this.style.display='none'"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
-        style="width:100%;display:block;transition:transform .4s;opacity:0;"
+        style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
     const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
@@ -435,12 +437,12 @@ function renderGallery() {
       </div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
-      const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1.04)';
+      const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1.04)`;
       if (isVideo) { const v = div.querySelector('video'); if (v && v.src) v.play().catch(()=>{}); }
     };
     div.onmouseleave = () => {
       div.querySelector('.overlay').style.opacity = '0';
-      const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1)';
+      const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1)`;
     };
     div.onclick = () => openLb(idx);
     div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(idx);} };

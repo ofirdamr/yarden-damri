@@ -1239,6 +1239,11 @@ const DEFAULT_PRICING = [
 ];
 
 function getPricingItems() {
+  // Prefer RemoteState (public). Fallback to localStorage, then defaults.
+  if (window.RemoteState && window.RemoteState.getCached) {
+    const s = window.RemoteState.getCached() || {};
+    if (s.pricing && Array.isArray(s.pricing) && s.pricing.length) return s.pricing;
+  }
   try { return JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; } catch(e) { return DEFAULT_PRICING; }
 }
 
@@ -1272,7 +1277,7 @@ function updatePricingItem(i, field, value) {
 function removePricingItem(i) {
   if (!_pricingItems) _pricingItems = getPricingItems();
   _pricingItems.splice(i, 1);
-  localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems));
+  persistPricing();
   renderPricingEditor();
 }
 function addPricingItem() {
@@ -1280,10 +1285,18 @@ function addPricingItem() {
   _pricingItems.push({icon:'✨',name:'שירות חדש',desc:'תיאור',price:'לפי הצעה',featured:false,includes:[]});
   renderPricingEditor();
 }
+function persistPricing() {
+  // Local backup
+  try { localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems)); } catch(e){}
+  // Public sync
+  if (window.RemoteState && window.RemoteState.update) {
+    window.RemoteState.update({ pricing: _pricingItems });
+  }
+}
 function savePricingItems() {
   if (!_pricingItems) _pricingItems = getPricingItems();
-  localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems));
-  showToast('✅ מחירון נשמר! מופיע באתר עכשיו.');
+  persistPricing();
+  showToast('✅ מחירון נשמר! גלוי לכל המבקרים תוך כדקה.');
 }
 
 // ─── TOAST ───────────────────────────────────────────────────────
