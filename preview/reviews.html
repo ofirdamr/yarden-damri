@@ -259,10 +259,11 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
      * Without these, anyone can extract this key and run up your bill.
      * ──────────────────────────────────────────────────────────────── */
     const PLACES_API_KEY  = 'AIzaSyCEEhecaLf_jOkEDHd0q0fcioEODD6gMwQ';
-    const PLACE_ID        = 'ChIJCQk-1mXFcwAVEfrXGS6nwqdX'; // derived from verified map feature id
-    const PLACE_CID       = '6316231025699182586';          // verified from maps.app.goo.gl/RoDSTLPmyGuXekcX8
+    const PLACE_CID       = '6316231025699182586'; // verified from maps.app.goo.gl/RoDSTLPmyGuXekcX8
+    const PLACE_ID        = ''; // place id couldn't be reliably derived; live Google reviews API disabled, using on-site form
+    // CID profile URL is reliable. It opens the Google profile with the "Write a review" button at the top.
     const READ_REVIEWS_URL  = 'https://www.google.com/maps?cid=' + PLACE_CID;
-    const WRITE_REVIEW_URL  = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
+    const WRITE_REVIEW_URL  = 'https://www.google.com/maps?cid=' + PLACE_CID;
 
     document.getElementById('write-review-btn').href = WRITE_REVIEW_URL;
 
@@ -278,6 +279,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     }
 
     async function loadReviews() {
+      if (!PLACE_ID) { showFallback(); return; } // no valid place id → use on-site reviews only
       try {
         const res = await fetch(
           `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=rating,userRatingCount,reviews&languageCode=he&key=${PLACES_API_KEY}`

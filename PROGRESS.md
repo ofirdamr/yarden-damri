@@ -301,3 +301,11 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - The earlier 500 was likely transient/CDN, not a bad place id
 - Write button → search.google.com/local/writereview?placeid= (opens write-review box directly)
 - Read fallback → search.google.com/local/reviews?placeid= (opens reviews directly)
+
+## 2026-05-27 - Reviews Google links → reliable CID profile URL
+- Place ID couldn't be reliably derived (protobuf encoding non-trivial, test vector failed)
+- writereview?placeid= with wrong/derived id gave 404/500
+- Solution: both buttons → https://www.google.com/maps?cid=6316231025699182586 (CONFIRMED working)
+- This opens the Google profile where "Write a review" button is at the top
+- Live Google reviews API call disabled (PLACE_ID empty) → on-site form is primary
+- On-site reviews (JSONBin) remain the reliable review system
