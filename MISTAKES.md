@@ -93,3 +93,15 @@
   - Pricing (had its own separate localStorage key 'pricing_packages')
   - Rotation rendering on public pages (was saved but never read by gallery/index)
 - Lesson: when making settings "public", enumerate EVERY admin feature and trace it end-to-end: (1) admin saves it, (2) it reaches the shared store, (3) public page reads it, (4) public page renders it. A setting can be saved publicly but still invisible if step 3 or 4 is missing.
+
+## Put a JS template literal inside STATIC HTML (didn't execute)
+- Wrote `\${[1,2,3,4,5].map(n=>...)}` directly in the HTML body of reviews.html
+- Static HTML doesn't run JS interpolation → the raw code `\${[1,2,3,4,5].map(n=>...` printed on the page (visible to user)
+- Template literals (`\${...}`) ONLY work inside JS backtick strings, never in raw HTML
+- Fix: either write static HTML, or generate the markup inside a JS function and inject via innerHTML
+- Lesson: after generating HTML with `\${}`, confirm whether it's a JS string (executes) or static markup (doesn't)
+
+## search.google.com/local/writereview?placeid= returns HTTP 500 for some place IDs
+- This endpoint is unreliable; gives 500 depending on the place ID
+- Reliable alternative: https://www.google.com/maps/search/?api=1&query=NAME&query_place_id=PLACE_ID
+- Lesson: don't depend on undocumented Google review-link endpoints; use the documented Maps URL scheme

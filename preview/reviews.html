@@ -206,7 +206,11 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
           <div style="margin-bottom:14px;">
             <span style="display:block;font-size:.85rem;color:#555;margin-bottom:6px;">דירוג</span>
             <div id="rev-stars" role="radiogroup" aria-label="דירוג" style="display:flex;gap:6px;direction:ltr;justify-content:flex-end;">
-              ${[1,2,3,4,5].map(n=>`<button type="button" class="rev-star" data-rating="${n}" aria-label="${n} כוכבים" onclick="setRating(${n})" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>`).join('')}
+              <button type="button" class="rev-star" data-rating="1" aria-label="1 כוכבים" onclick="setRating(1)" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>
+              <button type="button" class="rev-star" data-rating="2" aria-label="2 כוכבים" onclick="setRating(2)" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>
+              <button type="button" class="rev-star" data-rating="3" aria-label="3 כוכבים" onclick="setRating(3)" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>
+              <button type="button" class="rev-star" data-rating="4" aria-label="4 כוכבים" onclick="setRating(4)" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>
+              <button type="button" class="rev-star" data-rating="5" aria-label="5 כוכבים" onclick="setRating(5)" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>
             </div>
           </div>
           <div style="margin-bottom:16px;">
@@ -256,7 +260,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
      * ──────────────────────────────────────────────────────────────── */
     const PLACES_API_KEY  = 'AIzaSyCEEhecaLf_jOkEDHd0q0fcioEODD6gMwQ';
     const PLACE_ID        = 'ChIJCT7WZcVzABUR-tcZLqfCp1c';
-    const WRITE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
+    // writereview?placeid= returns HTTP 500 for some place IDs. Use the place-id maps URL which is reliable.
+    const READ_REVIEWS_URL  = 'https://www.google.com/maps/search/?api=1&query=ירדן+דמרי+מאפרת+אילת&query_place_id=' + PLACE_ID;
+    const WRITE_REVIEW_URL  = READ_REVIEWS_URL; // open the profile; user taps the stars there to write
 
     document.getElementById('write-review-btn').href = WRITE_REVIEW_URL;
 
@@ -334,21 +340,19 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     }
 
     function showFallback() {
-      // Show the overall rating with placeholder
-      document.getElementById('overall-rating').innerHTML = `
-        <div class="rv-rating-num">5.0</div>
-        <div class="rv-rating-stars">${renderStars(5)}</div>
-        <div class="rv-rating-count">דירוג גוגל</div>`;
-
-      // Replace skeleton with friendly fallback
+      // Google API unavailable — hide the rating header and the Google grid entirely.
+      // The on-site reviews + form below remain fully functional.
+      const ratingEl = document.getElementById('overall-rating');
+      if (ratingEl) ratingEl.innerHTML = '';
       const grid = document.getElementById('reviews-grid');
-      grid.setAttribute('aria-busy', 'false');
-      grid.style.gridTemplateColumns = '1fr';
-      grid.innerHTML = `
-        <div style="text-align:center;padding:48px 24px;background:#fff;border:1px solid #ece5dc;">
-          <p style="color:#555;font-size:1rem;margin-bottom:18px;">הביקורות החדשות יופיעו כאן בקרוב.</p>
-          <a href="${WRITE_REVIEW_URL}" target="_blank" rel="noopener noreferrer" class="btn-outline">קראי את כל הביקורות בגוגל ←</a>
-        </div>`;
+      if (grid) {
+        grid.setAttribute('aria-busy', 'false');
+        grid.style.gridTemplateColumns = '1fr';
+        grid.innerHTML = `
+          <div style="text-align:center;padding:32px 24px;">
+            <a href="${READ_REVIEWS_URL}" target="_blank" rel="noopener noreferrer" class="btn-outline">⭐ לצפייה בביקורות שלנו בגוגל ←</a>
+          </div>`;
+      }
     }
 
     // ── ON-SITE REVIEWS (visitor-submitted, public via JSONBin/RemoteState) ──
