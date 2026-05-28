@@ -219,3 +219,9 @@
 - Only icon SVG path differs (IG camera vs TT note)
 - Matches site palette — elegant brown/blush instead of clashing bright brand colors
 - `all: unset` + 12 `!important` size locks — bulletproof against any CSS conflict
+
+## Admin video preview + head-video selection (Stage 1)
+- Added ▶️ button on video cards → opens modal that PLAYS the actual video (fixes "can't see videos in admin")
+- Added ☆/⭐ button to mark a video as "head video" (saved to s.headVideo in localStorage)
+- Modal has "set as head video" button too
+- TODO Stage 2: make the head video actually display on the site (location TBD)

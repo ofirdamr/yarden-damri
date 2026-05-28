@@ -70,6 +70,12 @@
     .pin-badge{position:absolute;top:5px;right:5px;background:var(--gold);color:#000;font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:4px}
     .hidden-badge{position:absolute;top:5px;left:5px;background:var(--red);color:#fff;font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:4px}
     .video-badge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;font-size:.65rem;padding:2px 7px;border-radius:12px;pointer-events:none;z-index:2;}
+    .card-btn.head-active{background:var(--gold,#B89060);color:#fff;}
+    .vid-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;}
+    .vid-modal-bg.open{display:flex;}
+    .vid-modal-bg video{max-width:92vw;max-height:78vh;border-radius:10px;outline:none;}
+    .vid-modal-close{position:fixed;top:18px;left:18px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.6rem;width:46px;height:46px;border-radius:50%;cursor:pointer;line-height:1;}
+    .vid-modal-set{background:var(--gold,#B89060);color:#fff;border:none;padding:13px 28px;border-radius:30px;font-size:.95rem;font-weight:700;cursor:pointer;}
     /* CATEGORIES TAB */
     #tab-cats{display:none;padding:24px 28px}
     .cat-manager{max-width:600px}
@@ -321,6 +327,12 @@
       <button class="btn btn-primary" onclick="saveImageCategory()">שמור</button>
     </div>
   </div>
+</div>
+
+<div class="vid-modal-bg" id="vid-modal" onclick="if(event.target===this)closeVideoPreview()">
+  <button class="vid-modal-close" onclick="closeVideoPreview()" title="סגור">✕</button>
+  <video id="vid-modal-player" controls playsinline></video>
+  <button class="vid-modal-set" id="vid-modal-set-btn" onclick="setHeadVideoFromModal()">⭐ הגדר כסרטון ראשי</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -611,6 +623,8 @@ function renderGrid() {
       ${hiddenSet.has(img.u)?'<span class="hidden-badge">🚫</span>':''}
       <div class="card-overlay">
         <div class="card-actions">
+          ${isVid ? `<button class="card-btn" onclick="event.stopPropagation();previewVideo('${img.u}')" title="נגן וידאו">▶️</button>` : ''}
+          ${isVid ? `<button class="card-btn${(s.headVideo===img.u)?' head-active':''}" onclick="event.stopPropagation();setHeadVideo('${img.u}')" title="הגדר כסרטון ראשי">${(s.headVideo===img.u)?'⭐':'☆'}</button>` : ''}
           <button class="card-btn" onclick="togglePin('${img.u}')" title="נעץ">${pinnedSet.has(img.u)?'📌':'📍'}</button>
           <button class="card-btn" onclick="toggleHide('${img.u}')" title="הסתר">${hiddenSet.has(img.u)?'👁️':'🚫'}</button>
           <button class="card-btn" onclick="openCatModal('${img.u}')" title="קטגוריה">🏷️</button>
@@ -654,6 +668,31 @@ function setFilter(f,btn) {
 function filterGrid(){ window._adminPage=0; searchTerm=document.getElementById('search-input').value; renderGrid(); }
 
 // ─── ACTIONS ────────────────────────────────────────────────────
+let _previewUrl = null;
+function previewVideo(url){
+  _previewUrl = url;
+  const player = document.getElementById('vid-modal-player');
+  const playUrl = url.includes('cloudinary.com')
+    ? url.replace('/video/upload/', '/video/upload/q_auto,w_600,vc_auto/')
+    : url;
+  player.src = playUrl;
+  document.getElementById('vid-modal').classList.add('open');
+  player.play().catch(()=>{});
+}
+function closeVideoPreview(){
+  const player = document.getElementById('vid-modal-player');
+  player.pause(); player.src='';
+  document.getElementById('vid-modal').classList.remove('open');
+  _previewUrl = null;
+}
+function setHeadVideoFromModal(){ if(_previewUrl){ setHeadVideo(_previewUrl); closeVideoPreview(); } }
+function setHeadVideo(url){
+  const s = getSettings();
+  s.headVideo = (s.headVideo === url) ? null : url;
+  saveSettings(s);
+  showToast(s.headVideo ? '⭐ הוגדר כסרטון ראשי!' : 'בוטל סרטון ראשי');
+  renderGrid();
+}
 function togglePin(url){
   const s=getSettings(); s.pinned=s.pinned||[];
   const i=s.pinned.indexOf(url);
