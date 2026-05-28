@@ -59,3 +59,31 @@
 **Mistake:** Tried to keep brand colors (bright IG gradient vs solid black TT) — different brightness creates "irradiation illusion" that makes them look unequal sizes regardless of CSS dimensions.
 **Fix:** Both circles now use the SITE's brown palette (`var(--deep)` background, `var(--blush)` icon + 1.5px blush border). Identical bg, identical border, identical icon color → guaranteed equal visual size. Bonus: matches the site's elegant warm aesthetic instead of clashing.
 **Lesson:** When two elements must visually match, make them visually identical first, then differentiate only by minimal content (icon shape). Brand colors mid-button are a luxury that fights visual consistency.
+
+## Reviews.html had dark-theme leftovers after cream redesign
+- When migrating to a new color theme, audit ALL inline styles + JS innerHTML templates, not just the CSS file
+- `var(--card)` was redefined to #111 (still dark) but used on cream pages → ugly contrast
+- Lesson: when changing palette, scoped page-specific styles are safer than global var redefinitions
+
+## Hover-only UI breaks on mobile
+- `.item-actions { opacity: 0 }` with `:hover { opacity: 1 }` makes buttons UNCLICKABLE on touch devices because they have no visual target
+- Result: user thinks they're clicking the button, but actually taps the image area → wrong action triggers
+- Fix: `@media (hover: none) { .item-actions { opacity: 1 } }` to always show buttons on touch devices
+- Also: `event.preventDefault()` belt-and-suspenders alongside `event.stopPropagation()` in onclick handlers
+
+## Lazy loading videos via data-src is fragile
+- `data-src` + IntersectionObserver works only if observer fires reliably on first render
+- For above-the-fold videos: just use direct `src` + `autoplay preload="metadata"`
+- Lazy loading is for below-the-fold, not for visible-on-load videos
+
+## Assumed admin was localStorage-only without checking infrastructure
+- I told user "admin needs Cloudflare Worker" when in fact they already had JSONBin (used for reviews) AND a GitHub Action running every 6 hours
+- Lesson: when user pushes back on "X doesn't work", investigate the actual infrastructure FIRST (GitHub secrets, workflows, existing API integrations) before recommending big changes
+- User had: GitHub Secrets (CLOUDINARY_*, INSTAGRAM_TOKEN, NETLIFY_BUILD_HOOK), GitHub Action "Instagram Auto Sync", JSONBin for reviews, Render.com for IG feed proxy. None of these were obvious from a quick file listing.
+
+## Inline onclick attributes break when interpolating data with newlines
+- Instagram captions contain literal \n characters
+- Embedded in `onclick="...openComments('${caption}')..."` the newline becomes an invalid JS string literal (single-quoted strings can't span lines)
+- Result: SyntaxError → handler never runs → click bubbles to parent → wrong action triggers
+- Fix: sanitize with `.replace(/['"\\\n\r]/g,' ')` to strip ALL chars that break inline JS string literals
+- Better fix (for future): don't use inline onclick — use addEventListener with closure over the data

@@ -220,8 +220,72 @@
 - Matches site palette — elegant brown/blush instead of clashing bright brand colors
 - `all: unset` + 12 `!important` size locks — bulletproof against any CSS conflict
 
+## 2026-05-27 - Preview deploy via GitHub Pages
+- Netlify is suspended → no branch previews available
+- Solution: created /preview/ folder on main branch with ui-redesign content
+- GitHub Pages already serves main → preview will be live at yardendamri.co.il/preview/
+- Non-destructive: only adds folder, does not touch existing files
+- After review, user can delete preview/ folder
+
+## 2026-05-27 - Reviews page editorial overhaul (preview/)
+Fixed all dark-theme leftovers + UX issues on reviews.html:
+- Replaced all `var(--card)` (#111 black) and dark rgba colors with cream editorial palette
+- New scoped CSS classes (`.rv-hero`, `.rv-rating`, `.rv-card`, `.rv-cta`, `.rv-skel`) — no inline styles
+- Skeleton loaders (shimmer animation) instead of "טוענת ביקורות..." text
+- Larger editorial rating display (4rem rating number, gold stars on cream)
+- White cards on cream bg with subtle hover lift + shadow
+- CTA box now light editorial (white + thin cream border) — was a black block
+- XSS-safe rendering with escapeHtml() helper
+- aria-busy + aria-live for screen readers during loading
+- Better fallback: shows 5.0 rating + clean Google link, never an empty page
+- Security comment block above API key with required Google Cloud restrictions
+
+## 2026-05-27 - Gallery + Homepage video & comment fixes (preview/)
+Fixed 5 issues:
+1. Gallery: Removed play SVG overlay (videos autoplay)
+2. Gallery: Comment button "opened big video" bug → action buttons were opacity:0 (hover-only) so mobile users couldn't tap. Now always visible on touch devices (media hover:none), with pointer-events isolated to buttons + event.preventDefault on click handlers.
+3. Comment modal: Added direct IG link (uses igStats.permalink). Honest about IG comment limitation — actual comment text requires Instagram Graph API + business token + server-side fetcher (currently instagram-stats.json has empty comments arrays). For now, link redirects users to IG to read all comments.
+4. Homepage gallery: Video autoplay was broken because video used data-src (lazy) and observer was sometimes failing to fire on first render. Changed to direct `src` + `autoplay preload="metadata"`. Same mobile-button fix as gallery.
+5. Homepage hero: Added selectable hero video — admin panel has new "Hero Video" picker in Settings tab. Priority chain: hero-config.json (committed file, all visitors) > localStorage gallery_admin.heroVideo (this browser only) > default.
+
+Files touched: preview/gallery.html, preview/index.html, preview/admin.html
+
+## 2026-05-27 - MAJOR: Admin settings now public via JSONBin (preview/)
+**Discovery:** The site already uses JSONBin (for customer reviews), Render.com (IG feed), Cloudinary, and a GitHub Action that auto-syncs Instagram every 6 hours. So infrastructure exists — just admin gallery settings were stuck in localStorage.
+
+**Changes:**
+1. Created `preview/remote-state.js` — shared module that loads/saves admin state via JSONBin. Includes:
+   - 1-minute cache to reduce API calls
+   - Optimistic local update (UI feels instant)
+   - Auto-merge so other bin keys (reviews) are preserved on writes
+   - In-flight dedup so concurrent fetches don't race
+2. Admin.html: `getSettings/saveSettings` now read/write via RemoteState. On init, migrates existing localStorage data to remote (one-time, if remote is empty).
+3. Index.html: applyAdminSettings reads from RemoteState. After remote loads, re-renders gallery with synced state.
+4. Gallery.html: same pattern as index.
+5. Hero video: now stored in `record.heroVideo` of the same bin. All visitors see admin's choice.
+6. Reviews continue to work — same bin, same `reviews` key, just routed through RemoteState.
+
+**fix.js update:** Added permalink to per-post stats fetch + warning log when comments are requested but unavailable (token permission issue).
+
+**Result:** Hide/pin/order/category/heroVideo changes in admin are now visible to ALL visitors within ~1 minute (cache TTL).
+
+## 2026-05-27 - IS 5568 accessibility widget on ALL pages
+- Created preview/a11y.js — self-contained widget that auto-injects ♿ button + panel on any page that includes the script
+- Added <script src="a11y.js" defer> to: about, bridal-guide, bride, contact, disclaimer, gallery, pricing, reviews, services, accessibility-statement
+- Index.html already has inline widget (kept as-is for now; a11y.js detects existing #a11y-trigger and skips injection to avoid duplicates)
+- Settings (contrast/text size/links/animations) sync across all pages via localStorage 'a11y_prefs_v1'
+- Alt+A keyboard shortcut works everywhere
+- FOUC prevention: prefs applied BEFORE first paint via inline IIFE in a11y.js
+- IS 5568 / WCAG 2.1 AA compliance restored across the entire preview site
+
+## 2026-05-27 - Hero video picker = visual grid (preview/)
+- Replaced dropdown (select by caption) with visual thumbnail grid
+- Each video shows poster thumbnail (Cloudinary so_0 frame)
+- Hover (desktop) or tap (mobile) plays a low-res preview inline
+- Click a video to select it → saves to RemoteState → public within 1 min
+- Selected video gets highlighted border + "✓ נבחר" badge
+- Preview videos use preload="none" until hovered (saves bandwidth)
+
 ## Admin video preview + head-video selection (Stage 1)
-- Added ▶️ button on video cards → opens modal that PLAYS the actual video (fixes "can't see videos in admin")
-- Added ☆/⭐ button to mark a video as "head video" (saved to s.headVideo in localStorage)
-- Modal has "set as head video" button too
-- TODO Stage 2: make the head video actually display on the site (location TBD)
+- ▶️ on video cards plays actual video in modal; ☆/⭐ marks head video (s.headVideo)
+- TODO Stage 2: display head video on site
