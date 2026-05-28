@@ -260,9 +260,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
      * ──────────────────────────────────────────────────────────────── */
     const PLACES_API_KEY  = 'AIzaSyCEEhecaLf_jOkEDHd0q0fcioEODD6gMwQ';
     const PLACE_ID        = 'ChIJCT7WZcVzABUR-tcZLqfCp1c';
-    // writereview?placeid= returns HTTP 500 for some place IDs. Use the place-id maps URL which is reliable.
-    const READ_REVIEWS_URL  = 'https://www.google.com/maps/search/?api=1&query=ירדן+דמרי+מאפרת+אילת&query_place_id=' + PLACE_ID;
-    const WRITE_REVIEW_URL  = READ_REVIEWS_URL; // open the profile; user taps the stars there to write
+    // Direct links (verified place id from maps.app.goo.gl/RoDSTLPmyGuXekcX8)
+    const READ_REVIEWS_URL  = 'https://search.google.com/local/reviews?placeid=' + PLACE_ID;
+    const WRITE_REVIEW_URL  = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
 
     document.getElementById('write-review-btn').href = WRITE_REVIEW_URL;
 

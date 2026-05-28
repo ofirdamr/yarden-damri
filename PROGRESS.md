@@ -295,3 +295,9 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 2. ERROR 500 FIX: reviews.html only fetched Google reviews (read-only). The Google Places API was returning errors (500/403) that weren't fully handled. Added res.ok check + data.error check → graceful showFallback() instead of crash.
 3. NEW on-site review form on reviews.html: visitors can now write name + star rating + text. Saves to JSONBin (record.reviews) via RemoteState → public to all. Shows submitted reviews in a "ביקורות מהאתר" grid. Same bin as homepage form, so reviews appear in both places. Optimistic update with rollback on failure.
 4. Google "write review" button kept as secondary link.
+
+## 2026-05-27 - Correct Google review direct links
+- User shared maps link → extracted verified place id (hex 0x57a7c2a72e19d7fa = ChIJCT7WZcVzABUR-tcZLqfCp1c, the existing one was correct after all)
+- The earlier 500 was likely transient/CDN, not a bad place id
+- Write button → search.google.com/local/writereview?placeid= (opens write-review box directly)
+- Read fallback → search.google.com/local/reviews?placeid= (opens reviews directly)
