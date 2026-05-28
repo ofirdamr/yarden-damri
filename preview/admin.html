@@ -297,12 +297,9 @@
       <h2>🎬 וידאו ראשי בדף הבית</h2>
       <div class="field-group">
         <label>בחרי וידאו לכותרת הראשית (Hero) של דף הבית</label>
-        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">בחרי וידאו מתוך הוידאוים בגלריה. הבחירה תהיה גלויה לכל המבקרים באתר (תוך כדקה).</p>
-        <select id="hero-video-select" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;margin-bottom:10px;">
-          <option value="">— ברירת מחדל —</option>
-        </select>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:14px;">לחצי על וידאו כדי לבחור אותו. ניתן לרחף/ללחוץ כדי לראות תצוגה מקדימה. הבחירה תהיה גלויה לכל המבקרים תוך כדקה.</p>
+        <div id="hero-video-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:14px;max-height:480px;overflow-y:auto;padding:4px;"></div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-primary" onclick="saveHeroVideo()">שמור</button>
           <button class="btn btn-secondary" onclick="clearHeroVideo()">חזרה לברירת מחדל</button>
           <span id="hero-video-status" style="font-size:.85rem;color:var(--text-muted,#888);"></span>
         </div>
@@ -761,32 +758,60 @@ function clearAllSettings(){
   }
 }
 
-// ─── HERO VIDEO PICKER ──────────────────────────────────────────
+// ─── HERO VIDEO PICKER (visual grid) ──────────────────────────
+function heroVidThumb(url){
+  if (!url.includes('cloudinary.com')) return url;
+  return url.replace('/video/upload/', '/video/upload/so_0,w_300,h_400,c_fill,f_jpg/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+}
+function heroVidPreview(url){
+  if (!url.includes('cloudinary.com')) return url;
+  return url.replace('/video/upload/', '/video/upload/w_360,q_auto:low,vc_auto/');
+}
 function populateHeroVideoSelect(){
-  const sel = document.getElementById('hero-video-select'); if(!sel) return;
+  const grid = document.getElementById('hero-video-grid'); if(!grid) return;
   if (typeof GALLERY_IMAGES === 'undefined') return;
   const videos = GALLERY_IMAGES.filter(i => i.video || (i.u && i.u.includes('/video/upload/')));
   const current = (getSettings().heroVideo) || '';
-  // Reset options
-  sel.innerHTML = '<option value="">— ברירת מחדל —</option>';
-  videos.forEach((v, idx) => {
-    const opt = document.createElement('option');
-    opt.value = v.u;
-    const caption = (v.a || '').substring(0, 60).replace(/\n/g, ' ').trim();
-    opt.textContent = `🎬 ${caption || 'וידאו ' + (idx+1)}`;
-    if (v.u === current) opt.selected = true;
-    sel.appendChild(opt);
+
+  grid.innerHTML = videos.map(v => {
+    const selected = v.u === current;
+    const caption = (v.a || '').substring(0, 40).replace(/"/g,'&quot;');
+    return `
+      <div class="hero-vid-card" data-url="${v.u.replace(/"/g,'&quot;')}"
+           onclick="selectHeroVideo(this)"
+           style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:3px solid ${selected?'#C4866A':'transparent'};aspect-ratio:3/4;background:#000;"
+           title="${caption}">
+        <img src="${heroVidThumb(v.u)}" alt="${caption}" loading="lazy"
+             style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        <video src="${heroVidPreview(v.u)}" muted loop playsinline preload="none"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s;"></video>
+        <span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,.65);color:#fff;font-size:.6rem;padding:2px 6px;border-radius:10px;pointer-events:none;">▶ וידאו</span>
+        ${selected?'<span style="position:absolute;top:6px;left:6px;background:#C4866A;color:#fff;font-size:.7rem;padding:3px 8px;border-radius:10px;pointer-events:none;">✓ נבחר</span>':''}
+      </div>`;
+  }).join('');
+
+  // Hover/tap to preview: play the video overlay
+  grid.querySelectorAll('.hero-vid-card').forEach(card => {
+    const vid = card.querySelector('video');
+    const img = card.querySelector('img');
+    const startPreview = () => { if(vid){ if(vid.preload==='none'){vid.preload='auto';vid.load();} vid.style.opacity='1'; vid.play().catch(()=>{}); } };
+    const stopPreview  = () => { if(vid){ vid.pause(); vid.style.opacity='0'; } };
+    card.addEventListener('mouseenter', startPreview);
+    card.addEventListener('mouseleave', stopPreview);
+    // touch: tap shows preview for a few seconds
+    card.addEventListener('touchstart', () => { startPreview(); }, {passive:true});
   });
+
   const status = document.getElementById('hero-video-status');
-  if (status) status.textContent = current ? '✓ וידאו מותאם נבחר' : '';
+  if (status) status.textContent = current ? '✓ וידאו מותאם נבחר' : 'משתמש בברירת מחדל';
 }
-function saveHeroVideo(){
-  const sel = document.getElementById('hero-video-select');
+function selectHeroVideo(card){
+  const url = card.dataset.url;
   const s = getSettings();
-  if (sel.value) s.heroVideo = sel.value; else delete s.heroVideo;
+  s.heroVideo = url;
   saveSettings(s);
   showToast('🎬 וידאו ראשי עודכן! גלוי לכל המבקרים תוך כדקה.');
-  populateHeroVideoSelect();
+  populateHeroVideoSelect(); // re-render to show selection
 }
 function clearHeroVideo(){
   const s = getSettings();

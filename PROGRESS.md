@@ -277,3 +277,11 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - Alt+A keyboard shortcut works everywhere
 - FOUC prevention: prefs applied BEFORE first paint via inline IIFE in a11y.js
 - IS 5568 / WCAG 2.1 AA compliance restored across the entire preview site
+
+## 2026-05-27 - Hero video picker = visual grid (preview/)
+- Replaced dropdown (select by caption) with visual thumbnail grid
+- Each video shows poster thumbnail (Cloudinary so_0 frame)
+- Hover (desktop) or tap (mobile) plays a low-res preview inline
+- Click a video to select it → saves to RemoteState → public within 1 min
+- Selected video gets highlighted border + "✓ נבחר" badge
+- Preview videos use preload="none" until hovered (saves bandwidth)
