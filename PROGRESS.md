@@ -289,3 +289,9 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 ## Admin video preview + head-video selection (Stage 1)
 - ▶️ on video cards plays actual video in modal; ☆/⭐ marks head video (s.headVideo)
 - TODO Stage 2: display head video on site
+
+## 2026-05-27 - Reviews nav + on-site review form (preview/)
+1. NAV FIX: ביקורות (reviews) link was missing from main nav on index, gallery, services, bride (present on about/contact/pricing). Added to both desktop + mobile nav on all 4.
+2. ERROR 500 FIX: reviews.html only fetched Google reviews (read-only). The Google Places API was returning errors (500/403) that weren't fully handled. Added res.ok check + data.error check → graceful showFallback() instead of crash.
+3. NEW on-site review form on reviews.html: visitors can now write name + star rating + text. Saves to JSONBin (record.reviews) via RemoteState → public to all. Shows submitted reviews in a "ביקורות מהאתר" grid. Same bin as homepage form, so reviews appear in both places. Optimistic update with rollback on failure.
+4. Google "write review" button kept as secondary link.

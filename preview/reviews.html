@@ -62,6 +62,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <link rel="stylesheet" href="styles.css?v=4"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ירדן דמרי – מאפרת מקצועית","url":"https://yardendamri.co.il","telephone":"+9720547276716","address":{"@type":"PostalAddress","addressLocality":"אילת","addressCountry":"IL"}}</script>
   <script src="a11y.js" defer></script>
+  <script src="remote-state.js"></script>
 </head>
 <body>
 
@@ -186,16 +187,41 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
         <p>לקוחות מספרות על חוויית האיפור עם ירדן דמרי, מאפרת מקצועית באילת המתמחה באיפור כלות, איפור ערב ואיפור לאירועים. דירוג 5 כוכבים בגוגל.</p>
       </div>
 
-      <!-- CTA — editorial light -->
-      <div class="rv-cta">
+      <!-- Site reviews submitted by visitors (from JSONBin, public) -->
+      <div id="site-reviews-wrap" style="margin-top:8px;"></div>
+
+      <!-- Write a review — on-site form (saves to site, public) -->
+      <div class="rv-cta" id="review-form-card">
         <div class="rv-cta-icon">"</div>
         <h2 class="rv-cta-title">היית לקוחה שלי?</h2>
         <p class="rv-cta-text">
           הביקורת שלך עוזרת לכלות אחרות למצוא מאפרת מקצועית באילת — ומשמחת אותי מאוד.
         </p>
-        <a id="write-review-btn" href="#" target="_blank" rel="noopener noreferrer"
+        <div style="max-width:440px;margin:0 auto;text-align:right;">
+          <div style="margin-bottom:14px;">
+            <label for="rev-name" style="display:block;font-size:.85rem;color:#555;margin-bottom:4px;">שמך</label>
+            <input id="rev-name" type="text" placeholder="שם פרטי" aria-required="true"
+              style="width:100%;padding:11px 14px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.95rem;box-sizing:border-box;" />
+          </div>
+          <div style="margin-bottom:14px;">
+            <span style="display:block;font-size:.85rem;color:#555;margin-bottom:6px;">דירוג</span>
+            <div id="rev-stars" role="radiogroup" aria-label="דירוג" style="display:flex;gap:6px;direction:ltr;justify-content:flex-end;">
+              ${[1,2,3,4,5].map(n=>`<button type="button" class="rev-star" data-rating="${n}" aria-label="${n} כוכבים" onclick="setRating(${n})" style="background:none;border:none;font-size:1.8rem;cursor:pointer;color:#ddd;padding:0;line-height:1;transition:color .15s;">★</button>`).join('')}
+            </div>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label for="rev-text" style="display:block;font-size:.85rem;color:#555;margin-bottom:4px;">הביקורת שלך</label>
+            <textarea id="rev-text" placeholder="ספרי על החוויה שלך..." aria-required="true" rows="3"
+              style="width:100%;padding:11px 14px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.95rem;resize:vertical;box-sizing:border-box;"></textarea>
+          </div>
+          <button onclick="submitReview()" class="btn-primary" style="width:100%;">שלחי ביקורת 💌</button>
+          <div id="rev-msg" role="status" aria-live="polite" style="text-align:center;font-size:.85rem;margin-top:10px;min-height:1.2em;color:#7A4A34;"></div>
+        </div>
+        <p style="margin-top:18px;font-size:.82rem;color:#999;">
+          או <a id="write-review-btn" href="#" target="_blank" rel="noopener noreferrer"
            onclick="trackEvent('review_click','engagement','write_review')"
-           class="btn-primary">כתבי ביקורת בגוגל</a>
+           style="color:var(--rose);text-decoration:underline;">כתבי ביקורת בגוגל ←</a>
+        </p>
       </div>
 
     </section>
@@ -250,8 +276,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
         const res = await fetch(
           `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=rating,userRatingCount,reviews&languageCode=he&key=${PLACES_API_KEY}`
         );
+        if (!res.ok) { showFallback(); return; } // 403/500/etc → graceful fallback
         const data = await res.json();
-        if (!data.reviews || !data.reviews.length) { showFallback(); return; }
+        if (!data || data.error || !data.reviews || !data.reviews.length) { showFallback(); return; }
 
         // Overall rating header
         document.getElementById('overall-rating').innerHTML = `
@@ -324,7 +351,82 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
         </div>`;
     }
 
+    // ── ON-SITE REVIEWS (visitor-submitted, public via JSONBin/RemoteState) ──
+    let chosenRating = 0;
+    let siteReviews = [];
+
+    function setRating(n) {
+      chosenRating = n;
+      document.querySelectorAll('.rev-star').forEach(s => {
+        s.style.color = (+s.dataset.rating <= n) ? '#D4A574' : '#ddd';
+        s.setAttribute('aria-checked', +s.dataset.rating === n);
+      });
+    }
+
+    function renderSiteReviews() {
+      const wrap = document.getElementById('site-reviews-wrap');
+      if (!wrap) return;
+      if (!siteReviews.length) { wrap.innerHTML = ''; return; }
+      wrap.innerHTML = `
+        <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:1.6rem;color:var(--charcoal);text-align:center;margin:10px 0 24px;">ביקורות מהאתר</h2>
+        <div class="rv-grid">
+          ${siteReviews.map(r => `
+            <article class="rv-card">
+              <div class="rv-card-head">
+                <div class="rv-card-avatar" style="display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--rose);">${escapeHtml((r.name||'?').charAt(0))}</div>
+                <div>
+                  <div class="rv-card-name">${escapeHtml(r.name||'')}</div>
+                  <div class="rv-card-date">${escapeHtml(r.date||'')}</div>
+                </div>
+              </div>
+              <div class="rv-card-stars">${renderStars(r.rating||5)}</div>
+              <p class="rv-card-text">${escapeHtml(r.text||'')}</p>
+            </article>`).join('')}
+        </div>`;
+    }
+
+    async function loadSiteReviews() {
+      try {
+        if (window.RemoteState) {
+          await window.RemoteState.fetch();
+          siteReviews = window.RemoteState.getReviews() || [];
+        }
+      } catch(e) { siteReviews = []; }
+      renderSiteReviews();
+    }
+
+    async function submitReview() {
+      const name = document.getElementById('rev-name').value.trim();
+      const text = document.getElementById('rev-text').value.trim();
+      const msg = document.getElementById('rev-msg');
+      if (!name || !text || !chosenRating) {
+        msg.textContent = 'יש למלא שם, דירוג וטקסט';
+        return;
+      }
+      msg.textContent = 'שולחת...';
+      const newReview = { name, text, rating: chosenRating, date: new Date().toLocaleDateString('he-IL') };
+      siteReviews.unshift(newReview);
+      try {
+        if (window.RemoteState) {
+          const res = await window.RemoteState.update({ reviews: siteReviews });
+          if (!res.ok) throw new Error(res.error || 'save failed');
+        }
+        msg.style.color = '#2e7d32';
+        msg.textContent = '✓ תודה! הביקורת פורסמה.';
+        document.getElementById('rev-name').value = '';
+        document.getElementById('rev-text').value = '';
+        setRating(0); chosenRating = 0;
+        renderSiteReviews();
+        trackEvent && trackEvent('review_submit','engagement','site_review');
+      } catch(e) {
+        siteReviews.shift(); // rollback
+        msg.style.color = '#c62828';
+        msg.textContent = 'שגיאה בשליחה. נסי שוב בעוד רגע.';
+      }
+    }
+
     loadReviews();
+    loadSiteReviews();
   </script>
 
 </body>
