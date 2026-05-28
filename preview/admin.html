@@ -433,24 +433,17 @@ function getSettings() {
 }
 let _pendingSave = null;
 function saveSettings(s) {
-  // Always update local cache first so UI reflects change instantly.
-  // Persist to localStorage as a redundant local backup.
+  // Always update localStorage immediately as local backup
   try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
 
   if (window.RemoteState && window.RemoteState.update) {
-    // Split: admin keys vs heroVideo (top-level)
     const { heroVideo, ...adminFields } = s;
     const payload = { admin: adminFields };
-    if (heroVideo !== undefined) payload.heroVideo = heroVideo;
-
-    // Debounce rapid saves
-    clearTimeout(_pendingSave);
-    _pendingSave = setTimeout(async () => {
-      const result = await window.RemoteState.update(payload);
-      if (!result.ok) {
-        showToast('⚠️ שמירה לענן נכשלה — שמור שוב או בדוק חיבור');
-      }
-    }, 300);
+    if (heroVideo) payload.heroVideo = heroVideo;
+    // remote-state.js handles debounce + queue internally — no race conditions
+    window.RemoteState.update(payload).then(result => {
+      if (result && !result.ok) showToast('⚠️ שמירה לענן נכשלה — נסי שוב');
+    });
   }
 }
 
@@ -1239,12 +1232,12 @@ const DEFAULT_PRICING = [
 ];
 
 function getPricingItems() {
-  // Prefer RemoteState (public). Fallback to localStorage, then defaults.
-  if (window.RemoteState && window.RemoteState.getCached) {
-    const s = window.RemoteState.getCached() || {};
-    if (s.pricing && Array.isArray(s.pricing) && s.pricing.length) return s.pricing;
+  if (window.RemoteState && window.RemoteState.getPricing) {
+    const p = window.RemoteState.getPricing();
+    if (p && Array.isArray(p) && p.length) return p;
   }
-  try { return JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; } catch(e) { return DEFAULT_PRICING; }
+  try { return JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; }
+  catch(e) { return DEFAULT_PRICING; }
 }
 
 function renderPricingEditor() {
@@ -1286,9 +1279,7 @@ function addPricingItem() {
   renderPricingEditor();
 }
 function persistPricing() {
-  // Local backup
   try { localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems)); } catch(e){}
-  // Public sync
   if (window.RemoteState && window.RemoteState.update) {
     window.RemoteState.update({ pricing: _pricingItems });
   }

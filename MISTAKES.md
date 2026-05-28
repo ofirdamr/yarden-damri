@@ -111,3 +111,11 @@
 - Got the real one by: user shared maps link → extracted hex feature id (0x150073c565d63e09:0x57a7c2a72e19d7fa) → derived correct place id (ChIJCQk-1mXFcwAVEfrXGS6nwqdX) via protobuf+base64url encoding
 - CID for ?cid= url = decimal of second hex = 6316231025699182586
 - Lesson: never trust an inherited place id; verify against the actual maps share link. writereview/reviews endpoints 404/500 when place id is wrong.
+
+## Race condition in RemoteState.update caused data loss
+- Both saveSettings (admin) and persistPricing called RemoteState.update() independently
+- Each did: fetch current → merge own partial → write back
+- If both fetched current at the same moment, each saw the old state
+- Last write wins → one overwrites the other → categories OR pricing disappears
+- Fix: write queue in remote-state.js — all updates go through a queue, merge from LOCAL CACHE (not remote fetch), debounced 300ms. No two writes ever race because they accumulate in _pendingPartials and flush together.
+- Lesson: any system with multiple independent writers to the same record needs a write queue or optimistic locking. "fetch + merge + write" is NEVER safe without serialization.

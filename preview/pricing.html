@@ -170,10 +170,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 
     function renderPricing() {
       let items;
-      // Prefer RemoteState (public, synced). Fallback to localStorage, then defaults.
-      if (window.RemoteState && window.RemoteState.getCached) {
-        const s = window.RemoteState.getCached() || {};
-        if (s.pricing && Array.isArray(s.pricing) && s.pricing.length) items = s.pricing;
+      if (window.RemoteState && window.RemoteState.getPricing) {
+        items = window.RemoteState.getPricing();
       }
       if (!items) {
         try { items = JSON.parse(localStorage.getItem('pricing_packages') || 'null') || DEFAULT_PRICING; }
