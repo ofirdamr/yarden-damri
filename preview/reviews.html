@@ -259,9 +259,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
      * Without these, anyone can extract this key and run up your bill.
      * ──────────────────────────────────────────────────────────────── */
     const PLACES_API_KEY  = 'AIzaSyCEEhecaLf_jOkEDHd0q0fcioEODD6gMwQ';
-    const PLACE_ID        = 'ChIJCT7WZcVzABUR-tcZLqfCp1c';
-    // Direct links (verified place id from maps.app.goo.gl/RoDSTLPmyGuXekcX8)
-    const READ_REVIEWS_URL  = 'https://search.google.com/local/reviews?placeid=' + PLACE_ID;
+    const PLACE_ID        = 'ChIJCQk-1mXFcwAVEfrXGS6nwqdX'; // derived from verified map feature id
+    const PLACE_CID       = '6316231025699182586';          // verified from maps.app.goo.gl/RoDSTLPmyGuXekcX8
+    const READ_REVIEWS_URL  = 'https://www.google.com/maps?cid=' + PLACE_CID;
     const WRITE_REVIEW_URL  = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
 
     document.getElementById('write-review-btn').href = WRITE_REVIEW_URL;

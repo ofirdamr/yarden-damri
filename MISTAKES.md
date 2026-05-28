@@ -105,3 +105,9 @@
 - This endpoint is unreliable; gives 500 depending on the place ID
 - Reliable alternative: https://www.google.com/maps/search/?api=1&query=NAME&query_place_id=PLACE_ID
 - Lesson: don't depend on undocumented Google review-link endpoints; use the documented Maps URL scheme
+
+## Wrong Google Place ID caused 404/500 on review links
+- The place ID in code (ChIJCT7WZcVzABUR-tcZLqfCp1c) was WRONG
+- Got the real one by: user shared maps link → extracted hex feature id (0x150073c565d63e09:0x57a7c2a72e19d7fa) → derived correct place id (ChIJCQk-1mXFcwAVEfrXGS6nwqdX) via protobuf+base64url encoding
+- CID for ?cid= url = decimal of second hex = 6316231025699182586
+- Lesson: never trust an inherited place id; verify against the actual maps share link. writereview/reviews endpoints 404/500 when place id is wrong.
