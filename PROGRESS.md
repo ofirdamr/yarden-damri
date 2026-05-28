@@ -286,18 +286,6 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - Selected video gets highlighted border + "✓ נבחר" badge
 - Preview videos use preload="none" until hovered (saves bandwidth)
 
-## 2026-05-27 - Complete public persistence (preview/) — fixing remaining gaps
-User concern: ALL manager settings must persist publicly and never reset.
-Audited every admin feature. Found 2 gaps, fixed:
-
-1. PRICING was localStorage-only (not public):
-   - admin getPricingItems/savePricingItems → now use RemoteState (record.pricing)
-   - public pricing.html renderPricing → reads RemoteState, re-renders after fetch
-   - remote-state.js loaded in <head> of pricing.html
-
-2. ROTATION was saved to RemoteState but NOT applied on public pages:
-   - gallery.html + index.html now read rotations from getAdminSettings() and apply transform:rotate()
-   - hover scale handlers updated to preserve rotation (rotate + scale combined)
-
-Now FULLY public + persistent: hidden, pinned, order, categories, rotations, hero video, pricing, reviews.
-All stored in single JSONBin record, survive browser cache clears, device switches, incognito.
+## Admin video preview + head-video selection (Stage 1)
+- ▶️ on video cards plays actual video in modal; ☆/⭐ marks head video (s.headVideo)
+- TODO Stage 2: display head video on site
