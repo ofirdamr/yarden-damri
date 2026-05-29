@@ -316,6 +316,13 @@
         <button class="btn btn-primary" onclick="changePwd()">שמור סיסמה</button>
       </div>
       <div class="field-group" style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border)">
+        <label>🔄 שחזור עבודה מהמכשיר הזה</label>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">אם הקטגוריות והסידור שעשית בעבר נעלמו מהענן, ייתכן שהם עדיין שמורים על המכשיר הזה. הכפתור יסרוק ויראה לך מה אפשר לשחזר.</p>
+        <button class="btn btn-primary" onclick="scanLocalBackup()">🔍 סרוק עבודה שמורה</button>
+        <div id="restore-result" style="margin-top:14px;"></div>
+      </div>
+
+      <div class="field-group" style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border)">
         <label style="color:var(--red)">אזור מסוכן</label>
         <button class="btn btn-danger" onclick="clearAllSettings()">🗑️ מחק את כל הגדרות הגלריה</button>
       </div>
@@ -812,6 +819,105 @@ function clearHeroVideo(){
   saveSettings(s);
   showToast('🎬 חזרה לוידאו ברירת מחדל');
   populateHeroVideoSelect();
+}
+
+// ─── RESTORE FROM LOCAL BACKUP ──────────────────────────────────
+function scanLocalBackup(){
+  const out = document.getElementById('restore-result');
+  out.innerHTML = '<p style="color:#888;">סורקת...</p>';
+
+  // Read the local backup that the OLD admin (and current admin) saves to localStorage
+  let local = {};
+  try { local = JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e){}
+
+  const localCats    = local.cats    || {};
+  const localCatList = local.catList || [];
+  const localHidden  = local.hidden  || [];
+  const localPinned  = local.pinned  || [];
+  const localOrder   = local.order   || [];
+  const localRot     = local.rotations || {};
+
+  // Read what's currently in the cloud (remote state)
+  const remote = (window.RemoteState && window.RemoteState.getAdmin) ? window.RemoteState.getAdmin() : {};
+  const remoteCatsCount = Object.keys(remote.cats || {}).length;
+  const remoteCatListCount = (remote.catList || []).length;
+
+  const localCatsCount = Object.keys(localCats).length;
+  const localCatListCount = localCatList.length;
+
+  if (localCatsCount === 0 && localCatListCount === 0 && localHidden.length === 0 && localPinned.length === 0) {
+    out.innerHTML = '<p style="color:#c62828;">❌ לא נמצאה עבודה שמורה במכשיר הזה. נסי לפתוח admin מהמכשיר שבו עשית את הקטגוריזציה.</p>';
+    return;
+  }
+
+  out.innerHTML = `
+    <div style="background:#fff8e1;border:1px solid #f9c74f;border-radius:8px;padding:14px;">
+      <p style="font-weight:600;margin-bottom:8px;">📦 נמצאה עבודה שמורה במכשיר:</p>
+      <ul style="margin:0 0 12px 18px;font-size:.9rem;line-height:1.7;">
+        <li>${localCatListCount} קטגוריות (בענן: ${remoteCatListCount})</li>
+        <li>${localCatsCount} תמונות מסווגות (בענן: ${remoteCatsCount})</li>
+        <li>${localHidden.length} תמונות מוסתרות</li>
+        <li>${localPinned.length} תמונות נעוצות</li>
+        <li>${localOrder.length} פריטים בסדר מותאם</li>
+        <li>${Object.keys(localRot).length} תמונות מסובבות</li>
+      </ul>
+      <p style="font-size:.85rem;color:#7A4A34;margin-bottom:12px;"><strong>שחזור = מיזוג:</strong> נתונים בענן ישארו. נתונים מהמכשיר יתווספו. אם יש סתירה — הגרסה בענן נשארת.</p>
+      <button class="btn btn-primary" onclick="restoreFromLocal()">✅ שחזרי ומזגי לענן</button>
+      <button class="btn btn-danger" onclick="restoreFromLocalOverwrite()" style="margin-right:8px;">⚠️ שחזרי ודרוס את הענן</button>
+    </div>`;
+}
+
+async function restoreFromLocal(){
+  await doRestore(false);
+}
+async function restoreFromLocalOverwrite(){
+  if (!confirm('זה ימחק את הקטגוריות שבענן ויחליף בקטגוריות מהמכשיר. בטוחה?')) return;
+  await doRestore(true);
+}
+async function doRestore(overwrite){
+  let local = {};
+  try { local = JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e){}
+
+  const remote = (window.RemoteState && window.RemoteState.getAdmin) ? window.RemoteState.getAdmin() : {};
+
+  // Merge logic: in NON-overwrite mode, remote wins on conflicts. In overwrite mode, local wins everywhere.
+  const merged = overwrite
+    ? {
+        cats:      local.cats      || {},
+        catList:   local.catList   || [],
+        hidden:    local.hidden    || [],
+        pinned:    local.pinned    || [],
+        order:     local.order     || [],
+        rotations: local.rotations || {}
+      }
+    : {
+        // cats: local + remote, remote wins
+        cats: { ...(local.cats || {}), ...(remote.cats || {}) },
+        // catList: union
+        catList: Array.from(new Set([...(local.catList || []), ...(remote.catList || [])])),
+        // hidden/pinned: union
+        hidden: Array.from(new Set([...(local.hidden || []), ...(remote.hidden || [])])),
+        pinned: Array.from(new Set([...(local.pinned || []), ...(remote.pinned || [])])),
+        // order: remote wins if exists, else local
+        order: (remote.order && remote.order.length) ? remote.order : (local.order || []),
+        // rotations: local + remote, remote wins
+        rotations: { ...(local.rotations || {}), ...(remote.rotations || {}) }
+      };
+
+  if (!window.RemoteState || !window.RemoteState.update) {
+    document.getElementById('restore-result').innerHTML = '<p style="color:#c62828;">שרת לא זמין. נסי שוב.</p>';
+    return;
+  }
+
+  const res = await window.RemoteState.update({ admin: merged });
+  if (res && res.ok) {
+    document.getElementById('restore-result').innerHTML = `<p style="color:#2e7d32;font-weight:600;">✅ שוחזר! ${Object.keys(merged.cats).length} תמונות מסווגות, ${merged.catList.length} קטגוריות.</p>`;
+    showToast('🎉 העבודה שלך שוחזרה');
+    // Re-render the admin so the user sees the restored data
+    setTimeout(() => initAdmin(), 500);
+  } else {
+    document.getElementById('restore-result').innerHTML = '<p style="color:#c62828;">❌ שגיאת שמירה. נסי שוב בעוד רגע.</p>';
+  }
 }
 
 // ─── CATEGORIES ─────────────────────────────────────────────────
