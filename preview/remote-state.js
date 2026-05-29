@@ -8,17 +8,17 @@
   const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
   const CACHE_KEY   = 'remote_state_v2';
 
-  // ── URL ↔ IG ID compression ────────────────────────────────────
-  // JSONBin free tier limits each record to 100KB. With 1500+ photos,
-  // full URLs (~100 chars each) blow that limit. IG IDs are ~17 chars → 80% smaller.
-  // Compression is transparent — code outside this file always sees full URLs.
+  // ── URL ↔ photo ID compression ─────────────────────────────────
+  // Each photo has a unique item_id (~17 chars vs ~100 for full URL).
+  // We use item_id (NOT id, which is the shared IG post id across carousel photos).
   let _u2id = null, _id2u = null;
   function buildMaps() {
     if (_u2id) return true;
     if (typeof window.GALLERY_IMAGES === 'undefined') return false;
     _u2id = {}; _id2u = {};
     window.GALLERY_IMAGES.forEach(i => {
-      if (i.id && i.u) { _u2id[i.u] = i.id; _id2u[i.id] = i.u; }
+      const key = i.item_id || i.id; // prefer item_id (unique per photo)
+      if (key && i.u) { _u2id[i.u] = key; _id2u[key] = i.u; }
     });
     return true;
   }

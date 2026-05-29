@@ -165,3 +165,11 @@
 - Fix: compress URLs to IG IDs (17 chars vs ~100) before writing to wire. Expand on read.
 - Compression is transparent — code outside remote-state.js always sees full URLs
 - Lesson: when picking a cloud backend, calculate worst-case payload size early
+
+## Used wrong ID field for compression — `id` (shared post id) instead of `item_id` (unique per photo)
+- Each photo in GALLERY_IMAGES has TWO IDs: `id` (the IG POST id, shared by all photos in a carousel post) and `item_id` (unique per individual photo)
+- My compression used `id` → multiple photos collapsed to a single map entry on write
+- Result: 1402 cats → ~200 after round-trip, 832 hidden → ~150
+- Symptom: gallery showed only 60 photos because hidden count was wrong AND cats lost most entries
+- Fix: use item_id (unique). Now compression preserves all entries.
+- Lesson: when introducing compression, verify data is fully recoverable by writing tests with collisions
