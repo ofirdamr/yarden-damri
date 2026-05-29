@@ -151,3 +151,11 @@
 - User experience: "categories were always there but photos lost their category" = admin UI shows "5 תמונות בקטגוריה X" correctly, but on the public gallery clicking that category showed nothing
 - Fix: getCat() now checks adminCats[img.u] first; filter bar built dynamically from adminCats.catList
 - LESSON: when investigating data loss, distinguish "data not saved" from "data saved but not read". I wasted 3 fixes assuming the write side was broken when the read side was the problem.
+
+## update() returned fake success before actually writing
+- The old update() returned ok:true the MOMENT it queued the write, BEFORE the actual JSONBin PUT completed
+- doRestore() relied on that fake success, fetched fresh too early, saw old data, re-rendered showing nothing
+- User saw "restore did nothing"
+- Fix: rewrite update() to return the REAL promise — resolves with {ok:true} only AFTER the JSONBin PUT confirms 2xx
+- Also removed debounce — debounce is for typing scenarios, not for explicit save buttons. Explicit saves should flush immediately and return real status.
+- LESSON: never return fake success. Async code must propagate real success/failure all the way up.

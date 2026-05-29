@@ -52,65 +52,43 @@
     return _fetchPromise;
   }
 
-  // ── Write queue — prevents race conditions ─────────────────────
-  // All writes go through here. Each write merges on top of the latest local cache.
-  // This means if admin saves cats and pricing saves prices simultaneously,
-  // both get merged into the same record — no overwrites.
+  // ── Write serialization (never two writes at once) ────────────
   let _writeQueue = Promise.resolve();
-  let _pendingPartials = {}; // accumulate rapid saves before flushing
-  let _flushTimer = null;
 
-  function update(partial) {
-    // CRITICAL SAFETY: block writes until we've successfully synced with remote.
-    // This prevents the bug where a user opens admin, clicks save before fetch completes,
-    // and writes DEFAULT values over their real saved data.
+  async function update(partial) {
+    // SAFETY: block writes until we've successfully synced.
     if (!_ready) {
-      console.warn('[remote-state] write blocked: not yet synced');
-      return Promise.resolve({ ok: false, error: 'not_synced' });
+      return { ok: false, error: 'not_synced' };
     }
 
-    // Merge partial into pending immediately (synchronous, local)
-    _pendingPartials = deepMerge(_pendingPartials, partial);
-    // Also update local cache immediately so reads see the new state
-    const current = loadCache() || {};
-    saveCache(deepMerge(current, partial));
-
-    // Debounce the actual remote write (300ms)
-    clearTimeout(_flushTimer);
-    _flushTimer = setTimeout(() => {
-      const toWrite = _pendingPartials;
-      _pendingPartials = {};
-      // Queue the write so it never races with another write
-      _writeQueue = _writeQueue.then(() => flush(toWrite));
-    }, 300);
-
-    // Return a promise that resolves when the flush completes
-    return new Promise(resolve => {
-      const prev = _writeQueue;
-      _writeQueue = _writeQueue.then(async () => {
-        resolve({ ok: true });
-      });
-    });
-  }
-
-  async function flush(partial) {
-    // Merge partial on top of latest local cache (already updated above)
+    // 1. Synchronously merge into local cache + localStorage backup
     const current = loadCache() || {};
     const merged = deepMerge(current, partial);
     saveCache(merged);
-    try {
-      const r = await fetch(JSONBIN_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-        body: JSON.stringify(merged)
-      });
-      if (!r.ok) throw new Error('PUT ' + r.status);
-      console.log('[remote-state] saved ok');
-      return { ok: true };
-    } catch(e) {
-      console.error('[remote-state] save failed:', e.message);
-      return { ok: false, error: e.message };
-    }
+
+    // 2. Queue the actual JSONBin write. Each write waits for the previous to finish.
+    //    Returns the REAL success/failure from JSONBin — never fake "ok" before confirmation.
+    const myWrite = _writeQueue.then(async () => {
+      // Re-read cache in case other updates piled in while we waited
+      const latest = loadCache() || {};
+      try {
+        const r = await fetch(JSONBIN_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+          body: JSON.stringify(latest)
+        });
+        if (!r.ok) {
+          console.error('[remote-state] PUT failed:', r.status);
+          return { ok: false, error: 'http ' + r.status };
+        }
+        return { ok: true };
+      } catch(e) {
+        console.error('[remote-state] PUT error:', e.message);
+        return { ok: false, error: e.message };
+      }
+    });
+    _writeQueue = myWrite.catch(()=>{}); // keep queue alive even on error
+    return myWrite;
   }
 
   // Deep merge helper (non-destructive)
