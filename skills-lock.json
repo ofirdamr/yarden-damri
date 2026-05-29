@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "hebrew-document-generator": {
+      "source": "skills-il/localization",
+      "sourceType": "github",
+      "computedHash": "a8cfd7ad8fc6e14f8bb89b6b899eab4201ca7a7d4d05d49668fbd038424785a8"
+    },
     "hebrew-seo-geo-toolkit": {
       "source": "skills-il/marketing-growth",
       "sourceType": "github",
