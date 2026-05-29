@@ -9,16 +9,36 @@
   const CACHE_KEY   = 'remote_state_v2';
 
   // ── URL ↔ photo ID compression ─────────────────────────────────
-  // Each photo has a unique item_id (~17 chars vs ~100 for full URL).
-  // We use item_id (NOT id, which is the shared IG post id across carousel photos).
+  // Each photo has a unique item_id (~17 numeric chars).
+  // We base36-encode it (~11 chars) so total payload stays well under JSONBin's 100KB hard limit.
   let _u2id = null, _id2u = null;
+  function toB36(idStr){
+    try { return BigInt(idStr).toString(36); } catch(e) { return idStr; }
+  }
+  function fromB36(s){
+    try {
+      let n = 0n;
+      for (const c of s) {
+        const v = parseInt(c, 36);
+        if (isNaN(v)) return s;
+        n = n * 36n + BigInt(v);
+      }
+      return n.toString();
+    } catch(e) { return s; }
+  }
   function buildMaps() {
     if (_u2id) return true;
     if (typeof window.GALLERY_IMAGES === 'undefined') return false;
     _u2id = {}; _id2u = {};
     window.GALLERY_IMAGES.forEach(i => {
-      const key = i.item_id || i.id; // prefer item_id (unique per photo)
-      if (key && i.u) { _u2id[i.u] = key; _id2u[key] = i.u; }
+      const rawId = i.item_id || i.id;
+      if (rawId && i.u) {
+        const shortId = toB36(rawId);
+        _u2id[i.u] = shortId;
+        _id2u[shortId] = i.u;
+        // Also accept the raw numeric form (backward compat with old cloud data)
+        _id2u[rawId] = i.u;
+      }
     });
     return true;
   }
@@ -114,17 +134,41 @@
       // Re-read cache in case other updates piled in while we waited
       const latest = loadCache() || {};
       const compressed = compressFull(latest); // shrink URLs → IDs for wire (JSONBin 100KB limit)
+      const bodyStr = JSON.stringify(compressed);
+      const bodySize = new Blob([bodyStr]).size;
       try {
         const r = await fetch(JSONBIN_URL, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-          body: JSON.stringify(compressed)
+          body: bodyStr
         });
         if (!r.ok) {
           const body = await r.text().catch(()=>'');
           console.error('[remote-state] PUT failed:', r.status, body.slice(0,200));
-          return { ok: false, error: 'http ' + r.status + (body ? ': '+body.slice(0,120) : '') };
+          return { ok: false, error: 'http ' + r.status + (body ? ': '+body.slice(0,120) : '') + ' (size: ' + Math.round(bodySize/1024) + 'KB)' };
         }
+        // VERIFY: read back and compare counts to ensure JSONBin didn't silently truncate
+        try {
+          const v = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_KEY }, cache: 'no-cache' });
+          if (v.ok) {
+            const vd = await v.json();
+            const remoteAdmin = (vd.record && vd.record.admin) || {};
+            const localAdmin = compressed.admin || {};
+            const mismatches = [];
+            ['hidden','pinned','order'].forEach(k => {
+              const r = (remoteAdmin[k]||[]).length, l = (localAdmin[k]||[]).length;
+              if (r !== l) mismatches.push(`${k}: sent ${l} got ${r}`);
+            });
+            ['cats','rotations'].forEach(k => {
+              const r = Object.keys(remoteAdmin[k]||{}).length, l = Object.keys(localAdmin[k]||{}).length;
+              if (r !== l) mismatches.push(`${k}: sent ${l} got ${r}`);
+            });
+            if (mismatches.length) {
+              console.error('[remote-state] write verification FAILED:', mismatches);
+              return { ok: false, error: 'verify_failed: ' + mismatches.join(', ') + ' (size: ' + Math.round(bodySize/1024) + 'KB)' };
+            }
+          }
+        } catch(verifyErr) { /* verify failed but PUT may have worked; don't false-fail */ }
         return { ok: true };
       } catch(e) {
         console.error('[remote-state] PUT error:', e.message);

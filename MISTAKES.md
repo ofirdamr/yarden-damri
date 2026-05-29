@@ -173,3 +173,14 @@
 - Symptom: gallery showed only 60 photos because hidden count was wrong AND cats lost most entries
 - Fix: use item_id (unique). Now compression preserves all entries.
 - Lesson: when introducing compression, verify data is fully recoverable by writing tests with collisions
+
+## Two compounding problems caused data loss after restore
+1. Item_id alone (17 chars) compressed payload to ~105KB — RIGHT AT JSONBin's 100KB hard limit. JSONBin probably truncated silently or partially.
+2. No verification after PUT — code assumed success based on HTTP 200, never checked if data round-tripped correctly.
+
+FIX:
+- Base36-encode item_ids (~11 chars instead of 17) → payload drops to ~83KB, comfortable margin
+- Backward-compatible: idToUrl accepts both base36 AND raw numeric form (so old corrupted cloud data we read can still partially work)
+- After every PUT, immediately re-fetch and compare counts (hidden/pinned/order/cats/rotations). If JSONBin returned different counts than sent, error is surfaced — no more silent corruption.
+
+LESSON: never trust HTTP 200 alone for critical writes. Always verify the data made it.
