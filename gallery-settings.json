@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "updatedAt": null,
+  "admin": {
+    "hidden": [],
+    "pinned": [],
+    "order": [],
+    "cats": {},
+    "catList": [],
+    "rotations": {}
+  },
+  "heroVideo": null,
+  "pricing": null,
+  "reviews": []
+}

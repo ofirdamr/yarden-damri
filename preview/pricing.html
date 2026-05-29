@@ -54,7 +54,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=6"/>
   <script src="a11y.js" defer></script>
-  <script src="remote-state.js"></script>
+  <script src="cloud-storage.js"></script>
 </head>
 <body>
 
@@ -193,7 +193,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     // Initial render with defaults/cache, then refresh from remote
     renderPricing();
     (async () => {
-      if (window.RemoteState) { await window.RemoteState.fetch(); renderPricing(); }
+      if (window.RemoteState) { await window.RemoteState.fetchPublic(); renderPricing(); }
     })();
   </script>
 </body>

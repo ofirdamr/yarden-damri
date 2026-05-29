@@ -184,3 +184,18 @@ FIX:
 - After every PUT, immediately re-fetch and compare counts (hidden/pinned/order/cats/rotations). If JSONBin returned different counts than sent, error is surfaced — no more silent corruption.
 
 LESSON: never trust HTTP 200 alone for critical writes. Always verify the data made it.
+
+## STRATEGIC FAILURE: chose wrong backend (JSONBin) for the data size
+- User has 1500+ photos × multiple settings → ~100KB+ data
+- JSONBin free tier hard caps at 100KB → can never fit reliably
+- My fixes (compression, encoding, verification) were patches on a fundamentally wrong choice
+- User correctly called it "six year old work"
+- LESSON: when data exceeds backend's free-tier limits, switch backends — don't fight compression endlessly
+
+## SOLUTION: GitHub as the database
+- Admin commits gallery-settings.json directly via GitHub API
+- Public pages read it via served URL (no token, no auth)
+- No size limits in practice (GitHub allows files up to ~50MB before issues)
+- GitHub Pages serves the updated file within 1-2 min of commit (acceptable for admin changes)
+- No compression layer = no compression bugs
+- Real commits = real saves (atomic, verifiable, immutable history)

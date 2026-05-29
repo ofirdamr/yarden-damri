@@ -282,7 +282,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<script src="remote-state.js"></script>
+<script src="cloud-storage.js"></script>
 <script src="gallery-data.js?v=2"></script>
 <script>
 // ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
@@ -568,7 +568,7 @@ applyFilter('all');
 loadIgFeed();
 (async () => {
   if (window.RemoteState) {
-    await window.RemoteState.fetch();
+    await window.RemoteState.fetchPublic();
     buildFilterBar();            // rebuild with admin's custom categories
     applyFilter(activeFilter);   // re-filter with remote cats data
   }

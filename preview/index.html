@@ -191,7 +191,7 @@
           // 1. RemoteState (admin choice, public)
           try {
             if (window.RemoteState) {
-              await window.RemoteState.fetch();
+              await window.RemoteState.fetchPublic();
               url = window.RemoteState.getHeroVideo();
             }
           } catch(e){}
@@ -605,7 +605,7 @@
   <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="a11y-live"></div>
 
   <!-- Gallery data -->
-  <script src="remote-state.js"></script>
+  <script src="cloud-storage.js"></script>
   <script src="gallery-data.js"></script>
 
   <script>
@@ -674,7 +674,7 @@
     // Load remote state (admin settings, hero video, reviews). On success, re-render with applied settings.
     (async () => {
       if (!window.RemoteState) return;
-      await window.RemoteState.fetch();
+      await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
         filteredImages = applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE);
@@ -1037,7 +1037,7 @@
     async function loadReviews() {
       try {
         if (window.RemoteState) {
-          await window.RemoteState.fetch();
+          await window.RemoteState.fetchPublic();
           reviewsCache = window.RemoteState.getReviews();
         } else {
           const r = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_KEY } });
