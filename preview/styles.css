@@ -86,7 +86,7 @@
     nav[role="navigation"].scrolled .nav-links a:hover,
     nav[role="navigation"].scrolled .nav-links a:focus { color: #000; }
     .nav-cta {
-      background: #fff; color: var(--charcoal) !important;
+      background: var(--gold); color: #fff !important;
       padding: 0 20px; height: 34px; border-radius: 2px;
       font-weight: 700; font-size: .75rem; letter-spacing: .12em;
       transition: background .3s, color .3s !important; white-space: nowrap; display: inline-flex; align-items: center;
