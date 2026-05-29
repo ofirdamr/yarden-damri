@@ -159,3 +159,9 @@
 - Fix: rewrite update() to return the REAL promise — resolves with {ok:true} only AFTER the JSONBin PUT confirms 2xx
 - Also removed debounce — debounce is for typing scenarios, not for explicit save buttons. Explicit saves should flush immediately and return real status.
 - LESSON: never return fake success. Async code must propagate real success/failure all the way up.
+
+## JSONBin 100KB limit hit when saving 1402 cats — 403 error
+- User's data (1402 cats + 832 hidden + 1535 order) at ~100 chars/URL exceeded JSONBin free tier limit
+- Fix: compress URLs to IG IDs (17 chars vs ~100) before writing to wire. Expand on read.
+- Compression is transparent — code outside remote-state.js always sees full URLs
+- Lesson: when picking a cloud backend, calculate worst-case payload size early

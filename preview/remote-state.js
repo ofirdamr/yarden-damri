@@ -8,6 +8,47 @@
   const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
   const CACHE_KEY   = 'remote_state_v2';
 
+  // ── URL ↔ IG ID compression ────────────────────────────────────
+  // JSONBin free tier limits each record to 100KB. With 1500+ photos,
+  // full URLs (~100 chars each) blow that limit. IG IDs are ~17 chars → 80% smaller.
+  // Compression is transparent — code outside this file always sees full URLs.
+  let _u2id = null, _id2u = null;
+  function buildMaps() {
+    if (_u2id) return true;
+    if (typeof window.GALLERY_IMAGES === 'undefined') return false;
+    _u2id = {}; _id2u = {};
+    window.GALLERY_IMAGES.forEach(i => {
+      if (i.id && i.u) { _u2id[i.u] = i.id; _id2u[i.id] = i.u; }
+    });
+    return true;
+  }
+  function urlToId(u){ buildMaps(); return (_u2id && _u2id[u]) || u; }
+  function idToUrl(s){ buildMaps(); return (_id2u && _id2u[s]) || s; }
+
+  // Compress: deep-walk admin data, replacing URLs with IDs in known fields
+  function compressAdmin(admin) {
+    if (!admin || typeof admin !== 'object') return admin;
+    const out = { ...admin };
+    if (admin.hidden)    out.hidden    = admin.hidden.map(urlToId);
+    if (admin.pinned)    out.pinned    = admin.pinned.map(urlToId);
+    if (admin.order)     out.order     = admin.order.map(urlToId);
+    if (admin.cats)      out.cats      = Object.fromEntries(Object.entries(admin.cats).map(([k,v]) => [urlToId(k), v]));
+    if (admin.rotations) out.rotations = Object.fromEntries(Object.entries(admin.rotations).map(([k,v]) => [urlToId(k), v]));
+    return out;
+  }
+  function expandAdmin(admin) {
+    if (!admin || typeof admin !== 'object') return admin;
+    const out = { ...admin };
+    if (admin.hidden)    out.hidden    = admin.hidden.map(idToUrl);
+    if (admin.pinned)    out.pinned    = admin.pinned.map(idToUrl);
+    if (admin.order)     out.order     = admin.order.map(idToUrl);
+    if (admin.cats)      out.cats      = Object.fromEntries(Object.entries(admin.cats).map(([k,v]) => [idToUrl(k), v]));
+    if (admin.rotations) out.rotations = Object.fromEntries(Object.entries(admin.rotations).map(([k,v]) => [idToUrl(k), v]));
+    return out;
+  }
+  function compressFull(data){ return data.admin ? { ...data, admin: compressAdmin(data.admin) } : data; }
+  function expandFull(data){   return data.admin ? { ...data, admin: expandAdmin(data.admin) } : data; }
+
   // ── In-memory cache ────────────────────────────────────────────
   let _cache = null;
 
@@ -36,7 +77,8 @@
         });
         if (!r.ok) throw new Error('fetch ' + r.status);
         const d = await r.json();
-        const data = d.record || {};
+        const raw = d.record || {};
+        const data = expandFull(raw); // expand IDs → full URLs for caller
         saveCache(data);
         _ready = true;
         _readyResolve();
@@ -71,15 +113,17 @@
     const myWrite = _writeQueue.then(async () => {
       // Re-read cache in case other updates piled in while we waited
       const latest = loadCache() || {};
+      const compressed = compressFull(latest); // shrink URLs → IDs for wire (JSONBin 100KB limit)
       try {
         const r = await fetch(JSONBIN_URL, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-          body: JSON.stringify(latest)
+          body: JSON.stringify(compressed)
         });
         if (!r.ok) {
-          console.error('[remote-state] PUT failed:', r.status);
-          return { ok: false, error: 'http ' + r.status };
+          const body = await r.text().catch(()=>'');
+          console.error('[remote-state] PUT failed:', r.status, body.slice(0,200));
+          return { ok: false, error: 'http ' + r.status + (body ? ': '+body.slice(0,120) : '') };
         }
         return { ok: true };
       } catch(e) {

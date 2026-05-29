@@ -319,6 +319,8 @@
         <label>🔄 שחזור עבודה מהמכשיר הזה</label>
         <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:10px;">אם הקטגוריות והסידור שעשית בעבר נעלמו מהענן, ייתכן שהם עדיין שמורים על המכשיר הזה. הכפתור יסרוק ויראה לך מה אפשר לשחזר.</p>
         <button class="btn btn-primary" onclick="scanLocalBackup()">🔍 סרוק עבודה שמורה</button>
+        <button class="btn btn-secondary" onclick="downloadLocalBackup()" style="margin-right:8px;">💾 הורד גיבוי לקובץ</button>
+        <p style="font-size:.78rem;color:#999;margin-top:8px;">💡 אם את ב-incognito — הורידי קודם גיבוי לקובץ! המידע ייעלם כשתסגרי את החלון.</p>
         <div id="restore-result" style="margin-top:14px;"></div>
       </div>
 
@@ -822,6 +824,30 @@ function clearHeroVideo(){
 }
 
 // ─── DIAGNOSTIC + RESTORE ──────────────────────────────────────
+function downloadLocalBackup(){
+  let local = {};
+  try { local = JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e){
+    alert('שגיאה: לא ניתן לקרוא מהמכשיר'); return;
+  }
+  const data = {
+    exportedAt: new Date().toISOString(),
+    source: location.href,
+    gallery_admin: local,
+    pricing_packages: JSON.parse(localStorage.getItem('pricing_packages')||'null')
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `yarden-damri-backup-${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  const cats = Object.keys(local.cats||{}).length;
+  showToast(`💾 גיבוי הורד! ${cats} תמונות מסווגות`);
+}
+
 function scanLocalBackup(){
   const out = document.getElementById('restore-result');
   out.innerHTML = '<p style="color:#888;">סורקת...</p>';
