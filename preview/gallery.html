@@ -184,7 +184,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   </section>
 
   <section style="padding:0 0 60px;">
-    <div class="filter-bar" role="tablist" aria-label="סינון גלריה">
+    <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
       <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
       <button class="filter-btn" data-cat="bride" role="tab" aria-selected="false">כלות 💍</button>
       <button class="filter-btn" data-cat="evening" role="tab" aria-selected="false">ערב 🌙</button>
@@ -383,6 +383,10 @@ function openComments(url, alt) {
 
 // ── CATEGORY ──
 function getCat(img) {
+  // 1. Admin's explicit assignment (from JSONBin) — highest priority
+  const adminCats = getAdminSettings().cats || {};
+  if (adminCats[img.u]) return adminCats[img.u];
+  // 2. Built-in hardcoded categories from caption
   if (img.cat) return img.cat;
   const a = (img.a||'').toLowerCase();
   if (/כלה|כלות|bride|חינה|wedding|👰|💍/.test(a)) return 'bride';
@@ -470,6 +474,39 @@ function observeVideos() {
 }
 
 // ── FILTER ──
+function buildFilterBar() {
+  const bar = document.getElementById('filter-bar'); if (!bar) return;
+  const adminCats = getAdminSettings().catList || [];
+  // Find which cats are actually used (have at least one photo assigned)
+  const usedCats = new Set(Object.values(getAdminSettings().cats || {}));
+
+  // Remove any previously-added custom buttons
+  bar.querySelectorAll('button[data-custom-cat]').forEach(b => b.remove());
+
+  // Add admin's custom categories that have assignments
+  adminCats.forEach(cat => {
+    if (!usedCats.has(cat)) return;
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.setAttribute('data-cat', cat);
+    btn.setAttribute('data-custom-cat', '1');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', 'false');
+    btn.textContent = '🏷️ ' + cat;
+    bar.appendChild(btn);
+  });
+
+  // Rewire ALL filter buttons (built-in + custom)
+  bar.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.onclick = () => {
+      bar.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      applyFilter(btn.dataset.cat);
+    };
+  });
+}
+
 function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
@@ -477,15 +514,9 @@ function applyFilter(cat) {
   renderPage = 1;
   renderGallery();
 }
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected','true');
-    applyFilter(btn.dataset.cat);
-  });
-});
 document.getElementById('loadMoreBtn').addEventListener('click', () => { renderPage++; renderGallery(); });
+
+buildFilterBar();
 
 // ── LIGHTBOX ──
 function openLb(idx) {
@@ -538,7 +569,8 @@ loadIgFeed();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetch();
-    applyFilter(activeFilter);
+    buildFilterBar();            // rebuild with admin's custom categories
+    applyFilter(activeFilter);   // re-filter with remote cats data
   }
 })();
 </script>

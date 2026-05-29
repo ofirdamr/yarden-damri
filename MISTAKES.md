@@ -142,3 +142,12 @@
 - "It's a deep merge issue with arrays" (partially true but not the root cause)
 - "It's localStorage vs cloud sync" (wrong — both were updated, but with bad data)
 - "Migration handles edge cases" (WRONG — migration was the problem amplifier)
+
+## THE REAL DATA-LOSS BUG: public gallery never read admin's cats map
+- Admin DID save categories correctly to JSONBin (admin.cats = {photoUrl: catName})
+- Admin DID NOT lose data — data was always saved
+- But the PUBLIC gallery's getCat() function only used hardcoded keyword matching on captions, completely IGNORING the admin.cats map
+- Filter buttons were hardcoded (bride/evening/production) — admin's custom categories never appeared in the bar
+- User experience: "categories were always there but photos lost their category" = admin UI shows "5 תמונות בקטגוריה X" correctly, but on the public gallery clicking that category showed nothing
+- Fix: getCat() now checks adminCats[img.u] first; filter bar built dynamically from adminCats.catList
+- LESSON: when investigating data loss, distinguish "data not saved" from "data saved but not read". I wasted 3 fixes assuming the write side was broken when the read side was the problem.
