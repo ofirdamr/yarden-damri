@@ -309,3 +309,13 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - This opens the Google profile where "Write a review" button is at the top
 - Live Google reviews API call disabled (PLACE_ID empty) → on-site form is primary
 - On-site reviews (JSONBin) remain the reliable review system
+
+## 2026-05-28 - PERMANENT FIX for data loss bug (categories + pricing)
+**Root cause finally identified**: writes were happening before RemoteState.fetch() completed. User opens admin → clicks pricing tab/category in the 1-2 sec gap before fetch finishes → getSettings returns DEFAULT values → save writes DEFAULTS over real data in JSONBin.
+
+**Fix:**
+- remote-state.js: added `_ready` gate. update() refuses to write until first successful fetch.
+- admin.html: removed dangerous migration code. initAdmin shows "connection failed" UI if fetch fails — never silently overwrites.
+- saveSettings: shows "syncing" toast if user tries to save too early.
+
+This is the permanent fix. Categories, pricing, hero video, rotations, hidden, pinned, order — none can be overwritten by stale defaults anymore.

@@ -431,41 +431,39 @@ function getSettings() {
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{"hidden":[],"pinned":[],"order":[],"cats":{},"catList":[]}'); }
   catch(e) { return {hidden:[],pinned:[],order:[],cats:{},catList:[]}; }
 }
-let _pendingSave = null;
 function saveSettings(s) {
-  // Always update localStorage immediately as local backup
   try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
-
   if (window.RemoteState && window.RemoteState.update) {
     const { heroVideo, ...adminFields } = s;
     const payload = { admin: adminFields };
     if (heroVideo) payload.heroVideo = heroVideo;
-    // remote-state.js handles debounce + queue internally — no race conditions
     window.RemoteState.update(payload).then(result => {
-      if (result && !result.ok) showToast('⚠️ שמירה לענן נכשלה — נסי שוב');
+      if (result && !result.ok) {
+        if (result.error === 'not_synced') {
+          showToast('⏳ מסנכרן... רעני את הדף ונסי שוב');
+        } else {
+          showToast('⚠️ שמירה לענן נכשלה');
+        }
+      }
     });
   }
 }
 
 // ─── INIT ───────────────────────────────────────────────────────
 async function initAdmin() {
-  // 1. Load remote state first (so getSettings returns synced data)
+  // 1. Load remote state first (so getSettings returns synced data).
+  // We BLOCK rendering until fetch completes — prevents writes from overwriting remote with defaults.
   if (window.RemoteState) {
-    await window.RemoteState.fetch();
-
-    // Migration: if remote has no admin data but localStorage does, push localStorage up to remote
-    const remoteCached = window.RemoteState.getCached() || {};
-    if (!remoteCached.admin) {
-      try {
-        const local = JSON.parse(localStorage.getItem('gallery_admin') || '{}');
-        if (Object.keys(local).length > 0 && (local.hidden?.length || local.pinned?.length || local.order?.length || Object.keys(local.cats||{}).length)) {
-          const { heroVideo, ...adminFields } = local;
-          const payload = { admin: adminFields };
-          if (heroVideo) payload.heroVideo = heroVideo;
-          await window.RemoteState.update(payload);
-          showToast && showToast('☁️ הגדרות מקומיות הועלו לענן');
-        }
-      } catch(e) {}
+    const fetchResult = await window.RemoteState.fetch();
+    if (!fetchResult || !fetchResult.ok) {
+      // Fetch failed. Show error and abort. Do NOT migrate stale local data over remote.
+      document.getElementById('grid').innerHTML = `
+        <div style="padding:30px;text-align:center;">
+          <p style="color:#c62828;font-size:1rem;margin-bottom:14px;">⚠️ לא הצלחתי להתחבר לשרת.</p>
+          <p style="color:#666;font-size:.9rem;margin-bottom:18px;">בדקי חיבור לאינטרנט ורעני את הדף. השינויים שלך לא ייאבדו.</p>
+          <button class="btn btn-primary" onclick="location.reload()">🔄 נסי שוב</button>
+        </div>`;
+      return;
     }
   }
 

@@ -119,3 +119,26 @@
 - Last write wins → one overwrites the other → categories OR pricing disappears
 - Fix: write queue in remote-state.js — all updates go through a queue, merge from LOCAL CACHE (not remote fetch), debounced 300ms. No two writes ever race because they accumulate in _pendingPartials and flush together.
 - Lesson: any system with multiple independent writers to the same record needs a write queue or optimistic locking. "fetch + merge + write" is NEVER safe without serialization.
+
+## ROOT CAUSE OF REPEATED DATA LOSS (categories, pricing): writes happened before remote was loaded
+**The actual bug** (after multiple wrong diagnoses):
+- When admin page loads, RemoteState.fetch() takes 500ms-2s
+- BEFORE fetch completes, cache is empty/stale
+- If user clicks pricing tab or modifies a category in that gap → getSettings()/getPricingItems() returns DEFAULT values
+- User saves → DEFAULT values overwrite their real saved data in JSONBin
+- The dangerous "migration" code made it worse: if fetch transiently failed, it pushed stale localStorage over remote
+
+**The permanent fix:**
+1. Added `_ready` flag in remote-state.js, set true ONLY after successful fetch
+2. `update()` REFUSES to write if not ready — returns `{ok: false, error: 'not_synced'}`
+3. Removed the migration code from initAdmin entirely (it was dangerous, no longer needed)
+4. initAdmin now shows clear error UI if fetch fails — refuses to render the editor, prevents writes
+5. saveSettings shows "⏳ מסנכרן" toast if user tries to save before sync completes
+
+**Lesson:** any write-back system with a cache MUST have a "ready" gate. Writing stale defaults over server data is catastrophic and silent. The cost of blocking writes briefly is far less than losing user data.
+
+**Previous wrong diagnoses (for future me to avoid):**
+- "It's a race between two saves" (wrong — the queue I added didn't help)
+- "It's a deep merge issue with arrays" (partially true but not the root cause)
+- "It's localStorage vs cloud sync" (wrong — both were updated, but with bad data)
+- "Migration handles edge cases" (WRONG — migration was the problem amplifier)

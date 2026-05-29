@@ -23,6 +23,9 @@
 
   // ── Remote fetch (with in-flight dedup) ────────────────────────
   let _fetchPromise = null;
+  let _ready = false; // becomes true ONLY after a successful fetch from JSONBin
+  let _readyResolve;
+  const _readyPromise = new Promise(r => _readyResolve = r);
   async function fetchRemote() {
     if (_fetchPromise) return _fetchPromise;
     _fetchPromise = (async () => {
@@ -35,10 +38,13 @@
         const d = await r.json();
         const data = d.record || {};
         saveCache(data);
-        return data;
+        _ready = true;
+        _readyResolve();
+        return { ok: true, data };
       } catch(e) {
         console.warn('[remote-state] fetch failed:', e.message);
-        return loadCache() || {};
+        // Critical: DO NOT mark ready. This blocks writes so we never overwrite remote with stale local data.
+        return { ok: false, data: loadCache() || {} };
       } finally {
         _fetchPromise = null;
       }
@@ -55,6 +61,14 @@
   let _flushTimer = null;
 
   function update(partial) {
+    // CRITICAL SAFETY: block writes until we've successfully synced with remote.
+    // This prevents the bug where a user opens admin, clicks save before fetch completes,
+    // and writes DEFAULT values over their real saved data.
+    if (!_ready) {
+      console.warn('[remote-state] write blocked: not yet synced');
+      return Promise.resolve({ ok: false, error: 'not_synced' });
+    }
+
     // Merge partial into pending immediately (synchronous, local)
     _pendingPartials = deepMerge(_pendingPartials, partial);
     // Also update local cache immediately so reads see the new state
@@ -118,6 +132,14 @@
     fetch: fetchRemote,
     update: update,
     getCached: loadCache,
+    isReady: () => _ready,
+    ready: () => _readyPromise,
+    forceReload: async () => {
+      _ready = false;
+      _cache = null;
+      try { localStorage.removeItem(CACHE_KEY); } catch(e){}
+      return fetchRemote();
+    },
     getAdmin: () => {
       const s = loadCache() || {};
       const a = s.admin || {};
