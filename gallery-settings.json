@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T18:05:11.975Z",
+  "updatedAt": "2026-05-30T18:06:27.382Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3935,7 +3935,7 @@
     },
     "heroVideo": ""
   },
-  "heroVideo": null,
+  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178363/yarden_makeup/yarden_makeup_17923237620299374.mp4",
   "pricing": [
     {
       "icon": "💍",
