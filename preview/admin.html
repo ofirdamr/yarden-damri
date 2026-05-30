@@ -325,7 +325,7 @@
         <!-- 16:9 preview box -->
         <div style="position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#111;margin-bottom:14px;">
           <img id="hero-preview-img" src="" alt="תצוגה מקדימה" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;"/>
-          <video id="hero-preview-vid" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;"></video>
+          <video id="hero-preview-vid" muted loop playsinline autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;" onclick="this.play()"></video>
           <div id="hero-preview-label" style="position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:8px;pointer-events:none;"></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -929,7 +929,7 @@ function showHeroPreview(url, type) {
   section.style.display = '';
   if (type === 'video') {
     const previewSrc = _heroRawPreviewUrl(url, 'video');
-    vidEl.src = previewSrc; vidEl.style.display = 'block'; vidEl.load(); vidEl.play().catch(()=>{});
+    vidEl.src = previewSrc; vidEl.style.display = 'block'; vidEl.load(); setTimeout(()=>vidEl.play().catch(()=>{}), 100);
     imgEl.style.display = 'none';
     if (label) label.textContent = 'תצוגה מקדימה';
   } else {
