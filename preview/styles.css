@@ -97,7 +97,6 @@
     .nav-logo:hover .monogram span,
     .nav-logo:hover .monogram span em { color: var(--blush); }
     nav[role="navigation"].scrolled .nav-logo { color: var(--charcoal); }
-    .nav-logo span { font-style: italic; color: inherit; }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; font-size: .75rem; font-weight: 600;
@@ -169,20 +168,21 @@
     .hero-title {
       font-family: 'Rubik', sans-serif;
       font-size: clamp(3.6rem, 7vw, 6rem);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.0;
       color: #fff;
-      margin-bottom: 16px;
-      letter-spacing: -.01em;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+      text-align: right;
     }
     .hero-subtitle {
-      font-family: 'Heebo', sans-serif;
-      font-size: clamp(.85rem, 1.5vw, 1rem);
-      font-weight: 400;
+      font-family: 'Rubik', sans-serif;
+      font-size: clamp(.95rem, 1.8vw, 1.2rem);
+      font-weight: 300;
       color: rgba(255,255,255,.75);
       margin-bottom: 40px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
+      letter-spacing: 0;
+      text-align: right;
     }
     .hero-desc {
       font-size: 1rem; line-height: 1.85;
