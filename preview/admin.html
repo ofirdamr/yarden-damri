@@ -325,7 +325,8 @@
         <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ddd;">
           <label style="font-size:.9rem;font-weight:600;">☁️ שחזור מהאחסון הקודם (JSONBin)</label>
           <p style="font-size:.82rem;color:#666;margin:8px 0 12px;">העבודה הקודמת ייתכן שעדיין שמורה במערכת האחסון הישנה. נסי לטעון משם.</p>
-          <button class="btn btn-secondary" onclick="pullFromOldJsonbin()">🔁 משוך מהאחסון הישן</button>
+          <button class="btn btn-secondary" onclick="pullFromOldJsonbin(false)">🔁 משוך מהאחסון הישן</button>
+          <button class="btn btn-danger" onclick="pullFromOldJsonbin(true)" style="margin-right:8px;">⚠️ דרוס הכל מהאחסון הישן</button>
           <div id="pull-result" style="margin-top:10px;"></div>
         </div>
 
@@ -874,7 +875,7 @@ function clearHeroVideo(){
 }
 
 // ─── DIAGNOSTIC + RESTORE ──────────────────────────────────────
-async function pullFromOldJsonbin(){
+async function pullFromOldJsonbin(force = false){
   const out = document.getElementById('pull-result');
   out.innerHTML = '<p style="color:#888;">⏳ טוענת מהאחסון הישן...</p>';
 
@@ -940,12 +941,18 @@ async function pullFromOldJsonbin(){
       return;
     }
 
-    if (!confirm(`למצוא לטעון לענן החדש:\n• ${catListCount} קטגוריות\n• ${catsCount} תמונות מסווגות\n• ${hiddenCount} מוסתרות\n• ${orderCount} פריטים בסדר מותאם\n${record.pricing ? '• מחירון\n' : ''}${record.reviews ? '• ' + record.reviews.length + ' ביקורות\n' : ''}\nבטוחה?`)) {
+    if (!confirm(`${force ? '⚠️ זה ידרוס את כל הנתונים הנוכחיים בענן ויחליף בנתונים מהאחסון הישן.\n\n' : ''}למצוא לטעון לענן החדש:\n• ${catListCount} קטגוריות\n• ${catsCount} תמונות מסווגות\n• ${hiddenCount} מוסתרות\n• ${orderCount} פריטים בסדר מותאם\n${record.pricing ? '• מחירון\n' : ''}${record.reviews ? '• ' + record.reviews.length + ' ביקורות\n' : ''}\nבטוחה?`)) {
       out.innerHTML = '';
       return;
     }
 
     out.innerHTML = '<p style="color:#888;">⏳ שולחת לענן החדש...</p>';
+
+    // In force mode: clear local cache first so garbled data doesn't merge in
+    if (force) {
+      try { localStorage.removeItem('cloud_state_v2'); } catch(e){}
+      if (window.RemoteState) window.RemoteState.forceReload && await window.RemoteState.forceReload();
+    }
 
     const payload = { admin: adminExpanded };
     if (record.pricing)   payload.pricing   = record.pricing;
