@@ -380,6 +380,45 @@ async function tryLogin() {
   const errEl = document.getElementById('login-err');
   errEl.style.display = 'none';
   if (!input) { errEl.textContent = 'נא להזין סיסמה'; errEl.style.display = 'block'; return; }
+
+  // Validate password against Cloudflare Worker (which holds the real password as a secret)
+  errEl.textContent = '⏳ בודקת...';
+  errEl.style.display = 'block';
+  errEl.style.color = '#888';
+  try {
+    const r = await fetch('https://yarden-admin.ofirdamr.workers.dev/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': input },
+      body: JSON.stringify({}) // empty update just validates auth
+    });
+    if (r.status === 401) {
+      errEl.textContent = 'סיסמה שגויה — נסי שוב';
+      errEl.style.color = '#c62828';
+      document.getElementById('pwd-input').value = '';
+      document.getElementById('pwd-input').focus();
+      return;
+    }
+    if (!r.ok) {
+      errEl.textContent = 'שגיאת שרת. נסי שוב.';
+      errEl.style.color = '#c62828';
+      return;
+    }
+    // Success — store password in session and enter admin
+    window.RemoteState.setPwd(input);
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-main').style.display = 'block';
+    initAdmin().catch(e => console.error('initAdmin error:', e));
+  } catch(e) {
+    errEl.textContent = 'אין חיבור לאינטרנט';
+    errEl.style.color = '#c62828';
+  }
+}
+
+async function _legacyTryLogin_disabled() {
+  const input = document.getElementById('pwd-input').value;
+  const errEl = document.getElementById('login-err');
+  errEl.style.display = 'none';
+  if (!input) { errEl.textContent = 'נא להזין סיסמה'; errEl.style.display = 'block'; return; }
   const inputHash = await hashPwd(input);
   if (inputHash === getStoredHash()) {
     document.getElementById('login-screen').style.display = 'none';
@@ -466,43 +505,15 @@ function saveSettings(s) {
 
 // ─── INIT ───────────────────────────────────────────────────────
 async function initAdmin() {
-  // 1. Check for GitHub token (needed for cloud writes)
-  if (window.RemoteState && !window.RemoteState.hasToken()) {
-    const promptHTML = `
-      <div style="padding:30px;text-align:center;max-width:560px;margin:0 auto;">
-        <h2 style="font-family:'Frank Ruhl Libre',serif;margin-bottom:14px;">חיבור חד-פעמי לשמירה בענן</h2>
-        <p style="color:#555;font-size:.95rem;margin-bottom:16px;line-height:1.7;">
-          כדי לשמור את ההגדרות בענן (גלוי לכל המבקרים, יציב, ללא הגבלת גודל) — צריך פעם אחת לחבר את האדמין ל-GitHub.
-        </p>
-        <p style="color:#7A4A34;font-size:.88rem;margin-bottom:14px;text-align:right;font-weight:600;">איך:</p>
-        <ol style="text-align:right;color:#555;font-size:.88rem;line-height:1.9;margin-bottom:20px;padding-right:24px;">
-          <li>פתחי <a href="https://github.com/settings/tokens/new?scopes=repo&description=yarden-damri-admin" target="_blank" rel="noopener" style="color:#C4866A;text-decoration:underline;">קישור זה</a> בלשונית חדשה</li>
-          <li>היכנסי ל-GitHub אם צריך</li>
-          <li>למטה תראי "Generate token" — לחצי</li>
-          <li>העתיקי את הקוד הירוק שמופיע</li>
-          <li>הדביקי אותו כאן ↓</li>
-        </ol>
-        <input id="gh-token-input" type="password" placeholder="ghp_..." style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-family:monospace;font-size:.85rem;margin-bottom:12px;box-sizing:border-box;" />
-        <button class="btn btn-primary" onclick="saveGhTokenAndReload()" style="width:100%;padding:12px;">שמרי וטעני מהענן</button>
-        <p style="color:#999;font-size:.78rem;margin-top:14px;">הקוד נשמר רק בדפדפן הזה. צריך להגדיר אחד לכל מכשיר שמשתמש באדמין.</p>
-      </div>`;
-    document.getElementById('grid').innerHTML = promptHTML;
-    return;
-  }
-
-  // 2. Load remote state first
+  // Load remote state via Worker (no token needed — Worker holds it server-side)
   if (window.RemoteState) {
     const fetchResult = await window.RemoteState.fetch();
     if (!fetchResult || !fetchResult.ok) {
-      if (fetchResult && fetchResult.error === 'no_token') {
-        // Shouldn't reach here, but just in case
-        return initAdmin();
-      }
       document.getElementById('grid').innerHTML = `
         <div style="padding:30px;text-align:center;">
-          <p style="color:#c62828;font-size:1rem;margin-bottom:14px;">⚠️ לא הצלחתי להתחבר ל-GitHub. ייתכן שהקוד לא תקין או שאין הרשאות.</p>
+          <p style="color:#c62828;font-size:1rem;margin-bottom:14px;">⚠️ לא הצלחתי להתחבר לשרת.</p>
           <p style="color:#888;font-size:.85rem;margin-bottom:18px;">${fetchResult?.error || ''}</p>
-          <button class="btn btn-primary" onclick="resetGhToken()">🔑 הגדירי קוד מחדש</button>
+          <button class="btn btn-primary" onclick="initAdmin()">🔄 נסי שוב</button>
         </div>`;
       return;
     }
@@ -523,21 +534,6 @@ async function initAdmin() {
   renderCatList();
   renderCatFilters();
   populateHeroVideoSelect();
-}
-
-function saveGhTokenAndReload(){
-  const t = document.getElementById('gh-token-input').value.trim();
-  if (!t || (!t.startsWith('ghp_') && !t.startsWith('github_pat_'))) {
-    alert('הקוד צריך להתחיל ב-ghp_ או github_pat_');
-    return;
-  }
-  window.RemoteState.setToken(t);
-  initAdmin();
-}
-function resetGhToken(){
-  if (!confirm('להגדיר קוד GitHub חדש?')) return;
-  try { localStorage.removeItem('yd_gh_token'); } catch(e){}
-  initAdmin();
 }
 
 // ─── GRID ───────────────────────────────────────────────────────
