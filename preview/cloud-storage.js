@@ -136,7 +136,8 @@
         order:     a.order     || [],
         cats:      a.cats      || {},
         catList:   a.catList   || [],
-        rotations: a.rotations || {}
+        rotations: a.rotations || {},
+        privateCats: a.privateCats || []
       };
     },
     getHeroVideo: () => (loadCache() || {}).heroVideo || null,
