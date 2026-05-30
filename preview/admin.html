@@ -323,6 +323,13 @@
         <p style="font-size:.78rem;color:#999;margin-top:8px;">💡 אם את ב-incognito — הורידי קודם גיבוי לקובץ! המידע ייעלם כשתסגרי את החלון.</p>
 
         <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ddd;">
+          <label style="font-size:.9rem;font-weight:600;">☁️ שחזור מהאחסון הקודם (JSONBin)</label>
+          <p style="font-size:.82rem;color:#666;margin:8px 0 12px;">העבודה הקודמת ייתכן שעדיין שמורה במערכת האחסון הישנה. נסי לטעון משם.</p>
+          <button class="btn btn-secondary" onclick="pullFromOldJsonbin()">🔁 משוך מהאחסון הישן</button>
+          <div id="pull-result" style="margin-top:10px;"></div>
+        </div>
+
+        <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ddd;">
           <label style="font-size:.9rem;font-weight:600;">📂 ייבוא גיבוי מקובץ (אם הורדת קובץ ממכשיר אחר)</label>
           <input type="file" id="restore-file-input" accept="application/json,.json" style="display:block;margin-top:10px;font-family:inherit;font-size:.85rem;" onchange="importBackupFile(this)" />
         </div>
@@ -867,6 +874,101 @@ function clearHeroVideo(){
 }
 
 // ─── DIAGNOSTIC + RESTORE ──────────────────────────────────────
+async function pullFromOldJsonbin(){
+  const out = document.getElementById('pull-result');
+  out.innerHTML = '<p style="color:#888;">⏳ טוענת מהאחסון הישן...</p>';
+
+  const JSONBIN_KEY = '$2a$10$EUS8yhBdm130KXj7GB56iOGDZEB4Nlkid81ccEKHu/E6x1F6Sxdcm';
+  const JSONBIN_BIN = '69f88e09aaba8821976cbc68';
+
+  try {
+    const r = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN}/latest`, {
+      headers: { 'X-Master-Key': JSONBIN_KEY },
+      cache: 'no-cache'
+    });
+    if (!r.ok) {
+      out.innerHTML = `<p style="color:#c62828;">❌ JSONBin שגיאה: ${r.status}</p>`;
+      return;
+    }
+    const d = await r.json();
+    const record = d.record || {};
+
+    // Expand any compressed item_ids back to full URLs.
+    // Some entries may be: raw numeric IG ids, base36-encoded ids, or full URLs.
+    if (typeof GALLERY_IMAGES === 'undefined') {
+      out.innerHTML = `<p style="color:#c62828;">❌ קובץ הגלריה לא נטען</p>`;
+      return;
+    }
+    const id2u = {};
+    GALLERY_IMAGES.forEach(i => {
+      const raw = i.item_id || i.id;
+      if (raw && i.u) {
+        id2u[raw] = i.u; // raw numeric id
+        try { id2u[BigInt(raw).toString(36)] = i.u; } catch(e){} // base36
+      }
+    });
+    function maybeExpand(s) {
+      if (!s || typeof s !== 'string') return s;
+      if (s.startsWith('http')) return s;
+      return id2u[s] || s;
+    }
+    function expandArr(arr) { return Array.isArray(arr) ? arr.map(maybeExpand) : (arr || []); }
+    function expandMap(m) {
+      if (!m || typeof m !== 'object') return {};
+      const out = {};
+      Object.keys(m).forEach(k => out[maybeExpand(k)] = m[k]);
+      return out;
+    }
+
+    const admin = record.admin || {};
+    const adminExpanded = {
+      hidden:    expandArr(admin.hidden),
+      pinned:    expandArr(admin.pinned),
+      order:     expandArr(admin.order),
+      cats:      expandMap(admin.cats),
+      catList:   admin.catList || [],
+      rotations: expandMap(admin.rotations)
+    };
+
+    const catsCount = Object.keys(adminExpanded.cats).length;
+    const catListCount = adminExpanded.catList.length;
+    const hiddenCount = adminExpanded.hidden.length;
+    const orderCount = adminExpanded.order.length;
+
+    if (!catsCount && !catListCount && !hiddenCount && !orderCount && !record.pricing && !record.reviews) {
+      out.innerHTML = `<p style="color:#c62828;background:#ffebee;padding:10px;border-radius:6px;">❌ האחסון הישן ריק. אין מה לשחזר.</p>`;
+      return;
+    }
+
+    if (!confirm(`למצוא לטעון לענן החדש:\n• ${catListCount} קטגוריות\n• ${catsCount} תמונות מסווגות\n• ${hiddenCount} מוסתרות\n• ${orderCount} פריטים בסדר מותאם\n${record.pricing ? '• מחירון\n' : ''}${record.reviews ? '• ' + record.reviews.length + ' ביקורות\n' : ''}\nבטוחה?`)) {
+      out.innerHTML = '';
+      return;
+    }
+
+    out.innerHTML = '<p style="color:#888;">⏳ שולחת לענן החדש...</p>';
+
+    const payload = { admin: adminExpanded };
+    if (record.pricing)   payload.pricing   = record.pricing;
+    if (record.reviews)   payload.reviews   = record.reviews;
+    if (record.heroVideo) payload.heroVideo = record.heroVideo;
+
+    const res = await window.RemoteState.update(payload);
+    if (!res || !res.ok) {
+      out.innerHTML = `<p style="color:#c62828;background:#ffebee;padding:10px;border-radius:6px;">❌ שמירה נכשלה: ${res?.error || 'unknown'}</p>`;
+      return;
+    }
+
+    await window.RemoteState.forceReload();
+    await initAdmin();
+
+    const restored = window.RemoteState.getAdmin();
+    out.innerHTML = `<p style="color:#2e7d32;background:#e8f5e9;padding:12px;border-radius:6px;font-weight:600;">✅ שוחזר! ${Object.keys(restored.cats||{}).length} תמונות מסווגות, ${(restored.catList||[]).length} קטגוריות. הכל כעת מאוחסן ב-GitHub.</p>`;
+    showToast('🎉 העבודה שוחזרה מהאחסון הישן');
+  } catch(e) {
+    out.innerHTML = `<p style="color:#c62828;">❌ שגיאה: ${e.message}</p>`;
+  }
+}
+
 async function importBackupFile(inputEl){
   const file = inputEl.files && inputEl.files[0];
   if (!file) return;
