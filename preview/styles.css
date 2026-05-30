@@ -17,7 +17,7 @@
     html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; width: 100%; }
 
     body {
-      font-family: 'Heebo', Arial, sans-serif;
+      font-family: 'Heebo', sans-serif;
       background: var(--cream);
       color: var(--text);
       overflow-x: hidden;
@@ -66,12 +66,36 @@
       border-bottom: 1px solid #eee;
       padding: 14px 60px;
     }
+    
     .nav-logo {
-      font-family: 'Frank Ruhl Libre', serif;
-      font-size: 1.4rem; font-weight: 300;
-      letter-spacing: .08em; color: #fff; flex-shrink: 0;
-      text-decoration: none; transition: color .4s;
+      text-decoration: none;
+      flex-shrink: 0;
     }
+    .monogram {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid #c9a96e;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .3s;
+    }
+    .monogram span {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #c9a96e;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .monogram span em {
+      font-style: normal;
+      font-size: 0.65rem;
+      vertical-align: middle;
+      color: #c9a96e;
+    }
+    .nav-logo:hover .monogram { border-color: var(--blush); }
+    .nav-logo:hover .monogram span,
+    .nav-logo:hover .monogram span em { color: var(--blush); }
     nav[role="navigation"].scrolled .nav-logo { color: var(--charcoal); }
     .nav-logo span { font-style: italic; color: inherit; }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
@@ -97,10 +121,10 @@
     /* ── HERO ── */
     /* ── FONTS ── */
     body {
-      font-family: 'Heebo', Arial, sans-serif;
+      font-family: 'Heebo', sans-serif;
     }
     h1, h2, h3 {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Rubik', sans-serif;
     }
 
     /* ── HERO ── */
@@ -143,7 +167,7 @@
       margin-bottom: 24px;
     }
     .hero-title {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Rubik', sans-serif;
       font-size: clamp(3.6rem, 7vw, 6rem);
       font-weight: 300;
       line-height: 1.0;
@@ -192,7 +216,7 @@
     .small-card-num { display: none; }
     .small-card-label { display: none; }
     .section-eyebrow { font-size: .72rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #666; margin-bottom: 20px; display: block; }
-    .section-title { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 300; line-height: 1.08; color: var(--charcoal); margin-bottom: 28px; letter-spacing: -.01em; }
+    .section-title { font-family: 'Rubik', sans-serif; font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 300; line-height: 1.08; color: var(--charcoal); margin-bottom: 28px; letter-spacing: -.01em; }
     .section-title em { font-style: italic; color: inherit; }
     .section-body { font-size: 1.05rem; line-height: 2; color: #555; margin-bottom: 36px; }
     .about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
@@ -211,7 +235,7 @@
     .service-card:hover, .service-card:focus-within { background: #f8f8f8; transform: translateY(-4px); }
     .service-card:hover::before, .service-card:focus-within::before { transform: scaleX(1); transform-origin: left; }
     .service-icon { font-size: 2rem; margin-bottom: 24px; display: block; }
-    .service-name { font-family: 'Frank Ruhl Libre', serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 14px; }
+    .service-name { font-family: 'Rubik', sans-serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 14px; }
     .service-desc { font-size: .95rem; line-height: 1.85; color: #666; }
     .service-card.featured { background: #fff; border-top: 3px solid #111; }
     .service-card.featured .service-name { color: #111; }
@@ -222,12 +246,12 @@
 
     /* ── PHILOSOPHY ── */
     #philosophy { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); text-align: center; background: var(--cream); }
-    .philosophy-quote { font-family: 'Frank Ruhl Libre', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--charcoal); max-width: 860px; margin: 0 auto 60px; position: relative; }
+    .philosophy-quote { font-family: 'Rubik', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--charcoal); max-width: 860px; margin: 0 auto 60px; position: relative; }
     .philosophy-quote::before { content: none; }
     .philosophy-attrs { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 80px; border-top: 1px solid #eee; }
     .attr { text-align: center; padding: 48px 60px; border-left: 1px solid #eee; }
     .attr:first-child { border-left: none; }
-    .attr-num { font-family: 'Frank Ruhl Libre', serif; font-size: 4rem; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 10px; }
+    .attr-num { font-family: 'Rubik', sans-serif; font-size: 4rem; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 10px; }
     .attr-label { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #666; }
     .attr-divider { display: none; }
 
@@ -239,7 +263,7 @@
     .area-points { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
     .area-point { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 1px solid #eee; background: none; border-radius: 0; box-shadow: none; }
     .area-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-    .area-text strong { display: block; font-size: 1rem; color: var(--charcoal); margin-bottom: 4px; font-family: 'Frank Ruhl Libre', serif; }
+    .area-text strong { display: block; font-size: 1rem; color: var(--charcoal); margin-bottom: 4px; font-family: 'Rubik', sans-serif; }
     .area-text span { font-size: .9rem; color: #777; line-height: 1.6; }
 
     /* ── CONTACT ── */
@@ -247,7 +271,7 @@
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .biz-card { width: 100%; max-width: 460px; background: #111; border-radius: 2px; padding: 48px; position: relative; overflow: hidden; color: #fff; }
     .biz-card::before, .biz-card::after { display: none; }
-    .biz-card-logo { font-family: 'Frank Ruhl Libre', serif; font-size: 2rem; font-weight: 300; letter-spacing: .06em; margin-bottom: 6px; color: #fff; }
+    .biz-card-logo { font-family: 'Rubik', sans-serif; font-size: 2rem; font-weight: 300; letter-spacing: .06em; margin-bottom: 6px; color: #fff; }
     .biz-card-logo em { font-style: italic; color: rgba(255,255,255,.5); }
     .biz-card-title { font-size: .7rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 32px; }
     .biz-card-divider { width: 32px; height: 1px; background: rgba(255,255,255,.2); margin-bottom: 32px; }
@@ -268,7 +292,7 @@
 
     /* ── CTA STRIP ── */
     .cta-strip { background: #111; padding: 32px 40px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; text-align: center; }
-    .cta-strip-text { color: rgba(255,255,255,.7); font-size: 1rem; font-family: 'Frank Ruhl Libre', serif; }
+    .cta-strip-text { color: rgba(255,255,255,.7); font-size: 1rem; font-family: 'Rubik', sans-serif; }
     .cta-strip-text strong { color: #fff; font-weight: 400; }
     .cta-strip-btn { background: #fff; color: #111; padding: 14px 32px; border-radius: 2px; text-decoration: none; font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; transition: opacity .2s; }
     .cta-strip-btn:hover, .cta-strip-btn:focus { opacity: .8; }
@@ -551,7 +575,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   margin-bottom: 20px;
 }
 .page-title {
-  font-family: 'Frank Ruhl Libre', serif;
+  font-family: 'Rubik', sans-serif;
   font-size: clamp(3rem, 6vw, 5.5rem);
   font-weight: 300;
   color: var(--charcoal);
