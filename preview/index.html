@@ -584,8 +584,6 @@
       if (!window.RemoteState) return;
       try {
         await window.RemoteState.fetch();
-        const heroFit = window.RemoteState.getHeroFit ? window.RemoteState.getHeroFit() : 'cover';
-        const heroPos = window.RemoteState.getHeroPosition ? window.RemoteState.getHeroPosition() : 'center center';
         const imgUrl = window.RemoteState.getHeroImage ? window.RemoteState.getHeroImage() : null;
         const vidUrl = window.RemoteState.getHeroVideo();
         const videoEl = document.getElementById('heroVideo');
@@ -596,8 +594,6 @@
             ? imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/')
             : imgUrl;
           imgEl.src = cloudImg;
-          imgEl.style.objectFit = heroFit;
-          imgEl.style.objectPosition = heroPos;
           imgEl.style.display = 'block';
           videoEl.style.display = 'none';
           videoEl.pause();
@@ -612,8 +608,6 @@
                  .replace(/\.(mp4|mov|webm)$/i, '.jpg')
             : '';
           if (posterUrl) videoEl.poster = posterUrl;
-          videoEl.style.objectFit = heroFit;
-          videoEl.style.objectPosition = heroPos;
           s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
         }
       } catch(e) { console.warn('heroVideo error:', e); }
