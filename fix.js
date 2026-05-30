@@ -45,7 +45,21 @@ async function uploadToCloudinary(item) {
 
 (async () => {
   const token = process.env.INSTAGRAM_TOKEN;
-  if (!token) { console.log("No token"); return; }
+  if (!token) { console.error('ERROR: No INSTAGRAM_TOKEN set'); return; }
+  console.log('Token prefix:', token.substring(0, 6) + '...');
+
+  // Test token before doing anything
+  try {
+    const testResp = await get(`https://graph.instagram.com/me?fields=id,username&access_token=${token}`);
+    if (testResp.error) {
+      console.error('TOKEN ERROR:', JSON.stringify(testResp.error));
+      return;
+    }
+    console.log('Token OK — account:', testResp.username || testResp.id);
+  } catch(e) {
+    console.error('TOKEN TEST FAILED:', e.message);
+    return;
+  }
 
   // 1. Fetch all media from Instagram
   console.log("Fetching media...");
