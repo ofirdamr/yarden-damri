@@ -125,17 +125,43 @@ async function uploadToCloudinary(item) {
     const raw = fs.readFileSync("gallery-data.js", "utf8").replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
     existing = JSON.parse(raw);
   } catch(e) {}
-  // Key by item.id (child ID for carousels, post ID for singles)
+  // Build lookup maps — by item_id AND by Instagram ID embedded in Cloudinary URL
+  // This handles both Basic Display tokens (one set of IDs) and Business tokens (different IDs)
   const existingByItemId = {};
-  existing.forEach(e => { if (e.item_id) existingByItemId[e.item_id] = e; });
+  const existingByCloudinaryId = {}; // key = IG media ID extracted from Cloudinary URL
+  existing.forEach(e => {
+    if (e.item_id) existingByItemId[e.item_id] = e;
+    if (e.u && e.u.includes('cloudinary')) {
+      // Cloudinary URLs contain the IG media ID in the path, e.g. yarden_makeup_18094353658922515
+      const m = e.u.match(/yarden_makeup_(\d+)/);
+      if (m) existingByCloudinaryId[m[1]] = e;
+    }
+  });
+  const igIdFromUrl = (url) => {
+    if (!url) return null;
+    const m = url.match(/\/(\d{15,})(?:\?|$|_)/);
+    return m ? m[1] : null;
+  };
 
-  // 3. Upload new items to Cloudinary — deduplicate by item URL
+  // 3. Upload new items to Cloudinary — deduplicate by item_id OR by IG ID in URL
   const gallery = [];
   const seenUrls = new Set();
   for (const item of rawPosts) {
-    if (existingByItemId[item.id] && existingByItemId[item.id].u.includes('cloudinary')) {
-      const e = existingByItemId[item.id];
-      if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
+    // Check by item_id first
+    let existingEntry = existingByItemId[item.id];
+    // Fallback: extract IG ID from the media URL and check Cloudinary
+    if (!existingEntry) {
+      const igId = igIdFromUrl(item.media_url || item.thumbnail_url || '');
+      if (igId) existingEntry = existingByCloudinaryId[igId];
+    }
+
+    if (existingEntry && existingEntry.u && existingEntry.u.includes('cloudinary')) {
+      if (!seenUrls.has(existingEntry.u)) {
+        // Update item_id to new token's ID so future runs also match
+        existingEntry.item_id = item.id;
+        seenUrls.add(existingEntry.u);
+        gallery.push(existingEntry);
+      }
       process.stdout.write(".");
     } else {
       console.log(`\nUploading ${item.id}...`);
