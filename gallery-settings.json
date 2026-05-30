@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T14:46:51.471Z",
+  "updatedAt": "2026-05-30T18:08:18.975Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3935,7 +3935,81 @@
     },
     "heroVideo": ""
   },
-  "heroVideo": null,
-  "pricing": null,
+  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178360/yarden_makeup/yarden_makeup_18321495295280260.mp4",
+  "pricing": [
+    {
+      "icon": "💍",
+      "name": "מאפרת כלות",
+      "desc": "כולל פגישת התאמה + יום החתונה",
+      "price": "1990",
+      "featured": true,
+      "includes": [
+        "ניסוי איפור מקצועי",
+        "יום החתונה",
+        "Touch-Up Kit",
+        "מגיעה אלייך"
+      ]
+    },
+    {
+      "icon": "🌙",
+      "name": "איפור ערב",
+      "desc": "לאירועים ומסיבות",
+      "price": "450 ₪",
+      "featured": false,
+      "includes": [
+        "התאמה אישית",
+        "מוצרים פרימיום",
+        "עמיד לאורך הלילה"
+      ]
+    },
+    {
+      "icon": "🎬",
+      "name": "הפקות - יום איפור",
+      "desc": "צילומים ופרסומות",
+      "price": "1700 ₪",
+      "featured": false,
+      "includes": [
+        "מקצוע כלפי מצלמה",
+        "לפי שעות"
+      ]
+    },
+    {
+      "icon": "🎂",
+      "name": "איפור לנשף",
+      "desc": "כלה של היום",
+      "price": "400 ₪",
+      "featured": false,
+      "includes": [
+        "מראה חגיגי"
+      ]
+    },
+    {
+      "icon": "🖌️",
+      "name": "סדנת איפור אישית ",
+      "desc": "ללמוד לבד",
+      "price": "890 ₪",
+      "featured": false,
+      "includes": [
+        "אישית/קבוצתית",
+        "טכניקות מקצועיות"
+      ]
+    },
+    {
+      "icon": "✨",
+      "name": "סדנא קבוצתית",
+      "desc": "לימוד טכניקות מקצועיות בקבוצה ",
+      "price": "250 ₪",
+      "featured": false,
+      "includes": []
+    },
+    {
+      "icon": "✨",
+      "name": "הדבקת ריסים",
+      "desc": "הדבקת ריסים ",
+      "price": "100 ₪",
+      "featured": false,
+      "includes": []
+    }
+  ],
   "reviews": []
 }
