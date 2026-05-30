@@ -600,11 +600,14 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
-          // URL already has transforms from admin (g_auto,c_fill). Use as-is.
-          const cloudUrl = vidUrl;
-          // Poster: extract first frame at full width
-          const posterUrl = vidUrl.includes('/video/upload/')
-            ? vidUrl.replace('/video/upload/', '/video/upload/so_0,w_1280,c_fill,f_jpg,q_auto/')
+          // Strip any Cloudinary transforms from saved URL — use original video.
+          // CSS object-fit:cover handles cropping natively (no Cloudinary processing delay).
+          const cleanVid = vidUrl.includes('/video/upload/')
+            ? vidUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
+            : vidUrl;
+          const cloudUrl = cleanVid;
+          const posterUrl = cleanVid.includes('/video/upload/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_1280,f_jpg,q_auto/')
                  .replace(/\.(mp4|mov|webm)$/i, '.jpg')
             : '';
           if (posterUrl) videoEl.poster = posterUrl;

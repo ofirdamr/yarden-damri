@@ -901,15 +901,10 @@ function populateHeroVideoSelect(){
 let _heroPending = null;
 
 function _heroAutoUrl(url, type) {
-  // No ar_16:9 — hero is full-screen (100vh), not 16:9. g_auto centers faces. c_fill fills frame.
-  if (!url || !url.includes('cloudinary.com')) return url;
-  if (type === 'video') {
-    return url.includes('/video/upload/')
-      ? url.replace('/video/upload/', '/video/upload/g_auto,c_fill,w_1280,q_auto:low,vc_auto/')
-      : url;
-  } else {
-    return url.replace('/image/upload/', '/image/upload/g_auto,c_fill,w_1920,f_auto,q_auto/');
-  }
+  // Save original URL — no Cloudinary transforms needed.
+  // Hero CSS already uses object-fit:cover which fills the screen natively in the browser.
+  // Cloudinary on-demand transforms cause delays/blanks on first load.
+  return url;
 }
 function _heroRawPreviewUrl(url, type) {
   // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
@@ -962,12 +957,9 @@ function applyAutoFit(){
   delete s.heroFit; delete s.heroPosition;
   saveSettings(s);
   _heroPending = null;
-  // Warm up Cloudinary — first request generates the transform; subsequent requests are instant
-  if (type === 'video') { const v = document.createElement('video'); v.src = finalUrl; v.preload='metadata'; }
-  else { const i = new Image(); i.src = finalUrl; }
-  showToast('✨ מדיה ראשית עודכנה! מכינה את הקובץ — עלול לקחת 10-30 שניות בפעם הראשונה.');
+  showToast('✨ מדיה ראשית עודכנה! גלוי לכל המבקרים תוך כדקה.');
   const status = document.getElementById('hero-video-status');
-  if (status) status.textContent = '✓ נשמר — ייתכן שנדרשת דקה להכנה ראשונה';
+  if (status) status.textContent = '✓ נשמר';
   populateHeroVideoSelect(); populateHeroImageSelect();
 }
 function clearHeroVideo(){
