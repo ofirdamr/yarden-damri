@@ -186,9 +186,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <section style="padding:0 0 60px;">
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
       <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
-      <button class="filter-btn" data-cat="bride" role="tab" aria-selected="false">כלות 💍</button>
-      <button class="filter-btn" data-cat="evening" role="tab" aria-selected="false">ערב 🌙</button>
-      <button class="filter-btn" data-cat="production" role="tab" aria-selected="false">הפקות 🎬</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -496,7 +493,7 @@ function buildFilterBar() {
     btn.setAttribute('data-custom-cat', '1');
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-selected', 'false');
-    btn.textContent = '🏷️ ' + cat;
+    btn.textContent = cat;
     bar.appendChild(btn);
   });
 
@@ -514,7 +511,8 @@ function buildFilterBar() {
 function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
-  allFilteredImages = cat === 'all' ? base : base.filter(img => getCat(img) === cat);
+  const adminCatMap = getAdminSettings().cats || {};
+  allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
   renderPage = 1;
   renderGallery();
 }
