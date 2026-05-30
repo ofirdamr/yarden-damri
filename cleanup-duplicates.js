@@ -1,7 +1,5 @@
 /**
- * cleanup-duplicates.js
- * Uses Cloudinary Search API to find duplicates by Instagram ID in filename.
- * Keeps the FIRST uploaded (oldest), deletes extras.
+ * cleanup-duplicates.js — with rate limit protection
  */
 const cloudinary = require('cloudinary').v2;
 
@@ -11,10 +9,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 async function listAll(resourceType) {
   const results = [];
   let nextCursor = undefined;
+  let page = 0;
   do {
+    if (page > 0) await sleep(500); // 500ms between list calls
     const opts = {
       resource_type: resourceType,
       type: 'upload',
@@ -26,7 +28,8 @@ async function listAll(resourceType) {
     const batch = res.resources || [];
     results.push(...batch);
     nextCursor = res.next_cursor;
-    process.stdout.write(`\r  ${resourceType}s: ${results.length} fetched...`);
+    page++;
+    process.stdout.write(`\r  ${resourceType}s: ${results.length} fetched (page ${page})...`);
   } while (nextCursor);
   console.log('');
   return results;
@@ -35,6 +38,7 @@ async function listAll(resourceType) {
 async function run() {
   console.log('Fetching all Cloudinary assets...');
   const images = await listAll('image');
+  await sleep(1000);
   const videos = await listAll('video');
   const all = [...images, ...videos];
   console.log(`Total: ${all.length} assets (${images.length} images, ${videos.length} videos)`);
@@ -53,47 +57,45 @@ async function run() {
   for (const [key, assets] of Object.entries(byIgId)) {
     if (assets.length > 1) {
       dupGroups++;
-      // Keep oldest, delete the rest
       assets.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
       toDelete.push(...assets.slice(1));
     }
   }
 
-  console.log(`\nDuplicate groups: ${dupGroups}`);
+  console.log(`Duplicate groups: ${dupGroups}`);
   console.log(`Assets to delete: ${toDelete.length}`);
 
   if (toDelete.length === 0) {
-    console.log('No duplicates found!');
-    return;
+    console.log('No duplicates found!'); return;
   }
 
-  // Delete in batches
   const imageIds = toDelete.filter(a => a.resource_type === 'image').map(a => a.public_id);
   const videoIds = toDelete.filter(a => a.resource_type === 'video').map(a => a.public_id);
-  console.log(`Deleting ${imageIds.length} images and ${videoIds.length} videos...`);
+  console.log(`Deleting ${imageIds.length} images + ${videoIds.length} videos...`);
 
   const batchSize = 100;
   let deleted = 0;
 
   for (let i = 0; i < imageIds.length; i += batchSize) {
+    if (i > 0) await sleep(1000); // 1s between delete batches
     const batch = imageIds.slice(i, i + batchSize);
     await cloudinary.api.delete_resources(batch, { resource_type: 'image' });
     deleted += batch.length;
-    console.log(`  Deleted images: ${deleted}/${imageIds.length}`);
+    console.log(`  Images deleted: ${deleted}/${imageIds.length}`);
   }
 
   for (let i = 0; i < videoIds.length; i += batchSize) {
+    await sleep(1000);
     const batch = videoIds.slice(i, i + batchSize);
     await cloudinary.api.delete_resources(batch, { resource_type: 'video' });
     deleted += batch.length;
-    console.log(`  Deleted videos: ${deleted - imageIds.length}/${videoIds.length}`);
+    console.log(`  Videos deleted: ${deleted - imageIds.length}/${videoIds.length}`);
   }
 
-  console.log(`\nDone! Deleted ${toDelete.length} duplicates.`);
+  console.log(`Done! Deleted ${toDelete.length} duplicate assets.`);
 }
 
 run().catch(e => {
-  console.error('FATAL:', e.http_code || e.message || e);
-  if (e.error) console.error('Cloudinary error:', JSON.stringify(e.error));
+  console.error('FATAL:', e.message || JSON.stringify(e.error || e).slice(0,300));
   process.exit(1);
 });
