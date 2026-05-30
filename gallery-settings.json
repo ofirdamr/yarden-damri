@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T14:43:56.594Z",
+  "updatedAt": "2026-05-30T14:44:52.963Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3827,18 +3827,21 @@
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135020/yarden_makeup/yarden_makeup_17878921451958658.jpg": "איפור ערב",
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135022/yarden_makeup/yarden_makeup_17854429215017108.jpg": "איפור ערב",
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527795/yarden_makeup/yarden_makeup_18028527901625451.jpg": "איפור ערב",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135202/yarden_makeup/yarden_makeup_17943227332858929.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527764/yarden_makeup/yarden_makeup_18001202495526163.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527871/yarden_makeup/yarden_makeup_18031751350447930.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527707/yarden_makeup/yarden_makeup_17923712759844949.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527797/yarden_makeup/yarden_makeup_18233541823209413.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135024/yarden_makeup/yarden_makeup_18004232716961599.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135025/yarden_makeup/yarden_makeup_17886280559848874.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527800/yarden_makeup/yarden_makeup_17996434240956357.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178866/yarden_makeup/yarden_makeup_17901293152037439.mp4": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528486/yarden_makeup/yarden_makeup_17873247067139583.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528484/yarden_makeup/yarden_makeup_17900434600014653.jpg": "מוסתרות",
-      "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178864/yarden_makeup/yarden_makeup_17892239260111120.mp4": "מוסתרות"
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135202/yarden_makeup/yarden_makeup_17943227332858929.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527764/yarden_makeup/yarden_makeup_18001202495526163.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527871/yarden_makeup/yarden_makeup_18031751350447930.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527707/yarden_makeup/yarden_makeup_17923712759844949.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527797/yarden_makeup/yarden_makeup_18233541823209413.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135024/yarden_makeup/yarden_makeup_18004232716961599.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778135025/yarden_makeup/yarden_makeup_17886280559848874.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527800/yarden_makeup/yarden_makeup_17996434240956357.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178866/yarden_makeup/yarden_makeup_17901293152037439.mp4": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528486/yarden_makeup/yarden_makeup_17873247067139583.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528484/yarden_makeup/yarden_makeup_17900434600014653.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178864/yarden_makeup/yarden_makeup_17892239260111120.mp4": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134950/yarden_makeup/yarden_makeup_18331372822142968.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134951/yarden_makeup/yarden_makeup_17916774914897998.jpg": "ציורי גוף/פנים",
+      "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527853/yarden_makeup/yarden_makeup_18004654339572597.jpg": "ציורי גוף/פנים"
     },
     "catList": [
       "כלות/חתונות",
