@@ -331,7 +331,11 @@
         </div>
 
         <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ddd;">
-          <label style="font-size:.9rem;font-weight:600;">📂 ייבוא גיבוי מקובץ (אם הורדת קובץ ממכשיר אחר)</label>
+          <label style="font-size:.9rem;font-weight:600;">🔤 תיקון קידוד עברית</label>
+          <p style="font-size:.82rem;color:#666;margin:8px 0 12px;">אם שמות הקטגוריות מוצגים כסימנים לא מובנים (Â Â Â) — לחצי כאן לתיקון אוטומטי.</p>
+          <button class="btn btn-primary" onclick="fixHebrewEncoding()">🔤 תקני שמות קטגוריות</button>
+          <div id="fix-result" style="margin-top:10px;"></div>
+        </div>
           <input type="file" id="restore-file-input" accept="application/json,.json" style="display:block;margin-top:10px;font-family:inherit;font-size:.85rem;" onchange="importBackupFile(this)" />
         </div>
 
@@ -875,6 +879,61 @@ function clearHeroVideo(){
 }
 
 // ─── DIAGNOSTIC + RESTORE ──────────────────────────────────────
+// ─── FIX GARBLED HEBREW ENCODING ──────────────────────────────
+function tryFixStr(s) {
+  if (!s || typeof s !== 'string') return s;
+  try {
+    // Garbled Hebrew = UTF-8 bytes stored as Latin-1 chars.
+    // Fix: escape() converts each char to %XX, decodeURIComponent converts back to UTF-8.
+    const fixed = decodeURIComponent(escape(s));
+    // Only use the fix if it produced something different and looks like real text
+    return fixed !== s ? fixed : s;
+  } catch(e) { return s; }
+}
+
+async function fixHebrewEncoding() {
+  const out = document.getElementById('fix-result');
+  out.innerHTML = '<p style="color:#888;">⏳ מתקנת קידוד...</p>';
+
+  const s = getSettings();
+  let changed = 0;
+
+  // Fix catList (array of strings)
+  if (s.catList) {
+    s.catList = s.catList.map(c => { const f = tryFixStr(c); if (f !== c) changed++; return f; });
+  }
+
+  // Fix cats (object: url → catName)
+  if (s.cats) {
+    const fixed = {};
+    Object.entries(s.cats).forEach(([url, cat]) => {
+      const fixedCat = tryFixStr(cat);
+      if (fixedCat !== cat) changed++;
+      fixed[url] = fixedCat;
+    });
+    s.cats = fixed;
+  }
+
+  if (changed === 0) {
+    out.innerHTML = '<p style="color:#2e7d32;background:#e8f5e9;padding:10px;border-radius:6px;">✅ לא נמצאו שמות שצריך לתקן.</p>';
+    return;
+  }
+
+  // Save fixed data to localStorage + cloud
+  try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
+
+  const res = await window.RemoteState.update({ admin: s });
+  if (!res || !res.ok) {
+    out.innerHTML = `<p style="color:#c62828;background:#ffebee;padding:10px;border-radius:6px;">❌ שמירה נכשלה: ${res?.error || 'unknown'}</p>`;
+    return;
+  }
+
+  await window.RemoteState.forceReload();
+  await initAdmin();
+  out.innerHTML = `<p style="color:#2e7d32;background:#e8f5e9;padding:12px;border-radius:6px;font-weight:600;">✅ תוקנו ${changed} שמות! כעת מוצגים בעברית תקינה.</p>`;
+  showToast('🔤 קידוד עברית תוקן!');
+}
+
 async function pullFromOldJsonbin(force = false){
   const out = document.getElementById('pull-result');
   out.innerHTML = '<p style="color:#888;">⏳ טוענת מהאחסון הישן...</p>';
@@ -1095,46 +1154,37 @@ function scanLocalBackup(){
 
   out.innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-      <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:12px;">
-        <p style="font-weight:600;margin-bottom:8px;">☁️ בענן (כרגע מוצג):</p>
-        <div style="font-size:.85rem;line-height:1.6;">
-          <div>${(remote.catList||[]).length} שמות קטגוריות</div>
-          <div>${remoteCatsCount} תמונות מסווגות</div>
-          <div>${(remote.hidden||[]).length} מוסתרות</div>
-          <div style="margin-top:6px;padding-top:6px;border-top:1px solid #ffe0b2;">${renderCats(remotePerCat)}</div>
-        </div>
-      </div>
       <div style="background:#e8f5e9;border:1px solid #81c784;border-radius:8px;padding:12px;">
-        <p style="font-weight:600;margin-bottom:8px;">📱 על המכשיר (גיבוי):</p>
-        <div style="font-size:.85rem;line-height:1.6;">
+        <p style="font-weight:600;margin-bottom:8px;color:#1b5e20;">📱 על המכשיר (גיבוי):</p>
+        <div style="font-size:.85rem;line-height:1.6;color:#1b5e20;">
           <div>${localCatList.length} שמות קטגוריות</div>
           <div>${localCatsCount} תמונות מסווגות</div>
           <div>${(local.hidden||[]).length} מוסתרות</div>
-          <div style="margin-top:6px;padding-top:6px;border-top:1px solid #c8e6c9;">${renderCats(localPerCat)}</div>
+          <div style="margin-top:6px;padding-top:6px;border-top:1px solid #a5d6a7;">${renderCats(localPerCat)}</div>
+        </div>
+      </div>
+      <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:12px;">
+        <p style="font-weight:600;margin-bottom:8px;color:#e65100;">☁️ בענן (כרגע מוצג):</p>
+        <div style="font-size:.85rem;line-height:1.6;color:#e65100;">
+          <div>${(remote.catList||[]).length} שמות קטגוריות</div>
+          <div>${remoteCatsCount} תמונות מסווגות</div>
+          <div>${(remote.hidden||[]).length} מוסתרות</div>
+          <div style="margin-top:6px;padding-top:6px;border-top:1px solid #ffcc80;">${renderCats(remotePerCat)}</div>
         </div>
       </div>
     </div>`;
 
   if (localEmpty) {
-    out.innerHTML += `<p style="color:#c62828;background:#ffebee;padding:10px;border-radius:6px;">❌ אין גיבוי במכשיר הזה. ייתכן שהעבודה נעשתה במכשיר/דפדפן אחר, או שהדפדפן ניקה את המידע.</p>`;
+    out.innerHTML += `<p style="color:#c62828;background:#ffebee;padding:10px;border-radius:6px;">❌ אין גיבוי במכשיר הזה.</p>`;
     return;
   }
 
-  if (localCatsCount > remoteCatsCount) {
-    out.innerHTML += `
-      <div style="background:#fff8e1;border:1px solid #f9c74f;border-radius:8px;padding:12px;">
-        <p style="font-weight:600;color:#7A4A34;margin-bottom:10px;">💡 במכשיר יש <strong>${localCatsCount - remoteCatsCount}</strong> תמונות יותר מסווגות מאשר בענן!</p>
-        <button class="btn btn-primary" onclick="restoreOverwrite()" style="width:100%;padding:14px;">⚠️ שחזר את המכשיר לענן (יחליף את הקטגוריות שבענן)</button>
-      </div>`;
-  } else if (localCatsCount === remoteCatsCount && localCatsCount > 0) {
-    out.innerHTML += `<p style="color:#2e7d32;background:#e8f5e9;padding:10px;border-radius:6px;">✅ המכשיר והענן מסונכרנים (${remoteCatsCount} תמונות מסווגות).</p>`;
-  } else {
-    out.innerHTML += `
-      <div style="background:#fff8e1;border:1px solid #f9c74f;border-radius:8px;padding:12px;">
-        <p style="font-weight:600;color:#7A4A34;margin-bottom:10px;">בענן יש יותר/שונה מהמכשיר. תוכלי לשחזר את המכשיר אם זה רצוי:</p>
-        <button class="btn btn-danger" onclick="restoreOverwrite()" style="width:100%;padding:14px;">⚠️ שחזר את המכשיר לענן (יחליף את הענן)</button>
-      </div>`;
-  }
+  // Always show the restore button — even if counts match, cloud may have garbled Hebrew
+  out.innerHTML += `
+    <div style="background:#fff8e1;border:1px solid #f9c74f;border-radius:8px;padding:12px;margin-top:8px;">
+      <p style="font-size:.9rem;margin-bottom:10px;">📱 מכשיר: <strong>${localCatsCount}</strong> מסווגות &nbsp;|&nbsp; ☁️ ענן: <strong>${remoteCatsCount}</strong> מסווגות</p>
+      <button class="btn btn-danger" onclick="restoreOverwrite()" style="width:100%;padding:14px;font-size:1rem;">⚠️ שחזר מהמכשיר לענן (ידרוס את הענן)</button>
+    </div>`;
 }
 
 async function restoreOverwrite(){
