@@ -203,7 +203,7 @@
     .small-card-label { font-size: .8rem; opacity: .7; letter-spacing: .1em; }
     .section-eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--rose); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .section-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--rose); flex-shrink: 0; }
-    .section-title { font-family: 'Rubik', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 400; line-height: 1.15; color: var(--charcoal); margin-bottom: 24px; }
+    .section-title { font-family: 'Rubik', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.15; color: var(--charcoal); margin-bottom: 24px; }
     .section-title em { font-style: italic; color: var(--rose); }
     .section-body { font-size: 1rem; line-height: 1.95; opacity: .75; margin-bottom: 32px; }
     .about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
