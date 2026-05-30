@@ -219,6 +219,9 @@
       };
     },
     getHeroVideo: () => (loadCache() || {}).heroVideo || null,
+    getHeroImage: () => (loadCache() || {}).heroImage || null,
+    getHeroFit:   () => (loadCache() || {}).heroFit   || 'cover',
+    getHeroPosition: () => (loadCache() || {}).heroPosition || 'center center',
     getReviews:   () => (loadCache() || {}).reviews   || [],
     getPricing:   () => (loadCache() || {}).pricing   || null
   };

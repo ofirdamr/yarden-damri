@@ -298,7 +298,9 @@ function applyAdminSettings(images) {
   const pinned = new Set(s.pinned || []);
   const orderMap = {};
   (s.order || []).forEach((url, i) => orderMap[url] = i);
-  let filtered = images.filter(img => !hidden.has(img.u));
+  const privateCatsSet = new Set(s.privateCats || []);
+  const catMap = s.cats || {};
+  let filtered = images.filter(img => !hidden.has(img.u) && !privateCatsSet.has(catMap[img.u]));
   let pinnedImgs = filtered.filter(img => pinned.has(img.u));
   let rest = filtered.filter(img => !pinned.has(img.u));
   if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
@@ -483,9 +485,11 @@ function buildFilterBar() {
   // Remove any previously-added custom buttons
   bar.querySelectorAll('button[data-custom-cat]').forEach(b => b.remove());
 
-  // Add admin's custom categories that have assignments
+  const privateCats = new Set(getAdminSettings().privateCats || []);
+  // Add admin's custom categories that have assignments and are not private
   adminCats.forEach(cat => {
     if (!usedCats.has(cat)) return;
+    if (privateCats.has(cat)) return;
     const btn = document.createElement('button');
     btn.className = 'filter-btn';
     btn.setAttribute('data-cat', cat);

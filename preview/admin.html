@@ -297,15 +297,61 @@
   <!-- SETTINGS TAB -->
   <div id="tab-settings" style="display:none;padding:24px 28px">
     <div class="settings-section">
-      <h2>🎬 וידאו ראשי בדף הבית</h2>
-      <div class="field-group">
-        <label>בחרי וידאו לכותרת הראשית (Hero) של דף הבית</label>
-        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:14px;">לחצי על וידאו כדי לבחור אותו. ניתן לרחף/ללחוץ כדי לראות תצוגה מקדימה. הבחירה תהיה גלויה לכל המבקרים תוך כדקה.</p>
+      <h2>🎬 מדיה ראשית בדף הבית (Hero)</h2>
+
+      <!-- Media type tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button id="hero-tab-video" class="btn btn-primary" onclick="switchHeroTab('video')" style="font-size:.82rem;padding:7px 16px;">🎬 וידאו</button>
+        <button id="hero-tab-image" class="btn btn-secondary" onclick="switchHeroTab('image')" style="font-size:.82rem;padding:7px 16px;">🖼️ תמונה</button>
+      </div>
+
+      <!-- Video picker -->
+      <div id="hero-panel-video" class="field-group">
+        <label>בחרי וידאו לכותרת הראשית</label>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:14px;">לחצי על וידאו כדי לבחור. ניתן לרחף לתצוגה מקדימה.</p>
         <div id="hero-video-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:14px;max-height:60vh;overflow-y:auto;padding:4px;"></div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button class="btn btn-secondary" onclick="clearHeroVideo()">חזרה לברירת מחדל</button>
-          <span id="hero-video-status" style="font-size:.85rem;color:var(--text-muted,#888);"></span>
+      </div>
+
+      <!-- Image picker -->
+      <div id="hero-panel-image" class="field-group" style="display:none;">
+        <label>בחרי תמונה לכותרת הראשית</label>
+        <p style="font-size:.85rem;color:var(--text-muted,#888);margin-bottom:14px;">לחצי על תמונה כדי לבחור אותה.</p>
+        <div id="hero-image-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:14px;max-height:60vh;overflow-y:auto;padding:4px;"></div>
+      </div>
+
+      <!-- Fit & Position controls -->
+      <div class="field-group" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+        <label style="font-weight:600;">📐 התאמת מיקום המדיה ב-Hero</label>
+        <p style="font-size:.82rem;color:var(--text-muted,#888);margin-bottom:12px;">שלטי איך המדיה ממוקמת בפלייסהולדר — שימושי כשהפנים לא במרכז.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+          <div>
+            <label style="font-size:.8rem;display:block;margin-bottom:4px;">Object-fit</label>
+            <select id="hero-fit-select" onchange="saveHeroFit()" style="padding:6px 10px;border-radius:8px;border:1px solid var(--border);font-size:.85rem;">
+              <option value="cover">cover (ממלא, חותך)</option>
+              <option value="contain">contain (מראה הכל)</option>
+              <option value="fill">fill (מתמתח)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:.8rem;display:block;margin-bottom:4px;">מיקום (object-position)</label>
+            <select id="hero-position-select" onchange="saveHeroPosition()" style="padding:6px 10px;border-radius:8px;border:1px solid var(--border);font-size:.85rem;">
+              <option value="center center">מרכז</option>
+              <option value="top center">למעלה — מרכז</option>
+              <option value="top right">למעלה — ימין</option>
+              <option value="top left">למעלה — שמאל</option>
+              <option value="center right">מרכז — ימין</option>
+              <option value="center left">מרכז — שמאל</option>
+              <option value="bottom center">למטה — מרכז</option>
+              <option value="bottom right">למטה — ימין</option>
+              <option value="bottom left">למטה — שמאל</option>
+            </select>
+          </div>
         </div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <button class="btn btn-secondary" onclick="clearHeroMedia()">חזרה לברירת מחדל</button>
+        <span id="hero-video-status" style="font-size:.85rem;color:var(--text-muted,#888);"></span>
       </div>
     </div>
 
@@ -493,9 +539,9 @@ function getSettings() {
   // RemoteState.getAdmin() returns sensible defaults. The 'rotations' and 'heroVideo' keys are also synced.
   if (window.RemoteState && window.RemoteState.getAdmin) {
     const a = window.RemoteState.getAdmin();
-    // include heroVideo from top-level so admin can read/write it via this object
+    // include heroVideo/heroImage/heroFit/heroPosition from top-level so admin can read/write them
     const s = window.RemoteState.getCached() || {};
-    return { ...a, heroVideo: s.heroVideo || '' };
+    return { ...a, heroVideo: s.heroVideo || '', heroImage: s.heroImage || '', heroFit: s.heroFit || '', heroPosition: s.heroPosition || '' };
   }
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{"hidden":[],"pinned":[],"order":[],"cats":{},"catList":[]}'); }
   catch(e) { return {hidden:[],pinned:[],order:[],cats:{},catList:[]}; }
@@ -503,9 +549,12 @@ function getSettings() {
 function saveSettings(s) {
   try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
   if (window.RemoteState && window.RemoteState.update) {
-    const { heroVideo, ...adminFields } = s;
+    const { heroVideo, heroImage, heroFit, heroPosition, ...adminFields } = s;
     const payload = { admin: adminFields };
     if (heroVideo) payload.heroVideo = heroVideo;
+    if (heroImage) payload.heroImage = heroImage; else if('heroImage' in s) payload.heroImage = null;
+    if (heroFit) payload.heroFit = heroFit;
+    if (heroPosition) payload.heroPosition = heroPosition;
     window.RemoteState.update(payload).then(result => {
       if (result && !result.ok) {
         if (result.error === 'not_synced') {
@@ -880,6 +929,66 @@ function clearHeroVideo(){
   showToast('🎬 חזרה לוידאו ברירת מחדל');
   populateHeroVideoSelect();
 }
+function clearHeroMedia(){
+  const s = getSettings();
+  delete s.heroVideo; delete s.heroImage; delete s.heroFit; delete s.heroPosition;
+  saveSettings(s);
+  showToast('↩️ חזרה לברירת מחדל');
+  populateHeroVideoSelect(); populateHeroImageSelect();
+  document.getElementById('hero-fit-select').value='cover';
+  document.getElementById('hero-position-select').value='center center';
+  const status=document.getElementById('hero-video-status');
+  if(status) status.textContent='';
+}
+function switchHeroTab(tab){
+  document.getElementById('hero-panel-video').style.display = tab==='video'?'':'none';
+  document.getElementById('hero-panel-image').style.display = tab==='image'?'':'none';
+  document.getElementById('hero-tab-video').className = tab==='video'?'btn btn-primary':'btn btn-secondary';
+  document.getElementById('hero-tab-image').className = tab==='image'?'btn btn-primary':'btn btn-secondary';
+}
+function populateHeroImageSelect(){
+  const grid = document.getElementById('hero-image-grid'); if(!grid) return;
+  if (typeof GALLERY_IMAGES === 'undefined') return;
+  const images = GALLERY_IMAGES.filter(i => !i.video && !i.u.includes('/video/upload/'));
+  const current = (getSettings().heroImage) || '';
+  grid.innerHTML = images.map(img => {
+    const selected = img.u === current;
+    const caption = (img.a || '').substring(0,40).replace(/"/g,'&quot;');
+    const thumb = img.u.includes('cloudinary.com')
+      ? img.u.replace('/image/upload/','/image/upload/w_240,h_320,c_fill,f_jpg,q_auto/')
+      : img.u;
+    return `<div class="hero-vid-card" data-url="${img.u.replace(/"/g,'&quot;')}"
+         onclick="selectHeroImage(this)"
+         style="position:relative;cursor:pointer;border-radius:8px;overflow:hidden;border:3px solid ${selected?'#C4866A':'transparent'};width:100%;height:160px;background:#222;"
+         title="${caption}">
+      <img src="${thumb}" alt="${caption}" loading="lazy"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"/>
+      ${selected?'<span style="position:absolute;bottom:5px;left:5px;background:#C4866A;color:#fff;font-size:.65rem;padding:3px 7px;border-radius:8px;pointer-events:none;font-weight:600;">✓ נבחר</span>':''}
+    </div>`;
+  }).join('');
+  const status=document.getElementById('hero-video-status');
+  if(status && current) status.textContent = '✓ תמונה נבחרה';
+}
+function selectHeroImage(card){
+  const url = card.dataset.url;
+  const s = getSettings();
+  s.heroImage = url; delete s.heroVideo;
+  saveSettings(s);
+  showToast('🖼️ תמונה ראשית עודכנה!');
+  populateHeroImageSelect();
+  const status=document.getElementById('hero-video-status');
+  if(status) status.textContent='✓ תמונה נבחרה';
+}
+function saveHeroFit(){
+  const val = document.getElementById('hero-fit-select').value;
+  const s = getSettings(); s.heroFit=val; saveSettings(s);
+  showToast('📐 object-fit: '+val);
+}
+function saveHeroPosition(){
+  const val = document.getElementById('hero-position-select').value;
+  const s = getSettings(); s.heroPosition=val; saveSettings(s);
+  showToast('📍 מיקום עודכן');
+}
 
 // ─── DIAGNOSTIC + RESTORE ──────────────────────────────────────
 // ─── FIX GARBLED HEBREW ENCODING ──────────────────────────────
@@ -1230,16 +1339,25 @@ async function restoreOverwrite(){
 // ─── CATEGORIES ─────────────────────────────────────────────────
 function renderCatList(){
   const s=getSettings(); const cats=s.catList||[]; const catMap=s.cats||{};
+  const privateCats=new Set(s.privateCats||[]);
   const list=document.getElementById('cat-list'); if(!list)return;
   list.innerHTML='';
   if(cats.length===0){list.innerHTML='<p style="color:var(--muted);font-size:.85rem">אין קטגוריות עדיין. הוסיפי למטה.</p>';return;}
   cats.forEach(cat=>{
     const count=Object.values(catMap).filter(c=>c===cat).length;
+    const isPrivate=privateCats.has(cat);
     const div=document.createElement('div'); div.className='cat-item';
     div.innerHTML=`<span>${cat}</span><span class="cat-count">${count} תמונות</span>
+      <button class="btn" style="padding:5px 10px;font-size:.75rem;background:${isPrivate?'#888':'#2d7a4f'};color:#fff;border:none;" onclick="toggleCatPrivate('${cat}')" title="${isPrivate?'פרטי — לא גלוי באתר':'ציבורי — גלוי באתר'}">${isPrivate?'🔒 פרטי':'🌐 ציבורי'}</button>
       <button class="btn btn-secondary" style="padding:5px 10px;font-size:.75rem" onclick="deleteCat('${cat}')">🗑️</button>`;
     list.appendChild(div);
   });
+}
+function toggleCatPrivate(cat){
+  const s=getSettings(); s.privateCats=s.privateCats||[];
+  const i=s.privateCats.indexOf(cat);
+  if(i>=0)s.privateCats.splice(i,1); else s.privateCats.push(cat);
+  saveSettings(s); renderCatList(); showToast(s.privateCats.includes(cat)?'🔒 קטגוריה הוגדרה כפרטית':'🌐 קטגוריה הוגדרה כציבורית');
 }
 function renderCatFilters(){
   const s=getSettings(); const cats=s.catList||[];
@@ -1297,6 +1415,7 @@ function switchTab(name,el){
   if(name==='cats') renderCatList();
   if(name==='analytics') initAnalytics();
   if(name==='pricing') { _pricingItems = null; renderPricingEditor(); }
+  if(name==='settings') { populateHeroVideoSelect(); populateHeroImageSelect(); const s=getSettings(); const fitEl=document.getElementById('hero-fit-select'); const posEl=document.getElementById('hero-position-select'); if(fitEl)fitEl.value=s.heroFit||'cover'; if(posEl)posEl.value=s.heroPosition||'center center'; if(s.heroImage)switchHeroTab('image'); else switchHeroTab('video'); }
 }
 
 // ─── ANALYTICS ───────────────────────────────────────────────────

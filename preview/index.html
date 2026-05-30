@@ -183,6 +183,7 @@
         poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
         <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
+      <img id="heroImage" class="hero-video" src="" alt="ירדן דמרי מאפרת" style="display:none;object-fit:cover;object-position:center center;"/>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="hero-title">ירדן דמרי</h1>
@@ -578,25 +579,43 @@
   <!-- Gallery data -->
   <script src="cloud-storage.js"></script>
   <script>
-    // Apply hero video AFTER cloud-storage.js is loaded
+    // Apply hero media AFTER cloud-storage.js is loaded
     (async function applyHeroVideo(){
       if (!window.RemoteState) return;
       try {
-        const result = await window.RemoteState.fetch();
-        const url = window.RemoteState.getHeroVideo();
-        if (!url) return;
-        const v = document.getElementById('heroVideo');
-        const s = document.getElementById('heroVideoSource');
-        if (!v || !s) return;
-        const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
-          ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
-          : url;
-        const posterUrl = url.includes('/video/upload/')
-          ? url.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
-               .replace(/\.(mp4|mov|webm)$/i, '.jpg')
-          : '';
-        if (posterUrl) v.poster = posterUrl;
-        s.src = cloudUrl; v.load(); v.play().catch(()=>{});
+        await window.RemoteState.fetch();
+        const heroFit = window.RemoteState.getHeroFit ? window.RemoteState.getHeroFit() : 'cover';
+        const heroPos = window.RemoteState.getHeroPosition ? window.RemoteState.getHeroPosition() : 'center center';
+        const imgUrl = window.RemoteState.getHeroImage ? window.RemoteState.getHeroImage() : null;
+        const vidUrl = window.RemoteState.getHeroVideo();
+        const videoEl = document.getElementById('heroVideo');
+        const imgEl   = document.getElementById('heroImage');
+        if (imgUrl && imgEl && videoEl) {
+          // Show image, hide video
+          const cloudImg = imgUrl.includes('cloudinary.com') && !imgUrl.includes('/image/upload/f_')
+            ? imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/')
+            : imgUrl;
+          imgEl.src = cloudImg;
+          imgEl.style.objectFit = heroFit;
+          imgEl.style.objectPosition = heroPos;
+          imgEl.style.display = 'block';
+          videoEl.style.display = 'none';
+          videoEl.pause();
+        } else if (vidUrl && videoEl) {
+          const s = document.getElementById('heroVideoSource');
+          if (!s) return;
+          const cloudUrl = vidUrl.includes('/video/upload/') && !vidUrl.includes('c_fill,ar_16:9')
+            ? vidUrl.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
+            : vidUrl;
+          const posterUrl = vidUrl.includes('/video/upload/')
+            ? vidUrl.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
+                 .replace(/\.(mp4|mov|webm)$/i, '.jpg')
+            : '';
+          if (posterUrl) videoEl.poster = posterUrl;
+          videoEl.style.objectFit = heroFit;
+          videoEl.style.objectPosition = heroPos;
+          s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
+        }
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
