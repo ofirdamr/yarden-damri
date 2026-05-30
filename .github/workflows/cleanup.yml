@@ -1,0 +1,20 @@
+name: Cleanup Cloudinary Duplicates
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install cloudinary
+      - name: Delete duplicate photos
+        env:
+          CLOUDINARY_CLOUD: ${{ secrets.CLOUDINARY_CLOUD }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+        run: node cleanup-duplicates.js
