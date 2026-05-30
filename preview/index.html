@@ -600,11 +600,11 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
-          const cloudUrl = vidUrl.includes('/video/upload/') && !vidUrl.includes('c_fill,ar_16:9')
-            ? vidUrl.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
-            : vidUrl;
+          // URL already has transforms from admin (g_auto,c_fill). Use as-is.
+          const cloudUrl = vidUrl;
+          // Poster: extract first frame at full width
           const posterUrl = vidUrl.includes('/video/upload/')
-            ? vidUrl.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
+            ? vidUrl.replace('/video/upload/', '/video/upload/so_0,w_1280,c_fill,f_jpg,q_auto/')
                  .replace(/\.(mp4|mov|webm)$/i, '.jpg')
             : '';
           if (posterUrl) videoEl.poster = posterUrl;

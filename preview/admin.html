@@ -849,12 +849,12 @@ function clearAllSettings(){
 // ─── HERO VIDEO PICKER (visual grid) ──────────────────────────
 function heroVidThumb(url){
   if (!url.includes('cloudinary.com')) return url;
-  // Use a mid-frame (so_auto picks a good frame) at a fixed reasonable size
-  return url.replace('/video/upload/', '/video/upload/so_auto,w_240,h_320,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  return url.replace('/video/upload/', '/video/upload/so_0,w_240,h_160,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
 }
 function heroVidPreview(url){
   if (!url.includes('cloudinary.com')) return url;
-  return url.replace('/video/upload/', '/video/upload/w_320,h_426,c_fill,q_auto:low,vc_auto/');
+  // Use low-res original (no new transform) so browser plays instantly
+  return url.replace('/video/upload/', '/video/upload/w_400,q_auto:low,vc_auto/');
 }
 function populateHeroVideoSelect(){
   const grid = document.getElementById('hero-video-grid'); if(!grid) return;
@@ -901,23 +901,23 @@ function populateHeroVideoSelect(){
 let _heroPending = null;
 
 function _heroAutoUrl(url, type) {
+  // No ar_16:9 — hero is full-screen (100vh), not 16:9. g_auto centers faces. c_fill fills frame.
   if (!url || !url.includes('cloudinary.com')) return url;
   if (type === 'video') {
     return url.includes('/video/upload/')
-      ? url.replace('/video/upload/', '/video/upload/g_auto,c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
+      ? url.replace('/video/upload/', '/video/upload/g_auto,c_fill,w_1280,q_auto:low,vc_auto/')
       : url;
   } else {
-    return url.replace('/image/upload/', '/image/upload/g_auto,c_fill,ar_16:9,w_1280,f_auto,q_auto/');
+    return url.replace('/image/upload/', '/image/upload/g_auto,c_fill,w_1920,f_auto,q_auto/');
   }
 }
 function _heroRawPreviewUrl(url, type) {
-  // For live preview use original URL (no re-encode wait) — g_auto applied only on save
+  // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
   if (!url || !url.includes('cloudinary.com')) return url;
   if (type === 'video') {
-    // Strip any existing transforms so browser plays the original fast
-    return url.replace('/video/upload/', '/video/upload/q_auto:low,w_800,vc_auto/');
+    return url.replace('/video/upload/', '/video/upload/q_auto:low,w_640,vc_auto/');
   } else {
-    return url.replace('/image/upload/', '/image/upload/c_fill,ar_16:9,w_800,f_auto,q_auto/');
+    return url.replace('/image/upload/', '/image/upload/c_fill,w_800,h_450,f_auto,q_auto/');
   }
 }
 
@@ -962,9 +962,12 @@ function applyAutoFit(){
   delete s.heroFit; delete s.heroPosition;
   saveSettings(s);
   _heroPending = null;
-  showToast('✨ מדיה ראשית עודכנה עם חיתוך אוטומטי!');
+  // Warm up Cloudinary — first request generates the transform; subsequent requests are instant
+  if (type === 'video') { const v = document.createElement('video'); v.src = finalUrl; v.preload='metadata'; }
+  else { const i = new Image(); i.src = finalUrl; }
+  showToast('✨ מדיה ראשית עודכנה! מכינה את הקובץ — עלול לקחת 10-30 שניות בפעם הראשונה.');
   const status = document.getElementById('hero-video-status');
-  if (status) status.textContent = '✓ נשמר — גלוי לכל המבקרים תוך כדקה';
+  if (status) status.textContent = '✓ נשמר — ייתכן שנדרשת דקה להכנה ראשונה';
   populateHeroVideoSelect(); populateHeroImageSelect();
 }
 function clearHeroVideo(){
