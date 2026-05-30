@@ -48,14 +48,50 @@ async function uploadToCloudinary(item) {
   if (!token) { console.error('ERROR: No INSTAGRAM_TOKEN set'); return; }
   console.log('Token prefix:', token.substring(0, 6) + '...');
 
-  // Test token before doing anything
+  // Determine the correct base URL for media fetching.
+  // - Instagram Basic Display API tokens (IGQV...) use: graph.instagram.com/me/media
+  // - Facebook Business tokens (EAA...) need the Instagram Business Account ID first
+  let mediaBaseId = 'me';
+  let baseHost = 'graph.instagram.com';
+
   try {
+    // Try graph.instagram.com/me first (works for Basic Display + some Business tokens)
     const testResp = await get(`https://graph.instagram.com/me?fields=id,username&access_token=${token}`);
     if (testResp.error) {
-      console.error('TOKEN ERROR:', JSON.stringify(testResp.error));
-      return;
+      console.log('graph.instagram.com/me failed:', JSON.stringify(testResp.error));
+      // Try via Facebook Graph API to find Instagram Business Account
+      const fbResp = await get(`https://graph.facebook.com/me?fields=id,name&access_token=${token}`);
+      if (fbResp.error) {
+        console.error('TOKEN ERROR (both APIs failed):', JSON.stringify(fbResp.error));
+        return;
+      }
+      console.log('Facebook user:', fbResp.name || fbResp.id);
+      // Get pages connected to this user
+      const pages = await get(`https://graph.facebook.com/me/accounts?access_token=${token}`);
+      if (!pages.data || !pages.data.length) {
+        console.error('No Facebook Pages found for this token');
+        return;
+      }
+      // Find the page with an Instagram Business Account
+      let igAccountId = null;
+      for (const page of pages.data) {
+        const pageResp = await get(`https://graph.facebook.com/${page.id}?fields=instagram_business_account&access_token=${token}`);
+        if (pageResp.instagram_business_account) {
+          igAccountId = pageResp.instagram_business_account.id;
+          console.log('Found Instagram Business Account:', igAccountId, 'on page:', page.name);
+          break;
+        }
+      }
+      if (!igAccountId) {
+        console.error('No Instagram Business Account found connected to Facebook Pages');
+        return;
+      }
+      mediaBaseId = igAccountId;
+      baseHost = 'graph.facebook.com';
+      console.log('Using Facebook Graph API with IG account ID:', igAccountId);
+    } else {
+      console.log('Token OK (Instagram API) — account:', testResp.username || testResp.id);
     }
-    console.log('Token OK — account:', testResp.username || testResp.id);
   } catch(e) {
     console.error('TOKEN TEST FAILED:', e.message);
     return;
@@ -64,13 +100,14 @@ async function uploadToCloudinary(item) {
   // 1. Fetch all media from Instagram
   console.log("Fetching media...");
   let rawPosts = [];
-  let url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count&limit=100&access_token=${token}`;
+  const mediaFields = 'id,media_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count';
+  let url = `https://${baseHost}/${mediaBaseId}/media?fields=${mediaFields}&limit=100&access_token=${token}`;
   while (url) {
     const res = await get(url);
     if (!res.data) break;
     for (const item of res.data) {
       if (item.media_type === "CAROUSEL_ALBUM") {
-        const children = await get(`https://graph.instagram.com/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`);
+        const children = await get(`https://${baseHost}/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`);
         for (const child of children.data || []) {
           rawPosts.push({ ...child, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id });
         }
@@ -120,7 +157,7 @@ async function uploadToCloudinary(item) {
   for (const id of uniquePostIds) {
     try {
       // First try with full comment fields. If empty/error, log the response for debugging.
-      let data = await get(`https://graph.instagram.com/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
+      let data = await get(`https://${baseHost}/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
       let commentsArr = data.comments?.data || [];
       // If we got comments_count > 0 but no comments returned, the token lacks instagram_manage_comments permission.
       // Log once so the issue is visible in Action logs.
