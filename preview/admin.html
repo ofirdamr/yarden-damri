@@ -333,7 +333,7 @@
           <button class="btn btn-secondary" onclick="clearHeroMedia()">↩️ ברירת מחדל</button>
           <span id="hero-video-status" style="font-size:.82rem;color:var(--text-muted,#888);"></span>
         </div>
-        <p style="font-size:.78rem;color:var(--text-muted,#999);margin-top:8px;">✨ מתאים אוטומטית — Cloudinary מזהה פנים ומרכז אותן אוטומטית בחיתוך 16:9.</p>
+        <p style="font-size:.78rem;color:var(--text-muted,#999);margin-top:8px;">✨ מתאים אוטומטית — Cloudinary מזהה פנים ומרכז אותן אוטומטית בהתאם לגודל המסך.</p>
       </div>
     </div>
 
@@ -931,12 +931,12 @@ function showHeroPreview(url, type) {
     const previewSrc = _heroRawPreviewUrl(url, 'video');
     vidEl.src = previewSrc; vidEl.style.display = 'block'; vidEl.load(); vidEl.play().catch(()=>{});
     imgEl.style.display = 'none';
-    if (label) label.textContent = 'תצוגה מקדימה עם חיתוך אוטומטי (g_auto)';
+    if (label) label.textContent = 'תצוגה מקדימה';
   } else {
     imgEl.src = _heroRawPreviewUrl(url, 'image');
     imgEl.style.display = 'block';
     vidEl.style.display = 'none'; vidEl.pause(); vidEl.src = '';
-    if (label) label.textContent = 'תצוגה מקדימה עם חיתוך אוטומטי (g_auto)';
+    if (label) label.textContent = 'תצוגה מקדימה';
   }
 }
 
