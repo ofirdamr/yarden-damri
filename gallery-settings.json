@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T22:01:06.058Z",
+  "updatedAt": "2026-05-30T22:01:19.126Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3933,7 +3933,10 @@
       "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178396/yarden_makeup/yarden_makeup_18065253887174502.mp4": 90,
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1778134531/yarden_makeup/yarden_makeup_18163778272359750.jpg": 270
     },
-    "heroVideo": ""
+    "heroVideo": "",
+    "privateCats": [
+      "מוסתרות"
+    ]
   },
   "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178383/yarden_makeup/yarden_makeup_18112186504545212.mp4",
   "pricing": [
@@ -4011,5 +4014,6 @@
       "includes": []
     }
   ],
-  "reviews": []
+  "reviews": [],
+  "heroImage": null
 }
