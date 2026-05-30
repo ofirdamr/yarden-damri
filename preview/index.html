@@ -183,37 +183,6 @@
         poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
         <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
-      <script>
-        // Hero video override: admin sets via RemoteState (synced to all visitors via JSONBin).
-        (async function applyHeroVideo(){
-          let url = null;
-          try {
-            if (window.RemoteState) {
-              const result = await window.RemoteState.fetchPublic();
-              // fetchPublic may fallback to Worker GET — both update the cache
-              url = window.RemoteState.getHeroVideo();
-              // If fetchPublic failed, try Worker directly
-              if (!url) {
-                const r2 = await window.RemoteState.fetch();
-                if (r2 && r2.ok) url = window.RemoteState.getHeroVideo();
-              }
-            }
-          } catch(e){ console.warn('heroVideo fetch error:', e); }
-          if (url) {
-            const v = document.getElementById('heroVideo');
-            const s = document.getElementById('heroVideoSource');
-            const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
-              ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
-              : url;
-            const posterUrl = url.includes('/video/upload/')
-              ? url.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
-                   .replace(/\.(mp4|mov|webm)$/i, '.jpg')
-              : '';
-            if (posterUrl) v.poster = posterUrl;
-            s.src = cloudUrl; v.load(); v.play().catch(()=>{});
-          }
-        })();
-      </script>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="hero-title">ירדן דמרי</h1>
@@ -608,6 +577,29 @@
 
   <!-- Gallery data -->
   <script src="cloud-storage.js"></script>
+  <script>
+    // Apply hero video AFTER cloud-storage.js is loaded
+    (async function applyHeroVideo(){
+      if (!window.RemoteState) return;
+      try {
+        const result = await window.RemoteState.fetch();
+        const url = window.RemoteState.getHeroVideo();
+        if (!url) return;
+        const v = document.getElementById('heroVideo');
+        const s = document.getElementById('heroVideoSource');
+        if (!v || !s) return;
+        const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
+          ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
+          : url;
+        const posterUrl = url.includes('/video/upload/')
+          ? url.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
+               .replace(/\.(mp4|mov|webm)$/i, '.jpg')
+          : '';
+        if (posterUrl) v.poster = posterUrl;
+        s.src = cloudUrl; v.load(); v.play().catch(()=>{});
+      } catch(e) { console.warn('heroVideo error:', e); }
+    })();
+  </script>
   <script src="gallery-data.js"></script>
 
   <script>
