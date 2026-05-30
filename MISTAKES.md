@@ -199,3 +199,9 @@ LESSON: never trust HTTP 200 alone for critical writes. Always verify the data m
 - GitHub Pages serves the updated file within 1-2 min of commit (acceptable for admin changes)
 - No compression layer = no compression bugs
 - Real commits = real saves (atomic, verifiable, immutable history)
+
+## All typography/font changes applied to main site instead of /preview only
+- User clearly said the site under development is /preview
+- I applied all changes (fonts, monogram, styles) to root index.html and styles.css — the live production site
+- Had to revert root files back to commit 04b0a42
+- **Rule:** ALL design/development changes go ONLY to /preview folder. Never touch root HTML/CSS files unless explicitly told to push to production.
