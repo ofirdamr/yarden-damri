@@ -30,3 +30,6 @@
 ## Repo
 https://github.com/ofirdamr/yarden-damri.git
 Working folder: /preview
+
+## Mistakes log
+- **privateCats bug**: fixed `remote-state.js` but the site uses `cloud-storage.js` — always check BOTH files when changing RemoteState API. admin.html and gallery.html both load `cloud-storage.js` (line 113 in admin.html).
