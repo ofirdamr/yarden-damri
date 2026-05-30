@@ -1357,7 +1357,8 @@ function toggleCatPrivate(cat){
   const s=getSettings(); s.privateCats=s.privateCats||[];
   const i=s.privateCats.indexOf(cat);
   if(i>=0)s.privateCats.splice(i,1); else s.privateCats.push(cat);
-  saveSettings(s); renderCatList(); showToast(s.privateCats.includes(cat)?'🔒 קטגוריה הוגדרה כפרטית':'🌐 קטגוריה הוגדרה כציבורית');
+  const nowPrivate = s.privateCats.includes(cat);
+  saveSettings(s); renderCatList(); showToast(nowPrivate?'🔒 קטגוריה הוגדרה כפרטית':'🌐 קטגוריה הוגדרה כציבורית');
 }
 function renderCatFilters(){
   const s=getSettings(); const cats=s.catList||[];
