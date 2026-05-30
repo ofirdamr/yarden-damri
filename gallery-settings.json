@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T17:59:55.659Z",
+  "updatedAt": "2026-05-30T18:02:40.526Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3993,6 +3993,14 @@
         "אישית/קבוצתית",
         "טכניקות מקצועיות"
       ]
+    },
+    {
+      "icon": "✨",
+      "name": "סדנא קבוצתית",
+      "desc": "לימוד טכניקות מקצועיות בקבוצה ",
+      "price": "250 ₪",
+      "featured": false,
+      "includes": []
     },
     {
       "icon": "✨",
