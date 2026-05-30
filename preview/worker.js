@@ -51,7 +51,8 @@ async function getSettings(env) {
   if (r.status === 404) return { data: {}, sha: null };
   if (!r.ok) throw new Error('GitHub GET failed: ' + r.status);
   const meta = await r.json();
-  const content = atob(meta.content.replace(/\s/g, ''));
+  const rawBytes = atob(meta.content.replace(/\s/g, ''));
+  const content = decodeURIComponent(escape(rawBytes));
   return { data: JSON.parse(content), sha: meta.sha };
 }
 
