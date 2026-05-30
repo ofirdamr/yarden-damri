@@ -180,7 +180,7 @@
     <!-- HERO -->
     <section id="hero" aria-label="כותרת ראשית">
       <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto"
-        poster="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_face,w_1280,h_720,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu">
+        poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
         <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
       <script>
@@ -208,6 +208,12 @@
             const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
               ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
               : url;
+            // Set poster to first frame of the selected video so no jarring image switch
+            const posterUrl = url.includes('/video/upload/')
+              ? url.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
+                   .replace(/\.(mp4|mov|webm)$/i, '.jpg')
+              : '';
+            if (posterUrl) v.poster = posterUrl;
             s.src = cloudUrl; v.load(); v.play().catch(()=>{});
           }
         })();
