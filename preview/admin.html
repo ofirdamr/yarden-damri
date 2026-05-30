@@ -533,10 +533,8 @@ function saveSettings(s) {
   if (window.RemoteState && window.RemoteState.update) {
     const { heroVideo, heroImage, heroFit, heroPosition, ...adminFields } = s;
     const payload = { admin: adminFields };
-    if (heroVideo) payload.heroVideo = heroVideo;
-    if (heroImage) payload.heroImage = heroImage; else if('heroImage' in s) payload.heroImage = null;
-    if (heroFit) payload.heroFit = heroFit;
-    if (heroPosition) payload.heroPosition = heroPosition;
+    payload.heroVideo = heroVideo || null;
+    payload.heroImage = heroImage || null;
     window.RemoteState.update(payload).then(result => {
       if (result && !result.ok) {
         if (result.error === 'not_synced') {
@@ -913,14 +911,13 @@ function _heroAutoUrl(url, type) {
   }
 }
 function _heroRawPreviewUrl(url, type) {
-  // For the preview box — use g_auto crop but low-res for speed
+  // For live preview use original URL (no re-encode wait) — g_auto applied only on save
   if (!url || !url.includes('cloudinary.com')) return url;
   if (type === 'video') {
-    return url.includes('/video/upload/')
-      ? url.replace('/video/upload/', '/video/upload/g_auto,c_fill,ar_16:9,w_800,q_auto:low,vc_auto/')
-      : url;
+    // Strip any existing transforms so browser plays the original fast
+    return url.replace('/video/upload/', '/video/upload/q_auto:low,w_800,vc_auto/');
   } else {
-    return url.replace('/image/upload/', '/image/upload/g_auto,c_fill,ar_16:9,w_800,f_auto,q_auto/');
+    return url.replace('/image/upload/', '/image/upload/c_fill,ar_16:9,w_800,f_auto,q_auto/');
   }
 }
 

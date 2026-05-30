@@ -141,6 +141,7 @@
       };
     },
     getHeroVideo: () => (loadCache() || {}).heroVideo || null,
+    getHeroImage: () => (loadCache() || {}).heroImage || null,
     getReviews:   () => (loadCache() || {}).reviews   || [],
     getPricing:   () => (loadCache() || {}).pricing   || null
   };

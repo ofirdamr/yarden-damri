@@ -588,7 +588,7 @@
         const vidUrl = window.RemoteState.getHeroVideo();
         const videoEl = document.getElementById('heroVideo');
         const imgEl   = document.getElementById('heroImage');
-        if (imgUrl && imgEl && videoEl) {
+        if (imgUrl && imgUrl !== 'null' && imgEl && videoEl) {
           // Show image, hide video
           const cloudImg = imgUrl.includes('cloudinary.com') && !imgUrl.includes('/image/upload/f_')
             ? imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/')
