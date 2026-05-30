@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T22:42:30.671Z",
+  "updatedAt": "2026-05-30T22:43:18.628Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3939,7 +3939,7 @@
       "מוסתרות"
     ]
   },
-  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/g_auto,c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/v1778178394/yarden_makeup/yarden_makeup_17931130230119842.mp4",
+  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/g_auto,c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/v1778178363/yarden_makeup/yarden_makeup_17923237620299374.mp4",
   "pricing": [
     {
       "icon": "💍",
@@ -4016,7 +4016,7 @@
     }
   ],
   "reviews": [],
-  "heroImage": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg",
+  "heroImage": null,
   "heroPosition": "center right",
   "heroFit": "contain"
 }
