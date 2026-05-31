@@ -600,6 +600,10 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
+          // Strip any existing transforms from the saved URL
+          const cleanVid = vidUrl.includes('/video/upload/')
+            ? vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/')
+            : vidUrl;
           const cloudUrl = cleanVid.includes('/video/upload/')
             ? cleanVid.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/')
             : cleanVid;
