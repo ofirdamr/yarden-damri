@@ -61,7 +61,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <link rel="canonical" href="https://yardendamri.co.il/gallery.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=6"/>
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"גלריית עבודות ירדן דמרי","url":"https://yardendamri.co.il/gallery.html","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"}}</script>
@@ -178,7 +178,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <main id="main-content">
   <section class="page-hero">
     <span class="page-eyebrow">עבודות אמיתיות</span>
-    <h1 class="page-title">גלריית <em>עבודות</em></h1>
+    <h1 class="page-title">גלריית עבודות</h1>
     <p class="page-lead">מעל 1,000 לוקים — כלות, ערב, הפקות ואירועים. כל תמונה היא סיפור של אישה שהרגישה בדיוק כמו שרצתה.</p>
     <p style="max-width:600px;margin:16px auto 0;font-size:.9rem;color:var(--text);opacity:.7;line-height:1.8;">ירדן דמרי, <strong>מאפרת כלות מקצועית באילת</strong>, מתמחה באיפור כלות, איפור ערב ואיפור לאירועים. הגלריה כוללת עבודות <strong>איפור כלות אילת</strong>, איפור ערב, הפקות וסדנאות — כל לוק מותאם אישית לפנים ולאירוע.</p>
   </section>
@@ -186,9 +186,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <section style="padding:0 0 60px;">
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
       <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
-      <button class="filter-btn" data-cat="bride" role="tab" aria-selected="false">כלות 💍</button>
-      <button class="filter-btn" data-cat="evening" role="tab" aria-selected="false">ערב 🌙</button>
-      <button class="filter-btn" data-cat="production" role="tab" aria-selected="false">הפקות 🎬</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -298,7 +295,9 @@ function applyAdminSettings(images) {
   const pinned = new Set(s.pinned || []);
   const orderMap = {};
   (s.order || []).forEach((url, i) => orderMap[url] = i);
-  let filtered = images.filter(img => !hidden.has(img.u));
+  const privateCatsSet = new Set(s.privateCats || []);
+  const catMap = s.cats || {};
+  let filtered = images.filter(img => !hidden.has(img.u) && !privateCatsSet.has(catMap[img.u]));
   let pinnedImgs = filtered.filter(img => pinned.has(img.u));
   let rest = filtered.filter(img => !pinned.has(img.u));
   if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
@@ -483,16 +482,18 @@ function buildFilterBar() {
   // Remove any previously-added custom buttons
   bar.querySelectorAll('button[data-custom-cat]').forEach(b => b.remove());
 
-  // Add admin's custom categories that have assignments
+  const privateCats = new Set(getAdminSettings().privateCats || []);
+  // Add admin's custom categories that have assignments and are not private
   adminCats.forEach(cat => {
     if (!usedCats.has(cat)) return;
+    if (privateCats.has(cat)) return;
     const btn = document.createElement('button');
     btn.className = 'filter-btn';
     btn.setAttribute('data-cat', cat);
     btn.setAttribute('data-custom-cat', '1');
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-selected', 'false');
-    btn.textContent = '🏷️ ' + cat;
+    btn.textContent = cat;
     bar.appendChild(btn);
   });
 
@@ -510,7 +511,8 @@ function buildFilterBar() {
 function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
-  allFilteredImages = cat === 'all' ? base : base.filter(img => getCat(img) === cat);
+  const adminCatMap = getAdminSettings().cats || {};
+  allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
   renderPage = 1;
   renderGallery();
 }

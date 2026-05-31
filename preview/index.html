@@ -74,7 +74,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=6" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
@@ -112,7 +112,7 @@
 
   <!-- NAV -->
   <nav role="navigation" aria-label="ניווט ראשי">
-    <div class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">ירדן <span>דמרי</span></div>
+    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית"><div class="monogram"><span>Y.D</span></div></a>
 
     <!-- Mobile hamburger -->
     <button class="nav-hamburger" id="navHamburger"
@@ -183,6 +183,7 @@
         poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
         <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
+      <img id="heroImage" class="hero-video" src="" alt="ירדן דמרי מאפרת" style="display:none;object-fit:cover;object-position:center center;"/>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="hero-title">ירדן דמרי</h1>
@@ -221,7 +222,7 @@
       </div>
       <div class="about-content reveal">
         <p class="section-eyebrow">אודות</p>
-        <h2 id="about-title" class="section-title">האמנות של<br/><em>לגרום לך לזהור</em></h2>
+        <h2 id="about-title" class="section-title">האמנות של<br/>לגרום לך לזהור</h2>
         <p class="section-body">
           שמי ירדן דמרי, מאפרת מקצועית המתמחה באיפור כלות ואירועים.
           עבדתי עם מפורסמות והשתתפתי בהפקות רבות — ניסיון שמתורגם לרמת
@@ -247,7 +248,7 @@
     <section id="services" aria-labelledby="services-title">
       <div class="services-header reveal">
         <p class="section-eyebrow">מה אני מציעה</p>
-        <h2 id="services-title" class="section-title">השירותים <em>שלי</em></h2>
+        <h2 id="services-title" class="section-title">השירותים שלי</h2>
       </div>
       <div class="services-grid">
         <article class="service-card featured reveal">
@@ -334,7 +335,7 @@
       </div>
       <div class="reveal">
         <p class="section-eyebrow">אזור פעילות</p>
-        <h2 id="area-title" class="section-title">מאילת<br/><em>לכל הארץ</em></h2>
+        <h2 id="area-title" class="section-title">מאילת<br/>לכל הארץ</h2>
         <div class="area-points" role="list">
           <div class="area-point" role="listitem">
             <div class="area-text">
@@ -356,7 +357,7 @@
     <section id="gallery" class="gallery-section" aria-labelledby="gallery-title">
       <div style="text-align:center; margin-bottom:40px;" class="reveal">
         <p class="section-eyebrow" style="justify-content:center;">העבודות שלי</p>
-        <h2 id="gallery-title" class="section-title">גלריה <em>העבודות</em></h2>
+        <h2 id="gallery-title" class="section-title">גלריה העבודות</h2>
         <p style="font-size:1rem; opacity:.65; margin-top:12px;">כלות · ערב · הפקות | לחצי לצפייה מלאה</p>
       </div>
       <div id="gallery-filters" class="gallery-filters" role="group" aria-label="סינון גלריה"></div>
@@ -368,7 +369,7 @@
     <section id="reviews" style="padding:80px 40px; background:rgba(255,255,255,.02);" aria-labelledby="reviews-title">
       <div style="text-align:center; margin-bottom:50px;" class="reveal">
         <p class="section-eyebrow" style="justify-content:center;">מה אומרות עליי</p>
-        <h2 id="reviews-title" class="section-title">ביקורות <em>לקוחות</em></h2>
+        <h2 id="reviews-title" class="section-title">ביקורות לקוחות</h2>
         <div id="avg-rating" style="font-size:1.8rem; margin-top:12px; color:var(--gold);" aria-label="דירוג כוללי">⭐⭐⭐⭐⭐</div>
       </div>
 
@@ -408,7 +409,7 @@
     <section id="contact" aria-labelledby="contact-title">
       <div style="margin-bottom:60px" class="reveal">
         <p class="section-eyebrow">בואי נדבר</p>
-        <h2 id="contact-title" class="section-title">צרי <em>קשר</em></h2>
+        <h2 id="contact-title" class="section-title">צרי קשר</h2>
       </div>
       <div class="contact-inner">
         <div class="reveal">
@@ -418,7 +419,7 @@
             onclick="window.open('https://wa.me/9720547276716','_blank')"
             onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')">
             <div class="biz-card-pattern" aria-hidden="true"></div>
-            <div class="biz-card-logo">ירדן <em>דמרי</em></div>
+            <div class="biz-card-logo">ירדן דמרי</div>
             <div class="biz-card-title">Makeup Artist • מאפרת מקצועית</div>
             <div class="biz-card-divider"></div>
             <div class="biz-card-info">
@@ -578,25 +579,40 @@
   <!-- Gallery data -->
   <script src="cloud-storage.js"></script>
   <script>
-    // Apply hero video AFTER cloud-storage.js is loaded
+    // Apply hero media AFTER cloud-storage.js is loaded
     (async function applyHeroVideo(){
       if (!window.RemoteState) return;
       try {
-        const result = await window.RemoteState.fetch();
-        const url = window.RemoteState.getHeroVideo();
-        if (!url) return;
-        const v = document.getElementById('heroVideo');
-        const s = document.getElementById('heroVideoSource');
-        if (!v || !s) return;
-        const cloudUrl = url.includes('/video/upload/') && !url.includes('c_fill,ar_16:9')
-          ? url.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/')
-          : url;
-        const posterUrl = url.includes('/video/upload/')
-          ? url.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
-               .replace(/\.(mp4|mov|webm)$/i, '.jpg')
-          : '';
-        if (posterUrl) v.poster = posterUrl;
-        s.src = cloudUrl; v.load(); v.play().catch(()=>{});
+        await window.RemoteState.fetch();
+        const imgUrl = window.RemoteState.getHeroImage ? window.RemoteState.getHeroImage() : null;
+        const vidUrl = window.RemoteState.getHeroVideo();
+        const videoEl = document.getElementById('heroVideo');
+        const imgEl   = document.getElementById('heroImage');
+        if (imgUrl && imgUrl !== 'null' && imgEl && videoEl) {
+          // Show image, hide video
+          const cloudImg = imgUrl.includes('cloudinary.com') && !imgUrl.includes('/image/upload/f_')
+            ? imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/')
+            : imgUrl;
+          imgEl.src = cloudImg;
+          imgEl.style.display = 'block';
+          videoEl.style.display = 'none';
+          videoEl.pause();
+        } else if (vidUrl && videoEl) {
+          const s = document.getElementById('heroVideoSource');
+          if (!s) return;
+          // Strip any Cloudinary transforms from saved URL — use original video.
+          // CSS object-fit:cover handles cropping natively (no Cloudinary processing delay).
+          const cleanVid = vidUrl.includes('/video/upload/')
+            ? vidUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
+            : vidUrl;
+          const cloudUrl = cleanVid;
+          const posterUrl = cleanVid.includes('/video/upload/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_1280,f_jpg,q_auto/')
+                 .replace(/\.(mp4|mov|webm)$/i, '.jpg')
+            : '';
+          if (posterUrl) videoEl.poster = posterUrl;
+          s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
+        }
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
