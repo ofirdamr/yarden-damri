@@ -2,6 +2,16 @@
 
 ## ✅ Completed
 
+- refactor: production-grade optimization pass per external peer review —
+  (1) removed hidden dead `#wa-fab` element (was `display:none !important`) and its `@keyframes waPulse` style block;
+  (2) removed two dead JS variables (`_origRenderPage`, `origRenderPage`) and redundant `setTimeout(observeGalleryVideos, 1000)`;
+  (3) fixed duplicate `onclick` attribute on mobile menu WhatsApp link (browser was ignoring `closeMobileMenu()` — menu stayed open);
+  (4) added `<link rel="preload">` with `imagesrcset` for hero image in `<head>`, added `fetchpriority="high"` on hero `<img>`, added `srcset`/`sizes` for responsive delivery;
+  (5) added Cloudinary transformations (`q_auto,f_auto,w_560,c_fill,g_north`) to about-section background-image (was loading raw original);
+  (6) `cdnUrl` now adds `dpr_auto` for retina-quality gallery thumbnails;
+  (7) `cdnVideo` changed from `q_auto:low` → `q_auto:good` (was causing blur on mobile);
+  (8) `cdnVideoPoster` changed from `f_jpg` → `f_auto` (delivers WebP/AVIF to supporting browsers)
+
 - fix: mobile menu social buttons (Instagram/TikTok) now equal height + width — `.mobile-social .social-pill` set to `flex:1 1 0; min-width:0; height:44px; padding:0 11px` and removed `flex-wrap:wrap` from `.mobile-social` (prevented uneven sizing/wrapping); previous `flex:1` alone was undercut by base `height:36px` and the wrap allowing the longer "Instagram" label to size differently
 - fix: mobile menu social buttons (Instagram/TikTok) equal width via `flex:1` on `.mobile-social .social-pill`
 
