@@ -22,6 +22,17 @@ const GH_FILE   = 'gallery-settings.json';
 // CORS - allow your domain only
 const CORS_ORIGIN = 'https://yardendamri.co.il';
 
+function securityHeaders() {
+  return {
+    'Strict-Transport-Security': 'max-age=15552000; includeSubDomains; preload',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+    'X-XSS-Protection': '1; mode=block'
+  };
+}
+
 function corsHeaders() {
   return {
     'Access-Control-Allow-Origin': CORS_ORIGIN,
@@ -34,7 +45,7 @@ function corsHeaders() {
 function json(data, status = 200, extra = {}) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders(), ...extra }
+    headers: { 'Content-Type': 'application/json', ...corsHeaders(), ...securityHeaders(), ...extra }
   });
 }
 
