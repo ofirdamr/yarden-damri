@@ -1663,9 +1663,9 @@ function renderPricingEditor() {
         <input value="${item.price}" placeholder="מחיר" style="width:130px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)" onchange="updatePricingItem(${i},'price',this.value)"/>
       </div>
       <input value="${item.desc}" placeholder="תיאור קצר" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);margin-bottom:6px;box-sizing:border-box" onchange="updatePricingItem(${i},'desc',this.value)"/>
-      <textarea placeholder="מה כלול (שורה לכל פריט)" rows="2" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);resize:vertical;box-sizing:border-box" onchange="updatePricingItem(${i},'includes',this.value.split('\n').filter(Boolean))">${(item.includes||[]).join('\n')}</textarea>
+      <textarea placeholder="מה כלול (שורה לכל פריט)" rows="2" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);resize:vertical;box-sizing:border-box" oninput="updatePricingItem(${i},'includes',this.value.split('\n').filter(Boolean))">${(item.includes||[]).join('\n')}</textarea>
       <div style="font-size:.75rem;color:var(--muted);margin-bottom:4px;margin-top:6px;">➕ תוספות — פורמט: שם | מחיר (שורה לכל תוספת)</div>
-      <textarea placeholder="ליווי כלה | ₪200" rows="2" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid rgba(196,154,108,.3);background:rgba(196,154,108,.05);color:var(--text);resize:vertical;box-sizing:border-box" onchange="updatePricingItem(${i},'addons',this.value.split('\n').filter(Boolean).map(l=>{const p=l.split('|');return{name:(p[0]||'').trim(),price:(p[1]||'').trim()}}))">${(item.addons||[]).map(a=>a.name+'|'+a.price).join('\n')}</textarea>
+      <textarea placeholder="ליווי כלה | ₪200" rows="2" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid rgba(196,154,108,.3);background:rgba(196,154,108,.05);color:var(--text);resize:vertical;box-sizing:border-box" oninput="updatePricingItem(${i},'addons',this.value.split('\n').filter(Boolean).map(l=>{const p=l.split('|');return{name:(p[0]||'').trim(),price:(p[1]||'').trim()}}))">${(item.addons||[]).map(a=>a.name+(a.price?'|'+a.price:'')).join('\n')}</textarea>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
         <label style="font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer">
           <input type="checkbox" ${item.featured?'checked':''} onchange="updatePricingItem(${i},'featured',this.checked)"/> הכי פופולרי
@@ -1676,9 +1676,13 @@ function renderPricingEditor() {
 }
 
 let _pricingItems = null;
+let _pricingSaveTimer = null;
 function updatePricingItem(i, field, value) {
   if (!_pricingItems) _pricingItems = getPricingItems();
   _pricingItems[i][field] = value;
+  // Auto-save with debounce so rapid typing doesn't flood the API
+  clearTimeout(_pricingSaveTimer);
+  _pricingSaveTimer = setTimeout(() => persistPricing(), 800);
 }
 function removePricingItem(i) {
   if (!_pricingItems) _pricingItems = getPricingItems();
