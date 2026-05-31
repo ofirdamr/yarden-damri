@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-31T08:12:53.632Z",
+  "updatedAt": "2026-05-31T08:13:34.762Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3875,7 +3875,7 @@
       "תמונות שלי"
     ]
   },
-  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178480/yarden_makeup/yarden_makeup_18025971779499826.mp4",
+  "heroVideo": null,
   "pricing": [
     {
       "icon": "💍",
@@ -3952,7 +3952,7 @@
     }
   ],
   "reviews": [],
-  "heroImage": null,
+  "heroImage": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779050231/yarden_makeup/yarden_makeup_17913397584389406.jpg",
   "heroPosition": "center right",
   "heroFit": "contain"
 }
