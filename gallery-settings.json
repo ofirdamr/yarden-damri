@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-31T12:00:57.032Z",
+  "updatedAt": "2026-05-31T12:01:22.594Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3884,11 +3884,12 @@
       "price": "1990",
       "featured": true,
       "includes": [
-        "ניסוי איפור מקצועי",
+        "ניסוי איפ",
         "יום החתונה",
         "Touch-Up Kit",
         "מגיעה אלייך"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🌙",
@@ -3900,7 +3901,8 @@
         "התאמה אישית",
         "מוצרים פרימיום",
         "עמיד לאורך הלילה"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🎬",
@@ -3911,7 +3913,8 @@
       "includes": [
         "מקצוע כלפי מצלמה",
         "לפי שעות"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🎂",
@@ -3921,7 +3924,8 @@
       "featured": false,
       "includes": [
         "מראה חגיגי"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🖌️",
@@ -3932,7 +3936,8 @@
       "includes": [
         "אישית/קבוצתית",
         "טכניקות מקצועיות"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "✨",
@@ -3940,7 +3945,8 @@
       "desc": "לימוד טכניקות מקצועיות בקבוצה ",
       "price": "250 ₪",
       "featured": false,
-      "includes": []
+      "includes": [],
+      "addons": []
     },
     {
       "icon": "✨",
@@ -3948,7 +3954,8 @@
       "desc": "הדבקת ריסים ",
       "price": "100 ₪",
       "featured": false,
-      "includes": []
+      "includes": [],
+      "addons": []
     }
   ],
   "reviews": [],
