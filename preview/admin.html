@@ -330,12 +330,29 @@
           <video id="hero-preview-vid" muted loop playsinline autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;" onclick="this.play()"></video>
           <div id="hero-preview-label" style="position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:8px;pointer-events:none;"></div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-          <button class="btn btn-primary" onclick="applyAutoFit()" style="background:linear-gradient(135deg,#C4866A,#7A4A34);border:none;">✨ מתאים אוטומטית</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+          <button class="btn btn-primary" onclick="applyAutoFit()" style="background:linear-gradient(135deg,#C4866A,#7A4A34);border:none;">🤖 זיהוי פנים אוטומטי</button>
           <button class="btn btn-secondary" onclick="clearHeroMedia()">↩️ ברירת מחדל</button>
           <span id="hero-video-status" style="font-size:.82rem;color:var(--text-muted,#888);"></span>
         </div>
-        <p style="font-size:.78rem;color:var(--text-muted,#999);margin-top:8px;">✨ מתאים אוטומטית — Cloudinary מזהה פנים ומרכז אותן אוטומטית בהתאם לגודל המסך.</p>
+
+        <!-- Manual position control -->
+        <div id="hero-position-controls" style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
+          <label style="font-size:.82rem;font-weight:600;display:block;margin-bottom:8px;">🎯 מיקום ידני (אם זיהוי פנים לא מדויק)</label>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span style="font-size:.75rem;color:var(--muted);min-width:40px;">שמאל←ימין</span>
+            <input type="range" id="hero-pos-x" min="0" max="100" value="50" style="flex:1;"
+              oninput="updateHeroPosition()">
+            <span id="hero-pos-x-val" style="font-size:.75rem;color:var(--muted);min-width:30px;">50%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:.75rem;color:var(--muted);min-width:40px;">למעלה↑למטה</span>
+            <input type="range" id="hero-pos-y" min="0" max="100" value="50" style="flex:1;"
+              oninput="updateHeroPosition()">
+            <span id="hero-pos-y-val" style="font-size:.75rem;color:var(--muted);min-width:30px;">50%</span>
+          </div>
+        </div>
+        <p style="font-size:.75rem;color:var(--text-muted,#999);margin:0;">כפתור "זיהוי פנים" — Cloudinary מזהה פנים ומרכז אוטומטית. אם לא מדויק, כווני ידנית עם הסליידרים.</p>
       </div>
     </div>
 
@@ -917,10 +934,44 @@ function populateHeroVideoSelect() {
 let _heroPending = null;
 
 function _heroAutoUrl(url, type) {
-  // Save original URL — no Cloudinary transforms needed.
-  // Hero CSS already uses object-fit:cover which fills the screen natively in the browser.
-  // Cloudinary on-demand transforms cause delays/blanks on first load.
-  return url;
+  if (!url || !url.includes('cloudinary.com')) return url;
+  // Strip existing transforms first
+  const clean = url.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
+                   .replace(/\/image\/upload\/[^/]+\//, '/image/upload/');
+  if (type === 'video') {
+    // g_face = Cloudinary detects faces and centers crop there
+    return clean.replace('/video/upload/', '/video/upload/c_fill,g_face,ar_16:9,w_1280,q_auto:good,f_auto/');
+  } else {
+    return clean.replace('/image/upload/', '/image/upload/c_fill,g_face,w_1920,h_1080,q_auto,f_auto/');
+  }
+}
+
+function updateHeroPosition() {
+  const x = document.getElementById('hero-pos-x').value;
+  const y = document.getElementById('hero-pos-y').value;
+  document.getElementById('hero-pos-x-val').textContent = x + '%';
+  document.getElementById('hero-pos-y-val').textContent = y + '%';
+
+  // Apply to preview
+  const prevImg = document.getElementById('hero-preview-img');
+  const prevVid = document.getElementById('hero-preview-vid');
+  const pos = `${x}% ${y}%`;
+  if (prevImg) prevImg.style.objectPosition = pos;
+  if (prevVid) prevVid.style.objectPosition = pos;
+
+  // Apply to live hero on page (for admin preview)
+  const heroVid = document.getElementById('heroVideo');
+  const heroImg = document.getElementById('heroImage');
+  if (heroVid) heroVid.style.objectPosition = pos;
+  if (heroImg) heroImg.style.objectPosition = pos;
+
+  // Save position to cloud
+  clearTimeout(window._heroPosSaveTimer);
+  window._heroPosSaveTimer = setTimeout(() => {
+    const s = getSettings();
+    s.heroPosition = pos;
+    saveSettings(s);
+  }, 600);
 }
 function _heroRawPreviewUrl(url, type) {
   // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
