@@ -1451,7 +1451,7 @@ function switchTab(name,el){
   });
   if(name==='cats') renderCatList();
   if(name==='analytics') initAnalytics();
-  if(name==='pricing') { _pricingItems = null; renderPricingEditor(); }
+  if(name==='pricing') { renderPricingEditor(); }
   if(name==='settings') {
     populateHeroVideoSelect(); populateHeroImageSelect();
     const s=getSettings();
@@ -1825,7 +1825,10 @@ function getPricingItems() {
 }
 
 function renderPricingEditor() {
-  const items = getPricingItems();
+  // Use in-memory items if available (preserve unsaved edits).
+  // Only load from cloud if we don't have anything in memory yet.
+  if (!_pricingItems) _pricingItems = getPricingItems();
+  const items = _pricingItems;
   document.getElementById('pricing-editor').innerHTML = items.map((item, i) => `
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;">
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
@@ -1868,9 +1871,20 @@ function addPricingItem() {
   renderPricingEditor();
 }
 function persistPricing() {
-  try { localStorage.setItem('pricing_packages', JSON.stringify(_pricingItems)); } catch(e){}
+  // Ensure every item has all fields (no undefined/null) so cloud merge doesn't lose data
+  const clean = (_pricingItems || []).map(p => ({
+    icon:     p.icon     || '',
+    name:     p.name     || '',
+    desc:     p.desc     || '',
+    price:    p.price    || '',
+    featured: !!p.featured,
+    includes: Array.isArray(p.includes) ? p.includes : [],
+    addons:   Array.isArray(p.addons)   ? p.addons   : []
+  }));
+  try { localStorage.setItem('pricing_packages', JSON.stringify(clean)); } catch(e){}
   if (window.RemoteState && window.RemoteState.update) {
-    window.RemoteState.update({ pricing: _pricingItems });
+    // Use top-level key so it replaces entirely (not deep-merged per-item)
+    window.RemoteState.update({ pricing: clean });
   }
 }
 function savePricingItems() {
