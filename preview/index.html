@@ -181,7 +181,7 @@
     <section id="hero" aria-label="כותרת ראשית">
       <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto"
         poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
-        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:low,vc_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_960,q_45,vc_h264,f_mp4/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
       <img id="heroImage" class="hero-video" src="" alt="ירדן דמרי מאפרת" style="display:none;object-fit:cover;object-position:center center;"/>
       <div class="hero-overlay" aria-hidden="true"></div>
@@ -600,14 +600,15 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
-          // Strip any Cloudinary transforms from saved URL — use original video.
-          // CSS object-fit:cover handles cropping natively (no Cloudinary processing delay).
+          // Use 960p/q45 for fast loading
           const cleanVid = vidUrl.includes('/video/upload/')
             ? vidUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
             : vidUrl;
-          const cloudUrl = cleanVid;
+          const cloudUrl = cleanVid.includes('/video/upload/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_960,q_45,vc_h264,f_mp4/')
+            : cleanVid;
           const posterUrl = cleanVid.includes('/video/upload/')
-            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_1280,f_jpg,q_auto/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_960,h_540,c_fill,f_jpg,q_auto/')
                  .replace(/\.(mp4|mov|webm)$/i, '.jpg')
             : '';
           if (posterUrl) videoEl.poster = posterUrl;
@@ -797,13 +798,12 @@
     }
     function cdnVideo(url, w) {
       if (!url || !url.includes('cloudinary.com')) return url;
-      // Reduce to 480p max, auto quality, strip audio
-      return url.replace('/video/upload/', `/video/upload/q_auto:low,w_${w},c_fill,vc_auto/`);
+      // 360p for gallery grid (small cards don't need more)
+      return url.replace('/video/upload/', `/video/upload/q_35,w_360,c_fill,vc_h264,f_mp4/`);
     }
     function cdnVideoPoster(url) {
       if (!url || !url.includes('cloudinary.com')) return '';
-      // Get first frame as jpg poster
-      return url.replace('/video/upload/', '/video/upload/so_0,f_jpg,w_400,c_fill/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+      return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_360,h_360,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
@@ -921,9 +921,9 @@
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
-        // VIDEO: autoplay muted in grid. Use src directly (not data-src) so it loads + autoplays immediately.
+        // VIDEO: use data-src + poster for lazy loading. IntersectionObserver loads src only when visible.
         const mediaEl = isVideo
-          ? `<video src="${cdnVideo(item.u, 480)}" poster="${item.thumb ? cdnVideoPoster(item.u) : ''}" muted loop playsinline autoplay preload="metadata"
+          ? `<video data-src="${cdnVideo(item.u, 360)}" poster="${cdnVideoPoster(item.u)}" muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
                onerror="this.style.display='none'"></video>`
