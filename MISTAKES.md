@@ -205,3 +205,10 @@ LESSON: never trust HTTP 200 alone for critical writes. Always verify the data m
 - I applied all changes (fonts, monogram, styles) to root index.html and styles.css — the live production site
 - Had to revert root files back to commit 04b0a42
 - **Rule:** ALL design/development changes go ONLY to /preview folder. Never touch root HTML/CSS files unless explicitly told to push to production.
+
+## Pricing editor: rebuilding innerHTML = fundamental wrong approach
+- Using innerHTML = string templates means React-style "render on every change"
+- Each render destroys DOM, loses focus, requires re-reading values
+- onchange/oninput on individual elements in template strings = fragile
+- Correct approach: render ONCE, use event delegation on container, read from DOM when saving
+- LESSON: for edit forms that stay visible, render once and use event listeners. Never rebuild the DOM while user is editing.
