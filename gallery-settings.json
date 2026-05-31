@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-31T12:02:04.575Z",
+  "updatedAt": "2026-05-31T12:02:05.877Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3896,7 +3896,7 @@
         },
         {
           "name": "איפור מלווה",
-          "price": "400"
+          "price": "400 ₪"
         }
       ]
     },
