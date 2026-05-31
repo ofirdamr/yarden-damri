@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-31T12:13:22.829Z",
+  "updatedAt": "2026-05-31T12:13:24.803Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3900,6 +3900,10 @@
         },
         {
           "name": "תינתן הנחה לכלה עם 3 מלוות",
+          "price": ""
+        },
+        {
+          "name": "מקדמה",
           "price": ""
         }
       ]
