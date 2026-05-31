@@ -181,7 +181,7 @@
     <section id="hero" aria-label="כותרת ראשית">
       <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto"
         poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
-        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_960,q_45,vc_h264,f_mp4/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
       </video>
       <img id="heroImage" class="hero-video" src="" alt="ירדן דמרי מאפרת" style="display:none;object-fit:cover;object-position:center center;"/>
       <div class="hero-overlay" aria-hidden="true"></div>
@@ -600,15 +600,11 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
-          // Use 960p/q45 for fast loading
-          const cleanVid = vidUrl.includes('/video/upload/')
-            ? vidUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
-            : vidUrl;
           const cloudUrl = cleanVid.includes('/video/upload/')
-            ? cleanVid.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_960,q_45,vc_h264,f_mp4/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/')
             : cleanVid;
           const posterUrl = cleanVid.includes('/video/upload/')
-            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_960,h_540,c_fill,f_jpg,q_auto/')
+            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
                  .replace(/\.(mp4|mov|webm)$/i, '.jpg')
             : '';
           if (posterUrl) videoEl.poster = posterUrl;
@@ -798,12 +794,13 @@
     }
     function cdnVideo(url, w) {
       if (!url || !url.includes('cloudinary.com')) return url;
-      // 360p for gallery grid (small cards don't need more)
-      return url.replace('/video/upload/', `/video/upload/q_35,w_360,c_fill,vc_h264,f_mp4/`);
+      // q_auto = Cloudinary analyzes each video and picks optimal quality
+      // f_auto = serves WebP/best format for the browser
+      return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
     }
     function cdnVideoPoster(url) {
       if (!url || !url.includes('cloudinary.com')) return '';
-      return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_360,h_360,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+      return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_480,h_480,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
