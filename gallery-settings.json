@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-31T11:19:43.164Z",
+  "updatedAt": "2026-05-31T12:12:25.848Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3875,7 +3875,7 @@
       "תמונות שלי"
     ]
   },
-  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178371/yarden_makeup/yarden_makeup_17951003097110919.mp4",
+  "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178360/yarden_makeup/yarden_makeup_18321495295280260.mp4",
   "pricing": [
     {
       "icon": "💍",
@@ -3884,10 +3884,20 @@
       "price": "1990",
       "featured": true,
       "includes": [
-        "ניסוי איפור מקצועי",
+        "פגישת התאמה",
         "יום החתונה",
         "Touch-Up Kit",
-        "מגיעה אלייך"
+        "מגיעה אלייך (כל הארץ)"
+      ],
+      "addons": [
+        {
+          "name": "ליווי לכלה",
+          "price": "600 ₪"
+        },
+        {
+          "name": "איפור מלווה",
+          "price": "400 ₪"
+        }
       ]
     },
     {
@@ -3900,7 +3910,8 @@
         "התאמה אישית",
         "מוצרים פרימיום",
         "עמיד לאורך הלילה"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🎬",
@@ -3911,7 +3922,8 @@
       "includes": [
         "מקצוע כלפי מצלמה",
         "לפי שעות"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🎂",
@@ -3921,7 +3933,8 @@
       "featured": false,
       "includes": [
         "מראה חגיגי"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "🖌️",
@@ -3932,7 +3945,8 @@
       "includes": [
         "אישית/קבוצתית",
         "טכניקות מקצועיות"
-      ]
+      ],
+      "addons": []
     },
     {
       "icon": "✨",
@@ -3940,7 +3954,8 @@
       "desc": "לימוד טכניקות מקצועיות בקבוצה ",
       "price": "250 ₪",
       "featured": false,
-      "includes": []
+      "includes": [],
+      "addons": []
     },
     {
       "icon": "✨",
@@ -3948,7 +3963,8 @@
       "desc": "הדבקת ריסים ",
       "price": "100 ₪",
       "featured": false,
-      "includes": []
+      "includes": [],
+      "addons": []
     }
   ],
   "reviews": [],
