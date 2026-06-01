@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-01T15:37:59.224Z",
+  "updatedAt": "2026-06-01T15:38:34.898Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3874,7 +3874,7 @@
       "מוסתרות",
       "תמונות שלי"
     ],
-    "heroZoom": 75
+    "heroZoom": 50
   },
   "heroVideo": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178362/yarden_makeup/yarden_makeup_18094353658922515.mp4",
   "pricing": [
