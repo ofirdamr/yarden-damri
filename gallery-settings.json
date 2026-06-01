@@ -3993,8 +3993,5 @@
     }
   ],
   "reviews": [],
-  "heroImage": null,
-  "heroPosition": "50% 50%",
-  "heroFit": "contain",
-  "heroZoom": 100
+  "heroImage": null
 }
