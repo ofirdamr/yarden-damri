@@ -1,6 +1,14 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1780342362/yarden_makeup/yarden_makeup_17881563132435942.mp4",
+    "a": "רוצה להרגיש הכי יפה שלך ביום החתונה, בלי להרגיש מאופרת מדי? 🤍✨\nאיפור נקי, אלגנט",
+    "id": "17881563132435942",
+    "video": true,
+    "thumb": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/713744286_18595402171037829_2103418716125150212_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=6L8KSzym_r4Q7kNvwGlW8iu&_nc_oc=Adp6M5kPiV3grFs_kKLJN33HJwlQGtpQtFHoGJfh2riCoK4QE0z6WJLoKwNKy0MftsA&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=SeHJ_JhYUyj6mh_hLcySQw&_nc_tpa=Q5bMBQH6-kvptoL3fNH5OQEgyafQaalhxrzS5up8XRI4uXQ93JodvvoZZRt6Ifzt4hQbgnBj8SssK4B13w&oh=00_Af_WcKldPa7EDn8YNPtGeqt8-Y4_nUXJAJ14T9_QyB0Zbg&oe=6A23AC7A",
+    "item_id": "17881563132435942"
+  },
+  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1780177215/yarden_makeup/yarden_makeup_18082854338447188.mp4",
     "a": "יש משהו בבוקר של כלה שאי אפשר להסביר. מתחילים רגיל לגמרי, ופתאום קולטים שהיום הי",
     "id": "18082854338447188",
