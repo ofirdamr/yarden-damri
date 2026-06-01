@@ -1004,12 +1004,13 @@ function applyHeroCrop() {
 }
 
 function saveHeroCrop() {
-  const x = document.getElementById('hero-pos-x').value;
-  const y = document.getElementById('hero-pos-y').value;
-  const zoom = document.getElementById('hero-zoom').value;
+  const x = parseInt(document.getElementById('hero-pos-x').value) || 50;
+  const y = parseInt(document.getElementById('hero-pos-y').value) || 50;
+  const zoom = parseInt(document.getElementById('hero-zoom').value) || 100;
   const s = getSettings();
-  s.heroPosition = `${x}% ${y}%`;
+  s.heroPosition = `${x}% ${y}%`; // always percentages, never keywords
   s.heroZoom = zoom;
+  delete s.heroFit; // remove old conflicting values
   saveSettings(s);
   showToast('✅ כיוון נשמר');
 }

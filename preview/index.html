@@ -614,13 +614,15 @@
           if (posterUrl) videoEl.poster = posterUrl;
           s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
           const cached = window.RemoteState.getCached() || {};
-          if (cached.heroPosition) {
-            videoEl.style.objectPosition = cached.heroPosition;
+          const pos = cached.heroPosition;
+          // Only apply if valid percentage format (not keyword like "center right")
+          if (pos && pos.includes('%')) {
+            videoEl.style.objectPosition = pos;
           }
           if (cached.heroZoom && cached.heroZoom != 100) {
             const scale = cached.heroZoom / 100;
             videoEl.style.transform = `scale(${scale})`;
-            videoEl.style.transformOrigin = cached.heroPosition || '50% 50%';
+            videoEl.style.transformOrigin = (pos && pos.includes('%')) ? pos : '50% 50%';
           }
         }
       } catch(e) { console.warn('heroVideo error:', e); }
