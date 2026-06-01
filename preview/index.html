@@ -179,11 +179,16 @@
 
     <!-- HERO -->
     <section id="hero" aria-label="כותרת ראשית">
-      <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto"
-        poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
-        <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
-      </video>
-      <img id="heroImage" class="hero-video" src="" alt="ירדן דמרי מאפרת" style="display:none;object-fit:cover;object-position:center center;"/>
+      <!-- hero-media-wrap: controls pan & zoom via inline style -->
+      <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
+        <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 50%;top:0;left:0;"
+          poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
+          <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+        </video>
+        <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 50%;top:0;left:0;display:none;"/>
+      </div>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="hero-title">ירדן דמרי</h1>
@@ -579,20 +584,33 @@
   <!-- Gallery data -->
   <script src="cloud-storage.js"></script>
   <script>
-    // Apply hero media AFTER cloud-storage.js is loaded
+    function applyHeroCropToPage(pos, zoom) {
+      const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
+      const safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
+      const safeScale = (zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
+      els.forEach(el => {
+        if (!el) return;
+        el.style.objectPosition = safePos;
+        el.style.transform = safeScale !== 1 ? `scale(${safeScale})` : 'none';
+        el.style.transformOrigin = safePos;
+      });
+    }
+
     (async function applyHeroVideo(){
       if (!window.RemoteState) return;
       try {
         await window.RemoteState.fetch();
-        const imgUrl = window.RemoteState.getHeroImage ? window.RemoteState.getHeroImage() : null;
-        const vidUrl = window.RemoteState.getHeroVideo();
+        const cached = window.RemoteState.getCached() || {};
+        const imgUrl = cached.heroImage || null;
+        const vidUrl = cached.heroVideo || null;
         const videoEl = document.getElementById('heroVideo');
         const imgEl   = document.getElementById('heroImage');
-        if (imgUrl && imgUrl !== 'null' && imgEl && videoEl) {
-          // Show image, hide video
-          const cloudImg = imgUrl.includes('cloudinary.com') && !imgUrl.includes('/image/upload/f_')
-            ? imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/')
-            : imgUrl;
+
+        // Apply position/zoom first (works for default video too)
+        applyHeroCropToPage(cached.heroPosition, cached.heroZoom);
+
+        if (imgUrl && imgEl && videoEl) {
+          const cloudImg = imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/');
           imgEl.src = cloudImg;
           imgEl.style.display = 'block';
           videoEl.style.display = 'none';
@@ -600,30 +618,13 @@
         } else if (vidUrl && videoEl) {
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
-          // Strip any existing transforms from the saved URL
-          const cleanVid = vidUrl.includes('/video/upload/')
-            ? vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/')
-            : vidUrl;
-          const cloudUrl = cleanVid.includes('/video/upload/')
-            ? cleanVid.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/')
-            : cleanVid;
-          const posterUrl = cleanVid.includes('/video/upload/')
-            ? cleanVid.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/')
-                 .replace(/\.(mp4|mov|webm)$/i, '.jpg')
-            : '';
+          const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
+          const cloudUrl = clean.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/');
+          const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
           if (posterUrl) videoEl.poster = posterUrl;
-          s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
-          const cached = window.RemoteState.getCached() || {};
-          const pos = cached.heroPosition;
-          // Only apply if valid percentage format (not keyword like "center right")
-          if (pos && pos.includes('%')) {
-            videoEl.style.objectPosition = pos;
-          }
-          if (cached.heroZoom && cached.heroZoom != 100) {
-            const scale = cached.heroZoom / 100;
-            videoEl.style.transform = `scale(${scale})`;
-            videoEl.style.transformOrigin = (pos && pos.includes('%')) ? pos : '50% 50%';
-          }
+          s.src = cloudUrl;
+          videoEl.load();
+          videoEl.play().catch(()=>{});
         }
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
