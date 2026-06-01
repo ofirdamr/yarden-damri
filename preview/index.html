@@ -613,9 +613,15 @@
             : '';
           if (posterUrl) videoEl.poster = posterUrl;
           s.src = cloudUrl; videoEl.load(); videoEl.play().catch(()=>{});
-          // Apply saved position (manual adjustment or face-detected)
-          const pos = window.RemoteState.getCached()?.heroPosition;
-          if (pos) { videoEl.style.objectPosition = pos; }
+          const cached = window.RemoteState.getCached() || {};
+          if (cached.heroPosition) {
+            videoEl.style.objectPosition = cached.heroPosition;
+          }
+          if (cached.heroZoom && cached.heroZoom != 100) {
+            const scale = cached.heroZoom / 100;
+            videoEl.style.transform = `scale(${scale})`;
+            videoEl.style.transformOrigin = cached.heroPosition || '50% 50%';
+          }
         }
       } catch(e) { console.warn('heroVideo error:', e); }
     })();

@@ -331,26 +331,44 @@
           <div id="hero-preview-label" style="position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:8px;pointer-events:none;"></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
-          <button class="btn btn-primary" onclick="applyAutoFit()" style="background:linear-gradient(135deg,#C4866A,#7A4A34);border:none;">🤖 זיהוי פנים אוטומטי</button>
           <button class="btn btn-secondary" onclick="clearHeroMedia()">↩️ ברירת מחדל</button>
           <span id="hero-video-status" style="font-size:.82rem;color:var(--text-muted,#888);"></span>
         </div>
 
-        <!-- Manual position control -->
+        <!-- Crop/position tool -->
         <div id="hero-position-controls" style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
-          <label style="font-size:.82rem;font-weight:600;display:block;margin-bottom:8px;">🎯 מיקום ידני (אם זיהוי פנים לא מדויק)</label>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <span style="font-size:.75rem;color:var(--muted);min-width:40px;">שמאל←ימין</span>
-            <input type="range" id="hero-pos-x" min="0" max="100" value="50" style="flex:1;"
-              oninput="updateHeroPosition()">
-            <span id="hero-pos-x-val" style="font-size:.75rem;color:var(--muted);min-width:30px;">50%</span>
+          <label style="font-size:.82rem;font-weight:600;display:block;margin-bottom:10px;">🎯 כיוון ידני — גרור להזזה, זום להתקרבות</label>
+
+          <!-- Drag preview box -->
+          <div id="hero-crop-box"
+            style="position:relative;width:100%;padding-top:56.25%;border-radius:8px;overflow:hidden;cursor:grab;background:#111;margin-bottom:10px;touch-action:none;user-select:none;"
+            onmousedown="heroCropStart(event)" ontouchstart="heroCropStart(event)">
+            <video id="hero-crop-vid" muted loop playsinline autoplay
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>
+            <img id="hero-crop-img"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;display:none;" />
+            <div style="position:absolute;inset:0;border:2px dashed rgba(196,134,106,.6);pointer-events:none;border-radius:8px;"></div>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span style="font-size:.75rem;color:var(--muted);min-width:40px;">למעלה↑למטה</span>
-            <input type="range" id="hero-pos-y" min="0" max="100" value="50" style="flex:1;"
-              oninput="updateHeroPosition()">
-            <span id="hero-pos-y-val" style="font-size:.75rem;color:var(--muted);min-width:30px;">50%</span>
+
+          <!-- Sliders -->
+          <div style="display:grid;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.75rem;color:var(--muted);width:60px;text-align:left;">↔ אופקי</span>
+              <input type="range" id="hero-pos-x" min="0" max="100" value="50" style="flex:1;" oninput="applyHeroCrop()">
+              <span id="hero-pos-x-val" style="font-size:.75rem;color:var(--muted);width:32px;">50%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.75rem;color:var(--muted);width:60px;text-align:left;">↕ אנכי</span>
+              <input type="range" id="hero-pos-y" min="0" max="100" value="50" style="flex:1;" oninput="applyHeroCrop()">
+              <span id="hero-pos-y-val" style="font-size:.75rem;color:var(--muted);width:32px;">50%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.75rem;color:var(--muted);width:60px;text-align:left;">🔍 זום</span>
+              <input type="range" id="hero-zoom" min="100" max="200" value="100" step="1" style="flex:1;" oninput="applyHeroCrop()">
+              <span id="hero-zoom-val" style="font-size:.75rem;color:var(--muted);width:32px;">1×</span>
+            </div>
           </div>
+          <button class="btn btn-primary" onclick="saveHeroCrop()" style="width:100%;margin-top:10px;">💾 שמור כיוון</button>
         </div>
         <p style="font-size:.75rem;color:var(--text-muted,#999);margin:0;">כפתור "זיהוי פנים" — Cloudinary מזהה פנים ומרכז אוטומטית. אם לא מדויק, כווני ידנית עם הסליידרים.</p>
       </div>
@@ -922,7 +940,11 @@ function renderHeroGrid() {
 
 function populateHeroVideoSelect() {
   if (typeof GALLERY_IMAGES === 'undefined') return;
-  _heroAllVideos = GALLERY_IMAGES.filter(i => i.video || (i.u && i.u.includes('/video/upload/')));
+  const hidden = new Set(getSettings().hidden || []);
+  // Only show videos that are NOT hidden
+  _heroAllVideos = GALLERY_IMAGES.filter(i =>
+    (i.video || (i.u && i.u.includes('/video/upload/'))) && !hidden.has(i.u)
+  );
   renderHeroGrid();
   const status = document.getElementById('hero-video-status');
   if (status) {
@@ -933,46 +955,97 @@ function populateHeroVideoSelect() {
 // ── pending selection before save (url + type) ──
 let _heroPending = null;
 
-function _heroAutoUrl(url, type) {
-  if (!url || !url.includes('cloudinary.com')) return url;
-  // Strip existing transforms first
-  const clean = url.replace(/\/video\/upload\/[^/]+\//, '/video/upload/')
-                   .replace(/\/image\/upload\/[^/]+\//, '/image/upload/');
+// ─── HERO CROP TOOL ──────────────────────────────────────────────
+let _heroCropDrag = null;
+
+function loadHeroCropPreview(url, type) {
+  const vid = document.getElementById('hero-crop-vid');
+  const img = document.getElementById('hero-crop-img');
+  if (!vid || !img) return;
   if (type === 'video') {
-    // g_face = Cloudinary detects faces and centers crop there
-    return clean.replace('/video/upload/', '/video/upload/c_fill,g_face,ar_16:9,w_1280,q_auto:good,f_auto/');
+    vid.style.display = ''; img.style.display = 'none';
+    vid.src = url.includes('/video/upload/')
+      ? url.replace('/video/upload/', '/video/upload/w_640,q_auto:low,vc_auto/')
+      : url;
+    vid.load(); vid.play().catch(()=>{});
   } else {
-    return clean.replace('/image/upload/', '/image/upload/c_fill,g_face,w_1920,h_1080,q_auto,f_auto/');
+    img.style.display = ''; vid.style.display = 'none';
+    img.src = url.includes('/image/upload/')
+      ? url.replace('/image/upload/', '/image/upload/w_640,q_auto,f_auto/')
+      : url;
   }
+  // Restore saved crop
+  const s = getSettings();
+  if (s.heroPosition) {
+    const parts = s.heroPosition.split(' ');
+    const x = parseFloat(parts[0])||50, y = parseFloat(parts[1])||50;
+    document.getElementById('hero-pos-x').value = x;
+    document.getElementById('hero-pos-y').value = y;
+  }
+  if (s.heroZoom) document.getElementById('hero-zoom').value = s.heroZoom;
+  applyHeroCrop();
 }
 
-function updateHeroPosition() {
+function applyHeroCrop() {
   const x = document.getElementById('hero-pos-x').value;
   const y = document.getElementById('hero-pos-y').value;
+  const zoom = document.getElementById('hero-zoom').value;
   document.getElementById('hero-pos-x-val').textContent = x + '%';
   document.getElementById('hero-pos-y-val').textContent = y + '%';
+  document.getElementById('hero-zoom-val').textContent = (zoom/100).toFixed(1) + '×';
 
-  // Apply to preview
-  const prevImg = document.getElementById('hero-preview-img');
-  const prevVid = document.getElementById('hero-preview-vid');
   const pos = `${x}% ${y}%`;
-  if (prevImg) prevImg.style.objectPosition = pos;
-  if (prevVid) prevVid.style.objectPosition = pos;
-
-  // Apply to live hero on page (for admin preview)
-  const heroVid = document.getElementById('heroVideo');
-  const heroImg = document.getElementById('heroImage');
-  if (heroVid) heroVid.style.objectPosition = pos;
-  if (heroImg) heroImg.style.objectPosition = pos;
-
-  // Save position to cloud
-  clearTimeout(window._heroPosSaveTimer);
-  window._heroPosSaveTimer = setTimeout(() => {
-    const s = getSettings();
-    s.heroPosition = pos;
-    saveSettings(s);
-  }, 600);
+  const scale = zoom / 100;
+  const els = ['hero-crop-vid','hero-crop-img'];
+  els.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.objectPosition = pos; el.style.transform = `scale(${scale})`; el.style.transformOrigin = pos; }
+  });
 }
+
+function saveHeroCrop() {
+  const x = document.getElementById('hero-pos-x').value;
+  const y = document.getElementById('hero-pos-y').value;
+  const zoom = document.getElementById('hero-zoom').value;
+  const s = getSettings();
+  s.heroPosition = `${x}% ${y}%`;
+  s.heroZoom = zoom;
+  saveSettings(s);
+  showToast('✅ כיוון נשמר');
+}
+
+// Drag support on crop preview
+function heroCropStart(e) {
+  e.preventDefault();
+  const box = document.getElementById('hero-crop-box');
+  const rect = box.getBoundingClientRect();
+  const startX = e.touches ? e.touches[0].clientX : e.clientX;
+  const startY = e.touches ? e.touches[0].clientY : e.clientY;
+  const startPX = +document.getElementById('hero-pos-x').value;
+  const startPY = +document.getElementById('hero-pos-y').value;
+
+  function onMove(ev) {
+    const cx = ev.touches ? ev.touches[0].clientX : ev.clientX;
+    const cy = ev.touches ? ev.touches[0].clientY : ev.clientY;
+    const dx = ((startX - cx) / rect.width) * 100;
+    const dy = ((startY - cy) / rect.height) * 100;
+    document.getElementById('hero-pos-x').value = Math.max(0, Math.min(100, startPX + dx));
+    document.getElementById('hero-pos-y').value = Math.max(0, Math.min(100, startPY + dy));
+    applyHeroCrop();
+  }
+  function onEnd() {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onEnd);
+  }
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  document.addEventListener('touchmove', onMove, {passive:false});
+  document.addEventListener('touchend', onEnd);
+}
+
+function updateHeroPosition() { applyHeroCrop(); }
 function _heroRawPreviewUrl(url, type) {
   // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
   if (!url || !url.includes('cloudinary.com')) return url;
@@ -1006,13 +1079,23 @@ function selectHeroVideo(card){
   const url = card.dataset.url;
   _heroPending = { url, type: 'video' };
   showHeroPreview(url, 'video');
+  loadHeroCropPreview(url, 'video');
   populateHeroVideoSelect();
+  // Auto-save immediately
+  const s = getSettings();
+  s.heroVideo = url; delete s.heroImage;
+  saveSettings(s);
 }
 function selectHeroImage(card){
   const url = card.dataset.url;
   _heroPending = { url, type: 'image' };
   showHeroPreview(url, 'image');
+  loadHeroCropPreview(url, 'image');
   populateHeroImageSelect();
+  // Auto-save immediately
+  const s = getSettings();
+  s.heroImage = url; delete s.heroVideo;
+  saveSettings(s);
 }
 function applyAutoFit(){
   if (!_heroPending) { showToast('בחרי קודם וידאו או תמונה'); return; }
