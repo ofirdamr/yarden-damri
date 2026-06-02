@@ -587,7 +587,8 @@
     function applyHeroCropToPage(pos, zoom) {
       const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
       const safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
-      const safeScale = (zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
+      const isMobile = window.innerWidth <= 1080;
+      const safeScale = (!isMobile && zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
       els.forEach(el => {
         if (!el) return;
         el.style.objectPosition = safePos;

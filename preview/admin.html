@@ -337,7 +337,8 @@
 
         <!-- Crop/position tool -->
         <div id="hero-position-controls" style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
-          <label style="font-size:.82rem;font-weight:600;display:block;margin-bottom:10px;">🎯 כיוון ידני — גרור להזזה, זום להתקרבות</label>
+          <label style="font-size:.82rem;font-weight:600;display:block;margin-bottom:6px;">🎯 כיוון ידני — גרור להזזה, זום להתקרבות</label>
+          <p style="font-size:.72rem;color:var(--muted);margin:0 0 8px;">תצוגה מקדימה: מסך רחב בלבד. זום לא מופעל במובייל.</p>
 
           <!-- Drag preview box -->
           <div id="hero-crop-box"
@@ -368,7 +369,10 @@
               <span id="hero-zoom-val" style="font-size:.75rem;color:var(--muted);width:32px;">1×</span>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="saveHeroCrop()" style="width:100%;margin-top:10px;">💾 שמור כיוון</button>
+          <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn btn-primary" onclick="saveHeroCrop()" style="flex:1;">💾 שמור כיוון</button>
+            <button class="btn" onclick="document.getElementById('hero-zoom').value=100;applyHeroCrop();" style="flex:0 0 auto;padding:0 14px;" title="איפוס זום">↺ זום</button>
+          </div>
         </div>
         <p style="font-size:.75rem;color:var(--text-muted,#999);margin:0;">כפתור "זיהוי פנים" — Cloudinary מזהה פנים ומרכז אוטומטית. אם לא מדויק, כווני ידנית עם הסליידרים.</p>
       </div>
