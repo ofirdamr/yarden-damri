@@ -560,7 +560,7 @@ function getSettings() {
     const a = window.RemoteState.getAdmin();
     // include heroVideo/heroImage/heroFit/heroPosition from top-level so admin can read/write them
     const s = window.RemoteState.getCached() || {};
-    return { ...a, heroVideo: s.heroVideo || '', heroImage: s.heroImage || '', heroFit: s.heroFit || '', heroPosition: s.heroPosition || '' };
+    return { ...a, heroVideo: s.heroVideo || '', heroImage: s.heroImage || '', heroFit: s.heroFit || '', heroPosition: s.heroPosition || '', heroZoom: s.heroZoom || 100 };
   }
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{"hidden":[],"pinned":[],"order":[],"cats":{},"catList":[]}'); }
   catch(e) { return {hidden:[],pinned:[],order:[],cats:{},catList:[]}; }
@@ -568,10 +568,12 @@ function getSettings() {
 function saveSettings(s) {
   try { localStorage.setItem('gallery_admin', JSON.stringify(s)); } catch(e){}
   if (window.RemoteState && window.RemoteState.update) {
-    const { heroVideo, heroImage, heroFit, heroPosition, ...adminFields } = s;
+    const { heroVideo, heroImage, heroFit, heroPosition, heroZoom, ...adminFields } = s;
     const payload = { admin: adminFields };
-    payload.heroVideo = heroVideo || null;
-    payload.heroImage = heroImage || null;
+    payload.heroVideo    = heroVideo    || null;
+    payload.heroImage    = heroImage    || null;
+    payload.heroPosition = heroPosition || null;
+    payload.heroZoom     = heroZoom     || null;
     window.RemoteState.update(payload).then(result => {
       if (result && !result.ok) {
         if (result.error === 'not_synced') {
