@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-02T10:06:47.631Z",
+  "updatedAt": "2026-06-02T10:07:57.851Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3993,6 +3993,6 @@
   ],
   "reviews": [],
   "heroImage": null,
-  "heroPosition": "54% 52%",
-  "heroZoom": 70
+  "heroPosition": "36% 23%",
+  "heroZoom": 100
 }
