@@ -2,6 +2,8 @@
 
 ## ✅ Completed
 
+- fix: BCyber (Bezeq) block — replaced `workers.dev` Worker URL with custom domain `api.yardendamri.co.il` in `preview/cloud-storage.js` to remove the suspicious domain reference that triggered the filter; submitted false-positive removal request to Bezeq at ca-2@bezeq.co.il
+
 - fix: mobile menu social buttons (Instagram/TikTok) now equal height + width — `.mobile-social .social-pill` set to `flex:1 1 0; min-width:0; height:44px; padding:0 11px` and removed `flex-wrap:wrap` from `.mobile-social` (prevented uneven sizing/wrapping); previous `flex:1` alone was undercut by base `height:36px` and the wrap allowing the longer "Instagram" label to size differently
 - fix: mobile menu social buttons (Instagram/TikTok) equal width via `flex:1` on `.mobile-social .social-pill`
 
