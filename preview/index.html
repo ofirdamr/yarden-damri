@@ -182,12 +182,12 @@
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 50%;top:0;left:0;"
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;"
           poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
           <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 50%;top:0;left:0;display:none;"/>
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;display:none;"/>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
@@ -586,8 +586,16 @@
   <script>
     function applyHeroCropToPage(pos, zoom) {
       const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
-      const safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
       const isMobile = window.innerWidth <= 1080;
+      // On mobile portrait, force Y=0% so the face shows from the top (forehead down)
+      // rather than the center (just eyes/nose) which is too zoomed
+      let safePos;
+      if (isMobile) {
+        const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
+        safePos = x + ' 0%';
+      } else {
+        safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
+      }
       const safeScale = (!isMobile && zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
       els.forEach(el => {
         if (!el) return;
