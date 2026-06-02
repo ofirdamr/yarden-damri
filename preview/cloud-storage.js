@@ -4,7 +4,7 @@
  * Admin authenticates with password only. Works from any device, no per-device setup.
  */
 (function(window){
-  const WORKER_URL = 'https://yarden-admin.ofirdamr.workers.dev';
+  const WORKER_URL = 'https://api.yardendamri.co.il';
   const PUBLIC_URL = `https://yardendamri.co.il/gallery-settings.json`;
   const CACHE_KEY  = 'cloud_state_v2';
   const PWD_KEY    = 'yd_admin_pwd';
