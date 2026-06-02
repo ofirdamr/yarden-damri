@@ -23,9 +23,11 @@
 - remote-state.js: added getHeroImage, getHeroFit, getHeroPosition helpers
 
 ## Pending from last session (still open)
-1. Issue #2 — nav-cta button visibility on subpages (add subpage-nav class in HTML)
-2. Issue #4 — admin pricing: addPricingItem missing persistPricing() before render
-3. Issue #5 — admin gallery: uncategorized filter — ALREADY DONE (was in renderCatFilters)
+— all resolved —
+
+1. Issue #2 — nav-cta button visibility on subpages — DONE
+2. Issue #4 — admin pricing: addPricingItem missing persistPricing() — DONE
+3. Issue #5 — admin gallery: uncategorized filter — DONE
 
 ## Repo
 https://github.com/ofirdamr/yarden-damri.git
