@@ -369,8 +369,8 @@
     .footer-social-pills { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
     .footer-social-pills .social-pill { width: 34px; height: 34px; padding: 0; flex-shrink: 0; }
     .footer-social-pills .social-pill span { display: none; }
-    .footer-social-pills .social-ig svg { width: 18px; height: 18px; }
-    .footer-social-pills .social-tt svg { width: 20px; height: 20px; }
+    .footer-social-pills .social-ig svg { width: 17px; height: 17px; }
+    .footer-social-pills .social-tt svg { width: 24px; height: 24px; }
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; backdrop-filter: blur(2px); }
     .mobile-overlay.open { display: block; }
 
