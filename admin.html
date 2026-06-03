@@ -857,9 +857,7 @@ async function ga4Report(dimensions, metrics, dateRange, orderBy) {
 }
 
 function ga4DateRange(days) {
-  const end = new Date(); const start = new Date(Date.now() - days * 86400000);
-  const fmt = d => d.toISOString().split('T')[0];
-  return { startDate: fmt(start), endDate: fmt(end) };
+  return { startDate: `${days - 1}daysAgo`, endDate: 'today' };
 }
 
 // ── Main init ─────────────────────────────────────────
