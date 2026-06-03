@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-03 — preview/ nav + footer social buttons
+- Fixed nav logo `href="/"` → `href="/preview/"` on 5 subpages (about, accessibility-statement, bridal-guide, contact, disclaimer)
+- Added Instagram + TikTok footer buttons to all 10 preview subpages (were missing)
+- Styled as 34×34px square buttons matching hamburger menu style
+- Tuned icon sizes (IG 17px, TikTok 24px) to balance visual weight — TikTok still appears slightly smaller (deferred)
+
 - fix: BCyber (Bezeq) block — replaced `workers.dev` Worker URL with custom domain `api.yardendamri.co.il` in `preview/cloud-storage.js` to remove the suspicious domain reference that triggered the filter; submitted false-positive removal request to Bezeq at ca-2@bezeq.co.il
 
 - fix: mobile menu social buttons (Instagram/TikTok) now equal height + width — `.mobile-social .social-pill` set to `flex:1 1 0; min-width:0; height:44px; padding:0 11px` and removed `flex-wrap:wrap` from `.mobile-social` (prevented uneven sizing/wrapping); previous `flex:1` alone was undercut by base `height:36px` and the wrap allowing the longer "Instagram" label to size differently
