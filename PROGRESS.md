@@ -332,3 +332,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Added sync inline script after `<video>` element in preview/index.html
 - Script reads `cloud_state_v2` from localStorage synchronously and sets correct src/poster before browser fetches default
 - `applyHeroVideo()` now skips reload if src already matches (prevents double-load flash)
+
+## Session: Hero video — real fix for all visitors
+- Baked chosen video src+poster directly into preview/index.html (no more default video)
+- Worker (preview/worker.js) now calls patchIndexHtml() when POST /settings contains heroVideo
+- Worker fetches index.html from GitHub, replaces <source src> and poster via regex, commits back
+- This means ALL visitors (no localStorage) see the correct video from first byte
