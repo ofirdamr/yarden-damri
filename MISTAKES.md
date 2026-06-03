@@ -242,3 +242,9 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 **Rule for next time:** Before fixing a "value gets overwritten" bug, grep for EVERY place that writes to that element/variable (`grep -n "s.src\|heroVideoSource\|v.load"`) and read the full execution order. Fix the cause, then read the whole file again to confirm no duplicate/leftover code path remains.
 
 **The fix:** Deleted the leftover script entirely. Correct video is baked into the HTML `<source src>` + `poster`; `applyHeroVideo()` skips reload when the filename already matches. Nothing forces the old default anymore.
+
+## Share preview (og:image) vs favicon
+- Mistake: Confused favicon (browser tab icon) with og:image (WhatsApp/social share preview)
+- When user says "small pic near the link when sharing", that is og:image, NOT favicon
+- og:image must be an absolute URL (e.g. https://yardendamri.co.il/...)
+- Cloudinary upload via base64 requires valid full base64 data URI, not truncated
