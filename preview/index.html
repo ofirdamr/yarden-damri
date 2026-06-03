@@ -652,6 +652,10 @@
         if (!s) return;
         const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
         const cloudUrl = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+        // Compare by filename — browser may normalize the full URL differently
+        const newFile = cloudUrl.split('/').pop();
+        const curFile = s.src.split('/').pop();
+        if (newFile && curFile && newFile === curFile) return;
         const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
         if (posterUrl) videoEl.poster = posterUrl;
         s.src = cloudUrl;
