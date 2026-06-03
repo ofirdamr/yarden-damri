@@ -67,6 +67,55 @@ async function getSettings(env) {
   return { data: JSON.parse(content), sha: meta.sha };
 }
 
+// When heroVideo changes, bake the correct src+poster directly into preview/index.html
+// so ALL visitors (no localStorage) see the right video immediately on load.
+async function patchIndexHtml(env, videoUrl) {
+  const INDEX_FILE = 'preview/index.html';
+  const apiUrl = `https://api.github.com/repos/${GH_REPO}/contents/${INDEX_FILE}?ref=${GH_BRANCH}`;
+  const headers = {
+    'Authorization': 'token ' + env.GH_TOKEN,
+    'Accept': 'application/vnd.github+json',
+    'User-Agent': 'yarden-damri-admin-worker'
+  };
+  const r = await fetch(apiUrl, { headers, cf: { cacheTtl: 0, cacheEverything: false } });
+  if (!r.ok) throw new Error('index.html GET failed: ' + r.status);
+  const meta = await r.json();
+  let html = decodeURIComponent(escape(atob(meta.content.replace(/\s/g, ''))));
+
+  // Build clean Cloudinary URLs
+  const clean = videoUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/');
+  const src    = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+  const poster = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/')
+                      .replace(/\.(mp4|mov|webm)$/i, '.jpg');
+
+  // Replace the <source> src inside heroVideoSource
+  html = html.replace(
+    /(<source id="heroVideoSource" src=")[^"]*(")/,
+    `$1${src}$2`
+  );
+  // Replace the poster attribute on heroVideo
+  html = html.replace(
+    /(<video id="heroVideo"[^>]*poster=")[^"]*(")/,
+    `$1${poster}$2`
+  );
+
+  const putBody = {
+    message: 'admin: bake hero video into index.html',
+    content: btoa(unescape(encodeURIComponent(html))),
+    branch: GH_BRANCH,
+    sha: meta.sha
+  };
+  const pr = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${INDEX_FILE}`, {
+    method: 'PUT',
+    headers: { ...headers, 'Content-Type': 'application/json' },
+    body: JSON.stringify(putBody)
+  });
+  if (!pr.ok) {
+    const text = await pr.text().catch(() => '');
+    throw new Error('index.html PUT failed: ' + pr.status + ': ' + text.slice(0, 200));
+  }
+}
+
 async function putSettings(env, data, currentSha) {
   data.updatedAt = new Date().toISOString();
   const body = {
@@ -141,6 +190,10 @@ export default {
             const { data: current, sha } = await getSettings(env);
             const merged = deepMerge(current, body);
             await putSettings(env, merged, sha);
+            // If heroVideo changed, bake it into preview/index.html for zero-flash load for all visitors
+            if (body.heroVideo) {
+              await patchIndexHtml(env, body.heroVideo).catch(e => console.error('patchIndexHtml failed:', e.message));
+            }
             return json({ ok: true });
           } catch (e) {
             if (e.message.includes('409') || e.message.includes('sha')) {
