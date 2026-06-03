@@ -344,3 +344,4 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 ## Session 2026-06-03 (continued)
 - Deleted Render.com service — was crash-looping on missing webhook-server.js
 - Cloudflare Worker already handles everything Render was supposed to do
+2026-06-03 - Added favicon (favicon.ico, favicon.png, apple-touch-icon.png) from Yarden's photo across all HTML pages
