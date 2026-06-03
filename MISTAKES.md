@@ -229,3 +229,16 @@ LESSON: never trust HTTP 200 alone for critical writes. Always verify the data m
 - localStorage is per-device — new visitors have nothing in it, so they still see the default video.
 - Correct fix: bake the chosen video URL directly into the HTML <source src> and poster attributes at save time.
 - Method: Cloudflare Worker now patches preview/index.html in GitHub whenever admin saves a new heroVideo.
+
+## Mistake: Patched symptoms 4 times without reading the whole load sequence
+The hero video flash kept coming back because I fixed pieces without tracing the full page-load order.
+
+**The actual cause (finally found):** A leftover inline `<script>` sat right after the `<video>` element. It hardcoded `DEF_SRC` = the OLD video (18094353658922515). For any visitor with empty localStorage (i.e. everyone except me), it fell through to that default and ran `s.src = DEF_SRC; v.load()` — actively OVERWRITING the correct baked-in video with the old one. Then `applyHeroVideo()` later put the correct one back. That overwrite→restore was the visible flash.
+
+**Why I missed it repeatedly:**
+- I kept editing `applyHeroVideo()` / `applyHeroMediaFromState()` and assumed those were the only places touching the video src. I never grepped for ALL scripts that set `s.src`.
+- I added a localStorage sync script, then "removed" it — but an older near-identical block remained and I didn't re-read the file top-to-bottom.
+
+**Rule for next time:** Before fixing a "value gets overwritten" bug, grep for EVERY place that writes to that element/variable (`grep -n "s.src\|heroVideoSource\|v.load"`) and read the full execution order. Fix the cause, then read the whole file again to confirm no duplicate/leftover code path remains.
+
+**The fix:** Deleted the leftover script entirely. Correct video is baked into the HTML `<source src>` + `poster`; `applyHeroVideo()` skips reload when the filename already matches. Nothing forces the old default anymore.
