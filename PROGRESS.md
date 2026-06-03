@@ -338,3 +338,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Worker (preview/worker.js) now calls patchIndexHtml() when POST /settings contains heroVideo
 - Worker fetches index.html from GitHub, replaces <source src> and poster via regex, commits back
 - This means ALL visitors (no localStorage) see the correct video from first byte
+
+## Session 2026-06-03 (continued)
+- Deleted Render.com service — was crash-looping on missing webhook-server.js
+- Cloudflare Worker already handles everything Render was supposed to do
+- No more failed deploy emails
