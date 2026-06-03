@@ -189,25 +189,6 @@
           poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18352618189204100.jpg">
           <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18352618189204100.mp4" type="video/mp4">
         </video>
-        <script>
-        (function(){
-          var DEF_SRC    = 'https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4';
-          var DEF_POSTER = 'https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg';
-          var src = DEF_SRC, poster = DEF_POSTER;
-          try {
-            var state = JSON.parse(localStorage.getItem('cloud_state_v2') || 'null');
-            if (state && state.heroImage) { return; } // image hero — skip video entirely
-            if (state && state.heroVideo) {
-              var clean = state.heroVideo.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
-              src    = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-              poster = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
-            }
-          } catch(e) {}
-          var v = document.getElementById('heroVideo');
-          var s = document.getElementById('heroVideoSource');
-          if (v && s) { v.poster = poster; s.src = src; v.load(); v.play().catch(function(){}); }
-        })();
-        </script>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
       </div>
