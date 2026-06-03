@@ -364,11 +364,11 @@
     .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: #000; }
     .mobile-menu-wa { display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; text-decoration: none; padding: 16px 20px; border-radius: 2px; font-weight: 700; font-size: 1rem; margin-top: 28px; justify-content: center; }
     .mobile-social { display: flex; gap: 10px; margin-top: 16px; }
-    .mobile-social .social-pill,
-    .footer-social-pills .social-pill { width: 44px; height: 44px; padding: 0; border-radius: 50%; flex-shrink: 0; }
-    .mobile-social .social-pill span,
+    .mobile-social .social-pill { width: 44px; height: 44px; padding: 0; border-radius: 50%; flex-shrink: 0; }
+    .mobile-social .social-pill span { display: none; }
+    .footer-social-pills { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+    .footer-social-pills .social-pill { width: 34px; height: 34px; padding: 0; flex-shrink: 0; }
     .footer-social-pills .social-pill span { display: none; }
-    .footer-social-pills { display: flex; gap: 10px; justify-content: center; margin-top: 0; }
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; backdrop-filter: blur(2px); }
     .mobile-overlay.open { display: block; }
 
@@ -667,7 +667,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
 /* keep genuinely-circular UI bits round */
-.wa-float, #scroll-top, .footer-social-pills .social-pill,
+.wa-float, #scroll-top,
 [style*="border-radius:50%"], [style*="border-radius: 50%"] {
   border-radius: 50% !important;
 }
