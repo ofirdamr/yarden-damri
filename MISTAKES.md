@@ -212,3 +212,9 @@ LESSON: never trust HTTP 200 alone for critical writes. Always verify the data m
 - onchange/oninput on individual elements in template strings = fragile
 - Correct approach: render ONCE, use event delegation on container, read from DOM when saving
 - LESSON: for edit forms that stay visible, render once and use event listeners. Never rebuild the DOM while user is editing.
+
+## Hero Video Crop Bug (June 2026)
+- **Mistake**: Used Cloudinary transform `c_fill,ar_16:9,w_1280` on portrait Instagram videos → forced landscape crop destroyed face composition on mobile
+- **Also**: `object-position: 50% 0%` showed wrong area after the 16:9 crop
+- **Fix**: Remove `c_fill,ar_16:9` entirely. Use `w_720,q_auto:good,f_auto` — let CSS handle fitting. Set `object-position: 50% 20%` for face area in portrait videos
+- **Rule**: Never add aspect ratio transforms to Cloudinary video URLs from Instagram — they are already edited/portrait. Let the browser `object-fit:cover` handle the cropping via object-position.
