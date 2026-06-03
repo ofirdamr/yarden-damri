@@ -345,3 +345,4 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Deleted Render.com service — was crash-looping on missing webhook-server.js
 - Cloudflare Worker already handles everything Render was supposed to do
 2026-06-03 - Added favicon (favicon.ico, favicon.png, apple-touch-icon.png) from Yarden's photo across all HTML pages
+2026-06-03 - Fixed og:image on MAIN site root (index.html) - the shared link is root, not /preview. Old Cloudinary image replaced with share-preview.jpg

@@ -248,3 +248,7 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - When user says "small pic near the link when sharing", that is og:image, NOT favicon
 - og:image must be an absolute URL (e.g. https://yardendamri.co.il/...)
 - Cloudinary upload via base64 requires valid full base64 data URI, not truncated
+
+## Wrong location for og:image fix
+- Mistake: Fixed og:image only in /preview, but the actual shared link was the root yardendamri.co.il (index.html)
+- Lesson: Check the EXACT URL being shared in the screenshot before deciding which file to edit
