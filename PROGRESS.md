@@ -327,3 +327,8 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - saveSettings: shows "syncing" toast if user tries to save too early.
 
 This is the permanent fix. Categories, pricing, hero video, rotations, hidden, pinned, order — none can be overwritten by stale defaults anymore.
+
+## Session: Hero video flash fix (preview/)
+- Added sync inline script after `<video>` element in preview/index.html
+- Script reads `cloud_state_v2` from localStorage synchronously and sets correct src/poster before browser fetches default
+- `applyHeroVideo()` now skips reload if src already matches (prevents double-load flash)
