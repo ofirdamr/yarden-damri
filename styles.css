@@ -500,7 +500,6 @@
       footer { padding: 36px 20px; font-size: .82rem; }
 
       #scroll-top { left: 12px; bottom: 100px; width: 40px; height: 40px; font-size: 1.1rem; }
-      .wa-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
       #a11y-trigger { bottom: 20px; left: 20px; width: 46px; height: 46px; font-size: 1.3rem; }
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
