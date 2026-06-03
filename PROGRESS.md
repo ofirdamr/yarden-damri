@@ -346,3 +346,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Cloudflare Worker already handles everything Render was supposed to do
 2026-06-03 - Added favicon (favicon.ico, favicon.png, apple-touch-icon.png) from Yarden's photo across all HTML pages
 2026-06-03 - Fixed og:image on MAIN site root (index.html) - the shared link is root, not /preview. Old Cloudinary image replaced with share-preview.jpg
+
+## 2026-06-04 - PageSpeed performance fixes
+- Added `<link rel="preload">` for hero LCP image and styles.css
+- Added `fetchpriority="high"` + `decoding="sync"` + explicit `width`/`height` to hero img (reduces LCP + CLS)
+- Changed `gallery-data.js` (668KB) from synchronous to `defer` (removes render-blocking)
+- Wrapped gallery init in `DOMContentLoaded` to work correctly with deferred gallery-data.js
