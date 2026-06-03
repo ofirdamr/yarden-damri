@@ -335,7 +335,12 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 
 
 ## 2026-06-03 - Fix hero video flash on page load
-**Problem**: Custom hero video set in admin would flash the default video for ~500ms before being replaced.
-**Root cause**: `applyHeroVideo()` awaited a network fetch before applying settings. During that time the default HTML video played.
-**Fix**: Apply from `getCached()` (localStorage, synchronous) immediately on script run. Network fetch still happens after to refresh with latest data. No flash on return visits.
-- File: `preview/index.html` — refactored `applyHeroVideo` IIFE to call `applyHeroMediaFromState()` first from cache, then again after fetch.
+- Refactored `applyHeroVideo` IIFE to apply from localStorage cache synchronously before network fetch — no flash on return visits
+
+## Session: Hero video — real fix for all visitors
+- Baked chosen video src+poster directly into preview/index.html (no more default video)
+- Worker (preview/worker.js) now calls patchIndexHtml() when POST /settings contains heroVideo
+
+## Session 2026-06-03 (continued)
+- Deleted Render.com service — was crash-looping on missing webhook-server.js
+- Cloudflare Worker already handles everything Render was supposed to do

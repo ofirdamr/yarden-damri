@@ -218,3 +218,14 @@ LESSON: never trust HTTP 200 alone for critical writes. Always verify the data m
 - **Also**: `object-position: 50% 0%` showed wrong area after the 16:9 crop
 - **Fix**: Remove `c_fill,ar_16:9` entirely. Use `w_720,q_auto:good,f_auto` — let CSS handle fitting. Set `object-position: 50% 20%` for face area in portrait videos
 - **Rule**: Never add aspect ratio transforms to Cloudinary video URLs from Instagram — they are already edited/portrait. Let the browser `object-fit:cover` handle the cropping via object-position.
+
+## Mistake: Hero video flash — async fix was wrong
+- Previous fix set poster + src inside async `applyHeroVideo()` — this runs AFTER the browser already starts loading the hardcoded default video src, causing a 1-second flash.
+- Root cause: the default `src` in the `<source>` tag causes the browser to immediately queue a network request for the wrong video.
+- Correct fix: sync inline `<script>` immediately after the `<video>` element — reads localStorage cache synchronously, sets the correct `src`/`poster` before the browser fetches anything. Also added `if (s.src === cloudUrl) return` in `applyHeroVideo()` to prevent a second reload if the sync script already set the right src.
+
+## Mistake: localStorage fix only works for the device owner
+- Tried to fix hero video flash by reading localStorage on page load.
+- localStorage is per-device — new visitors have nothing in it, so they still see the default video.
+- Correct fix: bake the chosen video URL directly into the HTML <source src> and poster attributes at save time.
+- Method: Cloudflare Worker now patches preview/index.html in GitHub whenever admin saves a new heroVideo.

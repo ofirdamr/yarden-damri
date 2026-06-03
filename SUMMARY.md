@@ -1,15 +1,16 @@
 # SUMMARY
 
-## What was started this session
-- Working inside the `preview/` directory (the new version of the site, not yet live)
-- Fixing nav logo links and adding social buttons to the footer
-
 ## What is done
-1. **Nav logo links fixed** — 5 subpages (`about`, `accessibility-statement`, `bridal-guide`, `contact`, `disclaimer`) had `href="/"` pointing to the live site. Changed to `href="/preview/"`.
-2. **Footer social buttons added** — Instagram and TikTok buttons added to the footer of all 10 subpages (they were missing entirely; `index.html` already had them).
-3. **Button style** — Changed from circles (`border-radius: 50%`) to square-ish (2px radius) to match the hamburger menu style. Size: 34×34px.
-4. **Icon size balancing** — TikTok icon set to 24px, Instagram to 17px to compensate for TikTok's thinner logo shape. Visually close but not perfectly equal (user noted TikTok still looks slightly smaller — left for later).
+1. **Hero video flash — fixed for ALL visitors**
+   - Chosen video URL baked directly into `preview/index.html` (`<source src>` + `poster`)
+   - Worker (`preview/worker.js`) auto-patches `index.html` in GitHub whenever admin saves a new heroVideo
+   - Every visitor worldwide sees the correct video from first byte — no JS, no async, no flash
+
+2. **Render.com — deleted**
+   - Was crashing on every deploy: `Cannot find module 'webhook-server.js'` (file removed long ago)
+   - Served no purpose — Cloudflare Worker replaced it
+   - Deleted by Ofir → no more failed deploy emails
 
 ## What still needs to be done
-- **TikTok footer icon** still appears slightly smaller than Instagram visually. Root cause: the TikTok logo SVG path has less visual mass than the Instagram camera icon. Needs further tuning (tried multiple sizes, issue persists — user chose to defer).
-- Any other preview-specific tasks the user has planned.
+- TikTok footer icon still slightly smaller than Instagram visually (deferred)
+- Any new tasks
