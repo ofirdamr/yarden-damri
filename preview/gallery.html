@@ -248,6 +248,14 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <section style="padding:40px 24px 60px;text-align:center;">
     <p style="color:rgba(255,255,255,.4);font-size:.82rem;">ראי גם: <a href="bride.html" style="color:rgba(255,255,255,.6);">מאפרת כלות</a> | <a href="reviews.html" style="color:rgba(255,255,255,.6);">ביקורות לקוחות</a> | <a href="services.html" style="color:rgba(255,255,255,.6);">כל השירותים</a></p>
   </section>
+
+  <div class="share-strip">
+    <p class="share-strip-text">אהבת את הגלריה? שתפי עם חברה שמחפשת מאפרת</p>
+    <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את הגלריה">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      שתפי עם חברה
+    </button>
+  </div>
 </main>
 
 <footer role="contentinfo">
@@ -579,6 +587,16 @@ loadIgFeed();
     applyFilter(activeFilter);   // re-filter with remote cats data
   }
 })();
+
+function sharesite() {
+  var u = window.location.href;
+  var t = 'ירדן דמרי — מאפרת כלות וערב מאיילת | גלריית עבודות';
+  if (navigator.share) {
+    navigator.share({ title: 'ירדן דמרי', text: t, url: u }).catch(function(){});
+  } else {
+    window.open('https://wa.me/?text=' + encodeURIComponent(t + '\n' + u), '_blank');
+  }
+}
 </script>
 </body>
 </html>

@@ -299,6 +299,10 @@
     .cta-strip-btn:hover, .cta-strip-btn:focus { opacity: .8; }
     .cta-strip-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,.3); color: #fff; }
     .cta-strip-btn-outline:hover, .cta-strip-btn-outline:focus { background: rgba(255,255,255,.08); }
+    .share-strip { padding: 40px 24px; text-align: center; border-top: 1px solid rgba(196,128,90,.15); }
+    .share-strip-text { color: var(--text); font-size: .95rem; margin: 0 0 16px; font-family: 'Rubik', sans-serif; }
+    .share-strip-btn { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--blush); color: var(--blush); padding: 12px 28px; border-radius: 2px; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s; font-family: 'Rubik', sans-serif; }
+    .share-strip-btn:hover, .share-strip-btn:focus { background: var(--blush); color: #fff; }
 
     /* ── GALLERY ── */
     .gallery-section { padding: clamp(60px,8vw,100px) clamp(24px,6vw,60px); background: var(--cream); }

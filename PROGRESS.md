@@ -2,6 +2,11 @@
 
 ## ✅ Completed
 
+## 2026-06-03 — preview/ share buttons
+- Added share strip to gallery.html (after gallery grid), reviews.html (after reviews), index.html (between reviews and contact sections)
+- Strip shows "שתפי עם חברה" button — triggers native Web Share API on mobile; falls back to WhatsApp web on desktop
+- CSS added to styles.css: `.share-strip`, `.share-strip-text`, `.share-strip-btn`
+
 ## 2026-06-03 — preview/ nav + footer social buttons
 - Fixed nav logo `href="/"` → `href="/preview/"` on 5 subpages (about, accessibility-statement, bridal-guide, contact, disclaimer)
 - Added Instagram + TikTok footer buttons to all 10 preview subpages (were missing)
@@ -327,3 +332,10 @@ Files touched: preview/gallery.html, preview/index.html, preview/admin.html
 - saveSettings: shows "syncing" toast if user tries to save too early.
 
 This is the permanent fix. Categories, pricing, hero video, rotations, hidden, pinned, order — none can be overwritten by stale defaults anymore.
+
+
+## 2026-06-03 - Fix hero video flash on page load
+**Problem**: Custom hero video set in admin would flash the default video for ~500ms before being replaced.
+**Root cause**: `applyHeroVideo()` awaited a network fetch before applying settings. During that time the default HTML video played.
+**Fix**: Apply from `getCached()` (localStorage, synchronous) immediately on script run. Network fetch still happens after to refresh with latest data. No flash on return visits.
+- File: `preview/index.html` — refactored `applyHeroVideo` IIFE to call `applyHeroMediaFromState()` first from cache, then again after fetch.

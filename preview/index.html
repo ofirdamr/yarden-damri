@@ -181,11 +181,30 @@
     <section id="hero" aria-label="כותרת ראשית">
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
-        <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+        <video id="heroVideo" autoplay muted loop playsinline preload="none"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;"
           poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
-          <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+          <source id="heroVideoSource" src="" type="video/mp4">
         </video>
+        <script>
+        (function(){
+          var DEF_SRC    = 'https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4';
+          var DEF_POSTER = 'https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg';
+          var src = DEF_SRC, poster = DEF_POSTER;
+          try {
+            var state = JSON.parse(localStorage.getItem('cloud_state_v2') || 'null');
+            if (state && state.heroImage) { return; } // image hero — skip video entirely
+            if (state && state.heroVideo) {
+              var clean = state.heroVideo.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
+              src    = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+              poster = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+            }
+          } catch(e) {}
+          var v = document.getElementById('heroVideo');
+          var s = document.getElementById('heroVideoSource');
+          if (v && s) { v.poster = poster; s.src = src; v.load(); v.play().catch(function(){}); }
+        })();
+        </script>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
       </div>
@@ -410,6 +429,14 @@
       </div>
     </section>
 
+    <div class="share-strip">
+      <p class="share-strip-text">אהבת את מה שראית? שתפי עם חברה שמחפשת מאפרת</p>
+      <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את האתר">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        שתפי עם חברה
+      </button>
+    </div>
+
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
       <div style="margin-bottom:60px" class="reveal">
@@ -605,36 +632,42 @@
       });
     }
 
+    function applyHeroMediaFromState(state) {
+      const imgUrl = state.heroImage || null;
+      const vidUrl = state.heroVideo || null;
+      const videoEl = document.getElementById('heroVideo');
+      const imgEl   = document.getElementById('heroImage');
+      applyHeroCropToPage(state.heroPosition, state.heroZoom);
+      if (imgUrl && imgEl && videoEl) {
+        const cloudImg = imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/');
+        imgEl.src = cloudImg;
+        imgEl.style.display = 'block';
+        videoEl.style.display = 'none';
+        videoEl.pause();
+      } else if (vidUrl && videoEl) {
+        const s = document.getElementById('heroVideoSource');
+        if (!s) return;
+        const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
+        const cloudUrl = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+        const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+        if (posterUrl) videoEl.poster = posterUrl;
+        s.src = cloudUrl;
+        videoEl.load();
+        videoEl.play().catch(()=>{});
+      }
+    }
+
     (async function applyHeroVideo(){
       if (!window.RemoteState) return;
       try {
+        // Apply from local cache immediately (no network) to prevent flash of default video
+        const cached = window.RemoteState.getCached();
+        if (cached && (cached.heroVideo || cached.heroImage)) applyHeroMediaFromState(cached);
+
+        // Then fetch fresh state and re-apply if needed
         await window.RemoteState.fetch();
-        const cached = window.RemoteState.getCached() || {};
-        const imgUrl = cached.heroImage || null;
-        const vidUrl = cached.heroVideo || null;
-        const videoEl = document.getElementById('heroVideo');
-        const imgEl   = document.getElementById('heroImage');
-
-        // Apply position/zoom first (works for default video too)
-        applyHeroCropToPage(cached.heroPosition, cached.heroZoom);
-
-        if (imgUrl && imgEl && videoEl) {
-          const cloudImg = imgUrl.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1920,c_fill/');
-          imgEl.src = cloudImg;
-          imgEl.style.display = 'block';
-          videoEl.style.display = 'none';
-          videoEl.pause();
-        } else if (vidUrl && videoEl) {
-          const s = document.getElementById('heroVideoSource');
-          if (!s) return;
-          const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
-          const cloudUrl = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-          const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
-          if (posterUrl) videoEl.poster = posterUrl;
-          s.src = cloudUrl;
-          videoEl.load();
-          videoEl.play().catch(()=>{});
-        }
+        const fresh = window.RemoteState.getCached() || {};
+        applyHeroMediaFromState(fresh);
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
@@ -1208,6 +1241,16 @@
     // Init accessibility state
     syncA11yButtons();
     applyA11yPrefs();
+
+    function sharesite() {
+      var u = 'https://yardendamri.co.il';
+      var t = 'ירדן דמרי — מאפרת כלות וערב מאיילת';
+      if (navigator.share) {
+        navigator.share({ title: 'ירדן דמרי', text: t, url: u }).catch(function(){});
+      } else {
+        window.open('https://wa.me/?text=' + encodeURIComponent(t + '\n' + u), '_blank');
+      }
+    }
 
   </script>
   <!-- Floating WhatsApp CTA -->
