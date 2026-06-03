@@ -182,12 +182,12 @@
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;"
-          poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
-          <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;"
+          poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18094353658922515.jpg">
+          <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18094353658922515.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;display:none;"/>
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
@@ -592,7 +592,7 @@
       let safePos;
       if (isMobile) {
         const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
-        safePos = x + ' 0%';
+        safePos = x + ' 20%';
       } else {
         safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
       }
@@ -628,8 +628,8 @@
           const s = document.getElementById('heroVideoSource');
           if (!s) return;
           const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
-          const cloudUrl = clean.replace('/video/upload/', '/video/upload/c_fill,ar_16:9,w_1280,q_auto:good,f_auto/');
-          const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_1280,h_720,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+          const cloudUrl = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+          const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
           if (posterUrl) videoEl.poster = posterUrl;
           s.src = cloudUrl;
           videoEl.load();
