@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-03T10:23:18.246Z",
+  "updatedAt": "2026-06-03T10:23:20.339Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3881,7 +3881,7 @@
       "icon": "💍",
       "name": "מאפרת כלות",
       "desc": "כולל פגישת התאמה + יום החתונה",
-      "price": "1990 ",
+      "price": "1990 ₪",
       "featured": true,
       "includes": [
         "פגישת התאמה",
