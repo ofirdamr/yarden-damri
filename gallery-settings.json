@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-04T09:28:19.288Z",
+  "updatedAt": "2026-06-04T09:28:34.403Z",
   "admin": {
     "hidden": [
       "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777528858/yarden_makeup/yarden_makeup_17843112559037829.jpg",
@@ -3871,7 +3871,8 @@
     "privateCats": [
       "מבוגרות",
       "מוסתרות",
-      "תמונות שלי"
+      "תמונות שלי",
+      "איפור פורים"
     ],
     "heroZoom": 50
   },
