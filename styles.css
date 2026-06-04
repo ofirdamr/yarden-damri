@@ -315,9 +315,9 @@
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
-    .wa-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--charcoal); border: 1.5px solid var(--blush); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(44,32,24,.4); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s, background .25s; }
-    .wa-btn:hover, .wa-btn:focus { transform: scale(1.1); background: var(--deep); box-shadow: 0 10px 32px rgba(44,32,24,.55); }
-    .wa-btn svg { width: 24px; height: 24px; fill: var(--blush); }
+    .wa-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 28px rgba(196,134,106,.5); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+    .wa-btn:hover, .wa-btn:focus { transform: scale(1.1); box-shadow: 0 10px 36px rgba(196,134,106,.65); }
+    .wa-btn svg { width: 24px; height: 24px; fill: #fff; }
 
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 6px; align-items: center; }
