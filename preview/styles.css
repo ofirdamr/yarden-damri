@@ -669,6 +669,9 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   border-radius: 2px !important;
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
+    .wa-float { position: fixed; bottom: 32px; right: 32px; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(37,211,102,.45); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; animation: pulse 2.5s infinite; }
+    .wa-float:hover, .wa-float:focus { transform: scale(1.12); box-shadow: 0 12px 40px rgba(37,211,102,.55); }
+
 /* keep genuinely-circular UI bits round */
 .wa-float, #scroll-top,
 [style*="border-radius:50%"], [style*="border-radius: 50%"] {
