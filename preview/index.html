@@ -1146,6 +1146,15 @@
         : '<p style="opacity:.5;font-size:.95rem;text-align:center;">היי ראשונה להשאיר ביקורת! ⭐</p>';
     }
 
+    // Hero video: ensure autoplay on iOS Safari
+    (function() {
+      var v = document.getElementById('heroVideo');
+      if (!v) return;
+      v.muted = true;
+      v.addEventListener('loadeddata', function() { v.play().catch(function(){}); }, { once: true });
+      if (v.readyState >= 2) v.play().catch(function(){});
+    })();
+
     document.addEventListener('DOMContentLoaded', () => {
       loadGoogleReviews();
       loadReviews();
