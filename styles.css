@@ -64,9 +64,10 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       padding: 18px 60px;
       display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap;
-      background: rgba(26,16,8,1);
-      border-bottom: 1px solid rgba(196,154,108,.15);
-      transition: background .3s;
+      background: rgba(26,16,8,.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196,154,108,.12);
+      transition: all .4s ease;
     }
     .nav-logo {
       font-size: 1.5rem; font-weight: 300;
@@ -315,9 +316,8 @@
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
-    .wa-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 28px rgba(196,134,106,.5); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; }
-    .wa-btn:hover, .wa-btn:focus { transform: scale(1.1); box-shadow: 0 10px 36px rgba(196,134,106,.65); }
-    .wa-btn svg { width: 24px; height: 24px; fill: #fff; }
+    .wa-float { position: fixed; bottom: 32px; right: 32px; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(37,211,102,.45); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; animation: pulse 2.5s infinite; }
+    .wa-float:hover, .wa-float:focus { transform: scale(1.12); box-shadow: 0 12px 40px rgba(37,211,102,.55); }
 
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 6px; align-items: center; }
@@ -503,7 +503,7 @@
       footer { padding: 36px 20px; font-size: .82rem; }
 
       #scroll-top { left: 12px; bottom: 100px; width: 40px; height: 40px; font-size: 1.1rem; }
-      .wa-btn { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+      .wa-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
       #a11y-trigger { bottom: 20px; left: 20px; width: 46px; height: 46px; font-size: 1.3rem; }
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
