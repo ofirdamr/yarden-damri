@@ -1,16 +1,20 @@
-# SUMMARY
+# SUMMARY — 2026-06-04
 
-## What is done
-1. **Hero video flash — fixed for ALL visitors**
-   - Chosen video URL baked directly into `preview/index.html` (`<source src>` + `poster`)
-   - Worker (`preview/worker.js`) auto-patches `index.html` in GitHub whenever admin saves a new heroVideo
-   - Every visitor worldwide sees the correct video from first byte — no JS, no async, no flash
+## Status
+Active work on /preview folder. Live site: yardendamri.co.il/preview/
 
-2. **Render.com — deleted**
-   - Was crashing on every deploy: `Cannot find module 'webhook-server.js'` (file removed long ago)
-   - Served no purpose — Cloudflare Worker replaced it
-   - Deleted by Ofir → no more failed deploy emails
+## Done this session
+- Single clean WA button (wa-btn): rose/terracotta, bottom-right, replaces two old patched buttons
+- Fixed white nav on scroll: deleted .scrolled CSS block entirely
+- Fixed hero video iOS autoplay: preload=metadata
+- Discovered: ALL changes go to /preview only, not root
 
-## What still needs to be done
-- TikTok footer icon still slightly smaller than Instagram visually (deferred)
-- Any new tasks
+## Still to do (UX review list)
+1. Secondary CTA in hero (ghost button alongside לתיאום תור)
+2. Philosophy section needs a visual
+3. Contact form inline validation
+4. Reviews submission form → move to reviews.html
+5. Footer copyright → 2026
+6. Gallery לכל הגלריה button always visible
+7. Style selector page (different makeup looks as tabs)
+8. Continue patch hunt across all pages
