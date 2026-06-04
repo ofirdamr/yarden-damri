@@ -252,3 +252,15 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 ## Wrong location for og:image fix
 - Mistake: Fixed og:image only in /preview, but the actual shared link was the root yardendamri.co.il (index.html)
 - Lesson: Check the EXACT URL being shared in the screenshot before deciding which file to edit
+
+## WhatsApp button fix failed repeatedly (CRITICAL)
+- Mistake 1: Edited /preview files first when live site is ROOT (repeated the SAME preview-vs-root error already logged above)
+- Mistake 2: Blamed CDN cache when changes were not visible. User confirmed 12h later still broken = NOT cache. Never blame cache without proof.
+- Mistake 3: Could not verify actual rendered DOM because sandbox network blocks yardendamri.co.il (Host not in allowlist). Edited blind based on assumptions about which element was the "black square".
+- Verified facts: repo root index.html has single #wa-fab (green, border-radius:50%, right:32px), styles.css has NO .wa-float and NO dark wa-fab rule, Pages build succeeded AFTER edits on main branch root path. Yet user still sees old black square button.
+- ROOT CAUSE STILL UNKNOWN. The black square in screenshot does not match any element found in repo source.
+- Lessons:
+  1. ALWAYS confirm which file renders BEFORE editing (root vs preview) - check /pages API source.path
+  2. When you cannot see the live DOM, ASK USER to send page source (view-source) or DevTools screenshot instead of guessing.
+  3. Do not claim a fix is done until verified. Do not blame cache.
+  4. A service worker (worker.js exists in repo) may be serving a cached old page offline - investigate next.
