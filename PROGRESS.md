@@ -392,3 +392,18 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 ### Mistakes
 - Forgot to update step 01 in bridal-guide — kept old "הידרציה" content. Always check ALL steps when doing content updates, not just the ones explicitly mapped.
 - Used dark theme CSS variables in FAQ section on light-theme preview site. Always check --card/--text values in preview/styles.css before writing inline styles.
+
+## 2026-06-04 (UX/UI fixes session)
+
+### Infrastructure discovery
+- Live site yardendamri.co.il/preview/ served by GitHub Pages + Cloudflare CDN
+- Root (/) = old site. /preview = live new site. ALL changes must go to /preview only.
+- Spent most of session editing wrong folder (root) — logged in MISTAKES.md
+- Cloudflare Development Mode must be enabled to see changes immediately
+
+### Fixes applied to /preview
+1. White nav on scroll — deleted all .scrolled CSS rules (was turning nav white + hamburger black)
+2. Duplicate WA buttons — deleted #wa-fab (hidden patch) + .wa-float (green). New single wa-btn: rose color, fits site palette
+3. Hero video iOS autoplay — preload=none → preload=metadata
+4. CSS version bumped to v=12
+5. Root files — reverted all root changes back to original (root is not our concern)
