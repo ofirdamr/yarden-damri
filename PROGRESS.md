@@ -352,3 +352,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Added `fetchpriority="high"` + `decoding="sync"` + explicit `width`/`height` to hero img (reduces LCP + CLS)
 - Changed `gallery-data.js` (668KB) from synchronous to `defer` (removes render-blocking)
 - Wrapped gallery init in `DOMContentLoaded` to work correctly with deferred gallery-data.js
+
+## 2026-06-04
+- Deleted duplicate #wa-fab WhatsApp button block ENTIRELY from index.html (root) and preview/index.html
+- Single working .wa-float remains (green, bottom-right)
+- Removed the old `#wa-fab{display:none !important;}` patch and its dead HTML block
+- Layout: WA bottom-right | scroll-top + accessibility bottom-left
