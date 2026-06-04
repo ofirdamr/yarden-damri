@@ -264,3 +264,11 @@ The hero video flash kept coming back because I fixed pieces without tracing the
   2. When you cannot see the live DOM, ASK USER to send page source (view-source) or DevTools screenshot instead of guessing.
   3. Do not claim a fix is done until verified. Do not blame cache.
   4. A service worker (worker.js exists in repo) may be serving a cached old page offline - investigate next.
+
+## The duplicate WhatsApp button saga - THE LESSON ON PATCHES
+- Root cause of all confusion: a PAST session "fixed" a duplicate WhatsApp button by HIDING #wa-fab with `#wa-fab{display:none !important;}` instead of DELETING it.
+- This patch left two WA buttons in the code (one visible .wa-float, one hidden #wa-fab).
+- When reviewing the site later, I saw the duplication in the code and got confused by my own past patch - could not understand why two existed.
+- Then I made it WORSE: deleted the working .wa-float and un-hid the broken #wa-fab (which had left:24px), causing the black button to collide with the accessibility button.
+- THE FIX (correct): DELETE the entire duplicate #wa-fab block (HTML + style + hidden override). Keep only the single working .wa-float. No hiding. No patch.
+- PERMANENT LESSON: NEVER hide a duplicate/unwanted element with display:none. DELETE it from the code. A hidden element is a landmine for the next session. Fix the source, rewrite the block clean, leave zero dead code.
