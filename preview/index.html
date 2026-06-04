@@ -1156,6 +1156,14 @@
       loadGoogleReviews();
       loadReviews();
       observeGalleryVideos();
+      // iOS Safari requires explicit .play() — autoplay attribute alone is not enough
+      const heroVid = document.getElementById('heroVideo');
+      if (heroVid) {
+        heroVid.muted = true;
+        heroVid.play().catch(() => {
+          document.addEventListener('touchstart', () => heroVid.play().catch(()=>{}), { once: true });
+        });
+      }
     });
 
     // Re-observe videos after each gallery render
