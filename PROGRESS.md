@@ -358,3 +358,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Single working .wa-float remains (green, bottom-right)
 - Removed the old `#wa-fab{display:none !important;}` patch and its dead HTML block
 - Layout: WA bottom-right | scroll-top + accessibility bottom-left
+
+## 2026-06-04 (patch hunt)
+- New standing mission: find patches/band-aids and rewrite clean (no hiding, no all:unset, no !important storms, no dead code)
+- index.html: removed dead JS monkey-patch (_origRenderPage, origRenderPage, setTimeout hack); renderPage() now calls observeGalleryVideos() directly
+- styles.css: rewrote .social-circle from scratch - removed all:unset + ~25 redundant !important (no global `a` rule was conflicting, so they were never needed)
