@@ -90,7 +90,6 @@
     .nav-logo:hover .monogram { border-color: var(--blush); }
     .nav-logo:hover .monogram span,
     .nav-logo:hover .monogram span em { color: var(--blush); }
-    nav[role="navigation"].scrolled .nav-logo { color: var(--charcoal); }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; font-size: .75rem; font-weight: 600;
@@ -98,17 +97,13 @@
       color: rgba(255,255,255,.8);
       transition: color .3s; white-space: nowrap;
     }
-    nav[role="navigation"].scrolled .nav-links a { color: #555; }
     .nav-links a:hover, .nav-links a:focus { color: #fff; }
-    nav[role="navigation"].scrolled .nav-links a:hover,
-    nav[role="navigation"].scrolled .nav-links a:focus { color: #000; }
     .nav-cta {
       background: var(--gold); color: #fff !important;
       padding: 0 20px; height: 34px; border-radius: 2px;
       font-weight: 700; font-size: .75rem; letter-spacing: .12em;
       transition: background .3s, color .3s !important; white-space: nowrap; display: inline-flex; align-items: center;
     }
-    nav[role="navigation"].scrolled .nav-cta { background: var(--charcoal); color: #fff !important; }
     .nav-cta:hover, .nav-cta:focus { opacity: .8; }
 
     /* ── HERO ── */
@@ -352,7 +347,6 @@
     .nav-mobile-group { display: none; align-items: center; gap: 10px; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
     .nav-hamburger span { display: block; width: 26px; height: 2px; background: #fff; border-radius: 0; transition: .3s; }
-    nav[role="navigation"].scrolled .nav-hamburger span { background: var(--charcoal); }
     .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
