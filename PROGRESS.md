@@ -363,3 +363,32 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - New standing mission: find patches/band-aids and rewrite clean (no hiding, no all:unset, no !important storms, no dead code)
 - index.html: removed dead JS monkey-patch (_origRenderPage, origRenderPage, setTimeout hack); renderPage() now calls observeGalleryVideos() directly
 - styles.css: rewrote .social-circle from scratch - removed all:unset + ~25 redundant !important (no global `a` rule was conflicting, so they were never needed)
+
+---
+## June 2026 — SEO + Analytics + Content
+
+### SEO
+- Sitemap cleaned (removed 404/redirect/duplicate pages)
+- sitemap-media.xml created (80 images, 30 videos, no emojis)
+- sitemap-index.xml created
+- noindex added to admin.html
+- Static SEO content added to pricing.html and gallery.html
+- All 7 pages submitted for indexing in Search Console
+
+### Analytics Admin
+- OAuth fixed: hardcoded redirect URI, published app to production
+- GA4 Data API enabled
+- Added: bounce rate insight, specific sources, region+city, GSC setup guide
+- Google Signals enabled, Reporting Identity = מעורב
+
+### Reviews page
+- reviews.html created with Google Places API (live reviews from Google Business)
+- Added to all navs + sitemap
+
+### Content (Gemini)
+- services.html (preview): new copy, 4 main cards + FAQ
+- bridal-guide.html (preview): 4 steps, warm tone, no AI language
+
+### Mistakes
+- Forgot to update step 01 in bridal-guide — kept old "הידרציה" content. Always check ALL steps when doing content updates, not just the ones explicitly mapped.
+- Used dark theme CSS variables in FAQ section on light-theme preview site. Always check --card/--text values in preview/styles.css before writing inline styles.
