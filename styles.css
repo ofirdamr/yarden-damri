@@ -344,11 +344,11 @@
     .mobile-menu ul a:hover, .mobile-menu ul a:focus { color: #fff; }
     .mobile-menu-wa { display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; text-decoration: none; padding: 16px 20px; border-radius: 14px; font-weight: 700; font-size: 1rem; margin-top: 28px; justify-content: center; }
 
-    /* ── SOCIAL CIRCLES (identical structure, fits site palette) ── */
-    .social-circles { display: flex !important; gap: 16px !important; justify-content: center !important; align-items: center !important; margin-top: 18px !important; flex-direction: row !important; }
-    .social-circle { all: unset; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; min-width: 44px !important; min-height: 44px !important; max-width: 44px !important; max-height: 44px !important; flex: 0 0 44px !important; border-radius: 50% !important; background: var(--deep) !important; box-sizing: border-box !important; padding: 0 !important; margin: 0 !important; line-height: 0 !important; overflow: hidden !important; cursor: pointer; transition: transform .2s, background .2s; border: 1.5px solid var(--blush) !important; }
-    .social-circle svg { width: 20px !important; height: 20px !important; display: block !important; flex-shrink: 0 !important; fill: var(--blush) !important; }
-    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); background: var(--rose) !important; }
+    /* ── SOCIAL CIRCLES ── */
+    .social-circles { display: flex; gap: 16px; justify-content: center; align-items: center; margin-top: 18px; }
+    .social-circle { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; background: var(--deep); border: 1.5px solid var(--blush); cursor: pointer; transition: transform .2s, background .2s; }
+    .social-circle svg { width: 20px; height: 20px; fill: var(--blush); }
+    .social-circle:hover, .social-circle:focus { transform: translateY(-2px); background: var(--rose); }
 
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; backdrop-filter: blur(2px); }
     .mobile-overlay.open { display: block; }
