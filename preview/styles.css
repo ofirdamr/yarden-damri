@@ -60,7 +60,13 @@
       border-bottom: 1px solid transparent;
       transition: background .4s ease, border-color .4s ease, padding .4s ease;
     }
-
+    nav[role="navigation"].scrolled, .main-nav.scrolled {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #eee;
+      padding: 14px 60px;
+    }
+    
     .nav-logo {
       text-decoration: none;
       flex-shrink: 0;
@@ -90,6 +96,7 @@
     .nav-logo:hover .monogram { border-color: var(--blush); }
     .nav-logo:hover .monogram span,
     .nav-logo:hover .monogram span em { color: var(--blush); }
+    nav[role="navigation"].scrolled .nav-logo { color: var(--charcoal); }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; font-size: .75rem; font-weight: 600;
@@ -97,13 +104,17 @@
       color: rgba(255,255,255,.8);
       transition: color .3s; white-space: nowrap;
     }
+    nav[role="navigation"].scrolled .nav-links a { color: #555; }
     .nav-links a:hover, .nav-links a:focus { color: #fff; }
+    nav[role="navigation"].scrolled .nav-links a:hover,
+    nav[role="navigation"].scrolled .nav-links a:focus { color: #000; }
     .nav-cta {
       background: var(--gold); color: #fff !important;
       padding: 0 20px; height: 34px; border-radius: 2px;
       font-weight: 700; font-size: .75rem; letter-spacing: .12em;
       transition: background .3s, color .3s !important; white-space: nowrap; display: inline-flex; align-items: center;
     }
+    nav[role="navigation"].scrolled .nav-cta { background: var(--charcoal); color: #fff !important; }
     .nav-cta:hover, .nav-cta:focus { opacity: .8; }
 
     /* ── HERO ── */
@@ -326,11 +337,6 @@
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
-    /* ── WHATSAPP BUTTON ── */
-    .wa-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 28px rgba(196,134,106,.5); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; }
-    .wa-btn:hover, .wa-btn:focus { transform: scale(1.1); box-shadow: 0 10px 36px rgba(196,134,106,.65); }
-    .wa-btn svg { width: 24px; height: 24px; fill: #fff; }
-
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 8px; align-items: center; list-style: none; }
     .nav-social .social-pill { width: 32px; height: 32px; padding: 0; border-radius: 50%; }
@@ -347,6 +353,7 @@
     .nav-mobile-group { display: none; align-items: center; gap: 10px; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
     .nav-hamburger span { display: block; width: 26px; height: 2px; background: #fff; border-radius: 0; transition: .3s; }
+    nav[role="navigation"].scrolled .nav-hamburger span { background: var(--charcoal); }
     .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -502,7 +509,7 @@
       footer { padding: 36px 20px; font-size: .82rem; }
 
       #scroll-top { left: 12px; bottom: 100px; width: 40px; height: 40px; font-size: 1.1rem; }
-      .wa-btn { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+      .wa-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
       #a11y-trigger { bottom: 20px; left: 20px; width: 46px; height: 46px; font-size: 1.3rem; }
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
@@ -663,7 +670,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
 /* keep genuinely-circular UI bits round */
-.wa-btn, #scroll-top,
+.wa-float, #scroll-top,
 [style*="border-radius:50%"], [style*="border-radius: 50%"] {
   border-radius: 50% !important;
 }
