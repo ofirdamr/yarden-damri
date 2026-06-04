@@ -964,6 +964,7 @@
       if (currentPage < total) html += `<button style="${btn}" onclick="goPage(${currentPage+1})" aria-label="עמוד הבא">← הבא</button>`;
       html += `<p style="margin-top:12px;font-size:.85rem;opacity:.5;" aria-live="polite">עמוד ${currentPage} מתוך ${total} | ${filteredImages.length} תמונות</p>`;
       pagination.innerHTML = html;
+      observeGalleryVideos();
     }
 
     function goPage(p) { currentPage = p; renderPage(p); }
@@ -1006,8 +1007,6 @@
     function observeGalleryVideos() {
       document.querySelectorAll('.ig-gallery-grid video').forEach(v => videoObserver.observe(v));
     }
-    // Patch renderPage to call observeGalleryVideos
-    const _origRenderPage = renderPage;
 
     // ── REVIEWS ───────────────────────────────────
     function loadGoogleReviews() {
@@ -1088,9 +1087,6 @@
       observeGalleryVideos();
     });
 
-    // Re-observe videos after each gallery render
-    const origRenderPage = window.renderPage;
-    setTimeout(observeGalleryVideos, 1000);
 
     // ── IS 5568 ACCESSIBILITY WIDGET ─────────────
     let a11yPrefs = {};
