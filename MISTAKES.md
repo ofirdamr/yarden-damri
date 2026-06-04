@@ -278,3 +278,10 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - Any change to styles.css MUST be followed by bumping the version number
 - Without this, browsers/CDN serve cached old CSS, causing visual bugs that look like code bugs
 - RULE: every time styles.css is edited, also edit index.html to increment ?v=N
+
+## Breaking working video by "fixing" it
+- Original preload="none" on heroVideo was working correctly on iOS
+- Changed to preload="metadata" + added explicit play() thinking it would help iOS autoplay
+- This BROKE the video that was already working
+- Rule: if something works in the original, do not touch it. Only change things that are confirmed broken.
+- Reverted to preload="none" and removed added play() call
