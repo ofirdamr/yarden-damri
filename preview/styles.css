@@ -60,13 +60,7 @@
       border-bottom: 1px solid transparent;
       transition: background .4s ease, border-color .4s ease, padding .4s ease;
     }
-    nav[role="navigation"].scrolled, .main-nav.scrolled {
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #eee;
-      padding: 14px 60px;
-    }
-    
+
     .nav-logo {
       text-decoration: none;
       flex-shrink: 0;
@@ -337,6 +331,11 @@
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
+    /* ── WHATSAPP BUTTON ── */
+    .wa-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 28px rgba(196,134,106,.5); z-index: 200; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+    .wa-btn:hover, .wa-btn:focus { transform: scale(1.1); box-shadow: 0 10px 36px rgba(196,134,106,.65); }
+    .wa-btn svg { width: 24px; height: 24px; fill: #fff; }
+
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 8px; align-items: center; list-style: none; }
     .nav-social .social-pill { width: 32px; height: 32px; padding: 0; border-radius: 50%; }
@@ -509,7 +508,7 @@
       footer { padding: 36px 20px; font-size: .82rem; }
 
       #scroll-top { left: 12px; bottom: 100px; width: 40px; height: 40px; font-size: 1.1rem; }
-      .wa-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+      .wa-btn { width: 50px; height: 50px; bottom: 20px; right: 20px; }
       #a11y-trigger { bottom: 20px; left: 20px; width: 46px; height: 46px; font-size: 1.3rem; }
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
@@ -670,7 +669,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
 /* keep genuinely-circular UI bits round */
-.wa-float, #scroll-top,
+.wa-btn, #scroll-top,
 [style*="border-radius:50%"], [style*="border-radius: 50%"] {
   border-radius: 50% !important;
 }
