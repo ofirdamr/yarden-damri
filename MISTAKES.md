@@ -272,3 +272,9 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - Then I made it WORSE: deleted the working .wa-float and un-hid the broken #wa-fab (which had left:24px), causing the black button to collide with the accessibility button.
 - THE FIX (correct): DELETE the entire duplicate #wa-fab block (HTML + style + hidden override). Keep only the single working .wa-float. No hiding. No patch.
 - PERMANENT LESSON: NEVER hide a duplicate/unwanted element with display:none. DELETE it from the code. A hidden element is a landmine for the next session. Fix the source, rewrite the block clean, leave zero dead code.
+
+## Never forget to bump CSS version after any styles.css change
+- styles.css is linked as `styles.css?v=N` in index.html
+- Any change to styles.css MUST be followed by bumping the version number
+- Without this, browsers/CDN serve cached old CSS, causing visual bugs that look like code bugs
+- RULE: every time styles.css is edited, also edit index.html to increment ?v=N
