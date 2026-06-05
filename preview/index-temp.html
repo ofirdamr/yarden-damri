@@ -106,27 +106,31 @@
     }
   <style>
     /* ── FLOATING BUTTONS OVERRIDE ── */
-    .wa-float {
-      bottom: 24px !important; right: 24px !important;
+    .wa-float, #a11y-trigger, #scroll-top {
       width: 48px !important; height: 48px !important;
       min-width: 48px !important; max-width: 48px !important;
       min-height: 48px !important; max-height: 48px !important;
-      padding: 0 !important; box-sizing: border-box !important;
+      border-radius: 50% !important;
+      position: fixed !important;
+      bottom: 32px !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
     }
-    .wa-float svg, .wa-float img, .wa-float iframe {
-      width: 24px !important; height: 24px !important; flex-shrink: 0 !important;
-    }
+    .wa-float { right: 24px !important; left: auto !important; }
     #a11y-trigger {
-      bottom: 24px !important; left: 24px !important;
-      width: 48px !important; height: 48px !important;
+      left: 24px !important; right: auto !important;
       background: #1a1a1a !important; color: #fff !important;
       border: none !important; filter: none !important;
     }
-    #a11y-trigger svg { width: 22px !important; height: 22px !important; fill: #fff !important; }
     #scroll-top {
-      bottom: 24px !important; left: 84px !important;
-      width: 48px !important; height: 48px !important;
+      left: 84px !important; right: auto !important;
     }
+    #a11y-trigger svg { width: 22px !important; height: 22px !important; fill: #fff !important; color: #fff !important; }
+    .wa-float svg { width: 24px !important; height: 24px !important; }
   </style>
 </head>
 
