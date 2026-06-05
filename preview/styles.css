@@ -377,9 +377,9 @@
 
     /* ── ACCESSIBILITY WIDGET (IS 5568 Regulation 35) ── */
     #a11y-trigger {
-      position: fixed; bottom: 24px; left: 88px;
+      position: fixed; bottom: 24px; left: 86px;
       width: 50px; height: 50px; border-radius: 50%;
-      background: #1a1a1a; color: rgba(232,200,176,.9);
+      background: #1a1a1a; color: #fff;
       border: none;
       font-size: 1.3rem; cursor: pointer;
       box-shadow: 0 4px 20px rgba(0,0,0,.3); z-index: 9999;
@@ -509,8 +509,8 @@
       footer { padding: 36px 20px; font-size: .82rem; }
 
       #scroll-top { left: 16px; bottom: 24px; width: 44px; height: 44px; font-size: 1rem; }
-      .wa-float { width: 46px; height: 46px; bottom: 24px; right: 16px; }
-      #a11y-trigger { bottom: 24px; left: 68px; width: 44px; height: 44px; font-size: 1.1rem; }
+      .wa-float { width: 44px; height: 44px; min-width: 44px; max-width: 44px; bottom: 28px; right: 16px; }
+      #a11y-trigger { bottom: 24px; left: 72px; width: 44px; height: 44px; font-size: 1.1rem; }
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
 
@@ -669,8 +669,9 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   border-radius: 2px !important;
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
-    .wa-float { position: fixed; bottom: 24px; right: 24px; width: 50px; height: 50px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,.4); z-index: 9999; text-decoration: none; transition: transform .25s, box-shadow .25s; animation: pulse 2.5s infinite; }
+    .wa-float { position: fixed; bottom: 30px; right: 20px; width: 48px; height: 48px; min-width: 48px; min-height: 48px; max-width: 48px; max-height: 48px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,.4); z-index: 9999; text-decoration: none; transition: transform .25s, box-shadow .25s; animation: pulse 2.5s infinite; }
     .wa-float:hover, .wa-float:focus { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,.5); }
+    .wa-float svg { width: 24px; height: 24px; flex-shrink: 0; }
 
 /* keep genuinely-circular UI bits round */
 .wa-float, #scroll-top,
