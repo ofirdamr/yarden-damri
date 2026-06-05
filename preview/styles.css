@@ -252,8 +252,9 @@
     .philosophy-attrs { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 80px; border-top: 1px solid #eee; }
     .attr { text-align: center; padding: 48px 60px; border-left: 1px solid #eee; }
     .attr:first-child { border-left: none; }
-    .attr-num { font-family: 'Rubik', sans-serif; font-size: 4rem; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 10px; }
-    .attr-label { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #666; }
+    .attr-num { font-family: 'Rubik', sans-serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 8px; }
+    .attr-label { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #444; margin-bottom: 6px; }
+    .attr-sub { font-size: .78rem; font-weight: 400; color: #888; line-height: 1.5; max-width: 160px; }
     .attr-divider { display: none; }
 
     /* ── AREA ── */
