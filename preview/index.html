@@ -18,15 +18,15 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ירדן דמרי | מאפרת כלות וערב – איפור כלות, ערב והפקות</title>
-  <meta name="description" content="ירדן דמרי – מאפרת כלות וערב באילת. מתמחה באיפור כלות, איפור ערב, הפקות וסדנאות. מגיעה לכל הארץ." />
-  <meta name="keywords" content="מאפרת כלות אילת, איפור כלות אילת, מאפרת מקצועית אילת, איפור ערב אילת, מאפרת לאירועים, ירדן דמרי מאפרת, איפור כלה, ניסוי איפור כלות, מחיר מאפרת כלות" />
+  <title>ירדן דמרי | מאפרת כלות מקצועית – איפור כלות, ערב והפקות בכל הארץ</title>
+  <meta name="description" content="ירדן דמרי – מאפרת כלות וערב מקצועית המגיעה לכל הארץ. מתמחה באיפור כלות, איפור ערב, הפקות וסדנאות. מראה זוהר, טבעי ובלתי נשכח." />
+  <meta name="keywords" content="מאפרת כלות, איפור כלות, מאפרת מקצועית, איפור ערב, מאפרת לאירועים, ירדן דמרי מאפרת, איפור כלה, ניסוי איפור כלות, מאפרת מגיעה עד הבית, מאפרת לכל הארץ" />
   <meta name="author" content="ירדן דמרי" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ירדן דמרי | מאפרת כלות וערב" />
   <meta property="og:url" content="https://yardendamri.co.il/preview" />
-  <meta property="og:description" content="מאפרת כלות ואירועים מאילת. ניסיון עשיר, סגנון עדין וטבעי." />
+  <meta property="og:description" content="מאפרת כלות וערב מקצועית המגיעה לכל הארץ. מראה זוהר, טבעי ובלתי נשכח." />
   <meta property="og:image" content="https://yardendamri.co.il/preview/share-preview.jpg" />
   <link rel="canonical" href="https://yardendamri.co.il/preview" />
 
@@ -104,6 +104,29 @@
       padding: 0; margin: -1px; overflow: hidden;
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
+  <style>
+    /* ── FLOATING BUTTONS OVERRIDE ── */
+    #a11y-trigger, #scroll-top {
+      width: 48px !important; height: 48px !important;
+      min-width: 48px !important; max-width: 48px !important;
+      min-height: 48px !important; max-height: 48px !important;
+      border-radius: 50% !important;
+      position: fixed !important;
+      bottom: 24px !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+    }
+    #a11y-trigger {
+      left: 24px !important; right: auto !important;
+      background: #1a1a1a !important; color: #fff !important;
+      border: none !important; filter: none !important;
+    }
+    #scroll-top { left: 84px !important; right: auto !important; }
+    #a11y-trigger svg { width: 22px !important; height: 22px !important; fill: #fff !important; }
   </style>
 </head>
 
@@ -116,9 +139,18 @@
 
   <!-- NAV -->
   <nav role="navigation" aria-label="ניווט ראשי">
-    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית"><div class="monogram"><span>Y.D</span></div></a>
+    <!-- Monogram — right corner (RTL start) -->
+    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">
+      <div class="monogram"><span>Y<em>.D</em></span></div>
+    </a>
 
-    <!-- Mobile hamburger -->
+    <!-- Centered text branding (absolutely positioned) -->
+    <a href="/preview/" aria-label="ירדן דמרי - עמוד הבית" style="position:absolute;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1.25;">
+      <span style="font-family:'Rubik',sans-serif;font-size:1.1rem;font-weight:400;color:#c9a96e;letter-spacing:.04em;white-space:nowrap;">ירדן דמרי</span>
+      <span style="font-family:'Rubik',sans-serif;font-size:.58rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,169,110,.75);margin-top:2px;white-space:nowrap;">מאפרת כלות וערב</span>
+    </a>
+
+    <!-- Mobile hamburger — left corner (RTL end) -->
     <button class="nav-hamburger" id="navHamburger"
       aria-label="פתיחת תפריט ניווט"
       aria-expanded="false"
@@ -194,12 +226,14 @@
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
       </div>
-      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true" style="background:rgba(0,0,0,0.42);"></div>
       <div class="hero-content">
-        <h1 class="hero-title">ירדן דמרי</h1>
-        <p class="hero-subtitle">מאפרת כלות וערב</p>
+        <p class="hero-eyebrow" style="font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,200,176,.8);margin-bottom:18px;text-align:right;">מאפרת כלות מקצועית · מגיעה לכל הארץ</p>
+        <h1 class="hero-title">ביום הכי חשוב<br/>שלך — את ראויה<br/>להרגיש מושלמת</h1>
+        <p class="hero-subtitle">אני מגיעה אלייך, עם מוצרי פרימיום וניסיון עשיר,<br/>כדי שתיראי בדיוק כמו שתמיד דמיינת</p>
         <div class="hero-btns">
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%AA%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="btn-primary">לתיאום תור</a>
+          <a onclick="trackEvent('whatsapp_click','conversion','hero_cta')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%AA%D7%95%D7%A8%20%D7%9C%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%9B%D7%9C%D7%94" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding:16px 36px;">לקביעת פגישה</a>
+          <a href="#about" class="btn-outline" style="padding:16px 36px;border-color:rgba(255,255,255,.55);color:#fff;">קראי עליי</a>
         </div>
       </div>
     </section>
@@ -208,14 +242,14 @@
     <div class="divider" aria-hidden="true">
       <div class="divider-track">
         <span class="divider-item">איפור כלות</span>
-        <span class="divider-item">איפור ערב</span>
+        <span class="divider-item">ניסוי איפור</span>
         <span class="divider-item">הפקות</span>
-        <span class="divider-item">סדנאות</span>
+        <span class="divider-item">מוצרי פרימיום</span>
         <span class="divider-item">מגיעה עד אלייך</span>
-        <span class="divider-item">איפור כלות</span>
         <span class="divider-item">איפור ערב</span>
+        <span class="divider-item">ניסוי איפור</span>
         <span class="divider-item">הפקות</span>
-        <span class="divider-item">סדנאות</span>
+        <span class="divider-item">מוצרי פרימיום</span>
         <span class="divider-item">מגיעה עד אלייך</span>
       </div>
     </div>
@@ -232,24 +266,24 @@
       </div>
       <div class="about-content reveal">
         <p class="section-eyebrow">אודות</p>
-        <h2 id="about-title" class="section-title">האמנות של<br/>לגרום לך לזהור</h2>
+        <h2 id="about-title" class="section-title">אני כאן כדי שתרגישי<br/>רגועה ביום הגדול</h2>
         <p class="section-body">
-          שמי ירדן דמרי, מאפרת מקצועית המתמחה באיפור כלות ואירועים.
-          עבדתי עם מפורסמות והשתתפתי בהפקות רבות — ניסיון שמתורגם לרמת
-          דיוק ומקצועיות גבוהה בכל עבודה שאני עושה.
+          שמי ירדן דמרי. אני מאפרת מקצועית המתמחה בכלות ואירועים, ומגיעה לכל הארץ.
+          עם שנים של ניסיון בהפקות, צילומי אופנה ועבודה עם כלות מכל הסגנונות —
+          פיתחתי עין מדויקת ויד בטוחה שיהפכו כל רגע לקסום.
         </p>
         <p class="section-body">
-          הפילוסופיה שלי פשוטה: כל אישה יפה. תפקידי הוא רק לגרום לאותו
-          יופי לזרוח החוצה — עם מגע עדין, גימור נקי ומראה שמחזיק לאורך
-          כל הערב.
+          הגישה שלי פשוטה: אני מקשיבה לך, מבינה מה את רוצה לחוש,
+          ומשתמשת במוצרי פרימיום בלבד כדי להעצים את היופי הטבעי שלך.
+          אין כאן מסכות — רק את, זוהרת.
         </p>
         <div class="about-pills" role="list" aria-label="תחומי התמחות">
-          <span class="pill" role="listitem">✦ עדין וטבעי</span>
-          <span class="pill" role="listitem">✦ עור זוהר</span>
-          <span class="pill" role="listitem">✦ גימור נקי</span>
-          <span class="pill" role="listitem">✦ אלגנטי</span>
-          <span class="pill" role="listitem">✦ מצטלם טוב</span>
+          <span class="pill" role="listitem">✦ מוצרי פרימיום בלבד</span>
+          <span class="pill" role="listitem">✦ עור זוהר וטבעי</span>
+          <span class="pill" role="listitem">✦ מחזיק כל הלילה</span>
+          <span class="pill" role="listitem">✦ אלגנטי ומצטלם טוב</span>
           <span class="pill" role="listitem">✦ מגיעה עד אלייך</span>
+          <span class="pill" role="listitem">✦ ניסוי לפני החתונה</span>
         </div>
       </div>
     </section>
@@ -259,44 +293,65 @@
       <div class="services-header reveal">
         <p class="section-eyebrow">מה אני מציעה</p>
         <h2 id="services-title" class="section-title">השירותים שלי</h2>
+        <p style="font-size:1rem;opacity:.65;margin-top:10px;max-width:520px;margin-inline:auto;">מגיעה אלייך עם כל הציוד — בכל מקום בישראל</p>
       </div>
       <div class="services-grid">
+
+        <!-- BRIDAL — featured card -->
         <article class="service-card featured reveal">
+          <p style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;opacity:.9;">הפופולרי ביותר</p>
           <h3 class="service-name">איפור כלות</h3>
-          <p class="service-desc">המראה המושלם ביום המיוחד שלך. איפור כלה מקצועי שמחזיק מהבוקר ועד רגע האחרון — עדין, זוהר ובלתי נשכח.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%9B%D7%9C%D7%94" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום כלה</a>
+          <p class="service-desc">כלה שלי — זה לא עוד אירוע. אני מגיעה אלייך בבוקר החתונה מוכנה לחלוטין, עם מוצרי פרימיום ומגע רגוע שיתן לך את הביטחון שאת צריכה. המראה מחזיק מהבוקר ועד הריקוד האחרון.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 20px;font-size:.88rem;opacity:.75;line-height:1.9;">
+            <li>✓ ניסוי איפור לפני החתונה</li>
+            <li>✓ מגיעה לבית הכלה / אולם</li>
+            <li>✓ מוצרי פרימיום בלבד</li>
+            <li>✓ מראה שמחזיק כל הלילה</li>
+          </ul>
+          <a onclick="trackEvent('whatsapp_click','conversion','bridal_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%9B%D7%9C%D7%94" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום כלה</a>
         </article>
+
+        <!-- TRIAL -->
+        <article class="service-card reveal">
+          <h3 class="service-name">ניסוי איפור</h3>
+          <p class="service-desc">פגישת ניסוי היא השקעה שמשתלמת. נבנה יחד את המראה שלך, נבדוק מה מתאים לסגנון ולשמלה — כדי שביום החתונה לא יהיו הפתעות, רק אושר.</p>
+          <a onclick="trackEvent('whatsapp_click','conversion','trial_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A0%D7%99%D7%A1%D7%95%D7%99%20%D7%90%D7%99%D7%A4%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום ניסוי</a>
+        </article>
+
+        <!-- EVENTS -->
         <article class="service-card reveal">
           <h3 class="service-name">איפור ערב ואירועים</h3>
-          <p class="service-desc">איפור אלגנטי לכל אירוע — חתונות, ימי הולדת, אירועי חברה וכל מקרה שבו רוצים להיראות מושלמת.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%A2%D7%A8%D7%91" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום אירוע</a>
+          <p class="service-desc">חתונת חברה, בר מצווה, מסיבה, אירוע עסקי — כל סיבה היא סיבה טובה להיראות מושלמת. איפור אלגנטי שמתאים בדיוק לאירוע ולסגנון שלך.</p>
+          <a onclick="trackEvent('whatsapp_click','conversion','events_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%A2%D7%A8%D7%91" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום אירוע</a>
         </article>
+
+        <!-- PRODUCTIONS -->
         <article class="service-card reveal">
-          <h3 class="service-name">הפקות</h3>
-          <p class="service-desc">ניסיון עשיר בעבודה מול מצלמה — צילומי אופנה, קליפים, פרסומות ועבודה עם אמנים ואנשי ציבור.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%94%D7%A4%D7%A7%D7%94" target="_blank" rel="noopener noreferrer" class="service-cta">פרטים להפקה</a>
+          <h3 class="service-name">הפקות וצילומים</h3>
+          <p class="service-desc">ניסיון עשיר בעבודה מול מצלמה — קליפים, פרסומות, צילומי אופנה ועבודה עם אמנים ואנשי ציבור. מראה שנראה מדהים גם על המסך.</p>
+          <a onclick="trackEvent('whatsapp_click','conversion','prod_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%94%D7%A4%D7%A7%D7%94" target="_blank" rel="noopener noreferrer" class="service-cta">פרטים להפקה</a>
         </article>
+
+        <!-- BIRTHDAYS -->
         <article class="service-card reveal">
           <h3 class="service-name">ימי הולדת</h3>
-          <p class="service-desc">הפכי את יום ההולדת שלך לחוויה מרגשת. איפור ייחודי שמתאים לסגנון ולאופי שלך.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%99%D7%95%D7%9D%20%D7%94%D7%95%D7%9C%D7%93%D7%AA" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום</a>
+          <p class="service-desc">יום ההולדת שלך — רגע שראוי לזכור. איפור שמתאים לאופי ולסגנון שלך, שיגרום לך להרגיש כוכבת בדיוק ביום שמגיע לך.</p>
+          <a onclick="trackEvent('whatsapp_click','conversion','bday_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%99%D7%95%D7%9D%20%D7%94%D7%95%D7%9C%D7%93%D7%AA" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום</a>
         </article>
-        <article class="service-card reveal">
-          <h3 class="service-name">איפור פורים</h3>
-          <p class="service-desc">דמות, פנטזיה, גלאם — הכל אפשרי! איפור יצירתי ועוצר נשימה לחג הפורים.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%A4%D7%95%D7%A8%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום</a>
-        </article>
+
+        <!-- WORKSHOPS -->
         <article class="service-card reveal">
           <h3 class="service-name">סדנאות איפור</h3>
-          <p class="service-desc">רוצה ללמוד? סדנאות אישיות וקבוצתיות — טכניקות מקצועיות שתוכלי ליישם בעצמך.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%A1%D7%93%D7%A0%D7%AA%20%D7%90%D7%99%D7%A4%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="service-cta">הרשמה לסדנה</a>
+          <p class="service-desc">רוצה ללמוד? סדנאות אישיות וקבוצתיות — טכניקות מקצועיות שתוכלי ליישם בעצמך ביום-יום. מהנה, מעשי ומלמד.</p>
+          <a onclick="trackEvent('whatsapp_click','conversion','workshop_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%A1%D7%93%D7%A0%D7%AA%20%D7%90%D7%99%D7%A4%D7%95%D7%A8" target="_blank" rel="noopener noreferrer" class="service-cta">הרשמה לסדנה</a>
         </article>
+
       </div>
     </section>
 
     <!-- CTA STRIP -->
     <div class="cta-strip" role="complementary" aria-label="קריאה לפעולה">
-      <p class="cta-strip-text">כלה? אירוע? סדנה? — <strong>תיאום דחוף זמין עכשיו</strong></p>
+      <p class="cta-strip-text">כלה? אירוע? ניסוי? — <strong>מגיעה אלייך, בכל מקום בישראל</strong></p>
       <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="cta-strip-btn">פתחי וואטסאפ</a>
       <a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" class="cta-strip-btn cta-strip-btn-outline">התקשרי</a>
     </div>
@@ -305,23 +360,23 @@
     <section id="philosophy" aria-labelledby="philosophy-title">
       <p class="section-eyebrow" style="justify-content:center; margin-bottom:40px" id="philosophy-title">הפילוסופיה שלי</p>
       <blockquote class="philosophy-quote reveal">
-        האיפור הכי יפה הוא זה שגורם לך לראות את עצמך ולחייך —
-        כי הוא פשוט מדגיש את מה שתמיד היה שם
+        אני לא כאן כדי לשנות אותך —
+        אני כאן כדי שתסתכלי בראי ותגידי: "זאת אני. ואני יפה."
       </blockquote>
       <div class="philosophy-attrs reveal" role="list" aria-label="נתונים מרכזיים">
         <div class="attr" role="listitem">
-          <div class="attr-num" aria-label="יופי טבעי">∞</div>
-          <div class="attr-label">יופי טבעי</div>
+          <div class="attr-num" aria-label="מגיעה לכל הארץ">🇮🇱</div>
+          <div class="attr-label">כל הארץ</div>
         </div>
         <div class="attr-divider" aria-hidden="true"></div>
         <div class="attr" role="listitem">
-          <div class="attr-num">4+</div>
-          <div class="attr-label">סוגי שירות</div>
+          <div class="attr-num">פרימיום</div>
+          <div class="attr-label">מוצרים בלבד</div>
         </div>
         <div class="attr-divider" aria-hidden="true"></div>
         <div class="attr" role="listitem">
           <div class="attr-num">100%</div>
-          <div class="attr-label">מקצועיות</div>
+          <div class="attr-label">שביעות רצון</div>
         </div>
         <div class="attr-divider" aria-hidden="true"></div>
         <div class="attr" role="listitem">
@@ -333,30 +388,30 @@
 
     <!-- AREA -->
     <section id="area" aria-labelledby="area-title">
-      <div class="area-visual reveal">
+      <div class="area-visual reveal" aria-hidden="true">
         <div class="area-map-visual"
           role="button" tabindex="0"
-          aria-label="פתחי ניווט ל: דרך הבשמים 91, אילת"
-          onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=דרך+הבשמים+91,+אילת,+ישראל','_blank')"
-          onkeypress="if(event.key==='Enter')window.open('https://www.google.com/maps/dir/?api=1&destination=דרך+הבשמים+91,+אילת,+ישראל','_blank')"
+          aria-label="לחצי לפתיחת וואטסאפ"
+          onclick="window.open('https://wa.me/9720547276716','_blank')"
+          onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')"
           style="cursor:pointer;">
-          <span class="map-label">דרך הבשמים 91, אילת — לחצי לניווט</span>
+          <span class="map-label">מגיעה לכל הארץ — לחצי לתיאום</span>
         </div>
       </div>
       <div class="reveal">
         <p class="section-eyebrow">אזור פעילות</p>
-        <h2 id="area-title" class="section-title">מאילת<br/>לכל הארץ</h2>
+        <h2 id="area-title" class="section-title">מגיעה אלייך<br/>בכל מקום בישראל</h2>
         <div class="area-points" role="list">
           <div class="area-point" role="listitem">
             <div class="area-text">
-              <strong>בסיס קבוע באילת</strong>
-              <span>פעילות עיקרית באזור אילת ועמק הערבה</span>
+              <strong>שירות עד הבית</strong>
+              <span>אני מגיעה אלייך — לבית הכלה, לאולם, לאולפן</span>
             </div>
           </div>
           <div class="area-point" role="listitem">
             <div class="area-text">
-              <strong>מגיעה לכל הארץ</strong>
-              <span>מוכנה לנסוע לכל מקום בישראל לאפר כלות ואירועים</span>
+              <strong>כל הארץ</strong>
+              <span>צפון, מרכז, דרום — לא משנה איפה, אני מגיעה</span>
             </div>
           </div>
         </div>
@@ -378,8 +433,9 @@
     <!-- REVIEWS -->
     <section id="reviews" style="padding:80px 40px; background:rgba(255,255,255,.02);" aria-labelledby="reviews-title">
       <div style="text-align:center; margin-bottom:50px;" class="reveal">
-        <p class="section-eyebrow" style="justify-content:center;">מה אומרות עליי</p>
-        <h2 id="reviews-title" class="section-title">ביקורות לקוחות</h2>
+        <p class="section-eyebrow" style="justify-content:center;">מה הכלות אומרות</p>
+        <h2 id="reviews-title" class="section-title">ביקורות כלות אמיתיות</h2>
+        <p style="font-size:.95rem;opacity:.6;margin-top:10px;">כבר מאות כלות סמכו עליי ביום הגדול שלהן</p>
         <div id="avg-rating" style="font-size:1.8rem; margin-top:12px; color:var(--gold);" aria-label="דירוג כוללי">⭐⭐⭐⭐⭐</div>
       </div>
 
@@ -442,7 +498,7 @@
             <div class="biz-card-divider"></div>
             <div class="biz-card-info">
               <div class="biz-info-row"><span>054-7276716</span></div>
-              <div class="biz-info-row"><span>אילת | מגיעה לכל הארץ</span></div>
+              <div class="biz-info-row"><span>מגיעה לכל הארץ</span></div>
               <div class="biz-info-row"><span>@yarden_damri_makeup</span></div>
               <div class="biz-info-row"><span>כלות · ערב · הפקות · אירועים</span></div>
             </div>
@@ -452,7 +508,7 @@
         </div>
 
         <div class="reveal">
-          <p class="contact-intro">רוצה לשמוע עוד? מלאי את הפרטים ואחזור אלייך בהקדם</p>
+          <p class="contact-intro">מוכנה לשמוע עוד? מלאי את הפרטים ואחזור אלייך בהקדם — ביחס אישי ובלי להתחייב</p>
           <form onsubmit="return false;" novalidate aria-label="טופס יצירת קשר">
             <div class="form-row">
               <div class="form-group">
@@ -507,7 +563,7 @@
 
   <!-- FOOTER -->
   <footer role="contentinfo">
-    <p>© 2025 <strong>ירדן דמרי</strong> | מאפרת מקצועית | אילת וכל הארץ</p>
+    <p>© 2025 <strong>ירדן דמרי</strong> | מאפרת כלות וערב מקצועית | מגיעה לכל הארץ</p>
     <p style="margin-top:10px;"><a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="התקשרי אל ירדן דמרי">054-7276716</a> &nbsp;·&nbsp; <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">וואטסאפ</a></p>
     <nav aria-label="ניווט תחתון" style="margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin-bottom:16px;">
       <a href="bride.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מאפרת כלות</a>
@@ -559,7 +615,7 @@
     aria-controls="a11y-panel"
     aria-keyshortcuts="Alt+A"
     onclick="toggleA11y()">
-    ♿
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M10 7h4l2 5h3v2h-4l-1-2.5V17h2l1 4h-2l-1-3h-3l-1 3H8l1-4h2v-5.5L10 14H7v-2h2z"/></svg>
   </button>
   <div id="a11y-panel" role="dialog" aria-modal="false" aria-label="הגדרות נגישות">
     <h3>הגדרות נגישות</h3>
@@ -1239,9 +1295,9 @@
 
   </script>
   <!-- WHATSAPP FLOAT -->
-  <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-  </a>
+  <button id="wa-float-btn" aria-label="שלחי הודעת וואטסאפ לירדן דמרי" onclick="trackEvent('whatsapp_click','conversion','whatsapp');window.open('https://wa.me/9720547276716','_blank','noopener,noreferrer')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+  </button>
 
 
 <script>
