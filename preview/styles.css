@@ -259,7 +259,7 @@
 
     /* ── AREA ── */
     #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: 1px solid #eee; }
-    .area-map-visual { background: #000; border-radius: 2px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .area-map-visual { background: linear-gradient(135deg,#1a1a1a 0%,#2c2420 50%,#3d2e26 100%); border-radius: 2px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
     .area-map-visual::before { content: ''; }
     .map-label { position: absolute; bottom: 24px; background: rgba(0,0,0,.6); color: #fff; padding: 10px 24px; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-align: center; max-width: 88%; }
     .area-points { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
