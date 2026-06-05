@@ -338,9 +338,9 @@
     #scroll-top:hover { transform: scale(1.1); }
 
     /* ── WHATSAPP FLOAT ── */
-    #wa-float-btn { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: #1a1a1a; color: #fff; border: none; padding: 0; margin: 0; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.3); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: transform .2s; }
-    #wa-float-btn:hover { transform: scale(1.1); }
-    #wa-float-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+    #wa-float-btn, .wa-float { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: #1a1a1a; color: #fff; border: none; padding: 0; margin: 0; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.3); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: transform .2s; text-decoration: none; }
+    #wa-float-btn:hover, .wa-float:hover { transform: scale(1.1); }
+    #wa-float-btn svg, .wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
 
     /* ── SOCIAL PILLS ── */
     .nav-social { display: flex; gap: 8px; align-items: center; list-style: none; }
