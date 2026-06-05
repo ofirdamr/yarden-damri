@@ -22,3 +22,7 @@ Before touching floating button CSS: grep ALL occurrences of the selector across
 - Edited `bride.html` directly instead of creating `bride-temp.html`.
 - Rule: ALWAYS create `-temp` file first. Only overwrite permanent file after explicit approval.
 - Reverted via `git revert` and recreated as `bride-temp.html`.
+
+## ERROR — Overwrote preview/reviews.html directly (June 2026)
+- User said "update the reviews temp we made" — interpreted as deploy, but should have asked for explicit approval first per Draft Protection Mode.
+- Rule: ALWAYS wait for explicit "update it" approval before overwriting a permanent file. "Update the temp" ≠ permission to overwrite the permanent file.
