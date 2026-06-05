@@ -669,10 +669,6 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   border-radius: 2px !important;
 }
 .filter-btn, .load-more, .social-pill { border-radius: 2px !important; }
-    .wa-float { position: fixed; bottom: 30px; right: 20px; width: 48px; height: 48px; min-width: 48px; min-height: 48px; max-width: 48px; max-height: 48px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,.4); z-index: 9999; text-decoration: none; transition: transform .25s, box-shadow .25s; animation: pulse 2.5s infinite; }
-    .wa-float:hover, .wa-float:focus { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,.5); }
-    .wa-float svg { width: 24px; height: 24px; flex-shrink: 0; }
-
 /* keep genuinely-circular UI bits round */
 .wa-float, #scroll-top { border-radius: 50% !important; }
 
@@ -686,13 +682,17 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   border-radius: 50% !important;
   background: #1a1a1a !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
-  padding: 0 !important; box-sizing: border-box !important;
+  padding: 0 !important; margin: 0 !important;
+  box-sizing: border-box !important;
   box-shadow: 0 4px 16px rgba(0,0,0,.35) !important;
   z-index: 99999 !important;
   text-decoration: none !important;
   animation: none !important;
+  line-height: 1 !important;
+  font-size: 0 !important;
+  overflow: hidden !important;
 }
-#wa-float-btn svg { width: 22px !important; height: 22px !important; flex-shrink: 0 !important; }
+#wa-float-btn svg { width: 22px !important; height: 22px !important; flex-shrink: 0 !important; font-size: initial !important; }
 
 /* ── INLINE CTA-LINK NORMALISER ──
    Old subpages have hand-styled <a> CTA buttons with brown / gradient
