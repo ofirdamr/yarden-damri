@@ -679,7 +679,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 /* WA float brand button */
 #wa-float-btn {
   position: fixed !important;
-  bottom: 32px !important; right: 24px !important;
+  bottom: 24px !important; right: 24px !important;
   width: 48px !important; height: 48px !important;
   min-width: 48px !important; max-width: 48px !important;
   min-height: 48px !important; max-height: 48px !important;
