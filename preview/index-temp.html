@@ -116,12 +116,18 @@
 
   <!-- NAV -->
   <nav role="navigation" aria-label="ניווט ראשי">
-    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית" style="display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;line-height:1.2;">
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;font-style:italic;color:#c9a96e;letter-spacing:.04em;">ירדן דמרי</span>
-      <span style="font-family:'Heebo',sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,169,110,.7);margin-top:1px;">מאפרת כלות וערב</span>
+    <!-- Monogram — right corner (RTL start) -->
+    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">
+      <div class="monogram"><span>Y<em>.D</em></span></div>
     </a>
 
-    <!-- Mobile hamburger -->
+    <!-- Centered text branding (absolutely positioned) -->
+    <a href="/preview/" aria-hidden="true" tabindex="-1" style="position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1.25;pointer-events:none;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;font-style:italic;color:#c9a96e;letter-spacing:.04em;white-space:nowrap;">ירדן דמרי</span>
+      <span style="font-family:'Heebo',sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:rgba(201,169,110,.7);margin-top:2px;white-space:nowrap;">מאפרת כלות וערב</span>
+    </a>
+
+    <!-- Mobile hamburger — left corner (RTL end) -->
     <button class="nav-hamburger" id="navHamburger"
       aria-label="פתיחת תפריט ניווט"
       aria-expanded="false"
