@@ -17,3 +17,8 @@
 
 ### Root lesson:
 Before touching floating button CSS: grep ALL occurrences of the selector across the entire file, confirm one source of truth, then make one clean change. Never add !important to fight another !important.
+
+## ERROR — Edited permanent file directly (June 2026)
+- Edited `bride.html` directly instead of creating `bride-temp.html`.
+- Rule: ALWAYS create `-temp` file first. Only overwrite permanent file after explicit approval.
+- Reverted via `git revert` and recreated as `bride-temp.html`.
