@@ -672,7 +672,7 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
 /* keep genuinely-circular UI bits round */
 .wa-float, #scroll-top { border-radius: 50% !important; }
 
-/* WA float brand button */
+/* WA float brand button — same rule as scroll-top and a11y-trigger */
 #wa-float-btn {
   position: fixed !important;
   bottom: 24px !important; right: 24px !important;
@@ -680,19 +680,17 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   min-width: 48px !important; max-width: 48px !important;
   min-height: 48px !important; max-height: 48px !important;
   border-radius: 50% !important;
-  background: #1a1a1a !important;
+  background: #1a1a1a !important; color: #fff !important;
+  border: none !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
   padding: 0 !important; margin: 0 !important;
   box-sizing: border-box !important;
   box-shadow: 0 4px 16px rgba(0,0,0,.35) !important;
   z-index: 99999 !important;
-  text-decoration: none !important;
+  cursor: pointer !important;
   animation: none !important;
-  line-height: 1 !important;
-  font-size: 0 !important;
-  overflow: hidden !important;
 }
-#wa-float-btn svg { width: 22px !important; height: 22px !important; flex-shrink: 0 !important; font-size: initial !important; }
+#wa-float-btn svg { width: 22px !important; height: 22px !important; flex-shrink: 0 !important; }
 
 /* ── INLINE CTA-LINK NORMALISER ──
    Old subpages have hand-styled <a> CTA buttons with brown / gradient
