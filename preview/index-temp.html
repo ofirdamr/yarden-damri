@@ -104,6 +104,29 @@
       padding: 0; margin: -1px; overflow: hidden;
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
+  <style>
+    /* ── FLOATING BUTTONS OVERRIDE ── */
+    .wa-float {
+      bottom: 24px !important; right: 24px !important;
+      width: 48px !important; height: 48px !important;
+      min-width: 48px !important; max-width: 48px !important;
+      min-height: 48px !important; max-height: 48px !important;
+      padding: 0 !important; box-sizing: border-box !important;
+    }
+    .wa-float svg, .wa-float img, .wa-float iframe {
+      width: 24px !important; height: 24px !important; flex-shrink: 0 !important;
+    }
+    #a11y-trigger {
+      bottom: 24px !important; left: 24px !important;
+      width: 48px !important; height: 48px !important;
+      background: #1a1a1a !important; color: #fff !important;
+      border: none !important; filter: none !important;
+    }
+    #a11y-trigger svg { width: 22px !important; height: 22px !important; fill: #fff !important; }
+    #scroll-top {
+      bottom: 24px !important; left: 84px !important;
+      width: 48px !important; height: 48px !important;
+    }
   </style>
 </head>
 
