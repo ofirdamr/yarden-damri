@@ -25,7 +25,7 @@
         aria-label="פתיחת תפריט נגישות. קיצור מקלדת: Alt+A"
         aria-expanded="false"
         aria-controls="a11y-panel"
-        aria-keyshortcuts="Alt+A">♿</button>
+        aria-keyshortcuts="Alt+A"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M10 7h4l2 5h3v2h-4l-1-2.5V17h2l1 4h-2l-1-3h-3l-1 3H8l1-4h2v-5.5L10 14H7v-2h2z"/></svg></button>
       <div id="a11y-panel" role="dialog" aria-modal="false" aria-label="הגדרות נגישות">
         <h3>הגדרות נגישות</h3>
         <div class="a11y-row">
