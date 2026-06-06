@@ -319,7 +319,7 @@ function applyAdminSettings(images) {
 
 // ── CDN HELPERS ──
 function cdnUrl(url, w) {
-  if (url && url.includes('ik.imagekit.io')) return url.replace(/\/yarden_makeup\//, `/tr:w-${w},q-80,f-auto/yarden_makeup/`);
+  if (url && url.includes('ik.imagekit.io')) return url;  // ImageKit serves optimized by default
   
   if (!url || !url.includes('cloudinary.com')) return url;
   return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_limit/`);
