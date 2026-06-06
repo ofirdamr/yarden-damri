@@ -1,6 +1,20 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1780774909/yarden_makeup/yarden_makeup_18095410015962853.jpg",
+    "a": "זה אחד הלוקים האהובים עליי לאחרונה 🤍\nגל את מהממת! \n@galifergan \n@korenmalihe",
+    "id": "18399908116155226",
+    "item_id": "18095410015962853"
+  },
+  {
+    "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1780774910/yarden_makeup/yarden_makeup_18124163572566762.mp4",
+    "a": "זה אחד הלוקים האהובים עליי לאחרונה 🤍\nגל את מהממת! \n@galifergan \n@korenmalihe",
+    "id": "18399908116155226",
+    "video": true,
+    "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/718894002_18596918722037829_2304483789629556431_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=ZYfBPLFD0v0Q7kNvwF4Xtgm&_nc_oc=AdqmqEbO1htSNJ-_V1KEoZHGl0A6S7wjY02sl6XMFSseoKx1YZutZRFumPpf8aRRHw4&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=APY2UpUEAAAA&_nc_gid=pw2kduWSlqy0zPV_C2-2SA&_nc_tpa=Q5bMBQHUEj7zfxl4UWT-FmuxZWYM-YY322UpRC0OO-ycfsimcKY_pVAihP5pZiYOu1XyUSoPu02hxCv5SA&oh=00_Af8_zq2EX7o1vpD7X9mzTgQgLIs2b5AnzwVIDpJ7GYTRMA&oe=6A2A3F80",
+    "item_id": "18124163572566762"
+  },
+  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1780342362/yarden_makeup/yarden_makeup_17881563132435942.mp4",
     "a": "רוצה להרגיש הכי יפה שלך ביום החתונה, בלי להרגיש מאופרת מדי? 🤍✨\nאיפור נקי, אלגנט",
     "id": "17881563132435942",
