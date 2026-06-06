@@ -38,7 +38,7 @@
     "name": "ירדן דמרי — מאפרת כלות וערב",
     "url": "https://yardendamri.co.il",
     "telephone": "+972-54-7276716",
-    "image": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527589/yarden_makeup/yarden_makeup_18404043595145595.jpg",
+    "image": "https://ik.imagekit.io/Yardendamri/v1777527589/yarden_makeup/yarden_makeup_18404043595145595.jpg",
     "description": "ירדן דמרי – מאפרת כלות וערב באילת. מתמחה באיפור כלות, איפור ערב, הפקות וסדנאות. מגיעה לכל הארץ.",
     "address": {
       "@type": "PostalAddress",
@@ -219,9 +219,9 @@
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;"
-          poster="https://res.cloudinary.com/dfjwxc1cw/video/upload/so_0,w_720,f_jpg,q_auto/yarden_makeup/yarden_makeup_18352618189204100.jpg"
-          src="https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18352618189204100.mp4">
-          <source id="heroVideoSource" src="https://res.cloudinary.com/dfjwxc1cw/video/upload/w_720,q_auto:good,f_auto/yarden_makeup/yarden_makeup_18352618189204100.mp4" type="video/mp4">
+          poster="https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18352618189204100.jpg"
+          src="https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18352618189204100.mp4">
+          <source id="heroVideoSource" src="https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18352618189204100.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
@@ -257,7 +257,7 @@
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://res.cloudinary.com/dfjwxc1cw/image/upload/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
+        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
@@ -688,15 +688,13 @@
       } else if (vidUrl && videoEl) {
         const s = document.getElementById('heroVideoSource');
         if (!s) return;
-        const clean = vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/');
-        const cloudUrl = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-        // Compare by filename — browser may normalize the full URL differently
-        const newFile = cloudUrl.split('/').pop();
+        // ImageKit URL - use as-is, no transform needed
+        const finalUrl = vidUrl.includes('ik.imagekit.io') ? vidUrl :
+          vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/').replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
+        const newFile = finalUrl.split('/').pop();
         const curFile = s.src.split('/').pop();
         if (newFile && curFile && newFile === curFile) return;
-        const posterUrl = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
-        if (posterUrl) videoEl.poster = posterUrl;
-        s.src = cloudUrl;
+        s.src = finalUrl;
         videoEl.load();
         videoEl.play().catch(()=>{});
       }
