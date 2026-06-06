@@ -308,7 +308,7 @@
             <li>✓ מוצרי פרימיום בלבד</li>
             <li>✓ מראה שמחזיק כל הלילה</li>
           </ul>
-          <a onclick="trackEvent('whatsapp_click','conversion','bridal_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%9B%D7%9C%D7%94" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום כלה</a>
+          <a href="pricing.html" onclick="trackEvent('pricing_click','navigation','bridal_service')" class="service-cta">חבילות ומחירים</a>
         </article>
 
         <!-- TRIAL -->
@@ -322,7 +322,7 @@
         <article class="service-card reveal">
           <h3 class="service-name">איפור ערב ואירועים</h3>
           <p class="service-desc">חתונת חברה, בר מצווה, מסיבה, אירוע עסקי — כל סיבה היא סיבה טובה להיראות מושלמת. איפור אלגנטי שמתאים בדיוק לאירוע ולסגנון שלך.</p>
-          <a onclick="trackEvent('whatsapp_click','conversion','events_service')" href="https://wa.me/9720547276716?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A8%D7%93%D7%9F%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%AA%20%D7%91%D7%90%D7%99%D7%A4%D7%95%D7%A8%20%D7%A2%D7%A8%D7%91" target="_blank" rel="noopener noreferrer" class="service-cta">לתיאום אירוע</a>
+          <a href="pricing.html" onclick="trackEvent('pricing_click','navigation','events_service')" class="service-cta">חבילות ומחירים</a>
         </article>
 
         <!-- PRODUCTIONS -->
@@ -408,14 +408,8 @@
         <div class="area-points" role="list">
           <div class="area-point" role="listitem">
             <div class="area-text">
-              <strong>שירות עד הבית</strong>
-              <span>אני מגיעה אלייך — לבית הכלה, לאולם, לאולפן</span>
-            </div>
-          </div>
-          <div class="area-point" role="listitem">
-            <div class="area-text">
-              <strong>כל הארץ</strong>
-              <span>צפון, מרכז, דרום — לא משנה איפה, אני מגיעה</span>
+              <strong>שירות פרימיום עד הבית</strong>
+              <span>מגיעה איתך לכל לוקיישן שתבחרי – מהצפון ועד הדרום, לבית, לאולם או לאולפן, כדי להעניק לך שקט נפשי וחוויה מושלמת.</span>
             </div>
           </div>
         </div>
@@ -453,25 +447,19 @@
 
       <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto 40px;"></div>
 
-      <div style="max-width:500px;margin:0 auto;background:var(--card,#231815);border:1px solid rgba(232,200,176,.15);border-radius:20px;padding:28px;" class="reveal">
-        <h3 style="color:var(--blush);margin-bottom:18px;font-size:1.1rem;">✍️ השאירי ביקורת</h3>
-        <div class="form-group">
-          <label for="rev-name">שמך</label>
-          <input id="rev-name" type="text" placeholder="שם פרטי" aria-required="true" />
-        </div>
-        <div style="display:flex;gap:6px;margin-bottom:12px;direction:ltr;" id="star-picker" role="group" aria-label="בחרי דירוג כוכבים">
-          <span class="star-opt" data-v="1" onclick="setRev(1)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(1)" role="button" aria-label="כוכב אחד" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="2" onclick="setRev(2)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(2)" role="button" aria-label="שני כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="3" onclick="setRev(3)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(3)" role="button" aria-label="שלושה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="4" onclick="setRev(4)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(4)" role="button" aria-label="ארבעה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="5" onclick="setRev(5)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(5)" role="button" aria-label="חמישה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-        </div>
-        <div class="form-group">
-          <label for="rev-text">הביקורת שלך</label>
-          <textarea id="rev-text" placeholder="ספרי על החוויה שלך..." aria-required="true"></textarea>
-        </div>
-        <button onclick="submitReview()" class="submit-btn">שלחי ביקורת 💌</button>
-        <p id="rev-msg" style="font-size:.88rem;text-align:center;margin-top:8px;color:var(--gold);display:none;" role="status" aria-live="polite">תודה! הביקורת נוספה ✅</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto;" class="reveal">
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
+          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
+          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון. כולם שאלו אותי מי אפר אותי 😍</p>
+          <div style="font-size:.82rem;font-weight:600;color:#111;">נועה כ.</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות</div>
+        </article>
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
+          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
+          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש — סוף סוף — כמו עצמי. ביום החתונה בכיתי מרוב שמחה 🤍</p>
+          <div style="font-size:.82rem;font-weight:600;color:#111;">דנה א.</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות + ניסוי</div>
+        </article>
       </div>
     </section>
 
@@ -485,9 +473,8 @@
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
-      <div style="margin-bottom:60px" class="reveal">
-        <p class="section-eyebrow">בואי נדבר</p>
-        <h2 id="contact-title" class="section-title">צרי קשר</h2>
+      <div style="margin-bottom:48px" class="reveal">
+        <h2 id="contact-title" class="section-title">בואי נדבר?</h2>
       </div>
       <div class="contact-inner">
         <div class="reveal">
@@ -512,7 +499,7 @@
         </div>
 
         <div class="reveal">
-          <p class="contact-intro">מוכנה לשמוע עוד? מלאי את הפרטים ואחזור אלייך בהקדם — ביחס אישי ובלי להתחייב</p>
+          <p class="contact-intro">השאירי פרטים כאן, או לחצי על כפתור הוואטסאפ ונתחיל לתכנן את הלוק המנצח שלך.</p>
           <form onsubmit="return false;" novalidate aria-label="טופס יצירת קשר">
             <div class="form-row">
               <div class="form-group">
@@ -564,6 +551,8 @@
     </section>
 
   </main>
+
+  <div style="padding-bottom:100px;" aria-hidden="true"></div>
 
   <!-- FOOTER -->
   <footer role="contentinfo">
