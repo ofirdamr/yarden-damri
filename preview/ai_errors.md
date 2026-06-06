@@ -30,3 +30,8 @@ Before touching floating button CSS: grep ALL occurrences of the selector across
 ## ERROR — GitHub Pages cache delay (June 2026)
 - Changes pushed but user saw nothing for hours due to GitHub Pages CDN cache.
 - Lesson: After pushing, always warn user that GitHub Pages can take 5–10 min to propagate. Suggest adding `?v=N` to URL to bypass browser cache.
+
+## ERROR — Edited preview/styles.css directly (June 2026)
+- Modified `preview/styles.css` directly instead of creating `preview/styles-temp.css`.
+- Also edited root `index.html` and `styles.css` (which the user had not approved).
+- Rule: NEVER touch original files in `/preview`. Always create `-temp` versions. Wait for explicit approval before overwriting originals.
