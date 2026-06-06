@@ -393,25 +393,13 @@
     <!-- AREA -->
     <section id="area" aria-labelledby="area-title">
       <div class="area-visual reveal" aria-hidden="true">
-        <div class="area-map-visual">
-          <div class="area-map-cities">
-            <span>תל אביב</span>
-            <span>ירושלים</span>
-            <span>חיפה</span>
-            <span>באר שבע</span>
-            <span>נתניה</span>
-            <span>ראשון לציון</span>
-            <span>הרצליה</span>
-            <span>רמת גן</span>
-            <span>אשדוד</span>
-            <span>מודיעין</span>
-            <span>פתח תקווה</span>
-            <span>כפר סבא</span>
-          </div>
-          <div class="area-map-center">
-            <span class="area-map-icon">✦</span>
-            <p>מגיעה לכל הארץ</p>
-          </div>
+        <div class="area-map-visual"
+          role="button" tabindex="0"
+          aria-label="לחצי לפתיחת וואטסאפ"
+          onclick="window.open('https://wa.me/9720547276716','_blank')"
+          onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')"
+          style="cursor:pointer;">
+          <span class="map-label">מגיעה לכל הארץ — לחצי לתיאום</span>
         </div>
       </div>
       <div class="reveal">
@@ -441,46 +429,34 @@
     </section>
 
     <!-- REVIEWS -->
-    <section id="reviews" style="padding:80px 40px; background:rgba(255,255,255,.02);" aria-labelledby="reviews-title">
-      <div style="text-align:center; margin-bottom:50px;" class="reveal">
+    <section id="reviews" aria-labelledby="reviews-title" style="padding:clamp(60px,10vw,120px) clamp(24px,8vw,100px); border-top:1px solid #eee;">
+      <div style="text-align:center;margin-bottom:56px;" class="reveal">
         <p class="section-eyebrow" style="justify-content:center;">מה הכלות אומרות</p>
         <h2 id="reviews-title" class="section-title">ביקורות כלות אמיתיות</h2>
-        <p style="font-size:.95rem;opacity:.6;margin-top:10px;">כבר מאות כלות סמכו עליי ביום הגדול שלהן</p>
-        <div id="avg-rating" style="font-size:1.8rem; margin-top:12px; color:var(--gold);" aria-label="דירוג כוללי">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#999;margin-top:12px;letter-spacing:.04em;">כבר מאות כלות סמכו עליי ביום הגדול שלהן</p>
       </div>
-
-      <div id="google-reviews-strip" style="max-width:900px;margin:0 auto 32px;"></div>
-
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;" class="reveal" role="list" aria-label="פלטפורמות ביקורות">
-        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" role="listitem">⭐ כתבי ביקורת ב-Google</a>
-        <a href="https://www.d.co.il/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📒 דפי זהב</a>
-        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:860px;margin:0 auto 48px;" class="reveal">
+        <article style="background:#fff;border:1px solid #eee;border-radius:4px;padding:32px 28px;">
+          <div style="color:var(--gold);font-size:.85rem;letter-spacing:.2em;margin-bottom:20px;">★★★★★</div>
+          <p style="font-size:.93rem;color:#555;line-height:1.9;margin-bottom:24px;">"ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון."</p>
+          <div style="font-size:.8rem;font-weight:600;color:var(--charcoal);font-family:'Rubik',sans-serif;">נועה כ.</div>
+          <div style="font-size:.75rem;color:#bbb;margin-top:3px;letter-spacing:.06em;">איפור כלות</div>
+        </article>
+        <article style="background:#fff;border:1px solid #eee;border-radius:4px;padding:32px 28px;">
+          <div style="color:var(--gold);font-size:.85rem;letter-spacing:.2em;margin-bottom:20px;">★★★★★</div>
+          <p style="font-size:.93rem;color:#555;line-height:1.9;margin-bottom:24px;">"הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש כמו עצמי."</p>
+          <div style="font-size:.8rem;font-weight:600;color:var(--charcoal);font-family:'Rubik',sans-serif;">דנה א.</div>
+          <div style="font-size:.75rem;color:#bbb;margin-top:3px;letter-spacing:.06em;">איפור כלות + ניסוי</div>
+        </article>
       </div>
-
-      <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto 40px;"></div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto;" class="reveal">
-        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
-          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
-          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון. כולם שאלו אותי מי אפר אותי 😍</p>
-          <div style="font-size:.82rem;font-weight:600;color:#111;">נועה כ.</div>
-          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות</div>
-        </article>
-        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
-          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
-          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש — סוף סוף — כמו עצמי. ביום החתונה בכיתי מרוב שמחה 🤍</p>
-          <div style="font-size:.82rem;font-weight:600;color:#111;">דנה א.</div>
-          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות + ניסוי</div>
-        </article>
+      <div style="text-align:center;" class="reveal">
+        <a href="reviews.html" style="display:inline-block;font-family:'Rubik',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;">לכל הביקורות ←</a>
       </div>
     </section>
 
     <div class="share-strip">
       <p class="share-strip-text">אהבת את מה שראית? שתפי עם חברה שמחפשת מאפרת</p>
-      <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את האתר">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        שתפי עם חברה
-      </button>
+      <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את האתר">שתפי עם חברה</button>
     </div>
 
     <!-- CONTACT -->
@@ -490,24 +466,20 @@
       </div>
       <div class="contact-inner">
         <div class="reveal">
-          <div class="biz-card"
-            role="button" tabindex="0"
-            aria-label="לחצי לפתיחת שיחת וואטסאפ עם ירדן דמרי"
-            onclick="window.open('https://wa.me/9720547276716','_blank')"
-            onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')">
-            <div class="biz-card-pattern" aria-hidden="true"></div>
-            <div class="biz-card-logo">ירדן דמרי</div>
-            <div class="biz-card-title">Makeup Artist • מאפרת מקצועית</div>
-            <div class="biz-card-divider"></div>
-            <div class="biz-card-info">
-              <div class="biz-info-row"><span>054-7276716</span></div>
-              <div class="biz-info-row"><span>מגיעה לכל הארץ</span></div>
-              <div class="biz-info-row"><span>@yarden_damri_makeup</span></div>
-              <div class="biz-info-row"><span>כלות · ערב · הפקות · אירועים</span></div>
+          <div style="padding:48px 0 0;">
+            <p style="font-family:'Rubik',sans-serif;font-size:1.6rem;font-weight:300;color:var(--charcoal);margin-bottom:6px;">ירדן דמרי</p>
+            <p style="font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#bbb;margin-bottom:40px;">Makeup Artist • מאפרת מקצועית</p>
+            <div style="display:flex;flex-direction:column;gap:18px;">
+              <a href="tel:0547276716" style="font-size:.95rem;color:var(--charcoal);text-decoration:none;border-bottom:1px solid #eee;padding-bottom:18px;" dir="ltr">054-7276716</a>
+              <p style="font-size:.95rem;color:#777;border-bottom:1px solid #eee;padding-bottom:18px;">מגיעה לכל הארץ</p>
+              <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" style="font-size:.95rem;color:#777;text-decoration:none;border-bottom:1px solid #eee;padding-bottom:18px;" dir="ltr">@yarden_damri_makeup</a>
+              <p style="font-size:.9rem;color:#bbb;letter-spacing:.04em;">כלות · ערב · הפקות · אירועים</p>
             </div>
-            <div class="biz-card-name" aria-hidden="true">לחצי לוואטסאפ ←</div>
+            <a href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer"
+              style="display:inline-block;margin-top:40px;font-family:'Rubik',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;">
+              פתחי וואטסאפ ←
+            </a>
           </div>
-          <p style="text-align:center; margin-top:16px; font-size:.78rem; opacity:.5; letter-spacing:.08em;">✦ לחצי על הכרטיס לפתיחת וואטסאפ ✦</p>
         </div>
 
         <div class="reveal">
@@ -555,7 +527,7 @@
                 const msg = encodeURIComponent('היי ירדן! 😊\nשם: ' + name + '\nטלפון: ' + phone + '\nסוג שירות: ' + service + '\nתאריך אירוע: ' + date + (notes ? '\nהערות: ' + notes : ''));
                 window.open('https://wa.me/9720547276716?text='+msg,'_blank');
               })()">
-              📲 שלחי בוואטסאפ
+              שלחי בוואטסאפ ←
             </button>
           </form>
         </div>
