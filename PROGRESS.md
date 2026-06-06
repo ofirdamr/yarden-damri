@@ -407,3 +407,33 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 3. Hero video iOS autoplay — preload=none → preload=metadata
 4. CSS version bumped to v=12
 5. Root files — reverted all root changes back to original (root is not our concern)
+
+## 2026-06-06 (Cloudinary → ImageKit migration session)
+
+### Problem
+- Cloudinary free plan exceeded 198% (49.09/25 credits used)
+- Deactivation scheduled June 9, 2026
+- Root cause: 1,535 images with f_auto,q_auto,w_800 transforms on every delivery + admin panel loading hidden thumbnails
+
+### ImageKit account created
+- URL endpoint: https://ik.imagekit.io/Yardendamri
+- Public key: public_PLcivea4ZG8Ui6cG0j+BqiCc3oE=
+- Private key: private_XBe+OET/tGijZaP1hhXDKR+MZWI=
+
+### Migration attempted
+- Script ran on Mac to upload 1,535 images from Cloudinary → ImageKit
+- gallery-data.js URLs updated to ik.imagekit.io/Yardendamri/yarden_makeup/
+- gallery-temp.html created with updated cdnUrl() function
+
+### STATUS: BROKEN - Images not loading
+- Root cause unknown: ImageKit API blocked from Claude sandbox, cannot verify filenames
+- Likely issue: ImageKit appended random suffix to filenames during upload (e.g. yarden_makeup_18119542276602555_AbCdEf.jpg instead of yarden_makeup_18119542276602555.jpg)
+- Videos still on Cloudinary (not migrated) — working fine
+- gallery-data.js currently has ik.imagekit.io URLs — images broken on live site
+
+### IMMEDIATE ACTION NEEDED (next session)
+1. Open ImageKit dashboard → Media Library → yarden_makeup folder
+2. Check actual filename of any file (does it have random suffix appended?)
+3. If yes → re-upload with useUniqueFileName=false parameter
+4. If no → debug why URLs are 404
+5. Option B: revert gallery-data.js to Cloudinary URLs, remove transforms to save credits
