@@ -285,3 +285,15 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - This BROKE the video that was already working
 - Rule: if something works in the original, do not touch it. Only change things that are confirmed broken.
 - Reverted to preload="none" and removed added play() call
+
+## 2026-06-06: ImageKit migration - did not verify filenames before updating gallery-data.js
+- Ran upload script from Mac, saw "✓ filename" in terminal, assumed success
+- Updated gallery-data.js URLs to ImageKit BEFORE verifying actual uploaded filenames in ImageKit dashboard
+- ImageKit likely appended random suffix to filenames (useUniqueFileName defaults to true)
+- Result: 1,535 broken image URLs in gallery-data.js on live site
+- RULE: After any bulk file upload to a new CDN, ALWAYS verify 2-3 actual filenames in the dashboard BEFORE updating any URL references in code
+
+## 2026-06-06: Did not test single image URL before bulk URL replacement
+- Should have tested: curl -I https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18119542276602555.jpg
+- from a non-sandboxed environment (the Mac terminal) before updating gallery-data.js
+- RULE: Always test one URL manually before doing bulk find/replace across 1,500+ entries
