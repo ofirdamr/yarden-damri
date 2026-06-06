@@ -440,43 +440,35 @@
     </section>
 
     <!-- REVIEWS -->
-    <section id="reviews" style="padding:80px 40px; background:rgba(255,255,255,.02);" aria-labelledby="reviews-title">
-      <div style="text-align:center; margin-bottom:50px;" class="reveal">
+    <section id="reviews" style="padding:80px clamp(24px,6vw,80px);background:var(--bg);" aria-labelledby="reviews-title">
+      <div style="text-align:center;margin-bottom:48px;" class="reveal">
         <p class="section-eyebrow" style="justify-content:center;">מה הכלות אומרות</p>
         <h2 id="reviews-title" class="section-title">ביקורות כלות אמיתיות</h2>
-        <p style="font-size:.95rem;opacity:.6;margin-top:10px;">כבר מאות כלות סמכו עליי ביום הגדול שלהן</p>
-        <div id="avg-rating" style="font-size:1.8rem; margin-top:12px; color:var(--gold);" aria-label="דירוג כוללי">⭐⭐⭐⭐⭐</div>
+        <div style="color:#c9a96e;font-size:1.3rem;margin-top:10px;" aria-label="דירוג 5 כוכבים">★★★★★</div>
       </div>
 
       <div id="google-reviews-strip" style="max-width:900px;margin:0 auto 32px;"></div>
-
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;" class="reveal" role="list" aria-label="פלטפורמות ביקורות">
-        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" role="listitem">⭐ כתבי ביקורת ב-Google</a>
-        <a href="https://www.d.co.il/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📒 דפי זהב</a>
-        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
-      </div>
-
       <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto 40px;"></div>
 
-      <div style="max-width:500px;margin:0 auto;background:var(--card,#231815);border:1px solid rgba(232,200,176,.15);border-radius:20px;padding:28px;" class="reveal">
-        <h3 style="color:var(--blush);margin-bottom:18px;font-size:1.1rem;">✍️ השאירי ביקורת</h3>
-        <div class="form-group">
-          <label for="rev-name">שמך</label>
-          <input id="rev-name" type="text" placeholder="שם פרטי" aria-required="true" />
-        </div>
-        <div style="display:flex;gap:6px;margin-bottom:12px;direction:ltr;" id="star-picker" role="group" aria-label="בחרי דירוג כוכבים">
-          <span class="star-opt" data-v="1" onclick="setRev(1)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(1)" role="button" aria-label="כוכב אחד" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="2" onclick="setRev(2)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(2)" role="button" aria-label="שני כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="3" onclick="setRev(3)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(3)" role="button" aria-label="שלושה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="4" onclick="setRev(4)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(4)" role="button" aria-label="ארבעה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-          <span class="star-opt" data-v="5" onclick="setRev(5)" tabindex="0" onkeypress="if(event.key==='Enter')setRev(5)" role="button" aria-label="חמישה כוכבים" style="font-size:1.6rem;cursor:pointer;opacity:.4">⭐</span>
-        </div>
-        <div class="form-group">
-          <label for="rev-text">הביקורת שלך</label>
-          <textarea id="rev-text" placeholder="ספרי על החוויה שלך..." aria-required="true"></textarea>
-        </div>
-        <button onclick="submitReview()" class="submit-btn">שלחי ביקורת 💌</button>
-        <p id="rev-msg" style="font-size:.88rem;text-align:center;margin-top:8px;color:var(--gold);display:none;" role="status" aria-live="polite">תודה! הביקורת נוספה ✅</p>
+      <!-- Static hardcoded testimonials -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto 40px;" class="reveal">
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
+          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
+          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון. כולם שאלו אותי מי אפר אותי 😍</p>
+          <div style="font-size:.82rem;font-weight:600;color:#111;">נועה כ.</div>
+          <div style="font-size:.75rem;color:#aaa;">איפור כלות</div>
+        </article>
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
+          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
+          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש — סוף סוף — כמו עצמי. ביום החתונה בכיתי מרוב שמחה כשראיתי את עצמי במראה 🤍</p>
+          <div style="font-size:.82rem;font-weight:600;color:#111;">דנה א.</div>
+          <div style="font-size:.75rem;color:#aaa;">איפור כלות + ניסוי</div>
+        </article>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;" class="reveal" role="list" aria-label="פלטפורמות ביקורות">
+        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" role="listitem">⭐ כתבי ביקורת ב-Google</a>
+        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(201,169,110,.3);color:#c9a96e;text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
       </div>
     </section>
 
@@ -490,9 +482,8 @@
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
-      <div style="margin-bottom:60px" class="reveal">
-        <p class="section-eyebrow">בואי נדבר</p>
-        <h2 id="contact-title" class="section-title">צרי קשר</h2>
+      <div style="margin-bottom:48px" class="reveal">
+        <h2 id="contact-title" class="section-title">בואי נדבר?</h2>
       </div>
       <div class="contact-inner">
         <div class="reveal">
@@ -517,7 +508,7 @@
         </div>
 
         <div class="reveal">
-          <p class="contact-intro">בואי נדבר? השאירי פרטים כאן, או לחצי על כפתור הוואטסאפ ונתחיל לתכנן את הלוק המנצח שלך.</p>
+          <p class="contact-intro">השאירי פרטים כאן, או לחצי על כפתור הוואטסאפ ונתחיל לתכנן את הלוק המנצח שלך.</p>
           <form onsubmit="return false;" novalidate aria-label="טופס יצירת קשר">
             <div class="form-row">
               <div class="form-group">
@@ -569,6 +560,8 @@
     </section>
 
   </main>
+
+  <div style="padding-bottom:100px;" aria-hidden="true"></div>
 
   <!-- FOOTER -->
   <footer role="contentinfo">

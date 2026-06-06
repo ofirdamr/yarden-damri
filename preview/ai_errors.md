@@ -26,3 +26,7 @@ Before touching floating button CSS: grep ALL occurrences of the selector across
 ## ERROR — Overwrote preview/reviews.html directly (June 2026)
 - User said "update the reviews temp we made" — interpreted as deploy, but should have asked for explicit approval first per Draft Protection Mode.
 - Rule: ALWAYS wait for explicit "update it" approval before overwriting a permanent file. "Update the temp" ≠ permission to overwrite the permanent file.
+
+## ERROR — GitHub Pages cache delay (June 2026)
+- Changes pushed but user saw nothing for hours due to GitHub Pages CDN cache.
+- Lesson: After pushing, always warn user that GitHub Pages can take 5–10 min to propagate. Suggest adding `?v=N` to URL to bypass browser cache.
