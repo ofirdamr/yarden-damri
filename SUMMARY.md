@@ -1,48 +1,40 @@
 # Session Summary — 2026-06-06
 
-## What we started with
-- Cloudinary free plan at 198% usage (49.09/25 credits)
-- Deactivation notice for June 9, 2026
-- 1,535 gallery images all served with f_auto,q_auto,w_800 transforms burning credits
+## Current state of the live site
+- ✅ gallery-data.js: REVERTED to Cloudinary URLs — images loading correctly again
+- ✅ Videos: on Cloudinary, working
+- ⚠️ gallery-temp.html: still exists with broken ImageKit URLs (can be deleted)
 
-## What is DONE
-- ✅ ImageKit account created: https://ik.imagekit.io/Yardendamri
-- ✅ 1,535 images uploaded from Cloudinary to ImageKit (ran script on Mac)
-- ✅ gallery-data.js updated: all image URLs now point to ik.imagekit.io
-- ✅ gallery-temp.html created with updated cdnUrl() function (no transforms, ImageKit pass-through)
+## The problem that still exists
+- Cloudinary at 198% usage, deactivation June 9, 2026
+- Credits burned by transforms (f_auto,q_auto,w_800) on every image request
 
-## What is BROKEN / NOT DONE
-- ❌ Images not loading in gallery-temp.html — broken question marks
-- ❌ Root cause: ImageKit filenames likely have random suffix appended (e.g. file_AbCdEf.jpg)
-- ❌ gallery.html NOT overwritten yet (still has old Cloudinary URLs — actually safer this way)
-- ❌ Videos still on Cloudinary (NOT migrated, intentional)
-- ❌ Instagram sync not updated to upload to ImageKit
+## What was attempted (FAILED)
+- Created ImageKit account: https://ik.imagekit.io/Yardendamri
+- Ran upload script on Mac — script showed success but NO files were uploaded
+- ImageKit dashboard shows only default sample files (sample-video.mp4, default-image.jpg)
+- The yarden_makeup folder exists but is completely empty
+- gallery-data.js was incorrectly updated to broken ImageKit URLs → REVERTED
 
-## Current file state
-- preview/gallery-data.js → ik.imagekit.io URLs (BROKEN - filenames unverified)
-- preview/gallery-temp.html → updated cdnUrl() - no transform for ImageKit
-- preview/gallery.html → UNCHANGED (still old Cloudinary static HTML + cdnUrl logic)
+## Two options for next session
+
+### Option A: Fix ImageKit upload and retry migration
+- Re-run the upload script on Mac with correct parameters
+- Test one URL manually BEFORE updating gallery-data.js
+- Upload script needs: useUniqueFileName=false, correct auth
+
+### Option B (faster): Keep Cloudinary, remove transforms
+- Edit cdnUrl() in gallery.html to remove f_auto,q_auto,w_800
+- This saves ~80% of credits (transforms = main credit consumer)
+- Images still served from Cloudinary but without resize transforms
+- Buys time, no risk of breaking anything
 
 ## FIRST THING to do next session
-Open ImageKit dashboard (imagekit.io) → Media Library → yarden_makeup folder.
-Check the actual filename of any image. Two scenarios:
-
-### Scenario A: Files have random suffix (e.g. yarden_makeup_18119542276602555_abc123.jpg)
-→ Re-run upload script with useUniqueFileName=false
-→ Then re-run gallery-data.js URL update
-
-### Scenario B: Files have correct names (yarden_makeup_18119542276602555.jpg)  
-→ The URL format or ImageKit config is wrong
-→ Check if endpoint URL is correct (case sensitive: Yardendamri)
-→ Test single URL in Mac terminal: curl -I https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18119542276602555.jpg
-
-### Scenario C (fallback): Revert gallery-data.js to Cloudinary
-→ Restore old Cloudinary URLs in gallery-data.js
-→ Instead remove transforms (f_auto,q_auto,w_800) from cdnUrl() in gallery.html to save credits
-→ Cloudinary deactivation: contact support explaining migration in progress
-
-## Key credentials (NEVER commit to repo)
-- GitHub token: [SEE PROJECT INSTRUCTIONS]
-- ImageKit private key: [SEE PROJECT INSTRUCTIONS]
-- ImageKit public key: [SEE PROJECT INSTRUCTIONS]
-- ImageKit endpoint: https://ik.imagekit.io/Yardendamri
+Decide: Option A or Option B.
+If Option A: run this test on Mac terminal first:
+curl -X POST https://upload.imagekit.io/api/v1/files/upload \
+  -u "private_XBe+OET/tGijZaP1hhXDKR+MZWI=:" \
+  -F "file=https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg" \
+  -F "fileName=test.jpg" \
+  -F "folder=/yarden_makeup"
+Then check ImageKit dashboard if test.jpg appeared.
