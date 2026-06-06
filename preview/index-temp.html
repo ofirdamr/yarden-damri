@@ -442,8 +442,8 @@
 
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;" class="reveal" role="list" aria-label="פלטפורמות ביקורות">
         <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" role="listitem">⭐ כתבי ביקורת ב-Google</a>
-        <a href="https://www.d.co.il/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(176,112,96,.3);color:var(--rose);text-decoration:none;font-size:.88rem;" role="listitem">📒 דפי זהב</a>
-        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(176,112,96,.3);color:var(--rose);text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
+        <a href="https://www.d.co.il/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📒 דפי זהב</a>
+        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
       </div>
 
       <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto 40px;"></div>
@@ -1180,13 +1180,13 @@
     function renderManualReviews() {
       const grid = document.getElementById('reviews-grid');
       grid.innerHTML = reviewsCache.length ? reviewsCache.map(r => `
-        <article style="background:#fff;border:1px solid rgba(176,112,96,.18);border-radius:16px;padding:22px 20px;box-shadow:0 2px 16px rgba(62,42,26,.06);">
+        <article style="background:var(--card,#231815);border:1px solid rgba(232,200,176,.12);border-radius:16px;padding:22px 20px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-            <strong style="color:var(--deep,#7A4A34);font-size:.95rem;">${r.name}</strong>
-            <span style="color:var(--gold,#B89060);font-size:.95rem;" aria-label="${r.rating} כוכבים">${'⭐'.repeat(r.rating)}</span>
+            <strong style="color:var(--blush,#E8C8B0);font-size:.95rem;">${r.name}</strong>
+            <span style="color:var(--gold,#D4AF6A);font-size:.95rem;" aria-label="${r.rating} כוכבים">${'⭐'.repeat(r.rating)}</span>
           </div>
-          <p style="font-size:.95rem;line-height:1.7;color:var(--text,#1A1A1A);opacity:.8;">${r.text}</p>
-          <p style="font-size:.78rem;opacity:.45;margin-top:10px;color:var(--text,#1A1A1A);">${r.date}</p>
+          <p style="font-size:.95rem;line-height:1.7;color:rgba(240,230,220,.8);">${r.text}</p>
+          <p style="font-size:.78rem;opacity:.4;margin-top:10px;">${r.date}</p>
         </article>`).join('')
         : '<p style="opacity:.5;font-size:.95rem;text-align:center;">היי ראשונה להשאיר ביקורת! ⭐</p>';
     }
