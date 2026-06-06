@@ -692,13 +692,9 @@
     (async function applyHeroVideo(){
       if (!window.RemoteState) return;
       try {
-        // Apply from local cache immediately (no network) to prevent flash of default video
-        const cached = window.RemoteState.getCached();
-        if (cached && (cached.heroVideo || cached.heroImage)) applyHeroMediaFromState(cached);
-
-        // Then fetch fresh state and re-apply if needed
         await window.RemoteState.fetch();
         const fresh = window.RemoteState.getCached() || {};
+        fresh.heroVideo = null; // hardcoded in HTML with ImageKit URL
         applyHeroMediaFromState(fresh);
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
