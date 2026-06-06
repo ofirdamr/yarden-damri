@@ -319,11 +319,11 @@ function applyAdminSettings(images) {
 
 // ── CDN HELPERS ──
 function cdnUrl(url, w) {
-  if (!url || !url.includes('cloudinary.com')) return url;
+  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
   return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_limit/`);
 }
 function cdnVideo(url, w) {
-  if (!url || !url.includes('cloudinary.com')) return url;
+  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
   return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
 }
 function cdnVideoPoster(url) {
@@ -431,7 +431,7 @@ function renderGallery() {
     const igCmtCount = igStats?(igStats.comments_count||igStats.comments?.length||0):0;
     const cmtCount = igCmtCount+((getComments()[key]||[]).length);
     const caption = (item.a||'').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
-    const isVideo = item.video || item.u.includes('/video/upload/');
+    const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
     const rot = (getAdminSettings().rotations || {})[item.u] || 0;
     const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
@@ -543,7 +543,7 @@ function showLb() {
   const item = allFilteredImages[lbIndex];
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
-  const isVideo = item.video || item.u.includes('/video/upload/');
+  const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
   if (isVideo) {
     lbVideo.src = item.u;
     lbVideo.style.display = '';
