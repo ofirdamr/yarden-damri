@@ -1,0 +1,72 @@
+name: Upload to ImageKit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload all assets to ImageKit
+        env:
+          IK_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
+        run: |
+          python3 << 'PYEOF'
+          import re, json, subprocess, os, time
+
+          with open('preview/gallery-data.js', 'r') as f:
+              content = f.read()
+
+          # Extract all cloudinary URLs
+          all_urls = re.findall(r'"u":\s*"(https://res\.cloudinary\.com[^"]+)"', content)
+          unique_urls = list(dict.fromkeys(all_urls))
+          print(f"Found {len(unique_urls)} unique assets")
+
+          private_key = os.environ['IK_PRIVATE_KEY']
+          success = 0
+          failed = []
+
+          for i, url in enumerate(unique_urls):
+              filename = url.split('/')[-1].split('?')[0]
+              is_video = 'video' in url or filename.endswith('.mp4')
+              folder = '/yarden_makeup_videos' if is_video else '/yarden_makeup'
+
+              cmd = [
+                  'curl', '-s', '-X', 'POST',
+                  'https://upload.imagekit.io/api/v1/files/upload',
+                  '-u', f'{private_key}:',
+                  '-F', f'file={url}',
+                  '-F', f'fileName={filename}',
+                  '-F', f'folder={folder}',
+                  '--max-time', '60'
+              ]
+              result = subprocess.run(cmd, capture_output=True, text=True)
+              resp = result.stdout.strip()
+
+              if 'fileId' in resp:
+                  success += 1
+                  if success % 100 == 0:
+                      print(f"Progress: {success}/{len(unique_urls)}")
+              else:
+                  failed.append({'url': url, 'error': resp[:200]})
+                  if len(failed) <= 5:
+                      print(f"FAILED: {filename} -> {resp[:100]}")
+
+              time.sleep(0.2)
+
+          print(f"Done: {success} uploaded, {len(failed)} failed")
+          with open('imagekit-results.json', 'w') as f:
+              json.dump({'success': success, 'failed': failed}, f, indent=2)
+          'PYEOF'
+
+      - name: Commit results
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add imagekit-results.json
+          git commit -m "ImageKit upload results" || echo "Nothing to commit"
+          git push
