@@ -3,6 +3,10 @@ const http = require("http");
 const fs = require("fs");
 const crypto = require("crypto");
 
+const TARGET_PREVIEW = process.argv.includes("--target=preview");
+const GALLERY_FILE = TARGET_PREVIEW ? "preview/gallery-data.js" : "gallery-data.js";
+console.log("Target:", GALLERY_FILE);
+
 const IK_IMAGES = {
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
   urlEndpoint: "https://ik.imagekit.io/Yardendamri"
@@ -192,7 +196,7 @@ async function checkExistsR2(fileName) {
 
   let existing = [];
   try {
-    const raw = fs.readFileSync("gallery-data.js", "utf8")
+    const raw = fs.readFileSync(GALLERY_FILE, "utf8")
       .replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
     existing = JSON.parse(raw);
   } catch(e) {}
@@ -275,7 +279,7 @@ async function checkExistsR2(fileName) {
   }
 
   console.log(`\nSaving ${gallery.length} items to gallery-data.js`);
-  fs.writeFileSync("gallery-data.js", `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
+  fs.writeFileSync(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
