@@ -796,9 +796,9 @@ function renderGrid() {
     div.dataset.url=img.u; div.draggable=true;
     const isVid = img.u.includes('/video/upload/') || img.u.match(/\.(mp4|mov|webm)$/i);
     function adminThumb(url, isVid) {
-      if (!url.includes('cloudinary.com')) return url;
-      if (isVid) return url.replace('/video/upload/', '/video/upload/so_0,w_300,h_300,c_fill,f_jpg/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
-      return url.replace('/upload/', '/upload/f_auto,q_auto,w_300,h_300,c_fill/');
+      if (!url) return url;
+      if (isVid) return url.includes('ik.imagekit.io') ? url + '/ik-thumbnail.jpg' : url;
+      return url.includes('ik.imagekit.io') ? url + '?tr=w-300,h-300,c-fill,f-auto,q-auto' : url;
     }
     const thumbSrc = adminThumb(img.u, isVid);
     const altTxt = generateAltText(img, catMap);
@@ -894,13 +894,11 @@ function clearAllSettings(){
 
 // ─── HERO VIDEO PICKER (visual grid) ──────────────────────────
 function heroVidThumb(url){
-  if (!url.includes('cloudinary.com')) return url;
-  return url.replace('/video/upload/', '/video/upload/so_0,w_240,h_160,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  if (!url) return url;
+  return url.includes('ik.imagekit.io') ? url + '/ik-thumbnail.jpg' : url;
 }
 function heroVidPreview(url){
-  if (!url.includes('cloudinary.com')) return url;
-  // Use low-res original (no new transform) so browser plays instantly
-  return url.replace('/video/upload/', '/video/upload/w_400,q_auto:low,vc_auto/');
+  return url;
 }
 let _heroAllVideos = [];
 let _heroCurrentFilter = '';
@@ -1057,13 +1055,9 @@ function heroCropStart(e) {
 
 function updateHeroPosition() { applyHeroCrop(); }
 function _heroRawPreviewUrl(url, type) {
-  // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
-  if (!url || !url.includes('cloudinary.com')) return url;
-  if (type === 'video') {
-    return url.replace('/video/upload/', '/video/upload/q_auto:low,w_640,vc_auto/');
-  } else {
-    return url.replace('/image/upload/', '/image/upload/c_fill,w_800,h_450,f_auto,q_auto/');
-  }
+  if (!url) return url;
+  if (type === 'video') return url;
+  return url.includes('ik.imagekit.io') ? url + '?tr=w-800,h-450,c-fill,f-auto,q-auto' : url;
 }
 
 function showHeroPreview(url, type) {
@@ -1154,8 +1148,8 @@ function populateHeroImageSelect(){
     const isPending = pendingUrl && (img.u === pendingUrl);
     const highlighted = isSaved || isPending;
     const caption = (img.a || '').substring(0,40).replace(/"/g,'&quot;');
-    const thumb = img.u.includes('cloudinary.com')
-      ? img.u.replace('/image/upload/','/image/upload/w_240,h_160,c_fill,f_jpg,q_auto/')
+    const thumb = img.u.includes('ik.imagekit.io')
+      ? img.u + '?tr=w-240,h-160,c-fill,f-auto,q-auto'
       : img.u;
     return `<div class="hero-vid-card" data-url="${img.u.replace(/"/g,'&quot;')}"
          onclick="selectHeroImage(this)"
