@@ -1,40 +1,39 @@
-# Session Summary — 2026-06-06
+# Project Summary — Yarden Damri Website
 
-## Current state of the live site
-- ✅ gallery-data.js: REVERTED to Cloudinary URLs — images loading correctly again
-- ✅ Videos: on Cloudinary, working
-- ⚠️ gallery-temp.html: still exists with broken ImageKit URLs (can be deleted)
+## Architecture
+- **Live site**: root branch (old, still on Cloudinary — not yet replaced)
+- **Staging**: `/preview` folder — all active work done here
+- **Repo**: github.com/ofirdamr/yarden-damri
+- **Admin backend**: yarden-admin.ofirdamr.workers.dev (password: in project instructions)
+- **GitHub Pages**: yardendamri.co.il
 
-## The problem that still exists
-- Cloudinary at 198% usage, deactivation June 9, 2026
-- Credits burned by transforms (f_auto,q_auto,w_800) on every image request
+## Media Stack (Preview folder — current)
+| Asset | Storage | Delivery |
+|---|---|---|
+| Images | Cloudinary (proxied) | ImageKit `ik.imagekit.io/Yardendamri` |
+| Videos | Cloudflare R2 `yarden-videos` bucket | ImageKit `ik.imagekit.io/yardenvideos` |
 
-## What was attempted (FAILED)
-- Created ImageKit account: https://ik.imagekit.io/Yardendamri
-- Ran upload script on Mac — script showed success but NO files were uploaded
-- ImageKit dashboard shows only default sample files (sample-video.mp4, default-image.jpg)
-- The yarden_makeup folder exists but is completely empty
-- gallery-data.js was incorrectly updated to broken ImageKit URLs → REVERTED
+## What Was Done This Session
+- Cloudinary deactivating June 9 — full migration completed
+- All 1535 images: Cloudinary → ImageKit (via web origin proxy)
+- All 289 videos: Cloudinary → Cloudflare R2 → ImageKit yardenvideos account
+- `gallery-data.js`: all URLs migrated to ImageKit/R2
+- `gallery-settings.json`: all URLs migrated, pushed to repo
+- `index.html`, `about.html`, `bride.html`, `bridal-guide.html`: Cloudinary refs removed
+- Hero video: fixed, now playing from ImageKit yardenvideos
+- Gallery categories: working
+- Worker heroVideo: updated via fix-hero.html
 
-## Two options for next session
+## Pending / To Verify
+1. **Root files** (live site): still have Cloudinary refs — needs migration when ready to go live with /preview
+2. **Render.com**: Instagram feed proxy — URL `yarden-damri.onrender.com` returns 404, needs checking
+3. **Instagram token**: appears working (GitHub Action syncs successfully) — verify
+4. **fix-hero.html**: should be deleted once confirmed stable
+5. **Temp files**: `bride-temp.html`, `index-temp.html`, `pricing-temp.html`, `reviews-temp.html`, `styles-temp.css` — clean up
+6. **ImageKit yardenvideos account**: registered under `rifzagury@gmail.com` — document this
 
-### Option A: Fix ImageKit upload and retry migration
-- Re-run the upload script on Mac with correct parameters
-- Test one URL manually BEFORE updating gallery-data.js
-- Upload script needs: useUniqueFileName=false, correct auth
-
-### Option B (faster): Keep Cloudinary, remove transforms
-- Edit cdnUrl() in gallery.html to remove f_auto,q_auto,w_800
-- This saves ~80% of credits (transforms = main credit consumer)
-- Images still served from Cloudinary but without resize transforms
-- Buys time, no risk of breaking anything
-
-## FIRST THING to do next session
-Decide: Option A or Option B.
-If Option A: run this test on Mac terminal first:
-curl -X POST https://upload.imagekit.io/api/v1/files/upload \
-  -u "private_XBe+OET/tGijZaP1hhXDKR+MZWI=:" \
-  -F "file=https://res.cloudinary.com/dfjwxc1cw/image/upload/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg" \
-  -F "fileName=test.jpg" \
-  -F "folder=/yarden_makeup"
-Then check ImageKit dashboard if test.jpg appeared.
+## Key Credentials
+- ImageKit images: `ik.imagekit.io/Yardendamri` (ofirdamr@gmail.com)
+- ImageKit videos: `ik.imagekit.io/yardenvideos` (rifzagury@gmail.com)
+- R2 bucket: `yarden-videos`, public URL: `pub-b53972ac15914c24b444efc1a580296e.r2.dev`
+- Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8350924`
