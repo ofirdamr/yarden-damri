@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="UTF-8"><title>Fix KV Video URLs</title></head>
 <body>
-<h2>Fix Gallery Settings - Migrate ImageKit videos to R2</h2>
+<h2>Fix Gallery Settings</h2>
 <pre id="log">Starting...</pre>
 <script>
 const OLD = 'https://ik.imagekit.io/yardenvideos/';
@@ -11,56 +11,47 @@ const NEW = 'https://videos.yardendamri.co.il/';
 async function fix() {
   const log = document.getElementById('log');
   
-  // Fetch current settings from Worker
   log.textContent = 'Fetching settings...';
-  const res = await fetch('https://yarden-admin.ofirdamr.workers.dev/settings', {
-    headers: { 'Authorization': 'makeup2026' }
-  });
+  const res = await fetch('https://yarden-admin.ofirdamr.workers.dev/settings');
+  if (!res.ok) { log.textContent = 'Fetch failed: ' + res.status; return; }
   const data = await res.json();
-  log.textContent = 'Got settings. Keys: ' + Object.keys(data).join(', ');
+  log.textContent = 'Got settings. Cat keys: ' + Object.keys(data.cats||{}).length;
   
   let changed = 0;
   
-  // Fix cats keys and values
   if (data.cats) {
     const newCats = {};
     for (const [k, v] of Object.entries(data.cats)) {
       const newKey = k.includes(OLD) ? k.replace(OLD, NEW) : k;
-      newCats[newKey] = v;
       if (newKey !== k) changed++;
+      newCats[newKey] = v;
     }
     data.cats = newCats;
   }
   
-  // Fix hidden array
   if (data.hidden) {
     data.hidden = data.hidden.map(h => h.includes(OLD) ? h.replace(OLD, NEW) : h);
   }
-  
-  // Fix order array
   if (data.order) {
     data.order = data.order.map(o => o.includes(OLD) ? o.replace(OLD, NEW) : o);
   }
-  
-  // Fix heroVideo
   if (data.heroVideo && data.heroVideo.includes(OLD)) {
     data.heroVideo = data.heroVideo.replace(OLD, NEW);
   }
   
   log.textContent += '
-Changed ' + changed + ' cat keys. Saving...';
+Changed ' + changed + ' keys. Saving...';
   
-  // Save back
   const saveRes = await fetch('https://yarden-admin.ofirdamr.workers.dev/settings', {
     method: 'POST',
-    headers: { 'Authorization': 'makeup2026', 'Content-Type': 'application/json' },
+    headers: { 'X-Admin-Password': 'makeup2026', 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   });
   const saveData = await saveRes.json();
   log.textContent += '
-Save result: ' + JSON.stringify(saveData);
+Result: ' + JSON.stringify(saveData);
   log.textContent += '
-DONE. Changed keys: ' + changed;
+DONE. Changed: ' + changed;
 }
 
 fix().catch(e => document.getElementById('log').textContent += '
