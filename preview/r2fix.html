@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body><pre id=l>...</pre><script>
+const O='https://ik.imagekit.io/yardenvideos/',N='https://videos.yardendamri.co.il/',W='https://api.yardendamri.co.il';
+(async()=>{
+  const l=document.getElementById('l');
+  const r=await fetch(W+'/settings',{cache:'no-cache'});
+  l.textContent='status:'+r.status;
+  if(!r.ok)return;
+  const d=await r.json();
+  const a=d.admin||{};
+  let n=0;
+  if(a.cats){const c={};for(const[k,v]of Object.entries(a.cats)){const nk=k.includes(O)?k.replace(O,N):k;if(nk!==k)n++;c[nk]=v;}a.cats=c;}
+  if(a.hidden)a.hidden=a.hidden.map(h=>h.includes(O)?h.replace(O,N):h);
+  if(a.order)a.order=a.order.map(o=>o.includes(O)?o.replace(O,N):o);
+  if(d.heroVideo&&d.heroVideo.includes(O))d.heroVideo=d.heroVideo.replace(O,N);
+  d.admin=a;
+  l.textContent+='
+changed:'+n;
+  const p=prompt('password:');
+  if(!p)return;
+  const s=await fetch(W+'/settings',{method:'POST',headers:{'X-Admin-Password':p,'Content-Type':'application/json'},body:JSON.stringify(d)});
+  l.textContent+='
+save:'+s.status+' '+(await s.text());
+})();
+</script></body></html>
