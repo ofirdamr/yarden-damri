@@ -18,7 +18,7 @@ jobs:
       - name: Sync Instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          IK_PRIVATE_IMAGES: ${{ secrets.IK_PRIVATE_IMAGES }}
+          IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
           IK_PRIVATE_VIDEOS: ${{ secrets.IK_PRIVATE_VIDEOS }}
         run: node fix.js
       - name: Commit and push

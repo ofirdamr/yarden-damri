@@ -2,7 +2,7 @@ const https = require("https");
 const fs = require("fs");
 
 const IK_IMAGES = {
-  privateKey: process.env.IK_PRIVATE_IMAGES,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
   urlEndpoint: "https://ik.imagekit.io/Yardendamri"
 };
 const IK_VIDEOS = {
@@ -54,7 +54,7 @@ function checkExistsImageKit(fileName, isVideo) {
 (async () => {
   const token = process.env.INSTAGRAM_TOKEN;
   if (!token) { console.error("ERROR: No INSTAGRAM_TOKEN"); return; }
-  if (!IK_IMAGES.privateKey || !IK_VIDEOS.privateKey) { console.error("ERROR: Missing IK_PRIVATE_IMAGES or IK_PRIVATE_VIDEOS"); return; }
+  if (!IK_IMAGES.privateKey || !IK_VIDEOS.privateKey) { console.error("ERROR: Missing IMAGEKIT_PRIVATE_KEY or IK_PRIVATE_VIDEOS"); return; }
 
   let mediaBaseId = "me", baseHost = "graph.instagram.com";
   const testResp = await get(`https://graph.instagram.com/me?fields=id,username&access_token=${token}`);
@@ -98,11 +98,28 @@ function checkExistsImageKit(fileName, isVideo) {
   const existingById = {};
   existing.forEach(e => { if (e.item_id) existingById[e.item_id] = e; });
 
+  // Load hidden items from gallery-settings.json — skip these, respect admin deletions
+  let hiddenUrls = new Set();
+  try {
+    const settings = JSON.parse(fs.readFileSync("gallery-settings.json", "utf8"));
+    (settings.hidden || []).forEach(u => hiddenUrls.add(u));
+    console.log(`Hidden items: ${hiddenUrls.size}`);
+  } catch(e) { console.log("No gallery-settings.json found, skipping hidden check"); }
+
+  // Build reverse lookup: URL -> item_id, to check if a hidden URL matches a new post
+  const urlToItemId = {};
+  existing.forEach(e => { if (e.u && e.item_id) urlToItemId[e.u] = e.item_id; });
+
   const gallery = [], seenUrls = new Set();
   const cleanCaption = (s) => (s||"").replace(/[⁨⁩‪-‮​-‏⁠-⁤﻿`]/g,"").substring(0,80).trim();
 
   for (const item of rawPosts) {
     const isVideo = item.media_type === "VIDEO";
+
+    // Skip if admin hid this item (check by item_id via existing URL lookup)
+    if (existingById[item.id] && hiddenUrls.has(existingById[item.id].u)) {
+      process.stdout.write("H"); continue;
+    }
 
     if (existingById[item.id]) {
       const e = existingById[item.id];
