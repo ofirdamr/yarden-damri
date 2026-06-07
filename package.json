@@ -1,10 +1,10 @@
 {
   "name": "yarden-webhook-server",
   "version": "1.0.0",
-  "description": "Instagram webhook → Cloudinary → GitHub → Netlify",
-  "main": "index.js",
+  "description": "Instagram webhook server",
+  "main": "src/webhook-server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/webhook-server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
