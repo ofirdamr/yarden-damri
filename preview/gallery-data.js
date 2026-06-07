@@ -1,6 +1,34 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_18124163572566762.mp4",
+    "a": "זה אחד הלוקים האהובים עליי לאחרונה 🤍\nגל את מהממת! \n@galifergan \n@korenmalihe",
+    "item_id": "18124163572566762",
+    "video": true,
+    "thumb": ""
+  },
+  {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_17881563132435942.mp4",
+    "a": "רוצה להרגיש הכי יפה שלך ביום החתונה, בלי להרגיש מאופרת מדי? 🤍✨\nאיפור נקי, אלגנט",
+    "item_id": "17881563132435942",
+    "video": true,
+    "thumb": ""
+  },
+  {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_18082854338447188.mp4",
+    "a": "יש משהו בבוקר של כלה שאי אפשר להסביר. מתחילים רגיל לגמרי, ופתאום קולטים שהיום הי",
+    "item_id": "18082854338447188",
+    "video": true,
+    "thumb": ""
+  },
+  {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_18103958203807211.mp4",
+    "a": "יש משהו יותר מספק מלראות לוק נבנה שלב אחרי שלב? \nנועה את משהו מיוחד 🤍\n@noa.naim",
+    "item_id": "18103958203807211",
+    "video": true,
+    "thumb": ""
+  },
+  {
     "u": "https://ik.imagekit.io/Yardendamri/v1779307030/yarden_makeup/yarden_makeup_18119542276602555.jpg",
     "a": "לוק רך, נקי, כזה שלא נמאס ממנו גם שנים אחרי ✨\nאם גם את חולמת על לוק שירגיש בדיוק",
     "id": "18121741381726046",
@@ -5213,6 +5241,13 @@ const GALLERY_IMAGES = [
     "item_id": "17944356871619142"
   },
   {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_18152709667205132.mp4",
+    "a": "Are you ready for it?\n#art #oneline",
+    "item_id": "18152709667205132",
+    "video": true,
+    "thumb": ""
+  },
+  {
     "u": "https://ik.imagekit.io/yardenvideos/yarden_makeup_17928949000754211.mp4",
     "a": "Summer 🌞",
     "id": "17928949000754211",
@@ -5755,6 +5790,13 @@ const GALLERY_IMAGES = [
     "item_id": "18094839694227731"
   },
   {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_17926049950524424.mp4",
+    "a": "אקרילעלקנבס #yardenart #artist #paiting  #art #israel #eilat #אילת \n#jaket #flui",
+    "item_id": "17926049950524424",
+    "video": true,
+    "thumb": ""
+  },
+  {
     "u": "https://ik.imagekit.io/yardenvideos/yarden_makeup_17887393988012875.mp4",
     "a": "",
     "id": "17887393988012875",
@@ -5863,6 +5905,13 @@ const GALLERY_IMAGES = [
     "a": "I can see you \n#eyes",
     "id": "17926281160498850",
     "item_id": "17926281160498850"
+  },
+  {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_17943323485429342.mp4",
+    "a": "",
+    "item_id": "17943323485429342",
+    "video": true,
+    "thumb": ""
   },
   {
     "u": "https://ik.imagekit.io/Yardendamri/v1777528093/yarden_makeup/yarden_makeup_17950904701408049.jpg",
@@ -7165,6 +7214,13 @@ const GALLERY_IMAGES = [
     "a": "💄💄\n@maccosmetics @ilmakiage_israel \n#🔝 #eilat #israel #makeuplips #lipstick💄 #sundaystyle",
     "id": "18005567995137688",
     "item_id": "18005567995137688"
+  },
+  {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_17864073601317071.mp4",
+    "a": "🔝MAYA 🔝\n@maya_segal95 @maccosmetics \n#makeuptutorial #makeup #2019 #beautiful",
+    "item_id": "17864073601317071",
+    "video": true,
+    "thumb": "https://ik.imagekit.io/Yardendamri/instagram/yarden_17864073601317071_thumb.jpg"
   },
   {
     "u": "https://ik.imagekit.io/yardenvideos/yarden_makeup_17852024335344690.mp4",
