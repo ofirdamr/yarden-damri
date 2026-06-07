@@ -1,51 +1,39 @@
-# Summary — June 2026
+# Project Summary — Yarden Damri Website
 
-## Status: IN PROGRESS
+## Architecture
+- **Live site**: root branch (old, still on Cloudinary — not yet replaced)
+- **Staging**: `/preview` folder — all active work done here
+- **Repo**: github.com/ofirdamr/yarden-damri
+- **Admin backend**: yarden-admin.ofirdamr.workers.dev (password: in project instructions)
+- **GitHub Pages**: yardendamri.co.il
 
-## Last session work — SEO + Content updates
+## Media Stack (Preview folder — current)
+| Asset | Storage | Delivery |
+|---|---|---|
+| Images | Cloudinary (proxied) | ImageKit `ik.imagekit.io/Yardendamri` |
+| Videos | Cloudflare R2 `yarden-videos` bucket | ImageKit `ik.imagekit.io/yardenvideos` |
 
-### 1. SEO audit & fixes — DONE
-- Fixed sitemap: removed reviews.html (404), pricing.html redirect, duplicate gallery entry
-- Added noindex to admin.html (security)
-- Added canonical tags to all pages missing them
-- Added static SEO content to pricing.html (prices readable by Google)
-- Created sitemap-media.xml with 80 images + 30 videos (fixed emoji issue causing fetch failure)
-- Created sitemap-index.xml referencing both sitemaps
-- Submitted sitemaps + requested indexing for all 7 pages in Search Console
+## What Was Done This Session
+- Cloudinary deactivating June 9 — full migration completed
+- All 1535 images: Cloudinary → ImageKit (via web origin proxy)
+- All 289 videos: Cloudinary → Cloudflare R2 → ImageKit yardenvideos account
+- `gallery-data.js`: all URLs migrated to ImageKit/R2
+- `gallery-settings.json`: all URLs migrated, pushed to repo
+- `index.html`, `about.html`, `bride.html`, `bridal-guide.html`: Cloudinary refs removed
+- Hero video: fixed, now playing from ImageKit yardenvideos
+- Gallery categories: working
+- Worker heroVideo: updated via fix-hero.html
 
-### 2. Google Analytics + Search Console — DONE
-- Fixed OAuth redirect_uri_mismatch (hardcoded redirect to /admin.html)
-- Fixed 403 access_denied (published OAuth app to production)
-- Enabled Google Analytics Data API in Google Cloud
-- Added bounce rate insight panel to admin analytics tab
-- Added specific traffic sources (instagram, google etc.) — not just channel groups
-- Added region+city location data
-- Added Search Console setup guide in keywords section
-- Enabled Google Signals + Reporting Identity = מעורב (demographics data incoming)
+## Pending / To Verify
+1. **Root files** (live site): still have Cloudinary refs — needs migration when ready to go live with /preview
+2. **Render.com**: Instagram feed proxy — URL `yarden-damri.onrender.com` returns 404, needs checking
+3. **Instagram token**: appears working (GitHub Action syncs successfully) — verify
+4. **fix-hero.html**: should be deleted once confirmed stable
+5. **Temp files**: `bride-temp.html`, `index-temp.html`, `pricing-temp.html`, `reviews-temp.html`, `styles-temp.css` — clean up
+6. **ImageKit yardenvideos account**: registered under `rifzagury@gmail.com` — document this
 
-### 3. Reviews page — DONE
-- Created reviews.html with Google Places API integration
-- Place ID: ChIJCT7WZcVzABUR-tcZLqfCp1c
-- Added to nav on all pages + sitemap
-- Places API key restricted to domain
-
-### 4. Content updates (Gemini copywriting) — DONE
-- preview/services.html: new H1 (nationwide, no Eilat in title), new intro paragraph, 4 main cards with bullet points, 2 secondary cards (הפקות + שירותים נוספים), FAQ section
-- preview/bridal-guide.html: new hero intro, 4 steps (was 5), removed AI language (הידרציה etc.), warm personal tone, ✅/❌ bullet lists per step
-
-## Pending
-- Gemini may have more pages to update (about, bride, contact?)
-- Stage 2 head video feature: display selected video on homepage (pending decision)
-- Hebrew font change (Cormorant Garamond or David Libre) — not finalized
-- reviews.html: not yet in sitemap of ROOT site (only preview)
-- Demographics data: will appear in 24-48h after Google Signals activated
-
-## Repo
-https://github.com/ofirdamr/yarden-damri.git
-Working folder: /preview
-
-## Key credentials
-- GA4 Property ID: in admin.html
-- OAuth Client ID: 243162243510-kdto966o5fofbu62rbvfegvstp9nlmnm
-- Places API Key: AIzaSyCEEhecaLf_jOkEDHd0q0fcioEODD6gMwQ
-- Place ID: ChIJCT7WZcVzABUR-tcZLqfCp1c
+## Key Credentials
+- ImageKit images: `ik.imagekit.io/Yardendamri` (ofirdamr@gmail.com)
+- ImageKit videos: `ik.imagekit.io/yardenvideos` (rifzagury@gmail.com)
+- R2 bucket: `yarden-videos`, public URL: `pub-b53972ac15914c24b444efc1a580296e.r2.dev`
+- Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8350924`
