@@ -786,20 +786,7 @@
       }
     })();
 
-    // Fetch fresh posts from server
-    (async () => {
-      try {
-        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
-        if (!res.ok) return;
-        const fresh = await res.json();
-        if (!Array.isArray(fresh) || !fresh.length) return;
-        const existingUrls = new Set((typeof GALLERY_IMAGES !== 'undefined' ? GALLERY_IMAGES : []).map(i => i.u));
-        const newOnes = fresh.filter(p => !existingUrls.has(p.u));
-        if (!newOnes.length) return;
-        filteredImages = applyAdminSettings([...newOnes, ...(typeof GALLERY_IMAGES !== 'undefined' ? GALLERY_IMAGES : [])]);
-        renderPage(1);
-      } catch(e) {}
-    })();
+    
 
     let lbItems = [];
     let lbIdx = 0;
