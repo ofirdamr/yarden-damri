@@ -15,13 +15,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install cloudinary
       - name: Sync Instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          CLOUDINARY_CLOUD: ${{ secrets.CLOUDINARY_CLOUD }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          IK_PRIVATE_IMAGES: ${{ secrets.IK_PRIVATE_IMAGES }}
+          IK_PRIVATE_VIDEOS: ${{ secrets.IK_PRIVATE_VIDEOS }}
         run: node fix.js
       - name: Commit and push
         run: |
