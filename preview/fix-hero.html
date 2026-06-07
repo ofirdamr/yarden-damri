@@ -15,7 +15,7 @@ function fix() {
   fetch('https://yarden-admin.ofirdamr.workers.dev/settings', {
     method: 'POST',
     headers: {'Content-Type': 'application/json', 'X-Admin-Password': 'makeup2026'},
-    body: JSON.stringify({heroVideo: 'https://pub-b53972ac15914c24b444efc1a580296e.r2.dev/yarden_makeup_18352618189204100.mp4'})
+    body: JSON.stringify({heroVideo: 'https://ik.imagekit.io/yardenvideos/yarden_makeup_18352618189204100.mp4'})
   }).then(r => r.text()).then(t => {
     document.getElementById('status').textContent = 'Done: ' + t;
   }).catch(e => {
