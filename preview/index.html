@@ -2,9 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <link rel="dns-prefetch" href="https://res.cloudinary.com">
-  <link rel="preconnect" href="https://graph.instagram.com" crossorigin>
+      <link rel="preconnect" href="https://graph.instagram.com" crossorigin>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
   <script>
@@ -875,17 +873,17 @@
 
     // Optimize Cloudinary URLs: auto format (WebP/AVIF), quality, resize
     function cdnUrl(url, w) {
-      if (!url || !url.includes('cloudinary.com')) return url;
+      if (!url) return url;
       return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_fill/`);
     }
     function cdnVideo(url, w) {
-      if (!url || !url.includes('cloudinary.com')) return url;
+      if (!url) return url;
       // q_auto = Cloudinary analyzes each video and picks optimal quality
       // f_auto = serves WebP/best format for the browser
       return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
     }
     function cdnVideoPoster(url) {
-      if (!url || !url.includes('cloudinary.com')) return '';
+      if (!url) return '';
       return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_480,h_480,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
     }
 
