@@ -104,27 +104,31 @@
     }
   <style>
     /* ── FLOATING BUTTONS OVERRIDE ── */
+    /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
     #a11y-trigger, #scroll-top {
-      width: 48px !important; height: 48px !important;
-      min-width: 48px !important; max-width: 48px !important;
-      min-height: 48px !important; max-height: 48px !important;
+      width: 36px !important; height: 36px !important;
+      min-width: 36px !important; max-width: 36px !important;
+      min-height: 36px !important; max-height: 36px !important;
       border-radius: 50% !important;
       position: fixed !important;
-      bottom: 24px !important;
+      bottom: 18px !important;
       z-index: 99999 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       padding: 0 !important;
       box-sizing: border-box !important;
+      opacity: 0.55 !important;
+      transition: opacity 0.2s !important;
     }
+    #a11y-trigger:hover, #scroll-top:hover { opacity: 0.9 !important; }
     #a11y-trigger {
-      left: 24px !important; right: auto !important;
-      background: #1a1a1a !important; color: #fff !important;
+      left: 12px !important; right: auto !important;
+      background: #444 !important; color: #fff !important;
       border: none !important; filter: none !important;
     }
-    #scroll-top { left: 84px !important; right: auto !important; }
-    #a11y-trigger svg { width: 22px !important; height: 22px !important; fill: #fff !important; }
+    #scroll-top { left: 56px !important; right: auto !important; background: #444 !important; color: #fff !important; border: none !important; font-size: 14px !important; }
+    #a11y-trigger svg { width: 16px !important; height: 16px !important; fill: #fff !important; }
   </style>
 </head>
 
@@ -351,39 +355,45 @@
     <div class="cta-strip" role="complementary" aria-label="קריאה לפעולה">
       <p class="cta-strip-text">כלה? אירוע? ניסוי? — <strong>מגיעה אלייך, בכל מקום בישראל</strong></p>
       <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="cta-strip-btn">פתחי וואטסאפ</a>
-      <a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" class="cta-strip-btn cta-strip-btn-outline">התקשרי</a>
     </div>
 
     <!-- PHILOSOPHY -->
-    <section id="philosophy" aria-labelledby="philosophy-title">
-      <p class="section-eyebrow" style="justify-content:center; margin-bottom:40px" id="philosophy-title">הפילוסופיה שלי</p>
-      <blockquote class="philosophy-quote reveal">
-        אני לא כאן כדי לשנות אותך —
-        אני כאן כדי שתסתכלי בראי ותגידי: "זאת אני. ואני יפה."
-      </blockquote>
-      <div class="philosophy-attrs reveal" role="list" aria-label="נתונים מרכזיים">
-        <div class="attr" role="listitem">
-          <div class="attr-num" aria-label="מגיעה לכל מקום">🇮🇱</div>
-          <div class="attr-label">מגיעה לכל מקום</div>
-          <div class="attr-sub">מהצפון ועד הדרום, ישירות אלייך.</div>
+    <section id="philosophy" aria-labelledby="philosophy-title" style="padding:0;overflow:hidden;">
+      <div style="display:flex;flex-direction:column;">
+        <!-- Photo + quote split -->
+        <div style="position:relative;width:100%;min-height:520px;background:#1a1614;">
+          <img src="https://ik.imagekit.io/Yardendamri/aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg"
+               alt="ירדן דמרי מאפרת כלות בעבודה"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.55;"
+               loading="lazy" />
+          <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:520px;padding:48px 32px 44px;">
+            <p class="section-eyebrow" id="philosophy-title" style="color:rgba(232,200,176,0.75);margin-bottom:18px;">הפילוסופיה שלי</p>
+            <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.45rem;line-height:1.7;color:#fff;margin:0 0 24px;border:none;padding:0;max-width:420px;">
+              אני לא כאן כדי לשנות אותך —<br/>
+              אני כאן כדי שתסתכלי בראי ותגידי:<br/>
+              <em style="color:rgba(232,200,176,0.9);">"זאת אני. ואני יפה."</em>
+            </blockquote>
+            <p style="font-size:0.78rem;letter-spacing:0.18em;color:rgba(255,255,255,0.5);text-transform:uppercase;">ירדן דמרי — מאפרת מקצועית</p>
+          </div>
         </div>
-        <div class="attr-divider" aria-hidden="true"></div>
-        <div class="attr" role="listitem">
-          <div class="attr-num">✨</div>
-          <div class="attr-label">המוצרים הכי טובים שיש</div>
-          <div class="attr-sub">עמידים, איכותיים ומצטלמים מושלם.</div>
-        </div>
-        <div class="attr-divider" aria-hidden="true"></div>
-        <div class="attr" role="listitem">
-          <div class="attr-num">🤍</div>
-          <div class="attr-label">בראש שקט</div>
-          <div class="attr-sub">ליווי אישי וקשוב מהרגע הראשון ועד האירוע.</div>
-        </div>
-        <div class="attr-divider" aria-hidden="true"></div>
-        <div class="attr" role="listitem">
-          <div class="attr-num">☀️</div>
-          <div class="attr-label">האנרגיה הנכונה</div>
-          <div class="attr-sub">בוקר רגוע, כיפי ובלי טיפת לחץ.</div>
+        <!-- Attributes strip -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;background:#f9f5f0;" role="list" aria-label="נתונים מרכזיים">
+          <div role="listitem" style="padding:32px 24px;border-left:1px solid rgba(0,0,0,0.07);border-bottom:1px solid rgba(0,0,0,0.07);">
+            <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">מגיעה לכל מקום</p>
+            <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">מהצפון ועד הדרום, ישירות אלייך.</p>
+          </div>
+          <div role="listitem" style="padding:32px 24px;border-bottom:1px solid rgba(0,0,0,0.07);">
+            <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">מוצרי פרימיום</p>
+            <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">עמידים, איכותיים ומצטלמים מושלם.</p>
+          </div>
+          <div role="listitem" style="padding:32px 24px;border-left:1px solid rgba(0,0,0,0.07);">
+            <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">בראש שקט</p>
+            <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">ליווי אישי וקשוב מהרגע הראשון.</p>
+          </div>
+          <div role="listitem" style="padding:32px 24px;">
+            <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">האנרגיה הנכונה</p>
+            <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">בוקר רגוע, כיפי ובלי טיפת לחץ.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -391,14 +401,14 @@
     <!-- AREA -->
     <section id="area" aria-labelledby="area-title">
       <div class="area-visual reveal" aria-hidden="true">
-        <div class="area-map-visual"
-          role="button" tabindex="0"
-          aria-label="לחצי לפתיחת וואטסאפ"
-          onclick="window.open('https://wa.me/9720547276716','_blank')"
-          onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')"
-          style="cursor:pointer;">
-          <span class="map-label">מגיעה לכל הארץ — לחצי לתיאום</span>
-        </div>
+        <iframe
+          title="ירדן דמרי מאפרת — אזור פעילות בישראל"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1859702!2d34.8516!3d31.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1siw!2sil!4v1700000000000!5m2!1siw!2sil"
+          style="width:100%;height:400px;border:0;border-radius:2px;display:block;filter:grayscale(1) contrast(1.05) brightness(0.97);"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
       <div class="reveal">
         <p class="section-eyebrow">אזור פעילות</p>
@@ -432,31 +442,29 @@
         <p class="section-eyebrow" style="justify-content:center;">מה הכלות אומרות</p>
         <h2 id="reviews-title" class="section-title">ביקורות כלות אמיתיות</h2>
         <p style="font-size:.95rem;opacity:.6;margin-top:10px;">כבר מאות כלות סמכו עליי ביום הגדול שלהן</p>
-        <div id="avg-rating" style="font-size:1.8rem; margin-top:12px; color:var(--gold);" aria-label="דירוג כוללי">⭐⭐⭐⭐⭐</div>
+        <div id="avg-rating" style="font-size:1.4rem; margin-top:12px; color:var(--gold); letter-spacing:4px;" aria-label="דירוג כוללי">★★★★★</div>
+        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:10px 24px;border:1px solid rgba(184,144,96,0.35);color:var(--gold);text-decoration:none;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;font-family:'Rubik',sans-serif;border-radius:2px;">
+          ✦ כתבי ביקורת ב־Google
+        </a>
       </div>
 
-      <div id="google-reviews-strip" style="max-width:900px;margin:0 auto 32px;"></div>
-
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;" class="reveal" role="list" aria-label="פלטפורמות ביקורות">
-        <a href="https://g.page/r/CfrXGS6nwqdXEBE/review" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" role="listitem">⭐ כתבי ביקורת ב-Google</a>
-        <a href="https://www.d.co.il/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📒 דפי זהב</a>
-        <a href="https://www.facebook.com/yarden.damri.makeup" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;border:1px solid rgba(232,200,176,.25);color:var(--blush);text-decoration:none;font-size:.88rem;" role="listitem">📘 פייסבוק</a>
-      </div>
+      <div id="google-reviews-strip" style="max-width:1100px;margin:0 auto 32px;"></div>
 
       <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto 40px;"></div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto;" class="reveal">
-        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
-          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
-          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון. כולם שאלו אותי מי אפר אותי 😍</p>
-          <div style="font-size:.82rem;font-weight:600;color:#111;">נועה כ.</div>
-          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות</div>
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:2px;padding:28px 24px;">
+          <div style="color:var(--gold);font-size:.85rem;margin-bottom:12px;letter-spacing:2px;">★★★★★</div>
+          <p style="font-size:.9rem;color:#555;line-height:1.8;margin-bottom:16px;">ירדן הגיעה אליי בבוקר החתונה עם כל כך הרבה אנרגיה טובה שהרגעה אותי ברגע. האיפור יצא בדיוק מה שרציתי — טבעי, זוהר, ומחזיק עד הריקוד האחרון. כולם שאלו אותי מי אפר אותי.</p>
+          <div style="font-size:.8rem;font-weight:600;color:var(--text);font-family:'Rubik',sans-serif;">נועה כ.</div>
+          <div style="font-size:.72rem;color:var(--blush);margin-top:2px;letter-spacing:.05em;">איפור כלות</div>
         </article>
-        <article style="background:#fff;border:1px solid #ede8e3;border-radius:16px;padding:28px 24px;">
-          <div style="color:#c9a96e;font-size:1rem;margin-bottom:12px;">★★★★★</div>
-          <p style="font-size:.92rem;color:#444;line-height:1.8;margin-bottom:16px;">הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש — סוף סוף — כמו עצמי. ביום החתונה בכיתי מרוב שמחה 🤍</p>
-          <div style="font-size:.82rem;font-weight:600;color:#111;">דנה א.</div>
-          <div style="font-size:.75rem;color:#aaa;margin-top:2px;">איפור כלות + ניסוי</div>
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:2px;padding:28px 24px;">
+          <div style="color:var(--gold);font-size:.85rem;margin-bottom:12px;letter-spacing:2px;">★★★★★</div>
+          <p style="font-size:.9rem;color:#555;line-height:1.8;margin-bottom:16px;">הגעתי לפגישת ניסוי עם המון חרדות ויצאתי הכי מרגועה שיש. ירדן הקשיבה לי, הבינה בדיוק מה אני רוצה, ובנינו ביחד מראה שגרם לי להרגיש — סוף סוף — כמו עצמי. ביום החתונה בכיתי מרוב שמחה.</p>
+          <div style="font-size:.8rem;font-weight:600;color:var(--text);font-family:'Rubik',sans-serif;">דנה א.</div>
+          <div style="font-size:.72rem;color:var(--blush);margin-top:2px;letter-spacing:.05em;">איפור כלות + ניסוי</div>
         </article>
       </div>
     </section>
@@ -476,24 +484,35 @@
       </div>
       <div class="contact-inner">
         <div class="reveal">
-          <div class="biz-card"
-            role="button" tabindex="0"
-            aria-label="לחצי לפתיחת שיחת וואטסאפ עם ירדן דמרי"
-            onclick="window.open('https://wa.me/9720547276716','_blank')"
-            onkeypress="if(event.key==='Enter')window.open('https://wa.me/9720547276716','_blank')">
-            <div class="biz-card-pattern" aria-hidden="true"></div>
-            <div class="biz-card-logo">ירדן דמרי</div>
-            <div class="biz-card-title">Makeup Artist • מאפרת מקצועית</div>
-            <div class="biz-card-divider"></div>
-            <div class="biz-card-info">
-              <div class="biz-info-row"><span>054-7276716</span></div>
-              <div class="biz-info-row"><span>מגיעה לכל הארץ</span></div>
-              <div class="biz-info-row"><span>@yarden_damri_makeup</span></div>
-              <div class="biz-info-row"><span>כלות · ערב · הפקות · אירועים</span></div>
+          <!-- Premium business card — cream/gold palette -->
+          <div style="background:var(--warm);border:1px solid rgba(184,144,96,0.25);padding:44px 36px;position:relative;overflow:hidden;max-width:420px;">
+            <!-- subtle gold corner accent -->
+            <div style="position:absolute;top:0;left:0;width:60px;height:60px;border-bottom:1px solid rgba(184,144,96,0.2);border-right:1px solid rgba(184,144,96,0.2);pointer-events:none;"></div>
+            <div style="position:absolute;bottom:0;right:0;width:60px;height:60px;border-top:1px solid rgba(184,144,96,0.2);border-left:1px solid rgba(184,144,96,0.2);pointer-events:none;"></div>
+
+            <p style="font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin:0 0 20px;font-family:'Rubik',sans-serif;">Makeup Artist</p>
+            <h3 style="font-family:'Rubik',sans-serif;font-size:1.9rem;font-weight:300;letter-spacing:0.06em;color:var(--text);margin:0 0 4px;">ירדן דמרי</h3>
+            <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush);margin:0 0 32px;font-family:'Rubik',sans-serif;">מאפרת כלות וערב מקצועית</p>
+            <div style="width:32px;height:1px;background:rgba(184,144,96,0.4);margin-bottom:32px;"></div>
+            <div style="display:flex;flex-direction:column;gap:14px;font-size:0.88rem;color:#666;font-family:'Rubik',sans-serif;">
+              <span>054-7276716</span>
+              <span>מגיעה לכל הארץ</span>
+              <span>@yarden_damri_makeup</span>
+              <span>כלות · ערב · הפקות · אירועים</span>
             </div>
-            <div class="biz-card-name" aria-hidden="true">לחצי לוואטסאפ ←</div>
+            <div style="margin-top:36px;display:flex;flex-direction:column;gap:10px;">
+              <a href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer"
+                 onclick="trackEvent('whatsapp_click','conversion','contact_section')"
+                 style="display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;background:var(--text);color:#fff;text-decoration:none;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-family:'Rubik',sans-serif;">
+                פתחי וואטסאפ
+              </a>
+              <a href="tel:0547276716"
+                 onclick="trackEvent('phone_click','conversion','contact_section')"
+                 style="display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border:1px solid rgba(184,144,96,0.4);color:var(--gold);text-decoration:none;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-family:'Rubik',sans-serif;">
+                התקשרי
+              </a>
+            </div>
           </div>
-          <p style="text-align:center; margin-top:16px; font-size:.78rem; opacity:.5; letter-spacing:.08em;">✦ לחצי על הכרטיס לפתיחת וואטסאפ ✦</p>
         </div>
 
         <div class="reveal">
@@ -1107,12 +1126,8 @@
     const _origRenderPage = renderPage;
 
     // ── REVIEWS ───────────────────────────────────
-    function loadGoogleReviews() {
-      document.getElementById('google-reviews-strip').innerHTML = `
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3395.123!2d34.9!3d29.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1500735765ec3e09%3A0xd7a9a72faebe17d7!2z15nRodmoINep15nRoNepINee15DRntepINebINee15rRkQ!5e0!3m2!1siw!2sil!4v1234567890"
-          width="100%" height="240" style="border:0;border-radius:14px;display:block;" allowfullscreen loading="lazy"
-          title="מפת גוגל – ירדן דמרי מאפרת, אילת"></iframe>`;
-    }
+    function loadGoogleReviews() { /* strip reserved for future Google Places API integration */ }
+
 
     let chosenRating = 0;
     function setRev(n) {
@@ -1177,15 +1192,15 @@
     function renderManualReviews() {
       const grid = document.getElementById('reviews-grid');
       grid.innerHTML = reviewsCache.length ? reviewsCache.map(r => `
-        <article style="background:var(--card,#231815);border:1px solid rgba(232,200,176,.12);border-radius:16px;padding:22px 20px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-            <strong style="color:var(--blush,#E8C8B0);font-size:.95rem;">${r.name}</strong>
-            <span style="color:var(--gold,#D4AF6A);font-size:.95rem;" aria-label="${r.rating} כוכבים">${'⭐'.repeat(r.rating)}</span>
+        <article style="background:#fff;border:1px solid #ede8e3;border-radius:2px;padding:28px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+            <strong style="color:var(--text);font-size:.9rem;font-family:'Rubik',sans-serif;">${r.name}</strong>
+            <span style="color:var(--gold);font-size:.85rem;letter-spacing:2px;" aria-label="${r.rating} כוכבים">${'★'.repeat(r.rating)}</span>
           </div>
-          <p style="font-size:.95rem;line-height:1.7;color:rgba(240,230,220,.8);">${r.text}</p>
-          <p style="font-size:.78rem;opacity:.4;margin-top:10px;">${r.date}</p>
+          <p style="font-size:.9rem;line-height:1.8;color:#555;">${r.text}</p>
+          <p style="font-size:.72rem;color:var(--blush);margin-top:12px;letter-spacing:.05em;">${r.date}</p>
         </article>`).join('')
-        : '<p style="opacity:.5;font-size:.95rem;text-align:center;">היי ראשונה להשאיר ביקורת! ⭐</p>';
+        : '<p style="opacity:.6;font-size:.9rem;text-align:center;font-family:Rubik,sans-serif;">אהבת את התוצאה? <a href=\"https://g.page/r/CfrXGS6nwqdXEBE/review\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:var(--gold);text-decoration:underline;\">שתפי ב-Google</a> — זה עוזר לכלות נוספות למצוא אותי</p>';
     }
 
     document.addEventListener('DOMContentLoaded', () => {

@@ -224,7 +224,7 @@
     .pill { border: 1px solid #ddd; color: #555; padding: 8px 18px; border-radius: 2px; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; background: transparent; }
 
     /* ── SERVICES ── */
-    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); }
+    #services { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--warm); }
     #services::before { display: none; }
     .services-header { text-align: center; margin-bottom: 70px; }
     .services-header .section-eyebrow { text-align: center; }
@@ -258,7 +258,7 @@
     .attr-divider { display: none; }
 
     /* ── AREA ── */
-    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: 1px solid #eee; }
+    #area { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--warm); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; border-top: none; }
     .area-map-visual { background: linear-gradient(135deg,#1a1a1a 0%,#2c2420 50%,#3d2e26 100%); border-radius: 2px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
     .area-map-visual::before { content: ''; }
     .map-label { position: absolute; bottom: 24px; background: rgba(0,0,0,.6); color: #fff; padding: 10px 24px; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-align: center; max-width: 88%; }
@@ -268,8 +268,11 @@
     .area-text strong { display: block; font-size: 1rem; color: var(--charcoal); margin-bottom: 4px; font-family: 'Rubik', sans-serif; }
     .area-text span { font-size: .9rem; color: #777; line-height: 1.6; }
 
+    /* ── REVIEWS ── */
+    #reviews { background: var(--warm) !important; }
+
     /* ── CONTACT ── */
-    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); border-top: 1px solid #eee; }
+    #contact { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); background: var(--cream); }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .biz-card { width: 100%; max-width: 460px; background: #111; border-radius: 2px; padding: 48px; position: relative; overflow: hidden; color: #fff; }
     .biz-card::before, .biz-card::after { display: none; }
