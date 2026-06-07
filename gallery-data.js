@@ -7229,6 +7229,13 @@ const GALLERY_IMAGES = [
     "item_id": "18005567995137688"
   },
   {
+    "u": "https://ik.imagekit.io/yardenvideos/yarden_17864073601317071.mp4",
+    "a": "🔝MAYA 🔝\n@maya_segal95 @maccosmetics \n#makeuptutorial #makeup #2019 #beautiful",
+    "item_id": "17864073601317071",
+    "video": true,
+    "thumb": ""
+  },
+  {
     "u": "https://res.cloudinary.com/dfjwxc1cw/video/upload/v1778178798/yarden_makeup/yarden_makeup_17852024335344690.mp4",
     "a": "Purim 2019 \n#purim #eilat #2019 #makeup #beautiful #makeuptutorial #lipstikpink",
     "id": "17852024335344690",
