@@ -327,8 +327,9 @@ function cdnVideo(url, w) {
   return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
 }
 function cdnVideoPoster(url) {
-  if (!url || !url.includes('cloudinary.com')) return '';
-  return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_480,h_480,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  if (!url) return '';
+  if (url.includes('ik.imagekit.io')) return url + '/ik-thumbnail.jpg';
+  return '';
 }
 
 // ── IG STATS ──
