@@ -52,7 +52,7 @@
 
   async function fetchPublic(){
     try {
-      const r = await fetch(PUBLIC_URL + '?t=' + Math.floor(Date.now() / 60000), { cache: 'no-cache' });
+      const r = await fetch(PUBLIC_URL + '?t=' + Date.now(), { cache: 'no-cache' });
       if (r.ok) {
         const data = await r.json();
         saveCache(data);
