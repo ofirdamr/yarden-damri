@@ -434,8 +434,9 @@ function renderGallery() {
       div.querySelector('.item-actions').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1)';
     };
-    div.onclick = () => openLb(idx);
-    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(idx);} };
+    const realIdx = allFilteredImages.indexOf(item);
+    div.onclick = () => openLb(realIdx);
+    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(realIdx);} };
     grid.appendChild(div);
   });
   const btn = document.getElementById('loadMoreBtn');

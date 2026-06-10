@@ -469,8 +469,9 @@ function renderGallery() {
       div.querySelector('.overlay').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1)`;
     };
-    div.onclick = () => openLb(idx);
-    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(idx);} };
+    const realIdx = allFilteredImages.indexOf(item);
+    div.onclick = () => openLb(realIdx);
+    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(realIdx);} };
     grid.appendChild(div);
   });
   const btn = document.getElementById('loadMoreBtn');
@@ -594,7 +595,6 @@ loadIgFeed();
     await window.RemoteState.fetchPublic();
   }
   const _dbgAdmin = window.RemoteState ? window.RemoteState.getAdmin() : {};
-  console.log('[DEBUG] hidden count:', (_dbgAdmin.hidden||[]).length, 'cats:', Object.keys(_dbgAdmin.cats||{}).length);
   buildFilterBar();
   applyFilter('all');
 })();
