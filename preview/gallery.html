@@ -593,6 +593,8 @@ loadIgFeed();
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
   }
+  const _dbgAdmin = window.RemoteState ? window.RemoteState.getAdmin() : {};
+  console.log('[DEBUG] hidden count:', (_dbgAdmin.hidden||[]).length, 'cats:', Object.keys(_dbgAdmin.cats||{}).length);
   buildFilterBar();
   applyFilter('all');
 })();
