@@ -297,11 +297,7 @@ function cdnVideo(url, w) {
   if (!url) return url;
   return url;
 }
-function cdnVideoPoster(url) {
-  if (!url) return '';
-  // R2 videos may have a matching .jpg poster
-  return url.replace(/\.mp4$/i, '.jpg');
-}
+function cdnVideoPoster(url) { return ''; }
 
 // ── IG STATS ──
 let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
@@ -374,7 +370,7 @@ function getCat(img) {
 }
 
 // ── STATE ──
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 24;
 let renderPage = 1;
 let activeFilter = 'all';
 let allFilteredImages = [];
@@ -401,11 +397,11 @@ function renderGallery() {
     const isVideo = item.video || item.u.includes('/video/upload/');
     let mediaHtml;
     if (isVideo) {
-      const poster = cdnVideoPoster(item.u);
-      mediaHtml = `<video data-src="${cdnVideo(item.u,480)}" poster="${poster}" muted loop playsinline
-        aria-label="${caption||'סרטון'}" style="width:100%;display:block;transition:transform .4s;"
-        onerror="this.style.display='none'"></video>
-        <div class="video-play"><svg width="44" height="44" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(0,0,0,.45)"/><polygon points="21,16 38,26 21,36" fill="white"/></svg></div>`;
+      const poster = (item.thumb && item.thumb.includes('ik.imagekit.io')) ? item.thumb : '';
+      const bgStyle = poster ? `background-image:url('${poster}');background-size:cover;background-position:center;` : 'background:#111;';
+      mediaHtml = `<div class="video-thumb" data-src="${item.u}" style="width:100%;aspect-ratio:9/16;${bgStyle}display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        <div class="video-play"><svg width="44" height="44" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(0,0,0,.55)"/><polygon points="21,16 38,26 21,36" fill="white"/></svg></div>
+        </div>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;"
@@ -421,7 +417,7 @@ function renderGallery() {
       div.querySelector('.overlay').style.opacity = '1';
       div.querySelector('.item-actions').style.opacity = '1';
       const img = div.querySelector('img'); if (img) img.style.transform = 'scale(1.04)';
-      if (isVideo) { const v = div.querySelector('video'); if (v && v.src) v.play().catch(()=>{}); }
+
     };
     div.onmouseleave = () => {
       div.querySelector('.overlay').style.opacity = '0';
@@ -437,19 +433,20 @@ function renderGallery() {
   observeVideos();
 }
 
-// ── VIDEO AUTOPLAY ──
-const videoObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    const vid = e.target;
-    if (e.isIntersecting) {
-      if (vid.dataset.src && !vid.src) { vid.src = vid.dataset.src; vid.load(); }
-      vid.play().catch(()=>{});
-    } else { vid.pause(); }
-  });
-}, { threshold: 0.2, rootMargin: '100px' });
-function observeVideos() {
-  document.querySelectorAll('#galleryGrid video').forEach(v => videoObserver.observe(v));
-}
+// ── VIDEO CLICK-TO-PLAY ──
+function observeVideos() {}
+document.addEventListener('click', function(e) {
+  const thumb = e.target.closest('.video-thumb');
+  if (!thumb) return;
+  const src = thumb.dataset.src;
+  if (!src) return;
+  e.stopPropagation();
+  const vid = document.createElement('video');
+  vid.src = src; vid.muted = true; vid.loop = true; vid.playsInline = true; vid.autoplay = true;
+  vid.style.cssText = 'width:100%;display:block;';
+  thumb.replaceWith(vid);
+  vid.play().catch(()=>{});
+});
 
 // ── FILTER ──
 function applyFilter(cat) {
