@@ -281,7 +281,9 @@ function applyAdminSettings(images) {
   const pinned = new Set(s.pinned || []);
   const orderMap = {};
   (s.order || []).forEach((url, i) => orderMap[url] = i);
-  let filtered = images.filter(img => !hidden.has(img.u));
+  const catMap = s.cats || {};
+  const hiddenCats = new Set([...(s.privateCats||[]), 'מוסתרות']);
+  let filtered = images.filter(img => !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
   let pinnedImgs = filtered.filter(img => pinned.has(img.u));
   let rest = filtered.filter(img => !pinned.has(img.u));
   if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
