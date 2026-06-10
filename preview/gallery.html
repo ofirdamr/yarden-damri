@@ -319,16 +319,14 @@ function applyAdminSettings(images) {
 
 // ── CDN HELPERS ──
 function cdnUrl(url, w) {
-  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
-  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_limit/`);
+  if (!url) return url;
+  if (url.includes('ik.imagekit.io')) return url.replace(/\?.*/, '') + `?tr=w-${w},q-auto,f-auto`;
+  return url;
 }
-function cdnVideo(url, w) {
-  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
-  return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
-}
+function cdnVideo(url, w) { return url || ''; }
 function cdnVideoPoster(url) {
-  if (!url || !url.includes('cloudinary.com')) return '';
-  return url.replace('/video/upload/', '/video/upload/so_auto,f_jpg,w_480,h_480,c_fill,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  if (!url) return '';
+  return url.replace(/\.mp4$/i, '.jpg');
 }
 
 // ── IG STATS ──

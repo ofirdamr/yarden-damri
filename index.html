@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+  <link rel="preconnect" href="https://ik.imagekit.io" crossorigin>
+  <link rel="dns-prefetch" href="https://ik.imagekit.io">
   <link rel="preconnect" href="https://graph.instagram.com" crossorigin>
-  <link rel="preload" as="image" href="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_north,w_420,h_540,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu" fetchpriority="high">
+  <link rel="preload" as="image" href="https://ik.imagekit.io/Yardendamri/aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg?tr=w-420,h-540,fo-top" fetchpriority="high">
   <link rel="preload" as="style" href="styles.css?v=3">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
@@ -40,7 +40,7 @@
     "name": "ירדן דמרי — מאפרת כלות וערב",
     "url": "https://yardendamri.co.il",
     "telephone": "+972-54-7276716",
-    "image": "https://res.cloudinary.com/dfjwxc1cw/image/upload/v1777527589/yarden_makeup/yarden_makeup_18404043595145595.jpg",
+    "image": "https://ik.imagekit.io/Yardendamri/v1777527589/yarden_makeup/yarden_makeup_18404043595145595.jpg",
     "description": "ירדן דמרי – מאפרת כלות וערב באילת. מתמחה באיפור כלות, איפור ערב, הפקות וסדנאות. מגיעה לכל הארץ.",
     "address": {
       "@type": "PostalAddress",
@@ -203,7 +203,7 @@
           <div class="hero-image-bg"></div>
           <div class="hero-image-placeholder">
             <img
-              src="https://res.cloudinary.com/dfjwxc1cw/image/upload/c_fill,g_north,w_420,h_540,q_auto,f_auto/WhatsApp_Image_2026-05-02_at_09.42.25_q5w4cu"
+              src="https://ik.imagekit.io/Yardendamri/aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg?tr=w-420,h-540,fo-top"
               alt="ירדן דמרי מאפרת מקצועית"
               loading="eager"
               fetchpriority="high"
@@ -244,7 +244,7 @@
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://res.cloudinary.com/dfjwxc1cw/image/upload/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
+        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
@@ -676,7 +676,7 @@
     // Fetch fresh posts from server
     (async () => {
       try {
-        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
+        const res = await fetch('instagram-stats.json');
         if (!res.ok) return;
         const fresh = await res.json();
         if (!Array.isArray(fresh) || !fresh.length) return;
@@ -771,20 +771,15 @@
       return m ? m[1] : null;
     }
 
-    // Optimize Cloudinary URLs: auto format (WebP/AVIF), quality, resize
     function cdnUrl(url, w) {
-      if (!url || !url.includes('cloudinary.com')) return url;
-      return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_fill/`);
+      if (!url) return url;
+      if (url.includes('ik.imagekit.io')) return url.replace(/\?.*/, '') + `?tr=w-${w},q-auto,f-auto`;
+      return url;
     }
-    function cdnVideo(url, w) {
-      if (!url || !url.includes('cloudinary.com')) return url;
-      // Reduce to 480p max, auto quality, strip audio
-      return url.replace('/video/upload/', `/video/upload/q_auto:low,w_${w},c_fill,vc_auto/`);
-    }
+    function cdnVideo(url, w) { return url || ''; }
     function cdnVideoPoster(url) {
-      if (!url || !url.includes('cloudinary.com')) return '';
-      // Get first frame as jpg poster
-      return url.replace('/video/upload/', '/video/upload/so_0,f_jpg,w_400,c_fill/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+      if (!url) return '';
+      return url.replace(/\.mp4$/i, '.jpg');
     }
 
     let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats')||'{}');
