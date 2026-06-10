@@ -587,15 +587,14 @@ document.addEventListener('keydown', e => {
 });
 
 // ── INIT ──
-// Initial render — apply with whatever cached state we have, then refresh from remote
-applyFilter('all');
+// Wait for RemoteState before first render so hidden items never appear
 loadIgFeed();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
-    buildFilterBar();            // rebuild with admin's custom categories
-    applyFilter(activeFilter);   // re-filter with remote cats data
   }
+  buildFilterBar();
+  applyFilter('all');
 })();
 
 function sharesite() {
