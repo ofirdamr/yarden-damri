@@ -272,6 +272,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 <script>
 // ── ADMIN SETTINGS (kept in localStorage, survives gallery-data.js regenerations) ──
 function getAdminSettings() {
+  if (window.RemoteState && window.RemoteState.getAdmin) return window.RemoteState.getAdmin();
   try { return JSON.parse(localStorage.getItem('gallery_admin') || '{}'); } catch(e) { return {}; }
 }
 function applyAdminSettings(images) {
