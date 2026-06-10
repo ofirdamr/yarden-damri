@@ -1,6 +1,6 @@
 {
   "18399908116155226": {
-    "likes": 137,
+    "likes": 139,
     "comments_count": 27,
     "comments": [
       {
@@ -91,7 +91,7 @@
     ]
   },
   "17881563132435942": {
-    "likes": 18,
+    "likes": 19,
     "comments_count": 21,
     "comments": [
       {
@@ -162,7 +162,7 @@
     ]
   },
   "18082854338447188": {
-    "likes": 58,
+    "likes": 59,
     "comments_count": 16,
     "comments": [
       {
@@ -238,7 +238,7 @@
     ]
   },
   "18103958203807211": {
-    "likes": 95,
+    "likes": 96,
     "comments_count": 13,
     "comments": [
       {
@@ -546,7 +546,7 @@
     ]
   },
   "18082350416408746": {
-    "likes": 182,
+    "likes": 183,
     "comments_count": 42,
     "comments": [
       {
@@ -1169,9 +1169,14 @@
     ]
   },
   "18007005827712973": {
-    "likes": 44,
-    "comments_count": 35,
+    "likes": 45,
+    "comments_count": 37,
     "comments": [
+      {
+        "username": "avivrdt",
+        "text": "מההמם",
+        "timestamp": "2026-06-10T16:41:49+0000"
+      },
       {
         "username": "tehilacroitoro",
         "text": "וואוו❤️❤️",
@@ -1291,11 +1296,6 @@
         "username": "avivrdt",
         "text": "מוכשרת ירדני 😍",
         "timestamp": "2026-04-15T17:34:11+0000"
-      },
-      {
-        "username": "oria_hota",
-        "text": "מטורפת !! 🔥🔥",
-        "timestamp": "2026-04-15T17:32:49+0000"
       }
     ]
   },
@@ -3972,7 +3972,7 @@
     ]
   },
   "18352618189204100": {
-    "likes": 329,
+    "likes": 330,
     "comments_count": 32,
     "comments": [
       {
@@ -26670,6 +26670,11 @@
     "comments_count": 30,
     "comments": [
       {
+        "username": "ben0985678",
+        "text": "מהיפות בארץ",
+        "timestamp": "2025-08-01T07:28:51+0000"
+      },
+      {
         "username": "elifalensia",
         "text": "🔥🔥🔥🔥❤️",
         "timestamp": "2024-04-06T17:17:03+0000"
@@ -26783,11 +26788,6 @@
         "username": "galsnir_photography",
         "text": "פצצה ואןוו",
         "timestamp": "2024-04-02T17:48:15+0000"
-      },
-      {
-        "username": "morabeckaser_nails",
-        "text": "מושלםםםםם❤❤",
-        "timestamp": "2024-04-02T17:47:31+0000"
       }
     ]
   },
