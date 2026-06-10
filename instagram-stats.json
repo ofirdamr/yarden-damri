@@ -1,6 +1,6 @@
 {
   "18399908116155226": {
-    "likes": 134,
+    "likes": 135,
     "comments_count": 27,
     "comments": [
       {
@@ -3972,7 +3972,7 @@
     ]
   },
   "18352618189204100": {
-    "likes": 328,
+    "likes": 329,
     "comments_count": 32,
     "comments": [
       {
@@ -38071,6 +38071,11 @@
     "comments_count": 35,
     "comments": [
       {
+        "username": "soe__media",
+        "text": "מהממת!",
+        "timestamp": "2023-04-24T08:14:18+0000"
+      },
+      {
         "username": "hodaya_far_makeup",
         "text": "מהמם ברמות 😍",
         "timestamp": "2023-04-16T07:18:32+0000"
@@ -38189,11 +38194,6 @@
         "username": "maya_sz_hair_makeup",
         "text": "מוכשרת אין עלייך❤️",
         "timestamp": "2023-04-13T12:03:52+0000"
-      },
-      {
-        "username": "maayanbaruch_makeuphair",
-        "text": "וואו זה מעלף",
-        "timestamp": "2023-04-13T11:55:36+0000"
       }
     ]
   },
