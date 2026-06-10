@@ -434,11 +434,8 @@ function renderGallery() {
     const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
     if (isVideo) {
-      const poster = (item.thumb && item.thumb.includes('ik.imagekit.io')) ? item.thumb : '';
-      const bgStyle = poster ? `background-image:url('${poster}');background-size:cover;background-position:center;` : 'background:#111;';
-      mediaHtml = `<div class="video-thumb" data-src="${item.u}" style="width:100%;aspect-ratio:9/16;${bgStyle}display:flex;align-items:center;justify-content:center;cursor:pointer;">
-        <div class="video-play"><svg width="44" height="44" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(0,0,0,.55)"/><polygon points="21,16 38,26 21,36" fill="white"/></svg></div>
-        </div>`;
+      mediaHtml = `<video data-src="${item.u}" muted loop playsinline
+        style="width:100%;display:block;" onerror="this.style.display='none'"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
@@ -469,20 +466,21 @@ function renderGallery() {
   observeVideos();
 }
 
-// ── VIDEO CLICK-TO-PLAY ──
-function observeVideos() {}
-document.addEventListener('click', function(e) {
-  const thumb = e.target.closest('.video-thumb');
-  if (!thumb) return;
-  const src = thumb.dataset.src;
-  if (!src) return;
-  e.stopPropagation();
-  const vid = document.createElement('video');
-  vid.src = src; vid.muted = true; vid.loop = true; vid.playsInline = true; vid.autoplay = true;
-  vid.style.cssText = 'width:100%;display:block;';
-  thumb.replaceWith(vid);
-  vid.play().catch(()=>{});
-});
+// ── VIDEO AUTOPLAY (viewport only) ──
+const videoObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) {
+      if (v.dataset.src && !v.src) { v.src = v.dataset.src; v.load(); }
+      v.play().catch(()=>{});
+    } else {
+      v.pause();
+    }
+  });
+}, { threshold: 0.1 });
+function observeVideos() {
+  document.querySelectorAll('#galleryGrid video[data-src]').forEach(v => videoObserver.observe(v));
+}
 
 // ── FILTER ──
 function buildFilterBar() {
