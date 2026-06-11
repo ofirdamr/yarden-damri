@@ -18,6 +18,7 @@ jobs:
           node-version: 20
       - name: Install ffmpeg
         run: sudo apt-get install -y ffmpeg
+        continue-on-error: true
       - name: Sync Instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
