@@ -595,26 +595,23 @@ function saveSettings(s) {
 
 // ─── INIT ───────────────────────────────────────────────────────
 async function initAdmin() {
-  // Load remote state via Worker (no token needed — Worker holds it server-side)
-  if (window.RemoteState) {
-    const fetchResult = await window.RemoteState.fetch();
-    if (!fetchResult || !fetchResult.ok) {
-      document.getElementById('grid').innerHTML = `
-        <div style="padding:30px;text-align:center;">
-          <p style="color:#c62828;font-size:1rem;margin-bottom:14px;">⚠️ לא הצלחתי להתחבר לשרת.</p>
-          <p style="color:#888;font-size:.85rem;margin-bottom:18px;">${fetchResult?.error || ''}</p>
-          <button class="btn btn-primary" onclick="initAdmin()">🔄 נסי שוב</button>
-        </div>`;
-      return;
-    }
-  }
-
-  const s = getSettings();
   if (typeof GALLERY_IMAGES === 'undefined') {
     document.getElementById('grid').innerHTML = '<p style="padding:20px;color:red">שגיאה: קובץ הגלריה לא נטען. רענן את הדף.</p>';
     return;
   }
+  // Show spinner while Worker loads settings (hidden/cats/order)
+  document.getElementById('grid').innerHTML = '<p style="padding:30px;text-align:center;opacity:.5;">⏳ טוען הגדרות...</p>';
+
+  if (window.RemoteState) {
+    const fetchResult = await window.RemoteState.fetch();
+    if (!fetchResult || !fetchResult.ok) {
+      showToast('⚠️ לא הצלחתי להתחבר לשרת — מוצג מנתונים מקומיים');
+    }
+  }
+
+  // Now render with full settings loaded
   allImages = [...GALLERY_IMAGES];
+  const s = getSettings();
   if (s.order && s.order.length > 0) {
     const orderMap = {};
     s.order.forEach((url,i) => orderMap[url] = i);
@@ -760,12 +757,19 @@ function renderGrid() {
   grid.innerHTML = '';
 
   let imgs = allImages;
-  if (currentFilter==='hidden') imgs = imgs.filter(i=>hiddenSet.has(i.u));
-  else if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
-  else if (currentFilter==='duplicates') { const uc={}; allImages.forEach(i=>{uc[i.u]=(uc[i.u]||0)+1;}); imgs=allImages.filter(i=>uc[i.u]>1); }
-  if (currentCatFilter === '__uncategorized__') imgs = imgs.filter(i=>!(catMap[i.u]));
-  else if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
-  if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
+  if (currentFilter==='hidden') {
+    // Hard override — show ALL hidden URLs, including those not in gallery (ghost items)
+    const inGallery = new Set(allImages.map(i=>i.u));
+    const ghostHidden = [...hiddenSet].filter(u=>!inGallery.has(u)).map(u=>({u,a:'',item_id:'',ghost:true}));
+    imgs = [...allImages.filter(i=>hiddenSet.has(i.u)), ...ghostHidden];
+    // Skip catFilter and searchTerm for hidden view
+  } else {
+    if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
+    else if (currentFilter==='duplicates') { const uc={}; allImages.forEach(i=>{uc[i.u]=(uc[i.u]||0)+1;}); imgs=allImages.filter(i=>uc[i.u]>1); }
+    if (currentCatFilter === '__uncategorized__') imgs = imgs.filter(i=>!(catMap[i.u]));
+    else if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
+    if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
+  }
 
   // Pagination — show 60 at a time
   const ADMIN_PAGE_SIZE = 60;
@@ -900,8 +904,11 @@ function clearAllSettings(){
 
 // ─── HERO VIDEO PICKER (visual grid) ──────────────────────────
 function heroVidThumb(url){
-  if (!url.includes('cloudinary.com')) return url;
-  return url.replace('/video/upload/', '/video/upload/so_0,w_240,h_160,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  if (url.includes('cloudinary.com'))
+    return url.replace('/video/upload/', '/video/upload/so_0,w_240,h_160,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  const fileName = url.split('/').pop();
+  const itemId = fileName.replace(/^yarden_(?:makeup_)?/, '').replace(/\.mp4$/, '');
+  return 'https://images.yardendamri.co.il/yarden_' + itemId + '_thumb.jpg';
 }
 function heroVidPreview(url){
   if (!url.includes('cloudinary.com')) return url;
@@ -958,7 +965,7 @@ function populateHeroVideoSelect() {
   const hidden = new Set(getSettings().hidden || []);
   // Only show videos that are NOT hidden
   _heroAllVideos = GALLERY_IMAGES.filter(i =>
-    (i.video || (i.u && i.u.includes('/video/upload/'))) && !hidden.has(i.u)
+    i.video || (i.u && (i.u.includes('/video/upload/') || i.u.includes('videos-new.yardendamri.co.il') || i.u.includes('videos.yardendamri.co.il') || i.u.match(/\.mp4$/i)))
   );
   renderHeroGrid();
   const status = document.getElementById('hero-video-status');
