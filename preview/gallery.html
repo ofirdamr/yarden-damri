@@ -331,22 +331,23 @@ function cdnVideoPoster(url) {
 }
 
 // ── IG STATS ──
-let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
+let igStatsCache = null; // null = not loaded yet
 function getIgStats(item) {
+  if (!igStatsCache) return null;
   const id = item.post_id || item.item_id || item.id;
   if (id && igStatsCache[id]) return igStatsCache[id];
-  const ck = (item.a||'').substring(0,40).replace(/\s+/g,'').toLowerCase();
-  return ck && igStatsCache[ck] ? igStatsCache[ck] : null;
+  return null;
 }
 async function loadIgFeed() {
-  if (Object.keys(igStatsCache).length > 0) return;
+  if (igStatsCache !== null) return; // already loaded
+  igStatsCache = {}; // mark as loading
   try {
-    const res = await fetch('instagram-stats.json?v=' + Math.floor(Date.now()/60000));
-    if (!res.ok) return;
-    Object.assign(igStatsCache, await res.json());
-    sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-    renderGallery();
-  } catch(e) {}
+    const res = await fetch('instagram-stats.json?v=' + Date.now(), { cache: 'no-store' });
+    if (res.ok) {
+      igStatsCache = await res.json();
+      renderGallery(); // re-render with stats
+    }
+  } catch(e) { igStatsCache = {}; }
 }
 
 // ── LIKES / COMMENTS ──
