@@ -208,6 +208,12 @@ async function checkExistsR2(cfg, fileName) {
         if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
         process.stdout.write("~"); continue;
       }
+      // Skip upload of new videos if ffmpeg unavailable - add placeholder and continue
+      const { execSync: testExec } = require("child_process");
+      try { testExec("which ffmpeg", {stdio:"pipe"}); } catch(e) {
+        console.log(`\nSkipping new video ${item.id} - ffmpeg not available`);
+        continue;
+      }
       console.log(`\nUploading video ${item.id}...`);
       try {
         const tmpIn = `/tmp/vin_${item.id}.mp4`;
