@@ -306,7 +306,8 @@ function cdnVideoPoster(url) { return ''; }
 // ── IG STATS ──
 let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
 function getIgStats(item) {
-  if (item.id && igStatsCache[item.id]) return igStatsCache[item.id];
+  const id = item.item_id || item.id;
+  if (id && igStatsCache[id]) return igStatsCache[id];
   const ck = (item.a||'').substring(0,40).replace(/\s+/g,'').toLowerCase();
   return ck && igStatsCache[ck] ? igStatsCache[ck] : null;
 }
@@ -421,7 +422,7 @@ function renderGallery() {
     }
     div.innerHTML = `${mediaHtml}
       <div class="overlay"><div class="overlay-text">${caption}</div></div>
-      <div class="item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;opacity:0;transition:opacity .3s;">
+      <div class="item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;">
         <button onclick="event.stopPropagation();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
         <button onclick="event.stopPropagation();openComments('${item.u}','${(item.a||'').substring(0,30).replace(/'/g,'')}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
       </div>`;
