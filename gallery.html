@@ -314,7 +314,7 @@ function getIgStats(item) {
 async function loadIgFeed() {
   if (Object.keys(igStatsCache).length > 0) return;
   try {
-    const res = await fetch('instagram-stats.json?v=' + Math.floor(Date.now()/3600000));
+    const res = await fetch('instagram-stats.json?v=' + Math.floor(Date.now()/60000));
     if (!res.ok) return;
     Object.assign(igStatsCache, await res.json());
     sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
