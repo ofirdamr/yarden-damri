@@ -82,22 +82,30 @@ async function patchIndexHtml(env, videoUrl) {
   const meta = await r.json();
   let html = decodeURIComponent(escape(atob(meta.content.replace(/\s/g, ''))));
 
-  // Build clean Cloudinary URLs
-  const clean = videoUrl.replace(/\/video\/upload\/[^/]+\//, '/video/upload/');
-  const src    = clean.replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-  const poster = clean.replace('/video/upload/', '/video/upload/so_0,w_720,f_jpg,q_auto/')
-                      .replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  // Use video URL directly (R2) and derive poster from images bucket
+  const src = videoUrl;
+  // Derive poster: same filename but .jpg in images bucket
+  const fileName = videoUrl.split('/').pop();
+  const itemId = fileName.replace(/^yarden_/, '').replace(/\.mp4$/, '');
+  const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
 
   // Replace the <source> src inside heroVideoSource
   html = html.replace(
     /(<source id="heroVideoSource" src=")[^"]*(")/,
     `$1${src}$2`
   );
-  // Replace the poster attribute on heroVideo
+  // Update video src attribute
   html = html.replace(
-    /(<video id="heroVideo"[^>]*poster=")[^"]*(")/,
-    `$1${poster}$2`
+    /(<video id="heroVideo"[^>]*src=")[^"]*(")/,
+    `$1${src}$2`
   );
+  // Replace or add poster attribute on heroVideo
+  if (html.includes('poster="')) {
+    html = html.replace(
+      /(<video id="heroVideo"[^>]*poster=")[^"]*(")/,
+      `$1${poster}$2`
+    );
+  }
 
   const putBody = {
     message: 'admin: bake hero video into index.html',

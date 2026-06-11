@@ -687,13 +687,15 @@
       } else if (vidUrl && videoEl) {
         const s = document.getElementById('heroVideoSource');
         if (!s) return;
-        // ImageKit URL - use as-is, no transform needed
-        const finalUrl = vidUrl.includes('ik.imagekit.io') ? vidUrl :
-          vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/').replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-        const newFile = finalUrl.split('/').pop();
-        const curFile = s.src.split('/').pop();
+        const newFile = vidUrl.split('/').pop();
+        const curFile = (videoEl.src || '').split('/').pop();
         if (newFile && curFile && newFile === curFile) return;
-        s.src = finalUrl;
+        // Derive poster from images bucket
+        const itemId = newFile.replace(/^yarden_/, '').replace(/\.mp4$/, '');
+        const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
+        videoEl.setAttribute('poster', poster);
+        s.src = vidUrl;
+        videoEl.src = vidUrl;
         videoEl.load();
         videoEl.play().catch(()=>{});
       }
