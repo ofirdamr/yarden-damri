@@ -590,14 +590,16 @@ document.addEventListener('keydown', e => {
 });
 
 // ── INIT ──
-// Wait for RemoteState before first render so hidden items never appear
+// Render immediately with cached state, then silently refresh with remote data
+buildFilterBar();
+applyFilter('all');
 loadIgFeed();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
+    buildFilterBar();
+    applyFilter(activeFilter);
   }
-  buildFilterBar();
-  applyFilter('all');
 })();
 
 function sharesite() {

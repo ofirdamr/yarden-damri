@@ -526,12 +526,13 @@ document.addEventListener('keydown', e => {
 });
 
 // ── INIT ──
+applyFilter('all');
 loadIgFeed();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
+    applyFilter(activeFilter);
   }
-  applyFilter('all');
 })();
 </script>
 </body>
