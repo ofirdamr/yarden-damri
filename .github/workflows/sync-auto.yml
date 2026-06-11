@@ -34,4 +34,4 @@ jobs:
           git add preview/gallery-data.js instagram-stats.json preview/instagram-stats.json
           git diff --staged --quiet && exit 0
           git commit -m "Update Instagram data"
-          git push origin main
+          git push origin main || (git pull --rebase origin main && git push origin main)
