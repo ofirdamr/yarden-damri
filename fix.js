@@ -221,14 +221,18 @@ function safeWrite(filePath, data) {
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
-  // Also fetch stats for any IDs in missing-stats-ids.json
-  let missingIds = [];
-  try { missingIds = JSON.parse(fs.readFileSync("missing-stats-ids.json", "utf8")); } catch(e) {}
-  const allIds = [...new Set([...uniquePostIds, ...missingIds])];
+  // Collect ALL IDs: from rawPosts AND from existing gallery items (covers old carousel children)
+  let existingGallery = [];
+  try {
+    const gr = fs.readFileSync(GALLERY_FILE, "utf8").replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
+    existingGallery = JSON.parse(gr);
+  } catch(e) {}
+  const galleryItemIds = existingGallery.map(g => String(g.item_id || '')).filter(Boolean);
+  const allIds = [...new Set([...uniquePostIds, ...galleryItemIds])];
   let stats = {};
   try { stats = JSON.parse(fs.readFileSync("instagram-stats.json", "utf8")); } catch(e) {}
   const newIds = allIds.filter(id => !stats[id]);
-  console.log(`Stats: ${Object.keys(stats).length} cached, ${newIds.length} new (incl ${missingIds.length} missing)`);
+  console.log(`Stats: ${Object.keys(stats).length} cached, ${newIds.length} new to fetch`);
   const BATCH = 20;
   for (let i = 0; i < newIds.length; i += BATCH) {
     await Promise.all(newIds.slice(i, i + BATCH).map(async id => {
