@@ -291,7 +291,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<script src="cloud-storage.js"></script>
+<script src="cloud-storage.js?v=7"></script>
 <script src="gallery-data.js?v=2"></script>
 <script>
 // ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
@@ -309,7 +309,8 @@ function applyAdminSettings(images) {
   (s.order || []).forEach((url, i) => orderMap[url] = i);
   const privateCatsSet = new Set(s.privateCats || []);
   const catMap = s.cats || {};
-  let filtered = images.filter(img => !hidden.has(img.u) && !privateCatsSet.has(catMap[img.u]));
+  const hiddenCats = new Set([...privateCatsSet, 'מוסתרות']);
+  let filtered = images.filter(img => !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
   let pinnedImgs = filtered.filter(img => pinned.has(img.u));
   let rest = filtered.filter(img => !pinned.has(img.u));
   if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
@@ -319,47 +320,75 @@ function applyAdminSettings(images) {
 
 // ── CDN HELPERS ──
 function cdnUrl(url, w) {
-  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
-  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${w},c_limit/`);
+  if (!url) return url;
+  if (url.includes('ik.imagekit.io')) return url.replace(/\?.*/, '') + `?tr=w-${w},q-auto,f-auto`;
+  return url;
 }
-function cdnVideo(url, w) {
-  if (!url) return url; if (url.includes('ik.imagekit.io')) return url;
-  return url.replace('/video/upload/', `/video/upload/q_auto:good,w_480,c_fill,f_auto/`);
-}
+function cdnVideo(url, w) { return url || ''; }
 function cdnVideoPoster(url) {
   if (!url) return '';
-  if (url.includes('ik.imagekit.io')) return url + '/ik-thumbnail.jpg';
-  return '';
+  return url.replace(/\.mp4$/i, '.jpg');
 }
 
 // ── IG STATS ──
-let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
+let igStatsCache = null; // null = not loaded yet
 function getIgStats(item) {
-  if (item.id && igStatsCache[item.id]) return igStatsCache[item.id];
-  const ck = (item.a||'').substring(0,40).replace(/\s+/g,'').toLowerCase();
-  return ck && igStatsCache[ck] ? igStatsCache[ck] : null;
+  if (!igStatsCache) return null;
+  const id = item.post_id || item.item_id || item.id;
+  if (id && igStatsCache[id]) return igStatsCache[id];
+  return null;
 }
 async function loadIgFeed() {
-  if (Object.keys(igStatsCache).length > 0) return;
+  if (igStatsCache !== null) return; // already loaded
+  igStatsCache = {}; // mark as loading
   try {
-    const res = await fetch('instagram-stats.json?v=' + Math.floor(Date.now()/3600000));
-    if (!res.ok) return;
-    Object.assign(igStatsCache, await res.json());
-    sessionStorage.setItem('ig_stats', JSON.stringify(igStatsCache));
-    renderGallery();
-  } catch(e) {}
+    const res = await fetch('instagram-stats.json?v=' + Date.now(), { cache: 'no-store' });
+    if (res.ok) {
+      igStatsCache = await res.json();
+      renderGallery(); // re-render with stats
+    }
+  } catch(e) { igStatsCache = {}; }
+  loadSocial().then(()=>renderGallery()).catch(()=>{});
 }
 
-// ── LIKES / COMMENTS ──
-function getLikes() { return JSON.parse(localStorage.getItem('img_likes') || '{}'); }
-function getComments() { return JSON.parse(localStorage.getItem('img_comments') || '{}'); }
-function toggleLike(url) {
-  const likes = getLikes();
+// ── SOCIAL (web-wide likes + comments via Worker) ──
+    const SOCIAL_URL = 'https://api.yardendamri.co.il/social';
+    let _socialCache = null;
+
+    async function loadSocial() {
+      if (_socialCache) return _socialCache;
+      try {
+        const r = await fetch(SOCIAL_URL + '?v=' + Math.floor(Date.now()/60000));
+        if (r.ok) _socialCache = await r.json();
+      } catch(e) {}
+      if (!_socialCache) _socialCache = {likes:{}, comments:{}};
+      return _socialCache;
+    }
+
+    async function saveSocial() {
+      try {
+        await fetch(SOCIAL_URL, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({likes: _socialCache.likes, comments: _socialCache.comments})
+        });
+      } catch(e) {}
+    }
+
+    function getLikes() { return (_socialCache||{}).likes || {}; }
+    function getComments() { return (_socialCache||{}).comments || {}; }
+    // Per-session liked tracking (show filled heart for this user this session)
+    function hasLiked(key) { try { return !!sessionStorage.getItem('liked_'+key); } catch(e) { return false; } }
+    function setLiked(key) { try { sessionStorage.setItem('liked_'+key,'1'); } catch(e) {} }
+    function clearLiked(key) { try { sessionStorage.removeItem('liked_'+key); } catch(e) {} }
+
+async function toggleLike(url) {
+  await loadSocial();
   const key = btoa(url).substring(0,12);
-  const liked = localStorage.getItem('liked_'+key);
-  if (liked) { likes[key] = Math.max(0,(likes[key]||1)-1); localStorage.removeItem('liked_'+key); }
-  else { likes[key] = (likes[key]||0)+1; localStorage.setItem('liked_'+key,'1'); }
-  localStorage.setItem('img_likes', JSON.stringify(likes));
+  const liked = hasLiked(key);
+  if (liked) { _socialCache.likes[key] = Math.max(0,(_socialCache.likes[key]||1)-1); clearLiked(key); }
+  else { _socialCache.likes[key] = (_socialCache.likes[key]||0)+1; setLiked(key); }
+  saveSocial();
   renderGallery();
 }
 function openComments(url, alt) {
@@ -387,7 +416,7 @@ function openComments(url, alt) {
     <input id="cmt-name" placeholder="שם" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;margin-bottom:8px;font-family:inherit;"/>
     <label for="cmt-text" style="display:block;font-size:.8rem;opacity:.6;margin-bottom:4px;">תגובה</label>
     <textarea id="cmt-text" placeholder="כתבי תגובה..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;min-height:70px;resize:none;margin-bottom:10px;font-family:inherit;"></textarea>
-    <button onclick="(()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});localStorage.setItem('img_comments',JSON.stringify(c));this.closest('div[role=dialog]').remove();renderGallery();})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
+    <button onclick="(async()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});_socialCache.comments=c;saveSocial();this.closest('div[role=dialog]').remove();renderGallery();})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
   </div>`;
   document.body.appendChild(modal);
   modal.querySelector('#cmt-name').focus();
@@ -408,7 +437,7 @@ function getCat(img) {
 }
 
 // ── STATE ──
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 24;
 let renderPage = 1;
 let activeFilter = 'all';
 let allFilteredImages = [];
@@ -425,7 +454,7 @@ function renderGallery() {
     div.setAttribute('role','listitem');
     div.setAttribute('tabindex','0');
     const key = btoa(item.u).substring(0,12);
-    const liked = localStorage.getItem('liked_'+key);
+    const liked = hasLiked(key);
     const localLikes = getLikes()[key]||0;
     const igStats = getIgStats(item);
     const totalLikes = (igStats?igStats.likes:0)+localLikes;
@@ -437,10 +466,8 @@ function renderGallery() {
     const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
     if (isVideo) {
-      const poster = cdnVideoPoster(item.u);
-      mediaHtml = `<video data-src="${cdnVideo(item.u,480)}" poster="${poster}" muted loop playsinline autoplay
-        aria-label="${caption||'סרטון'}" style="width:100%;display:block;transition:transform .4s;${rotStyle}"
-        onerror="this.style.display='none'"></video>`;
+      mediaHtml = `<video data-src="${item.u}" muted loop playsinline preload="none"
+        style="width:100%;display:block;" onerror="this.style.display='none'"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
@@ -456,14 +483,15 @@ function renderGallery() {
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1.04)`;
-      if (isVideo) { const v = div.querySelector('video'); if (v && v.src) v.play().catch(()=>{}); }
+
     };
     div.onmouseleave = () => {
       div.querySelector('.overlay').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1)`;
     };
-    div.onclick = () => openLb(idx);
-    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(idx);} };
+    const realIdx = allFilteredImages.indexOf(item);
+    div.onclick = () => openLb(realIdx);
+    div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(realIdx);} };
     grid.appendChild(div);
   });
   const btn = document.getElementById('loadMoreBtn');
@@ -471,18 +499,20 @@ function renderGallery() {
   observeVideos();
 }
 
-// ── VIDEO AUTOPLAY ──
+// ── VIDEO AUTOPLAY (viewport only) ──
 const videoObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    const vid = e.target;
+    const v = e.target;
     if (e.isIntersecting) {
-      if (vid.dataset.src && !vid.src) { vid.src = vid.dataset.src; vid.load(); }
-      vid.play().catch(()=>{});
-    } else { vid.pause(); }
+      if (v.dataset.src && !v.src) { v.src = v.dataset.src; v.load(); }
+      v.play().catch(()=>{});
+    } else {
+      v.pause();
+    }
   });
-}, { threshold: 0.2, rootMargin: '100px' });
+}, { threshold: 0.1 });
 function observeVideos() {
-  document.querySelectorAll('#galleryGrid video').forEach(v => videoObserver.observe(v));
+  document.querySelectorAll('#galleryGrid video[data-src]').forEach(v => videoObserver.observe(v));
 }
 
 // ── FILTER ──
@@ -578,14 +608,15 @@ document.addEventListener('keydown', e => {
 });
 
 // ── INIT ──
-// Initial render — apply with whatever cached state we have, then refresh from remote
+// Render immediately with cached state, then silently refresh with remote data
+buildFilterBar();
 applyFilter('all');
 loadIgFeed();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
-    buildFilterBar();            // rebuild with admin's custom categories
-    applyFilter(activeFilter);   // re-filter with remote cats data
+    buildFilterBar();
+    applyFilter(activeFilter);
   }
 })();
 
