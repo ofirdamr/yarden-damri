@@ -113,7 +113,7 @@
   </style>
 </head>
 <body>
-<script src="cloud-storage.js"></script>
+<script src="cloud-storage.js?v=7"></script>
 <script src="gallery-data.js?v=1779253059"></script>
 
 <!-- LOGIN -->
@@ -595,35 +595,33 @@ function saveSettings(s) {
 
 // ─── INIT ───────────────────────────────────────────────────────
 async function initAdmin() {
-  // Load remote state via Worker (no token needed — Worker holds it server-side)
-  if (window.RemoteState) {
-    const fetchResult = await window.RemoteState.fetch();
-    if (!fetchResult || !fetchResult.ok) {
-      document.getElementById('grid').innerHTML = `
-        <div style="padding:30px;text-align:center;">
-          <p style="color:#c62828;font-size:1rem;margin-bottom:14px;">⚠️ לא הצלחתי להתחבר לשרת.</p>
-          <p style="color:#888;font-size:.85rem;margin-bottom:18px;">${fetchResult?.error || ''}</p>
-          <button class="btn btn-primary" onclick="initAdmin()">🔄 נסי שוב</button>
-        </div>`;
-      return;
-    }
-  }
-
-  const s = getSettings();
   if (typeof GALLERY_IMAGES === 'undefined') {
     document.getElementById('grid').innerHTML = '<p style="padding:20px;color:red">שגיאה: קובץ הגלריה לא נטען. רענן את הדף.</p>';
     return;
   }
   allImages = [...GALLERY_IMAGES];
-  if (s.order && s.order.length > 0) {
-    const orderMap = {};
-    s.order.forEach((url,i) => orderMap[url] = i);
-    allImages.sort((a,b) => ((orderMap[a.u]!=null?orderMap[a.u]:99999)-(orderMap[b.u]!=null?orderMap[b.u]:99999)));
-  }
   renderGrid();
   renderCatList();
   renderCatFilters();
   populateHeroVideoSelect();
+
+  if (window.RemoteState) {
+    const fetchResult = await window.RemoteState.fetch();
+    if (!fetchResult || !fetchResult.ok) {
+      showToast('⚠️ לא הצלחתי להתחבר לשרת — מוצג מנתונים מקומיים');
+    } else {
+      const s = getSettings();
+      if (s.order && s.order.length > 0) {
+        const orderMap = {};
+        s.order.forEach((url,i) => orderMap[url] = i);
+        allImages.sort((a,b) => ((orderMap[a.u]!=null?orderMap[a.u]:99999)-(orderMap[b.u]!=null?orderMap[b.u]:99999)));
+      }
+      renderGrid();
+      renderCatList();
+      renderCatFilters();
+      populateHeroVideoSelect();
+    }
+  }
 }
 
 // ─── GRID ───────────────────────────────────────────────────────
@@ -760,7 +758,11 @@ function renderGrid() {
   grid.innerHTML = '';
 
   let imgs = allImages;
-  if (currentFilter==='hidden') imgs = imgs.filter(i=>hiddenSet.has(i.u));
+  if (currentFilter==='hidden') {
+    const inGallery = new Set(allImages.map(i=>i.u));
+    const ghostHidden = [...hiddenSet].filter(u=>!inGallery.has(u)).map(u=>({u,a:'',item_id:''}));
+    imgs = [...allImages.filter(i=>hiddenSet.has(i.u)), ...ghostHidden];
+  }
   else if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
   else if (currentFilter==='duplicates') { const uc={}; allImages.forEach(i=>{uc[i.u]=(uc[i.u]||0)+1;}); imgs=allImages.filter(i=>uc[i.u]>1); }
   if (currentCatFilter === '__uncategorized__') imgs = imgs.filter(i=>!(catMap[i.u]));
@@ -796,16 +798,22 @@ function renderGrid() {
     div.dataset.url=img.u; div.draggable=true;
     const isVid = img.u.includes('/video/upload/') || img.u.match(/\.(mp4|mov|webm)$/i);
     function adminThumb(url, isVid) {
-      if (!url) return url;
-      if (isVid) return url.includes('ik.imagekit.io') ? url + '/ik-thumbnail.jpg' : url;
-      return url.includes('ik.imagekit.io') ? url + '?tr=w-300,h-300,c-fill,f-auto,q-auto' : url;
+      if (!isVid) return url;
+      const fileName = url.split('/').pop();
+      const itemId = fileName.replace(/^yarden_(?:makeup_)?/, '').replace(/\.mp4$/, '');
+      return `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
     }
     const thumbSrc = adminThumb(img.u, isVid);
     const altTxt = generateAltText(img, catMap);
     const rotation = (s.rotations||{})[img.u] || 0;
     div.innerHTML=`
       ${isVid ? '<span class="video-badge">▶</span>' : ''}
-      <img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async" style="transform:rotate(${rotation}deg);transition:transform .3s;"/>
+      ${isVid
+        ? `<img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async"
+            style="transform:rotate(${rotation}deg);transition:transform .3s;width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.display='none';const v=document.createElement('video');v.src='${img.u}';v.muted=true;v.playsInline=true;v.style.cssText='width:100%;height:100%;object-fit:cover;';this.parentNode.insertBefore(v,this);v.addEventListener('loadeddata',()=>{v.currentTime=0.1;});"/>`
+        : `<img src="${thumbSrc}" alt="${altTxt}" loading="lazy" decoding="async" style="transform:rotate(${rotation}deg);transition:transform .3s;"/>`
+      }
       ${pinnedSet.has(img.u)?'<span class="pin-badge">📌</span>':''}
       ${hiddenSet.has(img.u)?'<span class="hidden-badge">🚫</span>':''}
       <div class="card-overlay">
@@ -894,11 +902,16 @@ function clearAllSettings(){
 
 // ─── HERO VIDEO PICKER (visual grid) ──────────────────────────
 function heroVidThumb(url){
-  if (!url) return url;
-  return url.includes('ik.imagekit.io') ? url + '/ik-thumbnail.jpg' : url;
+  if (url.includes('cloudinary.com'))
+    return url.replace('/video/upload/', '/video/upload/so_0,w_240,h_160,c_fill,f_jpg,q_auto/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
+  const fileName = url.split('/').pop();
+  const itemId = fileName.replace(/^yarden_(?:makeup_)?/, '').replace(/\.mp4$/, '');
+  return 'https://images.yardendamri.co.il/yarden_' + itemId + '_thumb.jpg';
 }
 function heroVidPreview(url){
-  return url;
+  if (!url.includes('cloudinary.com')) return url;
+  // Use low-res original (no new transform) so browser plays instantly
+  return url.replace('/video/upload/', '/video/upload/w_400,q_auto:low,vc_auto/');
 }
 let _heroAllVideos = [];
 let _heroCurrentFilter = '';
@@ -1055,9 +1068,13 @@ function heroCropStart(e) {
 
 function updateHeroPosition() { applyHeroCrop(); }
 function _heroRawPreviewUrl(url, type) {
-  if (!url) return url;
-  if (type === 'video') return url;
-  return url.includes('ik.imagekit.io') ? url + '?tr=w-800,h-450,c-fill,f-auto,q-auto' : url;
+  // Preview: use original video at low-res (no re-encode). Image: crop to wide banner.
+  if (!url || !url.includes('cloudinary.com')) return url;
+  if (type === 'video') {
+    return url.replace('/video/upload/', '/video/upload/q_auto:low,w_640,vc_auto/');
+  } else {
+    return url.replace('/image/upload/', '/image/upload/c_fill,w_800,h_450,f_auto,q_auto/');
+  }
 }
 
 function showHeroPreview(url, type) {
@@ -1148,8 +1165,8 @@ function populateHeroImageSelect(){
     const isPending = pendingUrl && (img.u === pendingUrl);
     const highlighted = isSaved || isPending;
     const caption = (img.a || '').substring(0,40).replace(/"/g,'&quot;');
-    const thumb = img.u.includes('ik.imagekit.io')
-      ? img.u + '?tr=w-240,h-160,c-fill,f-auto,q-auto'
+    const thumb = img.u.includes('cloudinary.com')
+      ? img.u.replace('/image/upload/','/image/upload/w_240,h_160,c_fill,f_jpg,q_auto/')
       : img.u;
     return `<div class="hero-vid-card" data-url="${img.u.replace(/"/g,'&quot;')}"
          onclick="selectHeroImage(this)"
