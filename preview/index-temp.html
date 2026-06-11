@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=14" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -218,12 +218,11 @@
     <!-- HERO -->
     <section id="hero" aria-label="כותרת ראשית">
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
-      <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;">
+      <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;background:#111;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;"
-          poster="https://ik.imagekit.io/yardenvideos/yarden_makeup_18352618189204100.jpg"
-          src="https://ik.imagekit.io/yardenvideos/yarden_makeup_18352618189204100.mp4">
-          <source id="heroVideoSource" src="https://ik.imagekit.io/yardenvideos/yarden_makeup_18352618189204100.mp4" type="video/mp4">
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;opacity:0;transition:opacity 0.6s ease;"
+          src="https://videos.yardendamri.co.il/yarden_makeup_18352618189204100.mp4">
+          <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18097031560849264.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
@@ -268,24 +267,18 @@
       </div>
       <div class="about-content reveal">
         <p class="section-eyebrow">אודות</p>
-        <h2 id="about-title" class="section-title">אני כאן כדי שתרגישי<br/>רגועה ביום הגדול</h2>
+        <h2 id="about-title" class="section-title">את יפה.<br/>אני כאן<br/>להראות את זה.</h2>
         <p class="section-body">
-          שמי ירדן דמרי. אני מאפרת מקצועית המתמחה בכלות ואירועים, ומגיעה לכל הארץ.
-          עם שנים של ניסיון בהפקות, צילומי אופנה ועבודה עם כלות מכל הסגנונות —
-          פיתחתי עין מדויקת ויד בטוחה שיהפכו כל רגע לקסום.
+          שמי ירדן. מאפרת מקצועית שמגיעה אלייך — לבית, לאולם, לכל מקום בישראל. מוצרי פרימיום, יד בטוחה, ובוקר שתזכרי לתמיד.
         </p>
-        <p class="section-body">
-          הגישה שלי פשוטה: אני מקשיבה לך, מבינה מה את רוצה לחוש,
-          ומשתמשת במוצרי פרימיום בלבד כדי להעצים את היופי הטבעי שלך.
-          אין כאן מסכות — רק את, זוהרת.
-        </p>
-        <div class="about-pills" role="list" aria-label="תחומי התמחות">
-          <span class="pill" role="listitem">✦ מוצרי פרימיום בלבד</span>
+        <div class="about-pills" role="list" aria-label="תחומי התמחות" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;">
           <span class="pill" role="listitem">✦ עור זוהר וטבעי</span>
           <span class="pill" role="listitem">✦ מחזיק כל הלילה</span>
-          <span class="pill" role="listitem">✦ אלגנטי ומצטלם טוב</span>
           <span class="pill" role="listitem">✦ מגיעה עד אלייך</span>
           <span class="pill" role="listitem">✦ ניסוי לפני החתונה</span>
+        </div>
+        <div style="margin-top:32px;">
+          <a href="about.html" class="btn-outline">קראי עליי ←</a>
         </div>
       </div>
     </section>
@@ -434,6 +427,14 @@
       <div id="gallery-filters" class="gallery-filters" role="group" aria-label="סינון גלריה"></div>
       <div id="ig-gallery" class="ig-gallery-grid" role="list" aria-label="גלריית תמונות"></div>
       <div style="text-align:center;margin-top:50px;" id="pagination" role="navigation" aria-label="עמודים"></div>
+
+      <div class="share-strip" style="margin-top:48px;border-top:1px solid rgba(196,128,90,.12);padding-top:40px;">
+        <p class="share-strip-text">אהבת את מה שראית? שתפי עם חברה שמחפשת מאפרת</p>
+        <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את האתר">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          שתפי עם חברה
+        </button>
+      </div>
     </section>
 
     <!-- REVIEWS -->
@@ -468,14 +469,6 @@
         </article>
       </div>
     </section>
-
-    <div class="share-strip">
-      <p class="share-strip-text">אהבת את מה שראית? שתפי עם חברה שמחפשת מאפרת</p>
-      <button class="share-strip-btn" onclick="sharesite()" aria-label="שתפי את האתר">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        שתפי עם חברה
-      </button>
-    </div>
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
@@ -694,15 +687,22 @@
       } else if (vidUrl && videoEl) {
         const s = document.getElementById('heroVideoSource');
         if (!s) return;
-        // ImageKit URL - use as-is, no transform needed
-        const finalUrl = vidUrl.includes('ik.imagekit.io') ? vidUrl :
-          vidUrl.replace(/\/video\/upload\/[^/]*\//, '/video/upload/').replace('/video/upload/', '/video/upload/w_720,q_auto:good,f_auto/');
-        const newFile = finalUrl.split('/').pop();
-        const curFile = s.src.split('/').pop();
+        const newFile = vidUrl.split('/').pop();
+        const curFile = (videoEl.src || '').split('/').pop();
         if (newFile && curFile && newFile === curFile) return;
-        s.src = finalUrl;
+        // Derive poster from images bucket
+        const itemId = newFile.replace(/^yarden_/, '').replace(/\.mp4$/, '');
+        const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
+        videoEl.style.opacity = '0';
+        videoEl.removeAttribute('poster');
+        s.src = vidUrl;
+        videoEl.src = vidUrl;
         videoEl.load();
-        videoEl.play().catch(()=>{});
+        videoEl.addEventListener('canplay', function onCanPlay() {
+          videoEl.removeEventListener('canplay', onCanPlay);
+          videoEl.play().catch(()=>{});
+          videoEl.style.opacity = '1';
+        }, { once: true });
       }
     }
 
@@ -711,7 +711,6 @@
       try {
         await window.RemoteState.fetch();
         const fresh = window.RemoteState.getCached() || {};
-        fresh.heroVideo = null; // hardcoded in HTML with ImageKit URL
         applyHeroMediaFromState(fresh);
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
@@ -792,20 +791,7 @@
       }
     })();
 
-    // Fetch fresh posts from server
-    (async () => {
-      try {
-        const res = await fetch('https://yarden-damri.onrender.com/instagram-feed');
-        if (!res.ok) return;
-        const fresh = await res.json();
-        if (!Array.isArray(fresh) || !fresh.length) return;
-        const existingUrls = new Set((typeof GALLERY_IMAGES !== 'undefined' ? GALLERY_IMAGES : []).map(i => i.u));
-        const newOnes = fresh.filter(p => !existingUrls.has(p.u));
-        if (!newOnes.length) return;
-        filteredImages = applyAdminSettings([...newOnes, ...(typeof GALLERY_IMAGES !== 'undefined' ? GALLERY_IMAGES : [])]);
-        renderPage(1);
-      } catch(e) {}
-    })();
+    
 
     let lbItems = [];
     let lbIdx = 0;
