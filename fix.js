@@ -24,15 +24,16 @@ const R2_VIDEOS = {
   publicUrl: "https://videos-new.yardendamri.co.il"
 };
 
-function get(url) {
+function get(url, timeoutMs=8000) {
   return new Promise((resolve) => {
     const lib = url.startsWith("https") ? https : http;
-    lib.get(url, (res) => {
-      if (res.statusCode === 301 || res.statusCode === 302) return get(res.headers.location).then(resolve);
+    const req = lib.get(url, (res) => {
+      if (res.statusCode === 301 || res.statusCode === 302) return get(res.headers.location, timeoutMs).then(resolve);
       let data = "";
       res.on("data", (c) => (data += c));
       res.on("end", () => { try { resolve(JSON.parse(data)); } catch (e) { resolve({}); } });
     }).on("error", () => resolve({}));
+    req.setTimeout(timeoutMs, () => { req.destroy(); resolve({}); });
   });
 }
 
@@ -246,10 +247,13 @@ async function checkExistsR2(cfg, fileName) {
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
-  const stats = {};
+  let stats = {};
+  try { stats = JSON.parse(fs.readFileSync("instagram-stats.json", "utf8")); } catch(e) {}
+  const newIds = uniquePostIds.filter(id => !stats[id]);
+  console.log(`Stats: ${Object.keys(stats).length} cached, ${newIds.length} new to fetch`);
   const BATCH = 20;
-  for (let i = 0; i < uniquePostIds.length; i += BATCH) {
-    const batch = uniquePostIds.slice(i, i + BATCH);
+  for (let i = 0; i < newIds.length; i += BATCH) {
+    const batch = newIds.slice(i, i + BATCH);
     await Promise.all(batch.map(async id => {
       try {
         const data = await get(`https://${baseHost}/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
@@ -258,5 +262,5 @@ async function checkExistsR2(cfg, fileName) {
     }));
   }
   fs.writeFileSync("instagram-stats.json", JSON.stringify(stats, null, 2));
-  console.log(`Done. ${uniquePostIds.length} posts.`);
+  console.log(`Done. ${Object.keys(stats).length} total posts.`);
 })();
