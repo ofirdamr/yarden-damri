@@ -194,7 +194,7 @@ async function checkExistsR2(cfg, fileName) {
       const fileName = `yarden_${item.id}.mp4`;
       const existsInR2 = await checkExistsR2(R2_VIDEOS, fileName);
       if (existsInR2) {
-        const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, video: true, thumb: "" };
+        const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: "" };
         if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
         process.stdout.write("~"); continue;
       }
@@ -209,7 +209,7 @@ async function checkExistsR2(cfg, fileName) {
         fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut);
         const r2Result = await uploadToR2(R2_VIDEOS, compressed, fileName, "video/mp4");
         if (r2Result.status === 200) {
-          const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, video: true, thumb: "" };
+          const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: "" };
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Video OK: ${fileName}`);
         } else { console.error(`R2 video failed ${item.id}: ${r2Result.status} ${r2Result.body}`); }
@@ -218,7 +218,7 @@ async function checkExistsR2(cfg, fileName) {
       const fileName = `yarden_${item.id}.webp`;
       const existsInR2 = await checkExistsR2(R2_IMAGES, fileName);
       if (existsInR2) {
-        const entry = { u: `${R2_IMAGES.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id };
+        const entry = { u: `${R2_IMAGES.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
         if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
         process.stdout.write("~"); continue;
       }
@@ -228,7 +228,7 @@ async function checkExistsR2(cfg, fileName) {
         const compressed = await compressImage(buffer);
         const r2Result = await uploadToR2(R2_IMAGES, compressed, fileName, "image/webp");
         if (r2Result.status === 200) {
-          const entry = { u: `${R2_IMAGES.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id };
+          const entry = { u: `${R2_IMAGES.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Image OK: ${fileName}`);
         } else { console.error(`R2 image failed ${item.id}: ${r2Result.status} ${r2Result.body}`); }

@@ -306,7 +306,7 @@ function cdnVideoPoster(url) { return ''; }
 // ── IG STATS ──
 let igStatsCache = JSON.parse(sessionStorage.getItem('ig_stats') || '{}');
 function getIgStats(item) {
-  const id = item.item_id || item.id;
+  const id = item.post_id || item.item_id || item.id;
   if (id && igStatsCache[id]) return igStatsCache[id];
   const ck = (item.a||'').substring(0,40).replace(/\s+/g,'').toLowerCase();
   return ck && igStatsCache[ck] ? igStatsCache[ck] : null;
