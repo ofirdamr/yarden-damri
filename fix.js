@@ -37,15 +37,16 @@ function get(url, timeoutMs=8000) {
   });
 }
 
-function downloadBuffer(url) {
+function downloadBuffer(url, timeoutMs=30000) {
   return new Promise((resolve, reject) => {
     const lib = url.startsWith("https") ? https : http;
-    lib.get(url, (res) => {
-      if (res.statusCode === 301 || res.statusCode === 302) return downloadBuffer(res.headers.location).then(resolve).catch(reject);
+    const req = lib.get(url, (res) => {
+      if (res.statusCode === 301 || res.statusCode === 302) return downloadBuffer(res.headers.location, timeoutMs).then(resolve).catch(reject);
       const chunks = [];
       res.on("data", (c) => chunks.push(c));
       res.on("end", () => resolve({ buffer: Buffer.concat(chunks), contentType: res.headers["content-type"] || "application/octet-stream" }));
     }).on("error", reject);
+    req.setTimeout(timeoutMs, () => { req.destroy(); reject(new Error("download timeout")); });
   });
 }
 
