@@ -63707,5 +63707,26 @@
     "likes": 0,
     "comments_count": 0,
     "comments": []
+  },
+  "17972187162071494": {
+    "likes": 8,
+    "comments_count": 5,
+    "comments": [
+      {
+        "username": "ofek_hatuel",
+        "text": "אין אלופה כמוך איןןןן",
+        "timestamp": "2026-06-11T19:07:43+0000"
+      },
+      {
+        "username": "adigolov1",
+        "text": "מושלםםםם",
+        "timestamp": "2026-06-11T18:32:20+0000"
+      },
+      {
+        "username": "dorits3",
+        "text": "",
+        "timestamp": "2026-06-11T18:21:18+0000"
+      }
+    ]
   }
 }
