@@ -553,6 +553,7 @@ function openLb(idx) {
 }
 function showLb() {
   const item = allFilteredImages[lbIndex];
+  if(window._dbgBanner){const cm=getAdminSettings().cats||{};window._dbgBanner.textContent='lb '+(lbIndex+1)+'/'+allFilteredImages.length+' cat:'+(cm[item.u]||'none')+' filter:'+activeFilter;}
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
   const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
@@ -600,11 +601,12 @@ loadIgFeed();
   }
   const _b=document.createElement('div');
   _b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#000;color:#0f0;font-size:11px;padding:4px;text-align:center;font-family:monospace';
-  _b.textContent=_dbg;
   _b.onclick=()=>_b.remove();
   document.body.appendChild(_b);
   buildFilterBar();
   applyFilter('all');
+  _b.textContent=_dbg+' shown:'+allFilteredImages.length;
+  window._dbgBanner=_b;
 })();
 
 function sharesite() {
