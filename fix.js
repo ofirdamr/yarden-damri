@@ -151,6 +151,7 @@ function safeWrite(filePath, data) {
   existing.forEach(e => { if (e.item_id) existingById[e.item_id] = e; });
 
   let hiddenUrls = new Set(), hiddenIds = new Set();
+  let heroVideoUrl = "", heroImageUrl = "", heroPosition = "50% 20%", heroZoom = 1;
   try {
     const settings = JSON.parse(fs.readFileSync("gallery-settings.json", "utf8"));
     (settings.admin?.hidden || settings.hidden || []).forEach(u => {
@@ -159,6 +160,10 @@ function safeWrite(filePath, data) {
       if (m) hiddenIds.add(m[1]);
     });
     console.log(`Hidden: ${hiddenUrls.size}`);
+    heroVideoUrl = settings.admin?.heroVideo || "";
+    heroImageUrl = settings.admin?.heroImage || "";
+    heroPosition = settings.admin?.heroPosition || "50% 20%";
+    heroZoom = settings.admin?.heroZoom || 1;
   } catch(e) {}
 
   const gallery = [], seenUrls = new Set();
