@@ -163,9 +163,14 @@ async function checkExistsR2(cfg, fileName) {
   existing.forEach(e => { if (e.item_id) existingById[e.item_id] = e; });
 
   let hiddenUrls = new Set();
+  let hiddenIds = new Set();
   try {
     const settings = JSON.parse(fs.readFileSync("gallery-settings.json", "utf8"));
-    (settings.hidden || []).forEach(u => hiddenUrls.add(u));
+    (settings.admin?.hidden || settings.hidden || []).forEach(u => {
+      hiddenUrls.add(u);
+      const m = u.match(/yarden_(?:makeup_)?(\d+)\./);
+      if (m) hiddenIds.add(m[1]);
+    });
     console.log(`Hidden items: ${hiddenUrls.size}`);
   } catch(e) {}
 
@@ -175,7 +180,7 @@ async function checkExistsR2(cfg, fileName) {
   for (const item of rawPosts) {
     const isVideo = item.media_type === "VIDEO";
 
-    if (existingById[item.id] && hiddenUrls.has(existingById[item.id].u)) {
+    if (hiddenIds.has(item.id) || (existingById[item.id] && hiddenUrls.has(existingById[item.id].u))) {
       process.stdout.write("H"); continue;
     }
 
