@@ -615,9 +615,7 @@ function renderGrid() {
     div.dataset.url=img.u; div.draggable=true;
     const isVid = img.u.includes('/video/upload/') || img.u.match(/\.(mp4|mov|webm)$/i);
     function adminThumb(url, isVid) {
-      if (!url.includes('cloudinary.com')) return url;
-      if (isVid) return url.replace('/video/upload/', '/video/upload/so_0,w_300,h_300,c_fill,f_jpg/').replace(/\.(mp4|mov|webm)$/i, '.jpg');
-      return url.replace('/upload/', '/upload/f_auto,q_auto,w_300,h_300,c_fill/');
+      return url || '';
     }
     const thumbSrc = adminThumb(img.u, isVid);
     const altTxt = generateAltText(img, catMap);
@@ -678,9 +676,7 @@ let _previewUrl = null;
 function previewVideo(url){
   _previewUrl = url;
   const player = document.getElementById('vid-modal-player');
-  const playUrl = url.includes('cloudinary.com')
-    ? url.replace('/video/upload/', '/video/upload/q_auto,w_600,vc_auto/')
-    : url;
+  const playUrl = url;
   player.src = playUrl;
   document.getElementById('vid-modal').classList.add('open');
   player.play().catch(()=>{});
