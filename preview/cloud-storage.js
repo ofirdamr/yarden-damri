@@ -123,7 +123,7 @@
     isReady: () => _ready,
     ready: () => _readyPromise,
     getCached: loadCache,
-    forceReload: async () => { _cache = null; _ready = false; try{localStorage.removeItem(CACHE_KEY);}catch(e){} return fetchRemote(); },
+    forceReload: async () => { _cache = null; _ready = false; return fetchRemote(); },
     getAdmin: () => {
       const s = loadCache() || {};
       const a = s.admin || {};
