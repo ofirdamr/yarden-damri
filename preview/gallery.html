@@ -348,30 +348,47 @@ async function loadIgFeed() {
       renderGallery(); // re-render with stats
     }
   } catch(e) { igStatsCache = {}; }
+  loadSocial().then(()=>renderGallery()).catch(()=>{});
 }
 
-// ── LIKES / COMMENTS ──
-// ── LIKES / COMMENTS (shared via RemoteState Worker) ──
-function getLikes() {
-  const s = window.RemoteState ? (window.RemoteState.getCached()||{}) : {};
-  return s.likes || {};
-}
-function getComments() {
-  const s = window.RemoteState ? (window.RemoteState.getCached()||{}) : {};
-  return s.comments || {};
-}
-// Per-device liked tracking only (to show filled heart for this user)
-function hasLiked(key) { try { return !!sessionStorage.getItem('liked_'+key); } catch(e) { return false; } }
-function setLiked(key) { try { sessionStorage.setItem('liked_'+key,'1'); } catch(e) {} }
-function clearLiked(key) { try { sessionStorage.removeItem('liked_'+key); } catch(e) {} }
+// ── SOCIAL (web-wide likes + comments via Worker) ──
+    const SOCIAL_URL = 'https://api.yardendamri.co.il/social';
+    let _socialCache = null;
+
+    async function loadSocial() {
+      if (_socialCache) return _socialCache;
+      try {
+        const r = await fetch(SOCIAL_URL + '?v=' + Math.floor(Date.now()/60000));
+        if (r.ok) _socialCache = await r.json();
+      } catch(e) {}
+      if (!_socialCache) _socialCache = {likes:{}, comments:{}};
+      return _socialCache;
+    }
+
+    async function saveSocial() {
+      try {
+        await fetch(SOCIAL_URL, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({likes: _socialCache.likes, comments: _socialCache.comments})
+        });
+      } catch(e) {}
+    }
+
+    function getLikes() { return (_socialCache||{}).likes || {}; }
+    function getComments() { return (_socialCache||{}).comments || {}; }
+    // Per-session liked tracking (show filled heart for this user this session)
+    function hasLiked(key) { try { return !!sessionStorage.getItem('liked_'+key); } catch(e) { return false; } }
+    function setLiked(key) { try { sessionStorage.setItem('liked_'+key,'1'); } catch(e) {} }
+    function clearLiked(key) { try { sessionStorage.removeItem('liked_'+key); } catch(e) {} }
 
 async function toggleLike(url) {
+  await loadSocial();
   const key = btoa(url).substring(0,12);
-  const likes = getLikes();
   const liked = hasLiked(key);
-  if (liked) { likes[key] = Math.max(0,(likes[key]||1)-1); clearLiked(key); }
-  else { likes[key] = (likes[key]||0)+1; setLiked(key); }
-  if (window.RemoteState) await window.RemoteState.update({ likes });
+  if (liked) { _socialCache.likes[key] = Math.max(0,(_socialCache.likes[key]||1)-1); clearLiked(key); }
+  else { _socialCache.likes[key] = (_socialCache.likes[key]||0)+1; setLiked(key); }
+  saveSocial();
   renderGallery();
 }
 function openComments(url, alt) {
@@ -399,7 +416,7 @@ function openComments(url, alt) {
     <input id="cmt-name" placeholder="שם" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;margin-bottom:8px;font-family:inherit;"/>
     <label for="cmt-text" style="display:block;font-size:.8rem;opacity:.6;margin-bottom:4px;">תגובה</label>
     <textarea id="cmt-text" placeholder="כתבי תגובה..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;min-height:70px;resize:none;margin-bottom:10px;font-family:inherit;"></textarea>
-    <button onclick="(async()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});if(window.RemoteState)await window.RemoteState.update({comments:c});this.closest('div[role=dialog]').remove();renderGallery();})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
+    <button onclick="(async()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});if(!_socialCache.comments)_socialCache.comments={};if(!_socialCache.comments['${key}'])_socialCache.comments['${key}']=[];_socialCache.comments['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});saveSocial();this.closest('div[role=dialog]').remove();renderGallery();})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
   </div>`;
   document.body.appendChild(modal);
   modal.querySelector('#cmt-name').focus();
