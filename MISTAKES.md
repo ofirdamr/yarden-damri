@@ -297,3 +297,28 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - Should have tested: curl -I https://ik.imagekit.io/Yardendamri/yarden_makeup/yarden_makeup_18119542276602555.jpg
 - from a non-sandboxed environment (the Mac terminal) before updating gallery-data.js
 - RULE: Always test one URL manually before doing bulk find/replace across 1,500+ entries
+
+## 2026-06-11: Social/likes/comments + hero flash + admin hidden photos
+
+### ❌ Removed localStorage cache from cloud-storage.js without thinking
+- Removed localStorage as cache storage thinking it would fix incognito issues
+- This broke the admin completely — on page load _cache is null, Worker fetch is async, so getSettings() returned empty defaults immediately
+- Rule: never remove a caching layer without a replacement. The fix was to make initAdmin WAIT for Worker fetch before rendering, not remove the cache.
+
+### ❌ Pushed fixes to -temp files that weren't accessible at the expected URL
+- Kept telling user to check yardendamri.co.il/preview/admin-temp.html before GitHub Pages propagated (2-10 min delay)
+- Rule: after pushing a temp file, warn user to wait 3-5 min before checking. Never say "check now" immediately after push.
+
+### ❌ Hidden filter showed only 4 photos despite ghost logic being correct
+- ghostHidden logic was correct but catFilter and searchTerm ran AFTER hidden filter, wiping ghost items
+- Fix: hidden filter must be a hard override — skip catFilter and searchTerm entirely when currentFilter==='hidden'
+- Rule: when a filter is a hard override (hidden, pinned), wrap all secondary filters in an else block so they never run against the override result.
+
+### ❌ Hero video flash — tried opacity/canplay approach first
+- Added opacity:0 + canplay listener instead of the correct fix (remove hardcoded src from video tag)
+- The real fix was already documented in MISTAKES.md: remove src from <video> tag, let JS set it from gallery-data.js
+- Rule: read MISTAKES.md before starting any fix that has been attempted before.
+
+### ❌ Wasted multiple rounds on thumbnail backfill workflow
+- Proposed ffmpeg + full video download (40 min) before realizing Instagram provides thumbnail_url
+- Rule: for Instagram media thumbnails, always use thumbnail_url from the Graph API — never download videos.
