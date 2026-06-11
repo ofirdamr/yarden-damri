@@ -963,7 +963,7 @@ function populateHeroVideoSelect() {
   const hidden = new Set(getSettings().hidden || []);
   // Only show videos that are NOT hidden
   _heroAllVideos = GALLERY_IMAGES.filter(i =>
-    (i.video || (i.u && i.u.includes('/video/upload/'))) && !hidden.has(i.u)
+    i.video || (i.u && (i.u.includes('/video/upload/') || i.u.includes('videos-new.yardendamri.co.il') || i.u.includes('videos.yardendamri.co.il') || i.u.match(/\.mp4$/i)))
   );
   renderHeroGrid();
   const status = document.getElementById('hero-video-status');
