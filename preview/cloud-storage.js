@@ -19,13 +19,10 @@
   function clearPwd(){ try { sessionStorage.removeItem(PWD_KEY); } catch(e){} }
 
   function loadCache(){
-    if (_cache) return _cache;
-    try { _cache = JSON.parse(localStorage.getItem(CACHE_KEY)||'null'); } catch(e){}
     return _cache;
   }
   function saveCache(d){
     _cache = d;
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch(e){}
   }
 
   let _fetchPromise = null;
