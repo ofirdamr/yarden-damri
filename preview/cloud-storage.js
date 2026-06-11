@@ -19,10 +19,13 @@
   function clearPwd(){ try { sessionStorage.removeItem(PWD_KEY); } catch(e){} }
 
   function loadCache(){
+    if (_cache) return _cache;
+    try { _cache = JSON.parse(localStorage.getItem(CACHE_KEY)||'null'); } catch(e){}
     return _cache;
   }
   function saveCache(d){
     _cache = d;
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch(e){}
   }
 
   let _fetchPromise = null;
@@ -123,7 +126,7 @@
     isReady: () => _ready,
     ready: () => _readyPromise,
     getCached: loadCache,
-    forceReload: async () => { _cache = null; _ready = false; return fetchRemote(); },
+    forceReload: async () => { _cache = null; _ready = false; try{localStorage.removeItem(CACHE_KEY);}catch(e){} return fetchRemote(); },
     getAdmin: () => {
       const s = loadCache() || {};
       const a = s.admin || {};
