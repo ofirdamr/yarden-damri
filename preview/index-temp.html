@@ -220,9 +220,8 @@
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;background:#111;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;"
-          src="https://videos.yardendamri.co.il/yarden_makeup_18352618189204100.mp4">
-          <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18097031560849264.mp4" type="video/mp4">
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;">
+          <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18089170315804159.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
@@ -649,7 +648,6 @@
   <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="a11y-live"></div>
 
   <!-- Gallery data -->
-  <script src="gallery-data.js"></script>
   <script src="cloud-storage.js"></script>
   <script>
     function applyHeroCropToPage(pos, zoom) {
@@ -702,22 +700,16 @@
       }
     }
 
-    (function applyHeroVideo(){
-      const state = {
-        heroVideo: (typeof HERO_VIDEO !== 'undefined') ? HERO_VIDEO : '',
-        heroImage: (typeof HERO_IMAGE !== 'undefined') ? HERO_IMAGE : '',
-        heroPosition: (typeof HERO_POSITION !== 'undefined') ? HERO_POSITION : '50% 20%',
-        heroZoom: (typeof HERO_ZOOM !== 'undefined') ? HERO_ZOOM : 1
-      };
-      applyHeroMediaFromState(state);
-      if (window.RemoteState) {
-        window.RemoteState.fetch().then(() => {
-          const fresh = window.RemoteState.getCached() || {};
-          if (fresh.heroVideo || fresh.heroImage) applyHeroMediaFromState(fresh);
-        }).catch(()=>{});
-      }
+    (async function applyHeroVideo(){
+      if (!window.RemoteState) return;
+      try {
+        await window.RemoteState.fetch();
+        const fresh = window.RemoteState.getCached() || {};
+        applyHeroMediaFromState(fresh);
+      } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
+  <script src="gallery-data.js"></script>
 
   <script>
     // ── MOBILE MENU ──────────────────────────────
@@ -870,8 +862,38 @@
       }
     });
 
-    function getLikes() { return JSON.parse(localStorage.getItem('img_likes')||'{}'); }
-    function getComments() { return JSON.parse(localStorage.getItem('img_comments')||'{}'); }
+
+    // ── SOCIAL (web-wide likes + comments via Worker) ──
+    const SOCIAL_URL = 'https://api.yardendamri.co.il/social';
+    let _socialCache = null;
+
+    async function loadSocial() {
+      if (_socialCache) return _socialCache;
+      try {
+        const r = await fetch(SOCIAL_URL + '?v=' + Math.floor(Date.now()/60000));
+        if (r.ok) _socialCache = await r.json();
+      } catch(e) {}
+      if (!_socialCache) _socialCache = {likes:{}, comments:{}};
+      return _socialCache;
+    }
+
+    async function saveSocial() {
+      try {
+        await fetch(SOCIAL_URL, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({likes: _socialCache.likes, comments: _socialCache.comments})
+        });
+      } catch(e) {}
+    }
+
+    function getLikes() { return (_socialCache||{}).likes || {}; }
+    function getComments() { return (_socialCache||{}).comments || {}; }
+    // Per-session liked tracking (show filled heart for this user this session)
+    function hasLiked(key) { try { return !!sessionStorage.getItem('liked_'+key); } catch(e) { return false; } }
+    function setLiked(key) { try { sessionStorage.setItem('liked_'+key,'1'); } catch(e) {} }
+    function clearLiked(key) { try { sessionStorage.removeItem('liked_'+key); } catch(e) {} }
+
 
     function igIdFromUrl(url) {
       const m = url.match(/yarden_makeup_(\d+)/);
@@ -926,15 +948,16 @@
     async function loadIgStats(images) {
       // Fire and forget — don't await, gallery shows immediately
       loadIgFeed().catch(()=>{});
+      loadSocial().then(()=>renderPage(currentPage)).catch(()=>{});
     }
 
-    function toggleLike(url) {
-      const likes = getLikes();
+    async function toggleLike(url) {
+      await loadSocial();
       const key = btoa(url).substring(0,12);
-      const liked = localStorage.getItem('liked_'+key);
-      if (liked) { likes[key] = Math.max(0,(likes[key]||1)-1); localStorage.removeItem('liked_'+key); }
-      else { likes[key] = (likes[key]||0)+1; localStorage.setItem('liked_'+key,'1'); }
-      localStorage.setItem('img_likes', JSON.stringify(likes));
+      const liked = hasLiked(key);
+      if (liked) { _socialCache.likes[key] = Math.max(0,(_socialCache.likes[key]||1)-1); clearLiked(key); }
+      else { _socialCache.likes[key] = (_socialCache.likes[key]||0)+1; setLiked(key); }
+      saveSocial();
       renderPage(currentPage);
     }
 
@@ -968,7 +991,7 @@
         <input id="cmt-name" placeholder="שם" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;margin-bottom:8px;font-family:inherit;" />
         <label for="cmt-text" style="display:block;font-size:.8rem;opacity:.6;margin-bottom:4px;">תגובה</label>
         <textarea id="cmt-text" placeholder="כתבי תגובה..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(232,200,176,.2);background:rgba(255,255,255,.06);color:#F0E6DC;font-size:.95rem;min-height:70px;resize:none;margin-bottom:10px;font-family:inherit;"></textarea>
-        <button onclick="(()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});localStorage.setItem('img_comments',JSON.stringify(c));this.closest('div[role=dialog]').remove();renderPage(currentPage);})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
+        <button onclick="(()=>{const n=document.getElementById('cmt-name').value.trim(),t=document.getElementById('cmt-text').value.trim();if(!n||!t)return;const c=getComments();if(!c['${key}'])c['${key}']=[];c['${key}'].push({name:n,text:t,date:new Date().toLocaleDateString('he-IL')});_socialCache.comments=c;saveSocial();this.closest('div[role=dialog]').remove();renderPage(currentPage);})()" style="width:100%;padding:13px;border-radius:10px;border:none;background:#C4805A;color:#fff;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit;">שלחי 💬</button>
       </div>`;
       document.body.appendChild(modal);
       modal.querySelector('#cmt-name').focus();
@@ -997,12 +1020,12 @@
         div.style.cssText = 'position:relative;overflow:hidden;border-radius:16px;aspect-ratio:1;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;touch-action:manipulation;';
 
         const key = btoa(item.u).substring(0,12);
-        const liked = localStorage.getItem('liked_'+key);
-        const localLikes = (JSON.parse(localStorage.getItem('img_likes')||'{}')||{})[key]||0;
+        const liked = hasLiked(key);
+        const localLikes = getLikes()[key]||0;
         const igStats = getIgStats(item);
         const totalLikes = (igStats ? igStats.likes : 0) + localLikes;
         const igCmtCount = igStats ? (igStats.comments_count || igStats.comments?.length || 0) : 0;
-        const localCmtCount = ((JSON.parse(localStorage.getItem('img_comments')||'{}')||{})[key]||[]).length;
+        const localCmtCount = (getComments()[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
 
         const isVideo = item.video || item.u.includes('/video/upload/');
