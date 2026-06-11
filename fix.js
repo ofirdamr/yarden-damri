@@ -191,6 +191,9 @@ async function checkExistsR2(cfg, fileName) {
       const isNewR2 = (isVideo && e.u && e.u.includes("videos-new.yardendamri")) ||
                       (!isVideo && e.u && e.u.includes("images.yardendamri"));
       if (isNewR2) {
+        // Always update post_id and caption in case they changed
+        e.post_id = item.post_id || item.id;
+        e.a = cleanCaption(item.caption);
         if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
         process.stdout.write("."); continue;
       }
