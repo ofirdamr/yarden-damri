@@ -242,11 +242,15 @@ async function checkExistsR2(cfg, fileName) {
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
   const stats = {};
-  for (const id of uniquePostIds) {
-    try {
-      const data = await get(`https://${baseHost}/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
-      stats[id] = { likes: data.like_count || 0, comments_count: data.comments_count || 0, comments: (data.comments?.data || []).map(c => ({ username: c.username || "", text: c.text || "", timestamp: c.timestamp || "" })) };
-    } catch(e) { stats[id] = { likes: 0, comments_count: 0, comments: [] }; }
+  const BATCH = 20;
+  for (let i = 0; i < uniquePostIds.length; i += BATCH) {
+    const batch = uniquePostIds.slice(i, i + BATCH);
+    await Promise.all(batch.map(async id => {
+      try {
+        const data = await get(`https://${baseHost}/${id}?fields=like_count,comments_count,comments{text,timestamp,username}&access_token=${token}`);
+        stats[id] = { likes: data.like_count || 0, comments_count: data.comments_count || 0, comments: (data.comments?.data || []).map(c => ({ username: c.username || "", text: c.text || "", timestamp: c.timestamp || "" })) };
+      } catch(e) { stats[id] = { likes: 0, comments_count: 0, comments: [] }; }
+    }));
   }
   fs.writeFileSync("instagram-stats.json", JSON.stringify(stats, null, 2));
   console.log(`Done. ${uniquePostIds.length} posts.`);
