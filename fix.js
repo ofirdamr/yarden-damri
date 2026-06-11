@@ -212,10 +212,13 @@ async function checkExistsR2(cfg, fileName) {
         const tmpIn = `/tmp/vin_${item.id}.mp4`;
         const tmpOut = `/tmp/vout_${item.id}.mp4`;
         const { buffer } = await downloadBuffer(item.media_url);
-        fs.writeFileSync(tmpIn, buffer);
-        await compressVideo(tmpIn, tmpOut);
-        const compressed = fs.readFileSync(tmpOut);
-        fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut);
+        let compressed = buffer;
+        try {
+          fs.writeFileSync(tmpIn, buffer);
+          await compressVideo(tmpIn, tmpOut);
+          compressed = fs.readFileSync(tmpOut);
+          fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut);
+        } catch(fe) { console.log(`ffmpeg unavailable, uploading original`); try{fs.unlinkSync(tmpIn);}catch(e){} }
         const r2Result = await uploadToR2(R2_VIDEOS, compressed, fileName, "video/mp4");
         if (r2Result.status === 200) {
           const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: "" };
