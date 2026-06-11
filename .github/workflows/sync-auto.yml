@@ -13,6 +13,7 @@ jobs:
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -34,4 +35,6 @@ jobs:
           git add preview/gallery-data.js instagram-stats.json preview/instagram-stats.json
           git diff --staged --quiet && exit 0
           git commit -m "Update Instagram data"
-          git push origin main || (git pull --rebase origin main && git push origin main)
+          git fetch origin main
+          git rebase origin/main
+          git push origin main
