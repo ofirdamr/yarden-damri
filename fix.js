@@ -221,10 +221,14 @@ function safeWrite(filePath, data) {
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
+  // Also fetch stats for any IDs in missing-stats-ids.json
+  let missingIds = [];
+  try { missingIds = JSON.parse(fs.readFileSync("missing-stats-ids.json", "utf8")); } catch(e) {}
+  const allIds = [...new Set([...uniquePostIds, ...missingIds])];
   let stats = {};
   try { stats = JSON.parse(fs.readFileSync("instagram-stats.json", "utf8")); } catch(e) {}
-  const newIds = uniquePostIds.filter(id => !stats[id]);
-  console.log(`Stats: ${Object.keys(stats).length} cached, ${newIds.length} new`);
+  const newIds = allIds.filter(id => !stats[id]);
+  console.log(`Stats: ${Object.keys(stats).length} cached, ${newIds.length} new (incl ${missingIds.length} missing)`);
   const BATCH = 20;
   for (let i = 0; i < newIds.length; i += BATCH) {
     await Promise.all(newIds.slice(i, i + BATCH).map(async id => {
@@ -235,5 +239,22 @@ function safeWrite(filePath, data) {
     }));
   }
   safeWrite("instagram-stats.json", JSON.stringify(stats, null, 2));
+  // Update post_id for items that now have stats via their item_id
+  let galleryUpdated = false;
+  try {
+    let galleryRaw = fs.readFileSync(GALLERY_FILE, "utf8").replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ", "").replace(/;$/, "");
+    let galleryData = JSON.parse(galleryRaw);
+    const statsKeys = new Set(Object.keys(stats));
+    for (const item of galleryData) {
+      if (!item.post_id && item.item_id && statsKeys.has(String(item.item_id))) {
+        item.post_id = String(item.item_id);
+        galleryUpdated = true;
+      }
+    }
+    if (galleryUpdated) {
+      safeWrite(GALLERY_FILE, "// Auto-generated gallery data\nconst GALLERY_IMAGES = " + JSON.stringify(galleryData, null, 2) + ";");
+      console.log("Updated gallery-data.js with matched post_ids");
+    }
+  } catch(e) { console.error("gallery post_id update error:", e.message); }
   console.log(`Done. ${Object.keys(stats).length} total posts.`);
 })();
