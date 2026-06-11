@@ -599,29 +599,28 @@ async function initAdmin() {
     document.getElementById('grid').innerHTML = '<p style="padding:20px;color:red">שגיאה: קובץ הגלריה לא נטען. רענן את הדף.</p>';
     return;
   }
-  allImages = [...GALLERY_IMAGES];
-  renderGrid();
-  renderCatList();
-  renderCatFilters();
-  populateHeroVideoSelect();
+  // Show spinner while Worker loads settings (hidden/cats/order)
+  document.getElementById('grid').innerHTML = '<p style="padding:30px;text-align:center;opacity:.5;">⏳ טוען הגדרות...</p>';
 
   if (window.RemoteState) {
     const fetchResult = await window.RemoteState.fetch();
     if (!fetchResult || !fetchResult.ok) {
       showToast('⚠️ לא הצלחתי להתחבר לשרת — מוצג מנתונים מקומיים');
-    } else {
-      const s = getSettings();
-      if (s.order && s.order.length > 0) {
-        const orderMap = {};
-        s.order.forEach((url,i) => orderMap[url] = i);
-        allImages.sort((a,b) => ((orderMap[a.u]!=null?orderMap[a.u]:99999)-(orderMap[b.u]!=null?orderMap[b.u]:99999)));
-      }
-      renderGrid();
-      renderCatList();
-      renderCatFilters();
-      populateHeroVideoSelect();
     }
   }
+
+  // Now render with full settings loaded
+  allImages = [...GALLERY_IMAGES];
+  const s = getSettings();
+  if (s.order && s.order.length > 0) {
+    const orderMap = {};
+    s.order.forEach((url,i) => orderMap[url] = i);
+    allImages.sort((a,b) => ((orderMap[a.u]!=null?orderMap[a.u]:99999)-(orderMap[b.u]!=null?orderMap[b.u]:99999)));
+  }
+  renderGrid();
+  renderCatList();
+  renderCatFilters();
+  populateHeroVideoSelect();
 }
 
 // ─── GRID ───────────────────────────────────────────────────────
