@@ -178,6 +178,10 @@ async function checkExistsR2(cfg, fileName) {
 
   const gallery = [], seenUrls = new Set();
   const cleanCaption = (s) => (s || "").replace(/[⁨⁩‪-‮​-‏⁠-⁤﻿`]/g, "").substring(0, 80).trim();
+  const { execSync: _testExec } = require("child_process");
+  let hasFfmpeg = false;
+  try { _testExec("which ffmpeg", {stdio:"pipe"}); hasFfmpeg = true; } catch(e) {}
+  console.log("ffmpeg available:", hasFfmpeg);
 
   for (const item of rawPosts) {
     const isVideo = item.media_type === "VIDEO";
@@ -202,18 +206,7 @@ async function checkExistsR2(cfg, fileName) {
 
     if (isVideo) {
       const fileName = `yarden_${item.id}.mp4`;
-      const existsInR2 = await checkExistsR2(R2_VIDEOS, fileName);
-      if (existsInR2) {
-        const entry = { u: `${R2_VIDEOS.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: "" };
-        if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
-        process.stdout.write("~"); continue;
-      }
-      // Skip upload of new videos if ffmpeg unavailable - add placeholder and continue
-      const { execSync: testExec } = require("child_process");
-      try { testExec("which ffmpeg", {stdio:"pipe"}); } catch(e) {
-        console.log(`\nSkipping new video ${item.id} - ffmpeg not available`);
-        continue;
-      }
+      if (!hasFfmpeg) { console.log(`\nSkipping new video ${item.id} - ffmpeg not available`); continue; }
       console.log(`\nUploading video ${item.id}...`);
       try {
         const tmpIn = `/tmp/vin_${item.id}.mp4`;
@@ -235,12 +228,6 @@ async function checkExistsR2(cfg, fileName) {
       } catch(e) { console.error(`Video error ${item.id}:`, e.message); }
     } else {
       const fileName = `yarden_${item.id}.webp`;
-      const existsInR2 = await checkExistsR2(R2_IMAGES, fileName);
-      if (existsInR2) {
-        const entry = { u: `${R2_IMAGES.publicUrl}/${fileName}`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
-        if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
-        process.stdout.write("~"); continue;
-      }
       console.log(`\nUploading image ${item.id}...`);
       try {
         const { buffer } = await downloadBuffer(item.media_url);
