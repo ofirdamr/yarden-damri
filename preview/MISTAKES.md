@@ -32,3 +32,13 @@
 - ALWAYS sync root instagram-stats.json = preview/instagram-stats.json after any data change
 - Before debugging data issues, verify the JS can actually READ the data (storage APIs, fetch errors)
 - Do not create one-time hack files or workflows — fix the root cause only
+
+## Mistake: Admin video picker showing black tiles
+- **Cause**: Videos served as .mp4 URLs set as <img> src — browsers can't display MP4 as image
+- **Fix**: Derive _thumb.jpg from images bucket. Falls back to <video> element if no thumb.
+- **Rule**: Never use .mp4 URL as <img> src. Always derive a .jpg thumbnail path.
+
+## Mistake: Hero video flash of wrong image/dark
+- **Cause**: No poster image exists for existing R2 videos (thumbnails not yet generated)
+- **Fix**: Generate _thumb.jpg on video upload via ffmpeg. Bake poster into index.html via Worker patchIndexHtml.
+- **Rule**: Always generate and store a thumbnail when uploading any video.

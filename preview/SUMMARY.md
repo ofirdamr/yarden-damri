@@ -1,39 +1,38 @@
-# Project Summary — Yarden Damri Website
+# Project Summary — June 2026
 
-## Architecture
-- **Live site**: root branch (old, still on Cloudinary — not yet replaced)
-- **Staging**: `/preview` folder — all active work done here
-- **Repo**: github.com/ofirdamr/yarden-damri
-- **Admin backend**: yarden-admin.ofirdamr.workers.dev (password: in project instructions)
-- **GitHub Pages**: yardendamri.co.il
+## Started
+Full site rebuild and media migration for yardendamri.co.il (Yarden Damri bridal makeup artist).
 
-## Media Stack (Preview folder — current)
-| Asset | Storage | Delivery |
-|---|---|---|
-| Images | Cloudinary (proxied) | ImageKit `ik.imagekit.io/Yardendamri` |
-| Videos | Cloudflare R2 `yarden-videos` bucket | ImageKit `ik.imagekit.io/yardenvideos` |
+## Done
+- **Media migration**: Cloudinary → R2 (images: `images.yardendamri.co.il`, videos: `videos-new.yardendamri.co.il`)
+- **Compression**: Images → WebP 800px, Videos → H.264 720p via ffmpeg on upload
+- **Gallery**: Lazy loading, viewport-only autoplay, PAGE_SIZE=24
+- **Instagram sync**: Every 6h, skips existing, only uploads new posts, no hang
+- **Likes/comments**: Fixed — removed sessionStorage (broken in incognito iPhone), fetch fresh every load
+- **Stats**: 1608 post IDs fetched including old carousel children
+- **Categories/hidden**: Working via Cloudflare Worker + gallery-settings.json
+- **Root ↔ Preview sync**: gallery-data.js and instagram-stats.json auto-copied on every sync
+- **Cloudinary**: All references removed from codebase
+- **ARCHITECTURE.md**: Created documenting full system
+- **Admin panel**: Video thumbnails fallback to video element when _thumb.jpg missing
 
-## What Was Done This Session
-- Cloudinary deactivating June 9 — full migration completed
-- All 1535 images: Cloudinary → ImageKit (via web origin proxy)
-- All 289 videos: Cloudinary → Cloudflare R2 → ImageKit yardenvideos account
-- `gallery-data.js`: all URLs migrated to ImageKit/R2
-- `gallery-settings.json`: all URLs migrated, pushed to repo
-- `index.html`, `about.html`, `bride.html`, `bridal-guide.html`: Cloudinary refs removed
-- Hero video: fixed, now playing from ImageKit yardenvideos
-- Gallery categories: working
-- Worker heroVideo: updated via fix-hero.html
+## In Progress
+- **Hero video**: Admin can pick any video, but video thumbnails not generated yet for existing videos → admin picker shows black tiles. _thumb.jpg files will be generated on next new video upload.
+- **Hero flash**: Still shows brief dark screen before video plays (no poster image available for existing videos)
 
-## Pending / To Verify
-1. **Root files** (live site): still have Cloudinary refs — needs migration when ready to go live with /preview
-2. **Render.com**: Instagram feed proxy — URL `yarden-damri.onrender.com` returns 404, needs checking
-3. **Instagram token**: appears working (GitHub Action syncs successfully) — verify
-4. **fix-hero.html**: should be deleted once confirmed stable
-5. **Temp files**: `bride-temp.html`, `index-temp.html`, `pricing-temp.html`, `reviews-temp.html`, `styles-temp.css` — clean up
-6. **ImageKit yardenvideos account**: registered under `rifzagury@gmail.com` — document this
+## To Do
+- Generate _thumb.jpg for all existing videos in R2 (needs one sync run with ffmpeg working)
+- Hero video shows instantly from first frame (blocked by missing thumbnails)
+- Site responsiveness / image sizing on desktop
+- SEO completion
+- Security audit  
+- Go-live: promote /preview → root (follow GO-LIVE.md)
+- Online reservation system (post-launch)
+- Google Places API for live reviews (post-launch)
 
-## Key Credentials
-- ImageKit images: `ik.imagekit.io/Yardendamri` (ofirdamr@gmail.com)
-- ImageKit videos: `ik.imagekit.io/yardenvideos` (rifzagury@gmail.com)
-- R2 bucket: `yarden-videos`, public URL: `pub-b53972ac15914c24b444efc1a580296e.r2.dev`
-- Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8350924`
+## Key Architecture
+- Images: `images.yardendamri.co.il` (R2 bucket: yarden-images)
+- Videos: `videos-new.yardendamri.co.il` (R2 bucket: yarden-videos-new)
+- Video thumbnails: `images.yardendamri.co.il/yarden_{itemId}_thumb.jpg`
+- Worker: `api.yardendamri.co.il/settings` (auth: X-Admin-Password: makeup2026)
+- Sync: GitHub Actions → fix.js → R2 + preview/gallery-data.js + instagram-stats.json
