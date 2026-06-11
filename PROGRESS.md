@@ -437,3 +437,28 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 3. If yes → re-upload with useUniqueFileName=false parameter
 4. If no → debug why URLs are 404
 5. Option B: revert gallery-data.js to Cloudinary URLs, remove transforms to save credits
+
+## 2026-06-11
+
+### Deployed to permanent files (admin.html, index.html, gallery.html)
+
+**Admin panel:**
+- initAdmin now waits for Worker fetch before rendering — hidden/cats/order all load correctly
+- Hidden filter is a hard override — shows all 711+ hidden photos including ghost items (old URLs not in current gallery-data.js)
+- Hero video picker now shows all R2 videos (fixed filter to include videos-new.yardendamri.co.il and .mp4 URLs)
+- Gallery loads fast — spinner shown while Worker fetches, single render after
+
+**Hero video:**
+- Removed hardcoded src from <video> tag — no more flash of old video on load
+- gallery-data.js now includes HERO_VIDEO/HERO_IMAGE/HERO_POSITION/HERO_ZOOM written by sync job
+- Video plays instantly from gallery-data.js, Worker updates in background
+
+**Likes & comments (web-wide):**
+- New /social endpoint added to Cloudflare Worker (public, no password)
+- social.json created in repo root as persistent store
+- Both index.html and gallery.html now read/write likes+comments via Worker — web-wide for all visitors
+- Removed all localStorage usage from likes/comments
+
+**Thumbnail backfill:**
+- backfill-thumbs.js + workflow created — uses Instagram thumbnail_url, no video download, ~3 min runtime
+- Workflow triggered manually via GitHub Actions
