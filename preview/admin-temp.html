@@ -767,6 +767,12 @@ function renderGrid() {
     if (currentFilter==='pinned') imgs = imgs.filter(i=>pinnedSet.has(i.u));
     else if (currentFilter==='duplicates') { const uc={}; allImages.forEach(i=>{uc[i.u]=(uc[i.u]||0)+1;}); imgs=allImages.filter(i=>uc[i.u]>1); }
     if (currentCatFilter === '__uncategorized__') imgs = imgs.filter(i=>!(catMap[i.u]));
+    else if (currentCatFilter === 'מוסתרות') {
+      // Named category "מוסתרות" = same as hidden system filter — include ghost items
+      const inGallery = new Set(allImages.map(i=>i.u));
+      const ghostHidden = [...hiddenSet].filter(u=>!inGallery.has(u)).map(u=>({u,a:'',item_id:'',ghost:true}));
+      imgs = [...allImages.filter(i=>hiddenSet.has(i.u)), ...ghostHidden];
+    }
     else if (currentCatFilter) imgs = imgs.filter(i=>(catMap[i.u]||'')=== currentCatFilter);
     if (searchTerm) imgs = imgs.filter(i=>i.a.includes(searchTerm));
   }
