@@ -120,7 +120,7 @@
     setPwd: setPwd,
     clearPwd: clearPwd,
     hasPwd: () => !!getPwd(),
-    fetch: fetchRemote,
+    fetch: fetchPublic,
     fetchPublic: fetchPublic,
     update: update,
     isReady: () => _ready,
