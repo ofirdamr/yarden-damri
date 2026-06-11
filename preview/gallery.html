@@ -291,7 +291,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<script src="cloud-storage.js"></script>
+<script src="cloud-storage.js?v=7"></script>
 <script src="gallery-data.js?v=2"></script>
 <script>
 // ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
@@ -595,7 +595,6 @@ loadIgFeed();
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
   }
-  const _dbgAdmin = window.RemoteState ? window.RemoteState.getAdmin() : {};
   buildFilterBar();
   applyFilter('all');
 })();
