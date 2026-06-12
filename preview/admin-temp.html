@@ -1580,6 +1580,15 @@ function addCategory(){
   s.catList.push(name); saveSettings(s); inp.value='';
   renderCatList(); renderCatFilters(); showToast('✅ קטגוריה נוספה');
 }
+function renameCat(cat){
+  const n=(prompt('שם חדש:',cat)||'').trim();
+  if(!n||n===cat)return;
+  const s=getSettings();
+  const i=s.catList.indexOf(cat); if(i!==-1)s.catList[i]=n;
+  for(const u of Object.keys(s.cats||{})){if(s.cats[u]===cat)s.cats[u]=n;}
+  if(s.privateCats){const pi=s.privateCats.indexOf(cat);if(pi!==-1)s.privateCats[pi]=n;}
+  saveSettings(s); renderCatList(); renderCatFilters(); showToast('✅ שונה ל־'+n);
+}
 function deleteCat(name){
   if(!confirm(`למחוק קטגוריה "${name}"? התמונות ישארו אבל ייאבד הסיווג.`))return;
   const s=getSettings();
