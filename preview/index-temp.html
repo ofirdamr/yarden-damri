@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=22" />
+  <link rel="stylesheet" href="styles-temp.css?v=23" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -667,7 +667,7 @@
         safeScale = 1;
       } else {
         const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
-        safePos = x + ' 32%';   // desktop-specific vertical framing on the face
+        safePos = x + ' 38%';   // desktop: centred on the subject, not the hairline
         safeScale = (zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
       }
       els.forEach(el => {
