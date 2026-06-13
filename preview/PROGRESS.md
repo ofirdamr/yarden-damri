@@ -53,6 +53,13 @@
 - Hero video thumbnails: _thumb.jpg not yet generated for existing 161 videos
 - Hero video flash: dark screen before video plays (needs thumbnails)
 
+### June 2026 — Homepage Gallery Fixes
+
+#### Completed
+- Fixed Instagram likes/comments not showing on homepage: `getIgStats` now checks `post_id` first (instagram-stats.json is keyed by post_id, not item_id)
+- Removed video filter from homepage gallery — videos now show alongside images
+- Verified: lazy loading already in place (videos: preload=none + data-src + poster via IntersectionObserver; images: loading=lazy + decoding=async)
+
 ### Next
 - Backfill _thumb.jpg for all existing R2 videos (GitHub Action)
 - Site responsiveness on desktop

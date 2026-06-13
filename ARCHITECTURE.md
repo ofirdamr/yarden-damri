@@ -197,12 +197,16 @@ const GALLERY_IMAGES = [
 
 ## Known Issues / To Do
 
-- **Hero video thumbnails**: `_thumb.jpg` not yet generated for existing 161 videos — admin picker shows black tiles, hero has brief dark flash before video plays. Will be fixed automatically when next new video is uploaded (ffmpeg generates thumb on upload). Or run a one-time backfill script.
+- **Hero video thumbnails**: `_thumb.jpg` not yet generated for existing 161 videos — admin picker shows black tiles, hero has brief dark flash before video plays.
 - **Old `yarden-videos` bucket**: Still has original uncompressed videos. Hero video still points there. Should migrate to `yarden-videos-new` after thumbnails are ready.
 - **Go-live**: Promote `/preview` → root following `GO-LIVE.md` (9-step checklist).
 - **SEO**: Meta tags, sitemap, structured data — pending before go-live.
 - **Online reservations**: Post-launch feature.
 - **Google Places API**: Live reviews — post-launch.
+
+## Stats Lookup — Important Note
+
+`instagram-stats.json` is keyed by **post_id** (parent post). `gallery-data.js` items have both `item_id` (child media) and `post_id`. All `getIgStats()` functions must check `post_id` first, then `item_id`, then `id`. This was the root cause of likes/comments not showing on the homepage (fixed June 2026).
 
 ---
 
