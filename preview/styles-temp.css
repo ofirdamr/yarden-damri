@@ -531,9 +531,14 @@
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
       #hero { height: 100vh; min-height: 600px; }
-      /* Desktop crop: cover (fills screen, no bars, no distortion); JS sets the desktop-specific face framing */
+      /* Zoom OUT: show the whole clip (smaller face, full person), centered */
+      #hero #heroMediaWrap {
+        background: radial-gradient(ellipse at center, #241a14 0%, #160f0a 55%, #0a0705 100%) !important;
+      }
       #hero #heroVideo, #hero #heroImage {
-        object-fit: cover !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+        transform: none !important;
       }
       .hero-content { max-width: 460px; padding: 0 60px; }
       .hero-title { font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 12px; }
