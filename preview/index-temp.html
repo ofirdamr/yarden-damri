@@ -1117,13 +1117,11 @@
 
     // Init
     if (filteredImages.length) {
-      loadSocial().then(() => {
-        renderPage(1);
-        loadIgStats(filteredImages.slice(0, 48));
-      }).catch(() => {
-        renderPage(1);
-        loadIgStats(filteredImages.slice(0, 48));
-      });
+      // Load both IG stats and social before first render
+      Promise.all([
+        loadIgFeed().catch(()=>{}),
+        loadSocial().catch(()=>{})
+      ]).then(() => renderPage(1));
     }
 
     // Scroll reveal
