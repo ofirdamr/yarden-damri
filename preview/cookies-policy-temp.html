@@ -4,7 +4,8 @@
   <meta name="robots" content="noindex,nofollow">
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>מדיניות עוגיות (Cookies) | ירדן דמרי</title>
+  <title>מדיניות עוגיות | ירדן דמרי</title>
+  <meta name="description" content="מדיניות עוגיות של ירדן דמרי — מאפרת מקצועית באילת."/>
   <link rel="stylesheet" href="styles.css?v=14"/>
   <style>
     .legal-body{max-width:760px;margin:0 auto;padding:120px 24px 80px;color:var(--text);font-size:.88rem;line-height:1.9}
@@ -14,32 +15,77 @@
     .legal-body ul{padding-right:20px;margin-bottom:12px}
     .legal-body li{margin-bottom:6px}
     .legal-updated{font-size:.78rem;color:rgba(62,42,26,.55);margin-bottom:32px}
-    .cookie-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:.83rem}
+    .cookie-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:.82rem}
     .cookie-table th{background:var(--blush);color:#fff;padding:8px 12px;text-align:right;font-weight:600}
     .cookie-table td{padding:8px 12px;border-bottom:1px solid rgba(62,42,26,.1);vertical-align:top}
     .cookie-table tr:nth-child(even) td{background:rgba(62,42,26,.03)}
 
-    /* ===== BANNER PREVIEW BOX ===== */
-    .banner-preview-box{background:var(--cream);border:2px dashed var(--blush);border-radius:12px;padding:28px 32px;margin-top:48px}
-    .banner-preview-box h2{border:none;margin-top:0;color:var(--blush)}
-    .banner-preview-box .banner-label{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(62,42,26,.45);margin-bottom:6px}
-    .cookie-banner-demo{background:#fff;border:1px solid rgba(62,42,26,.15);border-radius:8px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-    .cookie-banner-demo p{margin:0;flex:1;min-width:220px}
-    .cookie-banner-demo .btn-accept{background:var(--rose);color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:.85rem;cursor:pointer;white-space:nowrap}
-    .cookie-banner-demo .btn-decline{background:transparent;color:var(--text);border:1px solid rgba(62,42,26,.3);border-radius:6px;padding:9px 18px;font-size:.85rem;cursor:pointer;white-space:nowrap}
+    /* ===== COOKIE CONSENT BANNER ===== */
+    #cookie-banner{
+      position:fixed;bottom:0;left:0;right:0;z-index:9999;
+      background:var(--charcoal);color:rgba(255,255,255,.9);
+      padding:16px 20px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;flex-wrap:wrap;
+      box-shadow:0 -4px 24px rgba(0,0,0,.25);
+      font-size:.83rem;line-height:1.6;
+    }
+    #cookie-banner.hidden{display:none}
+    #cookie-banner p{margin:0;flex:1;min-width:200px}
+    #cookie-banner a{color:var(--blush);text-decoration:underline}
+    .cb-btns{display:flex;gap:10px;flex-shrink:0}
+    .cb-accept{background:var(--rose);color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:.83rem;cursor:pointer;font-family:inherit}
+    .cb-decline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:9px 16px;font-size:.83rem;cursor:pointer;font-family:inherit}
+    .cb-accept:hover{background:var(--deep)}
+    .cb-decline:hover{border-color:rgba(255,255,255,.6);color:#fff}
   </style>
   <script src="a11y.js" defer></script>
 </head>
 <body>
 
+  <!-- COOKIE CONSENT BANNER -->
+  <div id="cookie-banner" role="dialog" aria-label="הסכמה לעוגיות" aria-live="polite">
+    <p>
+      האתר משתמש בעוגיות לשיפור החוויה, ניתוח תנועה ופרסום ממוקד.
+      המשך הגלישה מהווה הסכמה לשימוש בהן.
+      <a href="cookies-policy-temp.html">למדיניות העוגיות המלאה</a>
+    </p>
+    <div class="cb-btns">
+      <button class="cb-accept" onclick="cookieConsent(true)">אני מסכימה</button>
+      <button class="cb-decline" onclick="cookieConsent(false)">דחה</button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var choice = localStorage.getItem('cookie_consent');
+      if (choice) document.getElementById('cookie-banner').classList.add('hidden');
+    })();
+    function cookieConsent(accepted) {
+      localStorage.setItem('cookie_consent', accepted ? 'accepted' : 'declined');
+      document.getElementById('cookie-banner').classList.add('hidden');
+    }
+  </script>
+
+  <!-- IS 5568: Skip navigation link -->
   <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
+  <!-- MOBILE OVERLAY -->
   <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()" aria-hidden="true"></div>
 
+  <!-- NAV -->
   <nav role="navigation" aria-label="ניווט ראשי">
     <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">ירדן <span>דמרי</span></a>
-    <button class="nav-hamburger" id="navHamburger" aria-label="פתיחת תפריט ניווט" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
+
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="navHamburger"
+      aria-label="פתיחת תפריט ניווט"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+      onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
+
+    <!-- Desktop nav links -->
     <ul class="nav-links" role="list">
       <li><a href="about.html">אודות</a></li>
       <li><a href="bride.html">מאפרת כלות</a></li>
@@ -48,42 +94,58 @@
       <li><a href="bridal-guide.html">מדריך כלות</a></li>
       <li><a href="pricing.html">מחירון</a></li>
       <li><a href="contact.html" class="nav-cta">צרי קשר</a></li>
+      <li class="nav-social">
+        <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram של ירדן דמרי" class="social-pill social-ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok של ירדן דמרי" class="social-pill social-tt">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+          <span>TikTok</span>
+        </a>
+      </li>
     </ul>
-    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="תפריט ניווט" aria-hidden="true">
-      <button class="mobile-close" onclick="closeMobileMenu()" aria-label="סגירת תפריט">✕</button>
-      <ul role="list">
-        <li><a href="about.html" onclick="closeMobileMenu()">אודות</a></li>
-        <li><a href="bride.html" onclick="closeMobileMenu()">מאפרת כלות</a></li>
-        <li><a href="services.html" onclick="closeMobileMenu()">שירותים</a></li>
-        <li><a href="gallery.html" onclick="closeMobileMenu()">גלריה</a></li>
-        <li><a href="bridal-guide.html" onclick="closeMobileMenu()">מדריך כלות</a></li>
-        <li><a href="pricing.html" onclick="closeMobileMenu()">מחירון</a></li>
-        <li><a href="contact.html" onclick="closeMobileMenu()">צרי קשר</a></li>
-      </ul>
-    </div>
   </nav>
+
+  <!-- Mobile slide-in menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="תפריט ניווט נייד" aria-hidden="true">
+    <ul role="list">
+      <li><a href="about.html" onclick="closeMobileMenu()">אודות</a></li>
+      <li><a href="bride.html" onclick="closeMobileMenu()">מאפרת כלות</a></li>
+      <li><a href="services.html" onclick="closeMobileMenu()">שירותים</a></li>
+      <li><a href="gallery.html" onclick="closeMobileMenu()">גלריה</a></li>
+      <li><a href="bridal-guide.html" onclick="closeMobileMenu()">מדריך כלות</a></li>
+      <li><a href="pricing.html" onclick="closeMobileMenu()">מחירון</a></li>
+      <li><a href="contact.html" onclick="closeMobileMenu()">צרי קשר</a></li>
+    </ul>
+    <a onclick="closeMobileMenu();" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" class="mobile-menu-wa">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.544 4.074 1.497 5.787L.057 23.882l6.255-1.641A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.666-.513-5.19-1.41l-.372-.22-3.863 1.013 1.032-3.765-.241-.388A9.978 9.978 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      שלחי הודעה בוואטסאפ
+    </a>
+    <div class="mobile-social">
+      <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-pill social-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-pill social-tt">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+        <span>TikTok</span>
+      </a>
+    </div>
+  </div>
 
   <main id="main-content">
     <div class="legal-body">
-
-      <!-- ═══════════════════════════════════════════════
-           SECTION 1 — FULL COOKIES POLICY
-           Copy-paste this entire block into your Privacy Policy page
-           ═══════════════════════════════════════════════ -->
 
       <h1>מדיניות עוגיות (Cookies)</h1>
       <p class="legal-updated">עודכן לאחרונה: יוני 2026</p>
 
       <h2>מה הן עוגיות?</h2>
       <p>
-        עוגיות (Cookies) הן קבצי טקסט קטנים שנשמרים על המכשיר שלך — מחשב, טאבלט או סמארטפון — כאשר את מבקרת באתר. העוגיות מאפשרות לאתר לזכור פרטים מסוימים על הביקור שלך, כגון השפה המועדפת, ולשפר את חווית השימוש.
-      </p>
-      <p>
-        העוגיות אינן מכילות מידע שמזהה אותך אישית כשלעצמן, אך הן עשויות לעבוד יחד עם מידע אחר שכבר מסרת לנו.
+        עוגיות (Cookies) הן קבצי טקסט קטנים שנשמרים על המכשיר שלך כשאת מבקרת באתר. הן מאפשרות לאתר לזכור פרטים מסוימים על הביקור שלך ולשפר את חווית השימוש. העוגיות אינן מכילות מידע שמזהה אותך אישית כשלעצמן.
       </p>
 
       <h2>אילו עוגיות אנו משתמשים בהן?</h2>
-      <p>אנו משתמשים בשלוש קטגוריות של עוגיות:</p>
 
       <table class="cookie-table" role="table" aria-label="סוגי עוגיות בשימוש">
         <thead>
@@ -97,20 +159,20 @@
         <tbody>
           <tr>
             <td><strong>חיוניות</strong></td>
-            <td>מאפשרות את תפקוד הבסיסי של האתר — ניווט, טעינת תוכן, אבטחה.</td>
-            <td>שמירת העדפות נגישות, זיכרון בחירת קטגוריה בגלריה</td>
+            <td>מאפשרות את תפקוד הבסיסי של האתר — ניווט, טעינת תוכן, נגישות.</td>
+            <td>שמירת העדפות נגישות, בחירת קטגוריה בגלריה</td>
             <td>כן — ללא אפשרות ביטול</td>
           </tr>
           <tr>
             <td><strong>ניתוח (Analytics)</strong></td>
-            <td>עוזרות לנו להבין כיצד המבקרות משתמשות באתר, אילו עמודים פופולריים ומה ניתן לשפר.</td>
-            <td>Google Analytics (GA4) — מזהה מכשיר אנונימי, מספר ביקורים, מקורות תנועה</td>
+            <td>עוזרות לנו להבין כיצד המבקרות משתמשות באתר ומה ניתן לשפר.</td>
+            <td>Google Analytics GA4 — מזהה אנונימי, ביקורים, מקורות תנועה</td>
             <td>לא — ניתן לבטל</td>
           </tr>
           <tr>
             <td><strong>שיווק (Marketing)</strong></td>
-            <td>מאפשרות הצגת פרסומות רלוונטיות ברשתות חברתיות ומדידת אפקטיביות קמפיינים.</td>
-            <td>Meta Pixel (Facebook/Instagram) — מעקב אחר פעולות כגון צפייה בעמוד, לחיצה על יצירת קשר</td>
+            <td>מאפשרות הצגת פרסומות רלוונטיות ומדידת אפקטיביות קמפיינים.</td>
+            <td>Meta Pixel — מעקב צפיות, לחיצות, יצירת קשר</td>
             <td>לא — ניתן לבטל</td>
           </tr>
         </tbody>
@@ -118,92 +180,82 @@
 
       <h2>שירותים חיצוניים שמשתמשים בעוגיות</h2>
       <ul>
-        <li>
-          <strong>Google Analytics (GA4)</strong> — שירות ניתוח תנועה של Google. המידע שנאסף (מספר ביקורים, זמן שהייה, מכשיר) מועבר לשרתי Google ומאוחסן בהתאם
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">למדיניות הפרטיות של Google</a>.
-          ניתן לבטל דרך <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">תוסף הביטול של Google Analytics</a>.
-        </li>
-        <li>
-          <strong>Meta Pixel (פייסבוק / אינסטגרם)</strong> — כלי מעקב שיווקי של Meta. המידע שנאסף משמש לאופטימיזציה של פרסומות ולבניית קהלי יעד.
-          פרטים נוספים ב<a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer">מדיניות הפרטיות של Meta</a>.
-        </li>
-        <li>
-          <strong>Instagram API</strong> — לצורך הצגת הגלריה מאינסטגרם. גלישה בגלריה עשויה לכלול קריאות לשרתי Meta לצורך שליפת תמונות ונתוני פוסטים.
-        </li>
-        <li>
-          <strong>Google Reviews / Google Maps</strong> — הצגת ביקורות ממפות Google. גלישה בעמוד הביקורות עשויה לכלול עוגיות של Google.
-        </li>
+        <li><strong>Google Analytics (GA4)</strong> — ניתוח תנועה אנונימי. <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">ביטול דרך תוסף Google</a>.</li>
+        <li><strong>Meta Pixel (פייסבוק / אינסטגרם)</strong> — מעקב שיווקי לאופטימיזציה של פרסומות. <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer">מדיניות Meta</a>.</li>
+        <li><strong>Instagram API</strong> — שליפת תמונות גלריה מאינסטגרם דרך שרתי Meta.</li>
+        <li><strong>Google Reviews / Maps</strong> — הצגת ביקורות גוגל. עשוי לכלול עוגיות של Google.</li>
       </ul>
 
       <h2>הסכמה ושימוש נמשך באתר</h2>
       <p>
-        בהתאם לנוהג המקובל בישראל ולעקרונות חוק הגנת הפרטיות, תשמ״א-1981 ותקנותיו, המשך הגלישה באתר לאחר הצגת הבאנר מהווה הסכמה לשימוש בעוגיות שאינן חיוניות. הסכמה זו ניתנת לביטול בכל עת באמצעות הגדרות הדפדפן שלך.
+        בהתאם לחוק הגנת הפרטיות, תשמ״א-1981, המשך הגלישה לאחר הצגת הבאנר מהווה הסכמה לשימוש בעוגיות שאינן חיוניות. ניתן לבטל הסכמה זו בכל עת דרך הגדרות הדפדפן.
       </p>
 
-      <h2>כיצד לנהל ולבטל עוגיות</h2>
-      <p>
-        ניתן לחסום, למחוק או להגביל עוגיות דרך הגדרות הדפדפן. לחיצה על "דחה" בבאנר העוגיות תמנע טעינת עוגיות ניתוח ושיווק. שים לב שחסימת עוגיות חיוניות עלולה לפגוע בתפקוד חלקי של האתר.
-      </p>
+      <h2>כיצד לבטל עוגיות</h2>
       <ul>
-        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome — ניהול עוגיות</a></li>
-        <li><a href="https://support.mozilla.org/he/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer">Mozilla Firefox — ניהול עוגיות</a></li>
-        <li><a href="https://support.apple.com/he-il/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Apple Safari — ניהול עוגיות</a></li>
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/he/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/he-il/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Apple Safari</a></li>
       </ul>
 
       <h2>שמירת המידע</h2>
-      <p>
-        עוגיות session נמחקות עם סגירת הדפדפן. עוגיות ניתוח ושיווק נשמרות בדרך כלל למשך עד 13 חודשים, בהתאם למדיניות הספק (Google/Meta).
-      </p>
-
-      <h2>עדכונים למדיניות זו</h2>
-      <p>
-        אנו עשויים לעדכן מדיניות זו מעת לעת. השינויים ייכנסו לתוקף עם פרסומם באתר. אם מדובר בשינוי מהותי, יוצג באנר הסכמה חדש.
-      </p>
+      <p>עוגיות session נמחקות עם סגירת הדפדפן. עוגיות ניתוח ושיווק נשמרות עד 13 חודשים בהתאם למדיניות Google / Meta.</p>
 
       <h2>יצירת קשר</h2>
-      <p>
-        לשאלות בנוגע לשימוש בעוגיות ניתן לפנות דרך <a href="contact.html">עמוד יצירת הקשר</a>.
-      </p>
-
-      <!-- ═══════════════════════════════════════════════
-           SECTION 2 — COOKIE CONSENT BANNER TEXT
-           Copy-paste the text below into your banner component
-           ═══════════════════════════════════════════════ -->
-
-      <div class="banner-preview-box">
-        <h2>טקסט לבאנר הסכמת עוגיות</h2>
-        <p class="banner-label">תצוגה מקדימה — כפי שיופיע למבקרות</p>
-        <div class="cookie-banner-demo">
-          <p>
-            האתר משתמש בעוגיות לשיפור החוויה, ניתוח תנועה ופרסום ממוקד.
-            המשך הגלישה מהווה הסכמה לשימוש בהן.
-            <a href="cookies-policy-temp.html" style="color:var(--rose);text-decoration:underline">למדיניות העוגיות המלאה</a>
-          </p>
-          <button class="btn-accept" type="button">אני מסכימה</button>
-          <button class="btn-decline" type="button">דחה</button>
-        </div>
-
-        <p style="margin-top:20px;font-size:.82rem;color:rgba(62,42,26,.55)">
-          <strong>הטקסט המלא לבאנר (לפיתוח):</strong><br>
-          «האתר משתמש בעוגיות לשיפור החוויה, ניתוח תנועה ופרסום ממוקד. המשך הגלישה מהווה הסכמה לשימוש בהן.»
-        </p>
-      </div>
+      <p>לשאלות: <a href="contact.html" style="color:var(--blush)">עמוד יצירת הקשר</a> | <a href="tel:0547276716" style="color:var(--blush)">054-7276716</a></p>
 
     </div>
   </main>
 
   <footer role="contentinfo">
-    <div class="footer-inner">
-      <p class="footer-brand">ירדן דמרי — מאפרת מקצועית, אילת</p>
-      <nav aria-label="קישורי שירות">
-        <a href="disclaimer.html">תנאי שימוש ומדיניות פרטיות</a>
-        <a href="accessibility-statement.html">הצהרת נגישות</a>
-        <a href="contact.html">צרי קשר</a>
-      </nav>
-      <p class="footer-copy">© 2024–2026 ירדן דמרי. כל הזכויות שמורות.</p>
+    <p>© 2025 <strong>ירדן דמרי</strong> | מאפרת מקצועית | אילת וכל הארץ</p>
+    <p style="margin-top:10px;">📱 <a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" style="color:var(--blush);text-decoration:none;" aria-label="התקשרי אל ירדן דמרי">054-7276716</a> &nbsp;·&nbsp; 💬 <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" style="color:var(--blush);text-decoration:none;" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">וואטסאפ</a></p>
+    <nav aria-label="ניווט תחתון" style="margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin-bottom:16px;">
+      <a href="/" style="color:rgba(255,255,255,.45);text-decoration:none;">דף הבית</a>
+      <a href="bride.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מאפרת כלות</a>
+      <a href="services.html" style="color:rgba(255,255,255,.45);text-decoration:none;">שירותים</a>
+      <a href="gallery.html" style="color:rgba(255,255,255,.45);text-decoration:none;">גלריה</a>
+      <a href="contact.html" style="color:rgba(255,255,255,.45);text-decoration:none;">צרי קשר</a>
+      <a href="accessibility-statement.html" style="color:rgba(255,255,255,.45);text-decoration:none;">נגישות</a>
+    </nav>
+    <div class="footer-social-pills">
+      <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" class="social-pill social-ig" aria-label="Instagram של ירדן דמרי"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span>Instagram</span></a>
+      <a href="https://www.tiktok.com/@yardendamri" target="_blank" rel="noopener noreferrer" class="social-pill social-tt" aria-label="TikTok של ירדן דמרי"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg><span>TikTok</span></a>
     </div>
   </footer>
 
-  <script src="nav.js" defer></script>
+  <script>
+    function toggleMobileMenu() {
+      var menu = document.getElementById('mobileMenu');
+      var btn  = document.getElementById('navHamburger');
+      var ov   = document.getElementById('mobileOverlay');
+      var open = menu.classList.toggle('open');
+      if (btn) btn.classList.toggle('open', open);
+      if (ov)  ov.classList.toggle('open', open);
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+    function closeMobileMenu() {
+      var menu = document.getElementById('mobileMenu');
+      var btn  = document.getElementById('navHamburger');
+      var ov   = document.getElementById('mobileOverlay');
+      if (!menu) return;
+      menu.classList.remove('open');
+      if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      if (ov)  ov.classList.remove('open');
+      menu.setAttribute('aria-hidden','true');
+    }
+    function trackEvent(event_name, category, label) {
+      if (typeof gtag === 'function') gtag('event', event_name, { event_category: category, event_label: label });
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      var nav = document.querySelector('nav[role="navigation"]');
+      if (nav) {
+        window.addEventListener('scroll', function(){
+          nav.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+      }
+    });
+  </script>
 </body>
 </html>
