@@ -29,6 +29,7 @@
 - Created `cookies-policy.html` — full Hebrew cookies policy, matches site style
 - Created `cookie-banner.js` — shared script, added to all 12 public pages
 - Banner: slim frosted-dark (charcoal #111111 + gold #B89060), one-time per visitor via localStorage
+- Cookie banner fix: slim bottom bar, floating buttons lifted dynamically above it — hero content and CTAs never blocked.
 - Policy covers: Essential / Analytics (GA4) / Marketing (Meta Pixel) / Instagram API / Google Reviews
 
 ## 2026-06-13 — Admin Security Refactor (complete)
