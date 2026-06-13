@@ -143,7 +143,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top center;
+      object-position: center center;
       z-index: 0;
     }
     .hero-overlay {
@@ -210,8 +210,8 @@
 
     /* ── ABOUT ── */
     #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; background: var(--cream); }
-    .about-visual { position: relative; overflow: hidden; }
-    .about-card { border-radius: 2px; aspect-ratio: 3/4; max-height: 600px; width: 100%; position: relative; overflow: hidden; }
+    .about-visual { position: relative; }
+    .about-card { border-radius: 2px; aspect-ratio: 3/4; max-height: 600px; position: relative; overflow: hidden; }
     .about-accent { display: none; }
     .about-small-card { display: none; }
     .small-card-num { display: none; }
@@ -521,6 +521,34 @@
       #a11y-panel { bottom: 76px; left: 14px; right: 14px; width: auto; }
     }
 
+    /* ── TABLET (768–1080px) ── */
+    @media (min-width: 768px) and (max-width: 1080px) {
+      .hero-title { font-size: clamp(2.6rem, 8vw, 4.2rem); }
+      .hero-content { max-width: 70%; }
+      nav[role="navigation"], .main-nav { padding: 16px 30px; }
+    }
+
+    /* ── DESKTOP (1081px+) ── */
+    @media (min-width: 1081px) {
+      #hero { height: min(100vh, 850px); }
+      .hero-content { max-width: 460px; padding: 0 60px; }
+      .hero-title { font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 12px; }
+      .hero-subtitle { font-size: clamp(1rem, 1.3vw, 1.2rem); margin-bottom: 28px; }
+      .hero-desc { font-size: .95rem; margin-bottom: 32px; }
+      .hero-overlay { background: linear-gradient(270deg, rgba(30,18,10,.78) 0%, rgba(30,18,10,.25) 45%, rgba(30,18,10,0) 85%); }
+
+      /* Center brand name in nav */
+      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:first-child { font-size: 1.45rem !important; }
+      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:last-child { font-size: .68rem !important; }
+    }
+
+    /* ── LARGE DESKTOP (1600px+) ── */
+    @media (min-width: 1600px) {
+      #hero { height: min(100vh, 760px); }
+      .hero-content { max-width: 520px; }
+      .hero-title { font-size: 4rem; }
+    }
+
     @media (max-width: 480px) {
       .hero-title { font-size: 1.85rem; }
       .hero-right { max-height: 320px; }
@@ -608,31 +636,6 @@ nav[role="navigation"].subpage-nav .nav-hamburger span { background: var(--charc
   line-height: 1.9;
   color: #666;
 }
-
-/* ── SUBPAGE DESKTOP CONTENT WIDTH ──
-   On wide screens, cap subpage section content so text doesn't span full viewport.
-   We use a box-sizing approach: sections get a max-width, full-bleed bg sections
-   are handled by capping inner content via .inner wrapper or per-section overrides. */
-@media (min-width: 1081px) {
-  .subpage main > section {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-  }
-  /* Hero-style section at top of subpages spans full width for visual impact */
-  .subpage main > section:first-child {
-    max-width: none;
-    padding-left: clamp(24px,10vw,160px) !important;
-    padding-right: clamp(24px,10vw,160px) !important;
-  }
-  /* About grid section — let its internal grid handle layout */
-  .subpage main > #about {
-    max-width: 1200px;
-  }
-}
-
-
 
 /* ════════════════════════════════════════════════════════════
    EDITORIAL BUTTON SYSTEM — one shape, three variants
