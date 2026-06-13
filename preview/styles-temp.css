@@ -533,20 +533,19 @@
       #hero { height: 100vh; min-height: 600px; }
       /* Full-screen cover — the original fitted look. Framing depends on the chosen clip. */
       #hero #heroVideo, #hero #heroImage { object-fit: cover !important; }
-      .hero-content { max-width: 460px; padding: 0 60px; }
+      .hero-content { max-width: 540px; padding: 0 50px; }
+      .hero-btns { flex-wrap: nowrap; }
       .hero-eyebrow { font-size: .7rem; margin-bottom: 16px; }
       .hero-title { font-size: clamp(1.9rem, 2.6vw, 2.8rem); line-height: 1.1; margin-bottom: 14px; }
       .hero-subtitle { font-size: clamp(.95rem, 1.1vw, 1.1rem); margin-bottom: 22px; }
       .hero-desc { font-size: .92rem; margin-bottom: 28px; }
       .hero-overlay { background: linear-gradient(270deg, rgba(30,18,10,.78) 0%, rgba(30,18,10,.25) 45%, rgba(30,18,10,0) 85%); }
 
-      /* About: fit the portrait image and title to desktop */
-      #about .about-card { max-height: 480px; max-width: 380px; margin-inline: auto; }
       #about .section-title { font-size: clamp(2rem, 3vw, 3rem); }
 
       /* Center brand name in nav */
-      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:first-child { font-size: 1.45rem !important; }
-      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:last-child { font-size: .68rem !important; }
+      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:first-child { font-size: 1.25rem !important; }
+      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:last-child { font-size: .62rem !important; }
     }
 
     /* ── LARGE DESKTOP (1600px+) ── */
