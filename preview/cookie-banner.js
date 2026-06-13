@@ -3,21 +3,24 @@
 
   var css = [
     '#ck-banner{position:fixed;bottom:0;left:0;right:0;z-index:99999;',
-    'background:#3E2A1A;color:rgba(255,255,255,.9);',
-    'padding:16px 20px;display:flex;align-items:center;',
-    'justify-content:space-between;gap:14px;flex-wrap:wrap;',
-    'box-shadow:0 -4px 24px rgba(0,0,0,.3);font-size:.83rem;line-height:1.6;',
-    'font-family:inherit;}',
-    '#ck-banner p{margin:0;flex:1;min-width:200px;}',
-    '#ck-banner a{color:#C4805A;text-decoration:underline;}',
-    '#ck-btns{display:flex;gap:10px;flex-shrink:0;}',
-    '#ck-accept{background:#C4805A;color:#fff;border:none;border-radius:6px;',
-    'padding:9px 22px;font-size:.83rem;cursor:pointer;font-family:inherit;}',
-    '#ck-decline{background:transparent;color:rgba(255,255,255,.7);',
-    'border:1px solid rgba(255,255,255,.3);border-radius:6px;',
-    'padding:9px 16px;font-size:.83rem;cursor:pointer;font-family:inherit;}',
-    '#ck-accept:hover{background:#a06040;}',
-    '#ck-decline:hover{border-color:rgba(255,255,255,.6);color:#fff;}'
+    'background:rgba(17,17,17,0.93);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);',
+    'border-top:1px solid rgba(184,144,96,.25);',
+    'padding:10px 20px;display:flex;align-items:center;',
+    'justify-content:space-between;gap:12px;flex-wrap:nowrap;',
+    'font-size:.78rem;line-height:1.5;font-family:inherit;}',
+    '#ck-banner p{margin:0;color:rgba(255,255,255,.7);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}',
+    '#ck-banner a{color:#B89060;text-decoration:underline;white-space:nowrap;}',
+    '#ck-btns{display:flex;gap:8px;flex-shrink:0;align-items:center;}',
+    '#ck-accept{background:#B89060;color:#fff;border:none;border-radius:4px;',
+    'padding:6px 18px;font-size:.76rem;cursor:pointer;font-family:inherit;white-space:nowrap;}',
+    '#ck-decline{background:transparent;color:rgba(255,255,255,.45);border:none;',
+    'padding:6px 10px;font-size:.76rem;cursor:pointer;font-family:inherit;white-space:nowrap;}',
+    '#ck-accept:hover{background:#9a7848;}',
+    '#ck-decline:hover{color:rgba(255,255,255,.8);}',
+    '@media(max-width:600px){',
+    '#ck-banner{flex-wrap:wrap;padding:10px 14px;}',
+    '#ck-banner p{white-space:normal;font-size:.74rem;}',
+    '}'
   ].join('');
 
   var style = document.createElement('style');
@@ -29,9 +32,8 @@
   banner.setAttribute('role', 'dialog');
   banner.setAttribute('aria-label', 'הסכמה לעוגיות');
   banner.innerHTML = [
-    '<p>האתר משתמש בעוגיות לשיפור החוויה, ניתוח תנועה ופרסום ממוקד. ',
-    'המשך הגלישה מהווה הסכמה לשימוש בהן. ',
-    '<a href="/preview/cookies-policy-temp.html">למדיניות העוגיות המלאה</a></p>',
+    '<p>האתר משתמש בעוגיות לשיפור החוויה וניתוח תנועה. ',
+    '<a href="/preview/cookies-policy-temp.html">מדיניות עוגיות</a></p>',
     '<div id="ck-btns">',
     '<button id="ck-accept">אני מסכימה</button>',
     '<button id="ck-decline">דחה</button>',
