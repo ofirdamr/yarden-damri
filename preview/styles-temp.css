@@ -438,6 +438,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
+      .hero-bg-layer { display: none !important; }
       /* Sections with max-width should expand to full width on mobile */
       section[style*="max-width"] { max-width: 100% !important; }
       /* NAV */
@@ -528,10 +529,27 @@
       nav[role="navigation"], .main-nav { padding: 16px 30px; }
     }
 
+    /* ── HERO BACKDROP LAYER (desktop fill behind portrait media) ── */
+    .hero-bg-layer {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      filter: blur(30px) brightness(.5);
+      transform: scale(1.12);
+      display: none;          /* shown only on desktop via JS + media query */
+      z-index: 0;
+    }
+
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
       #hero { height: 100vh; min-height: 600px; }
-      #hero #heroVideo, #hero #heroImage { object-fit: contain !important; object-position: center center !important; }
+      /* Foreground media: full clip visible, natural size, centered */
+      #hero #heroVideo, #hero #heroImage {
+        object-fit: contain !important;
+        object-position: center center !important;
+        transform: none !important;
+        z-index: 1;
+      }
       .hero-content { max-width: 460px; padding: 0 60px; }
       .hero-title { font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 12px; }
       .hero-subtitle { font-size: clamp(1rem, 1.3vw, 1.2rem); margin-bottom: 28px; }
