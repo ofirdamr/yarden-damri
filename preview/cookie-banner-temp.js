@@ -29,11 +29,11 @@
     '}' +
     '#ck-top-accept:hover{background:#9a7848;}' +
     '#ck-top-decline{' +
-      'background:transparent;color:rgba(255,255,255,.45);border:none;' +
-      'padding:4px 6px;font-size:1rem;line-height:1;cursor:pointer;' +
-      'font-family:inherit;flex-shrink:0;' +
+      'background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);border-radius:4px;' +
+      'padding:5px 10px;font-size:.7rem;cursor:pointer;' +
+      'font-family:inherit;flex-shrink:0;white-space:nowrap;' +
     '}' +
-    '#ck-top-decline:hover{color:rgba(255,255,255,.85);}' +
+    '#ck-top-decline:hover{color:#fff;border-color:rgba(255,255,255,.6);}' +
     '#ck-top-accept:focus-visible,#ck-top-decline:focus-visible{outline:2px solid #B89060;outline-offset:2px;}' +
     'body.has-ck nav[role="navigation"]{top:' + H + 'px !important;}';
 
@@ -51,7 +51,7 @@
   banner.innerHTML =
     '<span id="ck-top-text">🍪 האתר משתמש בעוגיות — <a href="/preview/cookies-policy.html">מדיניות פרטיות</a></span>' +
     '<button id="ck-top-accept">אני מסכימה</button>' +
-    '<button id="ck-top-decline" title="דחה">✕</button>';
+    '<button id="ck-top-decline">דחה</button>';
 
   document.body.insertBefore(banner, document.body.firstChild);
 
