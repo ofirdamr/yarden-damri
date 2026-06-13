@@ -1,5 +1,15 @@
 # Mistakes Log
 
+## 2026-06-13
+
+### ❌ Pushed to a new branch instead of working on main
+- **What happened:** Created and pushed to `claude/cookie-banner-prompt-t7b891` despite clear instruction to work only on `main` with temp files in `preview/`.
+- **Rule:** Always work on `main` branch. Use temp files in `preview/` folder for testing. Never create new branches.
+
+### ❌ Overwrote `preview/cookie-banner.js` directly without using a temp file first
+- **What happened:** Wrote changes directly to the real file before testing with a temp file, violating the established workflow.
+- **Rule:** Always create a `-temp` version first, get user approval on the live preview, then promote to the real file.
+
 ## 2026-05-25
 
 ### ❌ Added pricing to mobile menu when it should be hidden

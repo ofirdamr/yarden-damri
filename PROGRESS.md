@@ -15,7 +15,18 @@
 - KV namespace `yarden-admin-sessions` created (ID: `7fc38ac017a145fea0a486419a3bff07`)
 - All `-temp` files promoted to permanent and deleted
 
-## 2026-06-13 — Cookies Policy + Cookie Banner
+## 2026-06-13 — Cookie Banner Redesign + GA Consent Gating
+- Rewrote `preview/cookie-banner.js`: slim 48px bar at top of page (z-index:10001), slides down from top
+- Nav (`nav[role="navigation"]`) shifts to `top:48px` via `body.has-ck` class while banner is visible; returns to `top:0` on dismiss
+- Banner layout: cookie text + מדיניות פרטיות link | "אני מסכימה" button | ✕ close button
+- ✕ = declined (banner closes, GA never loads); "אני מסכימה" = accepted (GA loads dynamically)
+- Floating buttons (WA, accessibility) completely untouched — no position changes
+- GA (`G-68XM6LS4HX`) removed from `<head>` of all 10 preview pages; now loads only after explicit accept
+- Returning visitors who already accepted: GA loads immediately on page load (no banner shown)
+- Banner appears on first visit to ANY page of the site; localStorage prevents re-showing after accept/decline
+- Applied to: index.html + all 9 subpages (about, accessibility-statement, bridal-guide, bride, contact, gallery, pricing, reviews, services)
+
+## 2026-06-13 — Cookies Policy + Cookie Banner (original)
 - Created `preview/cookies-policy.html` — full Hebrew cookies policy page (matches disclaimer.html style)
 - Created `preview/cookie-banner.js` — shared script added to all 12 public pages
 - Banner: slim frosted-dark bar (preview charcoal #111111 + gold accent #B89060), appears once on first visit to any page, never shown again after accept/decline (localStorage)
