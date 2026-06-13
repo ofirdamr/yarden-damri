@@ -530,8 +530,8 @@
 
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
-      #hero { height: 145vh; min-height: 760px; }
-      #hero #heroVideo, #hero #heroImage { object-position: 50% 32% !important; }
+      #hero { height: 100vh; min-height: 600px; }
+      #hero #heroVideo, #hero #heroImage { object-fit: contain !important; object-position: center center !important; }
       .hero-content { max-width: 460px; padding: 0 60px; }
       .hero-title { font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 12px; }
       .hero-subtitle { font-size: clamp(1rem, 1.3vw, 1.2rem); margin-bottom: 28px; }
