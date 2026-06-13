@@ -47,7 +47,7 @@ jobs:
           KV_ID: ${{ steps.kv.outputs.kv_id }}
         run: |
           # Copy with the exact name used as main_module
-          cp preview/worker-temp.js worker.js
+          cp preview/worker.js worker.js
 
           METADATA=$(python3 -c "
           import json, os
