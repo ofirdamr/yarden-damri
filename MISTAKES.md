@@ -322,3 +322,11 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 ### ❌ Wasted multiple rounds on thumbnail backfill workflow
 - Proposed ffmpeg + full video download (40 min) before realizing Instagram provides thumbnail_url
 - Rule: for Instagram media thumbnails, always use thumbnail_url from the Graph API — never download videos.
+
+## 2026-06-13: Created unnecessary feature branch
+
+### ❌ Created feature branch `claude/preview-security-refactor-gyoow0` when project uses only `main`
+- Created a feature branch for the security refactor work instead of working directly on `main`
+- This caused repeated confusion: workflow_dispatch only appears for workflows on the default branch (main), files pushed to the feature branch weren't accessible at yardendamri.co.il/preview/, and the diverged histories required using the GitHub MCP API to push files directly to main anyway
+- The feature branch served no purpose and made everything harder
+- **Rule:** This project works on `main` only. Never create feature branches. Work directly on `main` (or in /preview for staging). If in doubt, ask before branching.
