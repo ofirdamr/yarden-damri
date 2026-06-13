@@ -3,13 +3,18 @@
 <head>
   <meta name="robots" content="noindex,nofollow">
       <link rel="preconnect" href="https://graph.instagram.com" crossorigin>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX"></script>
+  <!-- Google Analytics loaded only after cookie consent -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-68XM6LS4HX');
+    if (localStorage.getItem('cookie_consent') === 'accepted') {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-68XM6LS4HX';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', 'G-68XM6LS4HX');
+    }
   </script>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
