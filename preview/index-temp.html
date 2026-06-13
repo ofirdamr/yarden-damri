@@ -768,7 +768,7 @@
     let currentPage = 1;
     // Homepage: images only, first 48 — full gallery is at /gallery.html
     let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE)
+      ? applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE)
       : [];
 
     const gallery = document.getElementById('ig-gallery');
@@ -780,7 +780,7 @@
       await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE);
+        filteredImages = applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE);
         if (typeof renderPage === 'function') renderPage(currentPage);
       }
     })();
