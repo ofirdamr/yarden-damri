@@ -924,11 +924,9 @@
     }
 
     function getIgStats(item) {
-      // Try by Instagram post ID stored in gallery-data.js
+      if (item.post_id && igStatsCache[item.post_id]) return igStatsCache[item.post_id];
+      if (item.item_id && igStatsCache[item.item_id]) return igStatsCache[item.item_id];
       if (item.id && igStatsCache[item.id]) return igStatsCache[item.id];
-      // Try by caption match
-      const ck = captionKey(item.a);
-      if (ck && igCaptionMap[ck]) return igCaptionMap[ck];
       return null;
     }
 
