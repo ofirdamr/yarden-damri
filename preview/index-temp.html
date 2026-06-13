@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=20" />
+  <link rel="stylesheet" href="styles-temp.css?v=21" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -658,16 +658,18 @@
     function applyHeroCropToPage(pos, zoom) {
       const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
       const isMobile = window.innerWidth <= 1080;
-      // On mobile portrait, force Y=0% so the face shows from the top (forehead down)
-      // rather than the center (just eyes/nose) which is too zoomed
-      let safePos;
+      // MOBILE crop (unchanged): face from the top, forehead down
+      // DESKTOP crop (separate): frame the face centered in the wide band so it never lands on hairline/forehead
+      let safePos, safeScale;
       if (isMobile) {
         const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
         safePos = x + ' 20%';
+        safeScale = 1;
       } else {
-        safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
+        const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
+        safePos = x + ' 32%';   // desktop-specific vertical framing on the face
+        safeScale = (zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
       }
-      const safeScale = (!isMobile && zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
       els.forEach(el => {
         if (!el) return;
         el.style.objectPosition = safePos;
@@ -711,6 +713,11 @@
         await window.RemoteState.fetch();
         const fresh = window.RemoteState.getCached() || {};
         applyHeroMediaFromState(fresh);
+        let rt;
+        window.addEventListener('resize', () => {
+          clearTimeout(rt);
+          rt = setTimeout(() => applyHeroCropToPage(fresh.heroPosition, fresh.heroZoom), 150);
+        });
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
