@@ -1,5 +1,10 @@
 # Mistakes & AI Errors Log — Preview
 
+## Floating card banner covered hero content (2026-06-13)
+- Applied glassmorphism card design (`bottom: 90px`, large card) without previewing on the actual page. The card landed in the middle of the hero section, covering the headline and CTA buttons.
+- Should have created `cookie-banner-temp.js`, checked it visually, confirmed before touching permanent file.
+- **Rule:** Before any visual change to a floating/fixed element, think about where it will land relative to page content at `bottom: Xpx`. Always test on temp first.
+
 ## Edited cookie-banner.js directly without temp file (2026-06-13)
 - Changed `cookie-banner.js` (permanent) and bumped cache-bust on all HTML pages without creating a temp version first.
 - User confirmed: never do this — ALL changes go to `-temp` files until explicitly approved.
