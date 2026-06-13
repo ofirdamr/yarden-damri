@@ -15,7 +15,6 @@ jobs:
           CF_API_TOKEN: ${{ secrets.CF_WORKERS_API_TOKEN }}
           ACCOUNT_ID: 1c223389f8a4ebb05eb62cb6a8350924
         run: |
-          # Try to create the namespace
           RESPONSE=$(curl -s -X POST \
             "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/storage/kv/namespaces" \
             -H "Authorization: Bearer $CF_API_TOKEN" \
@@ -25,7 +24,6 @@ jobs:
           KV_ID=$(echo "$RESPONSE" | python3 -c \
             "import sys,json; r=json.load(sys.stdin); print(r['result']['id'])" 2>/dev/null || echo "")
 
-          # If creation failed (already exists), list and find it
           if [ -z "$KV_ID" ]; then
             LIST=$(curl -s \
               "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/storage/kv/namespaces?per_page=100" \
@@ -48,13 +46,16 @@ jobs:
           ACCOUNT_ID: 1c223389f8a4ebb05eb62cb6a8350924
           KV_ID: ${{ steps.kv.outputs.kv_id }}
         run: |
+          # Copy with the exact name used as main_module
+          cp preview/worker-temp.js worker.js
+
           METADATA=$(python3 -c "
-          import json
+          import json, os
           print(json.dumps({
             'main_module': 'worker.js',
             'compatibility_date': '2024-01-01',
             'bindings': [
-              {'type': 'kv_namespace', 'name': 'SESSIONS', 'namespace_id': '$KV_ID'}
+              {'type': 'kv_namespace', 'name': 'SESSIONS', 'namespace_id': os.environ['KV_ID']}
             ]
           }))")
 
@@ -62,7 +63,7 @@ jobs:
             "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts/yarden-admin" \
             -H "Authorization: Bearer $CF_API_TOKEN" \
             -F "metadata=$METADATA;type=application/json" \
-            -F "worker.js=@preview/worker-temp.js;type=application/javascript+module")
+            -F "worker.js=@worker.js;type=application/javascript+module")
 
           echo "$RESULT" | python3 -m json.tool
 
