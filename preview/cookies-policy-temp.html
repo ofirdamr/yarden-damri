@@ -20,51 +20,11 @@
     .cookie-table td{padding:8px 12px;border-bottom:1px solid rgba(62,42,26,.1);vertical-align:top}
     .cookie-table tr:nth-child(even) td{background:rgba(62,42,26,.03)}
 
-    /* ===== COOKIE CONSENT BANNER ===== */
-    #cookie-banner{
-      position:fixed;bottom:0;left:0;right:0;z-index:9999;
-      background:var(--charcoal);color:rgba(255,255,255,.9);
-      padding:16px 20px;
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;flex-wrap:wrap;
-      box-shadow:0 -4px 24px rgba(0,0,0,.25);
-      font-size:.83rem;line-height:1.6;
-    }
-    #cookie-banner.hidden{display:none}
-    #cookie-banner p{margin:0;flex:1;min-width:200px}
-    #cookie-banner a{color:var(--blush);text-decoration:underline}
-    .cb-btns{display:flex;gap:10px;flex-shrink:0}
-    .cb-accept{background:var(--rose);color:#fff;border:none;border-radius:6px;padding:9px 22px;font-size:.83rem;cursor:pointer;font-family:inherit}
-    .cb-decline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:9px 16px;font-size:.83rem;cursor:pointer;font-family:inherit}
-    .cb-accept:hover{background:var(--deep)}
-    .cb-decline:hover{border-color:rgba(255,255,255,.6);color:#fff}
   </style>
   <script src="a11y.js" defer></script>
+  <script src="cookie-banner.js" defer></script>
 </head>
 <body>
-
-  <!-- COOKIE CONSENT BANNER -->
-  <div id="cookie-banner" role="dialog" aria-label="הסכמה לעוגיות" aria-live="polite">
-    <p>
-      האתר משתמש בעוגיות לשיפור החוויה, ניתוח תנועה ופרסום ממוקד.
-      המשך הגלישה מהווה הסכמה לשימוש בהן.
-      <a href="cookies-policy-temp.html">למדיניות העוגיות המלאה</a>
-    </p>
-    <div class="cb-btns">
-      <button class="cb-accept" onclick="cookieConsent(true)">אני מסכימה</button>
-      <button class="cb-decline" onclick="cookieConsent(false)">דחה</button>
-    </div>
-  </div>
-  <script>
-    (function(){
-      var choice = localStorage.getItem('cookie_consent');
-      if (choice) document.getElementById('cookie-banner').classList.add('hidden');
-    })();
-    function cookieConsent(accepted) {
-      localStorage.setItem('cookie_consent', accepted ? 'accepted' : 'declined');
-      document.getElementById('cookie-banner').classList.add('hidden');
-    }
-  </script>
 
   <!-- IS 5568: Skip navigation link -->
   <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
