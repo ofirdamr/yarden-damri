@@ -1,5 +1,10 @@
 # Mistakes & AI Errors Log — Preview
 
+## Edited cookie-banner.js directly without temp file (2026-06-13)
+- Changed `cookie-banner.js` (permanent) and bumped cache-bust on all HTML pages without creating a temp version first.
+- User confirmed: never do this — ALL changes go to `-temp` files until explicitly approved.
+- **Rule:** Any change to a permanent file in `/preview` must first go to a `-temp` version. Only overwrite the permanent file after the user says "make it permanent" or equivalent explicit approval.
+
 ## Font changed without checking source (June 2026)
 - Swapped nav font to Cormorant Garamond / Heebo without checking original CSS. Original is Rubik weight 400 (name) + weight 300 (subtitle).
 - **Rule:** Before any typography change, check current CSS and git history.
