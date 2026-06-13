@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-13 — Cookies Policy + Cookie Banner
+- Created `preview/cookies-policy.html` — full Hebrew cookies policy page (matches disclaimer.html style)
+- Created `preview/cookie-banner.js` — shared script added to all 12 public pages
+- Banner: slim frosted-dark bar (preview charcoal #111111 + gold accent #B89060), appears once on first visit to any page, never shown again after accept/decline (localStorage)
+- Policy covers: Essential / Analytics (GA4) / Marketing (Meta Pixel) / Instagram API / Google Reviews
+
 ## 2026-06-03 — preview/ share buttons
 - Added share strip to gallery.html (after gallery grid), reviews.html (after reviews), index.html (between reviews and contact sections)
 - Strip shows "שתפי עם חברה" button — triggers native Web Share API on mobile; falls back to WhatsApp web on desktop

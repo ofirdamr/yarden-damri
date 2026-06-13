@@ -33,7 +33,7 @@
   banner.setAttribute('aria-label', 'הסכמה לעוגיות');
   banner.innerHTML = [
     '<p>האתר משתמש בעוגיות לשיפור החוויה וניתוח תנועה. ',
-    '<a href="/preview/cookies-policy-temp.html">מדיניות עוגיות</a></p>',
+    '<a href="/preview/cookies-policy.html">מדיניות עוגיות</a></p>',
     '<div id="ck-btns">',
     '<button id="ck-accept">אני מסכימה</button>',
     '<button id="ck-decline">דחה</button>',
