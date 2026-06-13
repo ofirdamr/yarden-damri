@@ -113,7 +113,7 @@
   </style>
 </head>
 <body>
-<script src="cloud-storage.js?v=9"></script>
+<script src="cloud-storage-temp.js?v=1"></script>
 <script src="gallery-data.js?v=1779253059"></script>
 
 <!-- LOGIN -->
@@ -468,37 +468,34 @@ async function tryLogin() {
   errEl.style.display = 'none';
   if (!input) { errEl.textContent = 'נא להזין סיסמה'; errEl.style.display = 'block'; return; }
 
-  // Validate password against Cloudflare Worker (which holds the real password as a secret)
   errEl.textContent = '⏳ בודקת...';
   errEl.style.display = 'block';
   errEl.style.color = '#888';
-  try {
-    const r = await fetch('https://yarden-admin.ofirdamr.workers.dev/settings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': input },
-      body: JSON.stringify({}) // empty update just validates auth
-    });
-    if (r.status === 401) {
-      errEl.textContent = 'סיסמה שגויה — נסי שוב';
-      errEl.style.color = '#c62828';
-      document.getElementById('pwd-input').value = '';
-      document.getElementById('pwd-input').focus();
-      return;
-    }
-    if (!r.ok) {
-      errEl.textContent = 'שגיאת שרת. נסי שוב.';
-      errEl.style.color = '#c62828';
-      return;
-    }
-    // Success — store password in session and enter admin
-    window.RemoteState.setPwd(input);
+
+  const result = await window.RemoteState.login(input);
+
+  if (result.ok) {
+    errEl.style.display = 'none';
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-main').style.display = 'block';
     initAdmin().catch(e => console.error('initAdmin error:', e));
-  } catch(e) {
-    errEl.textContent = 'אין חיבור לאינטרנט';
-    errEl.style.color = '#c62828';
+    return;
   }
+
+  document.getElementById('pwd-input').value = '';
+  document.getElementById('pwd-input').focus();
+
+  if (result.error === 'too_many_attempts') {
+    const mins = Math.ceil((result.retryAfter || 900) / 60);
+    errEl.textContent = `יותר מדי ניסיונות כושלים. נסי שוב בעוד ${mins} דקות.`;
+  } else if (result.error === 'invalid_password') {
+    errEl.textContent = 'סיסמה שגויה — נסי שוב';
+  } else if (result.error === 'network_error' || result.error === 'Failed to fetch') {
+    errEl.textContent = 'אין חיבור לאינטרנט';
+  } else {
+    errEl.textContent = 'שגיאת שרת. נסי שוב.';
+  }
+  errEl.style.color = '#c62828';
 }
 
 async function _legacyTryLogin_disabled() {
