@@ -8,8 +8,9 @@
       'position:fixed;top:0;left:0;right:0;' +
       'z-index:10001;' +
       'height:' + H + 'px;' +
-      'background:#1a1210;' +
-      'border-bottom:1px solid rgba(184,144,96,.25);' +
+      'background:rgba(26,16,8,.97);' +
+      'backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);' +
+      'border-bottom:1px solid rgba(196,154,108,.15);' +
       'display:flex;align-items:center;' +
       'padding:0 12px;gap:8px;' +
       'direction:rtl;font-family:inherit;' +
