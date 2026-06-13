@@ -2,6 +2,19 @@
 
 ## ✅ Completed
 
+## 2026-06-13 — Admin Security Refactor
+- Worker (`preview/worker.js`): replaced raw `X-Admin-Password` header with KV session tokens
+  - `POST /login` → validates password, issues 64-char hex token (8h TTL, stored in KV `SESSIONS`)
+  - `POST /logout` → invalidates token
+  - `POST /settings` → requires `Authorization: Bearer <token>`
+  - Rate limiting: 5 failed logins → 15-min IP lockout (`rl:{ip}` KV key)
+  - CORS: explicit allowlist, `Vary: Origin`, security headers (HSTS, X-Frame-Options: DENY, CSP)
+- `preview/cloud-storage.js`: full login/logout flow, Bearer token on all writes, 401/403 auto-clears token
+- `preview/admin.html`: `tryLogin()` calls `RemoteState.login()` — handles 429/401/network in Hebrew
+- `deploy-worker.yml`: GitHub Actions CI/CD — creates KV namespace, deploys Worker via Cloudflare REST API
+- KV namespace `yarden-admin-sessions` created (ID: `7fc38ac017a145fea0a486419a3bff07`)
+- All `-temp` files promoted to permanent and deleted
+
 ## 2026-06-13 — Cookies Policy + Cookie Banner
 - Created `preview/cookies-policy.html` — full Hebrew cookies policy page (matches disclaimer.html style)
 - Created `preview/cookie-banner.js` — shared script added to all 12 public pages

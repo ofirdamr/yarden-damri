@@ -67,3 +67,13 @@
 - Created temp page with `<script src="nav.js" defer>` — `nav.js` does not exist in preview.
 - Nav JS is inline at the bottom of each page (copied from disclaimer.html).
 - **Rule:** When creating a new page, copy the inline `<script>` block from the bottom of `disclaimer.html`. Never reference `nav.js`.
+
+## Created unnecessary feature branch (2026-06-13)
+- Created `claude/preview-security-refactor-gyoow0` for the security refactor instead of working on `main`
+- This caused: workflow_dispatch invisible (only shows on default branch), files not live at yardendamri.co.il/preview/, diverged histories requiring MCP API to push directly to main
+- **Rule:** This project uses `main` only. Never create feature branches.
+
+## Tried to push to main without pulling first (2026-06-13)
+- After creating temp branch and committing, tried `git push origin main` — rejected (non-fast-forward)
+- Had to use `--force-with-lease` after amending the tip commit
+- **Rule:** Always `git pull origin main` before pushing, especially after rebasing or amending.

@@ -95,12 +95,13 @@ fix.js (GitHub Actions runner)
 ```
 Admin opens /preview/admin.html
     ↓ loads cloud-storage.js (RemoteState)
-    ↓ fetchPublic() → fetches gallery-settings.json from GitHub Pages URL
-    ↓ (fallback) fetchRemote() → calls api.yardendamri.co.il/settings (Cloudflare Worker)
+    ↓ Admin enters password → POST api.yardendamri.co.il/login
+    ↓ Worker validates password, returns 64-char session token (stored in sessionStorage)
+    ↓ initAdmin() → fetchPublic() → fetches gallery-settings.json from GitHub Pages URL
 Admin makes change (hide photo, set category, change hero video)
     ↓ RemoteState.update({ admin: {...} })
-    ↓ POST api.yardendamri.co.il/settings with X-Admin-Password header
-    ↓ Worker reads current gallery-settings.json from GitHub API
+    ↓ POST api.yardendamri.co.il/settings with Authorization: Bearer <token>
+    ↓ Worker validates token against KV, reads current gallery-settings.json from GitHub API
     ↓ merges changes, writes back to GitHub
     ↓ (if hero video changed) Worker also patches preview/index.html src + poster directly
 All visitors see change on next page load (gallery-settings.json re-fetched)
@@ -130,11 +131,22 @@ Videos:           https://videos-new.yardendamri.co.il/yarden_{itemId}.mp4
 
 ## Admin API (Cloudflare Worker)
 
-- **URL:** `https://api.yardendamri.co.il/settings`
-- **GET** → returns full `gallery-settings.json` (public, no auth)
-- **POST** → merges partial update into `gallery-settings.json` (requires `X-Admin-Password: makeup2026`)
-- **Source:** `preview/worker.js` (deployed to Cloudflare Workers dashboard manually)
-- **GitHub token:** stored as Worker environment secret `GH_TOKEN`
+- **URL:** `https://api.yardendamri.co.il`
+- **Source:** `preview/worker.js` — deployed via `.github/workflows/deploy-worker.yml` (CF REST API)
+- **Script name:** `yarden-admin`
+- **KV binding:** `SESSIONS` → namespace `yarden-admin-sessions` (ID: `7fc38ac017a145fea0a486419a3bff07`)
+- **Secrets:** `ADMIN_PASSWORD`, `GH_TOKEN` (set in Cloudflare dashboard)
+
+| Endpoint | Auth | Purpose |
+|----------|------|---------|
+| `GET /settings` | None (public) | Returns `gallery-settings.json` |
+| `POST /login` | Password in body | Validates password, returns 8h session token |
+| `POST /logout` | `Authorization: Bearer <token>` | Invalidates session token |
+| `POST /settings` | `Authorization: Bearer <token>` | Merges partial update into `gallery-settings.json` |
+| `GET /social` | None (public) | Returns likes + comments |
+| `POST /social` | None (public) | Updates likes + comments |
+
+**Rate limiting:** 5 failed `/login` attempts → 15-min IP lockout (KV key `rl:{ip}`)
 
 ### gallery-settings.json structure
 ```json
@@ -192,6 +204,7 @@ const GALLERY_IMAGES = [
 | `R2_ACCESS_KEY_ID` | Cloudflare R2 authentication |
 | `R2_SECRET_ACCESS_KEY` | Cloudflare R2 authentication |
 | `R2_ENDPOINT` | R2 endpoint URL |
+| `CF_WORKERS_API_TOKEN` | Deploy Worker via Cloudflare REST API (`deploy-worker.yml`) |
 
 ---
 
