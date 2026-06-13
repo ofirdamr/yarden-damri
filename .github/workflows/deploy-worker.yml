@@ -1,0 +1,77 @@
+name: Deploy Worker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or find KV namespace (sessions)
+        id: kv
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_WORKERS_API_TOKEN }}
+          ACCOUNT_ID: 1c223389f8a4ebb05eb62cb6a8350924
+        run: |
+          # Try to create the namespace
+          RESPONSE=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/storage/kv/namespaces" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"title":"yarden-admin-sessions"}')
+
+          KV_ID=$(echo "$RESPONSE" | python3 -c \
+            "import sys,json; r=json.load(sys.stdin); print(r['result']['id'])" 2>/dev/null || echo "")
+
+          # If creation failed (already exists), list and find it
+          if [ -z "$KV_ID" ]; then
+            LIST=$(curl -s \
+              "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/storage/kv/namespaces?per_page=100" \
+              -H "Authorization: Bearer $CF_API_TOKEN")
+            KV_ID=$(echo "$LIST" | python3 -c \
+              "import sys,json; r=json.load(sys.stdin); ns=[n for n in r.get('result',[]) if n['title']=='yarden-admin-sessions']; print(ns[0]['id'] if ns else '')" 2>/dev/null || echo "")
+          fi
+
+          if [ -z "$KV_ID" ]; then
+            echo "ERROR: Could not create or find KV namespace"
+            exit 1
+          fi
+
+          echo "KV namespace ID: $KV_ID"
+          echo "kv_id=$KV_ID" >> $GITHUB_OUTPUT
+
+      - name: Deploy Worker script
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_WORKERS_API_TOKEN }}
+          ACCOUNT_ID: 1c223389f8a4ebb05eb62cb6a8350924
+          KV_ID: ${{ steps.kv.outputs.kv_id }}
+        run: |
+          METADATA=$(python3 -c "
+          import json
+          print(json.dumps({
+            'main_module': 'worker.js',
+            'compatibility_date': '2024-01-01',
+            'bindings': [
+              {'type': 'kv_namespace', 'name': 'SESSIONS', 'namespace_id': '$KV_ID'}
+            ]
+          }))")
+
+          RESULT=$(curl -s -X PUT \
+            "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts/yarden-admin" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -F "metadata=$METADATA;type=application/json" \
+            -F "worker.js=@preview/worker-temp.js;type=application/javascript+module")
+
+          echo "$RESULT" | python3 -m json.tool
+
+          SUCCESS=$(echo "$RESULT" | python3 -c \
+            "import sys,json; r=json.load(sys.stdin); print(r.get('success','false'))" 2>/dev/null)
+
+          if [ "$SUCCESS" != "True" ]; then
+            echo "ERROR: Worker deployment failed"
+            exit 1
+          fi
+
+          echo "Worker deployed successfully"
