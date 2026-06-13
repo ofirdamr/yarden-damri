@@ -15,6 +15,12 @@
 - KV namespace `yarden-admin-sessions` created (ID: `7fc38ac017a145fea0a486419a3bff07`)
 - All `-temp` files promoted to permanent and deleted
 
+## 2026-06-13 — Nav consistency fix: added ביקורות to homepage
+- `index.html` desktop nav and mobile menu were missing ביקורות — all other pages had it
+- Added `<li><a href="/reviews.html">ביקורות</a></li>` to both desktop and mobile nav in `index.html`
+- Root cause of intermittent "two ביקורות" bug: iOS Safari bfcache serving subpage DOM on homepage, resulting in visible duplicates
+- Fix: nav is now identical across all pages
+
 ## 2026-06-13 — Cookie Banner Redesign + GA Consent Gating
 - Rewrote `preview/cookie-banner.js`: slim 48px bar at top of page (z-index:10001), slides down from top
 - Nav (`nav[role="navigation"]`) shifts to `top:48px` via `body.has-ck` class while banner is visible; returns to `top:0` on dismiss

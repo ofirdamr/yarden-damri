@@ -2,6 +2,11 @@
 
 ## 2026-06-13
 
+### ❌ CLAUDE.md nav spec was outdated — ביקורות missing from homepage
+- **What happened:** CLAUDE.md listed nav as "אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | מחירון | צרי קשר" with no ביקורות, but all subpages had it. Homepage was inconsistent, causing iOS bfcache to show duplicate items.
+- **Rule:** When all subpages share a nav item, the homepage must have it too. Always verify nav consistency across ALL pages, not just the one being edited.
+- **Fixed:** Added ביקורות to `index.html` desktop + mobile nav.
+
 ### ❌ Pushed to a new branch instead of working on main
 - **What happened:** Created and pushed to `claude/cookie-banner-prompt-t7b891` despite clear instruction to work only on `main` with temp files in `preview/`.
 - **Rule:** Always work on `main` branch. Use temp files in `preview/` folder for testing. Never create new branches.

@@ -15,6 +15,13 @@
 | Video thumbnails | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il/yarden_{id}_thumb.jpg` |
 
 ## What Was Done (2026-06-13)
+- **Cookie banner** — slim 48px bar at top of page (z-index:10001), slides down from top on first visit
+  - Nav shifts to `top:48px` via `body.has-ck` while banner visible; returns to `top:0` on dismiss
+  - "אני מסכימה" → GA loads; ✕ → GA never loads
+  - GA (`G-68XM6LS4HX`) removed from `<head>` of all 10 preview pages; consent-gated in inline script
+  - Returning visitors who already accepted: GA loads immediately, no banner shown
+  - Applied to `preview/` folder only; temp files (`cookie-banner-temp.js`, `index-temp.html`) still present
+- **Nav consistency fix** — added ביקורות to `index.html` (homepage) desktop + mobile nav to match all subpages
 - **Admin security refactor** — replaced raw password header with session token auth:
   - Worker: `POST /login` issues KV token (8h), `POST /logout` revokes it, rate limiting (5 fails → 15-min lockout)
   - cloud-storage.js: login/logout flow, `Authorization: Bearer <token>` on all writes
