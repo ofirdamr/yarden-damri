@@ -1,44 +1,69 @@
+# Mistakes & AI Errors Log — Preview
 
-## Mistake: Hidden items showing in lightbox
-- **Cause**: `applyFilter('all')` was called before `RemoteState.fetchPublic()` completed, so `allFilteredImages` was built without hidden items loaded yet
-- **Fix**: Delay initial `applyFilter` until after `fetchPublic()` resolves
-- **Rule**: Always await RemoteState before first render when hidden items must be excluded
+## Font changed without checking source (June 2026)
+- Swapped nav font to Cormorant Garamond / Heebo without checking original CSS. Original is Rubik weight 400 (name) + weight 300 (subtitle).
+- **Rule:** Before any typography change, check current CSS and git history.
 
-## Mistake: getAdminSettings() used localStorage in root gallery
-- **Cause**: Root gallery.html had `getAdminSettings()` reading from localStorage instead of RemoteState
-- **Fix**: Updated to use `RemoteState.getAdmin()` with localStorage as fallback
-- **Rule**: Always use RemoteState for shared state, never localStorage for business data
+## WhatsApp floating button alignment (June 2026)
+- Changed `<a>` to `<button>` mid-session without solving root cause.
+- Used `!important` overrides repeatedly instead of fixing the underlying rule conflict.
+- Accepted fake selectors from Gemini (`#whatsapp-widget-container`, `[class*="elfsight-app"]`) — don't exist in codebase.
+- Mixed `bottom` values (24/28/30/32px) across scoped and global rules — never audited all occurrences first.
+- **Rule:** Before touching floating button CSS, grep ALL occurrences, confirm one source of truth, make one clean change. Never fight `!important` with another `!important`.
 
-## Critical Mistake: 2-Day Likes/Comments Debug (June 2026)
+## Edited permanent file directly (June 2026)
+- Edited `bride.html` directly instead of creating `bride-temp.html`. Reverted via git revert.
+- **Rule:** ALWAYS create `-temp` file first. Only overwrite permanent after explicit approval.
 
-**What happened:** Likes and comments stopped working after R2 migration. Took 2 days to fix.
+## Overwrote preview/reviews.html directly (June 2026)
+- Interpreted "update the reviews temp" as permission to deploy. It was not.
+- **Rule:** "Update the temp" ≠ permission to overwrite permanent. Wait for explicit approval.
 
-**Root causes (in order):**
-1. `sessionStorage` throws silently in incognito on iPhone — igStatsCache was never populated. Should have checked this on day 1.
-2. Root `gallery-data.js` was not synced with preview — different data, different post_ids. Should have kept them in sync from the start.
-3. `post_id` was missing from gallery items — added fix.js but the skip-existing path didn't update it. Took many sync runs to notice.
-4. `instagram-stats.json` was not copied to preview on sync — stats file was stale.
+## GitHub Pages cache delay (June 2026)
+- Pushed changes, user saw nothing for hours. Forgot CDN propagation delay.
+- **Rule:** After pushing, always warn: "GitHub Pages takes 5–10 min. Add `?v=N` to bust browser cache."
 
-**What I should have done:**
-1. **Read all relevant code first** before making any change — gallery.html igStats logic, fix.js entry structure, sync workflow commit step.
-2. **Test the exact failure path** — incognito + iPhone = no sessionStorage. This is documented in project instructions. I knew this.
-3. **One fix at a time, verify it worked before moving to next.**
-4. **Never patch around broken code** — I added post_id hacks, caption matching, missing-stats-ids.json. All were wrong. The real bug was sessionStorage.
-5. **Keep root and preview in sync** — gallery-data.js, instagram-stats.json must always be identical between root and preview.
+## Edited preview/styles.css directly (June 2026)
+- Modified `preview/styles.css` directly AND edited root `index.html` / `styles.css` (not approved).
+- **Rule:** Never touch original files in `/preview`. Always create `-temp`. Never touch root files.
 
-**Rules going forward:**
-- ALWAYS check sessionStorage/localStorage usage — Ofir uses iPhone incognito, neither is available
-- ALWAYS sync root gallery-data.js = preview/gallery-data.js after any data change
-- ALWAYS sync root instagram-stats.json = preview/instagram-stats.json after any data change
-- Before debugging data issues, verify the JS can actually READ the data (storage APIs, fetch errors)
-- Do not create one-time hack files or workflows — fix the root cause only
+## Hidden items showing in lightbox (June 2026)
+- `applyFilter('all')` called before `RemoteState.fetchPublic()` completed — hidden items not loaded yet.
+- **Rule:** Always await RemoteState before first render when hidden items must be excluded.
 
-## Mistake: Admin video picker showing black tiles
-- **Cause**: Videos served as .mp4 URLs set as <img> src — browsers can't display MP4 as image
-- **Fix**: Derive _thumb.jpg from images bucket. Falls back to <video> element if no thumb.
-- **Rule**: Never use .mp4 URL as <img> src. Always derive a .jpg thumbnail path.
+## getAdminSettings() used localStorage in root gallery (June 2026)
+- Root gallery.html read from localStorage instead of RemoteState.
+- **Rule:** Always use RemoteState for shared state. Never localStorage for business data.
 
-## Mistake: Hero video flash of wrong image/dark
-- **Cause**: No poster image exists for existing R2 videos (thumbnails not yet generated)
-- **Fix**: Generate _thumb.jpg on video upload via ffmpeg. Bake poster into index.html via Worker patchIndexHtml.
-- **Rule**: Always generate and store a thumbnail when uploading any video.
+## 2-Day Likes/Comments Debug (June 2026)
+- `sessionStorage` throws silently in incognito on iPhone — igStatsCache never populated.
+- Root and preview `gallery-data.js` were out of sync — different post_ids.
+- `post_id` missing from gallery items — skip-existing path in fix.js didn't update it.
+- `instagram-stats.json` not copied to preview on sync — stale stats.
+- **Rules:**
+  - Check sessionStorage/localStorage usage first — Ofir uses iPhone incognito, neither works.
+  - Always keep root gallery-data.js = preview/gallery-data.js in sync.
+  - One fix at a time, verify before next. Never patch around broken code.
+
+## Admin video picker showed black tiles (June 2026)
+- .mp4 URLs set as `<img> src` — browsers can't render MP4 as image.
+- **Rule:** Never use .mp4 as `<img>` src. Always derive a `_thumb.jpg` path.
+
+## Hero video flash (June 2026)
+- No poster for existing R2 videos (thumbnails not yet generated).
+- **Rule:** Always generate and store a thumbnail when uploading any video.
+
+## Cookie banner used wrong site palette (June 2026)
+- Used `#3E2A1A` (root site's `--text` color) instead of preview's `#111111` (charcoal).
+- Preview palette is different from root: charcoal is `#111111`, gold is `#B89060`, blush is `#D4A898`.
+- **Rule:** Always check `preview/styles.css` CSS variables before hardcoding colors. Never copy from root styles.
+
+## nav-logo showed as blue link on subpages (June 2026)
+- Subpages need `class="subpage-nav"` on `<nav>` to apply `color: var(--charcoal)` via styles.css line 566.
+- Without it, the `.nav-logo` anchor inherits browser default blue.
+- **Rule:** All subpages must have `class="subpage-nav"` on the `<nav role="navigation">` element.
+
+## nav.js reference used instead of inline JS (June 2026)
+- Created temp page with `<script src="nav.js" defer>` — `nav.js` does not exist in preview.
+- Nav JS is inline at the bottom of each page (copied from disclaimer.html).
+- **Rule:** When creating a new page, copy the inline `<script>` block from the bottom of `disclaimer.html`. Never reference `nav.js`.

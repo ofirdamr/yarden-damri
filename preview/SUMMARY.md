@@ -1,45 +1,41 @@
-# Project Summary — June 2026
+# Project Summary — Yarden Damri Website (Preview)
 
-## Started
-Full site rebuild and media migration for yardendamri.co.il (Yarden Damri bridal makeup artist).
+## Architecture
+- **Staging**: `/preview` folder on `main` branch → served at `yardendamri.co.il/preview/`
+- **Live site (root)**: old version, still on Cloudinary — not yet replaced
+- **Repo**: github.com/ofirdamr/yarden-damri
+- **Admin API**: `api.yardendamri.co.il` (Cloudflare Worker, password in project system prompt)
+
+## Media Stack
+| Asset | Storage | Delivery |
+|---|---|---|
+| Images | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il` |
+| Videos | Cloudflare R2 `yarden-videos-new` | `videos-new.yardendamri.co.il` |
+| Video thumbnails | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il/yarden_{id}_thumb.jpg` |
 
 ## Done
-- **Media migration**: Cloudinary → R2 (images: yarden-images, videos: yarden-videos-new)
-- **Gallery**: Lazy loading, viewport-only autoplay, PAGE_SIZE=24
-- **Instagram sync**: Every 6h via GitHub Actions → fix.js → gallery-data.js + instagram-stats.json
-- **Categories/hidden**: Via Cloudflare Worker + gallery-settings.json (GitHub as DB)
-- **Admin panel**: Waits for Worker before rendering. Hidden filter shows all items. Hero video picker shows all R2 videos.
-- **Hero video**: Plays from gallery-data.js HERO_VIDEO var. Worker updates in background.
-- **Likes/comments**: Web-wide via Worker /social endpoint. No localStorage anywhere.
-- **Homepage gallery**: Fixed IG likes/comments (getIgStats now checks post_id first). Videos now shown alongside images. Lazy loading confirmed working.
+- Full site redesign (index, about, services, bride, bridal-guide, contact, pricing, gallery, reviews)
+- Media migration: Cloudinary → R2 (images WebP 800px, videos H.264 720p)
+- Instagram sync every 6h: fix.js → gallery-data.js + instagram-stats.json
+- Admin panel: categories, hidden, pinned, hero video, web-wide likes/comments
+- Cookie consent banner (`cookie-banner.js`) on all 12 public pages — one-time, localStorage
+- Cookies policy page (`cookies-policy.html`) — full Hebrew, matches site style
 
-## In Progress
-- **Video thumbnails**: _thumb.jpg missing for 161 existing videos (hero has brief dark flash)
-- **SEO**: Not complete
-- **Security audit**: Not done
+## To Do Before Go-Live
+1. Backfill `_thumb.jpg` for 161 existing R2 videos (hero dark flash)
+2. SEO: meta tags, sitemap, structured data
+3. Security audit
+4. Clean up all `-temp` files
+5. Promote `/preview` → root (follow GO-LIVE.md)
 
-## To Do
-- Run backfill-thumbs workflow (Actions → Backfill Video Thumbnails → Run)
-- SEO completion
-- Security audit
-- Go-live: promote /preview → root (follow GO-LIVE.md)
-- Online reservation system (post-launch)
-- Google Places API for live reviews (post-launch)
+## Post-Launch
+- Online reservation system
+- Google Places API for live reviews
 
-## Key Architecture
-
-### Media
-- Images: `images.yardendamri.co.il` (R2: yarden-images)
-- Videos: `videos-new.yardendamri.co.il` (R2: yarden-videos-new)
-- Video thumbnails: `images.yardendamri.co.il/yarden_{itemId}_thumb.jpg`
-
-### Data files (repo, served via GitHub Pages)
-- `preview/gallery-data.js` — GALLERY_IMAGES array + HERO vars (keyed by item_id, has post_id for stats lookup)
-- `preview/instagram-stats.json` — per-post likes/comments counts (keyed by post_id)
-- `gallery-settings.json` (root) — admin settings: hidden/pinned/order/cats/heroVideo
-- `social.json` (root) — web-wide user likes + comments
-
-### APIs
-- Worker: `api.yardendamri.co.il/settings` — admin read/write
-- Worker: `api.yardendamri.co.il/social` — public likes+comments
-- Instagram Graph API — token in GitHub Secret INSTAGRAM_TOKEN
+## Key Credentials
+- R2 images: `images.yardendamri.co.il` (bucket: `yarden-images`)
+- R2 videos: `videos-new.yardendamri.co.il` (bucket: `yarden-videos-new`)
+- Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8350924`
+- GA4 Measurement ID: `G-68XM6LS4HX`
+- ImageKit images: `ik.imagekit.io/Yardendamri` (ofirdamr@gmail.com) — suspended, not in use
+- ImageKit videos: `ik.imagekit.io/yardenvideos` (rifzagury@gmail.com) — suspended, not in use

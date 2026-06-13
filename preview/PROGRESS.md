@@ -1,67 +1,41 @@
-# Progress Log
+# Progress Log — Preview Folder
 
-## Session — Homepage & Site Redesign (June 2026)
+## June 2026 — Homepage & Site Redesign
+- index.html: Philosophy, Area, CTA, Reviews, Contact, Share strip, About — all redesigned
+- about.html: full rewrite (Hero + Story + Experience + CTA), warm premium voice
+- styles.css: alternating cream/warm rhythm across all sections
+- pricing.html: title fixed
 
-### Completed
-- **index.html** — full homepage redesign:
-  - Philosophy section: replaced emoji attributes with editorial B&W photo (aa6145a7) + quote overlay + clean 2×2 grid
-  - Area section: replaced broken dark square with real Google Maps iframe (grayscale)
-  - CTA strip: cleaned to single WhatsApp button
-  - Reviews section: removed Google/דפי זהב/Facebook button cluster, restyled cards to site palette, added Google review CTA link, fixed empty state text
-  - Contact section: replaced dark biz-card with premium cream/gold business card
-  - Share strip: moved from standalone div to inside gallery section
-  - About section: rewritten — short, warm, punchy. Links to about.html
-  - Floating buttons: smaller, subtle, grouped left (a11y + scroll) / right (WhatsApp)
-
-- **about.html** — full rewrite:
-  - New structure: Hero + Story + Experience + CTA (4 sections)
-  - New copywriting throughout — warm premium voice, not corporate
-  - Hero: "את יפה. אני כאן להראות את זה."
-  - CTA links to pricing.html and WhatsApp
-
-- **styles.css** — rhythm fix applied to all pages:
-  - services → var(--warm)
-  - area → var(--warm)
-  - reviews → var(--warm)
-  - Alternating cream/warm pattern across full page
-
-- **pricing.html** — title fixed: "כמה זה עולה?" → "החבילות שלי"
-
-### Pending / Next Session
-- Review remaining pages for consistency: services, contact, reviews, gallery
-- Instagram feed token fix (keyword: גרעינים)
-- Cloudflare R2 video hosting ($0 cap, migrate 289 videos)
-- Hero video fix (Worker KV CDN path)
-- Google Places API real reviews integration
-- Bezeq Bcyber block status check
-
-## June 2026 — Media Migration & Fixes
-
-### Completed
-- Migrated all media from Cloudinary (closed) to R2: images→yarden-images, videos→yarden-videos-new
-- Images compressed WebP 800px, videos H.264 720p via ffmpeg in sync script
-- Fixed Instagram likes/comments: removed sessionStorage (broken on iPhone incognito), fetch fresh on load
-- Fixed stats for 1608 posts including carousel children
-- Root and preview gallery-data.js + instagram-stats.json now auto-synced on every workflow run
+## June 2026 — Media Migration
+- Cloudinary → R2: all images (yarden-images) + videos (yarden-videos-new)
+- Images: WebP 800px, Videos: H.264 720p via ffmpeg in sync script
 - Removed all Cloudinary references from codebase
-- Fixed admin video picker to derive _thumb.jpg, fallback to video element
-- Fixed gallery: lazy loading, viewport autoplay, PAGE_SIZE=24, hidden items working
+
+## June 2026 — Likes / Comments / Gallery
+- Fixed Instagram likes/comments: removed sessionStorage (broken on iPhone incognito)
+- getIgStats now checks post_id first (instagram-stats.json keyed by post_id)
+- Root + preview gallery-data.js and instagram-stats.json auto-synced on every workflow run
+- Gallery: lazy loading, viewport autoplay, PAGE_SIZE=24, hidden items working
+- Admin video picker: derives _thumb.jpg, fallback to video element
 - Sync workflow fixed: no hang, parallel stats fetch, skips existing items
-- Created ARCHITECTURE.md
 
-### In Progress
-- Hero video thumbnails: _thumb.jpg not yet generated for existing 161 videos
-- Hero video flash: dark screen before video plays (needs thumbnails)
+## June 2026 — Admin & Hero Video
+- Admin waits for Worker fetch before rendering
+- Hidden filter is hard override (skips catFilter/searchTerm)
+- Hero video: set from gallery-data.js HERO_VIDEO var, Worker updates in background
+- Web-wide likes/comments via Worker /social endpoint — no localStorage
 
-### June 2026 — Homepage Gallery Fixes
+## 2026-06-13 — Cookies Policy + Banner
+- Created `cookies-policy.html` — full Hebrew cookies policy, matches site style
+- Created `cookie-banner.js` — shared script, added to all 12 public pages
+- Banner: slim frosted-dark (charcoal #111111 + gold #B89060), one-time per visitor via localStorage
+- Policy covers: Essential / Analytics (GA4) / Marketing (Meta Pixel) / Instagram API / Google Reviews
 
-#### Completed
-- Fixed Instagram likes/comments not showing on homepage: `getIgStats` now checks `post_id` first (instagram-stats.json is keyed by post_id, not item_id)
-- Removed video filter from homepage gallery — videos now show alongside images
-- Verified: lazy loading already in place (videos: preload=none + data-src + poster via IntersectionObserver; images: loading=lazy + decoding=async)
-
-### Next
-- Backfill _thumb.jpg for all existing R2 videos (GitHub Action)
-- Site responsiveness on desktop
-- SEO, security audit
-- Go-live: promote /preview → root
+## Pending
+- Backfill _thumb.jpg for 161 existing R2 videos (hero has brief dark flash)
+- SEO completion (meta, sitemap, structured data)
+- Security audit
+- Go-live: promote /preview → root (follow GO-LIVE.md checklist)
+- Online reservation system (post-launch)
+- Google Places API for live reviews (post-launch)
+- Clean up temp files: bride-temp, index-temp, pricing-temp, reviews-temp, styles-temp, about-temp, gallery-temp, admin-temp, cookies-policy-temp
