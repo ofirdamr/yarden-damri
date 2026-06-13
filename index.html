@@ -667,7 +667,7 @@
     let currentPage = 1;
     // Homepage: images only, first 48 — full gallery is at /gallery.html
     let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE)
+      ? applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE)
       : [];
 
     const gallery = document.getElementById('ig-gallery');
@@ -790,11 +790,9 @@
     }
 
     function getIgStats(item) {
-      // Try by Instagram post ID stored in gallery-data.js
+      if (item.post_id && igStatsCache[item.post_id]) return igStatsCache[item.post_id];
+      if (item.item_id && igStatsCache[item.item_id]) return igStatsCache[item.item_id];
       if (item.id && igStatsCache[item.id]) return igStatsCache[item.id];
-      // Try by caption match
-      const ck = captionKey(item.a);
-      if (ck && igCaptionMap[ck]) return igCaptionMap[ck];
       return null;
     }
 
@@ -966,7 +964,7 @@
     // Init
     document.addEventListener('DOMContentLoaded', function() {
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = applyAdminSettings(GALLERY_IMAGES).filter(i => !i.video).slice(0, PER_PAGE);
+        filteredImages = applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE);
       }
       if (filteredImages.length) {
         renderPage(1);
