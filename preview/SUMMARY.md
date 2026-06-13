@@ -4,7 +4,7 @@
 - **Staging**: `/preview` folder on `main` branch → served at `yardendamri.co.il/preview/`
 - **Live site (root)**: old version, still on Cloudinary — not yet replaced
 - **Repo**: github.com/ofirdamr/yarden-damri
-- **Admin API**: `api.yardendamri.co.il` (Cloudflare Worker, password in project system prompt)
+- **Admin API**: `api.yardendamri.co.il` (Cloudflare Worker `yarden-admin`)
 
 ## Media Stack
 | Asset | Storage | Delivery |
@@ -20,13 +20,17 @@
 - Admin panel: categories, hidden, pinned, hero video, web-wide likes/comments
 - Cookie consent banner (`cookie-banner.js`) on all 12 public pages — one-time, localStorage
 - Cookies policy page (`cookies-policy.html`) — full Hebrew, matches site style
+- **Security refactor (2026-06-13)**:
+  - Worker: session token auth (KV), rate limiting (5 attempts → 15-min lockout), security headers, CORS hardening
+  - cloud-storage.js: login/logout flow, Bearer token on all writes
+  - admin.html: server-side login via RemoteState.login()
+  - deploy-worker.yml: CI/CD workflow to deploy Worker via Cloudflare REST API
+  - All temp files cleaned up — codebase is clean
 
 ## To Do Before Go-Live
 1. Backfill `_thumb.jpg` for 161 existing R2 videos (hero dark flash)
-2. SEO: meta tags, sitemap, structured data
-3. Security audit
-4. Clean up all `-temp` files
-5. Promote `/preview` → root (follow GO-LIVE.md)
+2. SEO: meta tags, sitemap.xml, structured data (JSON-LD)
+3. Promote `/preview` → root (follow GO-LIVE.md)
 
 ## Post-Launch
 - Online reservation system
@@ -36,6 +40,8 @@
 - R2 images: `images.yardendamri.co.il` (bucket: `yarden-images`)
 - R2 videos: `videos-new.yardendamri.co.il` (bucket: `yarden-videos-new`)
 - Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8350924`
+- KV namespace `yarden-admin-sessions` ID: `7fc38ac017a145fea0a486419a3bff07`
 - GA4 Measurement ID: `G-68XM6LS4HX`
-- ImageKit images: `ik.imagekit.io/Yardendamri` (ofirdamr@gmail.com) — suspended, not in use
-- ImageKit videos: `ik.imagekit.io/yardenvideos` (rifzagury@gmail.com) — suspended, not in use
+- Worker secret `ADMIN_PASSWORD`: set in Cloudflare dashboard
+- Worker secret `GH_TOKEN`: set in Cloudflare dashboard
+- GitHub secret `CF_WORKERS_API_TOKEN`: for deploy-worker.yml workflow

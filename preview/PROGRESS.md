@@ -31,11 +31,28 @@
 - Banner: slim frosted-dark (charcoal #111111 + gold #B89060), one-time per visitor via localStorage
 - Policy covers: Essential / Analytics (GA4) / Marketing (Meta Pixel) / Instagram API / Google Reviews
 
+## 2026-06-13 — Admin Security Refactor (complete)
+- **Worker** (`worker.js`): replaced raw `X-Admin-Password` header with KV-based session tokens
+  - `POST /login` — validates password, issues 64-char hex token (8h TTL in KV `SESSIONS`)
+  - `POST /logout` — invalidates token
+  - `POST /settings` — requires `Authorization: Bearer <token>`
+  - Rate limiting: 5 failed logins → 15-min IP lockout (KV key `rl:{ip}`)
+  - CORS hardened: explicit allowlist (`yardendamri.co.il`, `www.`, localhost dev ports)
+  - Security headers: `Strict-Transport-Security`, `X-Frame-Options: DENY`, `CSP: default-src 'none'`, etc.
+- **cloud-storage.js**: replaced password sessionStorage with session token (`yd_session_token`)
+  - `login(password)` POSTs to Worker, stores returned token
+  - `logout()` POSTs to `/logout` (best-effort), clears token
+  - All writes send `Authorization: Bearer <token>`; on 401/403 clears token automatically
+  - Backward-compat shims: `getPwd/setPwd/clearPwd/hasPwd` map to token equivalents
+- **admin.html**: `tryLogin()` rewritten to call `RemoteState.login()` (no local SHA-256 check)
+  - Handles 429 (rate limit), 401 (wrong password), network errors — all in Hebrew
+- **KV namespace**: `yarden-admin-sessions` (ID: `7fc38ac017a145fea0a486419a3bff07`) created on Cloudflare
+- **deploy-worker.yml**: GitHub Actions workflow deploys Worker to `yarden-admin` script via CF REST API
+- All `-temp` files promoted to permanent and deleted
+
 ## Pending
 - Backfill _thumb.jpg for 161 existing R2 videos (hero has brief dark flash)
 - SEO completion (meta, sitemap, structured data)
-- Security audit
 - Go-live: promote /preview → root (follow GO-LIVE.md checklist)
 - Online reservation system (post-launch)
 - Google Places API for live reviews (post-launch)
-- Clean up temp files: bride-temp, index-temp, pricing-temp, reviews-temp, styles-temp, about-temp, gallery-temp, admin-temp, cookies-policy-temp
