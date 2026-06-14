@@ -450,16 +450,25 @@
       /* Gallery tiles slightly larger on big screens */
       .ig-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 1400px; }
 
-      /* About card: show full image, not cropped portrait */
+      /* HERO: portrait 9:16 video on landscape 16:9 screen.
+         object-fit:cover only shows 31% of the portrait — always face-only.
+         contain shows the full person; dark bars on sides are filled by #heroMediaWrap background:#111 */
+      #heroVideo, #heroImage {
+        object-fit: contain !important;
+        object-position: center center !important;
+      }
+
+      /* About card: show full image without cropping */
       .about-card {
         aspect-ratio: auto;
-        height: 600px;
+        height: 620px;
         max-height: 700px;
         background-size: contain !important;
         background-position: center center !important;
+        background-color: var(--cream) !important;
       }
 
-      /* Philosophy section: show full image composition on desktop */
+      /* Philosophy section: taller on desktop to show full scene */
       #philosophy .philosophy-photo-wrap {
         min-height: 640px !important;
       }
