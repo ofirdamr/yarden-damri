@@ -530,28 +530,44 @@
 
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
+      /* ── Hero ── */
       #hero { height: 100vh; min-height: 600px; }
-      /* Full-screen cover — the original fitted look. Framing depends on the chosen clip. */
       #hero #heroVideo, #hero #heroImage { object-fit: cover !important; }
       .hero-content { max-width: 540px; padding: 0 50px; }
       .hero-btns { flex-wrap: nowrap; }
       .hero-eyebrow { font-size: .7rem; margin-bottom: 16px; }
-      .hero-title { font-size: clamp(1.9rem, 2.6vw, 2.8rem); line-height: 1.1; margin-bottom: 14px; }
-      .hero-subtitle { font-size: clamp(.95rem, 1.1vw, 1.1rem); margin-bottom: 22px; }
+      .hero-title { font-size: clamp(2.4rem, 3.2vw, 4rem); line-height: 1.08; margin-bottom: 14px; }
+      .hero-subtitle { font-size: clamp(1rem, 1.2vw, 1.15rem); margin-bottom: 22px; }
       .hero-desc { font-size: .92rem; margin-bottom: 28px; }
       .hero-overlay { background: linear-gradient(270deg, rgba(30,18,10,.78) 0%, rgba(30,18,10,.25) 45%, rgba(30,18,10,0) 85%); }
 
-      #about .section-title { font-size: clamp(2rem, 3vw, 3rem); }
+      /* ── About ── */
+      #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
+      /* Landscape crop on desktop — shows full scene (makeup artist + customer) */
+      .about-card { aspect-ratio: 16/9; max-height: none; }
 
-      /* Center brand name in nav */
-      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:first-child { font-size: 1.25rem !important; }
-      nav[role="navigation"] a[aria-label="ירדן דמרי - עמוד הבית"]:nth-of-type(2) span:last-child { font-size: .62rem !important; }
+      /* ── Section width caps (cream sections: cap the section; warm sections: cap the inner) ── */
+      #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      .services-header,
+      .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+
+      /* ── Philosophy attributes: 4 columns on desktop ── */
+      .philosophy-attrs-grid { grid-template-columns: repeat(4, 1fr) !important; }
+
+      /* ── Gallery ── */
+      .ig-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 1400px; }
+
+      /* ── Reviews ── */
+      #reviews { padding: 100px clamp(40px, 6vw, 120px); }
     }
 
     /* ── LARGE DESKTOP (1600px+) ── */
     @media (min-width: 1600px) {
-      .hero-content { max-width: 520px; }
-      .hero-title { font-size: 4rem; }
+      .hero-content { max-width: 560px; }
+      .hero-title { font-size: 4.2rem; }
     }
 
     @media (max-width: 480px) {

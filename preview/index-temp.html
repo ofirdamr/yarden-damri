@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=25" />
+  <link rel="stylesheet" href="styles-temp.css?v=26" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -262,7 +262,7 @@
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
+        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center center;"></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
@@ -374,7 +374,7 @@
           </div>
         </div>
         <!-- Attributes strip -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;background:#f9f5f0;" role="list" aria-label="נתונים מרכזיים">
+        <div class="philosophy-attrs-grid" style="display:grid;grid-template-columns:1fr 1fr;background:#f9f5f0;" role="list" aria-label="נתונים מרכזיים">
           <div role="listitem" style="padding:32px 24px;border-left:1px solid rgba(0,0,0,0.07);border-bottom:1px solid rgba(0,0,0,0.07);">
             <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">מגיעה לכל מקום</p>
             <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">מהצפון ועד הדרום, ישירות אלייך.</p>
@@ -1037,13 +1037,17 @@
         const localCmtCount = (getComments()[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
 
-        const isVideo = item.video || item.u.includes('/video/upload/');
+        const isVideo = item.video || item.u.includes('.mp4') || item.u.includes('/video/upload/');
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
+        // R2 video thumbnail: prefer item.thumb, fall back to images bucket pattern
+        const _videoThumb = item.thumb ||
+          (item.item_id ? `https://images.yardendamri.co.il/yarden_${item.item_id}_thumb.jpg` : '');
+
         // VIDEO: use data-src + poster for lazy loading. IntersectionObserver loads src only when visible.
         const mediaEl = isVideo
-          ? `<video data-src="${cdnVideo(item.u, 360)}" poster="${cdnVideoPoster(item.u)}" muted loop playsinline preload="none"
+          ? `<video data-src="${item.u}" poster="${_videoThumb}" muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
                onerror="this.style.display='none'"></video>`

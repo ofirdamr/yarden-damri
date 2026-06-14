@@ -506,3 +506,20 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
   - `#area`: calc-based left/right padding `max(100px, calc(50% - 700px))` caps content to ~1400px without clipping the warm background
   - `.ig-gallery-grid`: tile min bumped from 240px to 280px on large screens
   - Mobile breakpoint (`@media (max-width: 1080px)`) untouched
+
+## 2026-06-14 (session 2) — Desktop responsive redesign (temp files)
+- **preview/index-temp.html + preview/styles-temp.css** — all changes in temp files pending user approval
+  1. **Hero video crop**: desktop now uses `38%` vertical position (face + neck + shoulders visible, not just eyes)
+     - JS `applyHeroCropToPage()`: desktop safePos = `x + ' 38%'` instead of `50% 50%`
+     - Resize listener added so crop recalculates on window resize
+  2. **About section image**: changed `background-position:center top` → `center center` (shows full scene)
+     - Added `.about-card { aspect-ratio: 16/9; max-height: none }` on desktop in styles-temp.css
+  3. **Text / desktop layout**:
+     - Hero title: `clamp(2.4rem, 3.2vw, 4rem)` — bigger, better proportioned on large screens
+     - About title: `clamp(2.2rem, 3.2vw, 3.6rem)`
+     - Philosophy attributes: added `.philosophy-attrs-grid` class → 4-column grid on desktop
+     - Section max-width caps + gallery tile size inherited from styles.css and replicated in styles-temp.css
+  4. **Gallery video thumbnails**: fixed broken poster URLs
+     - Old code: `cdnVideoPoster(url)` generated Cloudinary paths that don't exist for R2 videos
+     - New code: uses `item.thumb` (from gallery-data.js) or derives R2 thumb URL: `images.yardendamri.co.il/yarden_{item_id}_thumb.jpg`
+     - Also fixed video detection: now checks `.mp4` in URL (R2 videos) not just `/video/upload/` (Cloudinary)

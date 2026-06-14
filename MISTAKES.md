@@ -363,3 +363,12 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - Root files are the old live site (Cloudinary-based, not yet replaced)
 - All development goes to preview/index.html and preview/styles.css
 - Changes to root files are invisible to the user (they review at yardendamri.co.il/preview/)
+
+## 2026-06-14 (session 2)
+
+### ❌ Started session on automated feature branch instead of switching to main immediately
+- Task system assigned branch `claude/desktop-responsive-redesign-kf2gmo`
+- MISTAKES.md says: this project uses main only, no feature branches
+- Did not read MISTAKES.md at session start — repeated a documented mistake
+- Wasted several turns of work on the wrong branch before user corrected me
+- Rule: At the very start of every session, check `git branch --show-current`. If not `main`, switch immediately before touching any file.

@@ -70,6 +70,17 @@ Update `PROGRESS.md` in the same commit or immediately after — every fix shoul
 
 After pushing, check the last few lines of output for `rejected` or `fetch first`. The GitHub Actions workflow commits directly to `main` every 6 hours; if it ran between your last pull and push, the push will be silently rejected. Pull with merge before pushing.
 
+## STRICT RULE — Branch
+
+**This project runs on `main` only. Working on any other branch is strictly forbidden.**
+
+- The very first action in every session must be: `git branch --show-current`
+- If the result is NOT `main`, stop immediately. Do not read files, do not write files. Switch to `main` first.
+- If the automated task system or any tool opened the session on another branch, ignore it. Switch to `main` before doing anything.
+- Never create a feature branch. Never push to any branch other than `main`.
+
+---
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
