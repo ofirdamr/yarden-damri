@@ -498,3 +498,11 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 **Thumbnail backfill:**
 - backfill-thumbs.js + workflow created — uses Instagram thumbnail_url, no video download, ~3 min runtime
 - Workflow triggered manually via GitHub Actions
+
+## 2026-06-14
+- **Desktop responsive fix (preview only)**: Added `@media (min-width: 1081px)` to `preview/styles.css`
+  - `#about`, `#philosophy`, `#contact`: `max-width: 1440px; margin: auto` — cream bg matches body so boundary is invisible
+  - `.services-header`, `.services-grid`: `max-width: 1280px; margin: auto` — inner content constrained inside full-width warm section
+  - `#area`: calc-based left/right padding `max(100px, calc(50% - 700px))` caps content to ~1400px without clipping the warm background
+  - `.ig-gallery-grid`: tile min bumped from 240px to 280px on large screens
+  - Mobile breakpoint (`@media (max-width: 1080px)`) untouched
