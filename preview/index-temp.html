@@ -225,11 +225,11 @@
       <!-- hero-media-wrap: controls pan & zoom via inline style -->
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;background:#111;">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;">
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;">
           <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18094353658922515.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
-          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
+          style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 0%;top:0;left:0;display:none;"/>
       </div>
       <div class="hero-overlay" aria-hidden="true" style="background:rgba(0,0,0,0.42);"></div>
       <div class="hero-content">
@@ -262,7 +262,7 @@
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center center;"></div>
+        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:contain;background-position:center center;background-color:#f9f5f0;"></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
@@ -358,10 +358,10 @@
     <section id="philosophy" aria-labelledby="philosophy-title" style="padding:0;overflow:hidden;">
       <div style="display:flex;flex-direction:column;">
         <!-- Photo + quote split -->
-        <div style="position:relative;width:100%;min-height:520px;background:#1a1614;">
+        <div class="philosophy-photo-wrap" style="position:relative;width:100%;min-height:520px;background:#1a1614;">
           <img src="https://ik.imagekit.io/Yardendamri/aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg"
                alt="ירדן דמרי מאפרת כלות בעבודה"
-               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.55;"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:0.55;"
                loading="lazy" />
           <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:520px;padding:48px 32px 44px;">
             <p class="section-eyebrow" id="philosophy-title" style="color:rgba(232,200,176,0.75);margin-bottom:18px;">הפילוסופיה שלי</p>
@@ -658,23 +658,21 @@
     function applyHeroCropToPage(pos, zoom) {
       const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
       const isMobile = window.innerWidth <= 1080;
-      // MOBILE crop (unchanged): face from the top, forehead down
-      // DESKTOP crop (separate): frame the face centered in the wide band so it never lands on hairline/forehead
-      let safePos, safeScale;
-      if (isMobile) {
-        const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
-        safePos = x + ' 20%';
-        safeScale = 1;
-      } else {
-        const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
-        safePos = x + ' 38%';   // desktop: centred on the subject, not the hairline
-        safeScale = (zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
+      if (!isMobile) {
+        // Desktop: the portrait video is massively scaled by object-fit:cover.
+        // The stored heroPosition is tuned for mobile. Do NOT apply it on desktop.
+        // The HTML inline object-position:50% 0% (face from top) is the correct value.
+        // Never apply heroZoom scale — it only further crops the portrait video.
+        els.forEach(el => { if (el) { el.style.transform = 'none'; } });
+        return;
       }
+      // Mobile only
+      const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
+      const safePos = x + ' 20%';
       els.forEach(el => {
         if (!el) return;
         el.style.objectPosition = safePos;
-        el.style.transform = safeScale !== 1 ? `scale(${safeScale})` : 'none';
-        el.style.transformOrigin = safePos;
+        el.style.transform = 'none';
       });
     }
 

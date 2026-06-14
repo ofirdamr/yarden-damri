@@ -211,7 +211,7 @@
     /* ── ABOUT ── */
     #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; background: var(--cream); }
     .about-visual { position: relative; }
-    .about-card { border-radius: 2px; aspect-ratio: 3/4; max-height: 600px; position: relative; overflow: hidden; }
+    .about-card { border-radius: 2px; aspect-ratio: 2/3; max-height: 700px; position: relative; overflow: hidden; }
     .about-accent { display: none; }
     .about-small-card { display: none; }
     .small-card-num { display: none; }
@@ -435,6 +435,49 @@
     img { -webkit-user-drag: none; user-drag: none; }
     body { -webkit-user-select: none; user-select: none; }
     input, textarea, select { -webkit-user-select: text; user-select: text; }
+
+    /* ── LARGE SCREEN CONSTRAINTS (>1080px) ── */
+    @media (min-width: 1081px) {
+      /* Cream sections: bg matches body — constrain the section itself */
+      #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      /* Warm-bg sections must stay full-width — constrain inner elements */
+      .services-header,
+      .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      /* Area: 2-col grid with no inner wrapper — use calc padding to cap width */
+      #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+      /* Gallery tiles slightly larger on big screens */
+      .ig-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 1400px; }
+
+      /* About card: show full image, not cropped portrait */
+      .about-card {
+        aspect-ratio: auto;
+        height: 600px;
+        max-height: 700px;
+        background-size: contain !important;
+        background-position: center center !important;
+      }
+
+      /* Philosophy section: show full image composition on desktop */
+      #philosophy .philosophy-photo-wrap {
+        min-height: 640px !important;
+      }
+      #philosophy .philosophy-photo-wrap img {
+        object-position: center center !important;
+      }
+
+      /* Reviews section max-width for wide screens */
+      #reviews > div { max-width: 1300px; margin-left: auto; margin-right: auto; }
+
+      /* Philosophy attributes: 4 columns on desktop */
+      .philosophy-attrs-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+      .philosophy-attrs-grid > [role="listitem"] {
+        border-bottom: none !important;
+      }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
