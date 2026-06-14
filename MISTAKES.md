@@ -345,3 +345,21 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - This caused repeated confusion: workflow_dispatch only appears for workflows on the default branch (main), files pushed to the feature branch weren't accessible at yardendamri.co.il/preview/, and the diverged histories required using the GitHub MCP API to push files directly to main anyway
 - The feature branch served no purpose and made everything harder
 - **Rule:** This project works on `main` only. Never create feature branches. Work directly on `main` (or in /preview for staging). If in doubt, ask before branching.
+
+## 2026-06-14: Desktop redesign — wrong files, wrong branch
+
+### ❌ Did not read SUMMARY.md at start of session
+- Jumped straight into editing root index.html and styles.css
+- SUMMARY.md clearly states: **Staging = /preview folder — all active work done here**
+- Rule: ALWAYS read SUMMARY.md at the start of every session before touching any file
+
+### ❌ Created a feature branch instead of working on main
+- Pushed to `claude/desktop-responsive-redesign-7i7q9f` instead of `main`
+- MISTAKES.md already documented this error on 2026-06-13
+- The same mistake was repeated because MISTAKES.md was not read first
+- Rule: This project works on `main` only. No feature branches.
+
+### ❌ Modified root index.html and styles.css instead of preview/ versions
+- Root files are the old live site (Cloudinary-based, not yet replaced)
+- All development goes to preview/index.html and preview/styles.css
+- Changes to root files are invisible to the user (they review at yardendamri.co.il/preview/)

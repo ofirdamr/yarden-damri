@@ -436,6 +436,21 @@
     body { -webkit-user-select: none; user-select: none; }
     input, textarea, select { -webkit-user-select: text; user-select: text; }
 
+    /* ── LARGE SCREEN CONSTRAINTS (>1080px) ── */
+    @media (min-width: 1081px) {
+      /* Cream sections: bg matches body — constrain the section itself */
+      #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      /* Warm-bg sections must stay full-width — constrain inner elements */
+      .services-header,
+      .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      /* Area: 2-col grid with no inner wrapper — use calc padding to cap width */
+      #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+      /* Gallery tiles slightly larger on big screens */
+      .ig-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 1400px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
       /* Sections with max-width should expand to full width on mobile */
