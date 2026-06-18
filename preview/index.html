@@ -692,7 +692,7 @@
         const s = document.getElementById('heroVideoSource');
         if (!s) return;
         const newFile = vidUrl.split('/').pop();
-        const curFile = (videoEl.src || '').split('/').pop();
+        const curFile = (videoEl.currentSrc || videoEl.src || '').split('/').pop();
         if (newFile && curFile && newFile === curFile) return;
         // Derive poster from images bucket
         const itemId = newFile.replace(/^yarden_/, '').replace(/\.mp4$/, '');
