@@ -693,7 +693,7 @@
         if (!s) return;
         const newFile = vidUrl.split('/').pop();
         const curFile = (videoEl.currentSrc || videoEl.src || s.getAttribute('src') || '').split('/').pop();
-        if (!curFile || newFile === curFile) { videoEl.play().catch(()=>{}); return; }
+        if (!curFile || newFile === curFile) { return; } // same URL — let native autoplay handle it
         // Derive poster from images bucket
         const itemId = newFile.replace(/^yarden_/, '').replace(/\.mp4$/, '');
         const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
