@@ -631,20 +631,6 @@
     }
 
     /* Touch devices: gallery overlay always semi-visible */
-    @media (hover: none) {
-      .ig-gallery-grid > div .overlay {
-        opacity: 1 !important;
-        display: flex;
-        align-items: flex-end;
-      }
-      .ig-gallery-grid > div .overlay p {
-        margin: 0;
-        padding: 8px 10px 44px 10px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-    }
-
     /* System reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
