@@ -692,8 +692,8 @@
         const s = document.getElementById('heroVideoSource');
         if (!s) return;
         const newFile = vidUrl.split('/').pop();
-        const curFile = (videoEl.currentSrc || videoEl.src || '').split('/').pop();
-        if (newFile && curFile && newFile === curFile) { videoEl.play().catch(()=>{}); return; }
+        const curFile = (videoEl.currentSrc || videoEl.src || s.getAttribute('src') || '').split('/').pop();
+        if (!curFile || newFile === curFile) { videoEl.play().catch(()=>{}); return; }
         // Derive poster from images bucket
         const itemId = newFile.replace(/^yarden_/, '').replace(/\.mp4$/, '');
         const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
