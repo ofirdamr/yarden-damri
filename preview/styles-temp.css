@@ -569,18 +569,22 @@
 
       /* ── About ── */
       #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
-      /* Landscape crop on desktop — shows full scene (makeup artist + customer) */
-      .about-card { aspect-ratio: 16/9; max-height: none; }
+      /* Portrait photo fills its column — cover + 2/3 aspect ratio */
+      .about-card { aspect-ratio: 2/3; max-height: 700px; background-size: cover !important; background-position: center top !important; }
       .about-card-img { background-size: cover; }
 
       /* ── Section width caps (cream sections: cap the section; warm sections: cap the inner) ── */
       #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      /* #philosophy and .cta-strip: full-bleed — no max-width keeps both edge-to-edge on all screen sizes */
       #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      .cta-strip { max-width: 1440px; margin-left: auto; margin-right: auto; }
       .services-header,
       .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
       #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+
+      /* Philosophy overlay text: consistent right-align (RTL natural) on desktop */
+      .philosophy-photo-wrap .section-eyebrow,
+      .philosophy-photo-wrap blockquote,
+      .philosophy-photo-wrap > div > p { text-align: right; }
 
       /* ── Philosophy attributes: 4 columns on desktop ── */
       .philosophy-attrs-grid { grid-template-columns: repeat(4, 1fr) !important; }
@@ -590,6 +594,10 @@
 
       /* ── Reviews ── */
       #reviews { padding: 100px clamp(40px, 6vw, 120px); }
+
+      /* Contact page: improve label and intro contrast on cream background */
+      .contact-intro { color: var(--text); }
+      .form-group label { color: #666; }
     }
 
     /* ── LARGE DESKTOP (1600px+) ── */
