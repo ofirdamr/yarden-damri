@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles-temp.css?v=27" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -262,7 +262,7 @@
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
+        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:contain;background-position:center center;background-color:#f9f5f0;"></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
@@ -358,10 +358,10 @@
     <section id="philosophy" aria-labelledby="philosophy-title" style="padding:0;overflow:hidden;">
       <div style="display:flex;flex-direction:column;">
         <!-- Photo + quote split -->
-        <div style="position:relative;width:100%;min-height:520px;background:#1a1614;">
+        <div class="philosophy-photo-wrap" style="position:relative;width:100%;min-height:520px;background:#1a1614;">
           <img src="https://ik.imagekit.io/Yardendamri/aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg"
                alt="ירדן דמרי מאפרת כלות בעבודה"
-               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.55;"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:0.55;"
                loading="lazy" />
           <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:520px;padding:48px 32px 44px;">
             <p class="section-eyebrow" id="philosophy-title" style="color:rgba(232,200,176,0.75);margin-bottom:18px;">הפילוסופיה שלי</p>
@@ -374,7 +374,7 @@
           </div>
         </div>
         <!-- Attributes strip -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;background:#f9f5f0;" role="list" aria-label="נתונים מרכזיים">
+        <div class="philosophy-attrs-grid" style="display:grid;grid-template-columns:1fr 1fr;background:#f9f5f0;" role="list" aria-label="נתונים מרכזיים">
           <div role="listitem" style="padding:32px 24px;border-left:1px solid rgba(0,0,0,0.07);border-bottom:1px solid rgba(0,0,0,0.07);">
             <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8976a;margin:0 0 8px;">מגיעה לכל מקום</p>
             <p style="font-size:0.9rem;color:#555;margin:0;line-height:1.6;">מהצפון ועד הדרום, ישירות אלייך.</p>
@@ -658,21 +658,21 @@
     function applyHeroCropToPage(pos, zoom) {
       const els = [document.getElementById('heroVideo'), document.getElementById('heroImage')];
       const isMobile = window.innerWidth <= 1080;
-      // On mobile portrait, force Y=0% so the face shows from the top (forehead down)
-      // rather than the center (just eyes/nose) which is too zoomed
-      let safePos;
-      if (isMobile) {
-        const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
-        safePos = x + ' 20%';
-      } else {
-        safePos = (pos && /^\d/.test(pos)) ? pos : '50% 50%';
+      if (!isMobile) {
+        // Desktop: the portrait video is massively scaled by object-fit:cover.
+        // The stored heroPosition is tuned for mobile. Do NOT apply it on desktop.
+        // The HTML inline object-position:50% 0% (face from top) is the correct value.
+        // Never apply heroZoom scale — it only further crops the portrait video.
+        els.forEach(el => { if (el) { el.style.transform = 'none'; } });
+        return;
       }
-      const safeScale = (!isMobile && zoom && zoom >= 50 && zoom <= 200) ? zoom / 100 : 1;
+      // Mobile only
+      const x = (pos && /^\d/.test(pos)) ? pos.split(' ')[0] : '50%';
+      const safePos = x + ' 20%';
       els.forEach(el => {
         if (!el) return;
         el.style.objectPosition = safePos;
-        el.style.transform = safeScale !== 1 ? `scale(${safeScale})` : 'none';
-        el.style.transformOrigin = safePos;
+        el.style.transform = 'none';
       });
     }
 
@@ -711,6 +711,11 @@
         await window.RemoteState.fetch();
         const fresh = window.RemoteState.getCached() || {};
         applyHeroMediaFromState(fresh);
+        let rt;
+        window.addEventListener('resize', () => {
+          clearTimeout(rt);
+          rt = setTimeout(() => applyHeroCropToPage(fresh.heroPosition, fresh.heroZoom), 150);
+        });
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
@@ -1030,13 +1035,17 @@
         const localCmtCount = (getComments()[key]||[]).length;
         const cmtCount = igCmtCount + localCmtCount;
 
-        const isVideo = item.video || item.u.includes('/video/upload/');
+        const isVideo = item.video || item.u.includes('.mp4') || item.u.includes('/video/upload/');
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
+        // R2 video thumbnail: prefer item.thumb, fall back to images bucket pattern
+        const _videoThumb = item.thumb ||
+          (item.item_id ? `https://images.yardendamri.co.il/yarden_${item.item_id}_thumb.jpg` : '');
+
         // VIDEO: use data-src + poster for lazy loading. IntersectionObserver loads src only when visible.
         const mediaEl = isVideo
-          ? `<video data-src="${cdnVideo(item.u, 360)}" poster="${cdnVideoPoster(item.u)}" muted loop playsinline preload="none"
+          ? `<video data-src="${item.u}" poster="${_videoThumb}" muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
                onerror="this.style.display='none'"></video>`
@@ -1350,6 +1359,6 @@
   } catch(e) {}
 })();
 </script>
-<script src="cookie-banner.js?v=8" defer></script>
+<script src="cookie-banner.js?v=7" defer></script>
 </body>
 </html>
