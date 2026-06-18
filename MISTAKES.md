@@ -372,3 +372,7 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 - Did not read MISTAKES.md at session start — repeated a documented mistake
 - Wasted several turns of work on the wrong branch before user corrected me
 - Rule: At the very start of every session, check `git branch --show-current`. If not `main`, switch immediately before touching any file.
+
+## 2026-06-18 — Clobbered pre-existing -temp files
+Ran a bulk find-replace across all "-temp.html" filenames without first checking if those files already existed on main with unreviewed content. 4 files (about-temp, bride-temp, gallery-temp, cookies-policy-temp) already existed and got overwritten by my script before I checked git diff. Caught it before push, reverted, confirmed those 4 were stale drafts (missing cookie-banner.js, missing consent-gated GA) not new unreviewed work, then rebuilt all 12 temp files correctly from current permanent files.
+Lesson: before writing to any "-temp.html" path, check `git status`/`git diff` first to see if it already exists with content that hasn't been reviewed yet.

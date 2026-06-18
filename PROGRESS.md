@@ -523,3 +523,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
      - Old code: `cdnVideoPoster(url)` generated Cloudinary paths that don't exist for R2 videos
      - New code: uses `item.thumb` (from gallery-data.js) or derives R2 thumb URL: `images.yardendamri.co.il/yarden_{item_id}_thumb.jpg`
      - Also fixed video detection: now checks `.mp4` in URL (R2 videos) not just `/video/upload/` (Cloudinary)
+
+## 2026-06-18 — RTL/Hebrew audit + phone number bidi fix
+- Audited all 13 preview pages: lang/dir attrs ✅, mobile menu RTL slide ✅, arrow icon direction ✅, no float usage, no broken bidi text — all correct.
+- Bug found: footer phone "054-7276716" not wrapped in dir="ltr", risk of digit/hyphen reorder in RTL context.
+- Fixed across all 12 pages showing the phone number (index, about, services, bride, bridal-guide, gallery, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy). Pushed as -temp.html files, pending review.
