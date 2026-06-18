@@ -631,6 +631,11 @@
     }
 
     /* Touch devices: gallery overlay always semi-visible */
+    /* Touch devices: gallery actions hidden — no hover exists on touch */
+    @media (hover: none) {
+      .hp-item-actions { display: none !important; }
+    }
+
     /* System reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }

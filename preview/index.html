@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=26" />
+  <link rel="stylesheet" href="styles.css?v=27" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -1066,7 +1066,7 @@
         div.setAttribute('aria-label', `תמונה ${idx+1}: ${item.a ? item.a.substring(0,60) : 'עבודת איפור'}. לחצי לצפייה מוגדלת.`);
 
         // Desktop hover
-        div.onmouseenter = () => {
+        div.onmouseenter = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1.02)';
           div.querySelector('.overlay').style.opacity = '1';
           const actEl = div.querySelector('.hp-item-actions'); if(actEl) actEl.style.opacity='1';
@@ -1074,7 +1074,7 @@
           if (imgEl) imgEl.style.transform = 'scale(1.05)';
           if (isVideo) { const v = div.querySelector('video'); if(v) v.play().catch(()=>{}); }
         };
-        div.onmouseleave = () => {
+        div.onmouseleave = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1)';
           div.querySelector('.overlay').style.opacity = '0';
           const actEl2 = div.querySelector('.hp-item-actions'); if(actEl2) actEl2.style.opacity='0';
