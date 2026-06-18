@@ -19,7 +19,7 @@ Static website for Yarden Damri, Israeli bridal & evening makeup artist. Hosted 
 | **Cloudflare DNS** | Domain routing for all subdomains | Site already on Cloudflare, unified control |
 | **GitHub Actions** | Instagram sync every 6 hours | Free CI/CD, runs `fix.js` to fetch + compress + upload new posts |
 | ~~Cloudinary~~ | ~~Old media host~~ | **CLOSED** — exceeded free plan limit June 2026 |
-| ~~ImageKit~~ | ~~Old image optimizer~~ | **SUSPENDED** — exceeded video transformation limit |
+| ~~ImageKit~~ | ~~Old image optimizer~~ | **SUSPENDED** — all ImageKit URLs (images + video) now return 403; fully retired, do not reuse |
 | ~~Render.com~~ | ~~Old Instagram proxy~~ | **REMOVED** — dead code, replaced by GitHub Actions |
 
 ---
