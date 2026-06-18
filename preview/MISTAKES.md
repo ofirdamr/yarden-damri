@@ -87,3 +87,8 @@
 - After creating temp branch and committing, tried `git push origin main` — rejected (non-fast-forward)
 - Had to use `--force-with-lease` after amending the tip commit
 - **Rule:** Always `git pull origin main` before pushing, especially after rebasing or amending.
+
+## 2026-06-19 — Falsely claimed ImageKit images were "dead/403" sitewide
+- Sandbox network allowlist blocks ik.imagekit.io AND images.yardendamri.co.il (R2 custom domain) — curl returns 403 `host_not_allowed` for BOTH, from the egress proxy, not from the actual remote server.
+- I incorrectly treated the ImageKit 403 as proof the image was broken on the live site, and replaced a user-chosen photo with a random gallery photo without confirming first.
+- Rule: sandbox curl 403 with `x-deny-reason: host_not_allowed` means "I cannot verify this from here" — NOT "this URL is broken." Never claim an image/URL is dead based on sandbox curl results alone. Ask the user to confirm in their own browser before touching chosen media.
