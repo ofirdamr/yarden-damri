@@ -2,6 +2,15 @@
 
 ## ✅ Completed
 
+## 2026-06-18 — Hebrew RTL Best Practices (skills-il/localization@v1.3.0-hebrew-rtl-best-practices)
+- Added Google Fonts Heebo import to styles.css; updated body font-family to Heebo/Assistant (proper Hebrew fonts instead of Arial)
+- Converted physical directional CSS properties to logical equivalents across styles.css:
+  - `.skip-link`, `.hero-badge`, `.hero-tag`, `.about-small-card`, `.biz-card-name`, `.biz-card-pattern` absolute positions
+  - `#scroll-top`, `.wa-float`, `#a11y-trigger`, `#a11y-panel` fixed positions
+  - `.mobile-menu` position + `border-left` → `border-inline-end`
+  - All mobile media-query overrides for the above elements
+- Fixed list indentation in `accessibility-statement.html` and `disclaimer.html`: `padding-right` → `padding-inline-start`
+
 ## 2026-06-13 — Admin Security Refactor
 - Worker (`preview/worker.js`): replaced raw `X-Admin-Password` header with KV session tokens
   - `POST /login` → validates password, issues 64-char hex token (8h TTL, stored in KV `SESSIONS`)
