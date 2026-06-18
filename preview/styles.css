@@ -440,7 +440,7 @@
     @media (min-width: 1081px) {
       /* Cream sections: bg matches body — constrain the section itself */
       #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      /* #philosophy is full-bleed (photo overlay) — no max-width, keeps edges flush with cta-strip */
       #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
       /* Warm-bg sections must stay full-width — constrain inner elements */
       .services-header,
@@ -458,14 +458,13 @@
         object-position: center center !important;
       }
 
-      /* About card: show full image without cropping */
+      /* About card: cover fills the portrait photo without letterboxing */
       .about-card {
-        aspect-ratio: auto;
-        height: 620px;
+        aspect-ratio: 2/3;
+        height: auto;
         max-height: 700px;
-        background-size: contain !important;
-        background-position: center center !important;
-        background-color: var(--cream) !important;
+        background-size: cover !important;
+        background-position: center top !important;
       }
 
       /* Philosophy section: taller on desktop to show full scene */
@@ -475,6 +474,11 @@
       #philosophy .philosophy-photo-wrap img {
         object-position: center center !important;
       }
+
+      /* Philosophy overlay text: consistent right-align (RTL natural) on desktop */
+      .philosophy-photo-wrap .section-eyebrow,
+      .philosophy-photo-wrap blockquote,
+      .philosophy-photo-wrap > div > p { text-align: right; }
 
       /* Reviews section max-width for wide screens */
       #reviews > div { max-width: 1300px; margin-left: auto; margin-right: auto; }
@@ -486,6 +490,10 @@
       .philosophy-attrs-grid > [role="listitem"] {
         border-bottom: none !important;
       }
+
+      /* Contact page: improve label and intro contrast on cream background */
+      .contact-intro { color: var(--text); }
+      .form-group label { color: #666; }
     }
 
     /* ── RESPONSIVE ── */
@@ -595,12 +603,12 @@
 
       /* ── About ── */
       #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
-      /* Landscape crop on desktop — shows full scene (makeup artist + customer) */
-      .about-card { aspect-ratio: 16/9; max-height: none; }
+      /* Portrait photo fills its column — cover + aspect-ratio 2/3 */
+      .about-card { aspect-ratio: 2/3; max-height: 700px; }
 
       /* ── Section width caps (cream sections: cap the section; warm sections: cap the inner) ── */
       #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      /* #philosophy: full-bleed — no max-width so edges align with .cta-strip above */
       #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
       .services-header,
       .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
