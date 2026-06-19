@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Test</title>
+<style>
+body { background:#111; color:#fff; font-family:sans-serif; padding:20px; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:900px; }
+.cell { aspect-ratio:1; background:#222; border-radius:12px; overflow:hidden; position:relative; }
+video { width:100%; height:100%; object-fit:cover; display:block; }
+p { margin:8px 0; font-size:14px; }
+</style>
+</head>
+<body>
+<h2>Video Autoplay Test</h2>
+<p>If you see moving images below — videos work. If you see black squares — autoplay is blocked.</p>
+
+<div class="grid">
+  <div class="cell">
+    <video src="https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4"
+      autoplay muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="cell">
+    <video src="https://videos-new.yardendamri.co.il/yarden_18124163572566762.mp4"
+      autoplay muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="cell">
+    <video src="https://videos-new.yardendamri.co.il/yarden_18007706085553597.mp4"
+      autoplay muted loop playsinline preload="auto"></video>
+  </div>
+</div>
+
+<br>
+<p>Click a video to hear audio:</p>
+<video src="https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4"
+  controls style="max-width:400px;border-radius:12px;"></video>
+
+<script>
+document.querySelectorAll('video[autoplay]').forEach(v => {
+  v.play().then(() => {
+    console.log('playing:', v.src.split('/').pop());
+  }).catch(e => {
+    console.warn('autoplay blocked:', v.src.split('/').pop(), e.message);
+    // Show poster text on failure
+    const c = v.parentElement;
+    const msg = document.createElement('div');
+    msg.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;text-align:center;padding:8px;';
+    msg.textContent = 'Autoplay blocked — tap to play';
+    c.appendChild(msg);
+    v.addEventListener('click', () => v.play());
+  });
+});
+</script>
+</body>
+</html>
