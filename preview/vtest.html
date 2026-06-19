@@ -7,14 +7,15 @@
 <style>
 body { background:#111; color:#fff; font-family:sans-serif; padding:20px; }
 .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:900px; }
-.cell { aspect-ratio:1; background:#222; border-radius:12px; overflow:hidden; position:relative; }
+.cell { aspect-ratio:1; background:#222; border-radius:12px; overflow:hidden; }
 video { width:100%; height:100%; object-fit:cover; display:block; }
-p { margin:8px 0; font-size:14px; }
+h2 { margin-bottom:8px; }
+p { margin:8px 0 20px; font-size:14px; color:#aaa; }
 </style>
 </head>
 <body>
 <h2>Video Autoplay Test</h2>
-<p>If you see moving images below — videos work. If you see black squares — autoplay is blocked.</p>
+<p>שלושה סרטונים צריכים לזוז אוטומטית — ללא לחיצה. אם זה עובד, הסרטונים בגלריה הראשית יעבדו גם כן.</p>
 
 <div class="grid">
   <div class="cell">
@@ -26,29 +27,25 @@ p { margin:8px 0; font-size:14px; }
       autoplay muted loop playsinline preload="auto"></video>
   </div>
   <div class="cell">
-    <video src="https://videos-new.yardendamri.co.il/yarden_18007706085553597.mp4"
+    <video src="https://videos-new.yardendamri.co.il/yarden_18082854338447188.mp4"
       autoplay muted loop playsinline preload="auto"></video>
   </div>
 </div>
 
-<br>
-<p>Click a video to hear audio:</p>
+<br><br>
+<p>לחיצה על סרטון + שמע (לחצי Play):</p>
 <video src="https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4"
-  controls style="max-width:400px;border-radius:12px;"></video>
+  controls preload="metadata" style="max-width:400px;border-radius:12px;display:block;"></video>
 
 <script>
 document.querySelectorAll('video[autoplay]').forEach(v => {
-  v.play().then(() => {
-    console.log('playing:', v.src.split('/').pop());
-  }).catch(e => {
-    console.warn('autoplay blocked:', v.src.split('/').pop(), e.message);
-    // Show poster text on failure
+  v.play().catch(e => {
     const c = v.parentElement;
-    const msg = document.createElement('div');
-    msg.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;text-align:center;padding:8px;';
-    msg.textContent = 'Autoplay blocked — tap to play';
-    c.appendChild(msg);
-    v.addEventListener('click', () => v.play());
+    c.style.display = 'flex';
+    c.style.alignItems = 'center';
+    c.style.justifyContent = 'center';
+    c.innerHTML = '<span style="color:#aaa;font-size:13px;padding:10px;text-align:center;">Autoplay blocked — tap to play</span>';
+    c.onclick = () => { c.innerHTML = ''; const nv = document.createElement('video'); nv.src = v.src; nv.autoplay = true; nv.muted = true; nv.loop = true; nv.playsInline = true; nv.style.cssText='width:100%;height:100%;object-fit:cover;'; c.appendChild(nv); nv.play(); };
   });
 });
 </script>

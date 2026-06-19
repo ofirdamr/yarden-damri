@@ -428,7 +428,7 @@
       </div>
       <div id="gallery-filters" class="gallery-filters" role="group" aria-label="סינון גלריה"></div>
       <div id="ig-gallery" class="ig-gallery-grid" role="list" aria-label="גלריית תמונות"></div>
-      <!-- build:20260619-n -->
+      <!-- build:20260619-o -->
       <div style="text-align:center;margin-top:50px;" id="pagination" role="navigation" aria-label="עמודים"></div>
 
       <div class="share-strip" style="margin-top:48px;border-top:1px solid rgba(196,128,90,.12);padding-top:40px;">
@@ -818,17 +818,19 @@
         let vid = lb.querySelector('video');
         if (!vid) {
           vid = document.createElement('video');
-          vid.preload = 'metadata';
           vid.style.cssText = 'max-width:88vw;max-height:80vh;border-radius:12px;';
           vid.controls = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
         }
+        vid.muted = false;
+        vid.preload = 'auto';
         vid.src = url;
         vid.style.display = 'block';
-        vid.play().catch(()=>{});
+        vid.load();
+        vid.addEventListener('loadedmetadata', () => { vid.play().catch(()=>{}); }, { once: true });
       } else {
         let vid = lb.querySelector('video');
-        if (vid) { vid.pause(); vid.style.display = 'none'; }
+        if (vid) { vid.pause(); vid.src = ''; vid.style.display = 'none'; }
         const img = lb.querySelector('img');
         img.style.display = 'block';
         img.src = cdnUrl(url, 1200);
