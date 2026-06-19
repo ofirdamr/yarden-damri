@@ -133,7 +133,7 @@
       min-height: 600px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: flex-end;
       overflow: hidden;
       padding: 0;
     }
@@ -557,7 +557,7 @@
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
       /* ── Hero ── */
-      #hero { height: 100vh; min-height: 600px; }
+      #hero { height: 100vh; min-height: 600px; justify-content: flex-start; align-items: center; }
       #hero #heroVideo, #hero #heroImage { object-fit: cover !important; }
       .hero-content { max-width: 540px; padding: 0 50px; }
       .hero-btns { flex-wrap: nowrap; }

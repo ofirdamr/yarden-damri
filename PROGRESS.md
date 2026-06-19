@@ -524,6 +524,10 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
      - New code: uses `item.thumb` (from gallery-data.js) or derives R2 thumb URL: `images.yardendamri.co.il/yarden_{item_id}_thumb.jpg`
      - Also fixed video detection: now checks `.mp4` in URL (R2 videos) not just `/video/upload/` (Cloudinary)
 
+## 2026-06-19 — Desktop layout fixes: hero justify-content + philosophy photo
+- Fixed `#hero justify-content` in base CSS: reverted to `flex-end` (restores mobile layout), added `flex-start` only in desktop `@media (min-width: 1081px)` block — text on right in RTL on desktop ✓
+- Reprocessed philosophy photo: re-downloaded original (1600×1067), applied resize + gentle UnsharpMask only (no brightness/contrast boost), re-uploaded 119KB to R2 `aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg` — less blown-out, natural B&W rendering
+
 ## 2026-06-18 — RTL/Hebrew audit + phone number bidi fix
 - Audited all 13 preview pages: lang/dir attrs ✅, mobile menu RTL slide ✅, arrow icon direction ✅, no float usage, no broken bidi text — all correct.
 - Bug found: footer phone "054-7276716" not wrapped in dir="ltr", risk of digit/hyphen reorder in RTL context.
