@@ -556,6 +556,10 @@
 
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
+      /* ── Nav: logo LEFT, links RIGHT (in RTL higher order = further left) ── */
+      .nav-logo { order: 2; }
+      .nav-links { order: 1; }
+
       /* ── Hero ── */
       #hero { height: 100vh; min-height: 600px; justify-content: flex-start; align-items: center; }
       #hero #heroVideo, #hero #heroImage { object-fit: cover !important; }
@@ -569,7 +573,7 @@
 
       /* ── About (desktop RTL: image fills left column, text on right) ── */
       #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
-      #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px) clamp(60px,10vw,140px) 0; max-width: none; align-items: stretch; }
+      #about { grid-template-columns: 1fr 1.4fr; padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px) clamp(60px,10vw,140px) 0; max-width: none; align-items: stretch; }
       .about-visual { order: 2; align-self: stretch; }
       .about-card { height: 100%; min-height: 580px; aspect-ratio: unset; max-height: none; border-radius: 0; }
       .about-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; filter: brightness(0.97) saturate(0.88) sepia(0.08); }
@@ -577,7 +581,9 @@
       #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
       .services-header,
       .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      /* ── Area: text RIGHT, map LEFT in RTL ── */
       #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+      .area-visual { order: 2; }
 
       /* Philosophy overlay text: consistent right-align (RTL natural) on desktop */
       .philosophy-photo-wrap .section-eyebrow,

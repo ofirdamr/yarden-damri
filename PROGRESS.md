@@ -524,6 +524,12 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
      - New code: uses `item.thumb` (from gallery-data.js) or derives R2 thumb URL: `images.yardendamri.co.il/yarden_{item_id}_thumb.jpg`
      - Also fixed video detection: now checks `.mp4` in URL (R2 videos) not just `/video/upload/` (Cloudinary)
 
+## 2026-06-19 — Desktop RTL layout: nav, about, area/map
+- Nav desktop: logo moved to LEFT, nav-links to RIGHT using CSS order (order:2 / order:1 in desktop query only, mobile untouched)
+- About: added grid-template-columns: 1fr 1.4fr on desktop — image column gets 58% width (was 50/50)
+- Area/map: added order:2 to .area-visual on desktop — map moves to LEFT, text stays RIGHT (RTL natural)
+- Cache-busted styles-temp.css link: ?v=20260619b
+
 ## 2026-06-19 — Desktop layout fixes: hero justify-content + philosophy photo
 - Fixed `#hero justify-content` in base CSS: reverted to `flex-end` (restores mobile layout), added `flex-start` only in desktop `@media (min-width: 1081px)` block — text on right in RTL on desktop ✓
 - Reprocessed philosophy photo: re-downloaded original (1600×1067), applied resize + gentle UnsharpMask only (no brightness/contrast boost), re-uploaded 119KB to R2 `aa6145a7-9efc-4bde-95ad-245544ef3bfc.jpeg` — less blown-out, natural B&W rendering
