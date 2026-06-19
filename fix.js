@@ -215,6 +215,8 @@ function safeWrite(filePath, data) {
           const entry = { u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: thumbUrl };
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Video OK: yarden_${item.id}.mp4${thumbUrl ? ' +thumb' : ''}`);
+        } else {
+          console.error(`Video R2 failed (${r2Result.status}): ${r2Result.body.substring(0, 300)}`);
         }
       } catch(e) { console.error(`Video error ${item.id}:`, e.message); }
     } else {
@@ -227,6 +229,8 @@ function safeWrite(filePath, data) {
           const entry = { u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Image OK: yarden_${item.id}.webp`);
+        } else {
+          console.error(`Image R2 failed (${r2Result.status}): ${r2Result.body.substring(0, 300)}`);
         }
       } catch(e) { console.error(`Image error ${item.id}:`, e.message); }
     }
