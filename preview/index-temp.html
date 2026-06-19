@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=20260619g" />
+  <link rel="stylesheet" href="styles-temp.css?v=20260619h" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -1038,12 +1038,11 @@
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
-        // VIDEO: load src directly so first frame is visible immediately (no lazy-src trick)
         const mediaEl = isVideo
-          ? `<video src="${item.u}" muted loop playsinline preload="metadata"
+          ? `<video data-src="${item.u}" muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
-               style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
-               onerror="this.style.display='none'"></video>`
+               style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"></video>
+             <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.55);color:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;pointer-events:none;backdrop-filter:blur(4px);" aria-hidden="true">▶</span>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
@@ -1127,6 +1126,10 @@
       entries.forEach(e => {
         const vid = e.target;
         if (e.isIntersecting) {
+          if (vid.dataset.src && !vid.getAttribute('src')) {
+            vid.src = vid.dataset.src;
+            vid.load();
+          }
           vid.play().catch(()=>{});
         } else {
           vid.pause();
