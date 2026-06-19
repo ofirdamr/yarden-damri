@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=20260619k" />
+  <link rel="stylesheet" href="styles-temp.css?v=20260619m" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -428,7 +428,7 @@
       </div>
       <div id="gallery-filters" class="gallery-filters" role="group" aria-label="סינון גלריה"></div>
       <div id="ig-gallery" class="ig-gallery-grid" role="list" aria-label="גלריית תמונות"></div>
-      <!-- build:20260619-k -->
+      <!-- build:20260619-m -->
       <div style="text-align:center;margin-top:50px;" id="pagination" role="navigation" aria-label="עמודים"></div>
 
       <div class="share-strip" style="margin-top:48px;border-top:1px solid rgba(196,128,90,.12);padding-top:40px;">
@@ -1050,10 +1050,9 @@
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
         const mediaEl = isVideo
-          ? `<video muted autoplay loop playsinline preload="metadata"
+          ? `<video data-src="${item.u}" muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
-               style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1210;${_rotStyle}"
-               data-vsrc="${item.u}"><source src="${item.u}" type="video/mp4"></video>`
+               style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
@@ -1135,10 +1134,18 @@
     // Lazy-load + auto-play videos only when in viewport
     const videoObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) e.target.play().catch(()=>{});
-        else e.target.pause();
+        const vid = e.target;
+        if (e.isIntersecting) {
+          if (vid.dataset.src && !vid.src) {
+            vid.src = vid.dataset.src;
+            vid.load();
+          }
+          vid.play().catch(()=>{});
+        } else {
+          vid.pause();
+        }
       });
-    }, { threshold: 0.1, rootMargin: '200px' });
+    }, { threshold: 0.2, rootMargin: '100px' });
 
     // Apply to gallery videos when rendered (called from renderPage)
     function observeGalleryVideos() {
