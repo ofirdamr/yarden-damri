@@ -92,3 +92,11 @@
 - Sandbox network allowlist blocks ik.imagekit.io AND images.yardendamri.co.il (R2 custom domain) — curl returns 403 `host_not_allowed` for BOTH, from the egress proxy, not from the actual remote server.
 - I incorrectly treated the ImageKit 403 as proof the image was broken on the live site, and replaced a user-chosen photo with a random gallery photo without confirming first.
 - Rule: sandbox curl 403 with `x-deny-reason: host_not_allowed` means "I cannot verify this from here" — NOT "this URL is broken." Never claim an image/URL is dead based on sandbox curl results alone. Ask the user to confirm in their own browser before touching chosen media.
+
+## 2026-06-19 — Gallery video cells were invisible (multiple wrong fixes)
+- Root cause: gallery cell container had NO background-color → transparent video cells (with data-src/no-src) were invisible against the cream page background. User saw "only images, no videos at all."
+- Wrong fix 1: switched from data-src to src directly — triggered onerror → videos still hidden.
+- Wrong fix 2: added play badge — user rejected (wanted pure autoplay, no badge).
+- Wrong fix 3: switched to `<source>` inside video + changed data-src to data-vsrc — broke IntersectionObserver condition (`vid.dataset.src && !vid.src` checks `data-src` not `data-vsrc`).
+- Correct fix: restore EXACT pattern from working root site: data-src + preload=none + IntersectionObserver that sets vid.src=vid.dataset.src on viewport entry + background:#1a1210 on container.
+- Rule: before inventing a new approach, read the working root site code and replicate it exactly. Do not switch approaches without diagnosing WHY the previous one failed.
