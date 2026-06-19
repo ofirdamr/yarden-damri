@@ -199,22 +199,22 @@ function safeWrite(filePath, data) {
         fs.writeFileSync(tmpIn, buffer);
         try { await compressVideo(tmpIn, tmpOut); } catch(fe) { fs.copyFileSync(tmpIn, tmpOut); }
         const compressed = fs.readFileSync(tmpOut);
+        // Extract thumbnail before deleting tmpOut
+        let thumbUrl = "";
+        try {
+          const thumbOut = `/tmp/thumb_${item.id}.jpg`;
+          execSync(`ffmpeg -y -i "${tmpOut}" -vf "select=eq(n\\,0)" -vframes 1 "${thumbOut}"`, { stdio: "pipe", timeout: 30000 });
+          const thumbBuf = fs.readFileSync(thumbOut);
+          fs.unlinkSync(thumbOut);
+          const tr = await uploadToR2(R2_IMAGES, thumbBuf, `yarden_${item.id}_thumb.jpg`, "image/jpeg");
+          if (tr.status === 200) thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`;
+        } catch(te) { console.log(`Thumb failed: ${te.message}`); }
         try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut); } catch(e) {}
         const r2Result = await uploadToR2(R2_VIDEOS, compressed, `yarden_${item.id}.mp4`, "video/mp4");
         if (r2Result.status === 200) {
-          // Extract thumbnail frame and upload to images bucket
-          let thumbUrl = "";
-          try {
-            const thumbOut = `/tmp/thumb_${item.id}.jpg`;
-            execSync(`ffmpeg -y -i "/tmp/vout_${item.id}.mp4" -vf "select=eq(n\,0)" -vframes 1 "${thumbOut}"`, { stdio: "pipe", timeout: 30000 });
-            const thumbBuf = fs.readFileSync(thumbOut);
-            fs.unlinkSync(thumbOut);
-            const tr = await uploadToR2(R2_IMAGES, thumbBuf, `yarden_${item.id}_thumb.jpg`, "image/jpeg");
-            if (tr.status === 200) thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`;
-          } catch(te) {}
           const entry = { u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: thumbUrl };
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
-          console.log(`Video OK: yarden_${item.id}.mp4`);
+          console.log(`Video OK: yarden_${item.id}.mp4${thumbUrl ? ' +thumb' : ''}`);
         }
       } catch(e) { console.error(`Video error ${item.id}:`, e.message); }
     } else {
