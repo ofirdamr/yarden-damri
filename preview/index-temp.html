@@ -1146,8 +1146,11 @@
     function observeGalleryVideos() {
       document.querySelectorAll('.ig-gallery-grid video').forEach(v => videoObserver.observe(v));
     }
-    // Patch renderPage to call observeGalleryVideos
-    const _origRenderPage = renderPage;
+    // Re-observe gallery videos whenever gallery content changes
+    const _galleryEl = document.getElementById('ig-gallery');
+    if (_galleryEl) {
+      new MutationObserver(() => setTimeout(observeGalleryVideos, 100)).observe(_galleryEl, { childList: true, subtree: true });
+    }
 
     // ── REVIEWS ───────────────────────────────────
     function loadGoogleReviews() { /* strip reserved for future Google Places API integration */ }
@@ -1233,8 +1236,6 @@
       observeGalleryVideos();
     });
 
-    // Re-observe videos after each gallery render
-    const origRenderPage = window.renderPage;
     setTimeout(observeGalleryVideos, 1000);
 
     // ── IS 5568 ACCESSIBILITY WIDGET ─────────────
