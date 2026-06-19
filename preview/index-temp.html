@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=20260619f" />
+  <link rel="stylesheet" href="styles-temp.css?v=20260619g" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -1053,6 +1053,7 @@
             <p style="position:absolute;bottom:40px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>
           <div class="hp-item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;">
+            ${isVideo ? `<button onclick="event.stopPropagation();event.preventDefault();(function(btn){const v=btn.closest('[role=listitem]').querySelector('video');if(!v)return;v.muted=!v.muted;btn.textContent=v.muted?'🔇':'🔊';})(this)" aria-label="השתק/הפעל קול" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">🔇</button>` : ''}
             <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">❤️ ${totalLikes}</button>
             <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">💬 ${cmtCount}</button>
           </div>`;
