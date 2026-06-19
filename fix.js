@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const { execSync } = require("child_process");
 
 const TARGET_PREVIEW = process.argv.includes("--target=preview");
+const FIX_AUDIO = process.argv.includes("--fix-audio"); // one-time: re-upload all videos incl. hidden ones to restore audio
 const GALLERY_FILE = TARGET_PREVIEW ? "preview/gallery-data.js" : "gallery-data.js";
 console.log("Target:", GALLERY_FILE);
 
@@ -172,11 +173,11 @@ function safeWrite(filePath, data) {
   for (const item of rawPosts) {
     const isVideo = item.media_type === "VIDEO";
 
-    if (hiddenIds.has(item.id) || (existingById[item.id] && hiddenUrls.has(existingById[item.id].u))) {
-      process.stdout.write("H"); continue;
-    }
+    const isHidden = hiddenIds.has(item.id) || (existingById[item.id] && hiddenUrls.has(existingById[item.id].u));
+    if (isHidden && !FIX_AUDIO) { process.stdout.write("H"); continue; }
+    if (isHidden && !isVideo)   { process.stdout.write("H"); continue; } // --fix-audio: only re-upload videos
 
-    if (existingById[item.id]) {
+    if (!FIX_AUDIO && existingById[item.id]) {
       const e = existingById[item.id];
       const isNewR2 = (isVideo && e.u && e.u.includes("videos-new.yardendamri")) ||
                       (!isVideo && e.u && e.u.includes("images.yardendamri"));
