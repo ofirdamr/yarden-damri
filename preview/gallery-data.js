@@ -1,50 +1,10 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4",
-    "a": "איפור עדין וסופר טבעי \nעדן כמה שאת יפה \n@yarden_damri_makeup \n@ofek_hatuel @ofek",
-    "item_id": "17972187162071494",
-    "post_id": "17972187162071494",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18095410015962853.webp",
     "a": "זה אחד הלוקים האהובים עליי לאחרונה \nגל את מהממת! \n@galifergan \n@korenmalihe",
     "item_id": "18095410015962853",
     "post_id": "18399908116155226"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18124163572566762.mp4",
-    "a": "זה אחד הלוקים האהובים עליי לאחרונה \nגל את מהממת! \n@galifergan \n@korenmalihe",
-    "item_id": "18124163572566762",
-    "video": true,
-    "thumb": "",
-    "post_id": "18399908116155226"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17881563132435942.mp4",
-    "a": "רוצה להרגיש הכי יפה שלך ביום החתונה, בלי להרגיש מאופרת מדי? ✨\nאיפור נקי, אלגנטי",
-    "item_id": "17881563132435942",
-    "video": true,
-    "thumb": "",
-    "post_id": "17881563132435942"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18082854338447188.mp4",
-    "a": "יש משהו בבוקר של כלה שאי אפשר להסביר. מתחילים רגיל לגמרי, ופתאום קולטים שהיום הי",
-    "item_id": "18082854338447188",
-    "video": true,
-    "thumb": "",
-    "post_id": "18082854338447188"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18103958203807211.mp4",
-    "a": "יש משהו יותר מספק מלראות לוק נבנה שלב אחרי שלב? \nנועה את משהו מיוחד \n@noa.naimy",
-    "item_id": "18103958203807211",
-    "video": true,
-    "thumb": "",
-    "post_id": "18103958203807211"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18119542276602555.webp",
@@ -119,22 +79,6 @@ const GALLERY_IMAGES = [
     "post_id": "18082350416408746"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18321495295280260.mp4",
-    "a": "⁨\tיש משהו בזוהר על עור כהה שפשוט אי אפשר להסביר ✨\nכלות שמתחברות לסגנון טבעי, נקי",
-    "item_id": "18321495295280260",
-    "video": true,
-    "thumb": "",
-    "post_id": "18321495295280260"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18094353658922515.mp4",
-    "a": "לכלות שמחפשות מראה מדויק, זוהר ולא מתאמץ \nבדיקת זמינות ושריון תאריך — בהודעה פרט",
-    "item_id": "18094353658922515",
-    "video": true,
-    "thumb": "",
-    "post_id": "18094353658922515"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18113142562769799.webp",
     "a": "אם את מחפשת איפור כלתי שיישאר מושלם כל היום – זה בדיוק זה.\nעמידות, דיוק, וגימור",
     "item_id": "18113142562769799",
@@ -189,14 +133,6 @@ const GALLERY_IMAGES = [
     "post_id": "17988685346980055"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17923237620299374.mp4",
-    "a": "לוק כלה נקי, מדויק וזוהר ✨ \n\nאיפור שמדגיש את היופי שלך — בלי להעמיס \nומחזיק איתך",
-    "item_id": "17923237620299374",
-    "video": true,
-    "thumb": "",
-    "post_id": "17988685346980055"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18083543753077608.webp",
     "a": "מראה כלתי קלאסי, נקי ועל-זמני ✨\nאיפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עד",
     "item_id": "18083543753077608",
@@ -215,30 +151,6 @@ const GALLERY_IMAGES = [
     "post_id": "17921662467293318"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18080335340527795.mp4",
-    "a": "מראה כלתי קלאסי, נקי ועל-זמני ✨\nאיפור שמדגיש את היופי הטבעי ומשאיר תחושת זוהר עד",
-    "item_id": "18080335340527795",
-    "video": true,
-    "thumb": "",
-    "post_id": "17921662467293318"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18007005827712973.mp4",
-    "a": "האיפור הזה? \nנראה טבעי… אבל כל פרט מחושב עד הסוף ✨\n\nעור זוהר \nעיניים מודגשות בעד",
-    "item_id": "18007005827712973",
-    "video": true,
-    "thumb": "",
-    "post_id": "18007005827712973"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18081110306628918.mp4",
-    "a": "איפור כלתי יוקרתי מתחיל בעור נקי, זוהר וטבעי ✨ \n\nאני מאמינה שאיפור כלה צריך להדג",
-    "item_id": "18081110306628918",
-    "video": true,
-    "thumb": "",
-    "post_id": "18081110306628918"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18073663340406769.webp",
     "a": "⁨\tלפני שנסעתי 3 \nמעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה ש",
     "item_id": "18073663340406769",
@@ -255,14 +167,6 @@ const GALLERY_IMAGES = [
     "a": "⁨\tלפני שנסעתי 3 \nמעניין עוד כמה פוסטים יהיו מלפני הנסיעה שלי, אין לכם מושג כמה ש",
     "item_id": "18070209767647052",
     "post_id": "18113103523706881"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17951003097110919.mp4",
-    "a": "שלייי אמנם אני רחוקה בתאילנד אבל בטוחה שאת מועמדת ראויה! \nוכמה שאת יפההההה זה לא",
-    "item_id": "17951003097110919",
-    "video": true,
-    "thumb": "",
-    "post_id": "17951003097110919"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18099599461749203.webp",
@@ -287,22 +191,6 @@ const GALLERY_IMAGES = [
     "a": "לפני שטסתי 2 \nהייתי שלושה ימים עם האישה הכי מיוחדת ומצחיקה שיש \nכיף ענקי ואני מת",
     "item_id": "18119257351554372",
     "post_id": "18055038962705833"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18094095407071118.mp4",
-    "a": "לפני שנסעתי יצא לי לאפר את לירון רביבו המתוקה!!! \nכמה שאת אנרגטית ומיוחדת, ועם א",
-    "item_id": "18094095407071118",
-    "video": true,
-    "thumb": "",
-    "post_id": "18094095407071118"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17962027107029610.mp4",
-    "a": "DORIN \n@dorinkraif \nMAU @yarden_damri_makeup \n@korenmalihe",
-    "item_id": "17962027107029610",
-    "video": true,
-    "thumb": "",
-    "post_id": "17962027107029610"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17852854302593480.webp",
@@ -353,14 +241,6 @@ const GALLERY_IMAGES = [
     "post_id": "18548497549041411"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18041005787725479.mp4",
-    "a": "⁨\tLIOR ✨✨\n@lior_petito@korenmalihehe \n#מאפרתבאילת #איפורכלה #makeuptutorial #פור",
-    "item_id": "18041005787725479",
-    "video": true,
-    "thumb": "",
-    "post_id": "18041005787725479"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18057020018367161.webp",
     "a": "LIOR ✨✨\nMUA @yarden_damri_makeup \n@korenmalihe \n@lior_petito",
     "item_id": "18057020018367161",
@@ -391,14 +271,6 @@ const GALLERY_IMAGES = [
     "post_id": "18077154716604888"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18072479633109405.mp4",
-    "a": "ליאל את פשוט משהו מיוחד! \nאישה עם אנרגיה מדהימה שאי אפשר להסביר במילים ✨\nזכיתי ל",
-    "item_id": "18072479633109405",
-    "video": true,
-    "thumb": "",
-    "post_id": "18072479633109405"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18208481125316258.webp",
     "a": "איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.\nושיער שאי אפשר להישאר אד",
     "item_id": "18208481125316258",
@@ -415,14 +287,6 @@ const GALLERY_IMAGES = [
     "a": "איפור שהוא מחווה לתקופות אחרות, לאיפור שהוא סיפור בכלל.\nושיער שאי אפשר להישאר אד",
     "item_id": "18070904519129535",
     "post_id": "17976837860985622"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18007958420674760.mp4",
-    "a": "אם יש לך עיניים בהירות — זה הטרנד שאת חייבת לראות!!\nקארן בתהליך איפור מהיר, שימו",
-    "item_id": "18007958420674760",
-    "video": true,
-    "thumb": "",
-    "post_id": "18007958420674760"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18107937169595688.webp",
@@ -455,14 +319,6 @@ const GALLERY_IMAGES = [
     "post_id": "18047006876704042"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18052203428680514.mp4",
-    "a": "כמה שזה עוצמתי אודם אדום! \nואיזה כיף זה שלקוחה מבקשת ממני את זה, כי בנינו נמאס ל",
-    "item_id": "18052203428680514",
-    "video": true,
-    "thumb": "",
-    "post_id": "18047006876704042"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18192241663338433.webp",
     "a": "כמה שזה כיף לצאת מאיזור הנוחות.\nללבוש אודם אדום, מבריק בעיניים ושיער אסוף ומוקפד",
     "item_id": "18192241663338433",
@@ -487,25 +343,9 @@ const GALLERY_IMAGES = [
     "post_id": "18397725892132248"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18112186504545212.mp4",
-    "a": "קבלו את יסמין מאלדין גרסת המקור \nלכבוד השנה החדשה \nHappy new year 2️⃣0️⃣2️⃣6️⃣\n@",
-    "item_id": "18112186504545212",
-    "video": true,
-    "thumb": "",
-    "post_id": "18112186504545212"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18101284834831611.webp",
     "a": "RON \nMAU @yarden_damri_makeup \nHair @korenmalihe \n@ron_kotek \n\n#איפורשיער #מאפרת",
     "item_id": "18101284834831611",
-    "post_id": "18112479550611613"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18097031560849264.mp4",
-    "a": "RON \nMAU @yarden_damri_makeup \nHair @korenmalihe \n@ron_kotek \n\n#איפורשיער #מאפרת",
-    "item_id": "18097031560849264",
-    "video": true,
-    "thumb": "",
     "post_id": "18112479550611613"
   },
   {
@@ -521,25 +361,9 @@ const GALLERY_IMAGES = [
     "post_id": "18112479550611613"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18091433518748989.mp4",
-    "a": "⁨\tMILANA \nכבר אמרתי שהלקוחות שלי הכי שוות⁉️\n#מאפרתבאילת #מאפרתמקצועית #איפורעדין",
-    "item_id": "18091433518748989",
-    "video": true,
-    "thumb": "",
-    "post_id": "18091433518748989"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18077253407209474.webp",
     "a": "@__galor איזה יפה את!!!!!\nMUA @yarden_damri_makeup \n\n#מאפרתבאילת #איפורמקצועי",
     "item_id": "18077253407209474",
-    "post_id": "18547912003014324"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18089170315804159.mp4",
-    "a": "@__galor איזה יפה את!!!!!\nMUA @yarden_damri_makeup \n\n#מאפרתבאילת #איפורמקצועי",
-    "item_id": "18089170315804159",
-    "video": true,
-    "thumb": "",
     "post_id": "18547912003014324"
   },
   {
@@ -573,50 +397,10 @@ const GALLERY_IMAGES = [
     "post_id": "17842918917648713"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18415963129136635.mp4",
-    "a": "הלקוחות שלנו הכי יפות שיש !! \n@korenmalihe \nMUA @yarden_damri_makeup",
-    "item_id": "18415963129136635",
-    "video": true,
-    "thumb": "",
-    "post_id": "17842918917648713"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17931130230119842.mp4",
-    "a": "TSLIL ✨✨\n#stepbystep \n@yarden_damri_makeup \n@korenmalihe\n@tslilbass",
-    "item_id": "17931130230119842",
-    "video": true,
-    "thumb": "",
-    "post_id": "17931130230119842"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18065253887174502.mp4",
-    "a": "MAU @yarden_damri_makeup",
-    "item_id": "18065253887174502",
-    "video": true,
-    "thumb": "",
-    "post_id": "18065253887174502"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18080499317171461.webp",
     "a": "⁨\t⁨\tלאחרונה אני מאוהבת באיפור על גווני הוורוד \nזה משהו שבא לי עם החורף \nמה אתן ח",
     "item_id": "18080499317171461",
     "post_id": "18167753632388448"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17863480359456013.mp4",
-    "a": "⁨\t⁨\tלאחרונה אני מאוהבת באיפור על גווני הוורוד \nזה משהו שבא לי עם החורף \nמה אתן ח",
-    "item_id": "17863480359456013",
-    "video": true,
-    "thumb": "",
-    "post_id": "18167753632388448"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18352618189204100.mp4",
-    "a": "⁨\tשלי את כל כך מיוחדת!\nזכיתי לאפר אותך ונהנתי מכל רגע \nפצצת אנרגיה!!! \n@shelly_.",
-    "item_id": "18352618189204100",
-    "video": true,
-    "thumb": "",
-    "post_id": "18352618189204100"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18084391139042604.webp",
@@ -649,14 +433,6 @@ const GALLERY_IMAGES = [
     "post_id": "18075476966028948"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18083562146044840.mp4",
-    "a": "Emma \nMUA @yarden_damri_makeup \n\n#מאפרתמקצועית #מאפרתבאילת #איפורעדין",
-    "item_id": "18083562146044840",
-    "video": true,
-    "thumb": "",
-    "post_id": "18083562146044840"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18077899397239126.webp",
     "a": "MAY ♀️\n\n@yarden_damri_makeup \n@korenmalihe \n@maychuli",
     "item_id": "18077899397239126",
@@ -679,30 +455,6 @@ const GALLERY_IMAGES = [
     "a": "לא רגועה ממנה!! \n@chaya_hartung \n@korenmalihe \n@yarden_damri_makeup",
     "item_id": "17973310709952270",
     "post_id": "18231392269306846"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18050686262362707.mp4",
-    "a": "יעל שלביה האילתית  התיישבה אצלי במושב הניתוחים \nנכון שהיא דומה לה!! \nתכירו את גל",
-    "item_id": "18050686262362707",
-    "video": true,
-    "thumb": "",
-    "post_id": "18050686262362707"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17979040103924723.mp4",
-    "a": "מאיה בצלאל עסיס איזה צחוקים איתך! \nמתי את באה שוב!? \n@mayabetzalel \n@korenmalihe",
-    "item_id": "17979040103924723",
-    "video": true,
-    "thumb": "",
-    "post_id": "17979040103924723"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18050220944354024.mp4",
-    "a": "BAR \n@yarden_damri_makeup \n@korenmalihe \n@barliani\n@lynrechnitz_bridal",
-    "item_id": "18050220944354024",
-    "video": true,
-    "thumb": "",
-    "post_id": "18050220944354024"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18163505596390829.webp",
@@ -747,25 +499,9 @@ const GALLERY_IMAGES = [
     "post_id": "17880029799307061"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18111317398576874.mp4",
-    "a": "״אני הכי יפה שהייתי בחיים״ - איזה זכות זו לתת לאישה להרגיש ככה . #זכיתי \nאני לגמ",
-    "item_id": "18111317398576874",
-    "video": true,
-    "thumb": "",
-    "post_id": "18111317398576874"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18066760163370790.webp",
     "a": "LIAN \n\n@yarden_damri_makeup \n@bartzanani_hair \n@lianyoseff \n@yardenderhi @byarde",
     "item_id": "18066760163370790",
-    "post_id": "17991573404714514"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18044662028688001.mp4",
-    "a": "LIAN \n\n@yarden_damri_makeup \n@bartzanani_hair \n@lianyoseff \n@yardenderhi @byarde",
-    "item_id": "18044662028688001",
-    "video": true,
-    "thumb": "",
     "post_id": "17991573404714514"
   },
   {
@@ -811,22 +547,6 @@ const GALLERY_IMAGES = [
     "post_id": "17913227031212383"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17887425150245663.mp4",
-    "a": "Raz \n@raz_turgeman_ \n\n#מאפרתבאילת #מאפרתמקצועית #איפור #איפורטבעי",
-    "item_id": "17887425150245663",
-    "video": true,
-    "thumb": "",
-    "post_id": "17913227031212383"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17995033085726232.mp4",
-    "a": "בהצגה של יב׳ז כבר הייתם? הכי יפה שיש. ובעיקר מבפנים! \n  @yaelbarzohar @korenmali",
-    "item_id": "17995033085726232",
-    "video": true,
-    "thumb": "",
-    "post_id": "17995033085726232"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18098408797653834.webp",
     "a": "כמה קסם ביום אחד ✨ הכלה המהממת ענת שזוהרת ביופי טבעי ועדין, בדיוק כמו שחלמה. תוד",
     "item_id": "18098408797653834",
@@ -845,41 +565,9 @@ const GALLERY_IMAGES = [
     "post_id": "18106159150580442"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18105527473523097.mp4",
-    "a": "טיטי את משהו מיוחד!! \n@titiayenew \n@korenmalihe \n@bebyshufersal \n\n#איפורושיער #א",
-    "item_id": "18105527473523097",
-    "video": true,
-    "thumb": "",
-    "post_id": "18105527473523097"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18125459323488028.mp4",
-    "a": "⁨\tמי נראת ככה?! \nוהריסים זה אמלההה ואבאלה! \n\nכולם שואלים אותי על הריסים אז מתייג",
-    "item_id": "18125459323488028",
-    "video": true,
-    "thumb": "",
-    "post_id": "18125459323488028"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18104486080523110.webp",
     "a": "Anat \n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
     "item_id": "18104486080523110",
-    "post_id": "17872066089429173"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17975121365771707.mp4",
-    "a": "Anat \n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
-    "item_id": "17975121365771707",
-    "video": true,
-    "thumb": "",
-    "post_id": "17872066089429173"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17984385209733654.mp4",
-    "a": "Anat \n\n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal \n@anatnassi",
-    "item_id": "17984385209733654",
-    "video": true,
-    "thumb": "",
     "post_id": "17872066089429173"
   },
   {
@@ -937,14 +625,6 @@ const GALLERY_IMAGES = [
     "post_id": "18074498573030491"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18066648758006007.mp4",
-    "a": "מיכל יובל כלת החינה שלי \nשהיא בכלל נסיכה בריטית שבאה מאיזה הגדה \n\n#איפורכלות #מא",
-    "item_id": "18066648758006007",
-    "video": true,
-    "thumb": "",
-    "post_id": "18066648758006007"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18074521808109339.webp",
     "a": "For @tictaceilat \n@valeriya.astafyeva \n@yarden_damri_makeup \n@valeria__vision \n@",
     "item_id": "18074521808109339",
@@ -963,50 +643,10 @@ const GALLERY_IMAGES = [
     "post_id": "18062919026591725"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17852020425486077.mp4",
-    "a": "Step by step ❤️\n\n#מאפרתבאילת #איפורערב #מאפרתמקצועית",
-    "item_id": "17852020425486077",
-    "video": true,
-    "thumb": "",
-    "post_id": "17852020425486077"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17912696106193072.webp",
     "a": "MAY ❤️\n\n@may.el25 \n\n#איפורעדין #איפורערב #מאפרתבאילת #מאפרתמקצועית",
     "item_id": "17912696106193072",
     "post_id": "17912696106193072"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18087535243633225.mp4",
-    "a": "אמאלהה ואבאלההה החיוך שלך בסוף זה לא אמיתי! \n@may_bachar1 e \n\nשיער @korenmalihe",
-    "item_id": "18087535243633225",
-    "video": true,
-    "thumb": "",
-    "post_id": "18087535243633225"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18314568328240653.mp4",
-    "a": "Step by step\nאיך אני אוהבת את התגובות שלכן ❤️\n\n@korenmalihe \n@sasha.shkuts \n@yar",
-    "item_id": "18314568328240653",
-    "video": true,
-    "thumb": "",
-    "post_id": "18314568328240653"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18052903892185381.mp4",
-    "a": "⁨\tאיך אני אוהבת את ההתרגשות \nשל הלקוחות שלי לפני שהן רואות את עצמן במראה \n\nאתן י",
-    "item_id": "18052903892185381",
-    "video": true,
-    "thumb": "",
-    "post_id": "18052903892185381"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17914896966156834.mp4",
-    "a": "תכירו את שיר - כלה שביקשה להרגיש כמו עצמה רק בגירסה הכי יפה שלה \n\n@shir.1025 \n@k",
-    "item_id": "17914896966156834",
-    "video": true,
-    "thumb": "",
-    "post_id": "17914896966156834"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18281915932257730.webp",
@@ -1117,22 +757,6 @@ const GALLERY_IMAGES = [
     "post_id": "18085072915654222"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18081680317884692.mp4",
-    "a": "Step by step with KESEM \n@kesem_david1 \n\n#מאפרתבאילת #איפורערב",
-    "item_id": "18081680317884692",
-    "video": true,
-    "thumb": "",
-    "post_id": "18081680317884692"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18147382273393408.mp4",
-    "a": "בואו לראות איך הופכים עין בוכייה לחתולית \n@yanashtein_  הכי יפה שיש! \n\nאיפור @ya",
-    "item_id": "18147382273393408",
-    "video": true,
-    "thumb": "",
-    "post_id": "18147382273393408"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18073871527977213.webp",
     "a": "YANA  \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @_jeen_bo",
     "item_id": "18073871527977213",
@@ -1145,22 +769,6 @@ const GALLERY_IMAGES = [
     "post_id": "18064392191332222"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17942192087901078.mp4",
-    "a": "⁨\tמצאתי את הליהוק החדש לברבי 2 הסרט \n@limor_edri@limed_socialal \n\nאי@yarden_damr",
-    "item_id": "17942192087901078",
-    "video": true,
-    "thumb": "",
-    "post_id": "17942192087901078"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18053917646594004.mp4",
-    "a": "⁨\tהבחורה הכי גבוהה שאיפרתי עד היום \nחד משמעית!!! \nואולי גם הכי מיוחדת תגידו לי א",
-    "item_id": "18053917646594004",
-    "video": true,
-    "thumb": "",
-    "post_id": "18053917646594004"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18037732355372175.webp",
     "a": "@yarden_damri_makeup \n@kesem_david1 \n\n#מאפרתבאילת #מאפרתמקצועית #איפורארט #mak",
     "item_id": "18037732355372175",
@@ -1171,22 +779,6 @@ const GALLERY_IMAGES = [
     "a": "@yarden_damri_makeup \n@kesem_david1 \n\n#מאפרתבאילת #מאפרתמקצועית #איפורארט #mak",
     "item_id": "18007823300784109",
     "post_id": "18113737726445564"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18085593385774043.mp4",
-    "a": "prom 2025 \n\n@korenmalihe \n@yarden_damri_makeup",
-    "item_id": "18085593385774043",
-    "video": true,
-    "thumb": "",
-    "post_id": "18085593385774043"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18481222096070029.mp4",
-    "a": "Mika \n@mikacarel__ \n\n#yardendamrimakeupartist #לפניואחרי #מאפרתבישראל #מאפרתבאיל",
-    "item_id": "18481222096070029",
-    "video": true,
-    "thumb": "",
-    "post_id": "18481222096070029"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18470304967079488.webp",
@@ -1207,42 +799,10 @@ const GALLERY_IMAGES = [
     "post_id": "18083865877831321"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18255976480304993.mp4",
-    "a": "את פילטר חיימי @shaizahav \nקבלו את השיטה של השיער אני בשוק! \nמכירים?? \n\n#איפורוש",
-    "item_id": "18255976480304993",
-    "video": true,
-    "thumb": "",
-    "post_id": "18255976480304993"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17974347077744838.webp",
     "a": "TAMAR \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.b",
     "item_id": "17974347077744838",
     "post_id": "17974347077744838"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18129873199428567.mp4",
-    "a": "אין תגובה מרגשת מזו! \nמיקה אין יפות כמוך @mika__david \n\nשיער @bartzanani_hair \n#",
-    "item_id": "18129873199428567",
-    "video": true,
-    "thumb": "",
-    "post_id": "18129873199428567"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18097401229596628.mp4",
-    "a": "רז המדהימה באיפור שלי למותג הכי שיקי שיש! \n@soygata.il \nספרו לי אם אהבתם  @razka",
-    "item_id": "18097401229596628",
-    "video": true,
-    "thumb": "",
-    "post_id": "18097401229596628"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18083099290839272.mp4",
-    "a": "את מסוג הכלות שתשים אודם אדום או ניוד? \nבתכלס זה אמיץ אבל אין יפה כזה!!! \nואין י",
-    "item_id": "18083099290839272",
-    "video": true,
-    "thumb": "",
-    "post_id": "18083099290839272"
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18510763915001883.webp",
@@ -1257,30 +817,6 @@ const GALLERY_IMAGES = [
     "post_id": "18041520479310506"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18074812873915154.mp4",
-    "a": "⁨\tבואו לראות איך מייצרים לוק מדוייק לצילומי אופנה \nעבור @soygata.il⁩",
-    "item_id": "18074812873915154",
-    "video": true,
-    "thumb": "",
-    "post_id": "18074812873915154"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18083063197766194.mp4",
-    "a": "אביגיל את פשוט מהממת מבחוץ \nואחרי יום איתך גיליתי שגם מבפנים \n\nאיפור שלי \nשיער @",
-    "item_id": "18083063197766194",
-    "video": true,
-    "thumb": "",
-    "post_id": "18083063197766194"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18062040937949080.mp4",
-    "a": "Sooo pretty \n@kelly.markowski",
-    "item_id": "18062040937949080",
-    "video": true,
-    "thumb": "",
-    "post_id": "18062040937949080"
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18176260213332650.webp",
     "a": "אהובתי היפה באיפור שלי \n@ziv.interiordesign",
     "item_id": "18176260213332650",
@@ -1291,22 +827,6 @@ const GALLERY_IMAGES = [
     "a": "אהובתי היפה באיפור שלי \n@ziv.interiordesign",
     "item_id": "18044930687217742",
     "post_id": "17960770013943608"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18087033274649938.mp4",
-    "a": "נושא שעדיין איתנו לצערי \nויש אנשים שחושבים שאם זה איפור ״עדין״ אז הוא מתומחר פחו",
-    "item_id": "18087033274649938",
-    "post_id": "18087033274649938",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18025971779499826.mp4",
-    "a": "⁨\tשקד שהיא אסתי גינזבורג האילתית! \nרק ביותר מוצלח! \nאז הרבה זמן לקח לי לערוך לכם",
-    "item_id": "18025971779499826",
-    "post_id": "18025971779499826",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18509820733019524.webp",
@@ -1357,14 +877,6 @@ const GALLERY_IMAGES = [
     "post_id": "18010843883685323"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18016465199519964.mp4",
-    "a": "לוק מחרפן!!! אסוף ואלגנטי במקסימום של קורין האלופה שלי! \nנכון שהיא דומה לקים!!!?",
-    "item_id": "18016465199519964",
-    "post_id": "18016465199519964",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18075458080892182.webp",
     "a": "BRIDE 2025 \n\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by @yarden_da",
     "item_id": "18075458080892182",
@@ -1381,14 +893,6 @@ const GALLERY_IMAGES = [
     "a": "So pretty  for @tictaceilat \nMakeup by @yarden_damri_makeup \n\n#מאפרתכלות #איפורכ",
     "item_id": "17874288609244698",
     "post_id": "17874288609244698"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18049640639598657.mp4",
-    "a": "קולקציה מדהימה של כלות \n\nשמלה של @sharon.bridal \nשיער @korenmalihe \nאיפור שלי",
-    "item_id": "18049640639598657",
-    "post_id": "18049640639598657",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18043901993451443.webp",
@@ -1439,14 +943,6 @@ const GALLERY_IMAGES = [
     "post_id": "18060465113122900"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18366240094120508.mp4",
-    "a": "For @tictaceilat \n@valeriya.astafyeva",
-    "item_id": "18366240094120508",
-    "post_id": "18366240094120508",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18084661123568172.webp",
     "a": "כל כך יפה ועדינה \nאיפור שלי \nשיער @korenmalihe \n\n#מאפרתבאילת #מסרקתבאילת #איפורע",
     "item_id": "18084661123568172",
@@ -1469,14 +965,6 @@ const GALLERY_IMAGES = [
     "a": "Makeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.bridal",
     "item_id": "18086147194625807",
     "post_id": "18074261548857834"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17917007199085444.mp4",
-    "a": "Makeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @sharon.bridal",
-    "item_id": "17917007199085444",
-    "post_id": "18074261548857834",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18014984033511955.webp",
@@ -1503,22 +991,6 @@ const GALLERY_IMAGES = [
     "post_id": "18066213922781339"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17972194907845869.mp4",
-    "a": "אוריאן איזה עיניים יש לך!!! \n@orian_moroni \nשיער של המוכשרת @korenmalihe \n\n#מאפר",
-    "item_id": "17972194907845869",
-    "post_id": "17972194907845869",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17889610182230514.mp4",
-    "a": "עיניים מחוטבות במקסימום!! \n@_adidagan - ההורסת \n\nשיער @korenmalihe",
-    "item_id": "17889610182230514",
-    "post_id": "17889610182230514",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18451318717072445.webp",
     "a": "⁨\tSoo pretty  \nאיפור שלי \nשיער @korenmalihe\nשמל@dorin_dress_s_⁩",
     "item_id": "18451318717072445",
@@ -1535,14 +1007,6 @@ const GALLERY_IMAGES = [
     "a": "⁨\tSoo pretty  \nאיפור שלי \nשיער @korenmalihe\nשמל@dorin_dress_s_⁩",
     "item_id": "17858907972330887",
     "post_id": "17978034209827420"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17961679754904787.mp4",
-    "a": "כמה שאת יפה \n@naomilevi148 \n\n#מאפרתבאילת #איפורערב",
-    "item_id": "17961679754904787",
-    "post_id": "17961679754904787",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18060998279046029.webp",
@@ -1567,30 +1031,6 @@ const GALLERY_IMAGES = [
     "a": "Sooo pretty \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \n@shaked_este",
     "item_id": "18122998831427410",
     "post_id": "18088375558520535"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18123223159390650.mp4",
-    "a": "פעם שלישית גלידה יפה שלי ❤️\n@sarai_mamane \n@korenmalihe \n\n#מאפרתבאילת #איפורכלות",
-    "item_id": "18123223159390650",
-    "post_id": "18123223159390650",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17926961241035936.mp4",
-    "a": "אתמול עלתה הסדרה החדשה ״הראש״\nומאז היא לא יוצאת לי מהראש ☺️\n\n@malilevi \nחליפה של",
-    "item_id": "17926961241035936",
-    "post_id": "17926961241035936",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17881074837255151.mp4",
-    "a": "לפעמים אנחנו בהחלפת תפקידים \nהפעם זה יצא מהמם  \n\nאיפור שלי \nשיער @korenmalihe \nש",
-    "item_id": "17881074837255151",
-    "post_id": "17881074837255151",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18158032123347058.webp",
@@ -1635,22 +1075,6 @@ const GALLERY_IMAGES = [
     "post_id": "18121848208390077"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18124942108419105.mp4",
-    "a": "קורל כמה שאת מיוחדת \nקולטים שהיא דומה לטליה מהאח הגדול? \n\n@koral__i \n#מאפרתבאילת",
-    "item_id": "18124942108419105",
-    "post_id": "18124942108419105",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17964791453853321.mp4",
-    "a": "אירנה הפקחית המושלמת!! \n\n@greku___ \n@korenmalihe",
-    "item_id": "17964791453853321",
-    "post_id": "17964791453853321",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18006486551540020.webp",
     "a": "@ivetta_berkovich \n@korenmalihe",
     "item_id": "18006486551540020",
@@ -1663,26 +1087,10 @@ const GALLERY_IMAGES = [
     "post_id": "18085374367581726"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18051459217977595.mp4",
-    "a": "שקד את אמלהההה!! \n@shaked_esterin \n\nסטיק קונטור של @lazorgan \n#מאפרתבאילת #איפור",
-    "item_id": "18051459217977595",
-    "post_id": "18051459217977595",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17972293742825499.webp",
     "a": "Yael bar Zohar ✨\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \n\n#מאפרתב",
     "item_id": "17972293742825499",
     "post_id": "17972293742825499"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18019082264677508.mp4",
-    "a": "שרה ❤️\nזכיתי לאפר אותך !\n\n@sarahfeyje_ \nשיער @korenmalihe \n\n#מאפרתבאילת",
-    "item_id": "18019082264677508",
-    "post_id": "18019082264677508",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17896759932054612.webp",
@@ -1701,30 +1109,6 @@ const GALLERY_IMAGES = [
     "a": "SHAKED \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by @dorin_d",
     "item_id": "18076711984633435",
     "post_id": "18073596133685992"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17843633244421006.mp4",
-    "a": "נכון שהיא דומה לאלזה!! \nאין לי מילים מאמי את ואוו- @ivetta_berkovich \n\nשיער @kor",
-    "item_id": "17843633244421006",
-    "post_id": "17843633244421006",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18029763632317157.mp4",
-    "a": "Look for valentine day ❤️\nMakeup by @yarden_damri_makeup \n\n#מאפרתבאילת",
-    "item_id": "18029763632317157",
-    "post_id": "18029763632317157",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18090627814554737.mp4",
-    "a": "הבראצית האמיתית \n@lizamarkolov \n\n@lazorgan \n@natashadenona \n@narsissist \n\n#מאפרת",
-    "item_id": "18090627814554737",
-    "post_id": "18090627814554737",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18030994454537916.webp",
@@ -1775,22 +1159,6 @@ const GALLERY_IMAGES = [
     "post_id": "18086474806561604"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17942470127825237.mp4",
-    "a": "שמנסים לצלם אותך והכל מצחיק \nשרופה עליך! @adiid_____ \nאיזה יפה היא!! ❤️\n\nאיפור ש",
-    "item_id": "17942470127825237",
-    "post_id": "17942470127825237",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18290457631172806.mp4",
-    "a": "שירן מלכת העוגות  של אילת באיפור שלי \nכמה שאת יפה ❤️❤️\nואיזה כיף של תגובה \n\n@shi",
-    "item_id": "18290457631172806",
-    "post_id": "18290457631172806",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17921601366014641.webp",
     "a": "Tamar ✨✨\nDress by @sharon.bridal \nHair by @korenmalihe \nMakeup by me ❤️",
     "item_id": "17921601366014641",
@@ -1825,14 +1193,6 @@ const GALLERY_IMAGES = [
     "a": "GLAM BY @yarden_damri_makeup \n@lizamarkolov \n\n#מאפרתבאילת",
     "item_id": "18032925302451674",
     "post_id": "17869948875205908"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17843448321399023.mp4",
-    "a": "אמלהה איזה כיף לאפר אותך!! \nותקלטו את הריסים והשפיים וכל הלוק ביחד - לא חוקי מאמ",
-    "item_id": "17843448321399023",
-    "post_id": "17843448321399023",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18117872557438067.webp",
@@ -1871,30 +1231,6 @@ const GALLERY_IMAGES = [
     "post_id": "18084515470564103"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18051764198120874.mp4",
-    "a": "MARGO GORGEOUS \n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \nDress by",
-    "item_id": "18051764198120874",
-    "post_id": "18051764198120874",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18066102463827856.mp4",
-    "a": "TAMAR \n\n@_tamarlev_ \n@yarden_damri_makeup \n@korenmalihe \n@sharon.bridal",
-    "item_id": "18066102463827856",
-    "post_id": "18066102463827856",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18042385703193057.mp4",
-    "a": "Welcome 2025 ✨\n@jasmin_garamy \n\nGlam by @yarden_damri_makeup",
-    "item_id": "18042385703193057",
-    "post_id": "18042385703193057",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18096528205491100.webp",
     "a": "DJ @hadarslutsky \nMakeup by @yarden_damri_makeup",
     "item_id": "18096528205491100",
@@ -1911,14 +1247,6 @@ const GALLERY_IMAGES = [
     "a": "Glam by @yarden_damri_makeup \nDress by @dorin_dress_",
     "item_id": "18016507784648237",
     "post_id": "18016507784648237"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18476521378063827.mp4",
-    "a": "Speechlesssss \n\n@mishel.kurganov \nMakeup by @yarden_damri_makeup \nHair by @bartz",
-    "item_id": "18476521378063827",
-    "post_id": "18476521378063827",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18259152247281025.webp",
@@ -1945,34 +1273,10 @@ const GALLERY_IMAGES = [
     "post_id": "18041409875022460"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18100998754463907.mp4",
-    "a": "בואו לראות איך לייצר לוק נקי ובובתי  \n@ella_ben_nun\n\n@narsissist",
-    "item_id": "18100998754463907",
-    "post_id": "18100998754463907",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18470452993008281.mp4",
-    "a": "בואו לראות איך אני מייצרת את הלוק שפתיים \nהכי יפה שיש!! \n@oriamayedri \nאיפור @ya",
-    "item_id": "18470452993008281",
-    "post_id": "18470452993008281",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17950654229883412.webp",
     "a": "✨✨✨\nGlam by @yarden_damri_makeup",
     "item_id": "17950654229883412",
     "post_id": "17950654229883412"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18023192474552073.mp4",
-    "a": "Look 2 \nOrel bride \nGlam by @yarden_damri_makeup \n@orel_hasson_derei \nHair by @k",
-    "item_id": "18023192474552073",
-    "post_id": "18023192474552073",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18031379714419736.webp",
@@ -2005,42 +1309,10 @@ const GALLERY_IMAGES = [
     "post_id": "18038851271040725"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18048212089887658.mp4",
-    "a": "ORIA gorgeous \n\n@oriamayedri \nMakeup by @yarden_damri_makeup \nDress by @dorin_dr",
-    "item_id": "18048212089887658",
-    "post_id": "18048212089887658",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17935853048826259.mp4",
-    "a": "אוראל הכלה המדהימה שלי! \nאיפור שלי \nשיער @korenmalihe \nשמלה @sharon.bridal",
-    "item_id": "17935853048826259",
-    "post_id": "17935853048826259",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17858917509299268.mp4",
-    "a": "מלווה של כלה מושלמת!!! \nאיפור שלי \nמסרקת @korenmalihe",
-    "item_id": "17858917509299268",
-    "post_id": "17858917509299268",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18012122501443933.webp",
     "a": "HODAYA GORGEOUS ✨✨\n@hodaya_benshimon_ \n\nMakeup by @yarden_damri_makeup",
     "item_id": "18012122501443933",
     "post_id": "18012122501443933"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18048858820847861.mp4",
-    "a": "BEAUTIFUL NOY ❤️❤️\n@noy_wagner \n\nMakeup by @yarden_damri_makeup \nHair by @korenm",
-    "item_id": "18048858820847861",
-    "post_id": "18048858820847861",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18024804956605697.webp",
@@ -2109,14 +1381,6 @@ const GALLERY_IMAGES = [
     "post_id": "18332531338149322"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17981433710765861.mp4",
-    "a": "החלק הכי מספק ❤️\nכמה שהיא יפה ועיניים אמלההה \n\n@shakedbouganim \nMakeup by @yarde",
-    "item_id": "17981433710765861",
-    "post_id": "17981433710765861",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18056638180880145.webp",
     "a": "SHAKED \n\nMakeup by @yarden_damri_makeup",
     "item_id": "18056638180880145",
@@ -2127,14 +1391,6 @@ const GALLERY_IMAGES = [
     "a": "SHAKED \n\nMakeup by @yarden_damri_makeup",
     "item_id": "18031291988364296",
     "post_id": "18081550360526559"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18052730194910902.mp4",
-    "a": "החלק הכי מרגש אצל זוג \nזכיתי לאפר את הנסיכה היפה בלבן \nשיער @korenmalihe \nשמלה ש",
-    "item_id": "18052730194910902",
-    "post_id": "18052730194910902",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18314720182093428.webp",
@@ -2197,22 +1453,6 @@ const GALLERY_IMAGES = [
     "post_id": "18084658423447318"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18320657914153592.mp4",
-    "a": "So beautiful ❤️\n\n@toharzino \n@bartzanani_hair \n@yarden_damri_makeup",
-    "item_id": "18320657914153592",
-    "post_id": "18320657914153592",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17981721281592756.mp4",
-    "a": "MISHEL \n\n@yarden_damri_makeup \n@bartzanani_hair \n@dorin_dress_ \n@mishel.kurganov",
-    "item_id": "17981721281592756",
-    "post_id": "17981721281592756",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18035124422507465.webp",
     "a": "TANIA \n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
     "item_id": "18035124422507465",
@@ -2223,14 +1463,6 @@ const GALLERY_IMAGES = [
     "a": "So pretty \nMakeup by @yarden_damri_makeup",
     "item_id": "18351200494115751",
     "post_id": "18351200494115751"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18042664717961242.mp4",
-    "a": "מתוך השתלמות איפור למאפרות \nלומדים טכניקות עבודה רלוונטיות ופשוטות.\nצורת עבודה נ",
-    "item_id": "18042664717961242",
-    "post_id": "18042664717961242",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17874033198117555.webp",
@@ -2353,34 +1585,10 @@ const GALLERY_IMAGES = [
     "post_id": "18232930894284290"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18032937596089388.mp4",
-    "a": "כמה שהיא מיוחדת!!! והחיטובים זה אהבה \nתראו את התוצאה הסופית כמה שהיא יפה ❤️\nספרו",
-    "item_id": "18032937596089388",
-    "post_id": "18032937596089388",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17874989160099074.mp4",
-    "a": "SOOO GORGEOUS \n@tohar.saban \n.\n.\nMakeup by @yarden_damri_makeup\nDress by @madeby",
-    "item_id": "17874989160099074",
-    "post_id": "17874989160099074",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18021723191076282.webp",
     "a": "Pnina \nMakeup by @yarden_damri_makeup \nHair by @tevel_hair_design",
     "item_id": "18021723191076282",
     "post_id": "18021723191076282"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17960385701652588.mp4",
-    "a": "SARAI GORGEOUSSSS ✨✨\nProm 2024 \n\nMakeup by @yarden_damri_makeup \nHair by @shahaf",
-    "item_id": "17960385701652588",
-    "post_id": "17960385701652588",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18036961057939724.webp",
@@ -2393,14 +1601,6 @@ const GALLERY_IMAGES = [
     "a": "Talor  \n\nMakeup by @yarden_damri_makeup \nDress by @nani_gal17\nHair by @tevel_hai",
     "item_id": "18155593303309305",
     "post_id": "18022662380213458"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17870093871128603.mp4",
-    "a": "Congratulations SHAY \n\nMakeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
-    "item_id": "17870093871128603",
-    "post_id": "17870093871128603",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18029108069122365.webp",
@@ -2431,14 +1631,6 @@ const GALLERY_IMAGES = [
     "a": "Ariel \n\nMakeup by @yarden_damri_makeup \n@arielshulga",
     "item_id": "18026315684128787",
     "post_id": "18300187390084698"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17999402264629794.mp4",
-    "a": "Obsessed ✨\n\nMakeup by @yarden_damri_makeup \nHair by @korenmalihe \n@oriyarahamimr",
-    "item_id": "17999402264629794",
-    "post_id": "17999402264629794",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18047757481701525.webp",
@@ -2511,14 +1703,6 @@ const GALLERY_IMAGES = [
     "a": "@yuvalbeider9 \nMakeup by @yarden_damri_makeup \nStyle by @inbalv.styling",
     "item_id": "17942578640716162",
     "post_id": "17942578640716162"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18232601095258045.mp4",
-    "a": "Beautiful \n\nMakeup by @yarden_damri_makeup \nshakedb1 \n\n@mikibuganimcosmetics @mi",
-    "item_id": "18232601095258045",
-    "post_id": "18232601095258045",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18033384559814733.webp",
@@ -2755,22 +1939,6 @@ const GALLERY_IMAGES = [
     "post_id": "18029908753903493"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18088519216423250.mp4",
-    "a": "The princess Shoval for @odeliaozel \n@princess.haziza \nMakeup by @yarden_damri_m",
-    "item_id": "18088519216423250",
-    "post_id": "18088519216423250",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17952692570750751.mp4",
-    "a": "Michelle for @odeliaozel \n@michelle_algrabli",
-    "item_id": "17952692570750751",
-    "post_id": "17952692570750751",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18423219484056776.webp",
     "a": "AMAZING MICHELLE  \n\n@michelle_algrabli \nMakeup by @yarden_damri_makeup \n@odeliao",
     "item_id": "18423219484056776",
@@ -2811,14 +1979,6 @@ const GALLERY_IMAGES = [
     "a": "ALMA \n\nMakeup by @yarden_damri_makeup",
     "item_id": "17940892451792414",
     "post_id": "17940892451792414"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18041779267638749.mp4",
-    "a": "OFEK \n\nLipstick by @diorbeauty @dior \nMakeup by @yarden_damri_makeup \n@ofek_este",
-    "item_id": "18041779267638749",
-    "post_id": "18041779267638749",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18013915130173373.webp",
@@ -2863,14 +2023,6 @@ const GALLERY_IMAGES = [
     "post_id": "18018233747041182"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18406013989019225.mp4",
-    "a": "SARAI \n\n@sarai_mamane \n @diorbeauty @dior \nMakeup by @yarden_damri_makeup \nHair",
-    "item_id": "18406013989019225",
-    "post_id": "18406013989019225",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18034192918759884.webp",
     "a": "SHIRAZ \n\n@shirazlevy__ \nMakeup by @yarden_damri_makeup",
     "item_id": "18034192918759884",
@@ -2907,14 +2059,6 @@ const GALLERY_IMAGES = [
     "post_id": "18024403060777369"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17901816815927060.mp4",
-    "a": "SHIRAZ AMAZING ✨\n\nMakeup by @yarden_damri_makeup \n@shirazlevy__ \n\nקונטור @lazorg",
-    "item_id": "17901816815927060",
-    "post_id": "17901816815927060",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18062434963445208.webp",
     "a": "Obsessed  \n\nMakeup by @yarden_damri_makeup \n@yesenia_kaliner",
     "item_id": "18062434963445208",
@@ -2925,14 +2069,6 @@ const GALLERY_IMAGES = [
     "a": "Obsessed  \n\nMakeup by @yarden_damri_makeup \n@yesenia_kaliner",
     "item_id": "18198947998304618",
     "post_id": "18405054301004151"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18000387995159407.mp4",
-    "a": "Alma \n \nLipstick @diorbeauty @dior \nMakeup by @yarden_damri_makeup \n@almaazoulay",
-    "item_id": "18000387995159407",
-    "post_id": "18000387995159407",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17998193537519957.webp",
@@ -2947,14 +2083,6 @@ const GALLERY_IMAGES = [
     "post_id": "18030297238672251"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18089393785405813.mp4",
-    "a": "",
-    "item_id": "18089393785405813",
-    "post_id": "18089393785405813",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17998711664377785.webp",
     "a": "JULIA \n@juliapikun.promanic \n\nאיפור שלי \nשיער @bartzanani_hair",
     "item_id": "17998711664377785",
@@ -2965,22 +2093,6 @@ const GALLERY_IMAGES = [
     "a": "JULIA \n@juliapikun.promanic \n\nאיפור שלי \nשיער @bartzanani_hair",
     "item_id": "17848124172119942",
     "post_id": "18034819795671837"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18036019414640625.mp4",
-    "a": "ROTEM \n@rotem.bendor",
-    "item_id": "18036019414640625",
-    "post_id": "18036019414640625",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17931717392697260.mp4",
-    "a": "NOGA GORGEOUS ✨\n@nogazenaty \n\nMakeup by me \nHair by @bartzanani_hair",
-    "item_id": "17931717392697260",
-    "post_id": "17931717392697260",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17919375854755418.webp",
@@ -2995,34 +2107,10 @@ const GALLERY_IMAGES = [
     "post_id": "17991003674295016"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18208094986286266.mp4",
-    "a": "אז מה אתם חושבים על אודם אדום ואיילינר? \nכמה שזה מחמיא לה!!",
-    "item_id": "18208094986286266",
-    "post_id": "18208094986286266",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17988271130313555.webp",
     "a": "יוליה בלוק הכי עוצמתי שיש! \n\nאיפור - @yarden_damri_makeup \nשיער - @bartzanani_ha",
     "item_id": "17988271130313555",
     "post_id": "17988271130313555"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18038735971612181.mp4",
-    "a": "לוק איפור היסטרי לנוגה ההורסת!! \nבואו תראו שלב אחרי שלב וחכו לסוף",
-    "item_id": "18038735971612181",
-    "post_id": "18038735971612181",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18080567533412003.mp4",
-    "a": "הרבה זמן שלא פרסמתי פה אבל חייב להמשיך ולהרים את הראש \n\nירדן דמרי | איפור כלות ו",
-    "item_id": "18080567533412003",
-    "post_id": "18080567533412003",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17878921451958658.webp",
@@ -3085,14 +2173,6 @@ const GALLERY_IMAGES = [
     "post_id": "17979839816378820"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17988062165333196.mp4",
-    "a": "Makeup by @yarden_damri_makeup \nHair by @bartzanani_hair",
-    "item_id": "17988062165333196",
-    "post_id": "17988062165333196",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17945563202563415.webp",
     "a": "יוליה המדהימה באיפור שלי \nשיער @bartzanani_hair \n\n_______________________\nירדן ד",
     "item_id": "17945563202563415",
@@ -3111,34 +2191,10 @@ const GALLERY_IMAGES = [
     "post_id": "18024859444603919"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18207841129300408.mp4",
-    "a": "נוגה המדהימה ✨\n\n@nogazenaty \nשיער- @bartzanani_hair \nאיפור - @yarden_damri_makeu",
-    "item_id": "18207841129300408",
-    "post_id": "18207841129300408",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18025972729511683.webp",
     "a": "NOA \n\n@noa.hasidiim \nHair by @bartzanani_hair \nMakeup by @yarden_damri_makeup",
     "item_id": "18025972729511683",
     "post_id": "18025972729511683"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17922706817735856.mp4",
-    "a": "Beautiful bride \n\n#bride #כלות2023 #כלות #כלותאורבניות #איפורכלה",
-    "item_id": "17922706817735856",
-    "post_id": "17922706817735856",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17931876749617249.mp4",
-    "a": "פאר המדהימה ✨✨\nבואו תראו את תהליך האיפור \n\nשיער - @bartzanani_hair \nסומק - @dior",
-    "item_id": "17931876749617249",
-    "post_id": "17931876749617249",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17952290075630726.webp",
@@ -3153,14 +2209,6 @@ const GALLERY_IMAGES = [
     "post_id": "18034342780463826"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17852120351995004.mp4",
-    "a": "נועה הקסומה באיפור שלי \nPROM 2023\n@noa._.scheriber \n\n________________________\nיר",
-    "item_id": "17852120351995004",
-    "post_id": "17852120351995004",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18195474445252523.webp",
     "a": "NOA GORGEOUS \n@noa._.scheriber\n\nHair by @zenzura_eilat \nMakeup Yarden Damri \n\n__",
     "item_id": "18195474445252523",
@@ -3171,14 +2219,6 @@ const GALLERY_IMAGES = [
     "a": "NOA GORGEOUS \n@noa._.scheriber\n\nHair by @zenzura_eilat \nMakeup Yarden Damri \n\n__",
     "item_id": "17986664705304989",
     "post_id": "18275555194126353"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17962284101378256.mp4",
-    "a": "כמה סיפוק יש בלאפר מישהי ושהיא תיהיה בעננים \nותרגיש הכי מושלמת שיש! \nזכיתי ביכו",
-    "item_id": "17962284101378256",
-    "post_id": "17962284101378256",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17991435707015862.webp",
@@ -3203,14 +2243,6 @@ const GALLERY_IMAGES = [
     "a": "NOAM \nmakeup - Yarden Damri \n\n_____________________\nירדן דמרי | איפור כלות וערב",
     "item_id": "18336833401078276",
     "post_id": "17952154748500999"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18287671468117935.mp4",
-    "a": "אלמוג המדהימה באיפור שלי \nשיער צנזורה אילת \n\n___________________\nירדן דמרי | איפ",
-    "item_id": "18287671468117935",
-    "post_id": "18287671468117935",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17898241769807598.webp",
@@ -3241,14 +2273,6 @@ const GALLERY_IMAGES = [
     "a": "SHAVUA TOV \n\n______________________\nירדן דמרי | איפור כלות וערב \n054-7276716",
     "item_id": "17936354888577620",
     "post_id": "17879401862873843"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18223354348172950.mp4",
-    "a": "ליהיא המושלמת באיפור שלי \n_______________________\nירדן דמרי | איפור כלות וערב \n0",
-    "item_id": "18223354348172950",
-    "post_id": "18223354348172950",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18027434467524285.webp",
@@ -3407,14 +2431,6 @@ const GALLERY_IMAGES = [
     "post_id": "18004654339572597"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18348195352003637.mp4",
-    "a": "Jonathan \n\n#פורים2023",
-    "item_id": "18348195352003637",
-    "post_id": "18348195352003637",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18041824093426624.webp",
     "a": "יהונתן באיפור פורים שלי \n@jonathangabay_ \n\n#פורים2023 \n_______________________",
     "item_id": "18041824093426624",
@@ -3425,14 +2441,6 @@ const GALLERY_IMAGES = [
     "a": "נועה שייבר בלוק פורים מהמם \n@noa._.schreiber \n\n_______________________\n\nירדן דמר",
     "item_id": "17971086359191580",
     "post_id": "17971086359191580"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18056576707386021.mp4",
-    "a": "flowers  \n@noa._.schreiber \n_________________________\n\nירדן דמרי | איפור כלות ו",
-    "item_id": "18056576707386021",
-    "post_id": "18056576707386021",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18249862501156661.webp",
@@ -3567,14 +2575,6 @@ const GALLERY_IMAGES = [
     "post_id": "17950739612412086"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18265004014189100.mp4",
-    "a": "לירון ויצמן המהממת באיפור שלי \n\n#מאפרתבאילת #איפורמקצועי #לירוןויצמן",
-    "item_id": "18265004014189100",
-    "post_id": "17950739612412086",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17975179231958272.webp",
     "a": "פורים 2023 אני מחכה לך \nלמה אתם מתחפשים? \n\n#פורים2023 #איפורפציעות #ארט #איפורפו",
     "item_id": "17975179231958272",
@@ -3683,14 +2683,6 @@ const GALLERY_IMAGES = [
     "post_id": "18041598472394695"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17978912668754172.mp4",
-    "a": "Pretty women ✨\n@dorintrabelsi",
-    "item_id": "17978912668754172",
-    "post_id": "17978912668754172",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17990858323648251.webp",
     "a": "דורין המושלמת באיפור שלי \n@dorintrabelsi",
     "item_id": "17990858323648251",
@@ -3757,26 +2749,10 @@ const GALLERY_IMAGES = [
     "post_id": "18152716645284620"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17961741011013570.mp4",
-    "a": "Gorgeous women",
-    "item_id": "17961741011013570",
-    "post_id": "17961741011013570",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17904951338662736.webp",
     "a": "דורית המקסימה הגיעה אליי לאיפור לאירוע צהריים \n\n#איפורצהריים #מאפרת #מאפרותמקצוע",
     "item_id": "17904951338662736",
     "post_id": "17904951338662736"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17942078459377419.mp4",
-    "a": "Glow ✨",
-    "item_id": "17942078459377419",
-    "post_id": "17942078459377419",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17970268162855055.webp",
@@ -3797,14 +2773,6 @@ const GALLERY_IMAGES = [
     "post_id": "17927443058557184"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18047147005366668.mp4",
-    "a": "הלקוחות שלי הכי יפות שיש \nליאת המדהימה \n@liat1155 \nאיפור לבריתה",
-    "item_id": "18047147005366668",
-    "post_id": "18047147005366668",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17963153026900876.webp",
     "a": "איפור שלי לסנדרה אברהם - בוליווד. \nאיפור הודי עם טאצ שלי \n@sandrabolliwood \n\nאת",
     "item_id": "17963153026900876",
@@ -3823,34 +2791,10 @@ const GALLERY_IMAGES = [
     "post_id": "17934973187397806"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17975139385733561.mp4",
-    "a": "ספיר כלת החינה המדהימה שלי \nאיפור - ירדן דמרי \n\n#איפורכלה #איפורטבעי #חינה #כלות",
-    "item_id": "17975139385733561",
-    "post_id": "17975139385733561",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17927432000377513.mp4",
-    "a": "Shani bride ♀️ \nאיפור - ירדן דמרי \n\n#makeup #artist #art #bride #wedding #weddin",
-    "item_id": "17927432000377513",
-    "post_id": "17927432000377513",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17933709434431099.webp",
     "a": "קורל באיפור שלי לצילומי תדמית \n@corals144 \n\nקורל היא יועצת עיסקית אילתית- מעבר ל",
     "item_id": "17933709434431099",
     "post_id": "17933709434431099"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17964979837864363.mp4",
-    "a": "ספיר הכלה היפה שלי \n@sapirgrossfish \n\n#כלותאורבניות #כלות #איפורכלה #מהממת #הכיי",
-    "item_id": "17964979837864363",
-    "post_id": "17964979837864363",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17904518621636200.webp",
@@ -3907,14 +2851,6 @@ const GALLERY_IMAGES = [
     "post_id": "17961930193860413"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17933985842208595.mp4",
-    "a": "Makeup by me\n\n#makeup #makeupblog #makeupbyme #מאפרת #מאפרתבאילת #מאפרתמקצועית",
-    "item_id": "17933985842208595",
-    "post_id": "17933985842208595",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17961360508860497.webp",
     "a": "לפני  ואחרי \nספרו לי אם אהבתם ❤️\n\nMakeup- yarden damri ⠀⠀⠀⠀\n\n⠀⠀⠀⠀ ⠀⠀⠀⠀\n\n⠀⠀⠀⠀ ⠀⠀⠀",
     "item_id": "17961360508860497",
@@ -3957,14 +2893,6 @@ const GALLERY_IMAGES = [
     "post_id": "17990998501502725"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18202407301165685.mp4",
-    "a": "1..2..3…. Boom! \nMakeup by me \nModel @agamsemo \n\n#amazingwoman #beauty #makeup #",
-    "item_id": "18202407301165685",
-    "post_id": "18202407301165685",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17965351075740875.webp",
     "a": "כבר אמרתי לכם שהכי יפות אצלי? \nאין יותר כיף מזה שאישה באה אליי ויוצאת עם ים של ב",
     "item_id": "17965351075740875",
@@ -3977,26 +2905,10 @@ const GALLERY_IMAGES = [
     "post_id": "17887045781671735"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17889221576663420.mp4",
-    "a": "הצללות אף זה חלק בלתי נפרד מפיסול הפנים שלנו כשאנחנו מאפרים. \nרק שצריך לעשות את",
-    "item_id": "17889221576663420",
-    "post_id": "17889221576663420",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17952693181942761.webp",
     "a": "איה המדהימה והפוטוגנית בטירוף! \nבאיפור שלי \n@asandra.soul - הצלמת המוכשרת \n\n#נשף",
     "item_id": "17952693181942761",
     "post_id": "17952693181942761"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17926634336510793.mp4",
-    "a": "Beautiful women ❤️\n@_ayayosef_ \n@asandra.soul \n\n#makeup #instamakeup #cosmetic #",
-    "item_id": "17926634336510793",
-    "post_id": "17926634336510793",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17930401709354680.webp",
@@ -4023,26 +2935,10 @@ const GALLERY_IMAGES = [
     "post_id": "17890477265653319"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17921988884331185.mp4",
-    "a": "קבלו את ההצצה הראשונה של הנשף 2022 ✨\nאיה המדהימה באיפור שלי @_ayayosef_ \nוהמוכשר",
-    "item_id": "17921988884331185",
-    "post_id": "17921988884331185",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17986345630516071.webp",
     "a": "איפור פציעות #3 \nעבור שדה תעופה רמון תרגיל בטחוני ✈️\n\nמה אומרים נראה אמין? \n#פצו",
     "item_id": "17986345630516071",
     "post_id": "17986345630516071"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18057294679320065.mp4",
-    "a": "איפור פציעות \n\n#איפורפציעות #תרגילביטחוני #איפוראפקטים #מאפרתבאילת",
-    "item_id": "18057294679320065",
-    "post_id": "18057294679320065",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17863984775743402.webp",
@@ -4153,14 +3049,6 @@ const GALLERY_IMAGES = [
     "post_id": "17920739831215861"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17895906671607201.mp4",
-    "a": "סדנת איפור מקסימה שהייתה לי \nהיה מהמם ❤️❤️",
-    "item_id": "17895906671607201",
-    "post_id": "17895906671607201",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17911227992324955.webp",
     "a": "איפור שלי לסיון קפרי המתוקה ❣️\n\n@sivanbeautician \n\n#טיפוח #טיפוחאישי #ביוטי #מאפ",
     "item_id": "17911227992324955",
@@ -4197,34 +3085,10 @@ const GALLERY_IMAGES = [
     "post_id": "17955074080661075"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17982997249467436.mp4",
-    "a": "נס המדהימה הייתה אצלי בסדנת איפור וזה פשוט היה נס! \nהיא פשוט הגיעה בלי להתכוון ו",
-    "item_id": "17982997249467436",
-    "post_id": "17982997249467436",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18118792582278037.mp4",
-    "a": "איפור פורים לשרון  המדהימה \n@sharon_nhamani\n\n#מאפרתבאילת #פורים2022 #איפורפורים",
-    "item_id": "18118792582278037",
-    "post_id": "18118792582278037",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17968496554527011.webp",
     "a": "פורים  פורים   פורים \nהחג האהוב שלי ליצירתיות \nעדיין לא שיריינתם תאריך❓זה הזמן❗️",
     "item_id": "17968496554527011",
     "post_id": "17968496554527011"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17909489306430964.mp4",
-    "a": "Daria amazing ❤️\n@darya_paz \n\n#barbiemakeup #makeup #artist #art #איפור #איפורבא",
-    "item_id": "17909489306430964",
-    "post_id": "17909489306430964",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_18183085273162416.webp",
@@ -4237,14 +3101,6 @@ const GALLERY_IMAGES = [
     "a": "איפור שלי לצילומי תדמית של \n@corals144 \n@tomer_haruvi הצלם המוכשר \n\n#צילומיתדמית",
     "item_id": "17914704527480037",
     "post_id": "17914704527480037"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17856088127696120.mp4",
-    "a": "מאחורי הקלעים לצילומי תדמית המדהימים שעשיתי אצל לירן יוחאי המדהימה \nפשוט תודה רב",
-    "item_id": "17856088127696120",
-    "post_id": "17856088127696120",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17936867566768192.webp",
@@ -4361,34 +3217,10 @@ const GALLERY_IMAGES = [
     "post_id": "17901550343370257"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17919242336030231.mp4",
-    "a": "מתוך סדנאות האיפור שלי \n@silantonella עושה לי פפראצי\n@hilashai הדוגמנית \nבשיתוף",
-    "item_id": "17919242336030231",
-    "post_id": "17919242336030231",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17920116973908262.webp",
     "a": "❤️",
     "item_id": "17920116973908262",
     "post_id": "17920116973908262"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17968397749470504.mp4",
-    "a": "Makeup effect to \n@fattal_hotels @herods__hotels",
-    "item_id": "17968397749470504",
-    "post_id": "17968397749470504",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17895003566336057.mp4",
-    "a": "Killing me softly\nMakeup by me",
-    "item_id": "17895003566336057",
-    "post_id": "17895003566336057",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17910810572178900.webp",
@@ -4397,34 +3229,10 @@ const GALLERY_IMAGES = [
     "post_id": "17910810572178900"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17872732358606959.mp4",
-    "a": "Makeup effects",
-    "item_id": "17872732358606959",
-    "post_id": "17872732358606959",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17917778678038491.webp",
     "a": "איפור פציעות עבור תרגיל ביטחוני \nבשיתוף @fattal_hotels \nמה אומרים פצוע קשה או לא",
     "item_id": "17917778678038491",
     "post_id": "17917778678038491"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_18152709667205132.mp4",
-    "a": "Are you ready for it?\n#art #oneline",
-    "item_id": "18152709667205132",
-    "post_id": "18152709667205132",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17927117578692898.mp4",
-    "a": "איך אני אוהבת שחוזרים אליי \nזה פשוט אומר לי הכל ונותן לי את התחושה הכי טובה שיש,",
-    "item_id": "17927117578692898",
-    "post_id": "18169414363157664",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17866673423583566.webp",
@@ -4445,14 +3253,6 @@ const GALLERY_IMAGES = [
     "post_id": "17895080429162987"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17931562918644910.mp4",
-    "a": "איפור מקצועי לליאור המדהימה \n@_liorbuskila_",
-    "item_id": "17931562918644910",
-    "post_id": "17895080429162987",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17911804903986393.webp",
     "a": "איפור ערב לנשף 2021 \nהמון זמן לא העלתי איפור שלי.. אז תפרגנו לי \nרק אם באמת אהבת",
     "item_id": "17911804903986393",
@@ -4465,30 +3265,6 @@ const GALLERY_IMAGES = [
     "post_id": "17883974216338558"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17987996179364374.mp4",
-    "a": "איפור ערב לנשף 2021 \nהמון זמן לא העלתי איפור שלי.. אז תפרגנו לי \nרק אם באמת אהבת",
-    "item_id": "17987996179364374",
-    "post_id": "17883974216338558",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17926049950524424.mp4",
-    "a": "אקרילעלקנבס #yardenart #artist #paiting  #art #israel #eilat #אילת \n#jaket #flui",
-    "item_id": "17926049950524424",
-    "post_id": "17926049950524424",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17943323485429342.mp4",
-    "a": "",
-    "item_id": "17943323485429342",
-    "post_id": "17943323485429342",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17918492287390552.webp",
     "a": "Purim 2020 comics makeup \n\n#makeup #makeupartist #amkeuplook #purim #purim2020 #",
     "item_id": "17918492287390552",
@@ -4499,14 +3275,6 @@ const GALLERY_IMAGES = [
     "a": "Halloween style",
     "item_id": "17930026003281486",
     "post_id": "17930026003281486"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17973048385238637.mp4",
-    "a": "Comics girl ♥️",
-    "item_id": "17973048385238637",
-    "post_id": "17973048385238637",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17848314520387879.webp",
@@ -4563,14 +3331,6 @@ const GALLERY_IMAGES = [
     "post_id": "17847268759371902"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17959989202236563.mp4",
-    "a": "Create yourself",
-    "item_id": "17959989202236563",
-    "post_id": "17959989202236563",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_18005070970146219.webp",
     "a": "Part 2 - sketchy",
     "item_id": "18005070970146219",
@@ -4581,30 +3341,6 @@ const GALLERY_IMAGES = [
     "a": "Today’s makeup - sketchy",
     "item_id": "18010468879095917",
     "post_id": "18010468879095917"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17864073601317071.mp4",
-    "a": "MAYA \n@maya_segal95 @maccosmetics \n#makeuptutorial #makeup #2019 #beautiful #pur",
-    "item_id": "17864073601317071",
-    "post_id": "17864073601317071",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17916897814266731.mp4",
-    "a": "#art #makeuptutorial #makeup #yardendamrimakeupartist #eilat #israel #purim2019",
-    "item_id": "17916897814266731",
-    "post_id": "17916897814266731",
-    "video": true,
-    "thumb": ""
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17973167485196639.mp4",
-    "a": "Purim 2019\n#purim2019 #makeup #yardendamrimakeupartist",
-    "item_id": "17973167485196639",
-    "post_id": "17973167485196639",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17961952381175953.webp",
@@ -4619,14 +3355,6 @@ const GALLERY_IMAGES = [
     "post_id": "17899075519259949"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17905003144208575.mp4",
-    "a": "Color party\n#milk1422 #artmakeup #highlights #unique #makeup #makeupbyme #love #",
-    "item_id": "17905003144208575",
-    "post_id": "17905003144208575",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17904221485203748.webp",
     "a": "@advanachmani ❤️\n@milk1422 \n#milk1422  #color #workmakeup #makeuptutorial #best",
     "item_id": "17904221485203748",
@@ -4637,14 +3365,6 @@ const GALLERY_IMAGES = [
     "a": "Colors ❤️\n@milk1422 \n#milk1422  #color #workmakeup #makeuptutorial #best #weddin",
     "item_id": "17938346590113729",
     "post_id": "17938346590113729"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17952544468003564.mp4",
-    "a": "Colors ❤️\n@milk1422 \n#milk1422  #color #workmakeup #makeuptutorial #best #weddin",
-    "item_id": "17952544468003564",
-    "post_id": "17952544468003564",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17881735126212254.webp",
@@ -4809,14 +3529,6 @@ const GALLERY_IMAGES = [
     "post_id": "17923752895014215"
   },
   {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17899338655184361.mp4",
-    "a": "מקומות אחרונים לפורים!! #פורים #פורים2018 #pink #workmakeup #mascara #mac #makeu",
-    "item_id": "17899338655184361",
-    "post_id": "17899338655184361",
-    "video": true,
-    "thumb": ""
-  },
-  {
     "u": "https://images.yardendamri.co.il/yarden_17849102191235562.webp",
     "a": "#workmakeup # #mac #makeupartist #makeupbyme #makeup #blackandwhite #black #ins",
     "item_id": "17849102191235562",
@@ -4863,14 +3575,6 @@ const GALLERY_IMAGES = [
     "a": "G.M \n#makeupbyme #makeuplover #makeupartist #makeup #mac #mascara #eye #eyebrows",
     "item_id": "17896520155133093",
     "post_id": "17896520155133093"
-  },
-  {
-    "u": "https://videos-new.yardendamri.co.il/yarden_17906917255113346.mp4",
-    "a": "Purim \n#purim # # #makeupbyme #makeup #makeupartist #makeuppurim #wow #colors #c",
-    "item_id": "17906917255113346",
-    "post_id": "17906917255113346",
-    "video": true,
-    "thumb": ""
   },
   {
     "u": "https://images.yardendamri.co.il/yarden_17893219486178375.webp",

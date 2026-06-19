@@ -63,7 +63,7 @@ async function compressImage(buffer) {
 }
 
 async function compressVideo(inputPath, outputPath) {
-  execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(720,iw)':-2" -c:v libx264 -crf 28 -preset fast -an -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 120000 });
+  execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(720,iw)':-2" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 128k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 120000 });
 }
 
 async function uploadToR2(cfg, buffer, fileName, contentType) {
