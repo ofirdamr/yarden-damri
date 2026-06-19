@@ -570,7 +570,7 @@
       /* ── About ── */
       #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
       /* Portrait photo fills its column — cover + 2/3 */
-      .about-card { aspect-ratio: 2/3; max-height: 700px; background-size: cover !important; background-position: center top !important; }
+      .about-card { aspect-ratio: 2/3; max-height: 700px; background-size: cover !important; background-position: center top !important; background-repeat: no-repeat !important; }
       .about-card-img { background-size: cover; }
 
       /* ── Section width caps (cream sections: cap the section; warm sections: cap the inner) ── */
