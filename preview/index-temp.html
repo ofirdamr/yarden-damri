@@ -224,7 +224,7 @@
       <div id="heroMediaWrap" style="position:absolute;inset:0;overflow:hidden;background:#111;">
         <video id="heroVideo" autoplay muted loop playsinline preload="none"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;">
-          <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18094353658922515.mp4" type="video/mp4">
+          <source id="heroVideoSource" src="https://videos-new.yardendamri.co.il/yarden_18100404782127411.mp4" type="video/mp4">
         </video>
         <img id="heroImage" src="" alt="ירדן דמרי מאפרת"
           style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 20%;top:0;left:0;display:none;"/>
@@ -1048,9 +1048,10 @@
 
         const _thumb2 = item.thumb || '';
         const mediaEl = isVideo
-          ? `<video src="${item.u}" muted loop playsinline preload="none" poster="${_thumb2}"
+          ? `<img src="${_thumb2}" data-video="${item.u}" loading="lazy"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
-               style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"></video>`
+               style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"
+               onerror="this.style.background='#1a1008'">`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
@@ -1102,7 +1103,15 @@
         _galleryVidObserver = new IntersectionObserver(entries => {
           entries.forEach(e => {
             const el = e.target;
-            if (e.isIntersecting && el.tagName === 'VIDEO') {
+            if (e.isIntersecting && el.tagName === 'IMG' && el.dataset.video) {
+              const v = document.createElement('video');
+              v.src = el.dataset.video; v.muted = true; v.loop = true;
+              v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
+              v.style.cssText = el.style.cssText;
+              el.parentNode.replaceChild(v, el);
+              v.muted = true; v.play().catch(()=>{});
+              v.dataset._obs = '1'; _galleryVidObserver.observe(v);
+            } else if (e.isIntersecting && el.tagName === 'VIDEO') {
               el.muted = true; el.play().catch(()=>{});
             } else if (!e.isIntersecting && el.tagName === 'VIDEO') {
               el.pause();
@@ -1110,7 +1119,7 @@
           });
         }, { threshold: 0.2 });
       }
-      document.querySelectorAll('#ig-gallery video').forEach(el => {
+      document.querySelectorAll('#ig-gallery img[data-video], #ig-gallery video').forEach(el => {
         if (!el.dataset._obs) { el.dataset._obs = '1'; _galleryVidObserver.observe(el); }
       });
     }
