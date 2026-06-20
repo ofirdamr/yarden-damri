@@ -569,3 +569,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Audited all 13 preview pages: lang/dir attrs ✅, mobile menu RTL slide ✅, arrow icon direction ✅, no float usage, no broken bidi text — all correct.
 - Bug found: footer phone "054-7276716" not wrapped in dir="ltr", risk of digit/hyphen reorder in RTL context.
 - Fixed across all 12 pages showing the phone number (index, about, services, bride, bridal-guide, gallery, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy). Pushed as -temp.html files, pending review.
+
+## 2026-06-20 — Fix gallery-temp.html video autoplay
+- Root cause: the confirmed fix from index-temp.html was NEVER applied to gallery-temp.html
+- gallery-temp.html had: `data-src` (not `src`), no `autoplay`, `preload="none"`, observer checked `!v.src` (always false on iOS)
+- Fix: `src="${item.u}"` direct, `autoplay`, `preload="metadata"`, `poster="${item.thumb}"`, observer uses WeakSet + just play()/pause()
