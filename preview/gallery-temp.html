@@ -466,8 +466,10 @@ function renderGallery() {
     const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
     if (isVideo) {
-      mediaHtml = `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${item.thumb||''}"
-        style="width:100%;height:100%;object-fit:cover;display:block;${rotStyle}" onerror="this.style.display='none'"></video>`;
+      const _thumb = item.thumb || item.u;
+      mediaHtml = `<img src="${_thumb}" data-video="${item.u}"
+        style="width:100%;height:100%;object-fit:cover;display:block;${rotStyle}"
+        loading="lazy" onerror="this.src='${item.u}'">`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
@@ -499,18 +501,28 @@ function renderGallery() {
   observeVideos();
 }
 
-// ── VIDEO AUTOPLAY (viewport only) ──
+// ── VIDEO AUTOPLAY: thumbnail first, swap to <video autoplay> when in viewport ──
+const _obsSet = new WeakSet();
 const videoObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    const v = e.target;
-    if (e.isIntersecting) { v.muted = true; v.play().catch(()=>{}); }
-    else { v.pause(); }
+    const el = e.target;
+    if (e.isIntersecting && el.tagName === 'IMG' && el.dataset.video) {
+      const v = document.createElement('video');
+      v.src = el.dataset.video; v.autoplay = true; v.muted = true;
+      v.loop = true; v.playsInline = true; v.preload = 'metadata';
+      v.style.cssText = el.style.cssText;
+      el.parentNode.replaceChild(v, el);
+      v.muted = true; v.play().catch(()=>{});
+    } else if (e.isIntersecting && el.tagName === 'VIDEO') {
+      el.muted = true; el.play().catch(()=>{});
+    } else if (!e.isIntersecting && el.tagName === 'VIDEO') {
+      el.pause();
+    }
   });
 }, { threshold: 0.1 });
-let _obsSet = new WeakSet();
 function observeVideos() {
-  document.querySelectorAll('#galleryGrid video').forEach(v => {
-    if (!_obsSet.has(v)) { _obsSet.add(v); videoObserver.observe(v); }
+  document.querySelectorAll('#galleryGrid img[data-video], #galleryGrid video').forEach(el => {
+    if (!_obsSet.has(el)) { _obsSet.add(el); videoObserver.observe(el); }
   });
 }
 
