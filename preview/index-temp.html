@@ -1052,7 +1052,7 @@
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
         const mediaEl = isVideo
-          ? `<video data-src="${item.u}" muted loop playsinline preload="none"
+          ? `<video data-src="${item.u}" ${item.thumb ? `poster="${item.thumb}"` : ''} muted loop playsinline preload="none"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;${_rotStyle}"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
