@@ -809,9 +809,29 @@ function renderGrid() {
           <button class="card-btn" onclick="togglePin('${img.u}')" title="נעץ">${pinnedSet.has(img.u)?'📌':'📍'}</button>
           <button class="card-btn" onclick="toggleHide('${img.u}')" title="הסתר">${hiddenSet.has(img.u)?'👁️':'🚫'}</button>
           <button class="card-btn" onclick="openCatModal('${img.u}')" title="קטגוריה">🏷️</button>
+          ${isVid?`<button class="card-btn" onclick="event.stopPropagation();setHeroVideo('${img.u}')" title="הגדר כווידאו ראשי">🎬</button>`:''}
+
         </div>
         ${cat?`<span class="cat-label">🏷️ ${cat}</span>`:''}
       </div>`;
+
+    if (isVid) {
+      div.addEventListener('mouseenter', () => {
+        const imgEl = div.querySelector('img'); if (!imgEl) return;
+        const v = document.createElement('video');
+        v.src = img.u; v.muted = true; v.loop = true; v.playsInline = true;
+        v.style.cssText = imgEl.style.cssText;
+        imgEl.replaceWith(v); v.play().catch(()=>{});
+      });
+      div.addEventListener('mouseleave', () => {
+        const v = div.querySelector('video'); if (!v) return;
+        v.pause();
+        const imgEl = document.createElement('img');
+        imgEl.src = thumbSrc; imgEl.loading = 'lazy'; imgEl.decoding = 'async';
+        imgEl.style.cssText = `transform:rotate(${rotation}deg);transition:transform .3s;width:100%;height:100%;object-fit:cover;`;
+        v.replaceWith(imgEl);
+      });
+    }
 
     if (multiSelectMode) {
       if (selectedUrls.has(img.u)) div.classList.add('selected');
@@ -849,6 +869,10 @@ function setFilter(f,btn) {
 function filterGrid(){ window._adminPage=0; searchTerm=document.getElementById('search-input').value; renderGrid(); }
 
 // ─── ACTIONS ────────────────────────────────────────────────────
+function setHeroVideo(url) {
+  const s = getSettings(); s.heroVideo = url; saveSettings(s);
+  showToast('🎬 וידאו ראשי עודכן!');
+}
 function togglePin(url){
   const s=getSettings(); s.pinned=s.pinned||[];
   const i=s.pinned.indexOf(url);
