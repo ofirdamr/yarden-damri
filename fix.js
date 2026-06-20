@@ -174,8 +174,23 @@ function safeWrite(filePath, data) {
     const isVideo = item.media_type === "VIDEO";
 
     const isHidden = hiddenIds.has(item.id) || (existingById[item.id] && hiddenUrls.has(existingById[item.id].u));
-    if (isHidden && !FIX_AUDIO) { process.stdout.write("H"); continue; }
-    if (isHidden && !isVideo)   { process.stdout.write("H"); continue; } // --fix-audio: only re-upload videos
+    if (isHidden) {
+      // Keep hidden media IN gallery-data.js (so it stays listed for admin and remains on R2),
+      // flagged hidden:true. Public pages filter it out via gallery-settings.json. No re-upload —
+      // these were uploaded before, so we reuse the existing entry or the deterministic R2 URL.
+      let entry = existingById[item.id];
+      if (entry) {
+        entry.post_id = item.post_id || item.id;
+        entry.a = cleanCaption(item.caption);
+      } else if (isVideo) {
+        entry = { u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg` };
+      } else {
+        entry = { u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
+      }
+      entry.hidden = true;
+      if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
+      process.stdout.write("h"); continue;
+    }
 
     if (!FIX_AUDIO && existingById[item.id]) {
       const e = existingById[item.id];

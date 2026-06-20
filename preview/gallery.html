@@ -311,7 +311,7 @@ function applyAdminSettings(images) {
   const hiddenCats = new Set([...privateCatsSet, 'מוסתרות']);
   // Public gallery: keep natural Instagram upload (time) order, photos + videos together.
   // Only remove hidden items and items in private/hidden categories. No category/kind sorting.
-  return images.filter(img => !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
+  return images.filter(img => !img.hidden && !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
 }
 
 // ── CDN HELPERS ──
