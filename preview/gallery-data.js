@@ -1,6 +1,14 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://videos-new.yardendamri.co.il/yarden_18100404782127411.mp4",
+    "a": "Step by step ✨\n\n@sheluxe.social \n@sharon.bridal \n@korenmalihe \n@yarin.ohayon \n\n#",
+    "item_id": "18100404782127411",
+    "post_id": "18100404782127411",
+    "video": true,
+    "thumb": "https://images.yardendamri.co.il/yarden_18100404782127411_thumb.jpg"
+  },
+  {
     "u": "https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4",
     "a": "איפור עדין וסופר טבעי \nעדן כמה שאת יפה \n@yarden_damri_makeup \n@ofek_hatuel @ofek",
     "item_id": "17972187162071494",
