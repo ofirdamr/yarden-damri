@@ -184,10 +184,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   </section>
 
   <section style="padding:0 0 60px;">
-    <div class="filter-bar" id="media-filter" role="tablist" aria-label="סוג מדיה">
-      <button class="filter-btn active" data-media="all" role="tab" aria-selected="true">הכל</button>
-      <button class="filter-btn" data-media="photo" role="tab" aria-selected="false">תמונות</button>
-      <button class="filter-btn" data-media="video" role="tab" aria-selected="false">סרטונים</button>
+    <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
+      <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -294,7 +292,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 </div>
 
 <script src="cloud-storage.js?v=7"></script>
-<script src="gallery-data.js?v=1781985840"></script>
+<script src="gallery-data.js?v=1781987302"></script>
 <script>
 // ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
 function getAdminSettings() {
@@ -436,7 +434,6 @@ function getCat(img) {
 const PAGE_SIZE = 24;
 let renderPage = 1;
 let activeFilter = 'all';
-let mediaFilter = 'all';
 let allFilteredImages = [];
 let lbIndex = 0;
 
@@ -463,7 +460,7 @@ function renderGallery() {
     const rotStyle = rot ? `transform:rotate(${rot}deg);` : '';
     let mediaHtml;
     if (isVideo) {
-      mediaHtml = `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${item.thumb||''}"
+      mediaHtml = `<video src="${item.u}" muted loop playsinline preload="none" poster="${item.thumb||''}"
         style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;background:#1a1008;${rotStyle}"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
@@ -551,23 +548,10 @@ function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
   const adminCatMap = getAdminSettings().cats || {};
-  let list = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
-  const isVid = it => !!(it.video || (it.u && it.u.includes('.mp4')));
-  if (mediaFilter === 'photo') list = list.filter(it => !isVid(it));
-  else if (mediaFilter === 'video') list = list.filter(isVid);
-  allFilteredImages = list;
+  allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
   renderPage = 1;
   renderGallery();
 }
-
-// Media-type filter (הכל / תמונות / סרטונים) — independent of category filter
-document.getElementById('media-filter').addEventListener('click', e => {
-  const btn = e.target.closest('button'); if (!btn) return;
-  document.querySelectorAll('#media-filter .filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-  btn.classList.add('active'); btn.setAttribute('aria-selected','true');
-  mediaFilter = btn.dataset.media;
-  applyFilter(activeFilter);
-});
 document.getElementById('loadMoreBtn').addEventListener('click', () => { renderPage++; renderGallery(); });
 
 buildFilterBar();

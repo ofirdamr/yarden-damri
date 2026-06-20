@@ -719,7 +719,7 @@
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
   </script>
-  <script src="gallery-data.js?v=1781985840"></script>
+  <script src="gallery-data.js?v=1781987302"></script>
 
   <script>
     // ── MOBILE MENU ──────────────────────────────
@@ -1039,10 +1039,11 @@
         const _videoThumb = item.thumb ||
           (item.item_id ? `https://images.yardendamri.co.il/yarden_${item.item_id}_thumb.jpg` : '');
 
-        // VIDEO: real autoplay video (tile is an aspect-ratio:1 box, so it never collapses). No play button.
+        // VIDEO: lazy autoplay — poster shows first; observer plays it only when scrolled into view
+        // (preload="none" so the homepage doesn't download every clip at once). No play button.
         const _thumb = _videoThumb || '';
         const mediaEl = isVideo
-          ? `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${_thumb}"
+          ? `<video src="${item.u}" muted loop playsinline preload="none" poster="${_thumb}"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
