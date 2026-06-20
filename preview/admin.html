@@ -802,10 +802,7 @@ function renderGrid() {
     div.className='img-card'+(hiddenSet.has(img.u)?' hidden-card':'')+(pinnedSet.has(img.u)?' pinned':'');
     div.dataset.url=img.u; div.draggable=true;
     const isVid = img.u.includes('/video/upload/') || img.u.match(/\.(mp4|mov|webm)$/i);
-    function adminThumb(url, isVid) {
-      return url || '';
-    }
-    const thumbSrc = adminThumb(img.u, isVid);
+    const thumbSrc = isVid ? (img.thumb || img.u) : img.u;
     const altTxt = generateAltText(img, catMap);
     const rotation = (s.rotations||{})[img.u] || 0;
     div.innerHTML=`
