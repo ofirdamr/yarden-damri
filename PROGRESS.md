@@ -2,6 +2,15 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — Rebuilt gallery from scratch: preview/gallery-new.html
+Decision: stop debugging the tangled gallery pipeline in index-temp.html (stale 772-entry hidden list, 899-entry order map, brideKW sort, pagination that buried all videos on page 2). Built a fresh, self-contained gallery page.
+- Reads gallery-data.js directly. No admin-settings filtering, no stale hidden/order.
+- All 773 items in natural data order, so 12 videos appear in the first 40 tiles (immediately visible).
+- Videos: video tag with src autoplay muted loop playsinline preload=metadata poster, plus IntersectionObserver play/pause. No play button.
+- Filters: הכל / תמונות / סרטונים. "הצגת עוד" load-more (40/batch). Lightbox with prev/next + keyboard.
+- Self-contained: inline CSS/JS, no styles-temp.css dependency.
+- NOT yet verified live (session egress blocked). Pending user review at /preview/gallery-new.html.
+
 ## 2026-06-20 — ✅ CONFIRMED WORKING: gallery videos autoplay everywhere (incl. iPhone)
 - User confirmed videos now autoplay from all devices including iPhone.
 - Final working combo: `<video src autoplay muted loop playsinline preload="metadata" poster>` + `observeGalleryVideos()` IntersectionObserver that sets `v.muted=true` and calls `v.play()` on visible tiles / `v.pause()` off-screen. No play button anywhere.
