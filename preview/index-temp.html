@@ -1094,7 +1094,24 @@
 
       renderPagination();
       if (page > 1) window.scrollTo({top: document.getElementById('gallery').offsetTop - 80, behavior: 'smooth'});
-      if (typeof observeGalleryVideos === 'function') setTimeout(observeGalleryVideos, 50);
+      observeGalleryVideos();
+    }
+
+    // Autoplay gallery videos when visible, pause when off-screen (play/pause only — never a play button)
+    let _galleryVidObserver = null;
+    function observeGalleryVideos() {
+      const vids = document.querySelectorAll('#ig-gallery video');
+      if (!vids.length) return;
+      if (!_galleryVidObserver) {
+        _galleryVidObserver = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            const v = e.target;
+            if (e.isIntersecting) { v.play().catch(()=>{}); }
+            else { v.pause(); }
+          });
+        }, { threshold: 0.2 });
+      }
+      vids.forEach(v => { if (!v.dataset._obs) { v.dataset._obs = '1'; _galleryVidObserver.observe(v); } });
     }
 
     function renderPagination() {

@@ -2,6 +2,11 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — Restored missing observeGalleryVideos() — videos now actually play
+- Root cause of "only images, no videos": `observeGalleryVideos()` was CALLED (renderPage, DOMContentLoaded, setTimeout) but NEVER defined — a past session deleted it when switching to the play-button approach. Without it, grid `<video>` tiles never received `.play()`, so on iOS Safari they showed only their poster thumbnail (looked like images).
+- Fix: defined `observeGalleryVideos()` — an IntersectionObserver that plays visible gallery videos and pauses off-screen ones (play/pause only, no play button). Also serves performance for 162 videos.
+- Confirmed via user screenshot that served gallery-data.js DOES contain the videos — data was never the problem.
+
 ## 2026-06-20 — Gallery videos autoplay (deployed to main)
 - `preview/index-temp.html` renderPage(): video tiles now render a real `<video src="${item.u}" autoplay muted loop playsinline preload="none" poster="${item.thumb}">` instead of `<img>` + play-button overlay
 - Videos autoplay (muted, looping) in the gallery grid — no play button anywhere
