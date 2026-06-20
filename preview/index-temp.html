@@ -777,7 +777,7 @@
     const PER_PAGE = 48;
     let currentPage = 1;
     let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE)
+      ? applyAdminSettings(GALLERY_IMAGES)
       : [];
 
     const gallery = document.getElementById('ig-gallery');
@@ -789,7 +789,7 @@
       await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE);
+        filteredImages = applyAdminSettings(GALLERY_IMAGES);
         if (typeof renderPage === 'function') renderPage(currentPage);
       }
     })();
@@ -1138,7 +1138,7 @@
       entries.forEach(e => {
         const vid = e.target;
         if (e.isIntersecting) {
-          if (vid.dataset.src && !vid.src) {
+          if (vid.dataset.src && !vid.getAttribute('src')) {
             vid.src = vid.dataset.src;
             vid.load();
           }
