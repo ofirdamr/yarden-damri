@@ -105,6 +105,12 @@
     .period-btn.active{background:var(--blush);color:#fff;border-color:var(--blush)}
     /* TOAST */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--rose);color:#fff;padding:11px 26px;border-radius:28px;font-size:.88rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+    .vid-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;}
+    .vid-modal-bg.open{display:flex;}
+    .vid-modal-bg video{max-width:92vw;max-height:78vh;border-radius:10px;outline:none;}
+    .vid-modal-close{position:fixed;top:18px;left:18px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.6rem;width:46px;height:46px;border-radius:50%;cursor:pointer;line-height:1;}
+    .vid-modal-set{background:var(--gold,#B89060);color:#fff;border:none;padding:13px 28px;border-radius:30px;font-size:.95rem;font-weight:700;cursor:pointer;}
+    .card-btn.hero-active{background:var(--gold,#B89060);color:#fff;}
     .toast.show{opacity:1}
     @media(max-width:600px){
       #grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));padding:12px 14px}
@@ -438,6 +444,12 @@
       <button class="btn btn-primary" onclick="saveImageCategory()">שמור</button>
     </div>
   </div>
+</div>
+
+<div class="vid-modal-bg" id="vid-modal" onclick="if(event.target===this)closeVideoPreview()">
+  <button class="vid-modal-close" onclick="closeVideoPreview()" title="סגור">✕</button>
+  <video id="vid-modal-player" controls playsinline></video>
+  <button class="vid-modal-set" onclick="setHeroVideoFromModal()">⭐ הגדר כווידאו ראשי</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -806,10 +818,11 @@ function renderGrid() {
       ${hiddenSet.has(img.u)?'<span class="hidden-badge">🚫</span>':''}
       <div class="card-overlay">
         <div class="card-actions">
+          ${isVid?`<button class="card-btn" onclick="event.stopPropagation();previewVideo('${img.u}')" title="נגן וידאו">▶️</button>`:''}
+          ${isVid?`<button class="card-btn${(getSettings().heroVideo===img.u)?' hero-active':''}" onclick="event.stopPropagation();setHeroVideo('${img.u}')" title="הגדר כווידאו ראשי">${(getSettings().heroVideo===img.u)?'⭐':'☆'}</button>`:''}
           <button class="card-btn" onclick="togglePin('${img.u}')" title="נעץ">${pinnedSet.has(img.u)?'📌':'📍'}</button>
           <button class="card-btn" onclick="toggleHide('${img.u}')" title="הסתר">${hiddenSet.has(img.u)?'👁️':'🚫'}</button>
           <button class="card-btn" onclick="openCatModal('${img.u}')" title="קטגוריה">🏷️</button>
-          ${isVid?`<button class="card-btn" onclick="event.stopPropagation();setHeroVideo('${img.u}')" title="הגדר כווידאו ראשי">🎬</button>`:''}
         </div>
         ${cat?`<span class="cat-label">🏷️ ${cat}</span>`:''}
       </div>`;
@@ -868,9 +881,27 @@ function setFilter(f,btn) {
 function filterGrid(){ window._adminPage=0; searchTerm=document.getElementById('search-input').value; renderGrid(); }
 
 // ─── ACTIONS ────────────────────────────────────────────────────
+let _previewUrl = null;
+function previewVideo(url) {
+  _previewUrl = url;
+  const player = document.getElementById('vid-modal-player');
+  player.src = url;
+  document.getElementById('vid-modal').classList.add('open');
+  player.play().catch(()=>{});
+}
+function closeVideoPreview() {
+  const player = document.getElementById('vid-modal-player');
+  player.pause(); player.src = '';
+  document.getElementById('vid-modal').classList.remove('open');
+  _previewUrl = null;
+}
+function setHeroVideoFromModal() { if (_previewUrl) { setHeroVideo(_previewUrl); closeVideoPreview(); } }
 function setHeroVideo(url) {
-  const s = getSettings(); s.heroVideo = url; saveSettings(s);
-  showToast('🎬 וידאו ראשי עודכן!');
+  const s = getSettings();
+  s.heroVideo = (s.heroVideo === url) ? null : url;
+  saveSettings(s);
+  showToast(s.heroVideo ? '⭐ הוגדר כווידאו ראשי!' : 'בוטל וידאו ראשי');
+  renderGrid();
 }
 function togglePin(url){
   const s=getSettings(); s.pinned=s.pinned||[];
