@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — iOS gallery autoplay: preload=metadata + force muted at play()
+- User confirmed (after deploy) the video spots show static poster thumbnails but don't play on iPhone — i.e. new `<video>` code IS live, but iOS won't auto-start.
+- Root cause: `preload="none"` means iOS Safari never fetches video data, so it shows only the poster frame.
+- Fix: `preload="none"` → `preload="metadata"` on gallery `<video>` tiles, and set `v.muted = true` right before `v.play()` in observeGalleryVideos (iOS checks the muted property at play() time).
+- Note: iOS Low Power Mode disables all autoplay regardless of code.
+
 ## 2026-06-20 — Restored missing observeGalleryVideos() — videos now actually play
 - Root cause of "only images, no videos": `observeGalleryVideos()` was CALLED (renderPage, DOMContentLoaded, setTimeout) but NEVER defined — a past session deleted it when switching to the play-button approach. Without it, grid `<video>` tiles never received `.play()`, so on iOS Safari they showed only their poster thumbnail (looked like images).
 - Fix: defined `observeGalleryVideos()` — an IntersectionObserver that plays visible gallery videos and pauses off-screen ones (play/pause only, no play button). Also serves performance for 162 videos.
