@@ -239,6 +239,16 @@ function safeWrite(filePath, data) {
   console.log(`\nSaving ${gallery.length} items to ${GALLERY_FILE}`);
   safeWrite(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
 
+  // Bump gallery-data.js version in the HTML file so browsers don't serve stale cache
+  const htmlFile = TARGET_PREVIEW ? "preview/index-temp.html" : "index.html";
+  try {
+    let html = fs.readFileSync(htmlFile, "utf8");
+    const ver = Date.now();
+    html = html.replace(/gallery-data\.js\?v=\d+/, `gallery-data.js?v=${ver}`);
+    fs.writeFileSync(htmlFile, html, "utf8");
+    console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);
+  } catch(e) { console.warn("Could not bump HTML version:", e.message); }
+
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
   // Collect ALL IDs: from rawPosts AND from existing gallery items (covers old carousel children)

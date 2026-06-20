@@ -376,3 +376,18 @@ The hero video flash kept coming back because I fixed pieces without tracing the
 ## 2026-06-18 — Clobbered pre-existing -temp files
 Ran a bulk find-replace across all "-temp.html" filenames without first checking if those files already existed on main with unreviewed content. 4 files (about-temp, bride-temp, gallery-temp, cookies-policy-temp) already existed and got overwritten by my script before I checked git diff. Caught it before push, reverted, confirmed those 4 were stale drafts (missing cookie-banner.js, missing consent-gated GA) not new unreviewed work, then rebuilt all 12 temp files correctly from current permanent files.
 Lesson: before writing to any "-temp.html" path, check `git status`/`git diff` first to see if it already exists with content that hasn't been reviewed yet.
+
+## 2026-06-20 — Repeated documented mistake: data-src + IntersectionObserver for gallery videos
+MISTAKES.md already documented this exact pattern as fragile (entry: "Lazy loading videos via data-src is fragile"). I did not read MISTAKES.md at the start of the session and repeated it anyway — used `data-src` + IntersectionObserver for gallery video tiles, then spent multiple rounds patching the observer condition (`!vid.src` vs `!vid.getAttribute('src')`) instead of just not using data-src.
+Root cause: iOS Safari returns the page URL for `video.src` when no src attribute is set, so `!vid.src` is always false and the src was never set from data-src.
+Fix applied: replaced `<video data-src>` tiles with `<img src="${item.thumb}">` + play icon overlay. No IntersectionObserver needed for tiles. Lightbox plays video with audio as before.
+Rule: READ MISTAKES.md before implementing ANY video-related feature. data-src is fragile. Use direct src.
+
+## 2026-06-20 — filteredImages sliced to PER_PAGE — pagination completely broken
+`filteredImages = applyAdminSettings(GALLERY_IMAGES).slice(0, PER_PAGE)` was setting filteredImages to only 48 items. Since `renderPage` then did `filteredImages.slice(start, start+PER_PAGE)`, pages 2+ always returned empty. ~725 items (including ~148 videos) were unreachable. The bug was invisible because the gallery appeared to work for the first page.
+Fix: removed `.slice(0, PER_PAGE)` from the filteredImages assignment. `renderPage` already slices correctly.
+Rule: when setting a variable that represents "all filtered items for pagination", NEVER slice it. Only slice inside the render function.
+
+## 2026-06-20 — Made multiple changes without confirming each one worked
+Pushed 4 separate fixes for the same video-not-showing bug without verifying each one worked before pushing the next. The user could not tell which fix (if any) worked. This created confusion and eroded trust.
+Rule: make ONE targeted fix, push, confirm with user it works, then proceed. Never stack unverified fixes.
