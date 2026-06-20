@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — ROOT CAUSE found: gallery videos "not there" (preview/gallery.html)
+Verified by observation, not guessing (user: hero video PLAYS = video domain fine; gallery video tiles "not there at all"). Data checked: gallery-data.js has 162 videos all with thumb URLs; 138 survive admin hidden/private-category filtering — so the data and filter were NEVER the problem. Two real causes in gallery.html:
+1. No way to reach the videos — only category filters existed (no photos/videos toggle), and the admin `order` + bride-keyword sort buried videos deep in the masonry, so first pages show only photos.
+2. Invisible video tiles — `<video>` had `width:100%` with NO height/aspect-ratio in the `columns` masonry, plus `onerror→display:none`, so tiles collapsed to zero size.
+Fix (surgical, in source — no rebuild): added a הכל/תמונות/סרטונים media filter (independent of category filter); gave video tiles `aspect-ratio:4/5;object-fit:cover` + bg so they always have a visible box; removed the `onerror` hide. index.html homepage gallery has the same class of bug (img+data-video swap + `.slice(0,PER_PAGE)` cap) — pending after gallery.html is confirmed.
+
 ## 2026-06-20 — Rebuilt gallery from scratch: preview/gallery-new.html
 Decision: stop debugging the tangled gallery pipeline in index-temp.html (stale 772-entry hidden list, 899-entry order map, brideKW sort, pagination that buried all videos on page 2). Built a fresh, self-contained gallery page.
 - Reads gallery-data.js directly. No admin-settings filtering, no stale hidden/order.
