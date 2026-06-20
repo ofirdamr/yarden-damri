@@ -608,12 +608,6 @@ async function initAdmin() {
 
   // Now render with full settings loaded
   allImages = [...GALLERY_IMAGES];
-  const s = getSettings();
-  if (s.order && s.order.length > 0) {
-    const orderMap = {};
-    s.order.forEach((url,i) => orderMap[url] = i);
-    allImages.sort((a,b) => ((orderMap[a.u]!=null?orderMap[a.u]:99999)-(orderMap[b.u]!=null?orderMap[b.u]:99999)));
-  }
   renderGrid();
   renderCatList();
   renderCatFilters();
