@@ -1,45 +1,72 @@
-# Project Summary — Yarden Damri Website
+# Session Summary — 2026-06-20
 
-## Architecture
-- **Live site**: root branch (old, still on Cloudinary — not yet replaced)
-- **Staging**: `/preview` folder — all active work done here
-- **Repo**: github.com/ofirdamr/yarden-damri
-- **Admin backend**: `api.yardendamri.co.il` (Cloudflare Worker `yarden-admin`)
-- **GitHub Pages**: yardendamri.co.il
+## What was started
+Fix gallery videos — 162 Instagram videos uploaded to R2 but not showing in `preview/index-temp.html`.
 
-## Media Stack (Preview — current)
-| Asset | Storage | Delivery |
-|---|---|---|
-| Images | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il` |
-| Videos | Cloudflare R2 `yarden-videos-new` | `videos-new.yardendamri.co.il` |
-| Video thumbnails | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il/yarden_{id}_thumb.jpg` |
+---
 
-## What Was Done (2026-06-13)
-- **Cookie banner** — slim 48px bar at top of page (z-index:10001), slides down from top on first visit
-  - Nav shifts to `top:48px` via `body.has-ck` while banner visible; returns to `top:0` on dismiss
-  - "אני מסכימה" → GA loads; ✕ → GA never loads
-  - GA (`G-68XM6LS4HX`) removed from `<head>` of all 10 preview pages; consent-gated in inline script
-  - Returning visitors who already accepted: GA loads immediately, no banner shown
-  - Applied to `preview/` folder only; temp files (`cookie-banner-temp.js`, `index-temp.html`) still present
-- **Nav consistency fix** — added ביקורות to `index.html` (homepage) desktop + mobile nav to match all subpages
-- **Admin security refactor** — replaced raw password header with session token auth:
-  - Worker: `POST /login` issues KV token (8h), `POST /logout` revokes it, rate limiting (5 fails → 15-min lockout)
-  - cloud-storage.js: login/logout flow, `Authorization: Bearer <token>` on all writes
-  - admin.html: `tryLogin()` calls server, handles 429/401/network errors in Hebrew
-  - deploy-worker.yml: GitHub Actions CI/CD via Cloudflare REST API + `CF_WORKERS_API_TOKEN` secret
-  - All `-temp` files promoted to permanent and deleted
+## What is DONE
 
-## Pending / To Do
-1. Backfill `_thumb.jpg` for 161 existing R2 videos (hero dark flash)
-2. SEO: meta tags, sitemap.xml, structured data
-3. Promote `/preview` → root (follow GO-LIVE.md)
-4. Online reservation system (post-launch)
-5. Google Places API for live reviews (post-launch)
+### Infrastructure
+- R2 API tokens deleted and recreated (user did this via Cloudflare dashboard on iPhone)
+- GitHub Secrets `R2_ACCESS_KEY_ID` + `R2_SECRET_ACCESS_KEY` updated
+- Sync triggered: 162 videos with audio + thumbnails uploaded to R2 successfully
+  - Videos → `videos-new.yardendamri.co.il`
+  - Thumbnails → `images.yardendamri.co.il`
+- `preview/gallery-data.js`: 773 items (611 images + 162 videos), all videos have `video:true` + `thumb` URL
 
-## Key Credentials
-- R2 images: `images.yardendamri.co.il` (bucket: `yarden-images`)
-- R2 videos: `videos-new.yardendamri.co.il` (bucket: `yarden-videos-new`)
-- Cloudflare account ID: `1c223389f8a4ebb05eb62cb6a8650924`
-- KV `yarden-admin-sessions` ID: `7fc38ac017a145fea0a486419a3bff07`
-- GA4: `G-68XM6LS4HX`
-- GitHub secret `CF_WORKERS_API_TOKEN`: deploy Worker via Actions
+### Code fixes
+- `filteredImages` pagination bug fixed: was `.slice(0, PER_PAGE)` — removed the slice; pages 2+ now work
+- Cache-busting added: `<script src="gallery-data.js?v=1750416000">` — forces browsers to fetch new file
+- `fix.js` now bumps the `?v=` timestamp automatically on every sync
+- Pages deployment triggered (commit `8e83c66`)
+
+---
+
+## What is NOT DONE — VIDEO RENDERING IS STILL BROKEN
+
+### Critical: Gallery videos still not showing
+
+**Current broken state**: Videos use `<img src="${item.thumb}">` + a play button SVG overlay.
+This is WRONG for two reasons:
+1. User rule (stated many times): videos must **autoplay** in the gallery. **No play button. Ever.**
+2. A static `<img>` pretending to be a video is not autoplay — it's a broken experience.
+
+**Root cause of the original "no videos" bug**: Used `data-src` + IntersectionObserver to lazy-set the `src` on `<video>` elements. On iOS, `video.src` returns the page URL when no `src` attribute is set, so `!vid.src` was always false → src never got set → video never loaded.
+
+**The correct fix** (NOT yet implemented):
+```html
+<video src="${item.u}" 
+       autoplay muted loop playsinline 
+       preload="none" 
+       poster="${item.thumb}"
+       style="width:100%;height:100%;object-fit:cover;display:block;">
+</video>
+```
+- Direct `src` attribute on `<video>` (NOT `data-src`)
+- `poster="${item.thumb}"` shows thumbnail while buffering
+- `autoplay muted loop playsinline` — autoplays on mobile including iOS
+- `preload="none"` saves bandwidth
+- NO play button. NO IntersectionObserver for setting src.
+- IntersectionObserver is allowed ONLY for play/pause (pause when scrolled out of view), NOT for setting src.
+
+**File to fix**: `preview/index-temp.html` — `renderPage()` function, `mediaEl` variable around line 1054-1059. Replace `<img>` + play button block with `<video>` block above.
+
+---
+
+## Other pending work (after videos are fixed)
+
+1. **Verify lightbox plays video with audio** — click a video tile → lightbox opens → video plays with sound
+2. **Go-live**: promote all `-temp.html` → permanent files
+3. **SEO**: meta tags, sitemap, structured data
+
+---
+
+## Key file locations
+- `preview/index-temp.html` — gallery page under development
+- `preview/gallery-data.js` — 773 items, 162 videos with thumbs
+- `gallery-settings.json` — admin hidden/pinned/order (root)
+- `fix.js` — sync script, also bumps gallery-data.js version in HTML
+
+## Branch: always `main`
+## Live preview: `https://yardendamri.co.il/preview/index-temp.html`
