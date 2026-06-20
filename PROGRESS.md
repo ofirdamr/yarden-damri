@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — Gallery videos autoplay (deployed to main)
+- `preview/index-temp.html` renderPage(): video tiles now render a real `<video src="${item.u}" autoplay muted loop playsinline preload="none" poster="${item.thumb}">` instead of `<img>` + play-button overlay
+- Videos autoplay (muted, looping) in the gallery grid — no play button anywhere
+- Images unchanged (`<img>` via cdnUrl); hover handlers already guard `img` with `if (imgEl)`
+- Deployed straight to `main` (GitHub Pages serves /preview/ only from main)
+
 ## 2026-06-20 — Video gallery restore + cache-busting
 - R2 API credentials deleted and recreated; GitHub Secrets `R2_ACCESS_KEY_ID` + `R2_SECRET_ACCESS_KEY` updated
 - Sync triggered: 162 videos with audio + thumbnails uploaded to R2 (both buckets)
