@@ -1043,9 +1043,9 @@
         const _videoThumb = item.thumb ||
           (item.item_id ? `https://images.yardendamri.co.il/yarden_${item.item_id}_thumb.jpg` : '');
 
-        // VIDEO: use data-src + poster for lazy loading. IntersectionObserver loads src only when visible.
+        // VIDEO: direct src + autoplay (muted, looping). IntersectionObserver handles play/pause.
         const mediaEl = isVideo
-          ? `<video data-src="${item.u}" poster="${_videoThumb}" muted loop playsinline preload="none"
+          ? `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${_videoThumb}"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
                onerror="this.style.display='none'"></video>`
@@ -1125,26 +1125,20 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Lazy-load + auto-play videos only when in viewport
+    // Auto-play videos when visible, pause off-screen
+    const _vidObsSet = new WeakSet();
     const videoObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const vid = e.target;
-        if (e.isIntersecting) {
-          // Load src from data-src on first entry
-          if (vid.dataset.src && !vid.src) {
-            vid.src = vid.dataset.src;
-            vid.load();
-          }
-          vid.play().catch(()=>{});
-        } else {
-          vid.pause();
-        }
+        if (e.isIntersecting) { vid.muted = true; vid.play().catch(()=>{}); }
+        else { vid.pause(); }
       });
-    }, { threshold: 0.2, rootMargin: '100px' });
+    }, { threshold: 0.2 });
 
-    // Apply to gallery videos when rendered (called from renderPage)
     function observeGalleryVideos() {
-      document.querySelectorAll('.ig-gallery-grid video').forEach(v => videoObserver.observe(v));
+      document.querySelectorAll('.ig-gallery-grid video').forEach(v => {
+        if (!_vidObsSet.has(v)) { _vidObsSet.add(v); videoObserver.observe(v); }
+      });
     }
     // Patch renderPage to call observeGalleryVideos
     const _origRenderPage = renderPage;
