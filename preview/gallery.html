@@ -467,7 +467,7 @@ function renderGallery() {
     let mediaHtml;
     if (isVideo) {
       mediaHtml = `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${item.thumb||''}"
-        style="width:100%;height:100%;object-fit:cover;display:block;${rotStyle}" onerror="this.style.display='none'"></video>`;
+        style="width:100%;display:block;${rotStyle}" onerror="this.style.display='none'"></video>`;
     } else {
       mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
