@@ -1653,7 +1653,7 @@ function setPeriod(days, btn) {
 // ── OAuth connect ──────────────────────────────────────
 function ga4Connect() {
   const scope = 'https://www.googleapis.com/auth/analytics.readonly';
-  const redirect = encodeURIComponent('https://yardendamri.co.il/admin.html');
+  const redirect = encodeURIComponent('https://yardendamri.co.il/preview/admin.html');
   const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GA4_CLIENT_ID}&redirect_uri=${redirect}&response_type=token&scope=${encodeURIComponent(scope)}&prompt=select_account`;
   window.location.href = url;
 }

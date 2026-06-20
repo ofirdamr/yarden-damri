@@ -1152,8 +1152,9 @@
         if (!_vidObsSet.has(el)) { _vidObsSet.add(el); videoObserver.observe(el); }
       });
     }
-    // Patch renderPage to call observeGalleryVideos
+    // Patch renderPage to re-observe video thumbnails after every render
     const _origRenderPage = renderPage;
+    renderPage = function(p) { _origRenderPage(p); setTimeout(observeGalleryVideos, 50); };
 
     // ── REVIEWS ───────────────────────────────────
     function loadGoogleReviews() { /* strip reserved for future Google Places API integration */ }
@@ -1239,9 +1240,7 @@
       observeGalleryVideos();
     });
 
-    // Re-observe videos after each gallery render
-    const origRenderPage = window.renderPage;
-    setTimeout(observeGalleryVideos, 1000);
+    // (renderPage is patched above to call observeGalleryVideos after each render)
 
     // ── IS 5568 ACCESSIBILITY WIDGET ─────────────
     let a11yPrefs = {};
