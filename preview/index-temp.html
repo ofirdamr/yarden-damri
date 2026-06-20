@@ -763,15 +763,10 @@
     function applyAdminSettings(images) {
       const s = getAdminSettings();
       const hidden = new Set(s.hidden || []);
-      const pinned = new Set(s.pinned || []);
-      const orderMap = {};
-      (s.order || []).forEach((url, i) => orderMap[url] = i);
-      let filtered = images.filter(img => !hidden.has(img.u));
-      let pinnedImgs = filtered.filter(img => pinned.has(img.u));
-      let rest = filtered.filter(img => !pinned.has(img.u));
-      if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
-      const brideKW = /כלה|כלות|bride|חינה|wedding|👰|💍/i;
-      return [...pinnedImgs, ...rest.filter(i=>brideKW.test(i.a)), ...rest.filter(i=>!brideKW.test(i.a))];
+      const privateCatsSet = new Set(s.privateCats || []);
+      const catMap = s.cats || {};
+      const hiddenCats = new Set([...privateCatsSet, 'מוסתרות']);
+      return images.filter(img => !img.hidden && !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
     }
 
     const PER_PAGE = 48;
@@ -1051,11 +1046,11 @@
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
-        const _thumb2 = item.thumb || item.u;
+        const _thumb2 = item.thumb || '';
         const mediaEl = isVideo
-          ? `<img src="${_thumb2}" data-video="${item.u}"
-               style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
-               loading="lazy" onerror="this.src='${item.u}'">`
+          ? `<video src="${item.u}" muted loop playsinline preload="none" poster="${_thumb2}"
+               aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
+               style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
@@ -1107,15 +1102,7 @@
         _galleryVidObserver = new IntersectionObserver(entries => {
           entries.forEach(e => {
             const el = e.target;
-            if (e.isIntersecting && el.tagName === 'IMG' && el.dataset.video) {
-              const v = document.createElement('video');
-              v.src = el.dataset.video;
-              v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
-              v.preload = 'metadata'; v.style.cssText = el.style.cssText;
-              el.parentNode.replaceChild(v, el);
-              v.muted = true; v.play().catch(()=>{});
-              _galleryVidObserver.observe(v);
-            } else if (e.isIntersecting && el.tagName === 'VIDEO') {
+            if (e.isIntersecting && el.tagName === 'VIDEO') {
               el.muted = true; el.play().catch(()=>{});
             } else if (!e.isIntersecting && el.tagName === 'VIDEO') {
               el.pause();
@@ -1123,7 +1110,7 @@
           });
         }, { threshold: 0.2 });
       }
-      document.querySelectorAll('#ig-gallery img[data-video], #ig-gallery video').forEach(el => {
+      document.querySelectorAll('#ig-gallery video').forEach(el => {
         if (!el.dataset._obs) { el.dataset._obs = '1'; _galleryVidObserver.observe(el); }
       });
     }
@@ -1151,7 +1138,7 @@
     // Init
     if (filteredImages.length) {
       renderPage(1);
-      loadIgStats(filteredImages.slice(0, 48));
+      loadIgStats(filteredImages.slice(0, PER_PAGE));
     }
 
     // Scroll reveal
