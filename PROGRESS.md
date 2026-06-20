@@ -2,6 +2,10 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — ✅ CONFIRMED WORKING: gallery videos autoplay everywhere (incl. iPhone)
+- User confirmed videos now autoplay from all devices including iPhone.
+- Final working combo: `<video src autoplay muted loop playsinline preload="metadata" poster>` + `observeGalleryVideos()` IntersectionObserver that sets `v.muted=true` and calls `v.play()` on visible tiles / `v.pause()` off-screen. No play button anywhere.
+
 ## 2026-06-20 — iOS gallery autoplay: preload=metadata + force muted at play()
 - User confirmed (after deploy) the video spots show static poster thumbnails but don't play on iPhone — i.e. new `<video>` code IS live, but iOS won't auto-start.
 - Root cause: `preload="none"` means iOS Safari never fetches video data, so it shows only the poster frame.
