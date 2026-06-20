@@ -407,3 +407,18 @@ The correct implementation:
 
 Root cause of confusion: fixed "data-src is fragile" by switching to `<img>` + play icon — but the right fix was `<video src="...">` directly. Read the rule before implementing.
 Rule: ANY video in the gallery = `<video autoplay muted loop playsinline>` with direct src. Never a play button. Never a static thumbnail pretending to be a video.
+
+## 2026-06-20 — Video "not showing" had THREE stacked causes; wasted rounds by not finding all at once
+Symptom: user saw "only images, no videos." Took several pushes because each fix exposed the next layer:
+1. Render was `<img thumb>` + play button (wrong). Fixed → real `<video>` tag.
+2. `observeGalleryVideos()` was CALLED in 3 places but NEVER DEFINED (a past session deleted it). The call inside renderPage had a `typeof===function` guard so it failed silently; the other two threw ReferenceError. Without it nothing called `.play()`, so videos showed only their poster = looked like images. Fixed → defined the IntersectionObserver.
+3. iOS Safari: `preload="none"` makes iOS never fetch video data, so it sits on the poster. Fixed → `preload="metadata"` + set `v.muted=true` immediately before `v.play()` (iOS checks the muted PROPERTY at play time).
+Lesson: when a feature "doesn't work," grep that EVERY function it calls is actually DEFINED (`grep -n 'function name'`), not just called. A `typeof x==='function'` guard hides a missing definition silently. Trace render → observer → playback as one chain before pushing.
+
+## 2026-06-20 — Diagnosed "Cloudflare blocking me" — it was the sandbox egress allowlist
+Could not curl the live site; assumed Cloudflare. WRONG. The 403 came from the sandbox proxy itself: header `x-deny-reason: host_not_allowed`, body "Host not in allowlist". Proof: github.com→200, yardendamri.co.il/example.com→403. Fix is on the USER side: claude.ai/code → environment settings → "Allow network egress" + Domain allowlist "All domains". Applies to NEW sessions only (policy is fixed at session start).
+Lesson: when an HTTP fetch fails, read the FULL response headers/body first. `x-deny-reason` told the exact cause. Don't name a culprit (Cloudflare) without reading the error.
+
+## 2026-06-20 — Started on a feature branch again (task system), deployed via main
+Task system opened the session on `claude/preview-video-rendering-bug-ah6c9n`. Per project rule it's main-only, and GitHub Pages serves /preview/ ONLY from main — so commits on the feature branch were invisible to the user at the live URL. Had to reset local main to origin/main and push the fix there. Local main was diverged 50/50 from origin/main (stale sandbox history) — `git reset --hard origin/main` then apply fix is the safe path; origin/main is the deployed truth.
+Rule: regardless of the branch the harness opens, this project deploys from main. Verify with `git branch --show-current` and that the live URL is served from main before telling the user something is "live."

@@ -101,23 +101,19 @@
 
 ## What is NOT DONE (pending)
 
-### IMMEDIATE — Videos still broken in gallery
+### ✅ DONE — Gallery videos autoplay (confirmed working 2026-06-20, all devices incl. iPhone)
 
-**Current state**: `preview/index-temp.html` renderPage() renders videos as `<img src="${item.thumb}">` + play button SVG overlay. This violates the user's rule: **videos must autoplay, no play button ever.**
-
-**The correct fix** (one change, `renderPage()` around line 1054 in `preview/index-temp.html`):
+Videos in `preview/index-temp.html` renderPage() now autoplay (muted, looping), no play button. The working combo:
 ```html
-<video src="${item.u}" autoplay muted loop playsinline preload="none"
+<video src="${item.u}" autoplay muted loop playsinline preload="metadata"
        poster="${item.thumb}"
-       style="width:100%;height:100%;object-fit:cover;display:block;">
-</video>
+       style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"></video>
 ```
-- Direct `src` attribute (never `data-src` — documented in MISTAKES.md as fragile)
-- `poster` shows thumbnail while buffering
-- No play button anywhere
-- IntersectionObserver only for play/pause (not for setting src)
+Plus `observeGalleryVideos()` — an IntersectionObserver that does `v.muted=true; v.play()` on visible tiles and `v.pause()` off-screen. Three bugs were fixed: (1) was rendering `<img>`+play button; (2) `observeGalleryVideos()` was called but never defined; (3) iOS needed `preload="metadata"` (not "none") + muted-property set before play(). Cache-buster bumped to `?v=1781913600`.
+NOTE: this fix is in `index-temp.html` only — NOT yet promoted to permanent `preview/index.html`.
 
-**After fix**: verify lightbox opens on click and plays video with audio (unmuted in lightbox).
+### Sandbox network egress
+User enabled "Allow network egress → All domains" in claude.ai/code environment settings. Applies to NEW sessions only. From the next session onward, Claude CAN curl the live site (yardendamri.co.il etc.) to verify deployments directly. In older sessions the sandbox returns 403 `host_not_allowed`.
 
 ### Go-live checklist
 - All `-temp.html` pages need final user review → promote to permanent (delete temp, rename or copy)
