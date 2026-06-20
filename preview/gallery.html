@@ -184,13 +184,10 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   </section>
 
   <section style="padding:0 0 60px;">
-    <div class="filter-bar" id="media-filter" role="tablist" aria-label="סוג מדיה" style="margin-bottom:16px">
+    <div class="filter-bar" id="media-filter" role="tablist" aria-label="סוג מדיה">
       <button class="filter-btn active" data-media="all" role="tab" aria-selected="true">הכל</button>
       <button class="filter-btn" data-media="photo" role="tab" aria-selected="false">תמונות</button>
       <button class="filter-btn" data-media="video" role="tab" aria-selected="false">סרטונים</button>
-    </div>
-    <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
-      <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -309,18 +306,12 @@ function getAdminSettings() {
 function applyAdminSettings(images) {
   const s = getAdminSettings();
   const hidden = new Set(s.hidden || []);
-  const pinned = new Set(s.pinned || []);
-  const orderMap = {};
-  (s.order || []).forEach((url, i) => orderMap[url] = i);
   const privateCatsSet = new Set(s.privateCats || []);
   const catMap = s.cats || {};
   const hiddenCats = new Set([...privateCatsSet, 'מוסתרות']);
-  let filtered = images.filter(img => !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
-  let pinnedImgs = filtered.filter(img => pinned.has(img.u));
-  let rest = filtered.filter(img => !pinned.has(img.u));
-  if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
-  const brideKW = /כלה|כלות|bride|חינה|wedding|👰|💍/i;
-  return [...pinnedImgs, ...rest.filter(i=>brideKW.test(i.a)), ...rest.filter(i=>!brideKW.test(i.a))];
+  // Public gallery: keep natural Instagram upload (time) order, photos + videos together.
+  // Only remove hidden items and items in private/hidden categories. No category/kind sorting.
+  return images.filter(img => !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
 }
 
 // ── CDN HELPERS ──
