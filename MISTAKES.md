@@ -1,5 +1,15 @@
 # Mistakes Log
 
+## 2026-06-20 (session 3) — How the 2-day video bug was finally solved (and the lessons)
+After ~40 stacked "fix gallery videos" commits across two days, the fix took one session by OBSERVING instead of guessing. Two questions to the user settled everything: "hero video plays?" → YES (so the video domain + mp4s are fine — not a URL/CDN/storage problem) and "what do the gallery video spots look like?" → "not there at all" (videos filtered out / collapsed, not failing to load). That ruled out every dead-end prior sessions chased (R2 thumbs, CDN, autoplay, iOS).
+
+Real causes, all simple and all in source:
+1. **Display**: gallery `<video>` tiles had `width:100%` with no height in a CSS-`columns` masonry + `onerror→display:none` → tiles collapsed to 0 = invisible. Plus no media-type filter and the brideKW/order sort buried videos. Fix: aspect-ratio box, natural time order, media filter.
+2. **Data shrank to 773**: `fix.js` had `if (isHidden) continue` — it DELETED every hidden item (772) from gallery-data.js. User wanted hidden media KEPT in the data (on R2, hidden on site). Fix: include hidden flagged `hidden:true`, no re-upload. After re-sync: 1546 items.
+3. **Stale cache**: fix.js bumped `?v=` only on index-temp.html, and the workflow never committed HTML files → every sync left live pages on a stale cache key. Fix: bump all live pages + commit them.
+
+Lessons: (a) When you cannot observe live (egress off → `403 host_not_allowed`), ASK 2-3 discriminating questions before writing code — never narrate live behavior you can't see. (b) For "X not showing", first decide *not rendered* vs *rendered-but-invisible* vs *failed-to-load* — different causes. (c) You CAN verify a sync without local internet by triggering the GitHub Action and reading its logs. (d) A "fix" that isn't committed/deployed (the cache-bump) is not a fix — check the whole pipeline.
+
 ## 2026-06-13
 
 ### ❌ CLAUDE.md nav spec was outdated — ביקורות missing from homepage

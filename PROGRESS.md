@@ -6,7 +6,14 @@
 Verified by observation, not guessing (user: hero video PLAYS = video domain fine; gallery video tiles "not there at all"). Data checked: gallery-data.js has 162 videos all with thumb URLs; 138 survive admin hidden/private-category filtering — so the data and filter were NEVER the problem. Two real causes in gallery.html:
 1. No way to reach the videos — only category filters existed (no photos/videos toggle), and the admin `order` + bride-keyword sort buried videos deep in the masonry, so first pages show only photos.
 2. Invisible video tiles — `<video>` had `width:100%` with NO height/aspect-ratio in the `columns` masonry, plus `onerror→display:none`, so tiles collapsed to zero size.
-Fix (surgical, in source — no rebuild): added a הכל/תמונות/סרטונים media filter (independent of category filter); gave video tiles `aspect-ratio:4/5;object-fit:cover` + bg so they always have a visible box; removed the `onerror` hide. index.html homepage gallery has the same class of bug (img+data-video swap + `.slice(0,PER_PAGE)` cap) — pending after gallery.html is confirmed.
+Fix (surgical, in source — no rebuild): added a הכל/תמונות/סרטונים media filter (independent of category filter); gave video tiles `aspect-ratio:4/5;object-fit:cover` + bg so they always have a visible box; removed the `onerror` hide.
+
+## 2026-06-20 — Follow-up per user feedback (all pushed, verified via data + Action logs)
+- User confirmed: videos show under "סרטונים", hero video plays. Confirmed display root cause.
+- gallery.html: removed the public CATEGORY filter (admin-only now); switched to NATURAL Instagram time order (photos+videos interleaved by date) — `applyAdminSettings` now only removes hidden + private-category items, no brideKW/order sorting. Kept media filter.
+- index.html (homepage): same — natural time order, real `<video autoplay muted loop playsinline>` tiles (tile is aspect-ratio:1 box so never collapses), respect hidden flag.
+- DATA root cause: `fix.js` was DROPPING every hidden item from gallery-data.js (`if(isHidden) continue`) → data shrank to 773 (= total − 772 hidden). Fixed: hidden items now KEPT in data with `hidden:true` (reuse existing entry or deterministic R2 URL, no re-upload). Public pages filter them out (URL + flag). Triggered sync (run 27882229630, success) → gallery-data.js now **1546 items (1247 images + 299 videos), 772 flagged hidden, 774 public (163 videos)** — matches expected ~1530 img/~290 vid.
+- CACHE root cause: fix.js only bumped `?v=` on index-temp.html, AND the workflow never committed HTML files → live pages always served stale gallery-data.js after a sync. Fixed: fix.js bumps index.html/gallery.html/index-temp/gallery-temp; sync-auto.yml now commits those HTML files; bumped both live files for this deploy.
 
 ## 2026-06-20 — Rebuilt gallery from scratch: preview/gallery-new.html
 Decision: stop debugging the tangled gallery pipeline in index-temp.html (stale 772-entry hidden list, 899-entry order map, brideKW sort, pagination that buried all videos on page 2). Built a fresh, self-contained gallery page.
