@@ -2,6 +2,12 @@
 
 ## ✅ Completed
 
+## 2026-06-20 — Applied video fix to temp files + promoted temp → permanent
+- gallery-temp.html & index-temp.html: replaced brideKW/orderMap sort with natural Instagram time order; replaced `<img data-video>` swap pattern with real `<video preload="none">` elements; gave gallery tiles `aspect-ratio:4/5` so they never collapse in CSS-columns masonry; updated IntersectionObserver to play/pause `<video>` directly (no swap needed); filter includes `img.hidden` flag + privateCats.
+- Promoted: cp gallery-temp.html → gallery.html, index-temp.html → index.html. Permanent files now contain ALL temp UI/design changes (desktop responsiveness, RTL optimization, cookie banner, etc.) AND the full video fix.
+- Resolved conflict in index.html (upstream auto-sync had changed hero video source — kept upstream version).
+- Pushed to main.
+
 ## 2026-06-20 — ROOT CAUSE found: gallery videos "not there" (preview/gallery.html)
 Verified by observation, not guessing (user: hero video PLAYS = video domain fine; gallery video tiles "not there at all"). Data checked: gallery-data.js has 162 videos all with thumb URLs; 138 survive admin hidden/private-category filtering — so the data and filter were NEVER the problem. Two real causes in gallery.html:
 1. No way to reach the videos — only category filters existed (no photos/videos toggle), and the admin `order` + bride-keyword sort buried videos deep in the masonry, so first pages show only photos.
