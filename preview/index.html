@@ -763,15 +763,11 @@
     function applyAdminSettings(images) {
       const s = getAdminSettings();
       const hidden = new Set(s.hidden || []);
-      const pinned = new Set(s.pinned || []);
-      const orderMap = {};
-      (s.order || []).forEach((url, i) => orderMap[url] = i);
-      let filtered = images.filter(img => !hidden.has(img.u));
-      let pinnedImgs = filtered.filter(img => pinned.has(img.u));
-      let rest = filtered.filter(img => !pinned.has(img.u));
-      if (Object.keys(orderMap).length) rest.sort((a,b) => ((orderMap[a.u]??99999)-(orderMap[b.u]??99999)));
-      const brideKW = /כלה|כלות|bride|חינה|wedding|👰|💍/i;
-      return [...pinnedImgs, ...rest.filter(i=>brideKW.test(i.a)), ...rest.filter(i=>!brideKW.test(i.a))];
+      const privateCatsSet = new Set(s.privateCats || []);
+      const catMap = s.cats || {};
+      const hiddenCats = new Set([...privateCatsSet, 'מוסתרות']);
+      // Natural Instagram (time) order, photos + videos together; remove hidden + private-category items.
+      return images.filter(img => !img.hidden && !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
     }
 
     const PER_PAGE = 48;
@@ -1043,13 +1039,12 @@
         const _videoThumb = item.thumb ||
           (item.item_id ? `https://images.yardendamri.co.il/yarden_${item.item_id}_thumb.jpg` : '');
 
-        // VIDEO: show thumbnail immediately (like root admin), swap to autoplay video when visible
-        const _thumb = _videoThumb || item.u;
+        // VIDEO: real autoplay video (tile is an aspect-ratio:1 box, so it never collapses). No play button.
+        const _thumb = _videoThumb || '';
         const mediaEl = isVideo
-          ? `<img src="${_thumb}" data-video="${item.u}"
+          ? `<video src="${item.u}" autoplay muted loop playsinline preload="metadata" poster="${_thumb}"
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
-               style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"
-               loading="lazy" onerror="this.src='${item.u}'">`
+               style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"></video>`
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
