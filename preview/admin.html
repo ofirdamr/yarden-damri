@@ -809,8 +809,6 @@ function renderGrid() {
           <button class="card-btn" onclick="togglePin('${img.u}')" title="נעץ">${pinnedSet.has(img.u)?'📌':'📍'}</button>
           <button class="card-btn" onclick="toggleHide('${img.u}')" title="הסתר">${hiddenSet.has(img.u)?'👁️':'🚫'}</button>
           <button class="card-btn" onclick="openCatModal('${img.u}')" title="קטגוריה">🏷️</button>
-          ${isVid?`<button class="card-btn" onclick="event.stopPropagation();setHeroVideo('${img.u}')" title="הגדר כווידאו ראשי">🎬</button>`:''}
-
         </div>
         ${cat?`<span class="cat-label">🏷️ ${cat}</span>`:''}
       </div>`;
@@ -869,10 +867,6 @@ function setFilter(f,btn) {
 function filterGrid(){ window._adminPage=0; searchTerm=document.getElementById('search-input').value; renderGrid(); }
 
 // ─── ACTIONS ────────────────────────────────────────────────────
-function setHeroVideo(url) {
-  const s = getSettings(); s.heroVideo = url; saveSettings(s);
-  showToast('🎬 וידאו ראשי עודכן!');
-}
 function togglePin(url){
   const s=getSettings(); s.pinned=s.pinned||[];
   const i=s.pinned.indexOf(url);
