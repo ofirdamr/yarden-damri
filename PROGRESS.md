@@ -7,9 +7,10 @@
 - Sync triggered: 162 videos with audio + thumbnails uploaded to R2 (both buckets)
 - `preview/gallery-data.js` now has 773 items: 611 images + 162 videos (all with `video:true` + `thumb`)
 - **Root cause of "no videos"**: `gallery-data.js` had no cache-busting — browser served old file with 0 videos
-- Fix: added `?v=20260620` to script tag; fix.js now bumps version on every sync
+- Fix: added `?v=1750416000` to script tag (bumped from 20260620 to force new pages deploy); fix.js bumps version on every sync
 - Gallery video tiles: replaced `<video data-src>` (fragile, broken on iOS) with `<img src="${thumb}">` + play icon overlay
 - Pagination bug fixed: `filteredImages` was sliced to 48 items, making pages 2+ empty — removed the slice
+- Previous `?v=20260620` never deployed (pages build race condition) — bumped to `?v=1750416000` and re-committed
 
 ## 2026-06-13 — Admin Security Refactor
 - Worker (`preview/worker.js`): replaced raw `X-Admin-Password` header with KV session tokens
