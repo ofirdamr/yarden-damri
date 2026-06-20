@@ -34,7 +34,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           cp instagram-stats.json preview/instagram-stats.json
           cp preview/gallery-data.js gallery-data.js
-          git add preview/gallery-data.js gallery-data.js instagram-stats.json preview/instagram-stats.json
+          git add preview/gallery-data.js gallery-data.js instagram-stats.json preview/instagram-stats.json preview/index.html preview/gallery.html preview/index-temp.html preview/gallery-temp.html
           git diff --staged --quiet && exit 0
           git commit -m "Update Instagram data"
           git push origin HEAD:main

@@ -254,15 +254,20 @@ function safeWrite(filePath, data) {
   console.log(`\nSaving ${gallery.length} items to ${GALLERY_FILE}`);
   safeWrite(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
 
-  // Bump gallery-data.js version in the HTML file so browsers don't serve stale cache
-  const htmlFile = TARGET_PREVIEW ? "preview/index-temp.html" : "index.html";
-  try {
-    let html = fs.readFileSync(htmlFile, "utf8");
-    const ver = Date.now();
-    html = html.replace(/gallery-data\.js\?v=\d+/, `gallery-data.js?v=${ver}`);
-    fs.writeFileSync(htmlFile, html, "utf8");
-    console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);
-  } catch(e) { console.warn("Could not bump HTML version:", e.message); }
+  // Bump gallery-data.js version in every page that loads it, so browsers don't serve stale cache
+  const htmlFiles = TARGET_PREVIEW
+    ? ["preview/index.html", "preview/gallery.html", "preview/index-temp.html", "preview/gallery-temp.html"]
+    : ["index.html", "gallery.html"];
+  const ver = Date.now();
+  for (const htmlFile of htmlFiles) {
+    try {
+      let html = fs.readFileSync(htmlFile, "utf8");
+      if (/gallery-data\.js\?v=\d+/.test(html)) html = html.replace(/gallery-data\.js\?v=\d+/g, `gallery-data.js?v=${ver}`);
+      else html = html.replace(/gallery-data\.js(?!\?)/g, `gallery-data.js?v=${ver}`);
+      fs.writeFileSync(htmlFile, html, "utf8");
+      console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);
+    } catch(e) { console.warn(`Could not bump ${htmlFile}:`, e.message); }
+  }
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
