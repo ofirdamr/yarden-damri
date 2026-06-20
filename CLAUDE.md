@@ -81,6 +81,18 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 
 ---
 
+## STRICT RULE — Report on every completed mission
+
+**Every time a mission is finished, the reply MUST end with:**
+
+1. The word **"Done"**
+2. A short summary (1–3 lines) of what was changed
+3. A **full online link** to view the change live, e.g. `https://yardendamri.co.il/preview/index-temp.html`
+
+Use the exact temp/preview URL of the file that was edited so the change can be watched online. No exceptions.
+
+---
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
