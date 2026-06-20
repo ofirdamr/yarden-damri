@@ -1051,12 +1051,12 @@
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
 
-        const mediaEl = isVideo
-          ? `<video data-src="${item.u}" ${item.thumb ? `poster="${item.thumb}"` : ''} muted loop playsinline preload="none"
-               aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
-               style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;${_rotStyle}"></video>`
-          : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
-               style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
+        const thumbSrc = isVideo ? (item.thumb || '') : cdnUrl(item.u, 400);
+        const mediaEl = `<img src="${thumbSrc}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
+               style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />
+             ${isVideo ? `<div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+               <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,.45)"/><polygon points="19,14 37,24 19,34" fill="#fff"/></svg>
+             </div>` : ''}`;
 
         const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
         div.innerHTML = `${mediaEl}
@@ -1064,7 +1064,6 @@
             <p style="position:absolute;bottom:40px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>
           <div class="hp-item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;">
-            ${isVideo ? `<button onclick="event.stopPropagation();event.preventDefault();(function(btn){const v=btn.closest('[role=listitem]').querySelector('video');if(!v)return;v.muted=!v.muted;btn.textContent=v.muted?'🔇':'🔊';})(this)" aria-label="השתק/הפעל קול" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">🔇</button>` : ''}
             <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">❤️ ${totalLikes}</button>
             <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">💬 ${cmtCount}</button>
           </div>`;
@@ -1079,7 +1078,6 @@
           const actEl = div.querySelector('.hp-item-actions'); if(actEl) actEl.style.opacity='1';
           const imgEl = div.querySelector('img');
           if (imgEl) imgEl.style.transform = 'scale(1.05)';
-          if (isVideo) { const v = div.querySelector('video'); if(v) v.play().catch(()=>{}); }
         };
         div.onmouseleave = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1)';
@@ -1133,34 +1131,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Lazy-load + auto-play videos only when in viewport
-    const videoObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        const vid = e.target;
-        if (e.isIntersecting) {
-          if (vid.dataset.src && !vid.getAttribute('src')) {
-            vid.src = vid.dataset.src;
-            vid.load();
-          }
-          vid.play().catch(()=>{});
-        } else {
-          vid.pause();
-        }
-      });
-    }, { threshold: 0.2, rootMargin: '100px' });
-
-    // Apply to gallery videos when rendered (called from renderPage)
-    function observeGalleryVideos() {
-      document.querySelectorAll('.ig-gallery-grid video').forEach(v => {
-        videoObserver.observe(v);
-        v.play().catch(() => {});
-      });
-    }
-    // Re-observe gallery videos whenever gallery content changes
-    const _galleryEl = document.getElementById('ig-gallery');
-    if (_galleryEl) {
-      new MutationObserver(() => setTimeout(observeGalleryVideos, 100)).observe(_galleryEl, { childList: true, subtree: true });
-    }
 
     // ── REVIEWS ───────────────────────────────────
     function loadGoogleReviews() { /* strip reserved for future Google Places API integration */ }
