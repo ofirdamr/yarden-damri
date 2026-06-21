@@ -223,6 +223,8 @@ const GALLERY_IMAGES = [
 
 ## Known Issues / To Do
 
+- **Lightbox button layout (OPEN — next session)**: see `preview/NEXT-LIGHTBOX.md`. Lightbox media is fullscreen and the nav is hidden while open, but our custom buttons (close X, prev/next, like/comment/share action bar) overlap the browser's NATIVE `<video controls>` (mute top-left, PiP/fullscreen top-right, scrubber bottom). Needs a non-overlapping layout (likely drop native controls and use only our own).
+- **About image**: served from R2 `https://images.yardendamri.co.il/about-yarden.png` (homepage + about page). The old ImageKit URL was dead (403) and has been replaced.
 - **Hero video thumbnails**: `_thumb.jpg` not yet generated for existing 161 videos — admin picker shows black tiles, hero has brief dark flash before video plays.
 - **Old `yarden-videos` bucket**: Still has original uncompressed videos. Hero video still points there. Should migrate to `yarden-videos-new` after thumbnails are ready.
 - **Go-live**: Promote `/preview` → root following `GO-LIVE.md` (9-step checklist).

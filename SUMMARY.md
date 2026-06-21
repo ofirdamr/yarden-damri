@@ -2,6 +2,25 @@
 
 > Last updated: 2026-06-21
 
+## ⚠️ OPEN TASK FOR NEXT SESSION — Lightbox buttons overlap
+Read `preview/NEXT-LIGHTBOX.md` first. The lightbox (gallery + homepage) opens
+fullscreen with the nav hidden, but the buttons overlap each other and the video's
+NATIVE controls: our close **X** sits over the native mute control, and the bottom
+action bar (like/comment/share) sits over the native scrubber. A 48px cookie banner
+also sits on top. Goal: make it look good — **no button on top of another button**,
+every control visible and usable. Likely fix: drop native `<video controls>` and use
+only our own buttons, OR move our chrome clear of the native controls. Decide with the
+user; one change at a time; temp files only; promote on explicit approval.
+
+## 2026-06-21 — Nav/floating/lightbox/about overhaul PROMOTED to permanent
+All 12 pages promoted temp → permanent (user approved). Subpage nav now identical to
+the homepage (monogram logo left, centered "ירדן דמרי / מאפרת כלות וערב", social +
+fewer categories on the right, same fonts/colors). Floating buttons unified across all
+pages (a11y + scroll-top + WhatsApp: 36px, transparent .55, aligned). Lightbox media
+fullscreen + nav hidden while open (lightbox button layout still NEEDS work — see above).
+About image fixed (dead ImageKit URL → R2 `about-yarden.png`) and now shown on mobile on
+both the homepage about section and the about page.
+
 ## Architecture
 - **Live site**: `yardendamri.co.il` — root branch, old site (Cloudinary-based). Not yet replaced by preview.
 - **Staging/development**: `/preview` folder on `main` branch — `yardendamri.co.il/preview/`

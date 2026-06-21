@@ -1,5 +1,10 @@
 # Progress Log — Preview Folder
 
+## 2026-06-21 — PROMOTED to permanent + lightbox handoff
+- Promoted all 12 `-temp.html` → permanent (`index, gallery, about, bride, services, bridal-guide, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy`) on explicit user approval.
+- Promoted changes: subpage nav now identical to homepage (monogram left, centered name, social+fewer-categories right); unified floating buttons (a11y/scroll/WhatsApp = 36px, transparent .55, aligned); lightbox media fullscreen + nav hidden while open; about image fixed (dead ImageKit → R2 `about-yarden.png`) + shown on mobile (homepage + about page).
+- **OPEN TASK (see `NEXT-LIGHTBOX.md`)**: lightbox buttons overlap each other and the video's NATIVE controls (close X over native mute; action bar over native scrubber). Needs a clean control layout — handed off to next conversation.
+
 ## 2026-06-21 — Nav RTL + floating buttons + lightbox fullscreen (temp files)
 - All subpage `-temp.html` (about, bride, services, bridal-guide, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy, gallery): nav now matches homepage — desktop `flex-direction:row-reverse` (logo LEFT, links RIGHT), social pills first (rightmost), dropped מחירון + ביקורות from the desktop bar (kept in mobile menu). Injected one inline `<style id="rtl-float-override">` per page (stayed on styles.css, did not touch shared CSS).
 - Floating buttons unified across ALL pages (incl. homepage): a11y + scroll-top + WhatsApp identical — 36px circles, `bottom:18px`, transparent `opacity:.55` on `#444`, aligned (a11y left:12 / scroll left:56 / WhatsApp right:12). Added WhatsApp to homepage override so it matches.

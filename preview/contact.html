@@ -61,6 +61,18 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"צרי קשר – ירדן דמרי","url":"https://yardendamri.co.il/contact.html"}</script>
   <script src="a11y.js" defer></script>
   <script src="cookie-banner.js?v=5" defer></script>
+<style id="rtl-float-override">
+/* Desktop RTL nav: logo LEFT, links RIGHT (match homepage) */
+@media (min-width:1081px){ nav[role="navigation"]{ flex-direction: row-reverse !important; } }
+/* Floating buttons - unified across all pages */
+body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important;}
+#a11y-trigger,#scroll-top,#wa-float-btn,.wa-float{width:36px !important;height:36px !important;min-width:36px !important;max-width:36px !important;min-height:36px !important;max-height:36px !important;border-radius:50% !important;position:fixed !important;bottom:18px !important;z-index:99999 !important;display:flex !important;align-items:center !important;justify-content:center !important;padding:0 !important;box-sizing:border-box !important;background:#444 !important;color:#fff !important;border:none !important;filter:none !important;opacity:.55 !important;box-shadow:0 4px 16px rgba(0,0,0,.3) !important;transition:opacity .2s !important;}
+#a11y-trigger:hover,#scroll-top:hover,#wa-float-btn:hover,.wa-float:hover{opacity:.9 !important;transform:none !important;}
+#a11y-trigger{left:12px !important;right:auto !important;}
+#scroll-top{left:56px !important;right:auto !important;font-size:14px !important;}
+#wa-float-btn,.wa-float{right:12px !important;left:auto !important;}
+#a11y-trigger svg,#wa-float-btn svg,.wa-float svg{width:16px !important;height:16px !important;fill:#fff !important;}
+</style>
 </head>
 <body>
 
@@ -68,19 +80,17 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()" aria-hidden="true"></div>
 
   <nav role="navigation" aria-label="ניווט ראשי" class="subpage-nav">
-    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">ירדן <span>דמרי</span></a>
+    <a href="/preview/" class="nav-logo" aria-label="ירדן דמרי - עמוד הבית">
+      <div class="monogram"><span>Y<em>.D</em></span></div>
+    </a>
+    <a href="/preview/" aria-label="ירדן דמרי - עמוד הבית" style="position:absolute;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1.25;">
+      <span style="font-family:'Rubik',sans-serif;font-size:1.1rem;font-weight:400;color:#c9a96e;letter-spacing:.04em;white-space:nowrap;">ירדן דמרי</span>
+      <span style="font-family:'Rubik',sans-serif;font-size:.58rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,169,110,.75);margin-top:2px;white-space:nowrap;">מאפרת כלות וערב</span>
+    </a>
     <button class="nav-hamburger" id="navHamburger" aria-label="פתיחת תפריט ניווט" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" role="list">
-      <li><a href="about.html">אודות</a></li>
-      <li><a href="bride.html">מאפרת כלות</a></li>
-      <li><a href="services.html">שירותים</a></li>
-      <li><a href="gallery.html">גלריה</a></li>
-      <li><a href="bridal-guide.html">מדריך כלות</a></li>
-      <li><a href="pricing.html">מחירון</a></li>
-      <li><a href="reviews.html">ביקורות</a></li>
-      <li><a href="contact.html" class="nav-cta">צרי קשר</a></li>
       <li class="nav-social">
         <a href="https://www.instagram.com/yarden_damri_makeup" target="_blank" rel="noopener noreferrer" aria-label="Instagram של ירדן דמרי" class="social-pill social-ig">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -91,6 +101,12 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
           <span>TikTok</span>
         </a>
       </li>
+      <li><a href="contact.html" class="nav-cta">צרי קשר</a></li>
+      <li><a href="about.html">אודות</a></li>
+      <li><a href="bride.html">מאפרת כלות</a></li>
+      <li><a href="services.html">שירותים</a></li>
+      <li><a href="gallery.html">גלריה</a></li>
+      <li><a href="bridal-guide.html">מדריך כלות</a></li>
     </ul>
   </nav>
 
@@ -139,7 +155,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
             <div class="biz-card-title">Makeup Artist • מאפרת מקצועית</div>
             <div class="biz-card-divider"></div>
             <div class="biz-card-info">
-              <div class="biz-info-row"><span>054-7276716</span></div>
+              <div class="biz-info-row"><span><span dir="ltr">054-7276716</span></span></div>
               <div class="biz-info-row"><span>אילת | מגיעה לכל הארץ</span></div>
               <div class="biz-info-row"><span>@yarden_damri_makeup</span></div>
               <div class="biz-info-row"><span>כלות · ערב · הפקות · אירועים</span></div>
@@ -204,7 +220,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 
   <footer role="contentinfo">
     <p>© 2025 <strong>ירדן דמרי</strong> | מאפרת מקצועית | אילת וכל הארץ</p>
-    <p style="margin-top:10px;"><a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="התקשרי אל ירדן דמרי">054-7276716</a> &nbsp;·&nbsp; <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">וואטסאפ</a></p>
+    <p style="margin-top:10px;"><a onclick="trackEvent('phone_click','conversion','phone')" href="tel:0547276716" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="התקשרי אל ירדן דמרי"><span dir="ltr">054-7276716</span></a> &nbsp;·&nbsp; <a onclick="trackEvent('whatsapp_click','conversion','whatsapp')" href="https://wa.me/9720547276716" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.7);text-decoration:none;" aria-label="שלחי הודעת וואטסאפ לירדן דמרי">וואטסאפ</a></p>
     <nav aria-label="ניווט תחתון" style="margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin-bottom:16px;">
       <a href="/" style="color:rgba(255,255,255,.45);text-decoration:none;">דף הבית</a>
       <a href="bride.html" style="color:rgba(255,255,255,.45);text-decoration:none;">מאפרת כלות</a>
