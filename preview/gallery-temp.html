@@ -82,7 +82,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .media-badge{position:absolute;top:8px;right:8px;z-index:2;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
     .media-badge svg{width:21px;height:21px;fill:#fff}
     /* LIGHTBOX */
-    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:#000;align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
     .lb-img{max-width:100vw;max-height:100vh;max-height:100dvh;object-fit:contain;border-radius:0;touch-action:none;-webkit-user-drag:none;user-select:none}
     .lb-close{position:fixed;top:16px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
@@ -98,6 +98,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .video-play{display:none}
     .lb-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:100vw;max-height:100vh;max-height:100dvh;border-radius:0;outline:none;touch-action:auto}
     body.has-ck .lb-video{top:calc(50% + 28px);max-height:calc(100dvh - 56px)}
+    /* When a video is open, lift it above the action bar so the native video controls aren't hidden behind like/comment/share/save */
+    .lb.lb-video-on .lb-video{top:calc(50% - 43px);max-height:calc(100dvh - 86px)}
+    body.has-ck .lb.lb-video-on .lb-video{top:calc(50% - 43px);max-height:calc(100dvh - 86px)}
     /* Instagram-style lightbox action bar */
     .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:1002}
     .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s}
@@ -644,6 +647,7 @@ function showLb() {
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
   const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
+  document.getElementById('lb').classList.toggle('lb-video-on', !!isVideo);
   if (isVideo) {
     lbVideo.src = item.u;
     lbVideo.poster = item.thumb || '';   // show thumbnail instead of a black spinner while buffering

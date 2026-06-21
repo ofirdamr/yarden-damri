@@ -622,3 +622,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Root cause: the confirmed fix from index-temp.html was NEVER applied to gallery-temp.html
 - gallery-temp.html had: `data-src` (not `src`), no `autoplay`, `preload="none"`, observer checked `!v.src` (always false on iOS)
 - Fix: `src="${item.u}"` direct, `autoplay`, `preload="metadata"`, `poster="${item.thumb}"`, observer uses WeakSet + just play()/pause()
+
+## 2026-06-21 — preview/ lightbox: fully-opaque bg + video controls clear of action bar; homepage About nav link (temp files)
+- preview/gallery-temp.html, preview/index-temp.html: lightbox overlay background made fully opaque (#000 instead of rgba .96/.92) so the media reads as true fullscreen with no page bleed-through
+- Video controls fix: the Instagram-style .lb-actions bar (like/comment/share/save) is pinned to bottom:0 and was covering the video's native HTML5 control bar. When a video is open the video is now lifted/capped (top:calc(50% - 43px); max-height:calc(100dvh - 86px)) so its native controls sit above the action bar and are tappable. Gallery toggles `.lb-video-on` on #lb in showLb(); homepage bakes the offset into the created <video> style
+- index-temp.html: homepage nav "אודות" (desktop + mobile) now links to about.html (dedicated longer About page) instead of the #about homepage anchor
