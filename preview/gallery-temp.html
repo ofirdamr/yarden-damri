@@ -678,10 +678,10 @@ function lbToast(msg) {
 // ── SHARE (specific media, branded with logo + name + link) ──
 const SHARE_SITE = 'https://yardendamri.co.il';
 // Draw the photo onto a canvas and stamp the "ירדן דמרי" logo (nav style) + link, return a File.
-async function brandedImageFile(item) {
+async function brandedImageFile(srcUrl, isVideo) {
   const img = new Image();
   img.crossOrigin = 'anonymous';
-  img.src = cdnUrl(item.u, 1080);
+  img.src = srcUrl;
   await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
   try { if (document.fonts) { await document.fonts.load("italic 400 80px 'Cormorant Garamond'"); await document.fonts.ready; } } catch (e) {}
   const natW = img.naturalWidth || 1080, natH = img.naturalHeight || 1350;
@@ -707,6 +707,18 @@ async function brandedImageFile(item) {
   ctx.strokeStyle = '#B89060';
   ctx.lineWidth = Math.max(1, Math.round(photoW * 0.005));
   ctx.strokeRect(M, M, photoW, photoH);
+  // play badge for videos
+  if (isVideo) {
+    const r = Math.round(photoW * 0.085), bx = M + photoW / 2, by = M + photoH / 2;
+    ctx.fillStyle = 'rgba(0,0,0,0.42)';
+    ctx.beginPath(); ctx.arc(bx, by, r, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.moveTo(bx - r * 0.3, by - r * 0.45);
+    ctx.lineTo(bx - r * 0.3, by + r * 0.45);
+    ctx.lineTo(bx + r * 0.5, by);
+    ctx.closePath(); ctx.fill();
+  }
   // signature block (centered)
   const cx = W / 2;
   ctx.textAlign = 'center';
@@ -734,34 +746,33 @@ async function brandedImageFile(item) {
   const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.92));
   return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
 }
+// Clean deep-link that opens this exact item in the gallery lightbox
+function shareLink(item) {
+  const id = item.item_id || item.post_id || '';
+  const onTemp = location.pathname.indexOf('-temp') !== -1;
+  return location.origin + '/preview/gallery' + (onTemp ? '-temp' : '') + '.html' + (id ? ('?m=' + encodeURIComponent(id)) : '');
+}
 async function shareItem() {
   const item = lbImages[lbIndex];
   if (!item) return;
   const isVideo = item.video || /\.mp4/i.test(item.u);
-  const caption = (item.a || '').split('\n')[0].substring(0, 100);
-  const text = `${caption ? caption + '\n\n' : ''}ירדן דמרי – מאפרת כלות וערב באילת ✨\n${SHARE_SITE}`;
-  // Try to build a shareable file (branded image / video). May fail if the media CDN
-  // doesn't allow cross-origin reads — in that case we still share natively (link + photo URL).
+  const link = shareLink(item);
+  const text = isVideo
+    ? `✨ סרטון איפור מאת ירדן דמרי\nלצפייה בסרטון המלא 👇\n${link}`
+    : `✨ עבודת איפור מאת ירדן דמרי\nלצפייה בתמונה המלאה 👇\n${link}`;
+  // Branded thumbnail (the photo, or the video's poster) — shared as the image,
+  // with the short caption + clean link. No site card, no raw media URL.
+  const srcForFrame = isVideo ? (item.thumb || '') : cdnUrl(item.u, 1080);
   let file = null;
-  try {
-    if (!isVideo) {
-      file = await brandedImageFile(item);
-    } else {
-      const resp = await fetch(item.u);
-      const blob = await resp.blob();
-      file = new File([blob], 'yarden-damri.mp4', { type: blob.type || 'video/mp4' });
-    }
-  } catch (e) { file = null; }
+  try { if (srcForFrame) file = await brandedImageFile(srcForFrame, isVideo); } catch (e) { file = null; }
   try {
     if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({ files: [file], title: 'ירדן דמרי', text });
+      await navigator.share({ files: [file], text });
       return;
     }
-    if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', text, url: item.u }); return; }
+    if (navigator.share) { await navigator.share({ text, url: link }); return; }
   } catch (e) { if (e && e.name === 'AbortError') return; }
-  // Fallback: WhatsApp with caption + media link + site
-  const txt = encodeURIComponent(text + '\n' + item.u);
-  window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
 }
 
 // ── LIGHTBOX ACTION BAR STATE ──
@@ -829,11 +840,20 @@ document.addEventListener('keydown', e => {
 buildFilterBar();
 applyFilter('all');
 loadIgFeed();
+// Deep link: ?m=<id> opens that exact media in the lightbox (used by shared links)
+function openDeepLink() {
+  const m = new URLSearchParams(location.search).get('m');
+  if (!m) return;
+  const idx = lbImages.findIndex(it => String(it.item_id) === m || String(it.post_id) === m);
+  if (idx >= 0) openLb(idx);
+}
+openDeepLink();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
     buildFilterBar();
     applyFilter(activeFilter);
+    if (!document.getElementById('lb').classList.contains('open')) openDeepLink();
   }
 })();
 
