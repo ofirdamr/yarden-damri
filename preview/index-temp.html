@@ -981,24 +981,20 @@
       const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.92));
       return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
     }
+    function shareLink(item) {
+      const id = String(item.item_id || item.post_id || '').replace(/[^0-9]/g, '');
+      const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
+      const onTemp = location.pathname.indexOf('-temp') !== -1;
+      return 'https://api.yardendamri.co.il/s/' + (isVideo ? 'v' : 'p') + '/' + id + (onTemp ? '?g=t' : '');
+    }
     async function shareItem() {
       const item = lbItems[lbIdx];
       if (!item) return;
-      const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
-      const text = isVideo
-        ? `✨ לצפייה בסרטון המלא ובעוד עבודות של ירדן דמרי 💄\nyardendamri.co.il`
-        : `✨ לצפייה בתמונה המלאה ובעוד עבודות של ירדן דמרי 💄\nyardendamri.co.il`;
-      const srcForFrame = isVideo ? (item.thumb || '') : cdnUrl(item.u, 1080);
-      let file = null;
-      try { if (srcForFrame) file = await brandedImageFile(srcForFrame, isVideo); } catch (e) { file = null; }
+      const link = shareLink(item);
       try {
-        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], text });
-          return;
-        }
-        if (navigator.share) { await navigator.share({ text, url: 'https://yardendamri.co.il' }); return; }
+        if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', url: link }); return; }
       } catch (e) { if (e && e.name === 'AbortError') return; }
-      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      window.open('https://wa.me/?text=' + encodeURIComponent(link), '_blank', 'noopener');
     }
     function updateHpLbActions() {
       const item = lbItems[lbIdx];

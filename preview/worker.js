@@ -372,6 +372,46 @@ export default {
         return json({ error: 'conflict_retries_exhausted' }, 500, {}, origin);
       }
 
+      // ── GET /s/... — clean share page: OG card (thumbnail + title) that
+      //    redirects to the exact item in the gallery. Forms:
+      //    /s/v/<id> (video), /s/p/<id> (photo), /s/<id>, or /s?id=&t=v ──
+      if (request.method === 'GET' && (path === '/s' || path.startsWith('/s/'))) {
+        let id = url.searchParams.get('id') || '';
+        let kind = url.searchParams.get('t') || '';
+        const parts = path.split('/').filter(Boolean); // e.g. ['s','v','123']
+        if (parts.length === 3) { kind = parts[1]; id = parts[2]; }
+        else if (parts.length === 2) { id = parts[1]; }
+        id = (id || '').replace(/[^0-9]/g, '');
+        const temp = url.searchParams.get('g') === 't';
+        const galleryFile = temp ? 'gallery-temp.html' : 'gallery.html';
+        if (!id) return Response.redirect(`https://yardendamri.co.il/preview/${galleryFile}`, 302);
+        const isVid = kind === 'v';
+        const ogImage = isVid
+          ? `https://images.yardendamri.co.il/yarden_${id}_thumb.jpg`
+          : `https://images.yardendamri.co.il/yarden_${id}.webp`;
+        const target = `https://yardendamri.co.il/preview/${galleryFile}?m=${id}`;
+        const title = isVid ? 'לחצי לצפייה בסרטון המלא 👆' : 'לחצי לצפייה בתמונה המלאה 👆';
+        const desc = 'ירדן דמרי — מאפרת כלות וערב באילת';
+        const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        const htmlBody = `<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(desc)}</title>
+<meta property="og:type" content="${isVid ? 'video.other' : 'article'}">
+<meta property="og:site_name" content="ירדן דמרי">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:image" content="${esc(ogImage)}">
+<meta property="og:url" content="${esc(target)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:image" content="${esc(ogImage)}">
+<meta http-equiv="refresh" content="0;url=${esc(target)}">
+<style>body{margin:0;background:#fdf8f5;font-family:Heebo,Arial,sans-serif;color:#7A4A34;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}a{color:#B07060;font-weight:600}</style>
+</head><body><div><p>מעבירה אותך לגלריה…</p><p><a href="${esc(target)}">להמשך לחצי כאן</a></p>
+<script>location.replace(${JSON.stringify(target)});</script></div></body></html>`;
+        return new Response(htmlBody, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300', 'Access-Control-Allow-Origin': '*' } });
+      }
+
       return json({ error: 'not_found' }, 404, {}, origin);
 
     } catch (e) {
