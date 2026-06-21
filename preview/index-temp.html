@@ -125,7 +125,6 @@
     /* Instagram-style media badges (video / carousel) */
     .media-badge{position:absolute;top:8px;right:8px;z-index:3;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55));}
     .media-badge svg{width:21px;height:21px;fill:#fff;}
-  </style>
     /* ── FLOATING BUTTONS OVERRIDE ── */
     /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
     #a11y-trigger, #scroll-top {
@@ -966,8 +965,10 @@
       const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
       const caption = (item.a || '').split('\n')[0].substring(0, 100);
       const text = `${caption ? caption + '\n\n' : ''}ירדן דמרי – מאפרת כלות וערב באילת ✨\n${SHARE_SITE}`;
+      // Try to build a shareable file (branded image / video). May fail if the media CDN
+      // doesn't allow cross-origin reads — in that case we still share natively (link + photo URL).
+      let file = null;
       try {
-        let file;
         if (!isVideo) {
           file = await brandedImageFile(item);
         } else {
@@ -975,11 +976,13 @@
           const blob = await resp.blob();
           file = new File([blob], 'yarden-damri.mp4', { type: blob.type || 'video/mp4' });
         }
+      } catch (e) { file = null; }
+      try {
         if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({ files: [file], title: 'ירדן דמרי', text });
           return;
         }
-        if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', text, url: SHARE_SITE }); return; }
+        if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', text, url: item.u }); return; }
       } catch (e) { if (e && e.name === 'AbortError') return; }
       const txt = encodeURIComponent(text + '\n' + item.u);
       window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
