@@ -85,9 +85,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
     .lb-img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;touch-action:none;-webkit-user-drag:none;user-select:none}
-    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:1003}
+    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
     .lb-close:hover{opacity:1}
-    body.has-ck .lb-close{top:68px}
+    body.has-ck .lb-close{top:74px}
     .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .2s;z-index:1003}
     .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
     .lb-prev{right:12px}.lb-next{left:12px}
@@ -773,21 +773,27 @@ document.addEventListener('keydown', e => {
   if (e.key==='ArrowLeft') navLb(1);
   if (e.key==='ArrowRight') navLb(-1);
 });
-// Touch swipe (horizontal only) — blocks vertical drift so the media stays static
+// Touch swipe (horizontal). Listen in CAPTURE phase on document so the gesture
+// is caught even when the finger is on a playing <video> (its controls would
+// otherwise swallow the touch and block swiping).
 (function(){
-  const el = document.getElementById('lb');
+  const lbOpen = () => document.getElementById('lb').classList.contains('open');
   let x0=0, y0=0, active=false;
-  el.addEventListener('touchstart', e => { const t=e.touches[0]; x0=t.clientX; y0=t.clientY; active=true; }, {passive:true});
-  el.addEventListener('touchmove', e => {
-    if(!active) return;
+  document.addEventListener('touchstart', e => {
+    if(!lbOpen()) return;
+    const t=e.touches[0]; x0=t.clientX; y0=t.clientY; active=true;
+  }, {capture:true, passive:true});
+  document.addEventListener('touchmove', e => {
+    if(!active || !lbOpen()) return;
     const t=e.touches[0], dx=t.clientX-x0, dy=t.clientY-y0;
-    if(Math.abs(dx) > Math.abs(dy)) e.preventDefault();
-  }, {passive:false});
-  el.addEventListener('touchend', e => {
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) e.preventDefault();
+  }, {capture:true, passive:false});
+  document.addEventListener('touchend', e => {
     if(!active) return; active=false;
+    if(!lbOpen()) return;
     const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
     if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) navLb(dx < 0 ? 1 : -1);
-  }, {passive:true});
+  }, {capture:true, passive:true});
 })();
 
 // ── INIT ──
