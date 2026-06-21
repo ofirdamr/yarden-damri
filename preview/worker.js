@@ -390,7 +390,7 @@ export default {
           ? `https://images.yardendamri.co.il/yarden_${id}_thumb.jpg`
           : `https://images.yardendamri.co.il/yarden_${id}.webp`;
         const target = `https://yardendamri.co.il/preview/${galleryFile}?m=${id}`;
-        const title = isVid ? 'לחצי לצפייה בסרטון המלא 👆' : 'לחצי לצפייה בתמונה המלאה 👆';
+        const title = isVid ? 'לחצי כאן לצפייה בסרטון המלא 👆' : 'לחצי כאן לצפייה בתמונה המלאה 👆';
         const desc = 'ירדן דמרי — מאפרת כלות וערב באילת';
         const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
         const htmlBody = `<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8">

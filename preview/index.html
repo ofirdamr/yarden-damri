@@ -107,7 +107,24 @@
       padding: 0; margin: -1px; overflow: hidden;
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
-    body.has-ck .lb-close-btn { top: 68px; }
+    body.has-ck .lb-close-btn { top: 108px; }
+    /* Instagram-style lightbox action bar */
+    .lb-actions{display:flex;align-items:center;gap:18px;width:100%;max-width:480px;margin-top:14px;padding:4px 6px;}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s;}
+    .lb-act:active{transform:scale(.82);}
+    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;}
+    .lb-act.liked svg{fill:#ed4956;stroke:#ed4956;animation:lbPop .3s ease;}
+    .lb-act.saved svg{fill:#fff;}
+    @keyframes lbPop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+    .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px;}
+    .lb-save{margin-inline-start:auto;}
+    .lb-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9002;}
+    .lb-toast.show{opacity:1;}
+    /* Hide floating buttons while the lightbox is open */
+    body.lb-open #wa-float-btn, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important;}
+    /* Instagram-style media badges (video / carousel) */
+    .media-badge{position:absolute;top:8px;right:8px;z-index:3;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55));}
+    .media-badge svg{width:21px;height:21px;fill:#fff;}
     /* ── FLOATING BUTTONS OVERRIDE ── */
     /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
     #a11y-trigger, #scroll-top {
@@ -603,13 +620,30 @@
   <div id="lightbox"
     role="dialog" aria-modal="true" aria-label="תצוגת תמונה מוגדלת"
     onclick="if(event.target===this)closeLightbox()"
-    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;">
-    <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:20px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:9001;transition:top .2s;">✕</button>
+    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
+    <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:64px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:10002;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
-    <img src="" alt="" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:12px;" />
+    <img src="" alt="" style="max-width:88vw;max-height:74vh;object-fit:contain;border-radius:12px;" />
     <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.9rem;margin-top:14px;text-align:center;max-width:600px;line-height:1.6;"></p>
     <p id="lb-counter" style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></p>
+    <div class="lb-actions" id="hpLbActions">
+      <button class="lb-act" id="hpLbLike" aria-label="לייק">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="lb-cnt" id="hpLbLikeCnt"></span>
+      </button>
+      <button class="lb-act" id="hpLbComment" aria-label="תגובות">
+        <svg viewBox="0 0 24 24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22l-1.344-4.992z"/></svg>
+        <span class="lb-cnt" id="hpLbCmtCnt"></span>
+      </button>
+      <button class="lb-act" id="hpLbShare" aria-label="שיתוף">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="3" x2="9.5" y2="10.5"/><polygon points="22 3 15 21 11.5 13 3.5 9.5 22 3"/></svg>
+      </button>
+      <button class="lb-act lb-save" id="hpLbSave" aria-label="שמירה למועדפים">
+        <svg viewBox="0 0 24 24"><polygon points="19 21 12 16 5 21 5 3 19 3 19 21"/></svg>
+      </button>
+    </div>
+    <div class="lb-toast" id="hpLbToast"></div>
   </div>
 
   <!-- SCROLL TOP -->
@@ -769,11 +803,21 @@
       return images.filter(img => !img.hidden && !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
     }
 
+    // Collapse carousel children into one cover tile (Instagram-style)
+    function collapseCarousels(images) {
+      const out = [], seen = {};
+      for (const img of images) {
+        if (img.carousel && img.post_id) {
+          if (!seen[img.post_id]) { seen[img.post_id] = true; out.push(img); }
+        } else out.push(img);
+      }
+      return out;
+    }
+
     const PER_PAGE = 48;
     let currentPage = 1;
-    let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? applyAdminSettings(GALLERY_IMAGES)
-      : [];
+    let lbAll = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : []; // expanded (carousel children individual) — for lightbox swipe
+    let filteredImages = collapseCarousels(lbAll); // collapsed (one cover per carousel) — for the grid
 
     const gallery = document.getElementById('ig-gallery');
     const pagination = document.getElementById('pagination');
@@ -784,7 +828,8 @@
       await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = applyAdminSettings(GALLERY_IMAGES);
+        lbAll = applyAdminSettings(GALLERY_IMAGES);
+        filteredImages = collapseCarousels(lbAll);
         if (typeof renderPage === 'function') renderPage(currentPage);
       }
     })();
@@ -800,9 +845,11 @@
       _showLightboxContent(url, alt);
       const lb = document.getElementById('lightbox');
       lb.style.display = 'flex';
+      document.body.classList.add('lb-open');
       document.body.style.overflow = 'hidden';
       lb.focus();
       _updateLbNav();
+      updateHpLbActions();
     }
 
     function _showLightboxContent(url, alt) {
@@ -814,15 +861,17 @@
         if (!vid) {
           vid = document.createElement('video');
           vid.style.cssText = 'max-width:88vw;max-height:80vh;border-radius:12px;';
-          vid.controls = true;
+          vid.controls = true; vid.playsInline = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
         }
+        const cur = lbItems[lbIdx];
+        vid.poster = (cur && cur.thumb) || '';   // thumbnail instead of black while buffering
         vid.muted = false;
         vid.preload = 'auto';
         vid.src = url;
         vid.style.display = 'block';
         vid.load();
-        vid.addEventListener('loadedmetadata', () => { vid.play().catch(()=>{}); }, { once: true });
+        vid.play().catch(() => { vid.muted = true; vid.play().catch(() => {}); });
       } else {
         let vid = lb.querySelector('video');
         if (vid) { vid.pause(); vid.src = ''; vid.style.display = 'none'; }
@@ -836,7 +885,12 @@
 
     function _updateLbNav() {
       const counter = document.getElementById('lb-counter');
-      if (counter) counter.textContent = lbItems.length > 1 ? `${lbIdx + 1} / ${lbItems.length}` : '';
+      const cur = lbItems[lbIdx];
+      if (counter) {
+        let label = lbItems.length > 1 ? `${lbIdx + 1} / ${lbItems.length}` : '';
+        if (cur && cur.carousel && cur.ccount > 1) label = `◻ ${(cur.cidx||0)+1}/${cur.ccount} · ${label}`;
+        counter.textContent = label;
+      }
       const prev = document.getElementById('lb-prev');
       const next = document.getElementById('lb-next');
       if (prev) prev.style.opacity = lbIdx > 0 ? '1' : '.2';
@@ -850,6 +904,7 @@
       const item = lbItems[lbIdx];
       _showLightboxContent(item.u, item.a || '');
       _updateLbNav();
+      updateHpLbActions();
     }
 
     function closeLightbox() {
@@ -857,8 +912,118 @@
       const vid = lb.querySelector('video');
       if (vid) vid.pause();
       lb.style.display = 'none';
+      document.body.classList.remove('lb-open');
       document.body.style.overflow = '';
     }
+
+    // ── FAVORITES (saved per device) ──
+    function getFavorites() { try { return JSON.parse(localStorage.getItem('gallery_favorites')||'[]'); } catch(e) { return []; } }
+    function isFav(url) { return getFavorites().includes(url); }
+    function toggleFav(url) {
+      let f = getFavorites();
+      if (f.includes(url)) f = f.filter(u => u !== url);
+      else f.push(url);
+      try { localStorage.setItem('gallery_favorites', JSON.stringify(f)); } catch(e) {}
+      return f.includes(url);
+    }
+    function hpLbToast(msg) {
+      const t = document.getElementById('hpLbToast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(window._hpToastT);
+      window._hpToastT = setTimeout(() => t.classList.remove('show'), 1800);
+    }
+    const SHARE_SITE = 'https://yardendamri.co.il';
+    async function brandedImageFile(srcUrl, isVideo) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = srcUrl;
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+      try { if (document.fonts) { await document.fonts.load("italic 400 80px 'Cormorant Garamond'"); await document.fonts.ready; } } catch (e) {}
+      const W = 1080, H = 1350, mat = 74, band = 188;
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+      const bx = mat, by = mat, bw = W - 2 * mat, bh = H - band - mat;
+      const natW = img.naturalWidth || bw, natH = img.naturalHeight || bh;
+      const s = Math.min(bw / natW, bh / natH);
+      const dispW = Math.round(natW * s), dispH = Math.round(natH * s);
+      const px = Math.round((W - dispW) / 2), py = Math.round(by + (bh - dispH) / 2);
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.20)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 10;
+      ctx.fillStyle = '#fff'; ctx.fillRect(px, py, dispW, dispH);
+      ctx.restore();
+      ctx.drawImage(img, px, py, dispW, dispH);
+      ctx.strokeStyle = 'rgba(0,0,0,0.10)'; ctx.lineWidth = 1;
+      ctx.strokeRect(px + 0.5, py + 0.5, dispW - 1, dispH - 1);
+      if (isVideo) {
+        const r = 70, vx = px + dispW / 2, vy = py + dispH / 2;
+        ctx.fillStyle = 'rgba(0,0,0,0.45)';
+        ctx.beginPath(); ctx.arc(vx, vy, r, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.moveTo(vx - r * 0.28, vy - r * 0.42);
+        ctx.lineTo(vx - r * 0.28, vy + r * 0.42);
+        ctx.lineTo(vx + r * 0.46, vy);
+        ctx.closePath(); ctx.fill();
+      }
+      const cx = W / 2;
+      ctx.textAlign = 'center'; ctx.direction = 'rtl';
+      ctx.font = "italic 400 80px 'Cormorant Garamond', serif";
+      ctx.fillStyle = '#1A1A1A';
+      ctx.fillText('ירדן דמרי', cx, H - 104);
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(cx - 64, H - 80); ctx.lineTo(cx + 64, H - 80); ctx.stroke();
+      ctx.font = "400 29px 'Heebo', sans-serif";
+      ctx.fillStyle = '#555';
+      ctx.fillText('מאפרת כלות וערב · אילת', cx, H - 46);
+      ctx.font = "600 26px 'Heebo', sans-serif";
+      ctx.fillStyle = '#7A4A34';
+      ctx.fillText('yardendamri.co.il', cx, H - 14);
+      const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.94));
+      return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
+    }
+    function shareLink(item) {
+      const id = String(item.item_id || item.post_id || '').replace(/[^0-9]/g, '');
+      const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
+      const onTemp = location.pathname.indexOf('-temp') !== -1;
+      return 'https://api.yardendamri.co.il/s/' + (isVideo ? 'v' : 'p') + '/' + id + (onTemp ? '?g=t' : '');
+    }
+    async function shareItem() {
+      const item = lbItems[lbIdx];
+      if (!item) return;
+      const link = shareLink(item);
+      // Share the link only → clean card (thumbnail + "לחצי כאן לצפייה" + domain).
+      try {
+        if (navigator.share) { await navigator.share({ url: link }); return; }
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+      window.open('https://wa.me/?text=' + encodeURIComponent(link), '_blank', 'noopener');
+    }
+    function updateHpLbActions() {
+      const item = lbItems[lbIdx];
+      if (!item) return;
+      const key = btoa(item.u).substring(0,12);
+      const igStats = getIgStats(item);
+      const totalLikes = (igStats?igStats.likes:0) + (getLikes()[key]||0);
+      const cmtCount = (igStats?(igStats.comments_count||igStats.comments?.length||0):0) + ((getComments()[key]||[]).length);
+      document.getElementById('hpLbLike').classList.toggle('liked', hasLiked(key));
+      document.getElementById('hpLbLikeCnt').textContent = totalLikes || '';
+      document.getElementById('hpLbCmtCnt').textContent = cmtCount || '';
+      document.getElementById('hpLbSave').classList.toggle('saved', isFav(item.u));
+    }
+    document.getElementById('hpLbLike').addEventListener('click', async () => {
+      await toggleLike(lbItems[lbIdx].u); updateHpLbActions();
+    });
+    document.getElementById('hpLbComment').addEventListener('click', () => {
+      const it = lbItems[lbIdx];
+      openComments(it.u, (it.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim());
+    });
+    document.getElementById('hpLbShare').addEventListener('click', shareItem);
+    document.getElementById('hpLbSave').addEventListener('click', () => {
+      const saved = toggleFav(lbItems[lbIdx].u);
+      updateHpLbActions();
+      hpLbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
+    });
     document.addEventListener('keydown', e => {
       const lb = document.getElementById('lightbox');
       if (lb.style.display === 'flex') {
@@ -867,15 +1032,26 @@
         if (e.key === 'ArrowRight') navigateLightbox(-1);
       }
     });
-    // Mobile swipe for lightbox
+    // Mobile swipe — CAPTURE phase on document so it works even over a playing <video>
     (function() {
-      let _tx = 0;
-      const lb = document.getElementById('lightbox');
-      lb.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
-      lb.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - _tx;
-        if (Math.abs(dx) > 50) navigateLightbox(dx < 0 ? 1 : -1);
-      }, { passive: true });
+      const lbOpen = () => document.getElementById('lightbox').style.display === 'flex';
+      let x0 = 0, y0 = 0, active = false;
+      document.addEventListener('touchstart', e => {
+        if (!lbOpen()) return;
+        const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; active = true;
+      }, { capture: true, passive: true });
+      document.addEventListener('touchmove', e => {
+        if (!active || !lbOpen()) return;
+        const t = e.touches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) e.preventDefault();
+      }, { capture: true, passive: false });
+      document.addEventListener('touchend', e => {
+        if (!active) return; active = false;
+        if (!lbOpen()) return;
+        const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) navigateLightbox(dx < 0 ? 1 : -1);
+        else if (Math.abs(dy) > 70 && Math.abs(dy) > Math.abs(dx)) closeLightbox();  // swipe up/down to dismiss
+      }, { capture: true, passive: true });
     })();
 
 
@@ -1025,22 +1201,13 @@
     function renderPage(page) {
       const start = (page - 1) * PER_PAGE;
       const items = filteredImages.slice(start, start + PER_PAGE);
-      lbItems = items;
+      lbItems = lbAll; // lightbox swipes the full expanded list (incl. carousel children)
       gallery.innerHTML = '';
 
       items.forEach((item, idx) => {
         const div = document.createElement('div');
         div.setAttribute('role', 'listitem');
         div.style.cssText = 'position:relative;overflow:hidden;border-radius:16px;aspect-ratio:1;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;touch-action:manipulation;background:#1a1210;';
-
-        const key = btoa(item.u).substring(0,12);
-        const liked = hasLiked(key);
-        const localLikes = getLikes()[key]||0;
-        const igStats = getIgStats(item);
-        const totalLikes = (igStats ? igStats.likes : 0) + localLikes;
-        const igCmtCount = igStats ? (igStats.comments_count || igStats.comments?.length || 0) : 0;
-        const localCmtCount = (getComments()[key]||[]).length;
-        const cmtCount = igCmtCount + localCmtCount;
 
         const isVideo = item.video || item.u.includes('.mp4') || item.u.includes('/video/upload/');
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
@@ -1055,14 +1222,12 @@
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
-        const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
-        div.innerHTML = `${mediaEl}
+        const badge = (item.carousel || item.ccount > 1)
+          ? `<div class="media-badge" aria-label="פוסט עם מספר תמונות"><svg viewBox="0 0 48 48"><path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h12.7c5.5 0 9.9-4.4 9.9-9.9V18.6c0-1.6-.8-3.1-1.8-4.1-.5-.4-1.1 0-1.1.5z"/></svg></div>`
+          : (isVideo ? `<div class="media-badge" aria-label="סרטון"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : '');
+        div.innerHTML = `${mediaEl}${badge}
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none;" aria-hidden="true">
-            <p style="position:absolute;bottom:40px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
-          </div>
-          <div class="hp-item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;">
-            <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">❤️ ${totalLikes}</button>
-            <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">💬 ${cmtCount}</button>
+            <p style="position:absolute;bottom:14px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>`;
 
         div.setAttribute('tabindex', '0');
@@ -1072,21 +1237,20 @@
         div.onmouseenter = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1.02)';
           div.querySelector('.overlay').style.opacity = '1';
-          const actEl = div.querySelector('.hp-item-actions'); if(actEl) actEl.style.opacity='1';
           const imgEl = div.querySelector('img');
           if (imgEl) imgEl.style.transform = 'scale(1.05)';
         };
         div.onmouseleave = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1)';
           div.querySelector('.overlay').style.opacity = '0';
-          const actEl2 = div.querySelector('.hp-item-actions'); if(actEl2) actEl2.style.opacity='0';
           const imgEl = div.querySelector('img');
           if (imgEl) imgEl.style.transform = 'scale(1)';
         };
 
-        // Click / keyboard open lightbox
-        div.onclick = () => openLightbox(item.u, item.a || '', idx);
-        div.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(item.u, item.a || '', idx); } };
+        // Click / keyboard open lightbox (map cover → its position in the expanded list)
+        const lbi = lbAll.indexOf(item);
+        div.onclick = () => openLightbox(item.u, item.a || '', lbi);
+        div.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(item.u, item.a || '', lbi); } };
 
         gallery.appendChild(div);
       });
@@ -1107,7 +1271,9 @@
               const v = document.createElement('video');
               v.src = el.dataset.video; v.muted = true; v.loop = true;
               v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
+              v.poster = el.src || '';   // keep thumbnail visible while loading (no black box)
               v.style.cssText = el.style.cssText;
+              v.style.background = '#1a1008';
               el.parentNode.replaceChild(v, el);
               v.muted = true; v.play().catch(()=>{});
               v.dataset._obs = '1'; _galleryVidObserver.observe(v);

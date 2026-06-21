@@ -85,9 +85,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
     .lb-img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;touch-action:none;-webkit-user-drag:none;user-select:none}
-    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
+    .lb-close{position:fixed;top:64px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
     .lb-close:hover{opacity:1}
-    body.has-ck .lb-close{top:74px}
+    body.has-ck .lb-close{top:108px}
     .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .2s;z-index:1003}
     .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
     .lb-prev{right:12px}.lb-next{left:12px}
@@ -748,21 +748,13 @@ function shareLink(item) {
 async function shareItem() {
   const item = lbImages[lbIndex];
   if (!item) return;
-  const isVideo = item.video || /\.mp4/i.test(item.u);
   const link = shareLink(item);
-  const text = `✨ ${isVideo ? 'לצפייה בסרטון המלא' : 'לצפייה בתמונה המלאה'} של ירדן דמרי 💄\n${link}`;
-  // Branded white-framed image (the photo, or the video poster) + caption with the short link.
-  const srcForFrame = isVideo ? (item.thumb || '') : cdnUrl(item.u, 1080);
-  let file = null;
-  try { if (srcForFrame) file = await brandedImageFile(srcForFrame, isVideo); } catch (e) { file = null; }
+  // Share the link only → WhatsApp/others render a clean card (thumbnail +
+  // "לחצי כאן לצפייה" title + domain). No raw path, no URL dump.
   try {
-    if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({ files: [file], text });
-      return;
-    }
-    if (navigator.share) { await navigator.share({ text, url: link }); return; }
+    if (navigator.share) { await navigator.share({ url: link }); return; }
   } catch (e) { if (e && e.name === 'AbortError') return; }
-  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  window.open('https://wa.me/?text=' + encodeURIComponent(link), '_blank', 'noopener');
 }
 
 // ── LIGHTBOX ACTION BAR STATE ──

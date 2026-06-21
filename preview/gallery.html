@@ -78,25 +78,39 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px}
     .gallery-item:hover .overlay{opacity:1}
     .overlay-text{font-size:.72rem;color:rgba(255,255,255,.85);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+    /* Instagram-style media badges (video / carousel) */
+    .media-badge{position:absolute;top:8px;right:8px;z-index:2;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+    .media-badge svg{width:21px;height:21px;fill:#fff}
     /* LIGHTBOX */
-    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
-    .lb-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px}
-    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s}
+    .lb-img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;touch-action:none;-webkit-user-drag:none;user-select:none}
+    .lb-close{position:fixed;top:64px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
     .lb-close:hover{opacity:1}
-    body.has-ck .lb-close{top:68px}
-    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;padding:16px 12px;cursor:pointer;border-radius:4px;transition:background .2s}
-    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
+    body.has-ck .lb-close{top:108px}
+    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .2s;z-index:1003}
+    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
     .lb-prev{right:12px}.lb-next{left:12px}
-    .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
+    .lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem;z-index:1002}
+    body.has-ck .lb-counter{transition:bottom .2s}
     .load-more{display:block;margin:40px auto;background:#111;border:none;color:#fff;padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
     .load-more:hover{background:#111;color:#fff}
     .video-play{display:none}
-    .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}
-    .item-actions{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;opacity:0;transition:opacity .3s;pointer-events:none}
-    .item-actions button{pointer-events:auto}
-    .gallery-item:hover .item-actions,.gallery-item:focus-within .item-actions{opacity:1}
-    @media (hover:none){.item-actions{opacity:1}}
+    .lb-video{max-width:90vw;max-height:82vh;border-radius:4px;outline:none;touch-action:auto}
+    /* Instagram-style lightbox action bar */
+    .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:1002}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s}
+    .lb-act:active{transform:scale(.82)}
+    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+    .lb-act.liked svg{fill:#ed4956;stroke:#ed4956;animation:lbPop .3s ease}
+    .lb-act.saved svg{fill:#fff}
+    @keyframes lbPop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+    .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px}
+    .lb-save{margin-inline-start:auto}
+    .lb-toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:1003}
+    .lb-toast.show{opacity:1}
+    /* Hide floating buttons (WhatsApp, a11y, scroll-top) while the lightbox is open so they don't cover the action bar */
+    body.lb-open .wa-float, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important}
   </style>
   <style>
   </style>
@@ -187,6 +201,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <section style="padding:0 0 60px;">
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
       <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
+      <button class="filter-btn" data-cat="__fav__" role="tab" aria-selected="false">♥ המועדפים שלי</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -290,6 +305,23 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <video class="lb-video" id="lbVideo" controls playsinline style="display:none"></video>
   <button class="lb-next" id="lbNext" aria-label="הבאה">‹</button>
   <div class="lb-counter" id="lbCounter"></div>
+  <div class="lb-actions" id="lbActions">
+    <button class="lb-act" id="lbLike" aria-label="לייק">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <span class="lb-cnt" id="lbLikeCnt"></span>
+    </button>
+    <button class="lb-act" id="lbComment" aria-label="תגובות">
+      <svg viewBox="0 0 24 24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22l-1.344-4.992z"/></svg>
+      <span class="lb-cnt" id="lbCmtCnt"></span>
+    </button>
+    <button class="lb-act" id="lbShare" aria-label="שיתוף">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="3" x2="9.5" y2="10.5"/><polygon points="22 3 15 21 11.5 13 3.5 9.5 22 3"/></svg>
+    </button>
+    <button class="lb-act lb-save" id="lbSave" aria-label="שמירה למועדפים">
+      <svg viewBox="0 0 24 24"><polygon points="19 21 12 16 5 21 5 3 19 3 19 21"/></svg>
+    </button>
+  </div>
+  <div class="lb-toast" id="lbToast"></div>
 </div>
 
 <script src="cloud-storage.js?v=7"></script>
@@ -433,8 +465,26 @@ function getCat(img) {
 const PAGE_SIZE = 24;
 let renderPage = 1;
 let activeFilter = 'all';
-let allFilteredImages = [];
+let allFilteredImages = [];  // collapsed: one tile per carousel (for the grid)
+let lbImages = [];           // expanded: carousel children individually (for lightbox swipe)
 let lbIndex = 0;
+
+// Collapse carousel children into a single cover tile; cover._lbIndex points to
+// the first child's position in lbImages so the lightbox can swipe through them.
+function collapseCarousels(images) {
+  const out = [], firstSeen = {};
+  images.forEach((img, i) => {
+    if (img.carousel && img.post_id) {
+      if (firstSeen[img.post_id] == null) {
+        firstSeen[img.post_id] = true;
+        out.push({ ...img, _lbIndex: i });
+      }
+    } else {
+      out.push({ ...img, _lbIndex: i });
+    }
+  });
+  return out;
+}
 
 // ── RENDER ──
 function renderGallery() {
@@ -446,13 +496,6 @@ function renderGallery() {
     div.className = 'gallery-item';
     div.setAttribute('role','listitem');
     div.setAttribute('tabindex','0');
-    const key = btoa(item.u).substring(0,12);
-    const liked = hasLiked(key);
-    const localLikes = getLikes()[key]||0;
-    const igStats = getIgStats(item);
-    const totalLikes = (igStats?igStats.likes:0)+localLikes;
-    const igCmtCount = igStats?(igStats.comments_count||igStats.comments?.length||0):0;
-    const cmtCount = igCmtCount+((getComments()[key]||[]).length);
     const caption = (item.a||'').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
     const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
     const rot = (getAdminSettings().rotations || {})[item.u] || 0;
@@ -468,13 +511,11 @@ function renderGallery() {
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
-    const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
-    div.innerHTML = `${mediaHtml}
-      <div class="overlay"><div class="overlay-text">${caption}</div></div>
-      <div class="item-actions">
-        <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
-        <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
-      </div>`;
+    const badge = (item.carousel || item.ccount > 1)
+      ? `<div class="media-badge" aria-label="פוסט עם מספר תמונות"><svg viewBox="0 0 48 48"><path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h12.7c5.5 0 9.9-4.4 9.9-9.9V18.6c0-1.6-.8-3.1-1.8-4.1-.5-.4-1.1 0-1.1.5z"/></svg></div>`
+      : (isVideo ? `<div class="media-badge" aria-label="סרטון"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : '');
+    div.innerHTML = `${mediaHtml}${badge}
+      <div class="overlay"><div class="overlay-text">${caption}</div></div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1.04)`;
@@ -484,7 +525,7 @@ function renderGallery() {
       div.querySelector('.overlay').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1)`;
     };
-    const realIdx = allFilteredImages.indexOf(item);
+    const realIdx = item._lbIndex != null ? item._lbIndex : lbImages.indexOf(item);
     div.onclick = () => openLb(realIdx);
     div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(realIdx);} };
     grid.appendChild(div);
@@ -503,7 +544,9 @@ const videoObserver = new IntersectionObserver(entries => {
       const v = document.createElement('video');
       v.src = el.dataset.video; v.muted = true; v.loop = true;
       v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
+      v.poster = el.src || '';   // keep the thumbnail visible while the video loads (no black box)
       v.style.cssText = el.style.cssText;
+      v.style.background = '#1a1008';
       el.parentNode.replaceChild(v, el);
       v.muted = true; v.play().catch(()=>{});
       _obsSet.add(v); videoObserver.observe(v);
@@ -560,9 +603,18 @@ function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
   const adminCatMap = getAdminSettings().cats || {};
-  allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
+  if (cat === '__fav__') {
+    const favs = new Set(getFavorites());
+    lbImages = base.filter(img => favs.has(img.u));
+  } else {
+    lbImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
+  }
+  allFilteredImages = collapseCarousels(lbImages);
   renderPage = 1;
   renderGallery();
+  if (cat === '__fav__' && allFilteredImages.length === 0) {
+    document.getElementById('galleryGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;opacity:.6;padding:50px 20px;font-size:.95rem;">עדיין לא שמרת תמונות למועדפים.<br>פתחי תמונה ולחצי על 🔖 כדי לשמור.</p>';
+  }
 }
 document.getElementById('loadMoreBtn').addEventListener('click', () => { renderPage++; renderGallery(); });
 
@@ -573,19 +625,23 @@ function openLb(idx) {
   lbIndex = idx;
   showLb();
   document.getElementById('lb').classList.add('open');
+  document.body.classList.add('lb-open');
   document.body.style.overflow = 'hidden';
 }
 function showLb() {
-  const item = allFilteredImages[lbIndex];
+  const item = lbImages[lbIndex];
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
   const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
   if (isVideo) {
     lbVideo.src = item.u;
+    lbVideo.poster = item.thumb || '';   // show thumbnail instead of a black spinner while buffering
+    lbVideo.preload = 'auto';
+    lbVideo.muted = false;
     lbVideo.style.display = '';
     lbImg.style.display = 'none';
     lbImg.src = '';
-    lbVideo.play().catch(()=>{});
+    lbVideo.play().catch(() => { lbVideo.muted = true; lbVideo.play().catch(() => {}); });
   } else {
     lbImg.src = cdnUrl(item.u, 1200);
     lbImg.alt = (item.a||'').split('\n')[0].substring(0,80);
@@ -593,35 +649,194 @@ function showLb() {
     lbVideo.style.display = 'none';
     lbVideo.pause(); lbVideo.src = '';
   }
-  document.getElementById('lbCounter').textContent = `${lbIndex+1} / ${allFilteredImages.length}`;
+  // Carousel: show "image X of Y in this post"
+  let label = `${lbIndex+1} / ${lbImages.length}`;
+  if (item.carousel && item.ccount > 1) label = `◻ ${(item.cidx||0)+1}/${item.ccount} · ${label}`;
+  document.getElementById('lbCounter').textContent = label;
+  updateLbActions();
 }
 function closeLb() {
   document.getElementById('lb').classList.remove('open');
+  document.body.classList.remove('lb-open');
   document.body.style.overflow = '';
   const lbVideo = document.getElementById('lbVideo');
   lbVideo.pause(); lbVideo.src = '';
 }
+
+// ── FAVORITES (saved per device) ──
+function getFavorites() { try { return JSON.parse(localStorage.getItem('gallery_favorites')||'[]'); } catch(e) { return []; } }
+function isFav(url) { return getFavorites().includes(url); }
+function toggleFav(url) {
+  let f = getFavorites();
+  if (f.includes(url)) f = f.filter(u => u !== url);
+  else f.push(url);
+  try { localStorage.setItem('gallery_favorites', JSON.stringify(f)); } catch(e) {}
+  return f.includes(url);
+}
+function lbToast(msg) {
+  const t = document.getElementById('lbToast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(window._lbToastT);
+  window._lbToastT = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ── SHARE (specific media, branded with logo + name + link) ──
+const SHARE_SITE = 'https://yardendamri.co.il';
+// Draw the photo onto a bold white framed card with the "ירדן דמרי" signature.
+async function brandedImageFile(srcUrl, isVideo) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = srcUrl;
+  await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+  try { if (document.fonts) { await document.fonts.load("italic 400 80px 'Cormorant Garamond'"); await document.fonts.ready; } } catch (e) {}
+  // Fixed 4:5 white card so the whole frame + logo is always fully visible
+  const W = 1080, H = 1350, mat = 74, band = 188;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+  // photo fitted (contain) into the top area, centered with a bold white margin
+  const bx = mat, by = mat, bw = W - 2 * mat, bh = H - band - mat;
+  const natW = img.naturalWidth || bw, natH = img.naturalHeight || bh;
+  const s = Math.min(bw / natW, bh / natH);
+  const dispW = Math.round(natW * s), dispH = Math.round(natH * s);
+  const px = Math.round((W - dispW) / 2), py = Math.round(by + (bh - dispH) / 2);
+  // soft shadow so the photo lifts off the white frame
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.20)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 10;
+  ctx.fillStyle = '#fff'; ctx.fillRect(px, py, dispW, dispH);
+  ctx.restore();
+  ctx.drawImage(img, px, py, dispW, dispH);
+  // hairline for definition against the white
+  ctx.strokeStyle = 'rgba(0,0,0,0.10)'; ctx.lineWidth = 1;
+  ctx.strokeRect(px + 0.5, py + 0.5, dispW - 1, dispH - 1);
+  if (isVideo) {
+    const r = 70, vx = px + dispW / 2, vy = py + dispH / 2;
+    ctx.fillStyle = 'rgba(0,0,0,0.45)';
+    ctx.beginPath(); ctx.arc(vx, vy, r, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.moveTo(vx - r * 0.28, vy - r * 0.42);
+    ctx.lineTo(vx - r * 0.28, vy + r * 0.42);
+    ctx.lineTo(vx + r * 0.46, vy);
+    ctx.closePath(); ctx.fill();
+  }
+  // signature in the bottom band (dark on white)
+  const cx = W / 2;
+  ctx.textAlign = 'center'; ctx.direction = 'rtl';
+  ctx.font = "italic 400 80px 'Cormorant Garamond', serif";
+  ctx.fillStyle = '#1A1A1A';
+  ctx.fillText('ירדן דמרי', cx, H - 104);
+  ctx.strokeStyle = 'rgba(0,0,0,0.18)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(cx - 64, H - 80); ctx.lineTo(cx + 64, H - 80); ctx.stroke();
+  ctx.font = "400 29px 'Heebo', sans-serif";
+  ctx.fillStyle = '#555';
+  ctx.fillText('מאפרת כלות וערב · אילת', cx, H - 46);
+  ctx.font = "600 26px 'Heebo', sans-serif";
+  ctx.fillStyle = '#7A4A34';
+  ctx.fillText('yardendamri.co.il', cx, H - 14);
+  const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.94));
+  return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
+}
+// Clean short link → Worker share page that redirects to this exact item.
+function shareLink(item) {
+  const id = String(item.item_id || item.post_id || '').replace(/[^0-9]/g, '');
+  const isVideo = item.video || /\.mp4/i.test(item.u);
+  const onTemp = location.pathname.indexOf('-temp') !== -1;
+  return 'https://api.yardendamri.co.il/s/' + (isVideo ? 'v' : 'p') + '/' + id + (onTemp ? '?g=t' : '');
+}
+async function shareItem() {
+  const item = lbImages[lbIndex];
+  if (!item) return;
+  const link = shareLink(item);
+  // Share the link only → WhatsApp/others render a clean card (thumbnail +
+  // "לחצי כאן לצפייה" title + domain). No raw path, no URL dump.
+  try {
+    if (navigator.share) { await navigator.share({ url: link }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent(link), '_blank', 'noopener');
+}
+
+// ── LIGHTBOX ACTION BAR STATE ──
+function updateLbActions() {
+  const item = lbImages[lbIndex];
+  if (!item) return;
+  const key = btoa(item.u).substring(0,12);
+  const igStats = getIgStats(item);
+  const totalLikes = (igStats?igStats.likes:0) + (getLikes()[key]||0);
+  const cmtCount = (igStats?(igStats.comments_count||igStats.comments?.length||0):0) + ((getComments()[key]||[]).length);
+  document.getElementById('lbLike').classList.toggle('liked', hasLiked(key));
+  document.getElementById('lbLikeCnt').textContent = totalLikes || '';
+  document.getElementById('lbCmtCnt').textContent = cmtCount || '';
+  document.getElementById('lbSave').classList.toggle('saved', isFav(item.u));
+}
+document.getElementById('lbLike').addEventListener('click', async () => {
+  await toggleLike(lbImages[lbIndex].u); updateLbActions();
+});
+document.getElementById('lbComment').addEventListener('click', () => {
+  const it = lbImages[lbIndex];
+  openComments(it.u, (it.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim());
+});
+document.getElementById('lbShare').addEventListener('click', shareItem);
+document.getElementById('lbSave').addEventListener('click', () => {
+  const saved = toggleFav(lbImages[lbIndex].u);
+  updateLbActions();
+  lbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
+});
 document.getElementById('lbClose').addEventListener('click', closeLb);
-document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1)%allFilteredImages.length; showLb(); });
-document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex-1+allFilteredImages.length)%allFilteredImages.length; showLb(); });
+function navLb(step){ if(!lbImages.length) return; lbIndex=(lbIndex+step+lbImages.length)%lbImages.length; showLb(); }
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); navLb(-1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); navLb(1); });
 document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lb').classList.contains('open')) return;
   if (e.key==='Escape') closeLb();
-  if (e.key==='ArrowLeft') { lbIndex=(lbIndex+1)%allFilteredImages.length; showLb(); }
-  if (e.key==='ArrowRight') { lbIndex=(lbIndex-1+allFilteredImages.length)%allFilteredImages.length; showLb(); }
+  if (e.key==='ArrowLeft') navLb(1);
+  if (e.key==='ArrowRight') navLb(-1);
 });
+// Touch swipe (horizontal). Listen in CAPTURE phase on document so the gesture
+// is caught even when the finger is on a playing <video> (its controls would
+// otherwise swallow the touch and block swiping).
+(function(){
+  const lbOpen = () => document.getElementById('lb').classList.contains('open');
+  let x0=0, y0=0, active=false;
+  document.addEventListener('touchstart', e => {
+    if(!lbOpen()) return;
+    const t=e.touches[0]; x0=t.clientX; y0=t.clientY; active=true;
+  }, {capture:true, passive:true});
+  document.addEventListener('touchmove', e => {
+    if(!active || !lbOpen()) return;
+    const t=e.touches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx) > 10 || Math.abs(dy) > 10) e.preventDefault();
+  }, {capture:true, passive:false});
+  document.addEventListener('touchend', e => {
+    if(!active) return; active=false;
+    if(!lbOpen()) return;
+    const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) navLb(dx < 0 ? 1 : -1);
+    else if(Math.abs(dy) > 70 && Math.abs(dy) > Math.abs(dx)) closeLb();  // swipe up/down to dismiss
+  }, {capture:true, passive:true});
+})();
 
 // ── INIT ──
 // Render immediately with cached state, then silently refresh with remote data
 buildFilterBar();
 applyFilter('all');
 loadIgFeed();
+// Deep link: ?m=<id> opens that exact media in the lightbox (used by shared links)
+function openDeepLink() {
+  const m = new URLSearchParams(location.search).get('m');
+  if (!m) return;
+  const idx = lbImages.findIndex(it => String(it.item_id) === m || String(it.post_id) === m);
+  if (idx >= 0) openLb(idx);
+}
+openDeepLink();
 (async () => {
   if (window.RemoteState) {
     await window.RemoteState.fetchPublic();
     buildFilterBar();
     applyFilter(activeFilter);
+    if (!document.getElementById('lb').classList.contains('open')) openDeepLink();
   }
 })();
 
