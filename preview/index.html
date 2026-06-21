@@ -108,6 +108,17 @@
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
     body.has-ck .lb-close-btn { top: 68px; }
+    /* Instagram-style lightbox action bar */
+    .lb-actions{display:flex;align-items:center;gap:24px;width:100%;max-width:480px;margin-top:14px;padding:6px 8px;}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:7px;padding:2px;font-size:.95rem;font-weight:600;transition:transform .15s;}
+    .lb-act:active{transform:scale(.8);}
+    .lb-act svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+    .lb-act.liked svg{fill:#ff3040;stroke:#ff3040;}
+    .lb-act.saved svg{fill:#fff;}
+    .lb-cnt{font-size:.9rem;color:#fff;min-width:8px;}
+    .lb-save{margin-inline-start:auto;}
+    .lb-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:10px 22px;border-radius:24px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9002;}
+    .lb-toast.show{opacity:1;}
   </style>
     /* ── FLOATING BUTTONS OVERRIDE ── */
     /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
@@ -608,9 +619,26 @@
     <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:20px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:9001;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
-    <img src="" alt="" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:12px;" />
+    <img src="" alt="" style="max-width:88vw;max-height:74vh;object-fit:contain;border-radius:12px;" />
     <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.9rem;margin-top:14px;text-align:center;max-width:600px;line-height:1.6;"></p>
     <p id="lb-counter" style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></p>
+    <div class="lb-actions" id="hpLbActions">
+      <button class="lb-act" id="hpLbLike" aria-label="לייק">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="lb-cnt" id="hpLbLikeCnt"></span>
+      </button>
+      <button class="lb-act" id="hpLbComment" aria-label="תגובות">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="lb-cnt" id="hpLbCmtCnt"></span>
+      </button>
+      <button class="lb-act" id="hpLbShare" aria-label="שיתוף">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+      <button class="lb-act lb-save" id="hpLbSave" aria-label="שמירה למועדפים">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+    <div class="lb-toast" id="hpLbToast"></div>
   </div>
 
   <!-- SCROLL TOP -->
@@ -804,6 +832,7 @@
       document.body.style.overflow = 'hidden';
       lb.focus();
       _updateLbNav();
+      updateHpLbActions();
     }
 
     function _showLightboxContent(url, alt) {
@@ -851,6 +880,7 @@
       const item = lbItems[lbIdx];
       _showLightboxContent(item.u, item.a || '');
       _updateLbNav();
+      updateHpLbActions();
     }
 
     function closeLightbox() {
@@ -860,6 +890,61 @@
       lb.style.display = 'none';
       document.body.style.overflow = '';
     }
+
+    // ── FAVORITES (saved per device) ──
+    function getFavorites() { try { return JSON.parse(localStorage.getItem('gallery_favorites')||'[]'); } catch(e) { return []; } }
+    function isFav(url) { return getFavorites().includes(url); }
+    function toggleFav(url) {
+      let f = getFavorites();
+      if (f.includes(url)) f = f.filter(u => u !== url);
+      else f.push(url);
+      try { localStorage.setItem('gallery_favorites', JSON.stringify(f)); } catch(e) {}
+      return f.includes(url);
+    }
+    function hpLbToast(msg) {
+      const t = document.getElementById('hpLbToast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(window._hpToastT);
+      window._hpToastT = setTimeout(() => t.classList.remove('show'), 1800);
+    }
+    async function shareItem() {
+      const data = {
+        title: 'ירדן דמרי – מאפרת כלות וערב באילת',
+        text: 'ירדן דמרי – מאפרת כלות וערב באילת ✨',
+        url: 'https://yardendamri.co.il'
+      };
+      if (navigator.share) {
+        try { await navigator.share(data); return; }
+        catch(e) { if (e.name === 'AbortError') return; }
+      }
+      const txt = encodeURIComponent(data.text + ' ' + data.url);
+      window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
+    }
+    function updateHpLbActions() {
+      const item = lbItems[lbIdx];
+      if (!item) return;
+      const key = btoa(item.u).substring(0,12);
+      const igStats = getIgStats(item);
+      const totalLikes = (igStats?igStats.likes:0) + (getLikes()[key]||0);
+      const cmtCount = (igStats?(igStats.comments_count||igStats.comments?.length||0):0) + ((getComments()[key]||[]).length);
+      document.getElementById('hpLbLike').classList.toggle('liked', hasLiked(key));
+      document.getElementById('hpLbLikeCnt').textContent = totalLikes || '';
+      document.getElementById('hpLbCmtCnt').textContent = cmtCount || '';
+      document.getElementById('hpLbSave').classList.toggle('saved', isFav(item.u));
+    }
+    document.getElementById('hpLbLike').addEventListener('click', async () => {
+      await toggleLike(lbItems[lbIdx].u); updateHpLbActions();
+    });
+    document.getElementById('hpLbComment').addEventListener('click', () => {
+      const it = lbItems[lbIdx];
+      openComments(it.u, (it.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim());
+    });
+    document.getElementById('hpLbShare').addEventListener('click', shareItem);
+    document.getElementById('hpLbSave').addEventListener('click', () => {
+      const saved = toggleFav(lbItems[lbIdx].u);
+      updateHpLbActions();
+      hpLbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
+    });
     document.addEventListener('keydown', e => {
       const lb = document.getElementById('lightbox');
       if (lb.style.display === 'flex') {
@@ -1034,15 +1119,6 @@
         div.setAttribute('role', 'listitem');
         div.style.cssText = 'position:relative;overflow:hidden;border-radius:16px;aspect-ratio:1;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;touch-action:manipulation;background:#1a1210;';
 
-        const key = btoa(item.u).substring(0,12);
-        const liked = hasLiked(key);
-        const localLikes = getLikes()[key]||0;
-        const igStats = getIgStats(item);
-        const totalLikes = (igStats ? igStats.likes : 0) + localLikes;
-        const igCmtCount = igStats ? (igStats.comments_count || igStats.comments?.length || 0) : 0;
-        const localCmtCount = (getComments()[key]||[]).length;
-        const cmtCount = igCmtCount + localCmtCount;
-
         const isVideo = item.video || item.u.includes('.mp4') || item.u.includes('/video/upload/');
         const _rot = (getAdminSettings().rotations || {})[item.u] || 0;
         const _rotStyle = _rot ? `transform:rotate(${_rot}deg);` : '';
@@ -1056,14 +1132,9 @@
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
-        const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
         div.innerHTML = `${mediaEl}
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none;" aria-hidden="true">
-            <p style="position:absolute;bottom:40px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
-          </div>
-          <div class="hp-item-actions" style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:7px 9px;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;">
-            <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">❤️ ${totalLikes}</button>
-            <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:4px 9px;color:#fff;cursor:pointer;font-size:.78rem;backdrop-filter:blur(6px);pointer-events:auto;">💬 ${cmtCount}</button>
+            <p style="position:absolute;bottom:14px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>`;
 
         div.setAttribute('tabindex', '0');
@@ -1073,14 +1144,12 @@
         div.onmouseenter = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1.02)';
           div.querySelector('.overlay').style.opacity = '1';
-          const actEl = div.querySelector('.hp-item-actions'); if(actEl) actEl.style.opacity='1';
           const imgEl = div.querySelector('img');
           if (imgEl) imgEl.style.transform = 'scale(1.05)';
         };
         div.onmouseleave = () => { if (window.matchMedia('(hover:none)').matches) return;
           div.style.transform = 'scale(1)';
           div.querySelector('.overlay').style.opacity = '0';
-          const actEl2 = div.querySelector('.hp-item-actions'); if(actEl2) actEl2.style.opacity='0';
           const imgEl = div.querySelector('img');
           if (imgEl) imgEl.style.transform = 'scale(1)';
         };
