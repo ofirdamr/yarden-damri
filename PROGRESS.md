@@ -407,3 +407,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 3. Hero video iOS autoplay — preload=none → preload=metadata
 4. CSS version bumped to v=12
 5. Root files — reverted all root changes back to original (root is not our concern)
+
+## 2026-06-21 — preview/ lightbox full-screen + video controls + About page link (temp files)
+- preview/index-temp.html, preview/gallery-temp.html: lightbox media now fills the screen (img 96–100vw / 86–100vh, video up to 96vh); overlay background made fully opaque (#000) so underlying gallery tile buttons (like/comment/share/save) no longer bleed through over the video controls
+- gallery-temp.html: added `.lb.video-mode` — hides the bottom counter and caps video to 84vh while a video plays so the native HTML5 controls are never hidden behind the counter; close/nav/counter buttons given darker bg + z-index:5; counter moved to top
+- index-temp.html: homepage nav "אודות" (desktop + mobile) now links to about.html (dedicated longer About page) instead of the #about homepage anchor
+- Frontend UX/UI agent reviewed both temp files: full-viewport media, reachable video controls, ≥44px high-contrast tap targets, correct RTL — no defects
