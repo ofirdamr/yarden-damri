@@ -93,6 +93,16 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 
 ---
 
+## STRICT RULE — Do not over-read files (token discipline)
+
+**Reading many files, or files not strictly needed for the task, wastes tokens and is NOT permitted.**
+
+- Read only the exact file(s)/sections required to make the current change. Use targeted search (grep) over whole-file reads.
+- Do NOT bulk-read MD files, whole folders, or "for context" files unless the task truly requires it.
+- If you believe you need to read several files, STOP and ASK the user for permission first, explaining what and why.
+
+---
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
