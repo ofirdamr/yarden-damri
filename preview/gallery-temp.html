@@ -112,6 +112,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-toast.show{opacity:1}
     /* Hide floating buttons (WhatsApp, a11y, scroll-top) while the lightbox is open so they don't cover the action bar */
     body.lb-open .wa-float, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important}
+    /* Hide nav (and its hamburger) while lightbox is open so media is truly fullscreen */
+    body.lb-open nav[role="navigation"]{display:none !important}
   </style>
   <style>
   </style>

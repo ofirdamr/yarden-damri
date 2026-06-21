@@ -79,6 +79,11 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
   .about-visual{ order:2 !important; align-self:stretch; }
   .about-card{ aspect-ratio:unset !important; height:100%; min-height:580px; max-height:none; }
 }
+@media (max-width:1080px){
+  #about .about-visual{ display:block !important; }
+  #about .about-accent, #about .about-small-card{ display:none !important; }
+  #about .about-card{ aspect-ratio:3/4; max-height:70vh; }
+}
 </style>
 </head>
 <body>
