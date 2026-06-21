@@ -71,6 +71,15 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
 #wa-float-btn,.wa-float{right:12px !important;left:auto !important;}
 #a11y-trigger svg,#wa-float-btn svg,.wa-float svg{width:16px !important;height:16px !important;fill:#fff !important;}
 </style>
+<style id="about-match">
+.about-card{ background:var(--cream); }
+.about-card img{ width:100%; height:100%; object-fit:contain; object-position:center bottom; display:block; filter:brightness(0.97) saturate(0.88) sepia(0.08); }
+@media (min-width:1081px){
+  #about{ grid-template-columns:1fr 1.4fr !important; align-items:stretch; }
+  .about-visual{ order:2 !important; align-self:stretch; }
+  .about-card{ aspect-ratio:unset !important; height:100%; min-height:580px; max-height:none; }
+}
+</style>
 </head>
 <body>
 
@@ -139,7 +148,7 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
     <!-- HERO -->
     <section id="about" aria-labelledby="about-title" style="padding-top:120px;">
       <div class="about-visual reveal" aria-hidden="true">
-        <div class="about-card" style="background-image:url('https://ik.imagekit.io/Yardendamri/WhatsApp_Image_2026-05-02_at_09.42.25_1_vek36k');background-size:cover;background-position:center top;"></div>
+        <div class="about-card"><img src="https://images.yardendamri.co.il/about-yarden.png" alt="ירדן דמרי מאפרת" loading="lazy" /></div>
         <div class="about-accent"></div>
         <div class="about-small-card">
           <div class="small-card-num">100%</div>
