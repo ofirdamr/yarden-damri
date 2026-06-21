@@ -1,10 +1,21 @@
 # Site Status — yardendamri.co.il
 
-*Last updated: 2026-06-13*
+*Last updated: 2026-06-21*
 
 ## Current State
 - **Root (/)**: Old site — still live, still references Cloudinary (closing). Do not touch.
-- **Preview (/preview/)**: New site — all active development. Ready for go-live after checklist below.
+- **Preview (/preview/)**: New site — all active development. Served at `yardendamri.co.il/preview/`.
+- **Editing rule**: only edit `*-temp.html`; promote to permanent ONLY on explicit user approval (see CLAUDE.md).
+
+## Current Focus (2026-06-21) — Gallery / media / sharing (DONE, promoted live)
+- Videos display everywhere (grid thumbnail → autoplay on scroll w/ poster; lightbox plays w/ poster + muted fallback).
+- Natural Instagram time order; photos + videos interleaved. Admin gallery matches the same order.
+- Carousels (multi-image posts): one cover tile + ⧉ badge; lightbox swipes the post's children. Video tiles get a ▶ badge.
+- Lightbox: Instagram-style action bar (like / comment / share / save-to-favourites), horizontal swipe to navigate, swipe up/down to dismiss, static media (no vertical drift), X cleared of cookie bar + video controls.
+- Favourites: persistent per device (`localStorage gallery_favorites`) + a "♥ המועדפים שלי" gallery filter.
+- Share: shares a short Worker link `api.yardendamri.co.il/s/<v|p>/<id>` → WhatsApp renders a clean card (thumbnail + "לחצי כאן לצפייה" + domain) that deep-links to the exact item via `gallery.html?m=<id>`.
+- `fix.js`: retry wrapper so a single flaky page no longer truncates the Instagram fetch (was dropping many posts); carousel children tagged `carousel/cidx/ccount`.
+- R2 CORS set on `yarden-images` / `yarden-videos-new` (free, via dashboard) for cross-origin reads.
 
 ## Go-Live Checklist
 - [x] Security audit & hardening (session tokens, rate limiting, secure headers)
@@ -35,10 +46,12 @@
 ## Admin & Backend
 | Component | Status |
 |-----------|--------|
-| Cloudflare Worker (`yarden-admin`) | ✅ Deployed — session tokens + rate limiting |
-| KV namespace (`yarden-admin-sessions`) | ✅ Created — ID: `7fc38ac017a145fea0a486419a3bff07` |
-| deploy-worker.yml | ✅ CI/CD via GitHub Actions + `CF_WORKERS_API_TOKEN` secret |
-| Instagram sync (sync-auto.yml) | ✅ Every 6h |
+| Cloudflare Worker (`yarden-admin`) | ✅ Deployed — auth + `/social` + `/s/<id>` share pages |
+| Worker share route `/s/v|p/<id>` | ✅ OG card (thumbnail + "לחצי כאן לצפייה") → redirects to `gallery.html?m=<id>` |
+| KV namespace (`yarden-admin-sessions`) | ✅ ID: `7fc38ac017a145fea0a486419a3bff07` |
+| deploy-worker.yml | ✅ CI/CD via `CF_WORKERS_API_TOKEN`; uses `inherit` bindings to preserve ADMIN_PASSWORD + GH_TOKEN |
+| R2 CORS (set-cors.yml + dashboard) | ✅ Allow GET/HEAD from yardendamri.co.il on both buckets |
+| Instagram sync (sync-auto.yml) | ✅ Every 6h; resilient pagination (retry) |
 
 ## Known Issues
 - Hero video has brief dark flash — thumbnails not yet backfilled for 161 existing videos

@@ -2,6 +2,18 @@
 
 ## ✅ Completed
 
+## 2026-06-21 — Gallery/media/share overhaul PROMOTED to permanent
+Promoted `gallery-temp.html`→`gallery.html` and `index-temp.html`→`index.html` (user approved). All live now:
+- Videos: grid thumbnail → autoplay `<video>` on scroll with `poster=thumb` (no black boxes); lightbox plays with poster + muted-fallback (no endless spinner).
+- Natural Instagram time order across site + admin; carousels = one cover tile + ⧉ badge, lightbox swipes children; ▶ badge on videos.
+- Lightbox: IG action bar (like/comment/share/save), horizontal swipe = navigate, vertical swipe = dismiss, media static, X lowered to 64/108px (clear of cookie bar + video mute control), floats hidden while open.
+- Favourites: `localStorage gallery_favorites` + "♥ המועדפים שלי" filter.
+- Share: link-only → `api.yardendamri.co.il/s/<v|p>/<id>` → WhatsApp clean card (thumbnail + "לחצי כאן לצפייה" + domain) → deep-links to `gallery.html?m=<id>`. (Framed `brandedImageFile()` canvas stays in code but unused — WhatsApp can't show framed file AND card together.)
+- Worker: added `GET /s/...` share route; `deploy-worker.yml` uses `inherit` bindings so secrets survive redeploy. Redeployed.
+- fix.js: `getJSON()` retry wrapper fixed pagination truncation (real cause of missing posts); carousel children tagged.
+- R2 CORS set on both buckets via Cloudflare dashboard (R2 object token lacked bucket-admin for the API route).
+- CLAUDE.md: added STRICT RULE — only edit `*-temp.html`, promote on explicit approval only.
+
 ## 2026-06-21 — Temp-only rule, missing posts, IG-style media (temp files)
 - CLAUDE.md: added STRICT RULE — only edit `*-temp.html`, never permanent files; promote only on explicit approval.
 - fix.js ROOT CAUSE of missing posts: `get()` returns `{}` on any timeout, and the media pagination loop did `if(!res.data) break` — one flaky page silently dropped ALL older posts (not just reels). Added `getJSON()` retry wrapper (4x backoff) for media pages + carousel children. Triggered sync to recover.

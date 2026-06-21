@@ -1,5 +1,5 @@
 # Site Architecture — yardendamri.co.il
-*Last updated: June 2026*
+*Last updated: 2026-06-21*
 
 ---
 
@@ -145,8 +145,11 @@ Videos:           https://videos-new.yardendamri.co.il/yarden_{itemId}.mp4
 | `POST /settings` | `Authorization: Bearer <token>` | Merges partial update into `gallery-settings.json` |
 | `GET /social` | None (public) | Returns likes + comments |
 | `POST /social` | None (public) | Updates likes + comments |
+| `GET /s/<v\|p>/<id>` | None (public) | Share page: OG card (thumbnail + "לחצי כאן לצפייה" title) → redirects to `gallery.html?m=<id>` (`?g=t` → gallery-temp). `v`=video (thumb jpg), `p`=photo (webp) |
 
 **Rate limiting:** 5 failed `/login` attempts → 15-min IP lockout (KV key `rl:{ip}`)
+
+**Deploy safety:** `deploy-worker.yml` metadata includes `{"type":"inherit","name":"ADMIN_PASSWORD"}` and `GH_TOKEN` so re-deploying the script does NOT wipe the existing secret bindings.
 
 ### gallery-settings.json structure
 ```json
@@ -189,10 +192,20 @@ const GALLERY_IMAGES = [
     "item_id": "18124163572566762",
     "post_id": "18124163572566762",
     "video": true,
-    "thumb": ""  // _thumb.jpg URL if generated, else empty
+    "thumb": "https://images.yardendamri.co.il/yarden_18124163572566762_thumb.jpg"
   }
 ]
 ```
+
+**Optional flags added by `fix.js`:**
+- `hidden: true` — item kept in data (stays on R2 / visible to admin) but filtered out of public pages.
+- `carousel: true`, `cidx: <n>`, `ccount: <n>` — child of a multi-image post. The gallery shows ONE cover tile per `post_id` (with a ⧉ badge) and the lightbox swipes the children.
+
+**Gallery rendering (gallery.html / index.html):**
+- `lbImages` = full expanded list (carousel children individual) → drives the lightbox.
+- `allFilteredImages` / `filteredImages` = collapsed (one cover per carousel) → drives the grid.
+- Deep link `?m=<item_id|post_id>` opens that exact item in the lightbox.
+- Video grid tiles: `<img data-video>` thumbnail → swapped to autoplay `<video>` (poster=thumb) on scroll via IntersectionObserver.
 
 ---
 
