@@ -1,5 +1,10 @@
 # Progress Log — Preview Folder
 
+## 2026-06-21 — Nav RTL + floating buttons + lightbox fullscreen (temp files)
+- All subpage `-temp.html` (about, bride, services, bridal-guide, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy, gallery): nav now matches homepage — desktop `flex-direction:row-reverse` (logo LEFT, links RIGHT), social pills first (rightmost), dropped מחירון + ביקורות from the desktop bar (kept in mobile menu). Injected one inline `<style id="rtl-float-override">` per page (stayed on styles.css, did not touch shared CSS).
+- Floating buttons unified across ALL pages (incl. homepage): a11y + scroll-top + WhatsApp identical — 36px circles, `bottom:18px`, transparent `opacity:.55` on `#444`, aligned (a11y left:12 / scroll left:56 / WhatsApp right:12). Added WhatsApp to homepage override so it matches.
+- Lightbox media FULLSCREEN (homepage + gallery): `.lb-img`/`.lb-video` → `max-width:100vw;max-height:100dvh`, container padding 0. Action bar stays as fixed overlay.
+
 ## June 2026 — Homepage & Site Redesign
 - index.html: Philosophy, Area, CTA, Reviews, Contact, Share strip, About — all redesigned
 - about.html: full rewrite (Hero + Story + Experience + CTA), warm premium voice

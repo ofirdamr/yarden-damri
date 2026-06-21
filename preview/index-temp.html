@@ -129,7 +129,7 @@
     .media-badge svg{width:21px;height:21px;fill:#fff;}
     /* ── FLOATING BUTTONS OVERRIDE ── */
     /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
-    #a11y-trigger, #scroll-top {
+    #a11y-trigger, #scroll-top, #wa-float-btn, .wa-float {
       width: 36px !important; height: 36px !important;
       min-width: 36px !important; max-width: 36px !important;
       min-height: 36px !important; max-height: 36px !important;
@@ -142,17 +142,17 @@
       justify-content: center !important;
       padding: 0 !important;
       box-sizing: border-box !important;
-      opacity: 0.55 !important;
-      transition: opacity 0.2s !important;
-    }
-    #a11y-trigger:hover, #scroll-top:hover { opacity: 0.9 !important; }
-    #a11y-trigger {
-      left: 12px !important; right: auto !important;
       background: #444 !important; color: #fff !important;
       border: none !important; filter: none !important;
+      opacity: 0.55 !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3) !important;
+      transition: opacity 0.2s !important;
     }
-    #scroll-top { left: 56px !important; right: auto !important; background: #444 !important; color: #fff !important; border: none !important; font-size: 14px !important; }
-    #a11y-trigger svg { width: 16px !important; height: 16px !important; fill: #fff !important; }
+    #a11y-trigger:hover, #scroll-top:hover, #wa-float-btn:hover, .wa-float:hover { opacity: 0.9 !important; transform: none !important; }
+    #a11y-trigger { left: 12px !important; right: auto !important; }
+    #scroll-top { left: 56px !important; right: auto !important; font-size: 14px !important; }
+    #wa-float-btn, .wa-float { right: 12px !important; left: auto !important; }
+    #a11y-trigger svg, #wa-float-btn svg, .wa-float svg { width: 16px !important; height: 16px !important; fill: #fff !important; }
   </style>
 </head>
 
@@ -622,11 +622,11 @@
   <div id="lightbox"
     role="dialog" aria-modal="true" aria-label="תצוגת תמונה מוגדלת"
     onclick="if(event.target===this)closeLightbox()"
-    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
+    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:0;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
     <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:64px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:10002;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
-    <img src="" alt="" style="max-width:92vw;max-height:82vh;object-fit:contain;border-radius:8px;" />
+    <img src="" alt="" style="max-width:100vw;max-height:100vh;max-height:100dvh;object-fit:contain;border-radius:0;" />
     <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.9rem;margin-top:14px;text-align:center;max-width:600px;line-height:1.6;"></p>
     <p id="lb-counter" style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></p>
     <div class="lb-actions" id="hpLbActions">
@@ -862,7 +862,7 @@
         let vid = lb.querySelector('video');
         if (!vid) {
           vid = document.createElement('video');
-          vid.style.cssText = 'max-width:92vw;max-height:82vh;border-radius:8px;';
+          vid.style.cssText = 'max-width:100vw;max-height:100vh;max-height:100dvh;border-radius:0;';
           vid.controls = true; vid.playsInline = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
         }
