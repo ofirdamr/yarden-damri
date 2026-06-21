@@ -82,8 +82,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
     .lb.open{display:flex}
     .lb-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px}
-    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s}
+    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s}
     .lb-close:hover{opacity:1}
+    body.has-ck .lb-close{top:68px}
     .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;padding:16px 12px;cursor:pointer;border-radius:4px;transition:background .2s}
     .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
     .lb-prev{right:12px}.lb-next{left:12px}
