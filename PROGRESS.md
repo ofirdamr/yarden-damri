@@ -2,6 +2,14 @@
 
 ## ✅ Completed
 
+## 2026-06-21 — Temp-only rule, missing posts, IG-style media (temp files)
+- CLAUDE.md: added STRICT RULE — only edit `*-temp.html`, never permanent files; promote only on explicit approval.
+- fix.js ROOT CAUSE of missing posts: `get()` returns `{}` on any timeout, and the media pagination loop did `if(!res.data) break` — one flaky page silently dropped ALL older posts (not just reels). Added `getJSON()` retry wrapper (4x backoff) for media pages + carousel children. Triggered sync to recover.
+- fix.js: carousel children now stamped `carousel/cidx/ccount/post_id` so the gallery can group + badge them.
+- Temp gallery + homepage: one tile per carousel (cover) + layers badge; video badge; gallery lightbox swipes a post's children. IG-style lightbox icons (thin strokes, solid-red like + pop).
+- Share: shares the SPECIFIC media — images branded on canvas with "ירדן דמרי" logo + name + link; videos shared as file; WhatsApp fallback with caption + media link. NOTE: branded image needs CORS on images CDN; if blocked it falls back.
+- Lightbox open hides floating WhatsApp/a11y/scroll-top buttons (were covering the action bar on mobile).
+
 ## 2026-06-20 — Applied video fix to temp files + promoted temp → permanent
 - gallery-temp.html & index-temp.html: replaced brideKW/orderMap sort with natural Instagram time order; replaced `<img data-video>` swap pattern with real `<video preload="none">` elements; gave gallery tiles `aspect-ratio:4/5` so they never collapse in CSS-columns masonry; updated IntersectionObserver to play/pause `<video>` directly (no swap needed); filter includes `img.hidden` flag + privateCats.
 - Promoted: cp gallery-temp.html → gallery.html, index-temp.html → index.html. Permanent files now contain ALL temp UI/design changes (desktop responsiveness, RTL optimization, cookie banner, etc.) AND the full video fix.
