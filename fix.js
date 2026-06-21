@@ -40,6 +40,18 @@ function get(url, timeoutMs=10000) {
   });
 }
 
+// Retry wrapper: get() resolves to {} on any timeout/error/parse-fail.
+// Retrying prevents a single flaky request from silently truncating pagination
+// (which dropped large numbers of posts, not just reels).
+async function getJSON(url, timeoutMs=15000, retries=3) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const res = await get(url, timeoutMs);
+    if (res && Object.keys(res).length) return res;
+    if (attempt < retries) await new Promise(r => setTimeout(r, 1200 * (attempt + 1)));
+  }
+  return {};
+}
+
 function downloadBuffer(url, timeoutMs=30000) {
   return new Promise((resolve, reject) => {
     try {
@@ -128,20 +140,29 @@ function safeWrite(filePath, data) {
   console.log("Fetching media...");
   let rawPosts = [];
   let url = `https://${baseHost}/${mediaBaseId}/media?fields=id,media_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count&limit=100&access_token=${token}`;
+  let pageCount = 0, fetchFailed = false;
   while (url) {
-    const res = await get(url, 15000);
-    if (!res.data) break;
+    const res = await getJSON(url, 15000, 4);
+    if (!res.data) {
+      // Genuine failure after retries — log loudly, do NOT silently drop the rest
+      console.error(`\n⚠️ Page ${pageCount + 1} failed after retries — pagination stopped early, posts may be missing.`);
+      fetchFailed = true;
+      break;
+    }
+    pageCount++;
     for (const item of res.data) {
       if (item.media_type === "CAROUSEL_ALBUM") {
-        const ch = await get(`https://${baseHost}/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`, 15000);
-        for (const c of (ch.data || [])) rawPosts.push({ ...c, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id });
+        const ch = await getJSON(`https://${baseHost}/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`, 15000, 4);
+        const kids = ch.data || [];
+        if (!kids.length) console.warn(`\n⚠️ Carousel ${item.id} returned no children — skipped.`);
+        kids.forEach((c, ci) => rawPosts.push({ ...c, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id, carousel: true, cidx: ci, ccount: kids.length }));
       } else {
         rawPosts.push({ ...item, post_id: item.id });
       }
     }
     url = res.paging?.next || null;
   }
-  console.log(`Fetched ${rawPosts.length} items`);
+  console.log(`Fetched ${rawPosts.length} items across ${pageCount} pages${fetchFailed ? " (INCOMPLETE)" : ""}`);
 
   let existing = [];
   try {

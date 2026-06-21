@@ -81,6 +81,18 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 
 ---
 
+## STRICT RULE — Temp files only (NEVER edit permanent files)
+
+**Only ever edit the `-temp.html` files. NEVER edit the permanent (live) files directly.**
+
+- Editable: `preview/index-temp.html`, `preview/gallery-temp.html` (and any other `*-temp.html`).
+- FORBIDDEN to edit directly: `preview/index.html`, `preview/gallery.html` (the permanent/live files).
+- The user reviews changes at the `-temp.html` URLs (e.g. `/preview/gallery-temp.html`) BEFORE they go live.
+- Promotion temp → permanent (`cp gallery-temp.html gallery.html`) happens ONLY when the user EXPLICITLY says to promote/publish. Never promote on your own initiative.
+- If a fix is needed, make it in the `-temp.html` file only, push, and let the user review. Do not touch the permanent file.
+
+---
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
