@@ -88,23 +88,15 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;padding:16px 12px;cursor:pointer;border-radius:4px;transition:background .2s}
     .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
     .lb-prev{right:12px}.lb-next{left:12px}
-    .lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem;z-index:1002}
-    body.has-ck .lb-counter{transition:bottom .2s}
+    .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem}
     .load-more{display:block;margin:40px auto;background:#111;border:none;color:#fff;padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
     .load-more:hover{background:#111;color:#fff}
     .video-play{display:none}
     .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}
-    /* Instagram-style lightbox action bar */
-    .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:24px;padding:16px 22px;background:linear-gradient(to top,rgba(0,0,0,.9),transparent);z-index:1002}
-    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:7px;padding:2px;font-size:.95rem;font-weight:600;transition:transform .15s}
-    .lb-act:active{transform:scale(.8)}
-    .lb-act svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .lb-act.liked svg{fill:#ff3040;stroke:#ff3040}
-    .lb-act.saved svg{fill:#fff}
-    .lb-cnt{font-size:.9rem;color:#fff;min-width:8px}
-    .lb-save{margin-inline-start:auto}
-    .lb-toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:10px 22px;border-radius:24px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:1003}
-    .lb-toast.show{opacity:1}
+    .item-actions{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:flex-end;gap:5px;padding:5px 7px;z-index:3;opacity:0;transition:opacity .3s;pointer-events:none}
+    .item-actions button{pointer-events:auto}
+    .gallery-item:hover .item-actions,.gallery-item:focus-within .item-actions{opacity:1}
+    @media (hover:none){.item-actions{opacity:1}}
   </style>
   <style>
   </style>
@@ -195,7 +187,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <section style="padding:0 0 60px;">
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="סינון גלריה">
       <button class="filter-btn active" data-cat="all" role="tab" aria-selected="true">הכל</button>
-      <button class="filter-btn" data-cat="__fav__" role="tab" aria-selected="false">♥ המועדפים שלי</button>
     </div>
     <div id="gallery-seo" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);" aria-hidden="true">
 <h2>גלריית עבודות – ירדן דמרי מאפרת כלות ואירועים באילת</h2>
@@ -299,23 +290,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <video class="lb-video" id="lbVideo" controls playsinline style="display:none"></video>
   <button class="lb-next" id="lbNext" aria-label="הבאה">‹</button>
   <div class="lb-counter" id="lbCounter"></div>
-  <div class="lb-actions" id="lbActions">
-    <button class="lb-act" id="lbLike" aria-label="לייק">
-      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span class="lb-cnt" id="lbLikeCnt"></span>
-    </button>
-    <button class="lb-act" id="lbComment" aria-label="תגובות">
-      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      <span class="lb-cnt" id="lbCmtCnt"></span>
-    </button>
-    <button class="lb-act" id="lbShare" aria-label="שיתוף">
-      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-    <button class="lb-act lb-save" id="lbSave" aria-label="שמירה למועדפים">
-      <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-    </button>
-  </div>
-  <div class="lb-toast" id="lbToast"></div>
 </div>
 
 <script src="cloud-storage.js?v=7"></script>
@@ -472,6 +446,13 @@ function renderGallery() {
     div.className = 'gallery-item';
     div.setAttribute('role','listitem');
     div.setAttribute('tabindex','0');
+    const key = btoa(item.u).substring(0,12);
+    const liked = hasLiked(key);
+    const localLikes = getLikes()[key]||0;
+    const igStats = getIgStats(item);
+    const totalLikes = (igStats?igStats.likes:0)+localLikes;
+    const igCmtCount = igStats?(igStats.comments_count||igStats.comments?.length||0):0;
+    const cmtCount = igCmtCount+((getComments()[key]||[]).length);
     const caption = (item.a||'').replace(/[<>]/g,'').trim().split('\n')[0].substring(0,80);
     const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
     const rot = (getAdminSettings().rotations || {})[item.u] || 0;
@@ -487,8 +468,13 @@ function renderGallery() {
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
+    const safeCaption = (item.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim();
     div.innerHTML = `${mediaHtml}
-      <div class="overlay"><div class="overlay-text">${caption}</div></div>`;
+      <div class="overlay"><div class="overlay-text">${caption}</div></div>
+      <div class="item-actions">
+        <button onclick="event.stopPropagation();event.preventDefault();toggleLike('${item.u}')" aria-label="${liked?'הסרת לייק':'הוספת לייק'}" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:${liked?'#ff6b8a':'#fff'};cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">❤️ ${totalLikes}</button>
+        <button onclick="event.stopPropagation();event.preventDefault();openComments('${item.u}','${safeCaption}')" aria-label="פתיחת תגובות" style="background:rgba(0,0,0,.6);border:none;border-radius:20px;padding:3px 8px;color:#fff;cursor:pointer;font-size:.75rem;backdrop-filter:blur(6px);">💬 ${cmtCount}</button>
+      </div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1.04)`;
@@ -574,17 +560,9 @@ function applyFilter(cat) {
   activeFilter = cat;
   const base = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : [];
   const adminCatMap = getAdminSettings().cats || {};
-  if (cat === '__fav__') {
-    const favs = new Set(getFavorites());
-    allFilteredImages = base.filter(img => favs.has(img.u));
-  } else {
-    allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
-  }
+  allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
   renderPage = 1;
   renderGallery();
-  if (cat === '__fav__' && allFilteredImages.length === 0) {
-    document.getElementById('galleryGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;opacity:.6;padding:50px 20px;font-size:.95rem;">עדיין לא שמרת תמונות למועדפים.<br>פתחי תמונה ולחצי על 🔖 כדי לשמור.</p>';
-  }
 }
 document.getElementById('loadMoreBtn').addEventListener('click', () => { renderPage++; renderGallery(); });
 
@@ -616,7 +594,6 @@ function showLb() {
     lbVideo.pause(); lbVideo.src = '';
   }
   document.getElementById('lbCounter').textContent = `${lbIndex+1} / ${allFilteredImages.length}`;
-  updateLbActions();
 }
 function closeLb() {
   document.getElementById('lb').classList.remove('open');
@@ -624,65 +601,6 @@ function closeLb() {
   const lbVideo = document.getElementById('lbVideo');
   lbVideo.pause(); lbVideo.src = '';
 }
-
-// ── FAVORITES (saved per device) ──
-function getFavorites() { try { return JSON.parse(localStorage.getItem('gallery_favorites')||'[]'); } catch(e) { return []; } }
-function isFav(url) { return getFavorites().includes(url); }
-function toggleFav(url) {
-  let f = getFavorites();
-  if (f.includes(url)) f = f.filter(u => u !== url);
-  else f.push(url);
-  try { localStorage.setItem('gallery_favorites', JSON.stringify(f)); } catch(e) {}
-  return f.includes(url);
-}
-function lbToast(msg) {
-  const t = document.getElementById('lbToast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(window._lbToastT);
-  window._lbToastT = setTimeout(() => t.classList.remove('show'), 1800);
-}
-
-// ── SHARE ──
-async function shareItem() {
-  const data = {
-    title: 'ירדן דמרי – מאפרת כלות וערב באילת',
-    text: 'ירדן דמרי – מאפרת כלות וערב באילת ✨',
-    url: 'https://yardendamri.co.il'
-  };
-  if (navigator.share) {
-    try { await navigator.share(data); return; }
-    catch(e) { if (e.name === 'AbortError') return; }
-  }
-  const txt = encodeURIComponent(data.text + ' ' + data.url);
-  window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
-}
-
-// ── LIGHTBOX ACTION BAR STATE ──
-function updateLbActions() {
-  const item = allFilteredImages[lbIndex];
-  if (!item) return;
-  const key = btoa(item.u).substring(0,12);
-  const igStats = getIgStats(item);
-  const totalLikes = (igStats?igStats.likes:0) + (getLikes()[key]||0);
-  const cmtCount = (igStats?(igStats.comments_count||igStats.comments?.length||0):0) + ((getComments()[key]||[]).length);
-  document.getElementById('lbLike').classList.toggle('liked', hasLiked(key));
-  document.getElementById('lbLikeCnt').textContent = totalLikes || '';
-  document.getElementById('lbCmtCnt').textContent = cmtCount || '';
-  document.getElementById('lbSave').classList.toggle('saved', isFav(item.u));
-}
-document.getElementById('lbLike').addEventListener('click', async () => {
-  await toggleLike(allFilteredImages[lbIndex].u); updateLbActions();
-});
-document.getElementById('lbComment').addEventListener('click', () => {
-  const it = allFilteredImages[lbIndex];
-  openComments(it.u, (it.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim());
-});
-document.getElementById('lbShare').addEventListener('click', shareItem);
-document.getElementById('lbSave').addEventListener('click', () => {
-  const saved = toggleFav(allFilteredImages[lbIndex].u);
-  updateLbActions();
-  lbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
-});
 document.getElementById('lbClose').addEventListener('click', closeLb);
 document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1)%allFilteredImages.length; showLb(); });
 document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex-1+allFilteredImages.length)%allFilteredImages.length; showLb(); });
