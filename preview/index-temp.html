@@ -120,6 +120,11 @@
     .lb-save{margin-inline-start:auto;}
     .lb-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9002;}
     .lb-toast.show{opacity:1;}
+    /* Hide floating buttons while the lightbox is open */
+    body.lb-open #wa-float-btn, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important;}
+    /* Instagram-style media badges (video / carousel) */
+    .media-badge{position:absolute;top:8px;right:8px;z-index:3;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55));}
+    .media-badge svg{width:21px;height:21px;fill:#fff;}
   </style>
     /* ── FLOATING BUTTONS OVERRIDE ── */
     /* Floating buttons — grouped bottom-left (utility), WhatsApp bottom-right (CTA) */
@@ -799,10 +804,21 @@
       return images.filter(img => !img.hidden && !hidden.has(img.u) && !hiddenCats.has(catMap[img.u]));
     }
 
+    // Collapse carousel children into one cover tile (Instagram-style)
+    function collapseCarousels(images) {
+      const out = [], seen = {};
+      for (const img of images) {
+        if (img.carousel && img.post_id) {
+          if (!seen[img.post_id]) { seen[img.post_id] = true; out.push(img); }
+        } else out.push(img);
+      }
+      return out;
+    }
+
     const PER_PAGE = 48;
     let currentPage = 1;
     let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? applyAdminSettings(GALLERY_IMAGES)
+      ? collapseCarousels(applyAdminSettings(GALLERY_IMAGES))
       : [];
 
     const gallery = document.getElementById('ig-gallery');
@@ -814,7 +830,7 @@
       await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = applyAdminSettings(GALLERY_IMAGES);
+        filteredImages = collapseCarousels(applyAdminSettings(GALLERY_IMAGES));
         if (typeof renderPage === 'function') renderPage(currentPage);
       }
     })();
@@ -830,6 +846,7 @@
       _showLightboxContent(url, alt);
       const lb = document.getElementById('lightbox');
       lb.style.display = 'flex';
+      document.body.classList.add('lb-open');
       document.body.style.overflow = 'hidden';
       lb.focus();
       _updateLbNav();
@@ -889,6 +906,7 @@
       const vid = lb.querySelector('video');
       if (vid) vid.pause();
       lb.style.display = 'none';
+      document.body.classList.remove('lb-open');
       document.body.style.overflow = '';
     }
 
@@ -908,17 +926,57 @@
       clearTimeout(window._hpToastT);
       window._hpToastT = setTimeout(() => t.classList.remove('show'), 1800);
     }
+    const SHARE_SITE = 'https://yardendamri.co.il';
+    async function brandedImageFile(item) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = cdnUrl(item.u, 1080);
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+      const W = img.naturalWidth || 1080, H = img.naturalHeight || 1350;
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, W, H);
+      const g = ctx.createLinearGradient(0, H * 0.68, 0, H);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(1, 'rgba(0,0,0,0.6)');
+      ctx.fillStyle = g; ctx.fillRect(0, H * 0.68, W, H * 0.32);
+      const pad = Math.round(W * 0.05);
+      ctx.direction = 'rtl'; ctx.textAlign = 'right';
+      const fs = Math.round(W * 0.058);
+      ctx.font = `600 ${fs}px 'Cormorant Garamond', 'Heebo', serif`;
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 8;
+      ctx.fillText('ירדן דמרי', W - pad, H - pad - fs * 0.85);
+      ctx.shadowBlur = 0;
+      ctx.font = `400 ${Math.round(fs * 0.4)}px 'Heebo', sans-serif`;
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      ctx.fillText('מאפרת כלות וערב · yardendamri.co.il', W - pad, H - pad);
+      const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.92));
+      return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
+    }
     async function shareItem() {
-      const data = {
-        title: 'ירדן דמרי – מאפרת כלות וערב באילת',
-        text: 'ירדן דמרי – מאפרת כלות וערב באילת ✨',
-        url: 'https://yardendamri.co.il'
-      };
-      if (navigator.share) {
-        try { await navigator.share(data); return; }
-        catch(e) { if (e.name === 'AbortError') return; }
-      }
-      const txt = encodeURIComponent(data.text + ' ' + data.url);
+      const item = lbItems[lbIdx];
+      if (!item) return;
+      const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
+      const caption = (item.a || '').split('\n')[0].substring(0, 100);
+      const text = `${caption ? caption + '\n\n' : ''}ירדן דמרי – מאפרת כלות וערב באילת ✨\n${SHARE_SITE}`;
+      try {
+        let file;
+        if (!isVideo) {
+          file = await brandedImageFile(item);
+        } else {
+          const resp = await fetch(item.u);
+          const blob = await resp.blob();
+          file = new File([blob], 'yarden-damri.mp4', { type: blob.type || 'video/mp4' });
+        }
+        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'ירדן דמרי', text });
+          return;
+        }
+        if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', text, url: SHARE_SITE }); return; }
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+      const txt = encodeURIComponent(text + '\n' + item.u);
       window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
     }
     function updateHpLbActions() {
@@ -1133,7 +1191,10 @@
           : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
-        div.innerHTML = `${mediaEl}
+        const badge = (item.carousel || item.ccount > 1)
+          ? `<div class="media-badge" aria-label="פוסט עם מספר תמונות"><svg viewBox="0 0 48 48"><path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h12.7c5.5 0 9.9-4.4 9.9-9.9V18.6c0-1.6-.8-3.1-1.8-4.1-.5-.4-1.1 0-1.1.5z"/></svg></div>`
+          : (isVideo ? `<div class="media-badge" aria-label="סרטון"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : '');
+        div.innerHTML = `${mediaEl}${badge}
           <div class="overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,32,24,.88) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none;" aria-hidden="true">
             <p style="position:absolute;bottom:14px;left:0;right:0;color:#fff;font-size:.82rem;line-height:1.5;padding:6px 12px;margin:0;">${item.a ? item.a.substring(0,60) : ''}</p>
           </div>`;

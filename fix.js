@@ -190,6 +190,11 @@ function safeWrite(filePath, data) {
 
   const gallery = [], seenUrls = new Set();
   const cleanCaption = (s) => (s || "").replace(/[\uD800-\uDFFF\u200B-\u200F\u202A-\u202E]/g, "").substring(0, 80).trim();
+  // Tag carousel children so the gallery can show a "multiple media" badge / group them.
+  const stampMeta = (entry, item) => {
+    if (item.carousel) { entry.carousel = true; entry.post_id = item.post_id || item.id; entry.cidx = item.cidx; entry.ccount = item.ccount; }
+    return entry;
+  };
 
   for (const item of rawPosts) {
     const isVideo = item.media_type === "VIDEO";
@@ -209,6 +214,7 @@ function safeWrite(filePath, data) {
         entry = { u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
       }
       entry.hidden = true;
+      stampMeta(entry, item);
       if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
       process.stdout.write("h"); continue;
     }
@@ -220,6 +226,7 @@ function safeWrite(filePath, data) {
       if (isNewR2) {
         e.post_id = item.post_id || item.id;
         e.a = cleanCaption(item.caption);
+        stampMeta(e, item);
         if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
         process.stdout.write("."); continue;
       }
@@ -248,7 +255,7 @@ function safeWrite(filePath, data) {
         try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut); } catch(e) {}
         const r2Result = await uploadToR2(R2_VIDEOS, compressed, `yarden_${item.id}.mp4`, "video/mp4");
         if (r2Result.status === 200) {
-          const entry = { u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: thumbUrl };
+          const entry = stampMeta({ u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: thumbUrl }, item);
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Video OK: yarden_${item.id}.mp4${thumbUrl ? ' +thumb' : ''}`);
         } else {
@@ -262,7 +269,7 @@ function safeWrite(filePath, data) {
         const compressed = await compressImage(buffer);
         const r2Result = await uploadToR2(R2_IMAGES, compressed, `yarden_${item.id}.webp`, "image/webp");
         if (r2Result.status === 200) {
-          const entry = { u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id };
+          const entry = stampMeta({ u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id }, item);
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
           console.log(`Image OK: yarden_${item.id}.webp`);
         } else {

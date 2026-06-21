@@ -78,6 +78,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px}
     .gallery-item:hover .overlay{opacity:1}
     .overlay-text{font-size:.72rem;color:rgba(255,255,255,.85);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+    /* Instagram-style media badges (video / carousel) */
+    .media-badge{position:absolute;top:8px;right:8px;z-index:2;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+    .media-badge svg{width:21px;height:21px;fill:#fff}
     /* LIGHTBOX */
     .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
     .lb.open{display:flex}
@@ -106,6 +109,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-save{margin-inline-start:auto}
     .lb-toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:1003}
     .lb-toast.show{opacity:1}
+    /* Hide floating buttons (WhatsApp, a11y, scroll-top) while the lightbox is open so they don't cover the action bar */
+    body.lb-open .wa-float, body.lb-open #a11y-trigger, body.lb-open #scroll-top{display:none !important}
   </style>
   <style>
   </style>
@@ -460,8 +465,26 @@ function getCat(img) {
 const PAGE_SIZE = 24;
 let renderPage = 1;
 let activeFilter = 'all';
-let allFilteredImages = [];
+let allFilteredImages = [];  // collapsed: one tile per carousel (for the grid)
+let lbImages = [];           // expanded: carousel children individually (for lightbox swipe)
 let lbIndex = 0;
+
+// Collapse carousel children into a single cover tile; cover._lbIndex points to
+// the first child's position in lbImages so the lightbox can swipe through them.
+function collapseCarousels(images) {
+  const out = [], firstSeen = {};
+  images.forEach((img, i) => {
+    if (img.carousel && img.post_id) {
+      if (firstSeen[img.post_id] == null) {
+        firstSeen[img.post_id] = true;
+        out.push({ ...img, _lbIndex: i });
+      }
+    } else {
+      out.push({ ...img, _lbIndex: i });
+    }
+  });
+  return out;
+}
 
 // ── RENDER ──
 function renderGallery() {
@@ -488,7 +511,10 @@ function renderGallery() {
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
-    div.innerHTML = `${mediaHtml}
+    const badge = (item.carousel || item.ccount > 1)
+      ? `<div class="media-badge" aria-label="פוסט עם מספר תמונות"><svg viewBox="0 0 48 48"><path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h12.7c5.5 0 9.9-4.4 9.9-9.9V18.6c0-1.6-.8-3.1-1.8-4.1-.5-.4-1.1 0-1.1.5z"/></svg></div>`
+      : (isVideo ? `<div class="media-badge" aria-label="סרטון"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : '');
+    div.innerHTML = `${mediaHtml}${badge}
       <div class="overlay"><div class="overlay-text">${caption}</div></div>`;
     div.onmouseenter = () => {
       div.querySelector('.overlay').style.opacity = '1';
@@ -499,7 +525,7 @@ function renderGallery() {
       div.querySelector('.overlay').style.opacity = '0';
       const img = div.querySelector('img'); if (img) img.style.transform = `rotate(${rot}deg) scale(1)`;
     };
-    const realIdx = allFilteredImages.indexOf(item);
+    const realIdx = item._lbIndex != null ? item._lbIndex : lbImages.indexOf(item);
     div.onclick = () => openLb(realIdx);
     div.onkeypress = e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();openLb(realIdx);} };
     grid.appendChild(div);
@@ -577,10 +603,11 @@ function applyFilter(cat) {
   const adminCatMap = getAdminSettings().cats || {};
   if (cat === '__fav__') {
     const favs = new Set(getFavorites());
-    allFilteredImages = base.filter(img => favs.has(img.u));
+    lbImages = base.filter(img => favs.has(img.u));
   } else {
-    allFilteredImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
+    lbImages = cat === 'all' ? base : base.filter(img => adminCatMap[img.u] === cat);
   }
+  allFilteredImages = collapseCarousels(lbImages);
   renderPage = 1;
   renderGallery();
   if (cat === '__fav__' && allFilteredImages.length === 0) {
@@ -596,10 +623,11 @@ function openLb(idx) {
   lbIndex = idx;
   showLb();
   document.getElementById('lb').classList.add('open');
+  document.body.classList.add('lb-open');
   document.body.style.overflow = 'hidden';
 }
 function showLb() {
-  const item = allFilteredImages[lbIndex];
+  const item = lbImages[lbIndex];
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
   const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
@@ -616,11 +644,15 @@ function showLb() {
     lbVideo.style.display = 'none';
     lbVideo.pause(); lbVideo.src = '';
   }
-  document.getElementById('lbCounter').textContent = `${lbIndex+1} / ${allFilteredImages.length}`;
+  // Carousel: show "image X of Y in this post"
+  let label = `${lbIndex+1} / ${lbImages.length}`;
+  if (item.carousel && item.ccount > 1) label = `◻ ${(item.cidx||0)+1}/${item.ccount} · ${label}`;
+  document.getElementById('lbCounter').textContent = label;
   updateLbActions();
 }
 function closeLb() {
   document.getElementById('lb').classList.remove('open');
+  document.body.classList.remove('lb-open');
   document.body.style.overflow = '';
   const lbVideo = document.getElementById('lbVideo');
   lbVideo.pause(); lbVideo.src = '';
@@ -643,24 +675,66 @@ function lbToast(msg) {
   window._lbToastT = setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-// ── SHARE ──
+// ── SHARE (specific media, branded with logo + name + link) ──
+const SHARE_SITE = 'https://yardendamri.co.il';
+// Draw the photo onto a canvas and stamp the "ירדן דמרי" logo (nav style) + link, return a File.
+async function brandedImageFile(item) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = cdnUrl(item.u, 1080);
+  await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+  const W = img.naturalWidth || 1080, H = img.naturalHeight || 1350;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0, W, H);
+  const g = ctx.createLinearGradient(0, H * 0.68, 0, H);
+  g.addColorStop(0, 'rgba(0,0,0,0)');
+  g.addColorStop(1, 'rgba(0,0,0,0.6)');
+  ctx.fillStyle = g; ctx.fillRect(0, H * 0.68, W, H * 0.32);
+  const pad = Math.round(W * 0.05);
+  ctx.direction = 'rtl'; ctx.textAlign = 'right';
+  const fs = Math.round(W * 0.058);
+  ctx.font = `600 ${fs}px 'Cormorant Garamond', 'Heebo', serif`;
+  ctx.fillStyle = '#fff';
+  ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 8;
+  ctx.fillText('ירדן דמרי', W - pad, H - pad - fs * 0.85);
+  ctx.shadowBlur = 0;
+  ctx.font = `400 ${Math.round(fs * 0.4)}px 'Heebo', sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,.9)';
+  ctx.fillText('מאפרת כלות וערב · yardendamri.co.il', W - pad, H - pad);
+  const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.92));
+  return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
+}
 async function shareItem() {
-  const data = {
-    title: 'ירדן דמרי – מאפרת כלות וערב באילת',
-    text: 'ירדן דמרי – מאפרת כלות וערב באילת ✨',
-    url: 'https://yardendamri.co.il'
-  };
-  if (navigator.share) {
-    try { await navigator.share(data); return; }
-    catch(e) { if (e.name === 'AbortError') return; }
-  }
-  const txt = encodeURIComponent(data.text + ' ' + data.url);
+  const item = lbImages[lbIndex];
+  if (!item) return;
+  const isVideo = item.video || /\.mp4/i.test(item.u);
+  const caption = (item.a || '').split('\n')[0].substring(0, 100);
+  const text = `${caption ? caption + '\n\n' : ''}ירדן דמרי – מאפרת כלות וערב באילת ✨\n${SHARE_SITE}`;
+  try {
+    let file;
+    if (!isVideo) {
+      file = await brandedImageFile(item);
+    } else {
+      const resp = await fetch(item.u);
+      const blob = await resp.blob();
+      file = new File([blob], 'yarden-damri.mp4', { type: blob.type || 'video/mp4' });
+    }
+    if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: 'ירדן דמרי', text });
+      return;
+    }
+    if (navigator.share) { await navigator.share({ title: 'ירדן דמרי', text, url: SHARE_SITE }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  // Fallback: WhatsApp with caption + media link + site
+  const txt = encodeURIComponent(text + '\n' + item.u);
   window.open('https://wa.me/?text=' + txt, '_blank', 'noopener');
 }
 
 // ── LIGHTBOX ACTION BAR STATE ──
 function updateLbActions() {
-  const item = allFilteredImages[lbIndex];
+  const item = lbImages[lbIndex];
   if (!item) return;
   const key = btoa(item.u).substring(0,12);
   const igStats = getIgStats(item);
@@ -672,27 +746,27 @@ function updateLbActions() {
   document.getElementById('lbSave').classList.toggle('saved', isFav(item.u));
 }
 document.getElementById('lbLike').addEventListener('click', async () => {
-  await toggleLike(allFilteredImages[lbIndex].u); updateLbActions();
+  await toggleLike(lbImages[lbIndex].u); updateLbActions();
 });
 document.getElementById('lbComment').addEventListener('click', () => {
-  const it = allFilteredImages[lbIndex];
+  const it = lbImages[lbIndex];
   openComments(it.u, (it.a||'').substring(0,30).replace(/['"\\\n\r]/g,' ').trim());
 });
 document.getElementById('lbShare').addEventListener('click', shareItem);
 document.getElementById('lbSave').addEventListener('click', () => {
-  const saved = toggleFav(allFilteredImages[lbIndex].u);
+  const saved = toggleFav(lbImages[lbIndex].u);
   updateLbActions();
   lbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
 });
 document.getElementById('lbClose').addEventListener('click', closeLb);
-document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1)%allFilteredImages.length; showLb(); });
-document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex-1+allFilteredImages.length)%allFilteredImages.length; showLb(); });
+document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1)%lbImages.length; showLb(); });
+document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex-1+lbImages.length)%lbImages.length; showLb(); });
 document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lb').classList.contains('open')) return;
   if (e.key==='Escape') closeLb();
-  if (e.key==='ArrowLeft') { lbIndex=(lbIndex+1)%allFilteredImages.length; showLb(); }
-  if (e.key==='ArrowRight') { lbIndex=(lbIndex-1+allFilteredImages.length)%allFilteredImages.length; showLb(); }
+  if (e.key==='ArrowLeft') { lbIndex=(lbIndex+1)%lbImages.length; showLb(); }
+  if (e.key==='ArrowRight') { lbIndex=(lbIndex-1+lbImages.length)%lbImages.length; showLb(); }
 });
 
 // ── INIT ──
