@@ -621,7 +621,7 @@
   <div id="lightbox"
     role="dialog" aria-modal="true" aria-label="תצוגת תמונה מוגדלת"
     onclick="if(event.target===this)closeLightbox()"
-    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;">
+    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:20px;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
     <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:20px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:9001;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
@@ -817,9 +817,8 @@
 
     const PER_PAGE = 48;
     let currentPage = 1;
-    let filteredImages = typeof GALLERY_IMAGES !== 'undefined'
-      ? collapseCarousels(applyAdminSettings(GALLERY_IMAGES))
-      : [];
+    let lbAll = typeof GALLERY_IMAGES !== 'undefined' ? applyAdminSettings(GALLERY_IMAGES) : []; // expanded (carousel children individual) — for lightbox swipe
+    let filteredImages = collapseCarousels(lbAll); // collapsed (one cover per carousel) — for the grid
 
     const gallery = document.getElementById('ig-gallery');
     const pagination = document.getElementById('pagination');
@@ -830,7 +829,8 @@
       await window.RemoteState.fetchPublic();
       // Re-apply settings and re-render gallery
       if (typeof GALLERY_IMAGES !== 'undefined') {
-        filteredImages = collapseCarousels(applyAdminSettings(GALLERY_IMAGES));
+        lbAll = applyAdminSettings(GALLERY_IMAGES);
+        filteredImages = collapseCarousels(lbAll);
         if (typeof renderPage === 'function') renderPage(currentPage);
       }
     })();
@@ -884,7 +884,12 @@
 
     function _updateLbNav() {
       const counter = document.getElementById('lb-counter');
-      if (counter) counter.textContent = lbItems.length > 1 ? `${lbIdx + 1} / ${lbItems.length}` : '';
+      const cur = lbItems[lbIdx];
+      if (counter) {
+        let label = lbItems.length > 1 ? `${lbIdx + 1} / ${lbItems.length}` : '';
+        if (cur && cur.carousel && cur.ccount > 1) label = `◻ ${(cur.cidx||0)+1}/${cur.ccount} · ${label}`;
+        counter.textContent = label;
+      }
       const prev = document.getElementById('lb-prev');
       const next = document.getElementById('lb-next');
       if (prev) prev.style.opacity = lbIdx > 0 ? '1' : '.2';
@@ -1170,7 +1175,7 @@
     function renderPage(page) {
       const start = (page - 1) * PER_PAGE;
       const items = filteredImages.slice(start, start + PER_PAGE);
-      lbItems = items;
+      lbItems = lbAll; // lightbox swipes the full expanded list (incl. carousel children)
       gallery.innerHTML = '';
 
       items.forEach((item, idx) => {
@@ -1216,9 +1221,10 @@
           if (imgEl) imgEl.style.transform = 'scale(1)';
         };
 
-        // Click / keyboard open lightbox
-        div.onclick = () => openLightbox(item.u, item.a || '', idx);
-        div.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(item.u, item.a || '', idx); } };
+        // Click / keyboard open lightbox (map cover → its position in the expanded list)
+        const lbi = lbAll.indexOf(item);
+        div.onclick = () => openLightbox(item.u, item.a || '', lbi);
+        div.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(item.u, item.a || '', lbi); } };
 
         gallery.appendChild(div);
       });

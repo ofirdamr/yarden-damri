@@ -82,21 +82,21 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .media-badge{position:absolute;top:8px;right:8px;z-index:2;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
     .media-badge svg{width:21px;height:21px;fill:#fff}
     /* LIGHTBOX */
-    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
-    .lb-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px}
-    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s}
+    .lb-img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;touch-action:none;-webkit-user-drag:none;user-select:none}
+    .lb-close{position:fixed;top:20px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:1003}
     .lb-close:hover{opacity:1}
     body.has-ck .lb-close{top:68px}
-    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;padding:16px 12px;cursor:pointer;border-radius:4px;transition:background .2s}
-    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.2)}
+    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .2s;z-index:1003}
+    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
     .lb-prev{right:12px}.lb-next{left:12px}
     .lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem;z-index:1002}
     body.has-ck .lb-counter{transition:bottom .2s}
     .load-more{display:block;margin:40px auto;background:#111;border:none;color:#fff;padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
     .load-more:hover{background:#111;color:#fff}
     .video-play{display:none}
-    .lb-video{max-width:90vw;max-height:88vh;border-radius:4px;outline:none}
+    .lb-video{max-width:90vw;max-height:82vh;border-radius:4px;outline:none;touch-action:auto}
     /* Instagram-style lightbox action bar */
     .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:1002}
     .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s}
@@ -759,15 +759,32 @@ document.getElementById('lbSave').addEventListener('click', () => {
   lbToast(saved ? '💾 נשמר למועדפים' : 'הוסר מהמועדפים');
 });
 document.getElementById('lbClose').addEventListener('click', closeLb);
-document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex+1)%lbImages.length; showLb(); });
-document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex-1+lbImages.length)%lbImages.length; showLb(); });
+function navLb(step){ if(!lbImages.length) return; lbIndex=(lbIndex+step+lbImages.length)%lbImages.length; showLb(); }
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); navLb(-1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); navLb(1); });
 document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lb').classList.contains('open')) return;
   if (e.key==='Escape') closeLb();
-  if (e.key==='ArrowLeft') { lbIndex=(lbIndex+1)%lbImages.length; showLb(); }
-  if (e.key==='ArrowRight') { lbIndex=(lbIndex-1+lbImages.length)%lbImages.length; showLb(); }
+  if (e.key==='ArrowLeft') navLb(1);
+  if (e.key==='ArrowRight') navLb(-1);
 });
+// Touch swipe (horizontal only) — blocks vertical drift so the media stays static
+(function(){
+  const el = document.getElementById('lb');
+  let x0=0, y0=0, active=false;
+  el.addEventListener('touchstart', e => { const t=e.touches[0]; x0=t.clientX; y0=t.clientY; active=true; }, {passive:true});
+  el.addEventListener('touchmove', e => {
+    if(!active) return;
+    const t=e.touches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+  }, {passive:false});
+  el.addEventListener('touchend', e => {
+    if(!active) return; active=false;
+    const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) navLb(dx < 0 ? 1 : -1);
+  }, {passive:true});
+})();
 
 // ── INIT ──
 // Render immediately with cached state, then silently refresh with remote data
