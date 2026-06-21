@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-21T00:00:38.403Z",
+  "updatedAt": "2026-06-21T00:00:41.748Z",
   "admin": {
     "hidden": [
       "https://images.yardendamri.co.il/yarden_17843112559037829.webp",
@@ -3251,7 +3251,7 @@
     ],
     "heroZoom": 50
   },
-  "heroVideo": null,
+  "heroVideo": "https://videos-new.yardendamri.co.il/yarden_18100404782127411.mp4",
   "pricing": [
     {
       "icon": "💍",
