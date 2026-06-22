@@ -1,16 +1,16 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-21
+> Last updated: 2026-06-22
 
-## ⚠️ OPEN TASK FOR NEXT SESSION — Lightbox buttons overlap
-Read `preview/NEXT-LIGHTBOX.md` first. The lightbox (gallery + homepage) opens
-fullscreen with the nav hidden, but the buttons overlap each other and the video's
-NATIVE controls: our close **X** sits over the native mute control, and the bottom
-action bar (like/comment/share) sits over the native scrubber. A 48px cookie banner
-also sits on top. Goal: make it look good — **no button on top of another button**,
-every control visible and usable. Likely fix: drop native `<video controls>` and use
-only our own buttons, OR move our chrome clear of the native controls. Decide with the
-user; one change at a time; temp files only; promote on explicit approval.
+## ✅ RESOLVED & PROMOTED (2026-06-22) — Lightbox layout
+The lightbox open task is done and promoted to permanent (`preview/index.html` +
+`preview/gallery.html`). Media now opens **edge-to-edge fullscreen** (object-fit:cover,
+Reels-style — small intentional edge trim, no black bars, no seams). The
+like/comment/share/save buttons moved to a **vertical side rail on the right** (same
+layout for photos and videos), which frees the entire bottom for the video's native
+player controls — no more overlapping buttons. Removed the dark gradient scrim behind
+the buttons (icons use a subtle drop-shadow for legibility instead). Desktop shows the
+whole frame centered (portrait reels aren't over-zoomed). See `preview/NEXT-LIGHTBOX.md`.
 
 ## 2026-06-21 — Nav/floating/lightbox/about overhaul PROMOTED to permanent
 All 12 pages promoted temp → permanent (user approved). Subpage nav now identical to

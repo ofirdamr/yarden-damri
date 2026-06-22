@@ -1,5 +1,9 @@
 # Mistakes & AI Errors Log — Preview
 
+## Over-iterated on the lightbox fill before stating the trade-off (2026-06-22)
+- Cycled the fullscreen lightbox through contain-on-black → cover-crop → blurred-fill → back to cover over several round-trips. Each "fix" was rejected because I changed the approach instead of first explaining the unavoidable physics: media whose aspect ≠ the screen can be (a) cropped, (b) bar-boxed, or (c) blurred-filled — every option has exactly one artifact (trim / bars / seam). The user can only choose; there is no option with none.
+- **Rule:** When a request is physically impossible to satisfy perfectly (here: "fullscreen AND nothing cut AND no bars/seam"), state the trade-off up front and have the user pick ONCE, instead of silently trying each variant and burning review cycles.
+
 ## Floating card banner covered hero content (2026-06-13)
 - Applied glassmorphism card design (`bottom: 90px`, large card) without previewing on the actual page. The card landed in the middle of the hero section, covering the headline and CTA buttons.
 - Should have created `cookie-banner-temp.js`, checked it visually, confirmed before touching permanent file.

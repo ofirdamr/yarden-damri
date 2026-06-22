@@ -1,5 +1,11 @@
 # Progress Log — Preview Folder
 
+## 2026-06-22 — Lightbox redesign PROMOTED to permanent (closes the NEXT-LIGHTBOX handoff)
+- Resolved the open lightbox button-overlap task and promoted `index-temp.html`→`index.html`, `gallery-temp.html`→`gallery.html` on explicit user approval ("make it permanent").
+- **Fullscreen media**: `.lb-img`/`.lb-video` → `object-fit:cover`, `inset:0`, edge-to-edge (Reels style). Iterated through contain-on-black and a blurred-fill backdrop first; user rejected both (black bars / visible seam) and chose crop-to-fill. Desktop (`min-width:1081px`) overrides to `contain` centered so portrait reels don't over-zoom.
+- **Side action rail**: like/comment/share/save moved from a bottom bar to a vertical rail on the right edge (`.lb-actions{flex-direction:column;right:10px;bottom:64px}`, `.lb-act` column with count beneath) — identical for photos and videos. Frees the whole bottom for the native player controls, so nothing overlaps.
+- Removed the dark gradient scrim behind the buttons; added `drop-shadow`/`text-shadow` on icons/counts for legibility over bright media.
+
 ## 2026-06-21 — PROMOTED to permanent + lightbox handoff
 - Promoted all 12 `-temp.html` → permanent (`index, gallery, about, bride, services, bridal-guide, pricing, contact, reviews, disclaimer, accessibility-statement, cookies-policy`) on explicit user approval.
 - Promoted changes: subpage nav now identical to homepage (monogram left, centered name, social+fewer-categories right); unified floating buttons (a11y/scroll/WhatsApp = 36px, transparent .55, aligned); lightbox media fullscreen + nav hidden while open; about image fixed (dead ImageKit → R2 `about-yarden.png`) + shown on mobile (homepage + about page).

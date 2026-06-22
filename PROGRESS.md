@@ -660,3 +660,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 ## 2026-06-22 — preview/ lightbox: unified side rail for images AND videos
 - User: make the side action rail consistent — use it for images too, not only videos
 - gallery-temp.html + index-temp.html: moved the right-side vertical rail (like/comment/share/save, stacked with counts) into the base .lb-actions/.lb-act rules so photos and videos share one layout. Removed the video-only override.
+
+## 2026-06-22 — Lightbox PROMOTED to permanent
+- User approved ("make it permanent"): cp preview/index-temp.html → preview/index.html, cp preview/gallery-temp.html → preview/gallery.html
+- Final lightbox: edge-to-edge fullscreen cover media; right-side vertical action rail (photos + videos) freeing the bottom for native player controls; gradient scrim removed (icon shadows instead); desktop shows whole frame
+- Closes the NEXT-LIGHTBOX.md handoff. Updated SUMMARY.md, STATUS.md, preview/PROGRESS.md, preview/SUMMARY.md, preview/NEXT-LIGHTBOX.md, preview/MISTAKES.md

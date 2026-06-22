@@ -109,11 +109,20 @@
     }
     body.has-ck .lb-close-btn { top: 108px; }
     /* Instagram-style lightbox action bar */
-    .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:10001;}
+    .lb-actions{position:fixed;right:10px;left:auto;bottom:calc(64px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:20px;z-index:10003;}
     #lightbox #lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:10001;}
     #lightbox .lb-caption{display:none;}
+    /* Fullscreen video: lift the like/comment/share/save bar above the native player controls; hide counter */
+    /* Video: move like/comment/share/save to a side rail so the bottom stays free for the native player controls */
+    #lightbox.lb-video-on #lb-counter{display:none;}
     body.has-ck #lightbox .lb-close-btn{top:56px !important;}
-    body.has-ck #lightbox video{top:calc(50% + 28px) !important;max-height:calc(100dvh - 56px) !important;}
+    #lightbox .lb-bg{display:none;}
+    /* Reels-style: media fills the whole screen (crop to fill) */
+    #lightbox img,#lightbox video{position:absolute !important;inset:0 !important;top:0 !important;left:0 !important;transform:none !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:cover !important;z-index:1;}
+    /* Desktop: cover-fill would zoom a portrait reel absurdly — show it whole on black instead */
+    @media (min-width:1081px){
+      #lightbox img,#lightbox video{top:50% !important;left:50% !important;inset:auto !important;transform:translate(-50%,-50%) !important;width:auto !important;height:auto !important;max-width:94vw !important;max-height:94dvh !important;object-fit:contain !important;}
+    }
     body.lb-open nav[role="navigation"]{display:none !important;}
     /* Show the about image on mobile too (match desktop) */
     @media (max-width:1080px){
@@ -122,14 +131,15 @@
       #about .about-card{ background:var(--cream); aspect-ratio:3/4; max-height:70vh; }
       #about .about-card img{ width:100%; height:100%; object-fit:contain; object-position:center bottom; display:block; }
     }
-    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s;}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0;font-size:.72rem;font-weight:500;transition:transform .12s;}
     .lb-act:active{transform:scale(.82);}
-    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;}
+    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55));}
+    .lb-act,.lb-cnt{text-shadow:0 1px 2px rgba(0,0,0,.55);}
     .lb-act.liked svg{fill:#ed4956;stroke:#ed4956;animation:lbPop .3s ease;}
     .lb-act.saved svg{fill:#fff;}
     @keyframes lbPop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
     .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px;}
-    .lb-save{margin-inline-start:auto;}
+    .lb-save{margin-inline-start:0;}
     .lb-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9002;}
     .lb-toast.show{opacity:1;}
     /* Hide floating buttons while the lightbox is open */
@@ -208,7 +218,7 @@
         </a>
       </li>
       <li><a href="#contact" class="nav-cta">צרי קשר</a></li>
-      <li><a href="#about">אודות</a></li>
+      <li><a href="about.html">אודות</a></li>
       <li><a href="bride.html">מאפרת כלות</a></li>
       <li><a href="services.html">שירותים</a></li>
       <li><a href="gallery.html">גלריה</a></li>
@@ -219,7 +229,7 @@
   <!-- Mobile slide-in menu (outside nav to prevent backdrop-filter blur) -->
   <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="תפריט ניווט נייד" aria-hidden="true">
     <ul role="list">
-      <li><a href="#about" onclick="closeMobileMenu()">אודות</a></li>
+      <li><a href="about.html" onclick="closeMobileMenu()">אודות</a></li>
       <li><a href="bride.html" onclick="closeMobileMenu()">מאפרת כלות</a></li>
       <li><a href="services.html" onclick="closeMobileMenu()">שירותים</a></li>
       <li><a href="gallery.html" onclick="closeMobileMenu()">גלריה</a></li>
@@ -632,11 +642,12 @@
   <div id="lightbox"
     role="dialog" aria-modal="true" aria-label="תצוגת תמונה מוגדלת"
     onclick="if(event.target===this)closeLightbox()"
-    style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;padding:0;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
+    style="display:none;position:fixed;inset:0;z-index:9000;background:#000;align-items:center;justify-content:center;flex-direction:column;padding:0;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
+    <div class="lb-bg" id="hpLbBg" aria-hidden="true"></div>
     <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:16px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:10002;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
-    <img src="" alt="" style="max-width:100vw;max-height:100vh;max-height:100dvh;object-fit:contain;border-radius:0;" />
+    <img src="" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:0;" />
     <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.9rem;margin-top:14px;text-align:center;max-width:600px;line-height:1.6;"></p>
     <p id="lb-counter" style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></p>
     <div class="lb-actions" id="hpLbActions">
@@ -867,12 +878,13 @@
     function _showLightboxContent(url, alt) {
       const isVideo = url.includes('/video/upload/') || url.includes('.mp4');
       const lb = document.getElementById('lightbox');
+      lb.classList.toggle('lb-video-on', isVideo);
       if (isVideo) {
         lb.querySelector('img').style.display = 'none';
         let vid = lb.querySelector('video');
         if (!vid) {
           vid = document.createElement('video');
-          vid.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:100vw;max-height:100dvh;border-radius:0;';
+          vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:0;';
           vid.controls = true; vid.playsInline = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
         }

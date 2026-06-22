@@ -1,5 +1,24 @@
 # HANDOFF — Fix the lightbox button layout (gallery + homepage)
 
+## ✅ RESOLVED & PROMOTED — 2026-06-22 (this task is CLOSED)
+Final solution shipped to permanent (`preview/index.html` + `preview/gallery.html`):
+- **Media: edge-to-edge fullscreen** — `object-fit:cover` (Reels/TikTok style). User
+  explicitly accepted the small edge trim over black bars / blurred-fill seams (tried
+  both; "contain on black" and "blurred fill" were rejected). Desktop (`min-width:1081px`)
+  shows the whole frame centered so portrait reels aren't over-zoomed.
+- **Only ONE set of bottom controls**: the native `<video controls>` keep the entire
+  bottom of the screen. Our like/comment/share/save buttons were moved OUT of the bottom
+  to a **vertical side rail on the right edge** (`.lb-actions` → `flex-direction:column;
+  right:10px; bottom:64px`), stacked with counts beneath each icon — same layout for
+  photos and videos. No button sits on top of another button or the scrubber anymore.
+- Removed the dark gradient scrim that used to sit behind the buttons; icons/counts use
+  `drop-shadow`/`text-shadow` for legibility instead.
+- Close **X** stays top-left clear of the cookie bar (`body.has-ck .lb-close{top:56px}`).
+
+The handoff notes below are kept for history only.
+
+---
+
 **Read this first. This is the one open task.**
 
 ## Context

@@ -82,9 +82,11 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .media-badge{position:absolute;top:8px;right:8px;z-index:2;display:flex;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
     .media-badge svg{width:21px;height:21px;fill:#fff}
     /* LIGHTBOX */
-    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:#000;align-items:center;justify-content:center;overflow:hidden;overscroll-behavior:contain;touch-action:none}
     .lb.open{display:flex}
-    .lb-img{max-width:100vw;max-height:100vh;max-height:100dvh;object-fit:contain;border-radius:0;touch-action:none;-webkit-user-drag:none;user-select:none}
+    .lb-bg{display:none}
+    /* Reels-style: media fills the whole screen (crop to fill) */
+    .lb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;z-index:1;touch-action:none;-webkit-user-drag:none;user-select:none}
     .lb-close{position:fixed;top:16px;left:20px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;padding:8px;opacity:.8;transition:opacity .2s,top .2s;z-index:10002}
     .lb-close:hover{opacity:1}
     body.has-ck .lb-close{top:56px}
@@ -96,18 +98,23 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .load-more{display:block;margin:40px auto;background:#111;border:none;color:#fff;padding:12px 40px;border-radius:2px;cursor:pointer;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
     .load-more:hover{background:#111;color:#fff}
     .video-play{display:none}
-    .lb-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:100vw;max-height:100vh;max-height:100dvh;border-radius:0;outline:none;touch-action:auto}
-    body.has-ck .lb-video{top:calc(50% + 28px);max-height:calc(100dvh - 56px)}
-    /* Instagram-style lightbox action bar */
-    .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:1002}
-    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s}
+    .lb-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;outline:none;touch-action:auto;z-index:1}
+    /* Instagram/Reels-style action rail — same for photos and videos; sits on the side so the bottom stays free for video controls */
+    .lb-actions{position:fixed;right:10px;left:auto;bottom:calc(64px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:20px;z-index:1004}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0;font-size:.72rem;font-weight:500;transition:transform .12s}
     .lb-act:active{transform:scale(.82)}
-    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+    .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+    .lb-act,.lb-cnt{text-shadow:0 1px 2px rgba(0,0,0,.55)}
     .lb-act.liked svg{fill:#ed4956;stroke:#ed4956;animation:lbPop .3s ease}
     .lb-act.saved svg{fill:#fff}
     @keyframes lbPop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
     .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px}
-    .lb-save{margin-inline-start:auto}
+    .lb-save{margin-inline-start:0}
+    .lb.lb-video-on .lb-counter{display:none}
+    /* Desktop: cover-fill would zoom a portrait reel absurdly — show it whole on black instead */
+    @media (min-width:1081px){
+      .lb-img,.lb-video{position:absolute;top:50%;left:50%;inset:auto;transform:translate(-50%,-50%);width:auto;height:auto;max-width:94vw;max-height:94vh;max-height:94dvh;object-fit:contain}
+    }
     .lb-toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:1003}
     .lb-toast.show{opacity:1}
     /* Hide floating buttons (WhatsApp, a11y, scroll-top) while the lightbox is open so they don't cover the action bar */
@@ -310,6 +317,7 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
 
 <!-- Lightbox -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="תצוגת תמונה">
+  <div class="lb-bg" id="lbBg" aria-hidden="true"></div>
   <button class="lb-close" id="lbClose" aria-label="סגור">✕</button>
   <button class="lb-prev" id="lbPrev" aria-label="הקודמת">›</button>
   <img class="lb-img" id="lbImg" src="" alt=""/>
@@ -644,6 +652,7 @@ function showLb() {
   const lbImg = document.getElementById('lbImg');
   const lbVideo = document.getElementById('lbVideo');
   const isVideo = item.video || item.u.match(/\.mp4/i) || (item.video);
+  document.getElementById('lb').classList.toggle('lb-video-on', !!isVideo);
   if (isVideo) {
     lbVideo.src = item.u;
     lbVideo.poster = item.thumb || '';   // show thumbnail instead of a black spinner while buffering

@@ -14,6 +14,7 @@
 | Video thumbnails | Cloudflare R2 `yarden-images` | `images.yardendamri.co.il/yarden_{id}_thumb.jpg` |
 
 ## Done
+- **Lightbox redesign (2026-06-22, promoted)**: edge-to-edge fullscreen media (cover, Reels-style; desktop shows whole frame); like/comment/share/save moved to a right-side vertical rail (photos + videos) so the bottom stays free for native video controls — no overlapping buttons.
 - Full site redesign (index, about, services, bride, bridal-guide, contact, pricing, gallery, reviews)
 - Media migration: Cloudinary → R2 (images WebP 800px, videos H.264 720p)
 - Instagram sync every 6h: fix.js → gallery-data.js + instagram-stats.json

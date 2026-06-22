@@ -1,6 +1,6 @@
 # Site Status — yardendamri.co.il
 
-*Last updated: 2026-06-21*
+*Last updated: 2026-06-22*
 
 ## Current State
 - **Root (/)**: Old site — still live, still references Cloudinary (closing). Do not touch.
@@ -54,7 +54,7 @@
 | Instagram sync (sync-auto.yml) | ✅ Every 6h; resilient pagination (retry) |
 
 ## Known Issues
-- **Lightbox button layout (OPEN — next session, see `preview/NEXT-LIGHTBOX.md`)**: media opens fullscreen + nav hidden, but our buttons overlap the video's NATIVE controls (close X over native mute; action bar over native scrubber). Needs a clean, non-overlapping control layout.
+- ✅ **Lightbox button layout — RESOLVED & PROMOTED (2026-06-22)**: media opens edge-to-edge fullscreen (cover, Reels-style); like/comment/share/save moved to a right-side vertical rail (photos + videos), freeing the bottom for the native player controls — no overlaps. Gradient scrim removed (icon drop-shadow instead). Promoted to `preview/index.html` + `preview/gallery.html`.
 - Hero video has brief dark flash — thumbnails not yet backfilled for 161 existing videos
 - Old `yarden-videos` R2 bucket still has original uncompressed videos (backup, not in use)
 - ImageKit fully dead (403) — any remaining `ik.imagekit.io` URLs must be swapped to R2 (about image already fixed → `images.yardendamri.co.il/about-yarden.png`)
