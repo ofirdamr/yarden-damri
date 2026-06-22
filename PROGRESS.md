@@ -665,3 +665,8 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - User approved ("make it permanent"): cp preview/index-temp.html → preview/index.html, cp preview/gallery-temp.html → preview/gallery.html
 - Final lightbox: edge-to-edge fullscreen cover media; right-side vertical action rail (photos + videos) freeing the bottom for native player controls; gradient scrim removed (icon shadows instead); desktop shows whole frame
 - Closes the NEXT-LIGHTBOX.md handoff. Updated SUMMARY.md, STATUS.md, preview/PROGRESS.md, preview/SUMMARY.md, preview/NEXT-LIGHTBOX.md, preview/MISTAKES.md
+
+## 2026-06-22 — fix.js: diagnose + stop losing Instagram media
+- Investigated "media not uploaded to site (reels AND posts, incl. items never synced)".
+- Root cause A (ongoing loss): gallery-data.js was rebuilt purely from each API fetch — items the /media edge omitted on a run were dropped even though already on R2. Added a NON-DESTRUCTIVE UNION: previously-synced items the API didn't return are carried forward (respecting hidden settings).
+- Root cause B (never synced): the Instagram /media edge under-returns (commonly collab/co-author posts and some Reels). Added diagnostics: fetch account media_count and log the GAP vs top-level posts actually returned; log media_type/media_product_type breakdown; log items with no media_url (cannot download); flag empty-page-with-next-cursor as INCOMPLETE.

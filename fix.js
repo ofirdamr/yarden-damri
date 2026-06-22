@@ -137,10 +137,20 @@ function safeWrite(filePath, data) {
     if (mediaBaseId === "me") { console.error("No Instagram Business Account found"); return; }
   }
 
+  // How many posts does the account actually have? Used to detect under-fetching (the API
+  // — especially for Reels — sometimes returns fewer items than really exist).
+  let mediaCount = null;
+  try {
+    const acct = await getJSON(`https://${baseHost}/${mediaBaseId}?fields=media_count&access_token=${token}`, 15000, 3);
+    if (typeof acct.media_count === "number") mediaCount = acct.media_count;
+  } catch(e) {}
+  console.log("Account media_count (top-level posts reported by Instagram):", mediaCount === null ? "unknown" : mediaCount);
+
   console.log("Fetching media...");
   let rawPosts = [];
-  let url = `https://${baseHost}/${mediaBaseId}/media?fields=id,media_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count&limit=100&access_token=${token}`;
-  let pageCount = 0, fetchFailed = false;
+  let url = `https://${baseHost}/${mediaBaseId}/media?fields=id,media_type,media_product_type,media_url,thumbnail_url,caption,timestamp,like_count,comments_count&limit=100&access_token=${token}`;
+  let pageCount = 0, fetchFailed = false, topLevelCount = 0;
+  const typeBreakdown = {}, noUrlSkipped = [];
   while (url) {
     const res = await getJSON(url, 15000, 4);
     if (!res.data) {
@@ -151,18 +161,30 @@ function safeWrite(filePath, data) {
     }
     pageCount++;
     for (const item of res.data) {
+      topLevelCount++;
+      const k = `${item.media_type}${item.media_product_type ? "/" + item.media_product_type : ""}`;
+      typeBreakdown[k] = (typeBreakdown[k] || 0) + 1;
       if (item.media_type === "CAROUSEL_ALBUM") {
         const ch = await getJSON(`https://${baseHost}/${item.id}/children?fields=id,media_type,media_url,thumbnail_url&access_token=${token}`, 15000, 4);
         const kids = ch.data || [];
         if (!kids.length) console.warn(`\n⚠️ Carousel ${item.id} returned no children — skipped.`);
         kids.forEach((c, ci) => rawPosts.push({ ...c, caption: item.caption, like_count: item.like_count, comments_count: item.comments_count, post_id: item.id, carousel: true, cidx: ci, ccount: kids.length }));
       } else {
+        if (!item.media_url) noUrlSkipped.push(`${item.id}(${k})`);
         rawPosts.push({ ...item, post_id: item.id });
       }
     }
+    // If a page comes back empty but Instagram still hands us a "next" cursor, that is the API
+    // hiccupping mid-pagination — keep going, but flag it so we never treat it as a clean run.
+    if (res.data.length === 0 && res.paging?.next) { console.warn(`\n⚠️ Page ${pageCount} returned 0 items but has a next cursor — API hiccup.`); fetchFailed = true; }
     url = res.paging?.next || null;
   }
-  console.log(`Fetched ${rawPosts.length} items across ${pageCount} pages${fetchFailed ? " (INCOMPLETE)" : ""}`);
+  console.log(`Fetched ${topLevelCount} top-level posts (${rawPosts.length} items incl. carousel children) across ${pageCount} pages${fetchFailed ? " (INCOMPLETE)" : ""}`);
+  console.log("Type breakdown:", JSON.stringify(typeBreakdown));
+  if (mediaCount !== null && topLevelCount < mediaCount) {
+    console.warn(`\n⚠️ GAP: Instagram reports ${mediaCount} posts but the API only returned ${topLevelCount}. ${mediaCount - topLevelCount} post(s) are NOT being delivered by the /media edge (commonly collab/co-author posts or Reels the API withholds).`);
+  }
+  if (noUrlSkipped.length) console.warn(`\n⚠️ ${noUrlSkipped.length} item(s) had NO media_url (cannot download): ${noUrlSkipped.slice(0, 20).join(", ")}`);
 
   let existing = [];
   try {
@@ -278,6 +300,24 @@ function safeWrite(filePath, data) {
       } catch(e) { console.error(`Image error ${item.id}:`, e.message); }
     }
   }
+
+  // NON-DESTRUCTIVE UNION: anything we synced before (already on R2) that this run's fetch did
+  // NOT return is carried forward instead of being dropped. Instagram's /media edge omits items
+  // intermittently (and permanently for some — collab posts, certain Reels); without this, every
+  // flaky run silently prunes live media from the site. Carried items keep their old order (appended).
+  const seenIds = new Set(gallery.map(e => e.item_id));
+  let carried = 0;
+  for (const e of existing) {
+    if (!e || !e.u) continue;
+    if (seenIds.has(e.item_id) || seenUrls.has(e.u)) continue;
+    // Respect current hidden settings for carried-forward items too
+    const idMatch = (e.u.match(/yarden_(?:makeup_)?(\d+)\./) || [])[1];
+    if ((idMatch && hiddenIds.has(idMatch)) || hiddenUrls.has(e.u)) e.hidden = true;
+    seenUrls.add(e.u); seenIds.add(e.item_id);
+    gallery.push(e);
+    carried++;
+  }
+  if (carried) console.log(`Carried forward ${carried} previously-synced item(s) the API did not return this run.`);
 
   console.log(`\nSaving ${gallery.length} items to ${GALLERY_FILE}`);
   safeWrite(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
