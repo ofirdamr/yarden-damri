@@ -116,10 +116,9 @@
     #lightbox.lb-video-on .lb-actions{bottom:calc(56px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.55),transparent);padding-top:30px;}
     #lightbox.lb-video-on #lb-counter{display:none;}
     body.has-ck #lightbox .lb-close-btn{top:56px !important;}
-    /* Desktop: don't crop-fill — show the whole frame centered (portrait media would zoom absurdly at 100vw) */
-    @media (min-width:1081px){
-      #lightbox img,#lightbox video{position:absolute !important;top:50% !important;left:50% !important;transform:translate(-50%,-50%) !important;width:auto !important;height:auto !important;max-width:94vw !important;max-height:94dvh !important;object-fit:contain !important;}
-    }
+    /* Blurred fill behind the media so it looks fullscreen without cropping the photo/video */
+    #lightbox .lb-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(26px) brightness(.5);transform:scale(1.25);z-index:0;pointer-events:none;}
+    #lightbox img,#lightbox video{position:absolute !important;inset:0 !important;top:0 !important;left:0 !important;transform:none !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:contain !important;z-index:1;}
     body.lb-open nav[role="navigation"]{display:none !important;}
     /* Show the about image on mobile too (match desktop) */
     @media (max-width:1080px){
@@ -639,10 +638,11 @@
     role="dialog" aria-modal="true" aria-label="תצוגת תמונה מוגדלת"
     onclick="if(event.target===this)closeLightbox()"
     style="display:none;position:fixed;inset:0;z-index:9000;background:#000;align-items:center;justify-content:center;flex-direction:column;padding:0;overflow:hidden;overscroll-behavior:contain;touch-action:none;">
+    <div class="lb-bg" id="hpLbBg" aria-hidden="true"></div>
     <button onclick="closeLightbox()" aria-label="סגרי תצוגה מוגדלת" class="lb-close-btn" style="position:fixed;top:16px;left:20px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(8px);z-index:10002;transition:top .2s;">✕</button>
     <button onclick="navigateLightbox(-1)" id="lb-prev" aria-label="תמונה קודמת" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">›</button>
     <button onclick="navigateLightbox(1)" id="lb-next" aria-label="תמונה הבאה" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:1.6rem;cursor:pointer;backdrop-filter:blur(8px);z-index:2;display:flex;align-items:center;justify-content:center;">‹</button>
-    <img src="" alt="" style="position:absolute;top:0;left:0;width:100vw;height:100dvh;object-fit:cover;border-radius:0;" />
+    <img src="" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:0;" />
     <p class="lb-caption" style="color:rgba(255,255,255,.7);font-size:.9rem;margin-top:14px;text-align:center;max-width:600px;line-height:1.6;"></p>
     <p id="lb-counter" style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></p>
     <div class="lb-actions" id="hpLbActions">
@@ -874,12 +874,17 @@
       const isVideo = url.includes('/video/upload/') || url.includes('.mp4');
       const lb = document.getElementById('lightbox');
       lb.classList.toggle('lb-video-on', isVideo);
+      const hpBg = document.getElementById('hpLbBg');
+      if (hpBg) {
+        const cur = lbItems[lbIdx];
+        hpBg.style.backgroundImage = `url("${isVideo ? ((cur && cur.thumb) || '') : cdnUrl(url, 1200)}")`;
+      }
       if (isVideo) {
         lb.querySelector('img').style.display = 'none';
         let vid = lb.querySelector('video');
         if (!vid) {
           vid = document.createElement('video');
-          vid.style.cssText = 'position:absolute;top:0;left:0;width:100vw;height:100dvh;object-fit:cover;border-radius:0;background:#000;';
+          vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:0;';
           vid.controls = true; vid.playsInline = true;
           lb.insertBefore(vid, lb.querySelector('.lb-caption'));
         }

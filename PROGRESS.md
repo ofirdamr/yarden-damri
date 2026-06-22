@@ -634,3 +634,10 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Desktop (min-width:1081px): reverted to contained/centered (max 94vw/94dvh, object-fit:contain) so portrait media isn't zoomed absurdly at 100vw
 - Video controls: `.lb-video-on` (toggled on the lightbox when a video plays) lifts the like/comment/share/save bar to bottom:calc(56px+safe-area) with a gradient scrim, and hides the counter, so the native player controls are never covered
 - Removed the cookie-banner (has-ck) video-shrink override so video stays fullscreen even while the cookie banner shows
+
+## 2026-06-22 — preview/ lightbox: blurred-fill fullscreen (no crop) — final approach
+- User reported crop-to-fill was cutting the photo/video edges (looked like a "frame cutting the image"). Switched to the Instagram/YouTube-Shorts technique.
+- gallery-temp.html + index-temp.html: lightbox media is now object-fit:contain (whole photo/video, nothing cut), and a new `.lb-bg` element shows a blurred, zoomed copy of the same media behind it (filter:blur(26px) brightness(.5) scale(1.25)) to fill the screen — so it looks fullscreen edge-to-edge with no black bars and no cropping
+- JS sets the backdrop image per item (image URL, or video thumbnail/poster for videos)
+- Removed the desktop crop override and the per-platform cover rules (contain + blurred fill works on mobile and desktop)
+- Kept: video action bar lifted above native player controls; counter hidden on video
