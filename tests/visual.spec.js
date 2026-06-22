@@ -61,7 +61,18 @@ for (const p of PAGES) {
     const dir = path.join('screenshots', testInfo.project.name);
     fs.mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${p.name}.png`);
-    await page.screenshot({ path: file, fullPage: true });
+    // Full-page capture, with a fallback for pages taller than WebKit's hard
+    // 32767px screenshot limit (the long single-page mobile homepage hits it).
+    try {
+      await page.screenshot({ path: file, fullPage: true });
+    } catch (err) {
+      if (/32767/.test(String(err))) {
+        const width = page.viewportSize()?.width ?? 1280;
+        await page.screenshot({ path: file, clip: { x: 0, y: 0, width, height: 32000 } });
+      } else {
+        throw err;
+      }
+    }
     await testInfo.attach(`${p.name}-${testInfo.project.name}`, {
       path: file,
       contentType: 'image/png',
