@@ -627,3 +627,10 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - preview/gallery-temp.html, preview/index-temp.html: lightbox overlay background made fully opaque (#000 instead of rgba .96/.92) so the media reads as true fullscreen with no page bleed-through
 - Video controls fix: the Instagram-style .lb-actions bar (like/comment/share/save) is pinned to bottom:0 and was covering the video's native HTML5 control bar. When a video is open the video is now lifted/capped (top:calc(50% - 43px); max-height:calc(100dvh - 86px)) so its native controls sit above the action bar and are tappable. Gallery toggles `.lb-video-on` on #lb in showLb(); homepage bakes the offset into the created <video> style
 - index-temp.html: homepage nav "אודות" (desktop + mobile) now links to about.html (dedicated longer About page) instead of the #about homepage anchor
+
+## 2026-06-21 — preview/ lightbox TRUE fullscreen (crop-to-fill) — revised per user screenshot
+- User confirmed prior approach still letterboxed (black gap below portrait videos). Chose "crop to fill / Reels-style".
+- gallery-temp.html + index-temp.html: lightbox .lb-img and .lb-video now `position:absolute;inset:0;width:100vw;height:100dvh;object-fit:cover` → media fills the whole screen edge-to-edge on mobile (minor crop, like Instagram/TikTok)
+- Desktop (min-width:1081px): reverted to contained/centered (max 94vw/94dvh, object-fit:contain) so portrait media isn't zoomed absurdly at 100vw
+- Video controls: `.lb-video-on` (toggled on the lightbox when a video plays) lifts the like/comment/share/save bar to bottom:calc(56px+safe-area) with a gradient scrim, and hides the counter, so the native player controls are never covered
+- Removed the cookie-banner (has-ck) video-shrink override so video stays fullscreen even while the cookie banner shows
