@@ -113,7 +113,10 @@
     #lightbox #lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:10001;}
     #lightbox .lb-caption{display:none;}
     /* Fullscreen video: lift the like/comment/share/save bar above the native player controls; hide counter */
-    #lightbox.lb-video-on .lb-actions{bottom:calc(56px + env(safe-area-inset-bottom));}
+    /* Video: move like/comment/share/save to a side rail so the bottom stays free for the native player controls */
+    #lightbox.lb-video-on .lb-actions{flex-direction:column;align-items:center;left:auto;right:10px;top:auto;bottom:calc(64px + env(safe-area-inset-bottom));transform:none;max-width:none;width:auto;gap:20px;padding:0;margin:0;z-index:10003;}
+    #lightbox.lb-video-on .lb-act{flex-direction:column;gap:2px;font-size:.72rem;}
+    #lightbox.lb-video-on .lb-save{margin-inline-start:0;}
     #lightbox.lb-video-on #lb-counter{display:none;}
     body.has-ck #lightbox .lb-close-btn{top:56px !important;}
     #lightbox .lb-bg{display:none;}

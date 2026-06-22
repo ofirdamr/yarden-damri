@@ -111,7 +111,10 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px}
     .lb-save{margin-inline-start:auto}
     /* Fullscreen video: lift the like/comment/share/save bar above the native player controls so it never covers them */
-    .lb.lb-video-on .lb-actions{bottom:calc(56px + env(safe-area-inset-bottom))}
+    /* Video: move like/comment/share/save to a side rail so the bottom stays free for the native player controls */
+    .lb.lb-video-on .lb-actions{flex-direction:column;align-items:center;left:auto;right:10px;top:auto;bottom:calc(64px + env(safe-area-inset-bottom));transform:none;max-width:none;width:auto;gap:20px;padding:0;margin:0;z-index:1004}
+    .lb.lb-video-on .lb-act{flex-direction:column;gap:2px;font-size:.72rem}
+    .lb.lb-video-on .lb-save{margin-inline-start:0}
     .lb.lb-video-on .lb-counter{display:none}
     /* Desktop: cover-fill would zoom a portrait reel absurdly — show it whole on black instead */
     @media (min-width:1081px){

@@ -652,3 +652,7 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 ## 2026-06-22 — preview/ lightbox: removed dark gradient band behind action buttons
 - User: edge-to-edge fullscreen is good; remove the "filter" (dark gradient band) over part of the image/video
 - gallery-temp.html + index-temp.html: removed the linear-gradient scrim + padding-top from the .lb-video-on action bar; added a subtle drop-shadow/text-shadow on the action icons/counts so they stay legible over bright media without darkening it
+
+## 2026-06-22 — preview/ lightbox video: actions moved to side rail (free the bottom for player controls)
+- User: action bar sat too high and the native video controls weren't visible
+- gallery-temp.html + index-temp.html: for video (.lb-video-on) the like/comment/share/save bar is now a vertical rail on the right edge (TikTok/Reels style), bottom:64px, icons stacked with counts beneath. The entire bottom of the screen is left clear so the native play/scrub controls are visible and usable. Images keep the normal bottom row.
