@@ -641,3 +641,10 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - JS sets the backdrop image per item (image URL, or video thumbnail/poster for videos)
 - Removed the desktop crop override and the per-platform cover rules (contain + blurred fill works on mobile and desktop)
 - Kept: video action bar lifted above native player controls; counter hidden on video
+
+## 2026-06-22 — preview/ lightbox: final = crop-to-fill (Reels style), per user choice
+- User confirmed (after seeing blurred-fill seam lines) they want true edge-to-edge fullscreen and accept the small edge trim.
+- gallery-temp.html + index-temp.html: lightbox .lb-img/.lb-video back to object-fit:cover, inset:0, width/height:100% — fills the whole screen, no seams, no bars
+- Blurred-fill backdrop disabled (.lb-bg{display:none}) and its JS setter removed
+- Desktop (min-width:1081px): media shown whole/contained (max 94vw/94dvh) so a portrait reel isn't zoomed absurdly on wide screens
+- Kept: video action bar lifted above native controls; counter hidden on video

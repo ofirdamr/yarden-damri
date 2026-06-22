@@ -116,9 +116,13 @@
     #lightbox.lb-video-on .lb-actions{bottom:calc(56px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.55),transparent);padding-top:30px;}
     #lightbox.lb-video-on #lb-counter{display:none;}
     body.has-ck #lightbox .lb-close-btn{top:56px !important;}
-    /* Blurred fill behind the media so it looks fullscreen without cropping the photo/video */
-    #lightbox .lb-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(26px) brightness(.5);transform:scale(1.25);z-index:0;pointer-events:none;}
-    #lightbox img,#lightbox video{position:absolute !important;inset:0 !important;top:0 !important;left:0 !important;transform:none !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:contain !important;z-index:1;}
+    #lightbox .lb-bg{display:none;}
+    /* Reels-style: media fills the whole screen (crop to fill) */
+    #lightbox img,#lightbox video{position:absolute !important;inset:0 !important;top:0 !important;left:0 !important;transform:none !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:cover !important;z-index:1;}
+    /* Desktop: cover-fill would zoom a portrait reel absurdly — show it whole on black instead */
+    @media (min-width:1081px){
+      #lightbox img,#lightbox video{top:50% !important;left:50% !important;inset:auto !important;transform:translate(-50%,-50%) !important;width:auto !important;height:auto !important;max-width:94vw !important;max-height:94dvh !important;object-fit:contain !important;}
+    }
     body.lb-open nav[role="navigation"]{display:none !important;}
     /* Show the about image on mobile too (match desktop) */
     @media (max-width:1080px){
@@ -874,11 +878,6 @@
       const isVideo = url.includes('/video/upload/') || url.includes('.mp4');
       const lb = document.getElementById('lightbox');
       lb.classList.toggle('lb-video-on', isVideo);
-      const hpBg = document.getElementById('hpLbBg');
-      if (hpBg) {
-        const cur = lbItems[lbIdx];
-        hpBg.style.backgroundImage = `url("${isVideo ? ((cur && cur.thumb) || '') : cdnUrl(url, 1200)}")`;
-      }
       if (isVideo) {
         lb.querySelector('img').style.display = 'none';
         let vid = lb.querySelector('video');
