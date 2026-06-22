@@ -119,3 +119,64 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 12. If there is a better way or tool to accomplish what the user asks, say so before doing it.
 13. Token efficiency matters — minimize unnecessary file reads.
 14. You write in English. The site is in Hebrew, RTL.
+
+---
+
+## Multi-Agent Development Mode
+
+For any complex feature, bug fix, or non-trivial task, operate as a full autonomous
+development team. Do **not** write code immediately. First output a short, structured
+alignment discussion in the chat using these roles:
+
+- **[Product Manager]** — scope, business logic, user-experience requirements.
+- **[UI/UX Designer]** — visual standards, layout structure, styling rules (CSS variables, RTL, nav/footer consistency).
+- **[Frontend Engineer]** — component/markup structure, state, UI integration, edge cases.
+- **[Backend Engineer]** — architecture, data flow (Worker / R2 / `gallery-data.js`), API integrity.
+- **[Tech Lead / Architect]** — resolves conflicts, gives the final execution plan and the green light.
+- **[QA Engineer]** — owns the automated visual + functional loop; guarantees a flawless result before delivery.
+
+**Workflow:**
+1. **Internal discussion first** — keep it brief (a few lines per role), in the format above, before any commit.
+2. **Autonomous execution** — once the Tech Lead green-lights, execute the plan: make the changes and push.
+3. **No mid-task prompts** — do not ask for feedback or screenshots mid-task. Self-correct from build logs and the Playwright results. (Exception: a genuine product decision the user alone can make — then ask.)
+4. **Final delivery** — only report back once the work is complete, verified, and visually clean. Final message form:
+   *"The feature is ready and verified. Here is the link to review: [Link]. Confirm to merge."*
+
+> Reconciliation with the branch rules: `main` remains the source of truth and nothing
+> lands on it without explicit confirmation. Tasks initiated through **Claude Code on the
+> web** run on their assigned `claude/*` branch and are delivered as a **draft PR** — the
+> "link to review" above is that PR. Promotion/merge to `main` happens only on the user's
+> explicit "confirm to merge". For local interactive sessions the `main`-only rule is
+> unchanged.
+
+---
+
+## Automated QA Pipeline (Playwright) — the QA Engineer's "eyes"
+
+A Playwright suite gives the team automated visual + functional inspection of the site.
+
+- **Config:** `playwright.config.js` — serves the repo root with `http-server` and runs
+  two engines: `desktop-chromium` (1440×900) and `mobile-safari` (iPhone 13 / WebKit — the
+  engine where most of this site's bugs have lived). Override the target with `BASE_URL`
+  (e.g. the live site or a deploy preview).
+- **Tests:** `tests/visual.spec.js` — for each key page (home, about, services, gallery,
+  bride, bridal-guide, pricing, contact, reviews) it asserts: HTTP < 400, `lang="he" dir="rtl"`,
+  a visible `nav[role="navigation"]`, a non-empty `<title>`, **no horizontal overflow**, and
+  **no JS page errors**; then captures a full-page screenshot. Also checks the mobile menu
+  open/close on WebKit. Missing external assets (R2/Worker images) are tolerated; real script
+  errors fail the run.
+- **Artifacts:** screenshots → `screenshots/<project>/<page>.png`; HTML report → `playwright-report/`.
+- **CI:** `.github/workflows/playwright.yml` runs on every push + PR + manual dispatch, and
+  uploads both the report and the screenshots as build artifacts.
+- **Run locally:** `npm install && npx playwright install chromium webkit` then `npm run test:e2e`
+  (view report with `npm run test:report`).
+
+**Continuous learning loop (QA Engineer role):** at the start of every subsequent task,
+review the latest Playwright run — the screenshots, the HTML report, and CI logs — to
+confirm there is no overlapping text, broken modal, or layout shift **before** requesting
+final user confirmation. When a real regression is found, fix the root cause in source
+(never a band-aid), re-run the suite, and only then deliver.
+
+> These test files are **new infrastructure**, exempt from the `*-temp.html` editing rule
+> (that rule governs site HTML/CSS, not the QA harness). `node_modules/`, `playwright-report/`,
+> `test-results/` and `screenshots/` are git-ignored.

@@ -1,0 +1,6 @@
+# Node / Playwright (test infra only — the site itself has no build step)
+node_modules/
+playwright-report/
+test-results/
+screenshots/
+.cache/

@@ -2,6 +2,14 @@
 
 ## ✅ Completed
 
+## 2026-06-22 — Multi-Agent mode + Automated QA pipeline (Playwright)
+- CLAUDE.md: added "Multi-Agent Development Mode" (PM / UI-UX / FE / BE / Tech Lead / QA roles, internal-discussion-first workflow, no mid-task prompts, final delivery = review link + "confirm to merge") and "Automated QA Pipeline (Playwright)" section incl. the continuous-learning loop for the QA role. Reconciled with the main-only rule: web-initiated `claude/*` tasks ship as a draft PR; merge to main only on explicit confirmation.
+- ARCHITECTURE.md: added an "Automated QA / Visual Testing (Playwright)" section + data-flow diagram.
+- Playwright added: `playwright.config.js` (desktop-chromium 1440×900 + mobile-safari iPhone13/WebKit; serves repo root via http-server; `BASE_URL` override), `tests/visual.spec.js` (per key page: HTTP<400, RTL `lang=he dir=rtl`, visible `nav[role=navigation]`, non-empty title, no horizontal overflow, no JS errors, full-page screenshot; + mobile-menu open/close on WebKit).
+- CI: `.github/workflows/playwright.yml` runs on push/PR/dispatch, installs chromium+webkit, runs the suite, uploads `playwright-report/` + `screenshots/` artifacts.
+- package.json: added devDeps `@playwright/test`, `http-server` + scripts `serve`, `test:e2e`, `test:report`. Added `.gitignore` (node_modules, reports, screenshots).
+- Delivered on branch `claude/multi-agent-qa-pipeline-a0oguk` as a draft PR for review.
+
 ## 2026-06-21 — Gallery/media/share overhaul PROMOTED to permanent
 Promoted `gallery-temp.html`→`gallery.html` and `index-temp.html`→`index.html` (user approved). All live now:
 - Videos: grid thumbnail → autoplay `<video>` on scroll with `poster=thumb` (no black boxes); lightbox plays with poster + muted-fallback (no endless spinner).
