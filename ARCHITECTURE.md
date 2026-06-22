@@ -238,6 +238,32 @@ const GALLERY_IMAGES = [
 
 ---
 
+## Automated QA / Visual Testing (Playwright)
+
+End-to-end visual + functional testing harness — gives the team automated "eyes" on the
+layout without manual screenshots.
+
+| File | Purpose |
+|------|---------|
+| `playwright.config.js` | Serves repo root via `http-server`; runs `desktop-chromium` (1440×900) + `mobile-safari` (iPhone 13 / WebKit). `BASE_URL` overrides the target (live site / deploy preview). |
+| `tests/visual.spec.js` | Per key page: asserts HTTP<400, `lang="he" dir="rtl"`, visible `nav[role="navigation"]`, non-empty title, no horizontal overflow, no JS errors; saves a full-page screenshot. Plus mobile-menu open/close on WebKit. |
+| `.github/workflows/playwright.yml` | Runs on every push + PR + manual dispatch; uploads `playwright-report/` and `screenshots/` as artifacts (14-day retention). |
+
+```
+push / PR
+    ↓
+GitHub Actions (playwright.yml)
+    ↓ npm install → playwright install chromium webkit
+    ↓ http-server serves repo root → browsers hit each key page
+    ↓ assert RTL + nav + no overflow + no JS errors → capture screenshots
+    → upload playwright-report/ + screenshots/ as build artifacts
+```
+
+Local: `npm install && npx playwright install chromium webkit && npm run test:e2e`.
+Test infra (`node_modules/`, `playwright-report/`, `test-results/`, `screenshots/`) is git-ignored.
+
+---
+
 ## Development Rules
 
 1. **All changes go to `/preview` first** — never touch root files until go-live
