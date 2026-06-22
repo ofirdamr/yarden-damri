@@ -109,14 +109,11 @@
     }
     body.has-ck .lb-close-btn { top: 108px; }
     /* Instagram-style lightbox action bar */
-    .lb-actions{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;z-index:10001;}
+    .lb-actions{position:fixed;right:10px;left:auto;bottom:calc(64px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:20px;z-index:10003;}
     #lightbox #lb-counter{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:10001;}
     #lightbox .lb-caption{display:none;}
     /* Fullscreen video: lift the like/comment/share/save bar above the native player controls; hide counter */
     /* Video: move like/comment/share/save to a side rail so the bottom stays free for the native player controls */
-    #lightbox.lb-video-on .lb-actions{flex-direction:column;align-items:center;left:auto;right:10px;top:auto;bottom:calc(64px + env(safe-area-inset-bottom));transform:none;max-width:none;width:auto;gap:20px;padding:0;margin:0;z-index:10003;}
-    #lightbox.lb-video-on .lb-act{flex-direction:column;gap:2px;font-size:.72rem;}
-    #lightbox.lb-video-on .lb-save{margin-inline-start:0;}
     #lightbox.lb-video-on #lb-counter{display:none;}
     body.has-ck #lightbox .lb-close-btn{top:56px !important;}
     #lightbox .lb-bg{display:none;}
@@ -134,7 +131,7 @@
       #about .about-card{ background:var(--cream); aspect-ratio:3/4; max-height:70vh; }
       #about .about-card img{ width:100%; height:100%; object-fit:contain; object-position:center bottom; display:block; }
     }
-    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;font-size:.85rem;font-weight:500;transition:transform .12s;}
+    .lb-act{background:none;border:none;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0;font-size:.72rem;font-weight:500;transition:transform .12s;}
     .lb-act:active{transform:scale(.82);}
     .lb-act svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55));}
     .lb-act,.lb-cnt{text-shadow:0 1px 2px rgba(0,0,0,.55);}
@@ -142,7 +139,7 @@
     .lb-act.saved svg{fill:#fff;}
     @keyframes lbPop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
     .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px;}
-    .lb-save{margin-inline-start:auto;}
+    .lb-save{margin-inline-start:0;}
     .lb-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9002;}
     .lb-toast.show{opacity:1;}
     /* Hide floating buttons while the lightbox is open */

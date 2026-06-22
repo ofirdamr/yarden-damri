@@ -656,3 +656,7 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 ## 2026-06-22 — preview/ lightbox video: actions moved to side rail (free the bottom for player controls)
 - User: action bar sat too high and the native video controls weren't visible
 - gallery-temp.html + index-temp.html: for video (.lb-video-on) the like/comment/share/save bar is now a vertical rail on the right edge (TikTok/Reels style), bottom:64px, icons stacked with counts beneath. The entire bottom of the screen is left clear so the native play/scrub controls are visible and usable. Images keep the normal bottom row.
+
+## 2026-06-22 — preview/ lightbox: unified side rail for images AND videos
+- User: make the side action rail consistent — use it for images too, not only videos
+- gallery-temp.html + index-temp.html: moved the right-side vertical rail (like/comment/share/save, stacked with counts) into the base .lb-actions/.lb-act rules so photos and videos share one layout. Removed the video-only override.
