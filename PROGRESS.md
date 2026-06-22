@@ -2,6 +2,13 @@
 
 ## ✅ Completed
 
+## 2026-06-22 — Go-live Stage A: code cleanup (preview/ only, root untouched)
+Conservative, behavior-preserving cleanup ahead of promoting preview/ → root.
+- Deleted dead/standalone files: all 14 `preview/*-temp.*`, `preview/gallery-new.html`, `preview/vtest.html`, `preview/admin.html.headers`, legacy `netlify/functions/ig-stats.js`.
+- Unified CSS: the homepage was on `styles-temp.css` while subpages used `styles.css` (diverged into two desktop designs). Promoted the newer homepage stylesheet to `preview/styles.css`, repointed `index.html` to it, and normalized every page to `styles.css?v=20260622a`.
+- Removed dead code: unused `brandedImageFile()` share-canvas + unused `SHARE_SITE` const in `index.html` + `gallery.html`; simplified the now-dead `-temp`/`?g=t` branch in `shareLink()`.
+- Verify gate: review the cleaned site at `yardendamri.co.il/preview/` before Stage B (copy → root go-live).
+
 ## 2026-06-22 — Multi-Agent mode + Automated QA pipeline (Playwright)
 - CLAUDE.md: added "Multi-Agent Development Mode" (PM / UI-UX / FE / BE / Tech Lead / QA roles, internal-discussion-first workflow, no mid-task prompts, final delivery = review link + "confirm to merge") and "Automated QA Pipeline (Playwright)" section incl. the continuous-learning loop for the QA role. Reconciled with the main-only rule: web-initiated `claude/*` tasks ship as a draft PR; merge to main only on explicit confirmation.
 - ARCHITECTURE.md: added an "Automated QA / Visual Testing (Playwright)" section + data-flow diagram.

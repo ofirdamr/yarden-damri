@@ -211,7 +211,8 @@
     /* ── ABOUT ── */
     #about { padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); align-items: center; background: var(--cream); }
     .about-visual { position: relative; }
-    .about-card { border-radius: 2px; aspect-ratio: 2/3; max-height: 700px; position: relative; overflow: hidden; }
+    .about-card { border-radius: 2px; aspect-ratio: 2/3; max-height: 700px; position: relative; overflow: hidden; background: var(--cream); }
+    .about-card-img { width: 100%; height: 100%; background-repeat: no-repeat; background-size: contain; background-position: center center; background-color: #f9f5f0; }
     .about-accent { display: none; }
     .about-small-card { display: none; }
     .small-card-num { display: none; }
@@ -438,15 +439,6 @@
 
     /* ── LARGE SCREEN CONSTRAINTS (>1080px) ── */
     @media (min-width: 1081px) {
-      /* Cream sections: bg matches body — constrain the section itself */
-      #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      /* Warm-bg sections must stay full-width — constrain inner elements */
-      .services-header,
-      .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
-      /* Area: 2-col grid with no inner wrapper — use calc padding to cap width */
-      #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
       /* Gallery tiles slightly larger on big screens */
       .ig-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 1400px; }
 
@@ -456,16 +448,6 @@
       #heroVideo, #heroImage {
         object-fit: contain !important;
         object-position: center center !important;
-      }
-
-      /* About card: show full image without cropping */
-      .about-card {
-        aspect-ratio: auto;
-        height: 620px;
-        max-height: 700px;
-        background-size: contain !important;
-        background-position: center center !important;
-        background-color: var(--cream) !important;
       }
 
       /* Philosophy section: taller on desktop to show full scene */
@@ -478,14 +460,6 @@
 
       /* Reviews section max-width for wide screens */
       #reviews > div { max-width: 1300px; margin-left: auto; margin-right: auto; }
-
-      /* Philosophy attributes: 4 columns on desktop */
-      .philosophy-attrs-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
-      }
-      .philosophy-attrs-grid > [role="listitem"] {
-        border-bottom: none !important;
-      }
     }
 
     /* ── RESPONSIVE ── */
@@ -562,6 +536,7 @@
       .ig-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 12px; }
       .filter-bar { padding: 12px 12px; gap: 8px; }
+      #lb-prev, #lb-next { display: none !important; }
 
       .cta-strip { padding: 24px 16px; gap: 14px; flex-direction: column; }
       .cta-strip-text { font-size: .95rem; }
@@ -582,8 +557,11 @@
 
     /* ── DESKTOP (1081px+) ── */
     @media (min-width: 1081px) {
+      /* ── Nav: logo LEFT, links RIGHT — row-reverse flips RTL start/end on desktop ── */
+      nav[role="navigation"] { flex-direction: row-reverse !important; }
+
       /* ── Hero ── */
-      #hero { height: 100vh; min-height: 600px; }
+      #hero { height: 100vh; min-height: 600px; justify-content: flex-start; align-items: center; }
       #hero #heroVideo, #hero #heroImage { object-fit: cover !important; }
       .hero-content { max-width: 540px; padding: 0 50px; }
       .hero-btns { flex-wrap: nowrap; }
@@ -593,18 +571,24 @@
       .hero-desc { font-size: .92rem; margin-bottom: 28px; }
       .hero-overlay { background: linear-gradient(270deg, rgba(30,18,10,.78) 0%, rgba(30,18,10,.25) 45%, rgba(30,18,10,0) 85%); }
 
-      /* ── About ── */
+      /* ── About (desktop RTL: image fills left column, text on right) ── */
       #about .section-title { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
-      /* Landscape crop on desktop — shows full scene (makeup artist + customer) */
-      .about-card { aspect-ratio: 16/9; max-height: none; }
-
-      /* ── Section width caps (cream sections: cap the section; warm sections: cap the inner) ── */
-      #about  { max-width: 1440px; margin-left: auto; margin-right: auto; }
-      #philosophy { max-width: 1440px; margin-left: auto; margin-right: auto; }
+      #about { grid-template-columns: 1fr 1.4fr !important; padding: clamp(60px,10vw,140px) clamp(24px,8vw,100px) clamp(60px,10vw,140px) 0; max-width: none; align-items: stretch; }
+      .about-visual { order: 2 !important; align-self: stretch; }
+      .about-card { height: 100%; min-height: 580px; aspect-ratio: unset; max-height: none; border-radius: 0; }
+      .about-card img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; display: block; filter: brightness(0.97) saturate(0.88) sepia(0.08); }
+      /* #philosophy and .cta-strip: full-bleed — no max-width so edges align on all screen sizes */
       #contact { max-width: 1440px; margin-left: auto; margin-right: auto; }
       .services-header,
       .services-grid { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      /* ── Area: text RIGHT, map LEFT in RTL ── */
       #area { padding-left: max(100px, calc(50% - 700px)); padding-right: max(100px, calc(50% - 700px)); }
+      .area-visual { order: 2 !important; }
+
+      /* Philosophy overlay text: consistent right-align (RTL natural) on desktop */
+      .philosophy-photo-wrap .section-eyebrow,
+      .philosophy-photo-wrap blockquote,
+      .philosophy-photo-wrap > div > p { text-align: right; }
 
       /* ── Philosophy attributes: 4 columns on desktop ── */
       .philosophy-attrs-grid { grid-template-columns: repeat(4, 1fr) !important; }
@@ -614,6 +598,10 @@
 
       /* ── Reviews ── */
       #reviews { padding: 100px clamp(40px, 6vw, 120px); }
+
+      /* Contact: improve label and intro contrast on cream background */
+      .contact-intro { color: var(--text); }
+      .form-group label { color: #666; }
     }
 
     /* ── LARGE DESKTOP (1600px+) ── */

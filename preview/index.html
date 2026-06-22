@@ -82,7 +82,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-temp.css?v=20260619m" />
+  <link rel="stylesheet" href="styles.css?v=20260622a" />
 
   <!-- IS 5568 Accessibility: FOUC prevention for saved preferences -->
   <script>
@@ -956,62 +956,10 @@
       clearTimeout(window._hpToastT);
       window._hpToastT = setTimeout(() => t.classList.remove('show'), 1800);
     }
-    const SHARE_SITE = 'https://yardendamri.co.il';
-    async function brandedImageFile(srcUrl, isVideo) {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = srcUrl;
-      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
-      try { if (document.fonts) { await document.fonts.load("italic 400 80px 'Cormorant Garamond'"); await document.fonts.ready; } } catch (e) {}
-      const W = 1080, H = 1350, mat = 74, band = 188;
-      const c = document.createElement('canvas');
-      c.width = W; c.height = H;
-      const ctx = c.getContext('2d');
-      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
-      const bx = mat, by = mat, bw = W - 2 * mat, bh = H - band - mat;
-      const natW = img.naturalWidth || bw, natH = img.naturalHeight || bh;
-      const s = Math.min(bw / natW, bh / natH);
-      const dispW = Math.round(natW * s), dispH = Math.round(natH * s);
-      const px = Math.round((W - dispW) / 2), py = Math.round(by + (bh - dispH) / 2);
-      ctx.save();
-      ctx.shadowColor = 'rgba(0,0,0,0.20)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 10;
-      ctx.fillStyle = '#fff'; ctx.fillRect(px, py, dispW, dispH);
-      ctx.restore();
-      ctx.drawImage(img, px, py, dispW, dispH);
-      ctx.strokeStyle = 'rgba(0,0,0,0.10)'; ctx.lineWidth = 1;
-      ctx.strokeRect(px + 0.5, py + 0.5, dispW - 1, dispH - 1);
-      if (isVideo) {
-        const r = 70, vx = px + dispW / 2, vy = py + dispH / 2;
-        ctx.fillStyle = 'rgba(0,0,0,0.45)';
-        ctx.beginPath(); ctx.arc(vx, vy, r, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.moveTo(vx - r * 0.28, vy - r * 0.42);
-        ctx.lineTo(vx - r * 0.28, vy + r * 0.42);
-        ctx.lineTo(vx + r * 0.46, vy);
-        ctx.closePath(); ctx.fill();
-      }
-      const cx = W / 2;
-      ctx.textAlign = 'center'; ctx.direction = 'rtl';
-      ctx.font = "italic 400 80px 'Cormorant Garamond', serif";
-      ctx.fillStyle = '#1A1A1A';
-      ctx.fillText('ירדן דמרי', cx, H - 104);
-      ctx.strokeStyle = 'rgba(0,0,0,0.18)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(cx - 64, H - 80); ctx.lineTo(cx + 64, H - 80); ctx.stroke();
-      ctx.font = "400 29px 'Heebo', sans-serif";
-      ctx.fillStyle = '#555';
-      ctx.fillText('מאפרת כלות וערב · אילת', cx, H - 46);
-      ctx.font = "600 26px 'Heebo', sans-serif";
-      ctx.fillStyle = '#7A4A34';
-      ctx.fillText('yardendamri.co.il', cx, H - 14);
-      const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.94));
-      return new File([blob], 'yarden-damri.jpg', { type: 'image/jpeg' });
-    }
     function shareLink(item) {
       const id = String(item.item_id || item.post_id || '').replace(/[^0-9]/g, '');
       const isVideo = item.video || /\.mp4/i.test(item.u) || item.u.includes('/video/upload/');
-      const onTemp = location.pathname.indexOf('-temp') !== -1;
-      return 'https://api.yardendamri.co.il/s/' + (isVideo ? 'v' : 'p') + '/' + id + (onTemp ? '?g=t' : '');
+      return 'https://api.yardendamri.co.il/s/' + (isVideo ? 'v' : 'p') + '/' + id;
     }
     async function shareItem() {
       const item = lbItems[lbIdx];
