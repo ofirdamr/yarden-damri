@@ -670,3 +670,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Investigated "media not uploaded to site (reels AND posts, incl. items never synced)".
 - Root cause A (ongoing loss): gallery-data.js was rebuilt purely from each API fetch — items the /media edge omitted on a run were dropped even though already on R2. Added a NON-DESTRUCTIVE UNION: previously-synced items the API didn't return are carried forward (respecting hidden settings).
 - Root cause B (never synced): the Instagram /media edge under-returns (commonly collab/co-author posts and some Reels). Added diagnostics: fetch account media_count and log the GAP vs top-level posts actually returned; log media_type/media_product_type breakdown; log items with no media_url (cannot download); flag empty-page-with-next-cursor as INCOMPLETE.
+
+## 2026-06-22 — Sync gap diagnosis (manual run 27945933958)
+- Instagram media_count=1174, API returned=1142 → only 32 posts withheld by /media edge (likely collab/co-author posts; reels fine — 188 synced; no missing media_url).
+- BIG factor: 772 items flagged hidden in gallery-settings.json → synced+on R2 but filtered from public site. This is most of "in my IG grid but not on my site."
+- Carousels (232) collapse to one cover tile by design.
+- Remediation pending user decision: bulk-unhide the 772; add admin manual-upload for the 32 collab posts. Union fix already prevents future silent drops.
