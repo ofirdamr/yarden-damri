@@ -648,3 +648,7 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - Blurred-fill backdrop disabled (.lb-bg{display:none}) and its JS setter removed
 - Desktop (min-width:1081px): media shown whole/contained (max 94vw/94dvh) so a portrait reel isn't zoomed absurdly on wide screens
 - Kept: video action bar lifted above native controls; counter hidden on video
+
+## 2026-06-22 — preview/ lightbox: removed dark gradient band behind action buttons
+- User: edge-to-edge fullscreen is good; remove the "filter" (dark gradient band) over part of the image/video
+- gallery-temp.html + index-temp.html: removed the linear-gradient scrim + padding-top from the .lb-video-on action bar; added a subtle drop-shadow/text-shadow on the action icons/counts so they stay legible over bright media without darkening it
