@@ -1,0 +1,63 @@
+name: Publish to public site repo
+
+# One-way mirror: this (private) repo is the single source of truth. On every
+# push to main — Instagram sync data, Cloudflare Worker admin commits, or hand
+# edits — copy ONLY the curated static site (no history, no dev/secret files)
+# into the public repo that serves yardendamri.co.il. The public repo is never
+# written to by anything else, so there is no clobber.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-public
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source (this private repo)
+        uses: actions/checkout@v4
+
+      - name: Checkout public mirror
+        uses: actions/checkout@v4
+        with:
+          repository: ofirdamr/yardendamri-site
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          path: public
+
+      - name: Sync curated static files into the mirror
+        run: |
+          set -e
+          # The clean allowlist — exactly what the live site needs, nothing else.
+          FILES="index.html about.html services.html gallery.html bride.html \
+            bridal-guide.html pricing.html contact.html reviews.html \
+            disclaimer.html accessibility-statement.html cookies-policy.html \
+            admin.html styles.css a11y.js cloud-storage.js cookie-banner.js \
+            remote-state.js gallery-data.js instagram-stats.json \
+            gallery-settings.json social.json robots.txt sitemap.xml \
+            sitemap-index.xml sitemap-media.xml favicon.ico favicon.png \
+            apple-touch-icon.png share-preview.jpg CNAME"
+          # Prune everything in the mirror except .git, then lay down the
+          # allowlist — guarantees the public repo == exactly this set (so a
+          # file removed here is removed there too).
+          find public -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          for f in $FILES; do
+            if [ -e "$f" ]; then cp "$f" "public/$f"; else echo "WARN: missing $f"; fi
+          done
+
+      - name: Commit & push only when something changed
+        run: |
+          cd public
+          git config user.name "site-mirror[bot]"
+          git config user.email "noreply@yardendamri.co.il"
+          git checkout -B main
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No site changes to publish."
+          else
+            git commit -m "Publish site $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push -u origin main
+          fi
