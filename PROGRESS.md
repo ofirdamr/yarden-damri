@@ -743,3 +743,6 @@ Rollout: normal syncs apply the new pipeline to NEW photos automatically; trigge
 
 ## 2026-06-23 — Reprocess COMPLETE (all public photos upgraded)
 Reprocess run created Instagram-max + thumb for all photos on R2; first dispatch's push lost the race (old workflow), so a second race-safe pass landed the data (commit 7e7ef9d). gallery-data.js now has 611 image thumbs (= the full public image set; hidden images intentionally skipped). Verified a sample: full image upgraded 800→1080×1440 (133KB, lightbox/hero), grid thumb 600×800 (34KB). Grid now loads ~34KB tiles vs the old full image → faster homepage/gallery; lightbox sharper. Fully automatic for new posts going forward.
+
+## 2026-06-23 — Nav consistency: pricing+reviews out of mobile menu, into every footer
+Desktop nav had already dropped מחירון (pricing) + ביקורות (reviews); mobile menus still listed them (and services/gallery/bride had a DUPLICATE reviews <li>). Removed both from every page's mobile menu so it matches desktop (אודות·מאפרת כלות·שירותים·גלריה·מדריך כלות·צרי קשר), and ensured every footer carries pricing+reviews (most subpage footers were missing one/both). Done via scratchpad/navfix.py across all 12 pages. Verified at 390px: mobile menus clean, footers have both, no JS errors. Updated CLAUDE.md nav-consistency rule (nav no longer includes pricing; pricing+reviews are footer-only).

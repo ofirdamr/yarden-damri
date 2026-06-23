@@ -41,12 +41,12 @@ Subpages (`about.html`, `services.html`, `gallery.html`, `bride.html`, `bridal-g
 
 ## Nav consistency
 
-All pages share the same nav links (desktop + mobile):
-**אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | מחירון | צרי קשר**
+All pages share the same nav links (desktop **and** mobile menu must match exactly):
+**אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | צרי קשר**
 
 - `index.html` uses anchor links (`#about`, `#contact`) for its own sections
 - All other pages use full page links (`/about.html`, `/contact.html`)
-- `pricing.html` is live with real content and is included in the nav
+- **`מחירון` (pricing) and `ביקורות` (reviews) are NOT in the nav** — they live in the **footer** only (on every page). Keep the desktop nav and the mobile menu identical; don't reintroduce these two into either menu.
 
 ## Footer
 
