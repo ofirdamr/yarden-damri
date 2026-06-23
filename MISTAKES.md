@@ -1,5 +1,14 @@
 # Mistakes Log
 
+## 2026-06-22 — Skipped Multi-Agent Development Mode on a complex task
+The go-live task (clean code → promote preview→root → public/private split) is exactly the kind of
+complex, multi-part work the new CLAUDE.md "Multi-Agent Development Mode" rule governs: it requires
+FIRST outputting a short structured role discussion (PM / UI-UX / FE / BE / Tech Lead / QA) before
+planning or executing. I skipped it and went straight to exploration + execution. The user caught it.
+Rule: for any complex feature/bug/migration, output the bracketed multi-agent alignment discussion in
+chat BEFORE touching code — not after. The discussion is the deliverable that proves the plan was
+pressure-tested across roles; doing the work first defeats the purpose.
+
 ## 2026-06-20 (session 3) — How the 2-day video bug was finally solved (and the lessons)
 After ~40 stacked "fix gallery videos" commits across two days, the fix took one session by OBSERVING instead of guessing. Two questions to the user settled everything: "hero video plays?" → YES (so the video domain + mp4s are fine — not a URL/CDN/storage problem) and "what do the gallery video spots look like?" → "not there at all" (videos filtered out / collapsed, not failing to load). That ruled out every dead-end prior sessions chased (R2 thumbs, CDN, autoplay, iOS).
 
