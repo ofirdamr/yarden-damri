@@ -725,3 +725,8 @@ Fix (now + future-proof):
 - sync-auto.yml: replaced the hard-coded git-add list with an existence-guarded loop (`for f in ...; do [ -e "$f" ] && git add`), so a removed/renamed file can never abort a sync again. Dropped the two deleted temp files.
 - fix.js: removed the deleted *-temp.html entries from the cache-bump htmlFiles list (was only a warning, but tidy).
 Also logged in MISTAKES.md. Triggering a manual sync to (a) push fresh data and (b) generate the hero HD via the new fix.js step.
+
+## 2026-06-23 — Sync fix VERIFIED + HD hero generated (with a resolution caveat)
+- Triggered sync-auto.yml on main → run 28014709102 **succeeded** (previously failed). Bot pushed "Update Instagram data" (837abb1) → data flowing again. Workflow git-add guard confirmed working.
+- Hero HD file created on R2: yarden_18100404782127411_hd.mp4 = 5.6MB (crf22) vs light 3.2MB (crf28).
+- CAVEAT: parsed both = 720×1280. Instagram only served a 720px master of THIS clip, so `scale=min(1080,iw)` capped at 720 — the HD is a *higher-quality* 720p (fewer compression artifacts), NOT true 1080p. On a 1440px desktop it's still a ~2× upscale, so noticeably cleaner but not razor-sharp. Items where IG kept 1080 (esp. photos: light 800px → HD ~1080) get a real resolution bump. For a pristine hero on a low-res clip, only the original camera file (Option B) can help.
