@@ -35,7 +35,7 @@ jobs:
             remote-state.js gallery-data.js instagram-stats.json \
             gallery-settings.json social.json robots.txt sitemap.xml \
             sitemap-index.xml sitemap-media.xml favicon.ico favicon.png \
-            apple-touch-icon.png share-preview.jpg CNAME"
+            apple-touch-icon.png share-preview.jpg"
 
           REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${PUBLIC_REPO}.git"
 
@@ -57,6 +57,12 @@ jobs:
           for f in $FILES; do
             if [ -e "$f" ]; then cp "$f" "public/$f"; else echo "WARN: missing $f"; fi
           done
+
+          # The serving repo ALWAYS needs a CNAME for the custom domain. Write it
+          # here unconditionally — the private repo's CNAME was deleted by GitHub
+          # when its Pages custom domain was removed during the repo split, so we
+          # must not depend on copying it from the source.
+          echo "yardendamri.co.il" > public/CNAME
 
           cd public
           git add -A
