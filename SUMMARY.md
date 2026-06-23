@@ -29,10 +29,12 @@ hybrid GitHub ops (I do code + create/push repo; **user moves the domain**).
 in `/preview/`.** Now that egress is open, GET REAL EYES FIRST: `npm install && npx playwright install
 chromium webkit`, `npm run serve`, load `/preview/` pages at 1440px, screenshot AND `Read` the PNGs to
 actually SEE them before claiming anything fixed (last session was blind — cdn.playwright.dev was 403).
-1. **Hero video pixelated on desktop — UNFIXED.** Baked source is the COMPRESSED
-   `videos-new.yardendamri.co.il/yarden_18100404782127411.mp4` (settings `heroVideo:""`), upscaled by
-   `object-fit:cover` on the big desktop hero. Needs a higher-res source (re-encode original at 1080p +
-   upload via a private-repo workflow, OR a sharp still for desktop) — decide with user.
+1. **Hero pixelated on desktop — ✅ SOLVED (2026-06-23).** Generic fix (works for ANY admin-chosen
+   media): desktop ≥1081px now shows the portrait WHOLE + crisp (`object-fit:contain`) with a blurred
+   `.hero-bg` backdrop (cover + blur) filling the sides — no black bars, no upscale. Root cause was
+   `styles.css:565` `cover !important` overriding the intended `contain` at `:449`. Backdrop = poster
+   still (video) / image (image), wired into `applyHeroMediaFromState()`. Mobile unchanged (full-bleed
+   cover). See PROGRESS.md 2026-06-23.
 2. **Lightbox media mis-placed on desktop (home + gallery) — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):**
    flex-centering at ≥1081px in `preview/index.html` + `preview/gallery.html` confirmed — media centered, action rail right, X top-left.
 3. **Services boxes mis-organized on desktop — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):** scoped 2×2 grid ≥760px in `preview/services.html` confirmed — 4 cards render as balanced 2×2.
