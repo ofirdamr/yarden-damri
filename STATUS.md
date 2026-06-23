@@ -2,19 +2,19 @@
 
 *Last updated: 2026-06-23*
 
-## ▶ Current focus (2026-06-23) — READY TO GO LIVE (read SUMMARY.md "NEXT SESSION" first)
-All `preview/` work is **done & verified** on `main` (live at `/preview/`): 3 desktop fixes (lightbox,
-services 2×2, hero), hero Instagram-max pipeline, three-tier media (grid thumb / 1080 lightbox / max
-hero) with all 611 photos reprocessed, Instagram sync fixed + race-safe, and nav/footers made fully
-consistent (byte-identical footers across all 12 pages). **Next task = GO LIVE: promote `preview/` →
-root** (Stage B) — see the embedded GO-LIVE PLAN in SUMMARY.md. Gate the cutover behind one visual check
-of the ROOT pages, then push. Stage C (repo split + domain move) is later and needs the user.
-Note: `preview/*.html` are the working source (the `-temp.html` files were deleted).
+## ▶ Current focus (2026-06-23) — ✅ GONE LIVE (Stage B done). Stage C still pending (needs user)
+**GO LIVE complete:** `preview/` was promoted to the live **root** site on `main` (2026-06-23). The new
+site now serves at `yardendamri.co.il/`. Promotion = copy preview files → root + rewrite every
+`/preview/` → `/` (zero leftovers, grep-confirmed); verified on Chromium desktop 1440×900 + iPhone 13
+emulation across 9 pages (no overflow, no JS errors, no `/preview/` links). `/preview/` is kept as a
+harmless duplicate (robots.txt Disallows it so it stays out of the index). **Next = Stage C (repo split +
+domain move) — separate, needs the user.** Note: `preview/*.html` remain the working source for future
+edits; promote to root again at the next approved cutover.
 
 ## Current State
-- **Root (/)**: Old site — still live, still references Cloudinary (closing). Do not touch.
-- **Preview (/preview/)**: New site — all active development. Served at `yardendamri.co.il/preview/`.
-- **Editing rule**: `preview/*.html` are the working source (the `-temp.html` files were deleted). The live **root** changes only at the explicit, user-approved **go-live** (promote `preview/` → root). See CLAUDE.md + SUMMARY.md.
+- **Root (/)**: ✅ NEW site — promoted live 2026-06-23. Served at `yardendamri.co.il/`.
+- **Preview (/preview/)**: Working source for future edits; kept live as a duplicate (out of the index).
+- **Editing rule**: `preview/*.html` stay the working source. Re-promote preview → root only at an explicit, user-approved cutover. See CLAUDE.md + SUMMARY.md.
 
 ## Current Focus (2026-06-21) — Gallery / media / sharing (DONE, promoted live)
 - Videos display everywhere (grid thumbnail → autoplay on scroll w/ poster; lightbox plays w/ poster + muted fallback).
@@ -35,7 +35,7 @@ Note: `preview/*.html` are the working source (the `-temp.html` files were delet
 - [x] Three-tier media (grid ~600px thumb / lightbox ~1080 / hero IG-max); 611 photos reprocessed
 - [x] Nav + footers consistent across all 12 pages (footers byte-identical)
 - [x] Mobile render verified (menu + footer at 390px, no JS errors)
-- [ ] **Promote `/preview` → root** (the go-live: copy files, rewrite `/preview/`→`/`, verify ROOT pages, push) — see SUMMARY.md GO-LIVE PLAN
+- [x] **Promote `/preview` → root** (GO LIVE, 2026-06-23: copied files, rewrote `/preview/`→`/`, verified ROOT pages on Chromium desktop+mobile, pushed)
 - [ ] Stage C (later, needs user): repo split (private full history + public serving) + domain move
 
 ## All Pages — Status

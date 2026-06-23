@@ -2,6 +2,25 @@
 
 ## ✅ Completed
 
+## 2026-06-23 — 🚀 GO LIVE (Stage B): promoted preview/ → root
+The new site is now the live ROOT site. Promotion was a file copy + reference rewrite:
+- Copied preview/ site files to repo root, overwriting the old Cloudinary-era root: all 13
+  HTML pages (12 public + `admin.html`), `styles.css`, `gallery-data.js`, `instagram-stats.json`,
+  and the JS (`a11y.js`, `cookie-banner.js`, `cloud-storage.js`, `remote-state.js`). Added the
+  files root was missing (`a11y.js`, `cookie-banner.js`, `cookies-policy.html`, `remote-state.js`).
+  Did NOT copy `worker.js` (Cloudflare Worker source, deployed separately).
+- Rewrote every absolute `/preview/` reference → `/`: nav-logo + footer "דף הבית" hrefs across
+  all 12 pages; `index.html` `og:url`/`canonical`/`og:image`/share-`var u`; `cookie-banner.js`
+  cookies-policy link. Grep confirms **zero** `/preview/` link/asset refs in root html/js/css.
+- `robots.txt` left as-is (correctly Disallows `/preview/` so the duplicate stays out of the index);
+  `sitemap.xml` already root URLs. Root icons + `share-preview.jpg` already present.
+- **Verified** on Chromium (desktop 1440×900 + iPhone 13 emulation) across 9 key pages: HTTP ok,
+  `lang=he dir=rtl`, visible `nav[role=navigation]`, footer present, non-empty titles, **zero
+  horizontal overflow**, **no `/preview/` links in the DOM**, no JS errors. WebKit engine couldn't
+  launch in-sandbox (host missing GTK/GStreamer libs); used Chromium iPhone emulation for mobile —
+  content is byte-identical to the previously WebKit-verified preview apart from the href rewrites.
+- Stage C (repo split + domain move) NOT started — separate, needs the user.
+
 ## 2026-06-22 — 3 desktop fixes (UNVERIFIED) + rules/roles + egress for next session
 - User reviewed cleaned `/preview/` on desktop, found 3 issues. Pushed fixes (commit 8687f87) **UNVERIFIED** — could not render in-session (egress blocked the Playwright browser CDN + the live site):
   - `services.html`: scoped **2×2 grid** for the 4 main cards (≥760px) — shared `.services-grid` is `repeat(3,1fr)` → 3+1 lonely card.

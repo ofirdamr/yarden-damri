@@ -4,7 +4,17 @@
 
 ---
 
-## ▶ NEXT SESSION — START HERE (handoff)  ·  TASK = GO LIVE
+## ✅ GO LIVE DONE (2026-06-23) — root is now the NEW site
+Stage B complete: `preview/` was promoted to the live **root** (`yardendamri.co.il/`). Copied the
+preview site files to root, rewrote every `/preview/` → `/` (zero leftovers, grep-confirmed), verified
+on Chromium desktop 1440×900 + iPhone 13 emulation across 9 pages (no overflow, no JS errors, no
+`/preview/` links), pushed `main`. `/preview/` kept as a harmless duplicate (robots.txt keeps it out of
+the index). **NEXT = Stage C (repo split + domain move) — separate, needs the user; do NOT start alone.**
+`preview/*.html` stay the working source for future edits.
+
+---
+
+## ▶ (HISTORICAL) NEXT SESSION handoff  ·  TASK = GO LIVE  — now DONE, see above
 
 **⛔ BRANCH — non-negotiable, first action.** Work on **`main` ONLY**, in the `preview/` folder.
 Claude Code on the web opens the session on a `claude/...` branch and tells you to develop there +
