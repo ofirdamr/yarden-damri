@@ -740,3 +740,6 @@ Changes:
 - Resumable reprocess: `node fix.js --reprocess-images` re-fetches existing photos at IG-max + builds thumbs, skipping any image whose `_thumb.webp` already exists on R2 (survives the 45-min CI cap). Exposed as a `workflow_dispatch` input `reprocess_images` in sync-auto.yml.
 Verified: both grids render, no JS errors; grid uses `thumb` when present (video posters prove it), falls back to `u` otherwise; lightbox uses full `u`. Backward-compatible — safe before the reprocess finishes.
 Rollout: normal syncs apply the new pipeline to NEW photos automatically; trigger sync-auto with reprocess_images=true (possibly a few runs) to upgrade the ~1247 existing photos.
+
+## 2026-06-23 — Reprocess COMPLETE (all public photos upgraded)
+Reprocess run created Instagram-max + thumb for all photos on R2; first dispatch's push lost the race (old workflow), so a second race-safe pass landed the data (commit 7e7ef9d). gallery-data.js now has 611 image thumbs (= the full public image set; hidden images intentionally skipped). Verified a sample: full image upgraded 800→1080×1440 (133KB, lightbox/hero), grid thumb 600×800 (34KB). Grid now loads ~34KB tiles vs the old full image → faster homepage/gallery; lightbox sharper. Fully automatic for new posts going forward.
