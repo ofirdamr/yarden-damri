@@ -64654,5 +64654,26 @@
     "likes": 0,
     "comments_count": 0,
     "comments": []
+  },
+  "18106863977287938": {
+    "likes": 17,
+    "comments_count": 4,
+    "comments": [
+      {
+        "username": "karmit23",
+        "text": "אני לא מפסיקה להיסתכל ",
+        "timestamp": "2026-06-23T09:26:44+0000"
+      },
+      {
+        "username": "bar_bercovitz8",
+        "text": "אין כאלה",
+        "timestamp": "2026-06-23T09:17:16+0000"
+      },
+      {
+        "username": "karmit23",
+        "text": "מושלמת שלנו ",
+        "timestamp": "2026-06-23T09:15:34+0000"
+      }
+    ]
   }
 }
