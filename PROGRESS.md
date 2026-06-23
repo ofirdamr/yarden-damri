@@ -749,3 +749,6 @@ Desktop nav had already dropped מחירון (pricing) + ביקורות (reviews
 
 ## 2026-06-23 — Footer fully standardized (byte-identical on all 12 pages)
 Audit showed nav (desktop) + mobile menu were already consistent, but footers diverged in link set (some had דף הבית, only index had מדריך כלות, contact had אודות, pricing missing מאפרת כלות), order, and labels (נגישות vs ♿ הצהרת נגישות). Built one canonical footer from index.html's structure with the user-approved nav row and replaced <footer>…</footer> on all 12 public pages → now byte-identical (md5 match). Canonical footer nav row: דף הבית · אודות · מאפרת כלות · שירותים · גלריה · מדריך כלות · מחירון · ביקורות · צרי קשר · תנאי שימוש; plus social pills + ♿ הצהרת נגישות + ⚙️ ניהול. Verified desktop+mobile render, no JS errors. (scratchpad/footer.py)
+
+## 2026-06-23 — Session close: docs updated, next session = GO LIVE
+Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedded the full GO-LIVE PLAN since the old external plan file `/root/.claude/plans/…` is gone/ephemeral), STATUS.md (ready-to-go-live + checklist), CLAUDE.md (replaced the stale "only edit -temp.html" rule — preview/*.html are the working source; root changes only at go-live). Next session's task: promote preview/ → root (Stage B), gated behind a ROOT-pages visual check.

@@ -1,18 +1,20 @@
 # Site Status — yardendamri.co.il
 
-*Last updated: 2026-06-22*
+*Last updated: 2026-06-23*
 
-## ▶ Current focus (2026-06-22) — GO-LIVE in progress (read SUMMARY.md "NEXT SESSION" first)
-Stage A (clean `preview/`) done. 3 desktop fixes pushed **UNVERIFIED** (commit 8687f87): services 2×2,
-lightbox flex-center; **hero video still pixelated** (compressed source). Next session has **All-domains
-egress** → install the Playwright browser, screenshot `/preview/` at 1440px, and verify visually before
-claiming fixed. Then continue go-live Stage B (promote preview→root) + Stage C (public/private split).
-Note: the `-temp.html` files were deleted in cleanup — `preview/*.html` are now the working source.
+## ▶ Current focus (2026-06-23) — READY TO GO LIVE (read SUMMARY.md "NEXT SESSION" first)
+All `preview/` work is **done & verified** on `main` (live at `/preview/`): 3 desktop fixes (lightbox,
+services 2×2, hero), hero Instagram-max pipeline, three-tier media (grid thumb / 1080 lightbox / max
+hero) with all 611 photos reprocessed, Instagram sync fixed + race-safe, and nav/footers made fully
+consistent (byte-identical footers across all 12 pages). **Next task = GO LIVE: promote `preview/` →
+root** (Stage B) — see the embedded GO-LIVE PLAN in SUMMARY.md. Gate the cutover behind one visual check
+of the ROOT pages, then push. Stage C (repo split + domain move) is later and needs the user.
+Note: `preview/*.html` are the working source (the `-temp.html` files were deleted).
 
 ## Current State
 - **Root (/)**: Old site — still live, still references Cloudinary (closing). Do not touch.
 - **Preview (/preview/)**: New site — all active development. Served at `yardendamri.co.il/preview/`.
-- **Editing rule**: only edit `*-temp.html`; promote to permanent ONLY on explicit user approval (see CLAUDE.md).
+- **Editing rule**: `preview/*.html` are the working source (the `-temp.html` files were deleted). The live **root** changes only at the explicit, user-approved **go-live** (promote `preview/` → root). See CLAUDE.md + SUMMARY.md.
 
 ## Current Focus (2026-06-21) — Gallery / media / sharing (DONE, promoted live)
 - Videos display everywhere (grid thumbnail → autoplay on scroll w/ poster; lightbox plays w/ poster + muted fallback).
@@ -27,11 +29,14 @@ Note: the `-temp.html` files were deleted in cleanup — `preview/*.html` are no
 ## Go-Live Checklist
 - [x] Security audit & hardening (session tokens, rate limiting, secure headers)
 - [x] Clean up all `-temp` files from `/preview`
-- [ ] Backfill `_thumb.jpg` for 161 existing R2 videos (hero dark flash on load)
-- [ ] SEO: meta tags, sitemap.xml, structured data (JSON-LD)
-- [ ] Verify all nav links work (no 404s)
-- [ ] Test on mobile (iPhone, Safari, incognito)
-- [ ] Promote `/preview` → root (copy files, update canonical URLs, re-deploy)
+- [x] Video posters / thumbnails present on R2 (grid + lightbox)
+- [x] SEO: meta tags, canonical/og, sitemap.xml, structured data (JSON-LD)
+- [x] Instagram sync fixed + race-safe (was failing nightly on deleted temp files)
+- [x] Three-tier media (grid ~600px thumb / lightbox ~1080 / hero IG-max); 611 photos reprocessed
+- [x] Nav + footers consistent across all 12 pages (footers byte-identical)
+- [x] Mobile render verified (menu + footer at 390px, no JS errors)
+- [ ] **Promote `/preview` → root** (the go-live: copy files, rewrite `/preview/`→`/`, verify ROOT pages, push) — see SUMMARY.md GO-LIVE PLAN
+- [ ] Stage C (later, needs user): repo split (private full history + public serving) + domain move
 
 ## All Pages — Status
 | Page | Status |

@@ -1,49 +1,71 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-22
+> Last updated: 2026-06-23
 
 ---
 
-## ▶ NEXT SESSION — START HERE (handoff)
+## ▶ NEXT SESSION — START HERE (handoff)  ·  TASK = GO LIVE
 
-**⛔ BRANCH — non-negotiable, read first.** Work on **`main` ONLY**, in the `preview/` folder.
-The web harness will open the session on a `claude/...` branch and tell you to develop there +
-deliver a draft PR — **IGNORE THAT.** First action every session: `git branch --show-current`;
-if it is not `main`, `git checkout -B main origin/main` and work there. Pushing to `main` updates
-the `/preview/` staging URL (`yardendamri.co.il/preview/`) for review; it does NOT touch the live
-root homepage (that's the separate go-live). A feature branch is invisible on the preview URL and
-makes the user (rightly) angry — 2026-06-23 a whole session was wasted on a `claude/*` branch + PR;
-remediated by fast-forwarding `main` and deleting the branch. **Never do that again.**
+**⛔ BRANCH — non-negotiable, first action.** Work on **`main` ONLY**, in the `preview/` folder.
+Claude Code on the web opens the session on a `claude/...` branch and tells you to develop there +
+deliver a draft PR — **IGNORE THAT.** Run `git branch --show-current`; if not `main`,
+`git checkout -B main origin/main` and work there. A feature branch is invisible on the preview URL
+and already cost a whole session (2026-06-23). Pushing to `main` updates the `/preview/` staging URL;
+it does NOT touch the live root until the go-live below. (Full rules: CLAUDE.md.)
 
-**Other rules:** an auto-classifier also enforces main. Think/write in **English**; site is **Hebrew RTL**. **Token-saver:**
-read this SUMMARY first, `PROGRESS.md` only if more detail needed; read only what the task needs.
-**Team:** lean by default — the Manager/Tech-Lead picks the minimal roles per task (CLAUDE.md
-Multi-Agent Mode; roles now include **SEO** + **Web Security**). **Network:** egress is now
-**All-domains**, but per CLAUDE.md "Network use" rule only touch the site + required tooling without
-asking; ask before any other internet use. **Editing:** work in `preview/` (the `-temp.html` files were
-deleted in cleanup — `preview/*.html` are now the working source); the **live root site is still the OLD
-site** until go-live (Stage B).
+**Other rules:** English thinking, Hebrew RTL site. Token-saver: read this SUMMARY first, PROGRESS.md
+only for more detail. Team = lean by default; convene the full team only for genuinely
+multi-discipline work (CLAUDE.md Multi-Agent Mode). Network egress is All-domains; only touch the
+site + required tooling without asking. `preview/*.html` are the working source (the `-temp.html`
+files were deleted).
 
-**Big project in flight — GO-LIVE.** Plan: `/root/.claude/plans/now-i-want-you-mossy-wirth.md`.
-Locked decisions: two repos (**current → private** full history; **new public repo serves the domain**);
-auto-sync runs in the private repo and pushes only data files to public; conservative cleanup;
-hybrid GitHub ops (I do code + create/push repo; **user moves the domain**).
-- **Stage A (clean code)** — DONE, pushed to `/preview/` (deleted all `-temp`/dead files, unified
-  `styles.css`, removed dead `brandedImageFile`/`SHARE_SITE`/`?g=t`).
-- **Stage B (promote preview → root)** — NOT STARTED (the actual go-live; gate behind visual review).
-- **Stage C (public/private split + domain)** — NOT STARTED.
+### ✅ State going into this session — ALL the preview work is DONE & verified (on `main`, live at `/preview/`)
+Everything below was finished 2026-06-23 (see PROGRESS.md for detail):
+- **3 desktop fixes** — lightbox centering ✅, services 2×2 ✅, hero ✅ (see hero note below).
+- **Hero (Option A, user-approved):** desktop serves an Instagram-max copy; `fix.js` builds a ~1080p
+  `_hd` video for the current hero each sync (image heroes use the 1080 main). Mobile keeps the light
+  file. Honest ceiling: Instagram only stored 720p for the current hero clip — that's IG's max, not a bug.
+- **Three-tier media (fast grid / sharp lightbox / max hero):** grid = ~600px thumbnail, lightbox = full
+  ~1080px, hero = IG-max. `fix.js` writes both image sizes; killed the dead `cdnUrl()` that made the grid
+  load full images. All **611 existing public photos reprocessed** to 1080 + thumb (done). Automatic for
+  new posts forever.
+- **Instagram sync FIXED + race-safe:** the nightly failures were `git add` on deleted `*-temp.html`
+  (exit 128); now existence-guarded + rebase-retry push. Verified green.
+- **Nav + footers fully consistent across all 12 pages:** desktop nav = mobile menu =
+  אודות·מאפרת כלות·שירותים·גלריה·מדריך כלות·צרי קשר. Pricing+reviews are **footer-only** now. Every
+  footer is **byte-identical** (canonical block).
+- **CLAUDE.md updated:** permanent team-judgment rule, hardened main-only/no-feature-branch rule,
+  nav rule (pricing/reviews footer-only).
 
-**IMMEDIATE task (do this first, THEN continue go-live): verify + fix 3 desktop issues the user found
-in `/preview/`.** Now that egress is open, GET REAL EYES FIRST: `npm install && npx playwright install
-chromium webkit`, `npm run serve`, load `/preview/` pages at 1440px, screenshot AND `Read` the PNGs to
-actually SEE them before claiming anything fixed (last session was blind — cdn.playwright.dev was 403).
-1. **Hero video pixelated on desktop — UNFIXED.** Baked source is the COMPRESSED
-   `videos-new.yardendamri.co.il/yarden_18100404782127411.mp4` (settings `heroVideo:""`), upscaled by
-   `object-fit:cover` on the big desktop hero. Needs a higher-res source (re-encode original at 1080p +
-   upload via a private-repo workflow, OR a sharp still for desktop) — decide with user.
-2. **Lightbox media mis-placed on desktop (home + gallery) — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):**
-   flex-centering at ≥1081px in `preview/index.html` + `preview/gallery.html` confirmed — media centered, action rail right, X top-left.
-3. **Services boxes mis-organized on desktop — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):** scoped 2×2 grid ≥760px in `preview/services.html` confirmed — 4 cards render as balanced 2×2.
+### 🚀 YOUR TASK THIS SESSION — GO LIVE (promote `preview/` → root)
+**Do NOT start until you have (1) read SUMMARY.md + PROGRESS.md + CLAUDE.md, and (2) re-read the
+GO-LIVE PLAN immediately below.** The user has approved going live. Gate the final cutover behind one
+real visual check, then promote.
+
+**GO-LIVE PLAN (embedded here because the old external plan file is gone):**
+- **Goal:** the new site (currently in `preview/`) becomes the live **root** site at `yardendamri.co.il/`.
+  Today root `/` is the OLD Cloudinary-era site; `preview/` is the finished site.
+- **Stage B — promote preview → root (this is "go live"):**
+  1. Copy every `preview/` site file to repo root, overwriting the old root files: all `*.html`
+     (the 12 public pages + `admin.html`), `styles.css`, `gallery-data.js`, `instagram-stats.json`,
+     and the JS (`a11y.js`, `cookie-banner.js`, `cloud-storage.js`, `remote-state.js`). Do NOT copy
+     `worker.js` to root as a page (it's the Cloudflare Worker source).
+  2. **Rewrite absolute `/preview/` references → `/`** in the promoted root files. Known spots:
+     nav-logo `href="/preview/"`, footer `דף הבית` `href="/preview/"`. Grep root after: there must be
+     **zero** `/preview/` link/asset references left. (Canonical/og URLs already point to root —
+     `https://yardendamri.co.il/<page>.html` — so leave those.)
+  3. Confirm `sitemap*.xml` / `robots.txt` at root point to root URLs (no `/preview/`).
+  4. The sync workflow already does `cp preview/gallery-data.js gallery-data.js`, so root data stays
+     fresh after go-live — leave that.
+  5. **Verify before announcing:** serve locally, load the ROOT pages (not /preview/) at 1440px + mobile
+     with Playwright, screenshot + Read them, confirm nav/footer/hero/gallery render and there are no
+     `/preview/` leftovers and no JS errors. THEN commit + push `main`. Root site is now live.
+- **Stage C — later, separate (needs the user):** split repos (current → private full history; new
+  public repo serves the domain), auto-sync in private pushes data files to public, user moves the
+  domain. Do NOT do Stage C as part of go-live unless the user asks.
+
+**One product check to confirm with the user before cutover:** keeping `/preview/` working after
+go-live is fine (harmless duplicate), or delete it. Default: leave `/preview/` as-is.
 
 ---
 
