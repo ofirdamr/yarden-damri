@@ -33,11 +33,9 @@ actually SEE them before claiming anything fixed (last session was blind — cdn
    `videos-new.yardendamri.co.il/yarden_18100404782127411.mp4` (settings `heroVideo:""`), upscaled by
    `object-fit:cover` on the big desktop hero. Needs a higher-res source (re-encode original at 1080p +
    upload via a private-repo workflow, OR a sharp still for desktop) — decide with user.
-2. **Lightbox media mis-placed on desktop (home + gallery) — FIX PUSHED, UNVERIFIED (commit 8687f87):**
-   replaced absolute+transform centering with flex-centering (`object-fit:contain`) at ≥1081px in
-   `preview/index.html` + `preview/gallery.html`. If still off, suspect effective viewport <1081px → lower breakpoint.
-3. **Services boxes mis-organized on desktop — FIX PUSHED, UNVERIFIED (commit 8687f87):** 4 main cards
-   were forced into shared `.services-grid` `repeat(3,1fr)` (3+1); added scoped 2×2 grid ≥760px in `preview/services.html`.
+2. **Lightbox media mis-placed on desktop (home + gallery) — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):**
+   flex-centering at ≥1081px in `preview/index.html` + `preview/gallery.html` confirmed — media centered, action rail right, X top-left.
+3. **Services boxes mis-organized on desktop — ✅ VERIFIED FIXED (2026-06-23, Playwright 1440px):** scoped 2×2 grid ≥760px in `preview/services.html` confirmed — 4 cards render as balanced 2×2.
 
 ---
 

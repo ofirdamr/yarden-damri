@@ -699,3 +699,9 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - BIG factor: 772 items flagged hidden in gallery-settings.json → synced+on R2 but filtered from public site. This is most of "in my IG grid but not on my site."
 - Carousels (232) collapse to one cover tile by design.
 - Remediation pending user decision: bulk-unhide the 772; add admin manual-upload for the 32 collab posts. Union fix already prevents future silent drops.
+
+## 2026-06-23 — Verified desktop fixes #2 + #3 (Playwright real eyes, 1440px)
+- Set up Playwright (chromium+webkit) + http-server; screenshotted preview pages at 1440×900 and READ the PNGs.
+- **#2 Lightbox placement — VERIFIED FIXED** on both home (`preview/index.html`) and gallery (`preview/gallery.html`). Media flex-centered (controls mid-screen), action rail on right, X top-left. Media area renders black only because R2 video doesn't load inside sandbox — layout is correct.
+- **#3 Services 2×2 — VERIFIED FIXED** (`preview/services.html`): 4 main cards now render as a balanced 2×2 grid at ≥760px (was 3+lonely-1).
+- **#1 Hero video pixelated — still UNFIXED**, needs user decision (re-encode original @1080p via private-repo workflow vs. sharp still on desktop). Asked user.
