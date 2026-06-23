@@ -1,5 +1,14 @@
 # Mistakes Log
 
+## 2026-06-23 — Go-live promoted the whole site as `noindex,nofollow` (caught in audit)
+The `preview/*.html` carried `<meta name="robots" content="noindex,nofollow">` to keep staging out
+of Google. Stage B copied preview→root verbatim, so EVERY live public page shipped with that tag
+(alongside a conflicting `index, follow`) — Google honors the most restrictive, so the entire live
+site was non-indexable. Not caught at go-live; found later in a proactive performance/SEO audit.
+Fix: removed the noindex from all root public pages (admin + preview/ keep it). Lesson: promotion
+must diff staging-only signals (robots/noindex, canonical, preview URLs) — copying preview verbatim
+silently carries staging directives onto production.
+
 ## 2026-06-23 — Changed styles.css but forgot to bump the `?v=` cache-buster
 Compacted `.mobile-menu-wa` in styles.css and "verified" it on the local server — but every page
 loads `styles.css?v=20260622a` with a FIXED version query. The local server serves the new file
