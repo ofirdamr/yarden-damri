@@ -472,3 +472,6 @@ Context: the gallery is BROKEN on the preview site (videos not showing) on BOTH 
 - If `curl -sI https://example.com` returns 403, egress is OFF — you cannot verify live; say so and ask the user. Do not claim "verified."
 - One change at a time, verified with the user, no stacked unverified fixes.
 - The goal is a real ROOT CAUSE we can write down — not a workaround.
+
+## 2026-06-23 — Claimed services 2×2 "verified" but missed the secondary grid
+I screenshotted only the main 4 service cards (confirmed 2×2) and declared #3 fixed, but the page has a SECOND grid below ("secondary services", 2 cards) that was still `repeat(auto-fill,minmax(280px,1fr))` → rendered as 3 columns with 2 narrow misaligned cards. The user saw it as "still not arranged." Root lesson: verify the WHOLE page/section, not just the element I changed — and force scroll-reveal (`.reveal`) visible when screenshotting or lower content reads as blank. Fix: gave the secondary grid `class="services-grid"` so it inherits the same responsive 2-col layout and aligns under the 2×2.

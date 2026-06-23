@@ -713,3 +713,6 @@ Solution (server-side, everyone sees it; mobile unaffected):
 - `preview/index.html`: `upgradeHeroToHD()` — desktop ≥1081px only, preload-then-swap to the `_hd` file; stays on the light file if HD absent (never breaks). Mobile never requests HD (verified: 0 HD requests at 390px).
 Verified: fix.js `node --check` OK; desktop probes `..._hd.mp4` and falls back cleanly (no JS errors); mobile requests no HD.
 Rollout: sync-auto.yml checks out main, so the HD file is generated on the next sync AFTER this lands on main. Until then desktop shows the light file (today's look). DEFAULT_HERO_ID in fix.js must stay in sync with the baked <source> in preview/index.html.
+
+## 2026-06-23 — Services page: align the secondary grid under the 2×2 (real #3 fix)
+The main 4 cards were already 2×2, but the separate "Secondary services" grid (2 cards) used `repeat(auto-fill,minmax(280px,1fr))` → 3 columns → 2 narrow, left-shoved, misaligned cards (what the user reported as "not arranged"). Fix: gave that div `class="services-grid"` and dropped its inline grid-template/gap so it inherits the shared responsive grid + the `#services > .services-grid` 2-col override. Verified at 1440/820/390: secondary cards now match the main grid (1440: 499px×2 aligned under the 2×2; mobile: 1 col).
