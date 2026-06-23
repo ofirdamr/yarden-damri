@@ -36,7 +36,7 @@ edits; promote to root again at the next approved cutover.
 - [x] Nav + footers consistent across all 12 pages (footers byte-identical)
 - [x] Mobile render verified (menu + footer at 390px, no JS errors)
 - [x] **Promote `/preview` → root** (GO LIVE, 2026-06-23: copied files, rewrote `/preview/`→`/`, verified ROOT pages on Chromium desktop+mobile, pushed)
-- [ ] Stage C (later, needs user): repo split (private full history + public serving) + domain move
+- [x] **Stage C (2026-06-23): repo split + domain move DONE.** Origin `ofirdamr/yarden-damri` now **private** (keeps full history, Actions, secrets, `preview/`). New **public** repo `ofirdamr/yardendamri-site` serves `yardendamri.co.il`, fed by a one-way mirror workflow (`publish-public.yml`, allowlist only, no dev/secret files). Verified private→public→live byte-match for site + data + settings. Public repo needs no secrets; Worker still writes `gallery-settings.json` to the private repo.
 
 ## All Pages — Status
 | Page | Status |

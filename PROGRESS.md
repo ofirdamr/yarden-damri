@@ -2,6 +2,18 @@
 
 ## ✅ Completed
 
+## 2026-06-23 — Stage C: repo split + domain move (DONE)
+Origin `ofirdamr/yarden-damri` made **private** (keeps full history, Actions, secrets, `preview/`).
+New **public** repo `ofirdamr/yardendamri-site` now serves `yardendamri.co.il`. Design: private repo
+is the single source of truth; `publish-public.yml` mirrors a curated allowlist (site + data only,
+no fix.js/worker.js/workflows/preview/docs) to the public repo on every push to main — so Instagram
+sync and Worker admin commits propagate to live automatically, no clobber. First mirror run failed
+(empty public repo had no `main`); fixed to clone-or-init + create `main`. Domain moved (custom
+domain cleared on old repo, set on new repo, DNS green, HTTPS enforced). Verified private→public→live
+byte-match for gallery-data.js, gallery-settings.json, index.html; old repo raw 404 (private). Public
+repo holds **no secrets** (all automation runs in private repo / Cloudflare). Worker `GH_REPO` still
+points to the private repo — its token must retain private-repo access for admin writes.
+
 ## 2026-06-23 — Fix Visual QA (Playwright) red on the go-live commit
 The go-live deploy itself succeeded (`pages build and deployment` green; site live), but the
 `Visual QA (Playwright)` CI went red on **2 WebKit (mobile-safari) tests** — `home` + `gallery`:
