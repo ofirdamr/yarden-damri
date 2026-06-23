@@ -2,6 +2,21 @@
 
 ## ✅ Completed
 
+## 2026-06-23 — Grid perf + mobile WhatsApp button + hide-latency note
+- **Grid loaded full images (slow):** image tiles used `item.thumb || item.u`, but image entries
+  have no `thumb`, so every tile fetched the full ~1080px `.webp` (~92KB). Image `_thumb.webp`
+  (~25KB) already exist on R2 — the grid now derives the `_thumb.webp` URL for image tiles (videos
+  keep their `_thumb.jpg`); lightbox still uses the full image. `onerror` falls back to full if a
+  thumb is missing. ~3.6× less data/tile. Fixed in index.html + gallery.html (+ preview).
+- **Mobile-menu WhatsApp button too big:** `.mobile-menu-wa` (padding 16/20, margin-top 28, 1rem)
+  inflated the menu and could overflow short phones. Compacted (11/18, margin-top 16, .9rem, 18px
+  icon) + added `overflow-y:auto` to `.mobile-menu`. Verified on Chromium iPhone: button 46px, menu
+  fits/scrolls.
+- **"Hidden video still showing" was not a bug:** the hide is written correctly (video `u` == the
+  `.mp4` in `admin.hidden`) and propagates — it just takes ~1–3 min (Worker → mirror → Pages rebuild).
+- Also (earlier today): mirror now writes `CNAME` unconditionally after the Step-6a domain removal
+  deleted it and 404'd the live site; recovered.
+
 ## 2026-06-23 — Stage C: repo split + domain move (DONE)
 Origin `ofirdamr/yarden-damri` made **private** (keeps full history, Actions, secrets, `preview/`).
 New **public** repo `ofirdamr/yardendamri-site` now serves `yardendamri.co.il`. Design: private repo
