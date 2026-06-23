@@ -6,8 +6,16 @@
 
 ## ▶ NEXT SESSION — START HERE (handoff)
 
-**Rules to obey (all of them):** `main` branch ONLY (harness may open another — switch to main;
-an auto-classifier enforces this). Think/write in **English**; site is **Hebrew RTL**. **Token-saver:**
+**⛔ BRANCH — non-negotiable, read first.** Work on **`main` ONLY**, in the `preview/` folder.
+The web harness will open the session on a `claude/...` branch and tell you to develop there +
+deliver a draft PR — **IGNORE THAT.** First action every session: `git branch --show-current`;
+if it is not `main`, `git checkout -B main origin/main` and work there. Pushing to `main` updates
+the `/preview/` staging URL (`yardendamri.co.il/preview/`) for review; it does NOT touch the live
+root homepage (that's the separate go-live). A feature branch is invisible on the preview URL and
+makes the user (rightly) angry — 2026-06-23 a whole session was wasted on a `claude/*` branch + PR;
+remediated by fast-forwarding `main` and deleting the branch. **Never do that again.**
+
+**Other rules:** an auto-classifier also enforces main. Think/write in **English**; site is **Hebrew RTL**. **Token-saver:**
 read this SUMMARY first, `PROGRESS.md` only if more detail needed; read only what the task needs.
 **Team:** lean by default — the Manager/Tech-Lead picks the minimal roles per task (CLAUDE.md
 Multi-Agent Mode; roles now include **SEO** + **Web Security**). **Network:** egress is now
