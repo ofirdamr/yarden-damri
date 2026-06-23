@@ -103,6 +103,17 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 
 ---
 
+## STRICT RULE — Network / internet use (token discipline)
+
+Even when network egress is open ("All domains"), keep internet use minimal:
+- **Allowed without asking:** the project's own site (`yardendamri.co.il` and its media
+  domains `images.` / `videos-new.yardendamri.co.il`) and tooling required to operate
+  (e.g. downloading the Playwright browser engine).
+- **Ask first:** any other internet/web access. If a task seems to need the internet beyond
+  the above, STOP and ask the user before fetching — open browsing wastes tokens.
+
+---
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
@@ -124,15 +135,20 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 
 ## Multi-Agent Development Mode
 
-For any complex feature, bug fix, or non-trivial task, operate as a full autonomous
-development team. Do **not** write code immediately. First output a short, structured
-alignment discussion in the chat using these roles:
+For any complex feature, bug fix, or non-trivial task, operate as an autonomous
+development team. **The [Tech Lead / Manager] decides — per task — the leanest set of
+roles to involve**: a single role (e.g. just the Frontend Engineer) for a small isolated
+fix, the full team only for complex, multi-discipline work. Always optimize for the fewest
+tokens and least time. When more than one role is needed, do **not** write code immediately —
+first output a short, structured alignment discussion in the chat using the relevant roles:
 
 - **[Product Manager]** — scope, business logic, user-experience requirements.
 - **[UI/UX Designer]** — visual standards, layout structure, styling rules (CSS variables, RTL, nav/footer consistency).
 - **[Frontend Engineer]** — component/markup structure, state, UI integration, edge cases.
 - **[Backend Engineer]** — architecture, data flow (Worker / R2 / `gallery-data.js`), API integrity.
-- **[Tech Lead / Architect]** — resolves conflicts, gives the final execution plan and the green light.
+- **[SEO Specialist]** — guards SEO on every change: titles/meta, `canonical` + `og:`/Twitter tags, heading structure, JSON-LD structured data, `sitemap*.xml`/`robots.txt`, page performance, and no regressions to indexing.
+- **[Web Security Specialist]** — owns all security: no passwords/tokens/secrets in committed code, auth hardening (e.g. 2-step verification), XSS/input safety, exposed-endpoint and dependency review; flags vulnerabilities and proposes fixes.
+- **[Tech Lead / Architect / Manager]** — picks the roles, resolves conflicts, gives the final execution plan and the green light.
 - **[QA Engineer]** — owns the automated visual + functional loop; guarantees a flawless result before delivery.
 
 **Workflow:**
