@@ -1,5 +1,13 @@
 # Mistakes Log
 
+## 2026-06-23 — Changed styles.css but forgot to bump the `?v=` cache-buster
+Compacted `.mobile-menu-wa` in styles.css and "verified" it on the local server — but every page
+loads `styles.css?v=20260622a` with a FIXED version query. The local server serves the new file
+regardless of the query, so my Chromium check passed; real browsers + the CDN kept serving the
+cached OLD stylesheet, so the user saw no change and (rightly) asked "what changed?". Lesson: any
+CSS change must bump the `styles.css?v=` token across all pages (root + preview), or it won't reach
+users. Verify CSS changes against a *versioned* URL, not just file content on a fresh local server.
+
 ## 2026-06-22 — Attempted visual fixes while blind (no browser). Verify capability FIRST.
 Tried to diagnose/fix 3 desktop CSS issues (hero, lightbox, services) with no way to render the site:
 this session's egress blocked the Playwright browser CDN (`cdn.playwright.dev` → 403) AND the live site
