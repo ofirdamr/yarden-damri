@@ -79,6 +79,33 @@ async function compressVideo(inputPath, outputPath) {
   execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(720,iw)':-2" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 128k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 120000 });
 }
 
+// ── HERO HD encoders ── higher-resolution variants used only for the hero, so the
+// desktop site can show a crisp full-screen hero (mobile keeps the light file).
+async function compressImageHD(buffer) {
+  const sharp = require("sharp");
+  return await sharp(buffer)
+    .resize({ width: 1600, withoutEnlargement: true })
+    .webp({ quality: 88 })
+    .toBuffer();
+}
+function compressVideoHD(inputPath, outputPath) {
+  execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(1080,iw)':-2" -c:v libx264 -crf 22 -preset fast -c:a aac -b:a 160k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 180000 });
+}
+// HEAD a public R2 URL to see if an object already exists (avoids rebuilding the hero HD every run).
+function urlExists(url, timeoutMs = 8000) {
+  return new Promise((resolve) => {
+    try {
+      const u = new URL(url);
+      const req = https.request({ hostname: u.hostname, path: u.pathname, method: "HEAD" }, (res) => {
+        resolve(res.statusCode >= 200 && res.statusCode < 300);
+      });
+      req.on("error", () => resolve(false));
+      req.setTimeout(timeoutMs, () => { req.destroy(); resolve(false); });
+      req.end();
+    } catch (e) { resolve(false); }
+  });
+}
+
 async function uploadToR2(cfg, buffer, fileName, contentType) {
   const endpoint = new URL(cfg.endpoint);
   const host = endpoint.hostname;
@@ -336,6 +363,52 @@ function safeWrite(filePath, data) {
       console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);
     } catch(e) { console.warn(`Could not bump ${htmlFile}:`, e.message); }
   }
+
+  // ── HERO HD ── ensure the current hero (admin-chosen, or the baked default) has a
+  // ~1080p copy on R2 so the desktop site can serve a crisp full-screen hero. Hero-only,
+  // to keep storage minimal; the frontend falls back to the light file if _hd is absent.
+  // Keep DEFAULT_HERO_ID in sync with the baked <source> in preview/index.html.
+  const DEFAULT_HERO_ID = "18100404782127411", DEFAULT_HERO_IS_VIDEO = true;
+  try {
+    let heroId = "", heroIsVideo = true;
+    const vm = (heroVideoUrl || "").match(/yarden_(\d+)\.mp4/);
+    const im = (heroImageUrl || "").match(/yarden_(\d+)\.webp/);
+    if (vm) { heroId = vm[1]; heroIsVideo = true; }
+    else if (im) { heroId = im[1]; heroIsVideo = false; }
+    else { heroId = DEFAULT_HERO_ID; heroIsVideo = DEFAULT_HERO_IS_VIDEO; }
+
+    const hdName = heroIsVideo ? `yarden_${heroId}_hd.mp4` : `yarden_${heroId}_hd.webp`;
+    const hdCfg = heroIsVideo ? R2_VIDEOS : R2_IMAGES;
+    const hdPublic = `${hdCfg.publicUrl}/${hdName}`;
+
+    if (await urlExists(hdPublic)) {
+      console.log(`Hero HD already present: ${hdName}`);
+    } else {
+      const src = rawPosts.find(p => String(p.id) === String(heroId));
+      if (!src || !src.media_url) {
+        console.warn(`Hero HD: item ${heroId} not in this fetch (or no media_url) — desktop falls back to the light file until a sync includes it.`);
+      } else if (heroIsVideo) {
+        if (!hasFfmpeg) { console.warn("Hero HD: ffmpeg unavailable — skipped."); }
+        else {
+          console.log(`Hero HD: building 1080p video for ${heroId}...`);
+          const tmpIn = `/tmp/hdin_${heroId}.mp4`, tmpOut = `/tmp/hdout_${heroId}.mp4`;
+          const { buffer } = await downloadBuffer(src.media_url, 60000);
+          fs.writeFileSync(tmpIn, buffer);
+          try { compressVideoHD(tmpIn, tmpOut); } catch (fe) { fs.copyFileSync(tmpIn, tmpOut); }
+          const hd = fs.readFileSync(tmpOut);
+          try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut); } catch (e) {}
+          const r = await uploadToR2(R2_VIDEOS, hd, hdName, "video/mp4");
+          console.log(r.status === 200 ? `Hero HD OK: ${hdName} (${(hd.length / 1e6).toFixed(1)}MB)` : `Hero HD upload failed (${r.status})`);
+        }
+      } else {
+        console.log(`Hero HD: building hi-res image for ${heroId}...`);
+        const { buffer } = await downloadBuffer(src.media_url, 60000);
+        const hd = await compressImageHD(buffer);
+        const r = await uploadToR2(R2_IMAGES, hd, hdName, "image/webp");
+        console.log(r.status === 200 ? `Hero HD OK: ${hdName} (${(hd.length / 1e3).toFixed(0)}KB)` : `Hero HD upload failed (${r.status})`);
+      }
+    }
+  } catch (e) { console.error("Hero HD step error:", e.message); }
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];

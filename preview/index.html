@@ -762,19 +762,51 @@
       }
     }
 
+    // Desktop only: upgrade the hero to its crisp ~1080p copy (yarden_<id>_hd.<ext>) if it
+    // exists on R2; otherwise stay on the light (mobile-optimized) file. Mobile never loads
+    // the heavy HD file. Preload-then-swap so the hero is never left broken/blank.
+    function hdVariant(u){ return (u || '').split('?')[0].replace(/\.(mp4|webp|jpg|jpeg|png)$/i, '_hd.$1'); }
+    function upgradeHeroToHD(){
+      if (window.matchMedia('(max-width:1080px)').matches) return;
+      const video = document.getElementById('heroVideo');
+      const img   = document.getElementById('heroImage');
+      const src   = document.getElementById('heroVideoSource');
+      const imageShown = img && img.style.display !== 'none';
+      if (imageShown) {
+        if (!img.src || /_hd\./i.test(img.src)) return;
+        const hd = hdVariant(img.src);
+        const probe = new Image();
+        probe.onload = () => { img.src = hd; };
+        probe.src = hd; // <img> loads cross-origin without CORS; onerror → keep light
+      } else if (video && src) {
+        const cur = video.currentSrc || src.getAttribute('src') || '';
+        if (!cur || /_hd\.mp4/i.test(cur)) return;
+        const hd = hdVariant(cur);
+        const probe = document.createElement('video');
+        probe.muted = true; probe.preload = 'metadata';
+        probe.onloadedmetadata = () => {
+          if (src.getAttribute('src') === hd) return;
+          src.src = hd; video.src = hd; video.load(); video.play().catch(()=>{});
+        };
+        probe.src = hd; // metadata-only probe; onerror → keep light
+      }
+    }
+
     (async function applyHeroVideo(){
-      if (!window.RemoteState) return;
+      if (!window.RemoteState) { upgradeHeroToHD(); return; }
       try {
         await window.RemoteState.fetch();
         const fresh = window.RemoteState.getCached() || {};
         applyHeroMediaFromState(fresh);
+        upgradeHeroToHD();
         let rt;
         window.addEventListener('resize', () => {
           clearTimeout(rt);
-          rt = setTimeout(() => applyHeroCropToPage(fresh.heroPosition, fresh.heroZoom), 150);
+          rt = setTimeout(() => { applyHeroCropToPage(fresh.heroPosition, fresh.heroZoom); upgradeHeroToHD(); }, 150);
         });
       } catch(e) { console.warn('heroVideo error:', e); }
     })();
+    window.addEventListener('load', upgradeHeroToHD);
   </script>
   <script src="gallery-data.js?v=1782130363653"></script>
 

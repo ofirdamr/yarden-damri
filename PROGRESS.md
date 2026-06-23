@@ -705,3 +705,11 @@ This is the permanent fix. Categories, pricing, hero video, rotations, hidden, p
 - **#2 Lightbox placement — VERIFIED FIXED** on both home (`preview/index.html`) and gallery (`preview/gallery.html`). Media flex-centered (controls mid-screen), action rail on right, X top-left. Media area renders black only because R2 video doesn't load inside sandbox — layout is correct.
 - **#3 Services 2×2 — VERIFIED FIXED** (`preview/services.html`): 4 main cards now render as a balanced 2×2 grid at ≥760px (was 3+lonely-1).
 - **#1 Hero video pixelated — still UNFIXED**, needs user decision (re-encode original @1080p via private-repo workflow vs. sharp still on desktop). Asked user.
+
+## 2026-06-23 — Hero #1 (Option A, user-approved): HD source for desktop hero
+Root constraint: hero media is web/mobile-optimized — images ~800px wide, videos ~480p (480×854) — far below a full-screen desktop hero (1440–1920px). object-fit:cover then upscales 2–3× → soft/"phone-like". No CSS adds detail; only a higher-res source fixes it. (User rejected the blurred-fill backdrop approach — reverted in ac3c749.)
+Solution (server-side, everyone sees it; mobile unaffected):
+- `fix.js`: after each sync, `ensureHeroHD` builds a ~1080p copy of the CURRENT hero (admin `heroVideo`/`heroImage`, else baked default `18100404782127411`) and uploads `yarden_<id>_hd.mp4` (ffmpeg scale min(1080) crf22) / `yarden_<id>_hd.webp` (sharp w1600 q88) to R2. Hero-only = negligible storage. Skips if `_hd` already exists (HEAD check via `urlExists`). If the hero item isn't in the fetch, logs and skips (frontend falls back).
+- `preview/index.html`: `upgradeHeroToHD()` — desktop ≥1081px only, preload-then-swap to the `_hd` file; stays on the light file if HD absent (never breaks). Mobile never requests HD (verified: 0 HD requests at 390px).
+Verified: fix.js `node --check` OK; desktop probes `..._hd.mp4` and falls back cleanly (no JS errors); mobile requests no HD.
+Rollout: sync-auto.yml checks out main, so the HD file is generated on the next sync AFTER this lands on main. Until then desktop shows the light file (today's look). DEFAULT_HERO_ID in fix.js must stay in sync with the baked <source> in preview/index.html.
