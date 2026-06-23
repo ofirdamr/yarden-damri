@@ -111,9 +111,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .lb-cnt{font-size:.82rem;color:rgba(255,255,255,.92);min-width:6px}
     .lb-save{margin-inline-start:0}
     .lb.lb-video-on .lb-counter{display:none}
-    /* Desktop: cover-fill would zoom a portrait reel absurdly — show it whole on black instead */
+    /* Desktop: show the whole photo/video centered (flex-centered, contained) instead of cover-crop */
     @media (min-width:1081px){
-      .lb-img,.lb-video{position:absolute;top:50%;left:50%;inset:auto;transform:translate(-50%,-50%);width:auto;height:auto;max-width:94vw;max-height:94vh;max-height:94dvh;object-fit:contain}
+      .lb-img,.lb-video{position:relative !important;inset:auto !important;top:auto !important;left:auto !important;transform:none !important;margin:auto !important;width:auto !important;height:auto !important;max-width:94vw !important;max-height:90vh !important;object-fit:contain !important}
     }
     .lb-toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(20,14,10,.95);color:#F0E6DC;padding:9px 20px;border-radius:24px;font-size:.84rem;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:1003}
     .lb-toast.show{opacity:1}

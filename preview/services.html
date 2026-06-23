@@ -77,6 +77,9 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
 #scroll-top{left:56px !important;right:auto !important;font-size:14px !important;}
 #wa-float-btn,.wa-float{right:12px !important;left:auto !important;}
 #a11y-trigger svg,#wa-float-btn svg,.wa-float svg{width:16px !important;height:16px !important;fill:#fff !important;}
+/* Services page: balance the 4 main service cards as a 2x2 on tablet/desktop
+   (the shared .services-grid is repeat(3,1fr), which leaves a lonely 4th card) */
+@media (min-width:760px){ #services > .services-grid{ grid-template-columns:repeat(2,1fr) !important; } }
 </style>
 </head>
 <body>
