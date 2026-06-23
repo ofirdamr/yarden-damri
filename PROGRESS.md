@@ -2,6 +2,21 @@
 
 ## ✅ Completed
 
+## 2026-06-23 — Fix Visual QA (Playwright) red on the go-live commit
+The go-live deploy itself succeeded (`pages build and deployment` green; site live), but the
+`Visual QA (Playwright)` CI went red on **2 WebKit (mobile-safari) tests** — `home` + `gallery`:
+`JS errors on gallery: /api.yardendamri.co.il/social?v=... due to access control checks.`
+Root cause: the promoted pages (unlike the old root) call the Worker `/social` likes endpoint.
+WebKit surfaces a **cross-origin** fetch as a "due to access control checks" pageerror whenever the
+page is served off-origin — i.e. always in CI (127.0.0.1), **never** on live `yardendamri.co.il`
+(origin is CORS-allowlisted). The app already swallows the rejection (`loadSocial` try/catch +
+`.catch`), so the site is fine — this was browser-level network noise the test mis-classified as a
+real script error, contradicting its own "missing external assets are tolerated" contract.
+Fix (QA harness only, site untouched): `tests/visual.spec.js` `pageerror` handler now filters
+tolerated external-resource/CORS failures (`api.yardendamri.co.il`, "access control checks",
+load/net::ERR) while still failing on real TypeError/ReferenceError. Chromium suite stays green.
+
+
 ## 2026-06-23 — 🚀 GO LIVE (Stage B): promoted preview/ → root
 The new site is now the live ROOT site. Promotion was a file copy + reference rewrite:
 - Copied preview/ site files to repo root, overwriting the old Cloudinary-era root: all 13
