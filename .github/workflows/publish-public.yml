@@ -21,14 +21,10 @@ jobs:
       - name: Checkout source (this private repo)
         uses: actions/checkout@v4
 
-      - name: Checkout public mirror
-        uses: actions/checkout@v4
-        with:
-          repository: ofirdamr/yardendamri-site
-          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
-          path: public
-
-      - name: Sync curated static files into the mirror
+      - name: Publish curated static site to the public mirror
+        env:
+          PUBLIC_REPO: ofirdamr/yardendamri-site
+          GH_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
         run: |
           set -e
           # The clean allowlist — exactly what the live site needs, nothing else.
@@ -40,6 +36,20 @@ jobs:
             gallery-settings.json social.json robots.txt sitemap.xml \
             sitemap-index.xml sitemap-media.xml favicon.ico favicon.png \
             apple-touch-icon.png share-preview.jpg CNAME"
+
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${PUBLIC_REPO}.git"
+
+          # Clone the mirror if it has any history; otherwise init a fresh repo.
+          # (A brand-new repo with no commits has no main branch to check out.)
+          if ! git clone "$REMOTE" public 2>/dev/null; then
+            mkdir -p public && (cd public && git init -q && git remote add origin "$REMOTE")
+          fi
+          cd public
+          git config user.name "site-mirror[bot]"
+          git config user.email "noreply@yardendamri.co.il"
+          git checkout main 2>/dev/null || git checkout -b main
+          cd ..
+
           # Prune everything in the mirror except .git, then lay down the
           # allowlist — guarantees the public repo == exactly this set (so a
           # file removed here is removed there too).
@@ -48,12 +58,7 @@ jobs:
             if [ -e "$f" ]; then cp "$f" "public/$f"; else echo "WARN: missing $f"; fi
           done
 
-      - name: Commit & push only when something changed
-        run: |
           cd public
-          git config user.name "site-mirror[bot]"
-          git config user.email "noreply@yardendamri.co.il"
-          git checkout -B main
           git add -A
           if git diff --cached --quiet; then
             echo "No site changes to publish."
