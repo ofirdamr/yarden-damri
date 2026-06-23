@@ -475,3 +475,6 @@ Context: the gallery is BROKEN on the preview site (videos not showing) on BOTH 
 
 ## 2026-06-23 — Claimed services 2×2 "verified" but missed the secondary grid
 I screenshotted only the main 4 service cards (confirmed 2×2) and declared #3 fixed, but the page has a SECOND grid below ("secondary services", 2 cards) that was still `repeat(auto-fill,minmax(280px,1fr))` → rendered as 3 columns with 2 narrow misaligned cards. The user saw it as "still not arranged." Root lesson: verify the WHOLE page/section, not just the element I changed — and force scroll-reveal (`.reveal`) visible when screenshotting or lower content reads as blank. Fix: gave the secondary grid `class="services-grid"` so it inherits the same responsive 2-col layout and aligns under the 2×2.
+
+## 2026-06-23 — Go-live cleanup deleted files still referenced by the sync workflow
+Deleting preview/index-temp.html + preview/gallery-temp.html (Stage A) broke sync-auto.yml, which still did `git add` on them → exit 128 every run → gallery data stopped updating. Lesson: when deleting files, grep the whole repo (workflows included) for references before/after — a deletion isn't done until nothing still points at the file. Hard-coded file lists in CI are brittle; prefer existence-guarded staging.

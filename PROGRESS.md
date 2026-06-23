@@ -716,3 +716,12 @@ Rollout: sync-auto.yml checks out main, so the HD file is generated on the next 
 
 ## 2026-06-23 — Services page: align the secondary grid under the 2×2 (real #3 fix)
 The main 4 cards were already 2×2, but the separate "Secondary services" grid (2 cards) used `repeat(auto-fill,minmax(280px,1fr))` → 3 columns → 2 narrow, left-shoved, misaligned cards (what the user reported as "not arranged"). Fix: gave that div `class="services-grid"` and dropped its inline grid-template/gap so it inherits the shared responsive grid + the `#services > .services-grid` 2-col override. Verified at 1440/820/390: secondary cards now match the main grid (1440: 499px×2 aligned under the 2×2; mobile: 1 col).
+
+## 2026-06-23 — FIX: Instagram auto-sync failing since go-live cleanup (root cause found)
+Symptom: sync-auto.yml runs failed 06-22 20:51 and 06-23 03:49 (after a clean streak). The sync itself succeeded (fetched 1142 posts, wrote preview/gallery-data.js, uploaded to R2) but the "Commit and push" step died:
+  `fatal: pathspec 'preview/index-temp.html' did not match any files` → exit 128.
+Root cause: Stage A cleanup DELETED preview/index-temp.html + preview/gallery-temp.html, but the workflow still ran `git add ... preview/index-temp.html preview/gallery-temp.html`. git add on a missing pathspec aborts the step → media reached R2 but gallery-data.js was never committed/pushed → site data went stale.
+Fix (now + future-proof):
+- sync-auto.yml: replaced the hard-coded git-add list with an existence-guarded loop (`for f in ...; do [ -e "$f" ] && git add`), so a removed/renamed file can never abort a sync again. Dropped the two deleted temp files.
+- fix.js: removed the deleted *-temp.html entries from the cache-bump htmlFiles list (was only a warning, but tidy).
+Also logged in MISTAKES.md. Triggering a manual sync to (a) push fresh data and (b) generate the hero HD via the new fix.js step.

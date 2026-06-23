@@ -351,7 +351,7 @@ function safeWrite(filePath, data) {
 
   // Bump gallery-data.js version in every page that loads it, so browsers don't serve stale cache
   const htmlFiles = TARGET_PREVIEW
-    ? ["preview/index.html", "preview/gallery.html", "preview/index-temp.html", "preview/gallery-temp.html"]
+    ? ["preview/index.html", "preview/gallery.html"]
     : ["index.html", "gallery.html"];
   const ver = Date.now();
   for (const htmlFile of htmlFiles) {
