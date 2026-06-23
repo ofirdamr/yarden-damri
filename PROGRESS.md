@@ -2,6 +2,14 @@
 
 ## ✅ Completed
 
+## 2026-06-22 — 3 desktop fixes (UNVERIFIED) + rules/roles + egress for next session
+- User reviewed cleaned `/preview/` on desktop, found 3 issues. Pushed fixes (commit 8687f87) **UNVERIFIED** — could not render in-session (egress blocked the Playwright browser CDN + the live site):
+  - `services.html`: scoped **2×2 grid** for the 4 main cards (≥760px) — shared `.services-grid` is `repeat(3,1fr)` → 3+1 lonely card.
+  - `index.html` + `gallery.html` lightbox: **flex-centering** (`object-fit:contain`) at ≥1081px, replacing the absolute+transform centering (could corner-pin/cover-crop on desktop).
+  - **Hero video pixelation: diagnosed, NOT fixed** — baked source is the compressed `videos-new.yardendamri.co.il/yarden_18100404782127411.mp4`, upscaled by `object-fit:cover` on the desktop hero. Needs a higher-res source.
+- `CLAUDE.md`: new STRICT RULE — Network/internet use (site + tooling only without asking); team **lean-by-default** (Manager picks roles); added **[SEO Specialist]** + **[Web Security Specialist]**.
+- Egress set to **All-domains** (effective next session) → next session can `playwright install` the browser and **visually verify** the fixes. Handoff written in `SUMMARY.md` (▶ NEXT SESSION).
+
 ## 2026-06-22 — Go-live Stage A: code cleanup (preview/ only, root untouched)
 Conservative, behavior-preserving cleanup ahead of promoting preview/ → root.
 - Deleted dead/standalone files: all 14 `preview/*-temp.*`, `preview/gallery-new.html`, `preview/vtest.html`, `preview/admin.html.headers`, legacy `netlify/functions/ig-stats.js`.

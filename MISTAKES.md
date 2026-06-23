@@ -1,5 +1,16 @@
 # Mistakes Log
 
+## 2026-06-22 — Attempted visual fixes while blind (no browser). Verify capability FIRST.
+Tried to diagnose/fix 3 desktop CSS issues (hero, lightbox, services) with no way to render the site:
+this session's egress blocked the Playwright browser CDN (`cdn.playwright.dev` → 403) AND the live site
+(`yardendamri.co.il` → 403), and no system browser exists. I inferred fixes from code and pushed them
+UNVERIFIED. The "I saw it with Playwright" capability was always **GitHub Actions CI** (cloud) producing
+pass/fail + screenshots for the USER — never local vision in my session.
+Rule: before any visual fix, confirm I can actually SEE — `playwright install` a browser, screenshot the
+page, and `Read` the PNG (the Read tool renders images = real eyes). If egress blocks the browser CDN or
+the site, STOP, tell the user it's critical, and get egress opened (All-domains) + a fresh session. Do
+not guess at pixels.
+
 ## 2026-06-22 — Skipped Multi-Agent Development Mode on a complex task
 The go-live task (clean code → promote preview→root → public/private split) is exactly the kind of
 complex, multi-part work the new CLAUDE.md "Multi-Agent Development Mode" rule governs: it requires

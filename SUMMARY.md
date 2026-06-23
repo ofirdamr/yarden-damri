@@ -2,6 +2,45 @@
 
 > Last updated: 2026-06-22
 
+---
+
+## ▶ NEXT SESSION — START HERE (handoff)
+
+**Rules to obey (all of them):** `main` branch ONLY (harness may open another — switch to main;
+an auto-classifier enforces this). Think/write in **English**; site is **Hebrew RTL**. **Token-saver:**
+read this SUMMARY first, `PROGRESS.md` only if more detail needed; read only what the task needs.
+**Team:** lean by default — the Manager/Tech-Lead picks the minimal roles per task (CLAUDE.md
+Multi-Agent Mode; roles now include **SEO** + **Web Security**). **Network:** egress is now
+**All-domains**, but per CLAUDE.md "Network use" rule only touch the site + required tooling without
+asking; ask before any other internet use. **Editing:** work in `preview/` (the `-temp.html` files were
+deleted in cleanup — `preview/*.html` are now the working source); the **live root site is still the OLD
+site** until go-live (Stage B).
+
+**Big project in flight — GO-LIVE.** Plan: `/root/.claude/plans/now-i-want-you-mossy-wirth.md`.
+Locked decisions: two repos (**current → private** full history; **new public repo serves the domain**);
+auto-sync runs in the private repo and pushes only data files to public; conservative cleanup;
+hybrid GitHub ops (I do code + create/push repo; **user moves the domain**).
+- **Stage A (clean code)** — DONE, pushed to `/preview/` (deleted all `-temp`/dead files, unified
+  `styles.css`, removed dead `brandedImageFile`/`SHARE_SITE`/`?g=t`).
+- **Stage B (promote preview → root)** — NOT STARTED (the actual go-live; gate behind visual review).
+- **Stage C (public/private split + domain)** — NOT STARTED.
+
+**IMMEDIATE task (do this first, THEN continue go-live): verify + fix 3 desktop issues the user found
+in `/preview/`.** Now that egress is open, GET REAL EYES FIRST: `npm install && npx playwright install
+chromium webkit`, `npm run serve`, load `/preview/` pages at 1440px, screenshot AND `Read` the PNGs to
+actually SEE them before claiming anything fixed (last session was blind — cdn.playwright.dev was 403).
+1. **Hero video pixelated on desktop — UNFIXED.** Baked source is the COMPRESSED
+   `videos-new.yardendamri.co.il/yarden_18100404782127411.mp4` (settings `heroVideo:""`), upscaled by
+   `object-fit:cover` on the big desktop hero. Needs a higher-res source (re-encode original at 1080p +
+   upload via a private-repo workflow, OR a sharp still for desktop) — decide with user.
+2. **Lightbox media mis-placed on desktop (home + gallery) — FIX PUSHED, UNVERIFIED (commit 8687f87):**
+   replaced absolute+transform centering with flex-centering (`object-fit:contain`) at ≥1081px in
+   `preview/index.html` + `preview/gallery.html`. If still off, suspect effective viewport <1081px → lower breakpoint.
+3. **Services boxes mis-organized on desktop — FIX PUSHED, UNVERIFIED (commit 8687f87):** 4 main cards
+   were forced into shared `.services-grid` `repeat(3,1fr)` (3+1); added scoped 2×2 grid ≥760px in `preview/services.html`.
+
+---
+
 ## ✅ RESOLVED & PROMOTED (2026-06-22) — Lightbox layout
 The lightbox open task is done and promoted to permanent (`preview/index.html` +
 `preview/gallery.html`). Media now opens **edge-to-edge fullscreen** (object-fit:cover,

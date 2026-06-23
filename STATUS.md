@@ -2,6 +2,13 @@
 
 *Last updated: 2026-06-22*
 
+## ▶ Current focus (2026-06-22) — GO-LIVE in progress (read SUMMARY.md "NEXT SESSION" first)
+Stage A (clean `preview/`) done. 3 desktop fixes pushed **UNVERIFIED** (commit 8687f87): services 2×2,
+lightbox flex-center; **hero video still pixelated** (compressed source). Next session has **All-domains
+egress** → install the Playwright browser, screenshot `/preview/` at 1440px, and verify visually before
+claiming fixed. Then continue go-live Stage B (promote preview→root) + Stage C (public/private split).
+Note: the `-temp.html` files were deleted in cleanup — `preview/*.html` are now the working source.
+
 ## Current State
 - **Root (/)**: Old site — still live, still references Cloudinary (closing). Do not touch.
 - **Preview (/preview/)**: New site — all active development. Served at `yardendamri.co.il/preview/`.
