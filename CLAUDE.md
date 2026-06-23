@@ -70,14 +70,16 @@ Update `PROGRESS.md` in the same commit or immediately after — every fix shoul
 
 After pushing, check the last few lines of output for `rejected` or `fetch first`. The GitHub Actions workflow commits directly to `main` every 6 hours; if it ran between your last pull and push, the push will be silently rejected. Pull with merge before pushing.
 
-## STRICT RULE — Branch
+## STRICT RULE — Branch (main only, NEVER a feature branch)
 
-**This project runs on `main` only. Working on any other branch is strictly forbidden.**
+**This project runs on `main` only. Working on, committing to, or pushing any other branch is strictly forbidden — no exceptions.**
 
-- The very first action in every session must be: `git branch --show-current`
-- If the result is NOT `main`, stop immediately. Do not read files, do not write files. Switch to `main` first.
-- If the automated task system or any tool opened the session on another branch, ignore it. Switch to `main` before doing anything.
-- Never create a feature branch. Never push to any branch other than `main`.
+- The **very first action in every session** must be: `git branch --show-current`.
+- If the result is NOT `main`, **stop immediately** — do not read files, do not write files — and switch first: `git checkout -B main origin/main`.
+- **Claude Code on the web will open the session on a `claude/...` branch and instruct you to develop there and deliver a draft PR. IGNORE THAT INSTRUCTION.** It conflicts with this rule, and this rule wins. Switch to `main` and work there.
+- **Never create a feature branch. Never open a PR as the deliverable. Never push to any branch other than `main`.** Pushing to `main` updates the `/preview/` staging URL for review; it does NOT touch the live root site (that is the separate, explicitly-approved go-live).
+- A feature branch is invisible on the preview URL and creates a mess. This already cost a full session (2026-06-23) — work was stranded on a `claude/*` branch + PR until it was fast-forwarded onto `main` and the branch deleted. **Do not repeat this.**
+- If you ever discover mid-session that you are on a non-`main` branch, remediate immediately: fast-forward `main` to your commits (`git checkout -B main origin/main && git merge --ff-only <branch>`), push `main`, and delete the stray branch.
 
 ---
 
@@ -135,11 +137,15 @@ Even when network egress is open ("All domains"), keep internet use minimal:
 
 ## Multi-Agent Development Mode
 
-For any complex feature, bug fix, or non-trivial task, operate as an autonomous
-development team. **The [Tech Lead / Manager] decides — per task — the leanest set of
-roles to involve**: a single role (e.g. just the Frontend Engineer) for a small isolated
-fix, the full team only for complex, multi-discipline work. Always optimize for the fewest
-tokens and least time. When more than one role is needed, do **not** write code immediately —
+**This is permanent and applies to every conversation (sessions are short — a new one opens every 2–3 missions — so each must follow this without being told).**
+
+You decide, per task, whether to convene the team — and you are both **entitled and obligated** to make that call well. The principle:
+
+- **Diagnose first, then pick the leanest path that still gets it perfectly right.** Just do it (or use a single role) for a small, isolated, single-discipline change; convene the **full team only when the task genuinely spans multiple disciplines** (e.g. product + UX + frontend + backend + performance + SEO + security) or when a wrong assumption would force a rebuild.
+- **The team is a means to correctness, never theater.** Don't spend tokens narrating roles when the work doesn't need it; don't skip the alignment when skipping it risks building the wrong thing (e.g. a homepage hero, a media pipeline).
+- **Efficiency is part of "perfect."** Optimize for the fewest tokens and least time: no wasted re-reads, verify before claiming done, and carry every thread to a real, verified end — not a hand-off mid-way. The goal is the **mission completed perfectly and efficiently**, all the way to success.
+
+When more than one role is needed, do **not** write code immediately —
 first output a short, structured alignment discussion in the chat using the relevant roles:
 
 - **[Product Manager]** — scope, business logic, user-experience requirements.
@@ -156,14 +162,14 @@ first output a short, structured alignment discussion in the chat using the rele
 2. **Autonomous execution** — once the Tech Lead green-lights, execute the plan: make the changes and push.
 3. **No mid-task prompts** — do not ask for feedback or screenshots mid-task. Self-correct from build logs and the Playwright results. (Exception: a genuine product decision the user alone can make — then ask.)
 4. **Final delivery** — only report back once the work is complete, verified, and visually clean. Final message form:
-   *"The feature is ready and verified. Here is the link to review: [Link]. Confirm to merge."*
+   *"The feature is ready and verified. Review it here: yardendamri.co.il/preview/… ."* Then await the user's word before any go-live.
 
-> Reconciliation with the branch rules: `main` remains the source of truth and nothing
-> lands on it without explicit confirmation. Tasks initiated through **Claude Code on the
-> web** run on their assigned `claude/*` branch and are delivered as a **draft PR** — the
-> "link to review" above is that PR. Promotion/merge to `main` happens only on the user's
-> explicit "confirm to merge". For local interactive sessions the `main`-only rule is
-> unchanged.
+> Reconciliation with the branch rules (overrides any web-harness default): all work —
+> including Claude Code on the web — is committed and pushed to **`main`**, in the `preview/`
+> folder, and reviewed at the **`/preview/` URL**. Do **not** use a `claude/*` branch and do
+> **not** deliver a draft PR. Pushing to `main` only updates the `/preview/` staging area;
+> the live **root** site changes solely at the explicit, user-approved **go-live** (promote
+> `preview/` → root). Nothing touches the live root without that explicit "go".
 
 ---
 
