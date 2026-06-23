@@ -730,3 +730,13 @@ Also logged in MISTAKES.md. Triggering a manual sync to (a) push fresh data and 
 - Triggered sync-auto.yml on main → run 28014709102 **succeeded** (previously failed). Bot pushed "Update Instagram data" (837abb1) → data flowing again. Workflow git-add guard confirmed working.
 - Hero HD file created on R2: yarden_18100404782127411_hd.mp4 = 5.6MB (crf22) vs light 3.2MB (crf28).
 - CAVEAT: parsed both = 720×1280. Instagram only served a 720px master of THIS clip, so `scale=min(1080,iw)` capped at 720 — the HD is a *higher-quality* 720p (fewer compression artifacts), NOT true 1080p. On a 1440px desktop it's still a ~2× upscale, so noticeably cleaner but not razor-sharp. Items where IG kept 1080 (esp. photos: light 800px → HD ~1080) get a real resolution bump. For a pristine hero on a low-res clip, only the original camera file (Option B) can help.
+
+## 2026-06-23 — Three-tier media resolution (grid thumb / lightbox full / hero max)
+Goal (user): fast grid + sharp lightbox + crisp hero, all automatic from Instagram (no phone files).
+Finding: `cdnUrl()` (used by both grids + lightboxes) does `url.replace('/upload/',…)` — R2 URLs have no `/upload/`, so it was DEAD: grid + lightbox both loaded the full 800px file.
+Changes:
+- fix.js: images now stored as TWO sizes — `yarden_<id>.webp` at Instagram-max ~1080 (lightbox+hero) + `yarden_<id>_thumb.webp` ~600 (grid); image entries carry a `thumb` field. compressImage 800→1080; added compressImageThumb (600,q72). Hero HD step now video-only (image hero already served at IG-max via main file); removed unused compressImageHD.
+- index.html + gallery.html: grid img → `item.thumb || item.u` (small thumb, fallback to full for not-yet-reprocessed photos); lightbox img → `item.u` (full); hero upgrade is video-only now.
+- Resumable reprocess: `node fix.js --reprocess-images` re-fetches existing photos at IG-max + builds thumbs, skipping any image whose `_thumb.webp` already exists on R2 (survives the 45-min CI cap). Exposed as a `workflow_dispatch` input `reprocess_images` in sync-auto.yml.
+Verified: both grids render, no JS errors; grid uses `thumb` when present (video posters prove it), falls back to `u` otherwise; lightbox uses full `u`. Backward-compatible — safe before the reprocess finishes.
+Rollout: normal syncs apply the new pipeline to NEW photos automatically; trigger sync-auto with reprocess_images=true (possibly a few runs) to upgrade the ~1247 existing photos.

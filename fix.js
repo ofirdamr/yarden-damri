@@ -6,6 +6,7 @@ const { execSync } = require("child_process");
 
 const TARGET_PREVIEW = process.argv.includes("--target=preview");
 const FIX_AUDIO = process.argv.includes("--fix-audio"); // one-time: re-upload all videos incl. hidden ones to restore audio
+const IMG_REPROCESS = process.argv.includes("--reprocess-images"); // re-fetch existing photos at Instagram-max + build the small grid thumb (resumable: skips any image whose _thumb.webp already exists on R2)
 const GALLERY_FILE = TARGET_PREVIEW ? "preview/gallery-data.js" : "gallery-data.js";
 console.log("Target:", GALLERY_FILE);
 
@@ -70,8 +71,17 @@ function downloadBuffer(url, timeoutMs=30000) {
 async function compressImage(buffer) {
   const sharp = require("sharp");
   return await sharp(buffer)
-    .resize({ width: 800, withoutEnlargement: true })
+    .resize({ width: 1080, withoutEnlargement: true })
     .webp({ quality: 82 })
+    .toBuffer();
+}
+// Small grid thumbnail (~600px). The homepage/gallery grid shows 40+ tiles, so this is
+// where page weight matters most; the full ~1080px image is reserved for the lightbox + hero.
+async function compressImageThumb(buffer) {
+  const sharp = require("sharp");
+  return await sharp(buffer)
+    .resize({ width: 600, withoutEnlargement: true })
+    .webp({ quality: 72 })
     .toBuffer();
 }
 
@@ -79,15 +89,9 @@ async function compressVideo(inputPath, outputPath) {
   execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(720,iw)':-2" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 128k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 120000 });
 }
 
-// ── HERO HD encoders ── higher-resolution variants used only for the hero, so the
-// desktop site can show a crisp full-screen hero (mobile keeps the light file).
-async function compressImageHD(buffer) {
-  const sharp = require("sharp");
-  return await sharp(buffer)
-    .resize({ width: 1600, withoutEnlargement: true })
-    .webp({ quality: 88 })
-    .toBuffer();
-}
+// ── HERO HD video encoder ── higher-resolution video for the hero, so the desktop
+// site can show a crisp full-screen hero (mobile keeps the light file). Images don't
+// need this — their main file is already stored at Instagram-max (~1080px).
 function compressVideoHD(inputPath, outputPath) {
   execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(1080,iw)':-2" -c:v libx264 -crf 22 -preset fast -c:a aac -b:a 160k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 180000 });
 }
@@ -273,11 +277,23 @@ function safeWrite(filePath, data) {
       const isNewR2 = (isVideo && e.u && e.u.includes("videos-new.yardendamri")) ||
                       (!isVideo && e.u && e.u.includes("images.yardendamri"));
       if (isNewR2) {
-        e.post_id = item.post_id || item.id;
-        e.a = cleanCaption(item.caption);
-        stampMeta(e, item);
-        if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
-        process.stdout.write("."); continue;
+        // Image-reprocess pass: re-make any photo that doesn't yet have a small grid thumb
+        // (and bump its main to Instagram-max). Resumable — if the _thumb.webp already
+        // exists on R2 we just record it and move on, so the job survives the CI timeout.
+        let needsUpgrade = false;
+        if (IMG_REPROCESS && !isVideo) {
+          const thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
+          if (await urlExists(thumbUrl)) { e.thumb = thumbUrl; }
+          else { needsUpgrade = true; }
+        }
+        if (!needsUpgrade) {
+          e.post_id = item.post_id || item.id;
+          e.a = cleanCaption(item.caption);
+          stampMeta(e, item);
+          if (!seenUrls.has(e.u)) { seenUrls.add(e.u); gallery.push(e); }
+          process.stdout.write("."); continue;
+        }
+        // fall through to regenerate full + thumb from Instagram
       }
     }
 
@@ -315,14 +331,19 @@ function safeWrite(filePath, data) {
       console.log(`\nUploading image ${item.id}...`);
       try {
         const { buffer } = await downloadBuffer(item.media_url);
-        const compressed = await compressImage(buffer);
-        const r2Result = await uploadToR2(R2_IMAGES, compressed, `yarden_${item.id}.webp`, "image/webp");
-        if (r2Result.status === 200) {
-          const entry = stampMeta({ u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id }, item);
+        // Full ~1080px (lightbox + hero) AND a small ~600px grid thumbnail.
+        const full = await compressImage(buffer);
+        const thumb = await compressImageThumb(buffer);
+        const rFull = await uploadToR2(R2_IMAGES, full, `yarden_${item.id}.webp`, "image/webp");
+        let thumbUrl = "";
+        const rThumb = await uploadToR2(R2_IMAGES, thumb, `yarden_${item.id}_thumb.webp`, "image/webp");
+        if (rThumb.status === 200) thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
+        if (rFull.status === 200) {
+          const entry = stampMeta({ u: `${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, thumb: thumbUrl }, item);
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
-          console.log(`Image OK: yarden_${item.id}.webp`);
+          console.log(`Image OK: yarden_${item.id}.webp${thumbUrl ? ' +thumb' : ''}`);
         } else {
-          console.error(`Image R2 failed (${r2Result.status}): ${r2Result.body.substring(0, 300)}`);
+          console.error(`Image R2 failed (${rFull.status}): ${rFull.body.substring(0, 300)}`);
         }
       } catch(e) { console.error(`Image error ${item.id}:`, e.message); }
     }
@@ -401,11 +422,9 @@ function safeWrite(filePath, data) {
           console.log(r.status === 200 ? `Hero HD OK: ${hdName} (${(hd.length / 1e6).toFixed(1)}MB)` : `Hero HD upload failed (${r.status})`);
         }
       } else {
-        console.log(`Hero HD: building hi-res image for ${heroId}...`);
-        const { buffer } = await downloadBuffer(src.media_url, 60000);
-        const hd = await compressImageHD(buffer);
-        const r = await uploadToR2(R2_IMAGES, hd, hdName, "image/webp");
-        console.log(r.status === 200 ? `Hero HD OK: ${hdName} (${(hd.length / 1e3).toFixed(0)}KB)` : `Hero HD upload failed (${r.status})`);
+        // Image heroes are already served at Instagram-max via the main yarden_<id>.webp
+        // (now ~1080px), so no separate _hd image is needed.
+        console.log(`Hero ${heroId} is an image — served at Instagram-max via the main file; no _hd needed.`);
       }
     }
   } catch (e) { console.error("Hero HD step error:", e.message); }

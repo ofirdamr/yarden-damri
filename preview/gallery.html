@@ -526,7 +526,7 @@ function renderGallery() {
         style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;background:#1a1008;${rotStyle}"
         onerror="this.style.background='#1a1008'">`;
     } else {
-      mediaHtml = `<img src="${cdnUrl(item.u,400)}" alt="${caption||'תמונת איפור'}" loading="lazy"
+      mediaHtml = `<img src="${item.thumb || item.u}" alt="${caption||'תמונת איפור'}" loading="lazy"
         style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
         onload="this.style.opacity=1" onerror="this.style.opacity=1"/>`;
     }
@@ -663,7 +663,7 @@ function showLb() {
     lbImg.src = '';
     lbVideo.play().catch(() => { lbVideo.muted = true; lbVideo.play().catch(() => {}); });
   } else {
-    lbImg.src = cdnUrl(item.u, 1200);
+    lbImg.src = item.u; // full Instagram-max image (the grid uses the small thumb instead)
     lbImg.alt = (item.a||'').split('\n')[0].substring(0,80);
     lbImg.style.display = '';
     lbVideo.style.display = 'none';

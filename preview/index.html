@@ -771,25 +771,20 @@
       const video = document.getElementById('heroVideo');
       const img   = document.getElementById('heroImage');
       const src   = document.getElementById('heroVideoSource');
+      // Image heroes already load the Instagram-max file (yarden_<id>.webp) — nothing to upgrade.
+      // Only the video hero has a heavier _hd variant worth swapping in on desktop.
       const imageShown = img && img.style.display !== 'none';
-      if (imageShown) {
-        if (!img.src || /_hd\./i.test(img.src)) return;
-        const hd = hdVariant(img.src);
-        const probe = new Image();
-        probe.onload = () => { img.src = hd; };
-        probe.src = hd; // <img> loads cross-origin without CORS; onerror → keep light
-      } else if (video && src) {
-        const cur = video.currentSrc || src.getAttribute('src') || '';
-        if (!cur || /_hd\.mp4/i.test(cur)) return;
-        const hd = hdVariant(cur);
-        const probe = document.createElement('video');
-        probe.muted = true; probe.preload = 'metadata';
-        probe.onloadedmetadata = () => {
-          if (src.getAttribute('src') === hd) return;
-          src.src = hd; video.src = hd; video.load(); video.play().catch(()=>{});
-        };
-        probe.src = hd; // metadata-only probe; onerror → keep light
-      }
+      if (imageShown || !video || !src) return;
+      const cur = video.currentSrc || src.getAttribute('src') || '';
+      if (!cur || /_hd\.mp4/i.test(cur)) return;
+      const hd = hdVariant(cur);
+      const probe = document.createElement('video');
+      probe.muted = true; probe.preload = 'metadata';
+      probe.onloadedmetadata = () => {
+        if (src.getAttribute('src') === hd) return;
+        src.src = hd; video.src = hd; video.load(); video.play().catch(()=>{});
+      };
+      probe.src = hd; // metadata-only probe; onerror → keep light
     }
 
     (async function applyHeroVideo(){
@@ -933,7 +928,7 @@
         if (vid) { vid.pause(); vid.src = ''; vid.style.display = 'none'; }
         const img = lb.querySelector('img');
         img.style.display = 'block';
-        img.src = cdnUrl(url, 1200);
+        img.src = url; // full Instagram-max image (the grid uses the small thumb instead)
         img.alt = alt;
       }
       lb.querySelector('.lb-caption').textContent = alt.substring(0, 120);
@@ -1223,7 +1218,7 @@
                aria-label="${item.a ? item.a.substring(0,80) : 'סרטון'}"
                style="width:100%;height:100%;object-fit:cover;display:block;background:#1a1008;${_rotStyle}"
                onerror="this.style.background='#1a1008'">`
-          : `<img src="${cdnUrl(item.u, 400)}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
+          : `<img src="${item.thumb || item.u}" alt="${getAutoAlt(item).substring(0,120)}" loading="lazy" decoding="async"
                style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;${_rotStyle}" />`;
 
         const badge = (item.carousel || item.ccount > 1)

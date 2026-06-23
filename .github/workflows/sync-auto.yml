@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
+    inputs:
+      reprocess_images:
+        description: 'Re-fetch existing photos at Instagram-max + build small grid thumbnails (resumable)'
+        type: boolean
+        default: false
 
 jobs:
   sync:
@@ -27,7 +32,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-        run: node fix.js --target=preview
+        run: node fix.js --target=preview ${{ (inputs.reprocess_images && '--reprocess-images') || '' }}
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
