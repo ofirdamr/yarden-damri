@@ -26,25 +26,21 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
         continue-on-error: true
       - name: Sync Instagram
-        timeout-minutes: 45
+        timeout-minutes: 120
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-        run: node fix.js --target=preview ${{ (inputs.reprocess_images && '--reprocess-images') || '' }}
+        run: node fix.js ${{ (inputs.reprocess_images && '--reprocess-images') || '' }}
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp instagram-stats.json preview/instagram-stats.json
-          cp preview/gallery-data.js gallery-data.js
-          # Stage only files that exist. A removed/renamed file must NEVER abort the sync:
-          # the go-live cleanup deleted preview/*-temp.html, and the old hard-coded
-          # `git add preview/index-temp.html ...` then failed every run with
-          # "pathspec did not match any files" (exit 128) — the data was uploaded to R2
-          # but never committed. The existence guard makes this resilient going forward.
-          for f in preview/gallery-data.js gallery-data.js instagram-stats.json preview/instagram-stats.json preview/index.html preview/gallery.html; do
+          # Root-only since preview/ was retired (2026-06-24). fix.js writes the root
+          # gallery-data.js and bumps the cache version in root index.html / gallery.html.
+          # Stage only files that exist so a missing one never aborts the sync.
+          for f in gallery-data.js instagram-stats.json index.html gallery.html; do
             if [ -e "$f" ]; then git add "$f"; fi
           done
           git diff --staged --quiet && exit 0

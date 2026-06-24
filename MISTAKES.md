@@ -1,5 +1,15 @@
 # Mistakes Log
 
+## 2026-06-24 — Deleting preview/ broke the Instagram sync workflow
+After removing the stale `preview/` folder, I didn't update `sync-auto.yml`, which still ran
+`node fix.js --target=preview` and then `cp preview/gallery-data.js gallery-data.js` + `cp ...
+preview/instagram-stats.json`. With `preview/` gone, fix.js would crash writing
+`preview/gallery-data.js`, and the `cp` lines fail outright — so once a run finished its uploads it
+would error, and new Instagram posts would stop reaching the live gallery. Fix: made the sync
+root-only — `node fix.js` (no `--target`), and the commit step stages root `gallery-data.js`,
+`instagram-stats.json`, `index.html`, `gallery.html`. Lesson: when deleting a folder, grep the
+workflows/scripts for references to it before committing the deletion.
+
 ## 2026-06-24 — Live Google Places API key hardcoded in reviews.html (found in secret scan)
 `reviews.html` shipped a real Google API key (`AIzaSy…`) in client JS, publicly readable at
 `yardendamri.co.il/reviews.html` and in git history. It was **dead code** — `loadReviews()` returns
