@@ -35,7 +35,7 @@ jobs:
             remote-state.js gallery-data.js instagram-stats.json \
             gallery-settings.json social.json robots.txt sitemap.xml \
             sitemap-index.xml sitemap-media.xml favicon.ico favicon.png \
-            apple-touch-icon.png share-preview.jpg"
+            apple-touch-icon.png share-preview.jpg .well-known/security.txt"
 
           REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${PUBLIC_REPO}.git"
 
@@ -55,7 +55,7 @@ jobs:
           # file removed here is removed there too).
           find public -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           for f in $FILES; do
-            if [ -e "$f" ]; then cp "$f" "public/$f"; else echo "WARN: missing $f"; fi
+            if [ -e "$f" ]; then mkdir -p "public/$(dirname "$f")"; cp "$f" "public/$f"; else echo "WARN: missing $f"; fi
           done
 
           # The serving repo ALWAYS needs a CNAME for the custom domain. Write it
