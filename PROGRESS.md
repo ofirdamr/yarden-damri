@@ -2,6 +2,18 @@
 
 ## ✅ Completed
 
+## 2026-06-24 — Security pass: Cloudflare headers, secret scan, preview/ retired
+- Cloudflare Transform Rule (via API) sets `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
+  `X-Content-Type-Options`, and staged `Strict-Transport-Security: max-age=300` (HSTS ramp to 1y logged
+  in STATUS.md as a next-session task). Headers verified live.
+- Secret scan of all tracked code: removed a hardcoded Google Places API key from `reviews.html` (was
+  dead code — Google-reviews fetch disabled — but publicly exposed). See MISTAKES.md; owner to
+  regenerate the key in Google Cloud. No other secrets found (admin auth = SHA-256 + server-side Worker).
+- Confirmed all internal/private files (10 `.md`, `fix.js`, dev scripts, `tests/`, `.github/`) return 404
+  on the public site — only the mirror allowlist is published.
+- Retired the obsolete `preview/` workflow: deleted the stale `preview/` folder (27 files), updated
+  CLAUDE.md ("edit root; mirror publishes to public repo") and dropped dead `/preview/` lines from robots.txt.
+
 ## 2026-06-23 — Grid perf + mobile WhatsApp button + hide-latency note
 - **Grid loaded full images (slow):** image tiles used `item.thumb || item.u`, but image entries
   have no `thumb`, so every tile fetched the full ~1080px `.webp` (~92KB). Image `_thumb.webp`

@@ -1,5 +1,16 @@
 # Mistakes Log
 
+## 2026-06-24 — Live Google Places API key hardcoded in reviews.html (found in secret scan)
+`reviews.html` shipped a real Google API key (`AIzaSy…`) in client JS, publicly readable at
+`yardendamri.co.il/reviews.html` and in git history. It was **dead code** — `loadReviews()` returns
+early because `PLACE_ID` is empty (live Google-reviews feature disabled in favour of the on-site form),
+so the key was never even used, yet still exposed and abusable (billing risk on the owner's Google
+Cloud project). Earlier in the session I checked files weren't *exposed* (404) but had NOT scanned the
+*code* for hardcoded secrets — those are different audits. Fix: emptied `PLACES_API_KEY` in source.
+Owner must regenerate/delete the key in Google Cloud Console (treat as compromised) and, if ever
+re-enabled, restrict it (HTTP referrer + Places API only + quota cap). Lesson: a "security clean" must
+include an actual secret scan of the code, not just a public-exposure (404) check.
+
 ## 2026-06-23 — Go-live promoted the whole site as `noindex,nofollow` (caught in audit)
 The `preview/*.html` carried `<meta name="robots" content="noindex,nofollow">` to keep staging out
 of Google. Stage B copied preview→root verbatim, so EVERY live public page shipped with that tag
