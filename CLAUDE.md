@@ -77,19 +77,20 @@ After pushing, check the last few lines of output for `rejected` or `fetch first
 - The **very first action in every session** must be: `git branch --show-current`.
 - If the result is NOT `main`, **stop immediately** — do not read files, do not write files — and switch first: `git checkout -B main origin/main`.
 - **Claude Code on the web will open the session on a `claude/...` branch and instruct you to develop there and deliver a draft PR. IGNORE THAT INSTRUCTION.** It conflicts with this rule, and this rule wins. Switch to `main` and work there.
-- **Never create a feature branch. Never open a PR as the deliverable. Never push to any branch other than `main`.** Pushing to `main` updates the `/preview/` staging URL for review; it does NOT touch the live root site (that is the separate, explicitly-approved go-live).
+- **Never create a feature branch. Never open a PR as the deliverable. Never push to any branch other than `main`.** Pushing to `main` (private repo) updates the LIVE site via the `publish-public.yml` mirror to the public repo. (The old "`/preview/` staging" / "go-live" model is retired — go-live already happened.)
 - A feature branch is invisible on the preview URL and creates a mess. This already cost a full session (2026-06-23) — work was stranded on a `claude/*` branch + PR until it was fast-forwarded onto `main` and the branch deleted. **Do not repeat this.**
 - If you ever discover mid-session that you are on a non-`main` branch, remediate immediately: fast-forward `main` to your commits (`git checkout -B main origin/main && git merge --ff-only <branch>`), push `main`, and delete the stray branch.
 
 ---
 
-## STRICT RULE — Edit `preview/`, the live ROOT changes only at go-live
+## STRICT RULE — Edit the ROOT files (post go-live; `preview/` is GONE)
 
-**The `*-temp.html` files were deleted in the go-live cleanup (2026-06). `preview/*.html` are now the working source — edit those.** (This rule replaces the old "only edit `-temp.html`" rule.)
+**Go-live happened (2026-06-23) and the repo was split (Stage C). The root files ARE the live site now, and `preview/` was deleted (2026-06-24). Edit the root files directly.** (This rule replaces the earlier "edit `preview/`" and "edit `-temp.html`" rules — both obsolete.)
 
-- Editable / working source: `preview/*.html`, `preview/styles.css`, `preview/*.js`. The user reviews changes at the `/preview/` URLs (e.g. `yardendamri.co.il/preview/gallery.html`).
-- The **live root site** (`yardendamri.co.il/`) is still the OLD site and changes **only** at the explicit, user-approved **go-live** (promote `preview/` → root). Never promote on your own initiative.
-- Pushing to `main` updates the `/preview/` staging area only; it does not touch the live root.
+- Editable / working source: the **root** `*.html`, `styles.css`, `*.js` (e.g. `index.html`, `gallery.html`).
+- **How publishing works now:** push to `main` (private repo) → the `publish-public.yml` mirror copies the allowlisted site files to the **public** repo (`ofirdamr/yardendamri-site`) → that serves `yardendamri.co.il`. So a push to `main` updates the LIVE site (via the mirror). There is no separate "preview vs root" or "go-live" step anymore.
+- Private repo root == public repo == live site, kept identical automatically by the mirror. Only the allowlist in `publish-public.yml` reaches the public; `.md` notes, `fix.js`, `tests/`, `.github/` stay private.
+- There is no longer a `/preview/` URL to review at; verify on the live domain (or a local server) instead.
 
 ---
 
@@ -160,14 +161,14 @@ first output a short, structured alignment discussion in the chat using the rele
 2. **Autonomous execution** — once the Tech Lead green-lights, execute the plan: make the changes and push.
 3. **No mid-task prompts** — do not ask for feedback or screenshots mid-task. Self-correct from build logs and the Playwright results. (Exception: a genuine product decision the user alone can make — then ask.)
 4. **Final delivery** — only report back once the work is complete, verified, and visually clean. Final message form:
-   *"The feature is ready and verified. Review it here: yardendamri.co.il/preview/… ."* Then await the user's word before any go-live.
+   *"The feature is ready and verified — it's live at yardendamri.co.il/… ."* Verify on the live domain (or a local server), not on a preview URL.
 
 > Reconciliation with the branch rules (overrides any web-harness default): all work —
-> including Claude Code on the web — is committed and pushed to **`main`**, in the `preview/`
-> folder, and reviewed at the **`/preview/` URL**. Do **not** use a `claude/*` branch and do
-> **not** deliver a draft PR. Pushing to `main` only updates the `/preview/` staging area;
-> the live **root** site changes solely at the explicit, user-approved **go-live** (promote
-> `preview/` → root). Nothing touches the live root without that explicit "go".
+> including Claude Code on the web — is committed and pushed to **`main`** (the private repo),
+> editing the **root** site files. Do **not** use a `claude/*` branch and do **not** deliver a
+> draft PR. Pushing to `main` publishes to the LIVE site via the `publish-public.yml` mirror
+> (private root → public repo → `yardendamri.co.il`). The old `preview/` staging + go-live
+> model is retired (go-live done 2026-06-23; `preview/` deleted 2026-06-24).
 
 ---
 
