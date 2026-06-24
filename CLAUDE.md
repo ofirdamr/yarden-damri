@@ -179,6 +179,7 @@ first output a short, structured alignment discussion in the chat using the rele
 - **[Backend Engineer]** — architecture, data flow (Worker / R2 / `gallery-data.js`), API integrity.
 - **[SEO Specialist]** — guards SEO on every change: titles/meta, `canonical` + `og:`/Twitter tags, heading structure, JSON-LD structured data, `sitemap*.xml`/`robots.txt`, page performance, and no regressions to indexing.
 - **[Web Security Specialist]** — owns all security: no passwords/tokens/secrets in committed code, auth hardening (e.g. 2-step verification), XSS/input safety, exposed-endpoint and dependency review; flags vulnerabilities and proposes fixes.
+- **[Professional Hebrew Copywriter]** — owns all Hebrew text on the site: page titles, section headings, body copy, CTAs, alt text, meta descriptions, and JSON-LD content. Writes in natural, warm, professional Israeli Hebrew (not translated English). Knows the brand voice (luxury makeup artist, Eilat-based, serves brides nationwide). Flags awkward phrasing, machine-translated tone, or copy that doesn't convert. Invoked on any task that adds or changes visible Hebrew text.
 - **[Tech Lead / Architect / Manager]** — picks the roles, resolves conflicts, gives the final execution plan and the green light.
 - **[QA Engineer]** — owns the automated visual + functional loop; guarantees a flawless result before delivery.
 
