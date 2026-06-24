@@ -20,25 +20,22 @@ serves `yardendamri.co.il`. So a push to `main` updates the LIVE site. No `/prev
 process and ALL plausible causes with the team, find the ROOT cause, not the first symptom (CLAUDE.md).
 
 ### ✅ Open / pending tasks (in priority order)
-1. **Verify the Instagram sync is healthy.** It was failing (45-min timeout) because deleting `preview/`
-   erased `preview/gallery-data.js` — the file `fix.js --target=preview` read to know what was already
-   uploaded — so it re-uploaded ALL videos. **Fixed**: `sync-auto.yml` is now root-only (`node fix.js`,
-   no `--target`), timeout raised 45→120. **Check the next scheduled run (cron `0 */6`) went green** and
-   the gallery updates. If still red, read its logs (`mcp__github__get_job_logs`, repo `ofirdamr/yarden-damri`).
-2. **HSTS ramp (Cloudflare, ~on/after 2026-06-28).** Security headers are live via a Cloudflare Transform
-   Rule (NOT in the repo). HSTS is staged at `max-age=300`. After a few days with no HTTPS issues, raise it
-   to `max-age=31536000; includeSubDomains; preload`. Method in STATUS.md (zone `745a6f759dbdf0930afbf8349d2d4835`,
-   API `PUT /zones/{zone}/rulesets/phases/http_response_headers_transform/entrypoint`). Needs the user's
-   scoped Cloudflare token (the one they're keeping until this is done), then user **revokes** it.
+1. **Verify Instagram sync next run went green.** Fix committed (`42ef8ed`, 2026-06-24 15:24 UTC). The two
+   failed runs (09:35, 14:36) used the old broken workflow (pre-fix). The fix: root-only `node fix.js`,
+   timeout 45→120 min, `gallery-data.js` correct (1547 items, all R2 URLs). Next scheduled run is 18:00 UTC —
+   check it went green. If not, read logs via `mcp__github__get_job_logs`, repo `ofirdamr/yarden-damri`.
+2. **HSTS ramp (Cloudflare, ~on/after 2026-06-28).** HSTS staged at `max-age=300`. After a few days with
+   no HTTPS issues, raise to `max-age=31536000; includeSubDomains; preload`. Zone `745a6f759dbdf0930afbf8349d2d4835`,
+   API `PUT /zones/{zone}/rulesets/phases/http_response_headers_transform/entrypoint`. Needs user's scoped
+   Cloudflare token → after applying, user revokes it.
 3. ~~**User-side actions** — DONE (2026-06-24): Google Places API key rotated; Bot Fight Mode ON; www Proxied.~~
-4. **Analytics (guidance given, no code):** to see real humans, use **Cloudflare → Web Analytics →
-   Exclude bots = Yes** (no country filter) for the honest human count by country, and **GA4 sorted by
-   engagement time** to tell real foreign leads (Paris/NYC + real time on site) from datacenter bots
-   (Boydton/Cheyenne + ~0s). Don't filter GA4 to Israel-only — it would hide real French/US brides.
+4. **First mission for the Hebrew Copywriter** — queued for next session. Model: Sonnet.
+5. **Analytics (guidance given, no code):** Cloudflare → Web Analytics → Exclude bots = Yes for real human
+   count; GA4 sorted by engagement time to separate real foreign leads from datacenter bots.
 
 ---
 
-## ✅ DONE this session (2026-06-24)
+## ✅ DONE this session (2026-06-24, session 2)
 - **Cloudflare security headers (live, via API Transform Rule, reversible, not in git):**
   `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`,
   `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `X-Content-Type-Options: nosniff`,
@@ -53,6 +50,15 @@ process and ALL plausible causes with the team, find the ROOT cause, not the fir
 - **Fixed the Instagram sync** broken by the `preview/` deletion (see pending #1).
 - **Reviewed the Cloudflare security scan** the user pasted: the 4 "Dangling A Record" warnings are a
   **FALSE POSITIVE** (they're GitHub Pages' IPs `185.199.108-111.153` hosting the site — **do NOT delete**).
+
+## ✅ DONE this session (2026-06-24, session 2)
+- **Diagnosed Instagram sync redundant re-uploads:** root cause = fix commit `42ef8ed` landed at 15:24 UTC
+  but the two failed runs (09:35, 14:36) used commit `ca84125` (pre-fix). They re-uploaded all 1547 items
+  because `preview/gallery-data.js` was gone → `existingById` empty. Fix is now live; next run will be clean.
+  Re-uploads did NOT change video quality (same CRF 28 / 720p settings; `_hd.mp4` files untouched).
+- **Confirmed user-side security actions done:** Google Places API key rotated, Bot Fight Mode ON, www Proxied.
+- **Added Professional Hebrew Copywriter to CLAUDE.md team roles.** Recommended model: Sonnet (quality +
+  token efficiency; Haiku too weak for nuanced Hebrew, Opus overkill for copy).
 
 ---
 

@@ -2,9 +2,12 @@
 
 ## ✅ Completed
 
-## 2026-06-24 — User-side security actions confirmed done
-- Google Places API key rotated (old compromised key deleted from Google Cloud).
-- Cloudflare: Bot Fight Mode confirmed ON; www record flipped to Proxied (orange cloud), SSL/TLS = Full verified first.
+## 2026-06-24 (session 2) — Instagram sync diagnosis + team update
+- Diagnosed the two failed sync runs (09:35, 14:36 UTC): both used commit `ca84125` (pre-fix). The fix
+  (`42ef8ed`, 15:24 UTC) landed after the last failure. Next scheduled run will be clean.
+- Confirmed re-uploads used same quality settings (CRF 28 / 720p); no degradation; `_hd.mp4` untouched.
+- User confirmed user-side security actions done: Google Places API key rotated, Bot Fight Mode ON, www Proxied.
+- Added **Professional Hebrew Copywriter** role to CLAUDE.md. Model recommendation: Sonnet.
 
 ## 2026-06-24 — Security pass: Cloudflare headers, secret scan, preview/ retired
 - Cloudflare Transform Rule (via API) sets `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
