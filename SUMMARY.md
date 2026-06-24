@@ -30,12 +30,7 @@ process and ALL plausible causes with the team, find the ROOT cause, not the fir
    to `max-age=31536000; includeSubDomains; preload`. Method in STATUS.md (zone `745a6f759dbdf0930afbf8349d2d4835`,
    API `PUT /zones/{zone}/rulesets/phases/http_response_headers_transform/entrypoint`). Needs the user's
    scoped Cloudflare token (the one they're keeping until this is done), then user **revokes** it.
-3. **User-side actions (remind, don't block on):**
-   - **Rotate the Google Places API key** in Google Cloud Console → Maps Platform → Places API (New) /
-     Credentials. The old key was public in `reviews.html` (now removed) so it's compromised — delete it.
-   - **Cloudflare toggles:** confirm **Bot Fight Mode is actually ON** (a screen-recording showed it still
-     OFF), and flip **www** to Proxied (orange cloud) AFTER confirming SSL/TLS mode = **Full**.
-     ("Block AI bots" is correctly set to *Do not block / allow crawlers* — leave it.)
+3. ~~**User-side actions** — DONE (2026-06-24): Google Places API key rotated; Bot Fight Mode ON; www Proxied.~~
 4. **Analytics (guidance given, no code):** to see real humans, use **Cloudflare → Web Analytics →
    Exclude bots = Yes** (no country filter) for the honest human count by country, and **GA4 sorted by
    engagement time** to tell real foreign leads (Paris/NYC + real time on site) from datacenter bots

@@ -2,6 +2,10 @@
 
 ## ✅ Completed
 
+## 2026-06-24 — User-side security actions confirmed done
+- Google Places API key rotated (old compromised key deleted from Google Cloud).
+- Cloudflare: Bot Fight Mode confirmed ON; www record flipped to Proxied (orange cloud), SSL/TLS = Full verified first.
+
 ## 2026-06-24 — Security pass: Cloudflare headers, secret scan, preview/ retired
 - Cloudflare Transform Rule (via API) sets `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
   `X-Content-Type-Options`, and staged `Strict-Transport-Security: max-age=300` (HSTS ramp to 1y logged
