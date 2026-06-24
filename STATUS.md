@@ -11,6 +11,22 @@ harmless duplicate (robots.txt Disallows it so it stays out of the index). **Nex
 domain move) — separate, needs the user.** Note: `preview/*.html` remain the working source for future
 edits; promote to root again at the next approved cutover.
 
+## ⏳ PENDING — next session (HSTS ramp-up)
+**Security headers are LIVE via a Cloudflare Transform Rule** (NOT in the repo — set through the
+Cloudflare API, instantly reversible). Active headers on `yardendamri.co.il`: `X-Frame-Options:
+SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(),
+microphone=(), geolocation=()`, `X-Content-Type-Options: nosniff`, and `Strict-Transport-Security:
+max-age=300` (deployed 2026-06-24).
+- **TODO (after ~3–4 days, i.e. on/after ~2026-06-28, if the site shows no HTTPS issues):** raise HSTS
+  from `max-age=300` to `max-age=31536000; includeSubDomains; preload` (the real, lasting protection).
+- **How:** Cloudflare API, zone `745a6f759dbdf0930afbf8349d2d4835`, endpoint
+  `PUT /zones/{zone}/rulesets/phases/http_response_headers_transform/entrypoint` — re-send the full
+  Security Headers rule (all 5 headers) with the new HSTS value. Needs a scoped API token from the user
+  (Zone · Transform Rules · Edit + Zone · Read), which the user is keeping until this bump is done, then
+  **revoking**. Verify with `curl -sI https://yardendamri.co.il/ | grep -i strict-transport`.
+- **Why staged:** HSTS is cached inside each visitor's browser and can't be undone server-side, so we
+  prove it's safe at 5-min before committing to a year.
+
 ## Current State
 - **Root (/)**: ✅ NEW site — promoted live 2026-06-23. Served at `yardendamri.co.il/`.
 - **Preview (/preview/)**: Working source for future edits; kept live as a duplicate (out of the index).
