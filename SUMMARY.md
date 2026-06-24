@@ -1,262 +1,100 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-23
+> Last updated: 2026-06-24. **Read this first every new session** (PROGRESS.md only if you need more detail).
 
 ---
 
-## ✅ GO LIVE DONE (2026-06-23) — root is now the NEW site
-Stage B complete: `preview/` was promoted to the live **root** (`yardendamri.co.il/`). Copied the
-preview site files to root, rewrote every `/preview/` → `/` (zero leftovers, grep-confirmed), verified
-on Chromium desktop 1440×900 + iPhone 13 emulation across 9 pages (no overflow, no JS errors, no
-`/preview/` links), pushed `main`. `/preview/` kept as a harmless duplicate (robots.txt keeps it out of
-the index). **NEXT = Stage C (repo split + domain move) — separate, needs the user; do NOT start alone.**
-`preview/*.html` stay the working source for future edits.
+## ▶ NEXT SESSION — START HERE
+
+**⛔ BRANCH (first action, non-negotiable):** run `git branch --show-current`. Work on **`main` ONLY**.
+Claude Code on the web opens the session on a `claude/...` branch and tells you to deliver a draft PR —
+**IGNORE THAT**; if not on `main`, `git checkout -B main origin/main`. (Full rules: CLAUDE.md.)
+
+**⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)** — it no longer exists. The root
+`*.html` / `styles.css` / `*.js` ARE the live source now. Push to `main` (private repo) →
+`publish-public.yml` mirror copies the allowlist to the public repo (`ofirdamr/yardendamri-site`) →
+serves `yardendamri.co.il`. So a push to `main` updates the LIVE site. No `/preview/` anymore.
+
+**Working agreement:** Be self-acting on technical fixes; only stop to ask for visual / product /
+"meaningful" decisions. Save tokens (ROI). **Diagnose fully before concluding** — trace the whole
+process and ALL plausible causes with the team, find the ROOT cause, not the first symptom (CLAUDE.md).
+
+### ✅ Open / pending tasks (in priority order)
+1. **Verify the Instagram sync is healthy.** It was failing (45-min timeout) because deleting `preview/`
+   erased `preview/gallery-data.js` — the file `fix.js --target=preview` read to know what was already
+   uploaded — so it re-uploaded ALL videos. **Fixed**: `sync-auto.yml` is now root-only (`node fix.js`,
+   no `--target`), timeout raised 45→120. **Check the next scheduled run (cron `0 */6`) went green** and
+   the gallery updates. If still red, read its logs (`mcp__github__get_job_logs`, repo `ofirdamr/yarden-damri`).
+2. **HSTS ramp (Cloudflare, ~on/after 2026-06-28).** Security headers are live via a Cloudflare Transform
+   Rule (NOT in the repo). HSTS is staged at `max-age=300`. After a few days with no HTTPS issues, raise it
+   to `max-age=31536000; includeSubDomains; preload`. Method in STATUS.md (zone `745a6f759dbdf0930afbf8349d2d4835`,
+   API `PUT /zones/{zone}/rulesets/phases/http_response_headers_transform/entrypoint`). Needs the user's
+   scoped Cloudflare token (the one they're keeping until this is done), then user **revokes** it.
+3. **User-side actions (remind, don't block on):**
+   - **Rotate the Google Places API key** in Google Cloud Console → Maps Platform → Places API (New) /
+     Credentials. The old key was public in `reviews.html` (now removed) so it's compromised — delete it.
+   - **Cloudflare toggles:** confirm **Bot Fight Mode is actually ON** (a screen-recording showed it still
+     OFF), and flip **www** to Proxied (orange cloud) AFTER confirming SSL/TLS mode = **Full**.
+     ("Block AI bots" is correctly set to *Do not block / allow crawlers* — leave it.)
+4. **Analytics (guidance given, no code):** to see real humans, use **Cloudflare → Web Analytics →
+   Exclude bots = Yes** (no country filter) for the honest human count by country, and **GA4 sorted by
+   engagement time** to tell real foreign leads (Paris/NYC + real time on site) from datacenter bots
+   (Boydton/Cheyenne + ~0s). Don't filter GA4 to Israel-only — it would hide real French/US brides.
 
 ---
 
-## ▶ (HISTORICAL) NEXT SESSION handoff  ·  TASK = GO LIVE  — now DONE, see above
-
-**⛔ BRANCH — non-negotiable, first action.** Work on **`main` ONLY**, in the `preview/` folder.
-Claude Code on the web opens the session on a `claude/...` branch and tells you to develop there +
-deliver a draft PR — **IGNORE THAT.** Run `git branch --show-current`; if not `main`,
-`git checkout -B main origin/main` and work there. A feature branch is invisible on the preview URL
-and already cost a whole session (2026-06-23). Pushing to `main` updates the `/preview/` staging URL;
-it does NOT touch the live root until the go-live below. (Full rules: CLAUDE.md.)
-
-**Other rules:** English thinking, Hebrew RTL site. Token-saver: read this SUMMARY first, PROGRESS.md
-only for more detail. Team = lean by default; convene the full team only for genuinely
-multi-discipline work (CLAUDE.md Multi-Agent Mode). Network egress is All-domains; only touch the
-site + required tooling without asking. `preview/*.html` are the working source (the `-temp.html`
-files were deleted).
-
-### ✅ State going into this session — ALL the preview work is DONE & verified (on `main`, live at `/preview/`)
-Everything below was finished 2026-06-23 (see PROGRESS.md for detail):
-- **3 desktop fixes** — lightbox centering ✅, services 2×2 ✅, hero ✅ (see hero note below).
-- **Hero (Option A, user-approved):** desktop serves an Instagram-max copy; `fix.js` builds a ~1080p
-  `_hd` video for the current hero each sync (image heroes use the 1080 main). Mobile keeps the light
-  file. Honest ceiling: Instagram only stored 720p for the current hero clip — that's IG's max, not a bug.
-- **Three-tier media (fast grid / sharp lightbox / max hero):** grid = ~600px thumbnail, lightbox = full
-  ~1080px, hero = IG-max. `fix.js` writes both image sizes; killed the dead `cdnUrl()` that made the grid
-  load full images. All **611 existing public photos reprocessed** to 1080 + thumb (done). Automatic for
-  new posts forever.
-- **Instagram sync FIXED + race-safe:** the nightly failures were `git add` on deleted `*-temp.html`
-  (exit 128); now existence-guarded + rebase-retry push. Verified green.
-- **Nav + footers fully consistent across all 12 pages:** desktop nav = mobile menu =
-  אודות·מאפרת כלות·שירותים·גלריה·מדריך כלות·צרי קשר. Pricing+reviews are **footer-only** now. Every
-  footer is **byte-identical** (canonical block).
-- **CLAUDE.md updated:** permanent team-judgment rule, hardened main-only/no-feature-branch rule,
-  nav rule (pricing/reviews footer-only).
-
-### 🚀 YOUR TASK THIS SESSION — GO LIVE (promote `preview/` → root)
-**Do NOT start until you have (1) read SUMMARY.md + PROGRESS.md + CLAUDE.md, and (2) re-read the
-GO-LIVE PLAN immediately below.** The user has approved going live. Gate the final cutover behind one
-real visual check, then promote.
-
-**GO-LIVE PLAN (embedded here because the old external plan file is gone):**
-- **Goal:** the new site (currently in `preview/`) becomes the live **root** site at `yardendamri.co.il/`.
-  Today root `/` is the OLD Cloudinary-era site; `preview/` is the finished site.
-- **Stage B — promote preview → root (this is "go live"):**
-  1. Copy every `preview/` site file to repo root, overwriting the old root files: all `*.html`
-     (the 12 public pages + `admin.html`), `styles.css`, `gallery-data.js`, `instagram-stats.json`,
-     and the JS (`a11y.js`, `cookie-banner.js`, `cloud-storage.js`, `remote-state.js`). Do NOT copy
-     `worker.js` to root as a page (it's the Cloudflare Worker source).
-  2. **Rewrite absolute `/preview/` references → `/`** in the promoted root files. Known spots:
-     nav-logo `href="/preview/"`, footer `דף הבית` `href="/preview/"`. Grep root after: there must be
-     **zero** `/preview/` link/asset references left. (Canonical/og URLs already point to root —
-     `https://yardendamri.co.il/<page>.html` — so leave those.)
-  3. Confirm `sitemap*.xml` / `robots.txt` at root point to root URLs (no `/preview/`).
-  4. The sync workflow already does `cp preview/gallery-data.js gallery-data.js`, so root data stays
-     fresh after go-live — leave that.
-  5. **Verify before announcing:** serve locally, load the ROOT pages (not /preview/) at 1440px + mobile
-     with Playwright, screenshot + Read them, confirm nav/footer/hero/gallery render and there are no
-     `/preview/` leftovers and no JS errors. THEN commit + push `main`. Root site is now live.
-- **Stage C — later, separate (needs the user):** split repos (current → private full history; new
-  public repo serves the domain), auto-sync in private pushes data files to public, user moves the
-  domain. Do NOT do Stage C as part of go-live unless the user asks.
-
-**One product check to confirm with the user before cutover:** keeping `/preview/` working after
-go-live is fine (harmless duplicate), or delete it. Default: leave `/preview/` as-is.
+## ✅ DONE this session (2026-06-24)
+- **Cloudflare security headers (live, via API Transform Rule, reversible, not in git):**
+  `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`,
+  `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `X-Content-Type-Options: nosniff`,
+  `Strict-Transport-Security: max-age=300` (staged).
+- **Secret scan of all tracked code** → removed a hardcoded **Google Places API key** from `reviews.html`
+  (dead code, but public). No other secrets; admin auth = SHA-256 + server-side Worker. (User must rotate the key.)
+- **Confirmed private files are not public:** all `.md`, `fix.js`, dev scripts, `tests/`, `.github/`
+  return 404 on the live site — only the mirror allowlist is published.
+- **Retired `preview/`:** deleted the folder (27 files), rewrote the obsolete CLAUDE.md "edit preview/"
+  rules to "edit root; mirror publishes", cleaned dead `/preview/` lines from `robots.txt`.
+- **Added `.well-known/security.txt`** (RFC 9116) + taught the mirror to publish nested files.
+- **Fixed the Instagram sync** broken by the `preview/` deletion (see pending #1).
+- **Reviewed the Cloudflare security scan** the user pasted: the 4 "Dangling A Record" warnings are a
+  **FALSE POSITIVE** (they're GitHub Pages' IPs `185.199.108-111.153` hosting the site — **do NOT delete**).
 
 ---
 
-## ✅ RESOLVED & PROMOTED (2026-06-22) — Lightbox layout
-The lightbox open task is done and promoted to permanent (`preview/index.html` +
-`preview/gallery.html`). Media now opens **edge-to-edge fullscreen** (object-fit:cover,
-Reels-style — small intentional edge trim, no black bars, no seams). The
-like/comment/share/save buttons moved to a **vertical side rail on the right** (same
-layout for photos and videos), which frees the entire bottom for the video's native
-player controls — no more overlapping buttons. Removed the dark gradient scrim behind
-the buttons (icons use a subtle drop-shadow for legibility instead). Desktop shows the
-whole frame centered (portrait reels aren't over-zoomed). See `preview/NEXT-LIGHTBOX.md`.
-
-## 2026-06-21 — Nav/floating/lightbox/about overhaul PROMOTED to permanent
-All 12 pages promoted temp → permanent (user approved). Subpage nav now identical to
-the homepage (monogram logo left, centered "ירדן דמרי / מאפרת כלות וערב", social +
-fewer categories on the right, same fonts/colors). Floating buttons unified across all
-pages (a11y + scroll-top + WhatsApp: 36px, transparent .55, aligned). Lightbox media
-fullscreen + nav hidden while open (lightbox button layout still NEEDS work — see above).
-About image fixed (dead ImageKit URL → R2 `about-yarden.png`) and now shown on mobile on
-both the homepage about section and the about page.
-
-## Architecture
-- **Live site**: `yardendamri.co.il` — root branch, old site (Cloudinary-based). Not yet replaced by preview.
-- **Staging/development**: `/preview` folder on `main` branch — `yardendamri.co.il/preview/`
-- **Branch rule**: `main` ONLY. No feature branches. No exceptions.
-- **File rule**: edit only `*-temp.html`; promote temp → permanent ONLY on explicit user approval.
-- **Build**: Pure HTML/CSS/vanilla JS. No bundler. GitHub Pages auto-deploys on push to `main`.
-- **Images/videos**: Cloudflare R2 — `images.yardendamri.co.il` (photos + `_thumb.jpg`), `videos-new.yardendamri.co.il` (compressed mp4). CORS allows GET/HEAD from yardendamri.co.il.
-- **Gallery data**: `preview/gallery-data.js` — auto-generated by `fix.js` (GitHub Action every 6h). ~1546 items incl. hidden (flagged `hidden:true`); carousel children tagged `carousel/cidx/ccount/post_id`; videos have `video:true` + `thumb`.
-- **Admin settings**: `gallery-settings.json` — hidden/pinned/order/cats/privateCats. Committed via GitHub API by Cloudflare Worker.
-- **Worker**: `preview/worker.js` on Cloudflare (`api.yardendamri.co.il`) — admin auth (KV sessions), `/settings`, `/social` (likes/comments), and `/s/<v|p>/<id>` share pages (OG card → deep-link to gallery item). Deploy preserves secrets via `inherit` bindings.
-
----
-
-## Latest work (2026-06-21) — Gallery, media display & sharing (LIVE)
-- **Videos everywhere**: grid shows thumbnail then swaps to autoplay `<video>` on scroll (poster=thumb so no black box); lightbox plays with poster + muted-fallback.
-- **Order**: natural Instagram time order (photos+videos interleaved); admin gallery matches; removed brideKW/order sorting.
-- **Carousels**: one cover tile + ⧉ badge; lightbox swipes children (`?m=<id>` deep-link opens exact item). Videos get ▶ badge.
-- **Lightbox**: IG-style action bar (like/comment/share/save), horizontal swipe = navigate, vertical swipe = dismiss, media static (touch-action locked), X lowered clear of cookie bar + video controls.
-- **Favourites**: persistent `localStorage gallery_favorites` + "♥ המועדפים שלי" filter.
-- **Share**: link-only → `api.yardendamri.co.il/s/<v|p>/<id>` → WhatsApp clean card (thumbnail + "לחצי כאן לצפייה" + domain), opens the exact item. (Note: WhatsApp can't show a framed image AND a card in one share — chose the card. `brandedImageFile()` canvas frame remains in code but is unused.)
-- **fix.js**: `getJSON()` retry wrapper — a flaky page no longer truncates the fetch (was the real cause of "missing posts", not only reels).
-- **CORS**: set on both R2 buckets (free) via dashboard + `set-cors.yml` workflow (the R2 object token lacks bucket-admin, so dashboard was used).
-
----
-
-## What is DONE (full history)
-
-### Infrastructure
-- Migrated hosting from Netlify (suspended) → GitHub Pages
-- Set up Cloudflare DNS + SSL
-- GitHub Actions: Instagram sync every 6 hours (`sync-auto.yml`)
-- All ~1,535 images uploaded to Cloudinary (later migrated to R2)
-- ImageKit migration attempted (June 2026), broke images → reverted to R2
-- R2 setup: two buckets (`yarden-images`, `yarden-videos-new`) with custom domains
-- 162 Instagram videos re-uploaded with audio to R2 (June 2026, after credentials fix)
-- Thumbnails for all 162 videos uploaded to images R2 bucket
-- `fix.js`: full sync script — Instagram API → compress → R2 upload → write `gallery-data.js`
-- `fix.js` also bumps `gallery-data.js?v=` in HTML on every sync (cache-busting)
-
-### Admin Panel (`preview/admin.html`)
-- SHA-256 password login (no plain text in code)
-- Cloudflare Worker session tokens (KV, 8h TTL, rate limiting 5 attempts → 15 min lockout)
-- Gallery grid: view/hide/pin/rotate/set-category/move-to-top/delete per image
-- Hero video picker: visual thumbnail grid, click to select → saves to Worker → patches HTML
-- Pricing editor: edit service name/price/description/included items
-- Analytics tab: GA4 OAuth connect + live data
-- `remote-state.js`: shared read/write module with write queue, `_ready` gate (refuses writes before fetch), verification after PUT
-- Switched from JSONBin → GitHub (gallery-settings.json) — no size limits, no compression bugs
-
-### Gallery (`preview/index-temp.html` and `preview/gallery.html`)
-- 773 items from `gallery-data.js` (611 images + 162 videos)
-- `applyAdminSettings()`: respects hidden/pinned/order from `gallery-settings.json`
-- Pagination: 48 items/page, bug fixed (was slicing `filteredImages` to 48 → pages 2+ empty)
-- Likes + comments: read/write via Cloudflare Worker `/social` endpoint, web-wide for all visitors
-- Cache-busting: `gallery-data.js?v=1750416000` — bumped automatically by `fix.js`
-
-### Pages built (`/preview`)
-- `index.html` (homepage) — hero video, about, philosophy, area/map, gallery, reviews, contact sections
-- `about.html`
-- `services.html` — 4 service cards + FAQ
-- `gallery.html` — full standalone gallery page
-- `bride.html` — bridal makeup page
-- `bridal-guide.html` — 4-step bridal guide article (Gemini content)
-- `pricing.html` — pricing page with real content
-- `contact.html`
-- `reviews.html` — Google Places API + on-site review form
-- `cookies-policy.html`
-- `disclaimer.html`
-- `accessibility-statement.html`
-- All pages have `-temp.html` variants pending final review before permanent promotion
-
-### Design / UX
-- Desktop responsive fixes: `@media (min-width: 1081px)` — max-width caps, gallery tile size, section layout
-- RTL/Hebrew audit: all pages have `lang="he" dir="rtl"`, mobile menu RTL slide, phone number `dir="ltr"`
-- Desktop layout: logo left / nav links right (CSS order), about grid 1fr/1.4fr, area map left on desktop
-- Hero video: portrait crop fix — `object-position: 50% 20%` (face visible), no aspect-ratio Cloudinary transform
-- Hero video flash fix: correct video baked into `<source src>` + `poster` at save time; sync script sets defaults
-- Philosophy photo: reprocessed (no brightness boost, natural B&W, 119KB)
-- Social buttons: `.social-circle` — 44px circles, `var(--deep)` bg, `var(--blush)` icon + border, identical across mobile menu and footer
-
-### Nav consistency (all pages)
-- All pages share same nav: **אודות | מאפרת כלות | שירותים | גלריה | מדריך כלות | מחירון | ביקורות | צרי קשר**
-- `index.html` uses anchor links; all subpages use full page links
-
-### Cookie banner + GA consent
-- `cookie-banner.js`: slim 48px bar, slides from top, nav shifts down while visible
-- GA (`G-68XM6LS4HX`) removed from `<head>` — loads only after explicit accept
-- Returning visitors who accepted: GA loads immediately, no banner
-- Applied to all 12 public preview pages
-
-### Accessibility (IS 5568)
-- `a11y.js`: shared widget — contrast, text size, links highlight, animations toggle
-- Auto-injects ♿ button on any page that includes the script
-- Alt+A keyboard shortcut
-- ARIA labels, skip nav, screen reader announcements
-
-### SEO
-- Sitemap: `sitemap.xml` (10 pages + images), `sitemap-media.xml`, `sitemap-index.xml`
-- `robots.txt` allowing Google image crawling
-- JSON-LD structured data on all pages
-- `noindex` on admin.html
-- All pages submitted for indexing in Search Console
-
-### Security
-- Worker: session tokens in KV, rate limiting, CORS allowlist, HSTS, X-Frame-Options: DENY, CSP
-- `_ready` gate in remote-state.js — refuses writes before successful fetch (prevents data loss)
-- Write queue: all updates queue + merge from local cache (no race condition)
-- Password never in repo (Worker env var)
-- GitHub token never in repo (Worker env var)
-
----
-
-## What is NOT DONE (pending)
-
-### ✅ DONE — Gallery videos autoplay (confirmed working 2026-06-20, all devices incl. iPhone)
-
-Videos in `preview/index-temp.html` renderPage() now autoplay (muted, looping), no play button. The working combo:
-```html
-<video src="${item.u}" autoplay muted loop playsinline preload="metadata"
-       poster="${item.thumb}"
-       style="width:100%;height:100%;object-fit:cover;display:block;${_rotStyle}"></video>
-```
-Plus `observeGalleryVideos()` — an IntersectionObserver that does `v.muted=true; v.play()` on visible tiles and `v.pause()` off-screen. Three bugs were fixed: (1) was rendering `<img>`+play button; (2) `observeGalleryVideos()` was called but never defined; (3) iOS needed `preload="metadata"` (not "none") + muted-property set before play(). Cache-buster bumped to `?v=1781913600`.
-NOTE: this fix is in `index-temp.html` only — NOT yet promoted to permanent `preview/index.html`.
-
-### Sandbox network egress
-User enabled "Allow network egress → All domains" in claude.ai/code environment settings. Applies to NEW sessions only. From the next session onward, Claude CAN curl the live site (yardendamri.co.il etc.) to verify deployments directly. In older sessions the sandbox returns 403 `host_not_allowed`.
-
-### Go-live checklist
-- All `-temp.html` pages need final user review → promote to permanent (delete temp, rename or copy)
-- `preview/styles-temp.css` → review → promote to `preview/styles.css`
-- After all temps promoted: copy entire `/preview` folder → root (replace old site)
-
-### Other pending
-- Calendly booking integration (online booking + iPhone calendar sync)
-- Online payment (Bit, credit card)
-- Verify thumbnail backfill for any videos missing thumbs (1 video has no thumb in current data)
-
----
+## Architecture (current, post repo-split)
+- **Two repos.** Private origin `ofirdamr/yarden-damri` = full history + Actions + secrets + working source
+  (root files). Public `ofirdamr/yardendamri-site` = auto-generated mirror that serves the domain.
+- **Publishing:** push to `main` → `.github/workflows/publish-public.yml` copies an **allowlist** of site
+  files to the public repo (no `.md`, no `fix.js`, no `tests/`, no `.github/`) and always writes `CNAME`.
+  Private root == public repo == live site, kept identical automatically.
+- **Hosting:** the public repo serves `yardendamri.co.il` via **GitHub Pages** (apex A records = GitHub's
+  4 IPs), **proxied through Cloudflare** (orange cloud) — that's why the security headers apply.
+- **Build:** pure HTML/CSS/vanilla JS, no bundler.
+- **Media:** Cloudflare R2 — `images.yardendamri.co.il` (photos + `_thumb.webp`/`_thumb.jpg`),
+  `videos-new.yardendamri.co.il` (compressed mp4). CORS allows GET/HEAD from the site.
+- **Gallery data:** root `gallery-data.js` — auto-generated by `fix.js` (GitHub Action `sync-auto.yml`,
+  every 6h). Items: `{u,a,item_id,post_id}`; videos `{video:true,thumb}`; flags `hidden:true`,
+  `carousel:true`+`cidx`+`ccount`. Deep link `gallery.html?m=<id>`.
+- **Admin settings:** `gallery-settings.json` — written via GitHub API by the Cloudflare Worker
+  (`api.yardendamri.co.il`, also handles auth/`/social`/share pages). Worker writes to the PRIVATE repo.
 
 ## Key files
-
 | File | Purpose |
 |------|---------|
-| `preview/index-temp.html` | Homepage (active development — fix videos here) |
-| `preview/gallery-data.js` | Auto-generated: 773 items, 162 videos |
-| `gallery-settings.json` | Admin hidden/pinned/order (root, served via GitHub Pages) |
-| `preview/cloud-storage.js` | RemoteState API (fetch public settings, admin writes) |
-| `preview/remote-state.js` | Admin write queue + ready gate |
-| `preview/worker.js` | Cloudflare Worker — auth, settings, hero video patch |
-| `fix.js` | Instagram sync → R2 upload → gallery-data.js → bumps HTML version |
-| `.github/workflows/sync-auto.yml` | GitHub Action: runs fix.js every 6h |
+| `index.html` | Homepage (root = live source) |
+| `gallery.html` | Gallery page |
+| `styles.css` | Shared CSS (bump `?v=` on every change) |
+| `admin.html` | Admin panel (SHA-256 + Worker auth) |
+| `reviews.html` | Reviews (Google-reviews fetch disabled; on-site form) |
+| `fix.js` | Instagram sync → R2 → writes root `gallery-data.js` + bumps HTML cache version |
+| `.github/workflows/sync-auto.yml` | Runs `fix.js` every 6h (root-only, 120-min timeout) |
+| `.github/workflows/publish-public.yml` | One-way mirror: private root → public repo (allowlist) |
+| `.well-known/security.txt` | Vulnerability-disclosure contact |
 
 ## Credentials (never in repo)
-- Instagram token: GitHub Secret `INSTAGRAM_TOKEN`
-- Cloudinary: GitHub Secrets `CLOUDINARY_CLOUD`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
-- R2: GitHub Secrets `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`
-- Worker password: Cloudflare Worker env var
-- GitHub token for Worker: Cloudflare Worker env var
-- GA4 Property ID: 536415544 | Measurement ID: G-68XM6LS4HX
-- Cloudinary cloud: `dfjwxc1cw`
-- R2 account ID: in Cloudflare dashboard
+- Instagram: GitHub Secret `INSTAGRAM_TOKEN` · R2: `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_ENDPOINT`
+- Cloudinary (legacy): `CLOUDINARY_*` · Worker password + GitHub token: Cloudflare Worker env vars
+- Mirror push: GitHub Secret `PUBLIC_REPO_TOKEN`
+- GA4 Property `536415544` · Measurement `G-68XM6LS4HX` · Cloudflare zone `745a6f759dbdf0930afbf8349d2d4835`
+- The user's scoped Cloudflare API token (Transform Rules + Zone Read) is held temporarily for the HSTS
+  ramp, then revoked. It is ONLY in chat, never committed.

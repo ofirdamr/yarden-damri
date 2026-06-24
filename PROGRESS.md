@@ -13,6 +13,19 @@
   on the public site — only the mirror allowlist is published.
 - Retired the obsolete `preview/` workflow: deleted the stale `preview/` folder (27 files), updated
   CLAUDE.md ("edit root; mirror publishes to public repo") and dropped dead `/preview/` lines from robots.txt.
+- Added `.well-known/security.txt` (RFC 9116, vuln-disclosure contact) and taught `publish-public.yml`
+  to create parent dirs so nested allowlisted files publish.
+- **Fixed the Instagram sync broken by the `preview/` deletion** (root cause traced past the symptom):
+  `sync-auto.yml` ran `fix.js --target=preview`, which reads `preview/gallery-data.js` to know what was
+  already uploaded. With `preview/` deleted that file was gone → empty "already-uploaded" memory → it
+  re-transcoded/re-uploaded ALL videos → 45-min CI timeout. Fix: made the sync **root-only** (`node fix.js`,
+  no `--target`; commit stages root `gallery-data.js`/`instagram-stats.json`/`index.html`/`gallery.html`)
+  and raised `timeout-minutes` 45→120. See MISTAKES.md.
+- Reviewed the Cloudflare security scan the user pasted: 4 "Dangling A Record" warnings are a FALSE
+  POSITIVE (GitHub Pages IPs `185.199.108-111.153` — do NOT delete); `www` unproxied + Bot Fight Mode =
+  real one-tap dashboard fixes (user-side); "Block AI bots" correctly set to allow crawlers.
+- Added permanent routines to CLAUDE.md: diagnose-to-root-cause, grep-before-delete, real secret scans,
+  ffmpeg frame-extraction to read `.mp4` recordings, and the bride-alt-text (no `אילת`) rule.
 
 ## 2026-06-23 — Grid perf + mobile WhatsApp button + hide-latency note
 - **Grid loaded full images (slow):** image tiles used `item.thumb || item.u`, but image entries

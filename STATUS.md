@@ -1,15 +1,14 @@
 # Site Status — yardendamri.co.il
 
-*Last updated: 2026-06-23*
+*Last updated: 2026-06-24*
 
-## ▶ Current focus (2026-06-23) — ✅ GONE LIVE (Stage B done). Stage C still pending (needs user)
-**GO LIVE complete:** `preview/` was promoted to the live **root** site on `main` (2026-06-23). The new
-site now serves at `yardendamri.co.il/`. Promotion = copy preview files → root + rewrite every
-`/preview/` → `/` (zero leftovers, grep-confirmed); verified on Chromium desktop 1440×900 + iPhone 13
-emulation across 9 pages (no overflow, no JS errors, no `/preview/` links). `/preview/` is kept as a
-harmless duplicate (robots.txt Disallows it so it stays out of the index). **Next = Stage C (repo split +
-domain move) — separate, needs the user.** Note: `preview/*.html` remain the working source for future
-edits; promote to root again at the next approved cutover.
+## ▶ Current focus (2026-06-24) — ✅ Live + repo-split done; `preview/` deleted; security pass done
+**Go-live + Stage C (repo split) are complete and `preview/` was deleted (2026-06-24) — edit the ROOT
+files now.** This session ran a security + hardening pass: Cloudflare security headers (live via API
+Transform Rule), a code secret scan (removed an exposed Google Places key from `reviews.html`),
+`security.txt` added, and the Instagram sync fixed after the `preview/` removal had broken it.
+**See SUMMARY.md "NEXT SESSION — START HERE" for the open tasks** (verify sync green, HSTS ramp,
+user-side Cloudflare/Google-key actions).
 
 ## ⏳ PENDING — next session (HSTS ramp-up)
 **Security headers are LIVE via a Cloudflare Transform Rule** (NOT in the repo — set through the

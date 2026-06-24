@@ -115,6 +115,32 @@ Even when network egress is open ("All domains"), keep internet use minimal:
 
 ---
 
+## STRICT RULE — Diagnose fully before concluding (use the team; find the ROOT, not the symptom)
+
+When something fails or looks wrong, do **NOT** hand back the first single cause you find. Trace the
+**whole process** that actually led here this session, enumerate **every plausible cause**, and reason
+through them with the relevant team roles — then identify and **prove** the real root cause. The user
+is repeatedly right that "it's not the only possible reason." A surface symptom usually has a deeper
+root: e.g. a 45-minute CI timeout was *not* "too many new videos" — the root was that deleting
+`preview/` erased `preview/gallery-data.js`, the file the sync read to know what was already uploaded,
+so it re-uploaded everything. Chase it to that depth before you answer.
+
+## Routines learned (apply EVERY session, not once)
+
+- **Before deleting any file/folder:** grep ALL workflows (`.github/`) and scripts (`fix.js`) for
+  references to it first. A deletion that orphans a `--target=`/`cp`/path silently breaks a pipeline.
+- **"Security" means an actual secret scan of the code** — grep for key/token/password/JWT/PEM patterns
+  across tracked files — NOT just a public-exposure (404) check. Never commit secrets or API keys to
+  client code or the public repo; treat any exposed key as compromised and have the user rotate it.
+- **Viewing a screen recording (`.mp4`):** the model can't read video directly. Install ffmpeg
+  (`apt-get install -y ffmpeg`), extract frames (`ffmpeg -i v.mp4 -vf fps=1 f_%03d.png`), then Read the
+  frames (crop+upscale to read a toggle/state). Still images (PNG/JPG) and PDFs it reads natively.
+- **Alt text = promotional + category-aware.** The bride/`כלות` category must **NEVER** contain `אילת`
+  (she travels to brides countrywide); evening/general media use `באילת`.
+- **Cloudflare security lives outside the repo.** The site's response-header security (X-Frame-Options,
+  Referrer-Policy, Permissions-Policy, X-Content-Type-Options, HSTS) is a Cloudflare **Transform Rule**
+  on zone `745a6f759dbdf0930afbf8349d2d4835`, set via API — reversible in seconds, not in git.
+
 ## Special work instructions
 
 1. When creating new pages, use `index.html` and `styles.css` as the template — copy structure, keep the same CSS variables and nav.
