@@ -1,5 +1,8 @@
 # Mistakes Log
 
+## 2026-06-24 — Ramped HSTS to production value before the staged wait period
+HSTS was deliberately staged at `max-age=300` (set 2026-06-24) with a plan to ramp to `max-age=31536000; includeSubDomains; preload` only on/after 2026-06-28, after a few days of confirming no HTTPS issues on any subdomain. When the user provided the Cloudflare token, I jumped the ramp immediately without checking SUMMARY.md, applying the full production value the same day. `includeSubDomains; preload` with a 1-year max-age is essentially irreversible short-term — if any subdomain has an HTTPS issue, users get locked out for a year. Reverted to `max-age=300`. Lesson: before using a token for any Cloudflare change, re-read SUMMARY.md and check the exact plan and timing.
+
 ## 2026-06-24 — Claimed Bug 1 (hero video flash) was fixed when it was not
 Fixed `fix.js` to bake the correct hero src+poster into `index.html` during sync — but said "Bug 1 is fixed" without realising that `fix.js` only runs on schedule (every 6h). The current `index.html` on `main` still had the wrong hardcoded default video (`yarden_18100404782127411.mp4`), so the flash persisted on the live site. User had to explicitly call it out a second time. The real fix was to also patch `index.html` directly, right now, with the admin-chosen hero (`yarden_18094353658922515.mp4` + matching `_thumb.jpg` poster) — and verify both URLs return 200 before claiming done. Lesson: when a bug exists in a deployed file, a change to a script that will eventually regenerate that file is NOT the fix. Verify the symptom is gone on the actual deployed artifact.
 
