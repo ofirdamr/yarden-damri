@@ -379,12 +379,33 @@ function safeWrite(filePath, data) {
   const htmlFiles = TARGET_PREVIEW
     ? ["preview/index.html", "preview/gallery.html"]
     : ["index.html", "gallery.html"];
+  // Determine current hero for baking into index.html (prevents flash of wrong video on first load)
+  const hvm = (heroVideoUrl||'').match(/yarden_(\d+)\.mp4/);
+  const him = (heroImageUrl||'').match(/yarden_(\d+)\.webp/);
+  const bakedHeroId   = hvm ? hvm[1] : (him ? him[1] : '18100404782127411');
+  const bakedHeroIsVid = !!hvm || !him;
+  const bakedHeroSrc  = bakedHeroIsVid
+    ? `${R2_VIDEOS.publicUrl}/yarden_${bakedHeroId}.mp4`
+    : `${R2_IMAGES.publicUrl}/yarden_${bakedHeroId}.webp`;
+  const bakedHeroPoster = `${R2_IMAGES.publicUrl}/yarden_${bakedHeroId}_thumb.jpg`;
+
   const ver = Date.now();
   for (const htmlFile of htmlFiles) {
     try {
       let html = fs.readFileSync(htmlFile, "utf8");
       if (/gallery-data\.js\?v=\d+/.test(html)) html = html.replace(/gallery-data\.js\?v=\d+/g, `gallery-data.js?v=${ver}`);
       else html = html.replace(/gallery-data\.js(?!\?)/g, `gallery-data.js?v=${ver}`);
+      // Bake current hero src + poster into index.html so the <video> never starts on the wrong default
+      if (htmlFile.endsWith('index.html')) {
+        html = html.replace(/(<source id="heroVideoSource" src=")[^"]*(")/,
+          `$1${bakedHeroSrc}$2`);
+        if (/id="heroVideo" poster=/.test(html)) {
+          html = html.replace(/(id="heroVideo" poster=")[^"]*"/, `$1${bakedHeroPoster}"`);
+        } else {
+          html = html.replace(/(<video id="heroVideo")/, `$1 poster="${bakedHeroPoster}"`);
+        }
+        console.log(`Baked hero src (yarden_${bakedHeroId}) into ${htmlFile}`);
+      }
       fs.writeFileSync(htmlFile, html, "utf8");
       console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);
     } catch(e) { console.warn(`Could not bump ${htmlFile}:`, e.message); }
