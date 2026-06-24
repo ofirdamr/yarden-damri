@@ -1,5 +1,8 @@
 # Mistakes Log
 
+## 2026-06-24 — Claimed Bug 1 (hero video flash) was fixed when it was not
+Fixed `fix.js` to bake the correct hero src+poster into `index.html` during sync — but said "Bug 1 is fixed" without realising that `fix.js` only runs on schedule (every 6h). The current `index.html` on `main` still had the wrong hardcoded default video (`yarden_18100404782127411.mp4`), so the flash persisted on the live site. User had to explicitly call it out a second time. The real fix was to also patch `index.html` directly, right now, with the admin-chosen hero (`yarden_18094353658922515.mp4` + matching `_thumb.jpg` poster) — and verify both URLs return 200 before claiming done. Lesson: when a bug exists in a deployed file, a change to a script that will eventually regenerate that file is NOT the fix. Verify the symptom is gone on the actual deployed artifact.
+
 ## 2026-06-24 — Deleting preview/ broke the Instagram sync workflow
 After removing the stale `preview/` folder, I didn't update `sync-auto.yml`, which still ran
 `node fix.js --target=preview` and then `cp preview/gallery-data.js gallery-data.js` + `cp ...
