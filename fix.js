@@ -95,6 +95,11 @@ async function compressVideo(inputPath, outputPath) {
 function compressVideoHD(inputPath, outputPath) {
   execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(1080,iw)':-2" -c:v libx264 -crf 22 -preset fast -c:a aac -b:a 160k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 180000 });
 }
+// ── HERO MOBILE video encoder ── small ~480p copy of the hero video so phones
+// load ~1MB instead of the 720p base. Hero-only; frontend falls back to the base.
+function compressVideoMobile(inputPath, outputPath) {
+  execSync(`ffmpeg -y -i "${inputPath}" -vf "scale='min(480,iw)':-2" -c:v libx264 -crf 30 -preset fast -c:a aac -b:a 96k -movflags +faststart "${outputPath}"`, { stdio: "pipe", timeout: 120000 });
+}
 // HEAD a public R2 URL to see if an object already exists (avoids rebuilding the hero HD every run).
 function urlExists(url, timeoutMs = 8000) {
   return new Promise((resolve) => {
@@ -428,6 +433,40 @@ function safeWrite(filePath, data) {
       }
     }
   } catch (e) { console.error("Hero HD step error:", e.message); }
+
+  // ── HERO MOBILE ── small ~480p copy of the current hero video so phones load
+  // ~1MB instead of the 720p base. Hero-only; frontend falls back to base if absent.
+  try {
+    let heroId = "", heroIsVideo = true;
+    const vm = (heroVideoUrl || "").match(/yarden_(\d+)\.mp4/);
+    if (vm) { heroId = vm[1]; heroIsVideo = true; }
+    else if ((heroImageUrl || "").match(/yarden_(\d+)\.webp/)) { heroIsVideo = false; }
+    else { heroId = DEFAULT_HERO_ID; heroIsVideo = DEFAULT_HERO_IS_VIDEO; }
+    if (heroIsVideo && heroId) {
+      const mName = `yarden_${heroId}_mobile.mp4`;
+      const mPublic = `${R2_VIDEOS.publicUrl}/${mName}`;
+      if (await urlExists(mPublic)) {
+        console.log(`Hero mobile already present: ${mName}`);
+      } else if (!hasFfmpeg) {
+        console.warn("Hero mobile: ffmpeg unavailable — skipped.");
+      } else {
+        const src = rawPosts.find(p => String(p.id) === String(heroId));
+        if (!src || !src.media_url) {
+          console.warn(`Hero mobile: item ${heroId} not in this fetch — phones fall back to the base until a sync includes it.`);
+        } else {
+          console.log(`Hero mobile: building 480p video for ${heroId}...`);
+          const tmpIn = `/tmp/mbin_${heroId}.mp4`, tmpOut = `/tmp/mbout_${heroId}.mp4`;
+          const { buffer } = await downloadBuffer(src.media_url, 60000);
+          fs.writeFileSync(tmpIn, buffer);
+          try { compressVideoMobile(tmpIn, tmpOut); } catch (fe) { fs.copyFileSync(tmpIn, tmpOut); }
+          const mb = fs.readFileSync(tmpOut);
+          try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut); } catch (e) {}
+          const r = await uploadToR2(R2_VIDEOS, mb, mName, "video/mp4");
+          console.log(r.status === 200 ? `Hero mobile OK: ${mName} (${(mb.length/1e6).toFixed(2)}MB)` : `Hero mobile upload failed (${r.status})`);
+        }
+      }
+    }
+  } catch (e) { console.error("Hero mobile step error:", e.message); }
 
   console.log("Fetching stats...");
   const uniquePostIds = [...new Set(rawPosts.map(p => p.post_id || p.id).filter(Boolean))];
