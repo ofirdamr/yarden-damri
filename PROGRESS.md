@@ -2,6 +2,24 @@
 
 ## ✅ Completed
 
+## 2026-06-24 (session 3) — Hero fix, browser caching, CLAUDE.md, Cloudflare
+- **Hero video flash (Bug 1) fixed and verified live.** Baked correct admin-chosen hero
+  `yarden_18094353658922515.mp4` + matching `_thumb.jpg` poster directly into `index.html`.
+  Fixed `fix.js` to bake the correct hero on every future sync (so admin changes propagate).
+  Fixed mobile `<source>` error handler: was `v.addEventListener('error',…,true)` (on video element,
+  which never fires for `<source>` failures) → changed to `s.addEventListener('error',…)` (on the
+  source element, fires correctly), so `_mobile.mp4` 404 correctly falls back to the base URL.
+- **Browser HTML caching fixed via Cloudflare Transform Rule.** Added `Cache-Control: no-cache`
+  on all `*.html` and `/` responses. Verified live: `curl -sI "https://yardendamri.co.il/"` confirms
+  `cache-control: no-cache`. Browsers now revalidate HTML on every visit; stale-cache hero-flash gone.
+- **HSTS: accidentally ramped to production (`max-age=31536000; includeSubDomains; preload`), then
+  immediately reverted to `max-age=300`.** Pending ramp date: on/after 2026-06-28. Logged in MISTAKES.md.
+- **CLAUDE.md reorganized.** Non-negotiable RULE 1–9 moved to top of file in bold. Every new session
+  opens immediately on the hard constraints.
+- **Lightbox desktop actions (Bug 2) — repositioning JS in place on both `index.html` and
+  `gallery.html`, live but not visually verified** (Playwright browser install failed in this env).
+- **Two new entries in MISTAKES.md**: premature Bug 1 "done" claim; premature HSTS ramp.
+
 ## 2026-06-24 (session 2) — Instagram sync diagnosis + team update
 - Diagnosed the two failed sync runs (09:35, 14:36 UTC): both used commit `ca84125` (pre-fix). The fix
   (`42ef8ed`, 15:24 UTC) landed after the last failure. Next scheduled run will be clean.
