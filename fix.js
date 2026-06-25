@@ -240,10 +240,14 @@ function safeWrite(filePath, data) {
       if (m) hiddenIds.add(m[1]);
     });
     console.log(`Hidden: ${hiddenUrls.size}`);
-    heroVideoUrl = settings.admin?.heroVideo || "";
-    heroImageUrl = settings.admin?.heroImage || "";
-    heroPosition = settings.admin?.heroPosition || "50% 20%";
-    heroZoom = settings.admin?.heroZoom || 1;
+    // The admin panel + frontend (RemoteState) read/write the TOP-LEVEL hero fields.
+    // Read those first; fall back to the legacy admin.* nesting only if empty.
+    // (Reading admin.heroVideo alone bakes the wrong default when it is "" — the bug
+    //  that caused the multi-stage hero flash. Always match what the frontend reads.)
+    heroVideoUrl = settings.heroVideo || settings.admin?.heroVideo || "";
+    heroImageUrl = settings.heroImage || settings.admin?.heroImage || "";
+    heroPosition = settings.heroPosition || settings.admin?.heroPosition || "50% 20%";
+    heroZoom = settings.heroZoom || settings.admin?.heroZoom || 1;
   } catch(e) {}
 
   const gallery = [], seenUrls = new Set();
@@ -395,16 +399,33 @@ function safeWrite(filePath, data) {
       let html = fs.readFileSync(htmlFile, "utf8");
       if (/gallery-data\.js\?v=\d+/.test(html)) html = html.replace(/gallery-data\.js\?v=\d+/g, `gallery-data.js?v=${ver}`);
       else html = html.replace(/gallery-data\.js(?!\?)/g, `gallery-data.js?v=${ver}`);
-      // Bake current hero src + poster into index.html so the <video> never starts on the wrong default
+      // Bake the current hero (video OR image) into index.html so the first paint is ALWAYS
+      // the admin-chosen hero — never an old default that the frontend then swaps out (the
+      // multi-stage old-thumb → new-thumb → video flash). Set both the <video> and the <img>
+      // initial state so whichever type is chosen is visible from the very first frame.
       if (htmlFile.endsWith('index.html')) {
-        html = html.replace(/(<source id="heroVideoSource" src=")[^"]*(")/,
-          `$1${bakedHeroSrc}$2`);
-        if (/id="heroVideo" poster=/.test(html)) {
-          html = html.replace(/(id="heroVideo" poster=")[^"]*"/, `$1${bakedHeroPoster}"`);
-        } else {
-          html = html.replace(/(<video id="heroVideo")/, `$1 poster="${bakedHeroPoster}"`);
+        // Always keep the <video><source> and its single poster pointed at the chosen video
+        // (for an image hero this stays whatever was there — the hidden <video> never loads).
+        if (bakedHeroIsVid) {
+          html = html.replace(/(<source id="heroVideoSource" src=")[^"]*(")/, `$1${bakedHeroSrc}$2`);
         }
-        console.log(`Baked hero src (yarden_${bakedHeroId}) into ${htmlFile}`);
+        // Rewrite the <video id="heroVideo" ...> opening tag: strip EVERY existing poster=""
+        // (there must never be more than one — a duplicate poster was the cause of the old/new
+        // thumbnail double-flash) and set exactly one correct poster.
+        html = html.replace(/<video id="heroVideo"[^>]*>/, (tag) => {
+          let t = tag.replace(/\s*poster="[^"]*"/g, '');
+          t = t.replace(/^<video id="heroVideo"/, `<video id="heroVideo" poster="${bakedHeroPoster}"`);
+          // Toggle the video's visibility via its inline style (hidden for an image hero).
+          t = t.replace(/(style="[^"]*?);?\s*display:\s*(?:none|block);?/, '$1;');
+          if (!bakedHeroIsVid) t = t.replace(/(style="[^"]*?)(")/, '$1display:none;$2');
+          return t;
+        });
+        // Bake the <img id="heroImage"> too: an image hero shows it (src + display:block);
+        // a video hero keeps it empty + hidden so it never paints.
+        html = html.replace(/(<img id="heroImage" src=")[^"]*(")/, `$1${bakedHeroIsVid ? '' : bakedHeroSrc}$2`);
+        html = html.replace(/(<img id="heroImage"[^>]*style="[^"]*?)display:\s*(?:none|block);([^"]*")/,
+          `$1display:${bakedHeroIsVid ? 'none' : 'block'};$2`);
+        console.log(`Baked hero ${bakedHeroIsVid ? 'video' : 'image'} (yarden_${bakedHeroId}) into ${htmlFile}`);
       }
       fs.writeFileSync(htmlFile, html, "utf8");
       console.log(`Bumped gallery-data.js cache version in ${htmlFile} to ${ver}`);

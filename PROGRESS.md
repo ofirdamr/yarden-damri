@@ -2,6 +2,27 @@
 
 ## ✅ Completed
 
+## 2026-06-25 (session 4) — Hero flash: true root cause found and fixed (video + image)
+- **Found the real cause of the recurring hero flash.** `fix.js` read `settings.admin.heroVideo`
+  (`""`) instead of the top-level `settings.heroVideo` (the real admin choice
+  `yarden_18094353658922515.mp4`). Every 6h sync therefore re-baked the wrong default
+  `18100404782127411` into `index.html`, which the frontend (reads top-level) then swapped at
+  runtime → old-thumb → new-thumb → video multi-stage flash. A leftover duplicate `poster=""`
+  on the `<video>` tag made it worse.
+- **Fix 1 — `fix.js` reads the correct field.** `settings.heroVideo || settings.admin?.heroVideo`
+  (same for heroImage / heroPosition / heroZoom). Future syncs bake the admin's actual choice.
+- **Fix 2 — `index.html` baked hero corrected by hand (live now).** `<source>` + a SINGLE `poster`
+  both = `18094353658922515`; removed the duplicate stale poster. Baked hero now matches
+  `gallery-settings.json`, so the runtime swap is skipped entirely.
+- **Fix 3 — runtime swap compares by item ID.** `applyHeroMediaFromState` strips
+  `_mobile`/`_hd`/extension and compares the numeric ID, so a matching baked hero never reloads —
+  no flash even on mobile (where the source becomes `_mobile.mp4`).
+- **Fix 4 — `fix.js` baking made idempotent + image-aware.** Strips EVERY `poster=` then writes one;
+  bakes both `<video>` and `<img>` initial display state, so an image hero paints correctly on first
+  load too (video hidden, img shown) — no flash for image heroes either.
+- **QA:** node test of the baking transform on `index.html` for video hero, image hero, and
+  double-bake (idempotency) — all produce exactly one poster and correct display states.
+
 ## 2026-06-24 (session 3) — Hero fix, browser caching, CLAUDE.md, Cloudflare
 - **Hero video flash (Bug 1) fixed and verified live.** Baked correct admin-chosen hero
   `yarden_18094353658922515.mp4` + matching `_thumb.jpg` poster directly into `index.html`.
