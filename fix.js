@@ -8,6 +8,7 @@ const TARGET_PREVIEW = process.argv.includes("--target=preview");
 const FIX_AUDIO = process.argv.includes("--fix-audio"); // one-time: re-upload all videos incl. hidden ones to restore audio
 const IMG_REPROCESS = process.argv.includes("--reprocess-images"); // re-fetch existing photos at Instagram-max + build the small grid thumb (resumable: skips any image whose _thumb.webp already exists on R2)
 const VID_THUMB_REPROCESS = process.argv.includes("--reprocess-video-thumbs"); // build a small _thumb.webp grid thumbnail for existing videos (downscaled from the existing 720p _thumb.jpg). Resumable: skips any video whose _thumb.webp already exists on R2.
+const IMG_THUMB_FILL = process.argv.includes("--fill-image-thumbs"); // build the small _thumb.webp grid thumbnail for existing IMAGES that are missing it (downscaled from the existing full yarden_<id>.webp on R2 — no Instagram re-fetch). Resumable. Faster, lighter alternative to --reprocess-images when only thumbnails are missing.
 const GALLERY_FILE = TARGET_PREVIEW ? "preview/gallery-data.js" : "gallery-data.js";
 console.log("Target:", GALLERY_FILE);
 
@@ -296,18 +297,53 @@ function safeWrite(filePath, data) {
           if (await urlExists(thumbUrl)) { e.thumb = thumbUrl; }
           else { needsUpgrade = true; }
         }
-        // Video grid-thumbnail backfill: build the small _thumb.webp from the existing 720p
-        // _thumb.jpg (no ffmpeg/video re-download needed) so the grid stops loading heavy JPGs.
-        // Resumable — skip if the webp already exists. Point the entry's `thumb` at the webp.
+        // Image grid-thumbnail fill: ensure every image has a small _thumb.webp so the grid
+        // never falls back to the full-resolution file. Builds the thumb from the existing full
+        // yarden_<id>.webp on R2 (no Instagram re-fetch). Resumable — skip if the webp exists.
+        if (IMG_THUMB_FILL && !isVideo) {
+          const thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
+          if (await urlExists(thumbUrl)) { e.thumb = thumbUrl; }
+          else {
+            try {
+              const { buffer } = await downloadBuffer(`${R2_IMAGES.publicUrl}/yarden_${item.id}.webp`);
+              const webpBuf = await compressImageThumb(buffer);
+              const wr = await uploadToR2(R2_IMAGES, webpBuf, `yarden_${item.id}_thumb.webp`, "image/webp");
+              if (wr.status === 200) { e.thumb = thumbUrl; process.stdout.write("t"); }
+            } catch(te) { console.log(`\nImage thumb fill failed ${item.id}: ${te.message}`); }
+          }
+        }
+        // Video grid-thumbnail backfill: ensure every video has a small _thumb.webp so the grid
+        // stops loading heavy JPGs — and stops showing the bare brown placeholder for videos that
+        // never had a thumbnail at all. Resumable — skip if the webp already exists.
+        // Source the frame, in order of cheapness:
+        //   1. existing _thumb.jpg on R2  (just downscale it)
+        //   2. Instagram thumbnail_url    (also restores the missing _thumb.jpg for OG/poster)
+        //   3. ffmpeg first frame of the R2 .mp4 (last resort; also restores _thumb.jpg)
         if (VID_THUMB_REPROCESS && isVideo) {
           const webpUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
           if (await urlExists(webpUrl)) { e.thumb = webpUrl; }
           else {
             try {
-              const { buffer } = await downloadBuffer(`${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`);
-              const webpBuf = await compressImageThumb(buffer);
-              const wr = await uploadToR2(R2_IMAGES, webpBuf, `yarden_${item.id}_thumb.webp`, "image/webp");
-              if (wr.status === 200) { e.thumb = webpUrl; process.stdout.write("w"); }
+              let jpgBuf = null;
+              const jpgKey = `yarden_${item.id}_thumb.jpg`;
+              if (await urlExists(`${R2_IMAGES.publicUrl}/${jpgKey}`)) {
+                jpgBuf = (await downloadBuffer(`${R2_IMAGES.publicUrl}/${jpgKey}`)).buffer;
+              } else if (item.thumbnail_url) {
+                jpgBuf = (await downloadBuffer(item.thumbnail_url)).buffer;
+                await uploadToR2(R2_IMAGES, jpgBuf, jpgKey, "image/jpeg");
+              } else if (hasFfmpeg) {
+                const tmpIn = `/tmp/bf_${item.id}.mp4`, tmpFr = `/tmp/bf_${item.id}.jpg`;
+                fs.writeFileSync(tmpIn, (await downloadBuffer(`${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`)).buffer);
+                execSync(`ffmpeg -y -i "${tmpIn}" -vf "select=eq(n\\,0)" -vframes 1 "${tmpFr}"`, { stdio: "pipe", timeout: 60000 });
+                jpgBuf = fs.readFileSync(tmpFr);
+                await uploadToR2(R2_IMAGES, jpgBuf, jpgKey, "image/jpeg");
+                try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpFr); } catch(e) {}
+              }
+              if (jpgBuf) {
+                const webpBuf = await compressImageThumb(jpgBuf);
+                const wr = await uploadToR2(R2_IMAGES, webpBuf, `yarden_${item.id}_thumb.webp`, "image/webp");
+                if (wr.status === 200) { e.thumb = webpUrl; process.stdout.write("w"); }
+              } else { process.stdout.write("?"); }
             } catch(we) { console.log(`\nVideo thumb backfill failed ${item.id}: ${we.message}`); }
           }
         }

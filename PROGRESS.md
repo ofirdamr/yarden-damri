@@ -2,6 +2,23 @@
 
 ## ✅ Completed
 
+## 2026-06-25 (session 4) — Gallery grid speed: IMAGES + missing-thumbnail videos
+- **Half the image grid loaded full-res.** 636 of 1247 images had NO `_thumb.webp` on R2 (404) →
+  grid `onerror` fell back to the full `yarden_<id>.webp` (41–110KB). Earlier `--reprocess-images`
+  half-finished (CI timeout). Fix: `--fill-image-thumbs` builds the missing thumbs by downscaling the
+  existing full R2 `.webp` (no Instagram re-fetch; fast, resumable).
+- **50 full-res images in the hidden `#gallery-seo` block** (~93KB each ≈ 4.7MB), for crawlers only.
+  Switched all 50 to `_thumb.webp` (+ onerror fallback). SEO-safe (alt unchanged, 600px is indexable;
+  hidden images barely rank anyway) and a Core-Web-Vitals win. Only the lightbox stays full-res.
+- **137 of 301 videos had NO thumbnail at all** (no `_thumb.jpg`) → bare brown placeholder until the
+  video loaded. Enhanced `--reprocess-video-thumbs` to source the frame in order: existing `_thumb.jpg`
+  → Instagram `thumbnail_url` (also restores the missing jpg) → ffmpeg first-frame of the R2 `.mp4`.
+  Builds `_thumb.webp` for every video.
+- First video backfill run converted 164/301 (71KB→50KB webp); the remaining 137 (missing source jpg)
+  are covered by the enhanced sourcing above on the next run.
+- Note: legacy `backfill-thumbs.yml`/`backfill-thumbs.js` reference the deleted `preview/` dir — stale,
+  superseded by the `fix.js` reprocess modes driven by `sync-auto.yml`.
+
 ## 2026-06-25 (session 4) — Gallery grid speed: small WebP thumbnails for videos
 - **Diagnosed slow grid.** Video grid tiles loaded the full **720×1280 JPG** `_thumb.jpg`
   (37–71KB each), while images used a proper **600px WebP** `_thumb.webp` (23–35KB). With 301

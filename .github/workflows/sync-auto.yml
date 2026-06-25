@@ -13,6 +13,10 @@ on:
         description: 'Build small _thumb.webp grid thumbnails for existing videos (resumable)'
         type: boolean
         default: false
+      fill_image_thumbs:
+        description: 'Build missing _thumb.webp grid thumbnails for existing images from the full R2 file (resumable, no Instagram re-fetch)'
+        type: boolean
+        default: false
 
 jobs:
   sync:
@@ -36,7 +40,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-        run: node fix.js ${{ (inputs.reprocess_images && '--reprocess-images') || '' }} ${{ (inputs.reprocess_video_thumbs && '--reprocess-video-thumbs') || '' }}
+        run: node fix.js ${{ (inputs.reprocess_images && '--reprocess-images') || '' }} ${{ (inputs.reprocess_video_thumbs && '--reprocess-video-thumbs') || '' }} ${{ (inputs.fill_image_thumbs && '--fill-image-thumbs') || '' }}
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
