@@ -141,12 +141,14 @@ async function main() {
         if (await headExists(jpgKey)) {
           srcBuf = await downloadBuffer(`${R2_IMAGES.publicUrl}/${jpgKey}`);
         } else if (hasFfmpeg) {
-          const tin = `/tmp/bf_${it.id}.mp4`, tfr = `/tmp/bf_${it.id}.jpg`;
-          fs.writeFileSync(tin, await downloadBuffer(`${VIDEOS_PUBLIC}/yarden_${it.id}.mp4`));
-          execSync(`ffmpeg -y -i "${tin}" -vf "select=eq(n\\,0)" -vframes 1 "${tfr}"`, { stdio: "pipe", timeout: 60000 });
+          const tfr = `/tmp/bf_${it.id}.jpg`;
+          // Read the first frame STRAIGHT from the R2 URL. ffmpeg range-fetches exactly what it
+          // needs (incl. seeking to a tail moov atom), which avoids the truncated/corrupt result
+          // we got from buffering the whole video in-process ("moov atom not found").
+          execSync(`ffmpeg -y -i "${VIDEOS_PUBLIC}/yarden_${it.id}.mp4" -frames:v 1 -q:v 3 "${tfr}"`, { stdio: "pipe", timeout: 120000 });
           srcBuf = fs.readFileSync(tfr);
           await uploadToR2(srcBuf, jpgKey, "image/jpeg");   // restore the missing poster/OG jpg too
-          try { fs.unlinkSync(tin); fs.unlinkSync(tfr); } catch(_) {}
+          try { fs.unlinkSync(tfr); } catch(_) {}
         }
       } else {
         srcBuf = await downloadBuffer(`${R2_IMAGES.publicUrl}/yarden_${it.id}.webp`);
