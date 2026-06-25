@@ -37,14 +37,14 @@
           (prompt ? ('בקשת הסגנון של המנהלת: ' + prompt + '\n\n') : '') +
           'הציעי 3 ניסוחים חלופיים מצוינים לשדה הזה.';
 
-        const gURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
+        const gURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
         const gRes = await fetch(gURL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             system_instruction: { parts: [{ text: system }] },
             contents: [{ role: 'user', parts: [{ text: userMsg }] }],
-            generationConfig: { temperature: 0.9, maxOutputTokens: 1024, responseMimeType: 'application/json' },
+            generationConfig: { temperature: 0.9, maxOutputTokens: 2048, responseMimeType: 'application/json' },
           }),
         });
         if (!gRes.ok) {
