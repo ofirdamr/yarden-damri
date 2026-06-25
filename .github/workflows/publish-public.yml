@@ -32,7 +32,7 @@ jobs:
             bridal-guide.html pricing.html contact.html reviews.html \
             disclaimer.html accessibility-statement.html cookies-policy.html \
             admin.html styles.css a11y.js cloud-storage.js cookie-banner.js \
-            remote-state.js gallery-data.js instagram-stats.json \
+            remote-state.js site-content.js gallery-data.js instagram-stats.json \
             gallery-settings.json social.json robots.txt sitemap.xml \
             sitemap-index.xml sitemap-media.xml favicon.ico favicon.png \
             apple-touch-icon.png share-preview.jpg .well-known/security.txt"

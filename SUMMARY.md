@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-25 (session 4). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-25 (session 5). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -16,6 +16,13 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
 
 ### ✅ Open / pending tasks (in priority order)
+
+- **NEW (session 5): Editable site text (CMS pilot) — homepage LIVE; AI copywriter awaits user deploy.**
+  - Homepage marketing text is manager-editable via admin → 📝 תוכן: manual + 🎤 Hebrew voice (Web Speech API) + ↺ reset + 🤖 AI consult. 75 fields tagged `data-edit` in `index.html`; `site-content.js` applies overrides (stored in gallery-settings.json `content`) on load, fails safe to baked text. No Worker change needed for editing/voice/saving.
+  - **USER ACTION to enable 🤖 AI:** deploy `worker/copywriter-endpoint.js` to the Cloudflare Worker + set `ANTHROPIC_API_KEY` secret. See `worker/HANDOVER-content-editor.md`. Until then the button shows "שירות הקופירייטר עדיין לא הופעל".
+  - **NEXT (expansion):** repeat tagging on the other ~10 pages (add `data-edit`+label, include `site-content.js`, add page to `CONTENT_PAGES` in admin.html). Editor auto-discovers fields.
+  - **Then:** the queued **recopywriting mission** can use this editor + AI to rewrite the Hebrew copy.
+  - **Live QA still pending** (proxy blocks live site here): after publish, verify on a device — Content tab loads/saves, voice works in Chrome, homepage renders unchanged.
 
 0. **✅ DONE (session 4): gallery + hero media — fast thumbnails, no brown, autoplay kept. Live.**
    - **Thumbnails: 1547/1547 covered.** Every item (301 videos + 1247 images) has a small

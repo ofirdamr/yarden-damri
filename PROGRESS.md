@@ -946,3 +946,12 @@ Audit showed nav (desktop) + mobile menu were already consistent, but footers di
 
 ## 2026-06-23 — Session close: docs updated, next session = GO LIVE
 Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedded the full GO-LIVE PLAN since the old external plan file `/root/.claude/plans/…` is gone/ephemeral), STATUS.md (ready-to-go-live + checklist), CLAUDE.md (replaced the stale "only edit -temp.html" rule — preview/*.html are the working source; root changes only at go-live). Next session's task: promote preview/ → root (Stage B), gated behind a ROOT-pages visual check.
+
+## 2026-06-25 — session 5: Editable site text (CMS pilot) + AI copywriter backend
+- Backend mission (before the recopywriting mission): made all homepage marketing text manager-editable.
+- Architecture (decided with user): JSON-overrides-on-load, homepage pilot, editing+voice now / AI endpoint written for user to deploy.
+- `index.html`: tagged 75 text fields `data-edit="home.<section>.<field>"` + `data-edit-label` (incl. SEO title + meta description). Wired `site-content.js` in <head>.
+- `site-content.js` (new): fetches gallery-settings.json → applies `content` overrides on load (cache-first, fails safe to baked text). XSS-safe (escape + \n→<br>). Added to publish allowlist.
+- `admin.html`: new 📝 תוכן tab. Auto-discovers fields from the live page, grouped by section. Manual edit + 🎤 Hebrew voice dictation (Web Speech API) + ↺ reset + 🤖 AI copywriter consult. Saves via existing Worker /settings under `content` (no Worker change for editing).
+- `worker/copywriter-endpoint.js` (new, private): drop-in `POST /copywriter` → Claude (claude-sonnet-4-6) → 3 Hebrew suggestions. `worker/HANDOVER-content-editor.md`: deploy steps + ANTHROPIC_API_KEY secret. AI button shows graceful "not deployed yet" until the user deploys it.
+- QA: node --check passed on all 3 JS pieces; text round-trip verified; data-edit keys unique (75); div structure balanced. Live QA on device pending (proxy blocks live site from this env).
