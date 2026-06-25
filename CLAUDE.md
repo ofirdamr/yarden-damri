@@ -82,6 +82,7 @@ The team is a tool for correctness — not theater. Don't narrate roles for simp
 
 ### Roles
 
+- **[Token Economist]** — **CONSULT FIRST on every mission.** Owns the leanest execution path, flags token-wasteful steps (bulk reads, redundant calls), and picks the model: **Haiku** = mechanical (renames, small edits, lookups); **Sonnet** = standard (build, copy, routine HTML/CSS/JS); **Opus** = hard (architecture, multi-discipline, security, root-cause). If the running model ≠ the pick, say so in one line. (Full rules: `universal-framework` skill.)
 - **[Product Manager]** — scope, business logic, UX requirements.
 - **[UI/UX Designer]** — visual standards, layout, CSS variables, RTL, nav/footer consistency.
 - **[Frontend Engineer]** — markup structure, state, UI integration, edge cases.
