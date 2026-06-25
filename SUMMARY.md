@@ -15,6 +15,20 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ✅ Open / pending tasks (in priority order)
 
+0. **⏳ IN-FLIGHT (session 4): gallery thumbnail backfill.** Goal: every one of the 1548 gallery
+   items (301 videos + 1247 images) must have a small `yarden_<id>_thumb.webp` on R2 so the grid
+   never loads a full-res file or shows a brown placeholder. Driver: **`backfill-thumbs.js`** via
+   workflow **`backfill-thumbs.yml`** (workflow_dispatch). It's **R2-only (no Instagram), data-driven,
+   resumable, and does NOT commit** — it only uploads missing thumbs to R2. The frontend grid
+   (index.html + gallery.html) **derives** `_thumb.webp` from the id for both images and videos, so
+   tiles use the webp automatically as it lands.
+   **TO FINISH/VERIFY:** re-run `backfill-thumbs.yml` until its log says `created:0` (fully done).
+   Then verify live: a broad random sample of item ids should ALL return 200 for
+   `https://images.yardendamri.co.il/yarden_<id>_thumb.webp`, and the gallery grid should show no
+   brown/full-res tiles on mobile + desktop. (As of last check ~80% present and climbing.)
+   Note: `fix.js` already generates both thumbs for NEW media going forward, so this backfill is a
+   one-time catch-up for the existing library.
+
 1. **"Another problem" — UNRESOLVED.** User reported a second bug during hero-video investigation but never named it. I never found it. QA the live site on mobile and desktop: check the lightbox, gallery, and all visible UI for obvious issues.
 2. **Bug 2 (lightbox desktop actions) — UNVERIFIED LIVE.** The repositioning JS (`_repositionLbActionsDesktop` / `repositionLbActionsDesktop`) is in the live HTML but was never visually confirmed (Playwright browsers couldn't install in this environment). Verify by opening a gallery item on desktop and confirming the action bar is next to the media, not at screen far-right.
 3. **HSTS ramp — on/after 2026-06-28.** HSTS is staged at `max-age=300`. After 2026-06-28, ramp to `max-age=31536000; includeSubDomains; preload` via Cloudflare API (zone `745a6f759dbdf0930afbf8349d2d4835`). Needs user's scoped Cloudflare token → user revokes it immediately after. **Do NOT apply before 2026-06-28.**
