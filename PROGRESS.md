@@ -2,6 +2,22 @@
 
 ## ✅ Completed
 
+## 2026-06-25 (session 4) — Gallery + hero media: brown fixed, autoplay kept, robust reveal
+- **Brown placeholder → light cream.** The shimmer/`#1a1008` I added WAS the brown the user reported;
+  all grid + swapped-video backgrounds now `#efe7df`.
+- **Bulletproof reveal.** Tiles default to opacity:1; `tilefade` CSS animation (fill `both`) only adds
+  the fade. Removed the `opacity:0`+`onload` pattern that left loaded tiles invisible (brown) when
+  `onload` didn't fire on innerHTML-built imgs.
+- **Grid video overlay (autoplay KEPT).** Stopped replacing the thumbnail `<img>` with the `<video>`
+  (that left iOS tiles blank when autoplay was blocked). Now the thumbnail stays and the autoplaying
+  video is layered on top, revealed only on `'playing'`. Briefly tried disabling mobile autoplay —
+  reverted (user wants the previews).
+- **Hero same pattern.** `#heroImage` poster still always behind; `#heroVideo` opacity:0 → reveal on
+  `'playing'`; fixed `upgradeHeroToHD` to detect image-hero via the video being hidden.
+- Net: video tiles + hero never go blank/brown (show still on Low Power Mode), autoplay where allowed.
+- QA limit noted: no H.264 in headless chromium + proxy blocks live → could only verify the still
+  fallback via render (real R2 thumbnails), not live playback.
+
 ## 2026-06-25 (session 4) — Gallery grid speed: IMAGES + missing-thumbnail videos
 - **Half the image grid loaded full-res.** 636 of 1247 images had NO `_thumb.webp` on R2 (404) →
   grid `onerror` fell back to the full `yarden_<id>.webp` (41–110KB). Earlier `--reprocess-images`

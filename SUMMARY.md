@@ -15,19 +15,28 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ✅ Open / pending tasks (in priority order)
 
-0. **⏳ IN-FLIGHT (session 4): gallery thumbnail backfill.** Goal: every one of the 1548 gallery
-   items (301 videos + 1247 images) must have a small `yarden_<id>_thumb.webp` on R2 so the grid
-   never loads a full-res file or shows a brown placeholder. Driver: **`backfill-thumbs.js`** via
-   workflow **`backfill-thumbs.yml`** (workflow_dispatch). It's **R2-only (no Instagram), data-driven,
-   resumable, and does NOT commit** — it only uploads missing thumbs to R2. The frontend grid
-   (index.html + gallery.html) **derives** `_thumb.webp` from the id for both images and videos, so
-   tiles use the webp automatically as it lands.
-   **TO FINISH/VERIFY:** re-run `backfill-thumbs.yml` until its log says `created:0` (fully done).
-   Then verify live: a broad random sample of item ids should ALL return 200 for
-   `https://images.yardendamri.co.il/yarden_<id>_thumb.webp`, and the gallery grid should show no
-   brown/full-res tiles on mobile + desktop. (As of last check ~80% present and climbing.)
-   Note: `fix.js` already generates both thumbs for NEW media going forward, so this backfill is a
-   one-time catch-up for the existing library.
+0. **✅ DONE (session 4): gallery + hero media — fast thumbnails, no brown, autoplay kept. Live.**
+   - **Thumbnails: 1547/1547 covered.** Every item (301 videos + 1247 images) has a small
+     `yarden_<id>_thumb.webp` on R2. `backfill-thumbs.js` (R2-only, data-driven, resumable) made the
+     ~773 missing (images from the full `.webp`; videos via ffmpeg first-frame read STRAIGHT from the
+     R2 mp4 URL — buffering the whole video truncated it = `moov atom not found`). Grid weight ↓ ~63%.
+     `fix.js` makes BOTH `_thumb.jpg` (poster/OG) + `_thumb.webp` (grid) for every NEW video/image each
+     sync, so it stays fixed. Grid derives `_thumb.webp` from the id (index.html + gallery.html).
+   - **Loading placeholder is LIGHT CREAM** (`#efe7df`), not brown. The original brown shimmer/`#1a1008`
+     WAS the "brown" the user kept reporting.
+   - **Reveal is bulletproof:** tiles DEFAULT to opacity:1; a `tilefade` CSS animation (fill `both`) only
+     ADDS the fade — never depends on `onload` (which doesn't fire reliably on innerHTML imgs → was
+     leaving tiles invisible/brown).
+   - **Grid video = overlay pattern (KEEP autoplay):** the thumbnail `<img>` ALWAYS stays; an autoplaying
+     `<video>` is layered on top and revealed only on its `'playing'` event. If iOS can't autoplay (Low
+     Power Mode / throttling) the overlay stays opacity:0 and the THUMBNAIL shows — never blank. (Do NOT
+     go back to replacing the img with the video — that's what caused blank video tiles on iOS.)
+   - **Hero uses the same pattern:** `#heroImage` (poster still) always behind; `#heroVideo` opacity:0 →
+     revealed on `'playing'`. `upgradeHeroToHD` now detects an image-hero by the VIDEO being hidden
+     (heroImage is always present now).
+   - **Env limit:** headless Chromium here has NO H.264 codec + the proxy blocks the live site, so video
+     PLAYBACK can't be tested here — only the still/thumbnail fallback (verified via render with real R2
+     thumbnails). Verify real autoplay on a device.
 
 1. **"Another problem" — UNRESOLVED.** User reported a second bug during hero-video investigation but never named it. I never found it. QA the live site on mobile and desktop: check the lightbox, gallery, and all visible UI for obvious issues.
 2. **Bug 2 (lightbox desktop actions) — UNVERIFIED LIVE.** The repositioning JS (`_repositionLbActionsDesktop` / `repositionLbActionsDesktop`) is in the live HTML but was never visually confirmed (Playwright browsers couldn't install in this environment). Verify by opening a gallery item on desktop and confirming the action bar is next to the media, not at screen far-right.

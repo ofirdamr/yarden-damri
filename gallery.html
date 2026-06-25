@@ -62,7 +62,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
   <link rel="preconnect" href="https://images.yardendamri.co.il" crossorigin>
   <link rel="preconnect" href="https://videos-new.yardendamri.co.il" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260625a"/>
+  <link rel="stylesheet" href="styles.css?v=20260625b"/>
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"גלריית עבודות ירדן דמרי","url":"https://yardendamri.co.il/gallery.html","provider":{"@type":"Person","name":"ירדן דמרי","url":"https://yardendamri.co.il"}}</script>
   <style>
@@ -72,10 +72,13 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
     .gallery-grid{columns:2;gap:10px;max-width:1100px;margin:0 auto;padding:0 16px}
     @media(min-width:640px){.gallery-grid{columns:3}}
     @media(min-width:960px){.gallery-grid{columns:4}}
-    .gallery-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:0;cursor:pointer;background:#241910;background-image:linear-gradient(100deg,#241910 30%,#3a2a1e 50%,#241910 70%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}
-    .gallery-item img,.gallery-item video{position:relative;z-index:1}
+    .gallery-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;border-radius:0;cursor:pointer;background:#efe7df;background-image:linear-gradient(100deg,#efe7df 30%,#faf5f0 50%,#efe7df 70%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}
+    /* Reveal media with a fade that ALWAYS ends visible (animation fill 'both' overrides any
+       inline opacity:0) — never depends on an onload event firing, so tiles can't get stuck brown. */
+    .gallery-item img,.gallery-item video{position:relative;z-index:1;animation:tilefade .5s ease-out both}
     @keyframes shimmer{to{background-position:-200% 0}}
-    .gallery-item img{width:100%;display:block;transition:transform .4s,opacity .3s;opacity:0}
+    @keyframes tilefade{from{opacity:0}to{opacity:1}}
+    .gallery-item img{width:100%;display:block;transition:transform .4s}
     .gallery-item img.loaded{opacity:1}
     .gallery-item:hover img{transform:scale(1.04)}
     .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px}
@@ -358,7 +361,7 @@ body.lb-open #wa-float-btn, body.lb-open .wa-float, body.lb-open #a11y-trigger, 
 </div>
 
 <script src="cloud-storage.js?v=7"></script>
-<script src="gallery-data.js?v=1782367834890"></script>
+<script src="gallery-data.js?v=1782398483735"></script>
 <script>
 // ── ADMIN SETTINGS (read from RemoteState — synced across all visitors via JSONBin) ──
 function getAdminSettings() {
@@ -544,13 +547,13 @@ function renderGallery() {
       const _vid = item.item_id || (String(item.u).match(/yarden_(\d+)/) || [])[1] || '';
       const _thumb = _vid ? `https://images.yardendamri.co.il/yarden_${_vid}_thumb.webp` : (item.thumb || '');
       mediaHtml = `<img src="${_thumb}" data-video="${item.u}" alt="${_alt}" loading="lazy" decoding="async"
-        style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;opacity:0;transition:opacity .45s;${rotStyle}"
-        onload="this.style.opacity=1" onerror="if(!this.dataset.fb&&this.src.indexOf('_thumb.webp')>-1){this.dataset.fb=1;this.src=this.src.replace('_thumb.webp','_thumb.jpg');}else{this.style.opacity=1;}">`;
+        style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;${rotStyle}"
+        onerror="if(!this.dataset.fb&&this.src.indexOf('_thumb.webp')>-1){this.dataset.fb=1;this.src=this.src.replace('_thumb.webp','_thumb.jpg');}">`;
     } else {
       const _gThumb = item.thumb || item.u.replace(/\.(webp|jpe?g|png)(\?.*)?$/i, '_thumb.webp');
       mediaHtml = `<img src="${_gThumb}" alt="${_alt}" loading="lazy"
-        style="width:100%;display:block;transition:transform .4s;opacity:0;${rotStyle}"
-        onload="this.style.opacity=1" onerror="this.onerror=null;this.src='${item.u}';this.style.opacity=1"/>`;
+        style="width:100%;display:block;transition:transform .4s;${rotStyle}"
+        onerror="this.onerror=null;this.src='${item.u}'"/>`;
     }
     const badge = (item.carousel || item.ccount > 1)
       ? `<div class="media-badge" aria-label="פוסט עם מספר תמונות"><svg viewBox="0 0 48 48"><path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h12.7c5.5 0 9.9-4.4 9.9-9.9V18.6c0-1.6-.8-3.1-1.8-4.1-.5-.4-1.1 0-1.1.5z"/></svg></div>`
@@ -576,30 +579,34 @@ function renderGallery() {
   observeVideos();
 }
 
-// ── VIDEO AUTOPLAY: thumbnail first, swap to <video autoplay> when in viewport ──
+// ── VIDEO PREVIEW: the thumbnail <img> ALWAYS stays. When a tile is in view we lay an autoplaying
+// <video> ON TOP of it and reveal the video only once it actually starts playing ('playing' event).
+// So if iOS can't autoplay (Low Power Mode, too many at once, throttling), the thumbnail simply
+// stays visible — a tile can never go blank. Tap still opens the lightbox for the full video.
 const _obsSet = new WeakSet();
 const videoObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     const el = e.target;
-    if (e.isIntersecting && el.tagName === 'IMG' && el.dataset.video) {
+    if (el.tagName !== 'IMG' || !el.dataset.video) return;
+    if (e.isIntersecting) {
+      if (el._ov) { el._ov.play().catch(()=>{}); return; }
       const v = document.createElement('video');
-      v.src = el.dataset.video; v.muted = true; v.loop = true;
-      v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
-      v.poster = el.src || '';   // keep the thumbnail visible while the video loads (no black box)
-      v.style.cssText = el.style.cssText;
-      v.style.background = '#1a1008';
-      el.parentNode.replaceChild(v, el);
-      v.muted = true; v.play().catch(()=>{});
-      _obsSet.add(v); videoObserver.observe(v);
-    } else if (e.isIntersecting && el.tagName === 'VIDEO') {
-      el.muted = true; el.play().catch(()=>{});
-    } else if (!e.isIntersecting && el.tagName === 'VIDEO') {
-      el.pause();
+      v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
+      v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+      v.src = el.dataset.video;
+      v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s;z-index:1;animation:none;' + (el.style.transform ? ('transform:'+el.style.transform+';') : '');
+      v.addEventListener('playing', () => { v.style.opacity = '1'; });
+      el.parentNode.appendChild(v);
+      el._ov = v;
+      v.play().catch(()=>{});
+    } else if (el._ov) {
+      try { el._ov.pause(); } catch(_){}
+      el._ov.style.opacity = '0';
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.2 });
 function observeVideos() {
-  document.querySelectorAll('#galleryGrid img[data-video], #galleryGrid video').forEach(el => {
+  document.querySelectorAll('#galleryGrid img[data-video]').forEach(el => {
     if (!_obsSet.has(el)) { _obsSet.add(el); videoObserver.observe(el); }
   });
 }
