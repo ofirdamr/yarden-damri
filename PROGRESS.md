@@ -2,6 +2,16 @@
 
 ## ✅ Completed
 
+## 2026-06-25 (session 5) — Universal framework skill + Token Economist
+- Added `.claude/skills/universal-framework/` (lazy-loaded skill) capturing the cross-project
+  methodology: MD operating system, lean internal team led by PM, English-to-user + Hebrew-RTL
+  deliverable rules, verification gate, handover format, and a memory-compaction routine to curb
+  token growth. Includes `project-kickoff.template.md`.
+- Added **Token Economist** role to `CLAUDE.md` — mandatory first-consult; picks model
+  (Haiku/Sonnet/Opus) per task and flags token-wasteful steps.
+- Rationale documented in-skill: skills are lazy-loaded (cost ~0 until invoked) vs `CLAUDE.md`
+  which loads every session — so heavy rules belong in skills, always-on files stay lean.
+
 ## 2026-06-25 (session 4) — Gallery + hero media: brown fixed, autoplay kept, robust reveal
 - **Brown placeholder → light cream.** The shimmer/`#1a1008` I added WAS the brown the user reported;
   all grid + swapped-video backgrounds now `#efe7df`.
