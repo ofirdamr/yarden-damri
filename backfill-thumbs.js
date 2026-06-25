@@ -9,6 +9,8 @@ const R2_IMAGES = {
   bucket: "yarden-images",
   publicUrl: "https://images.yardendamri.co.il"
 };
+const VIDEOS_PUBLIC = "https://videos-new.yardendamri.co.il";
+const { execSync } = require("child_process");
 
 function get(url) {
   return new Promise((resolve) => {
@@ -91,53 +93,71 @@ async function headExists(fileName) {
   });
 }
 
-async function main() {
-  const token = process.env.INSTAGRAM_TOKEN;
-  if (!token) { console.error("No INSTAGRAM_TOKEN"); process.exit(1); }
-
-  const galleryRaw = fs.readFileSync("preview/gallery-data.js", "utf8");
-  const jsonPart = galleryRaw.replace("// Auto-generated gallery data\nconst GALLERY_IMAGES = ","").replace(/\nconst HERO_[\s\S]*/,"").replace(/;$/,"");
-  const entries = JSON.parse(jsonPart);
-  const videoIds = entries.filter(e => e.video && e.item_id).map(e => e.item_id);
-  console.log(`${videoIds.length} videos to process`);
-
-  let baseHost = "graph.instagram.com";
-  const test = await get(`https://graph.instagram.com/me?fields=id&access_token=${token}`);
-  if (test.error) {
-    const pages = await get(`https://graph.facebook.com/me/accounts?access_token=${token}`);
-    for (const page of (pages.data||[])) {
-      const p = await get(`https://graph.facebook.com/${page.id}?fields=instagram_business_account&access_token=${token}`);
-      if (p.instagram_business_account) { baseHost = "graph.facebook.com"; break; }
-    }
-  }
-
-  let done = 0, skipped = 0, failed = 0;
-  const BATCH = 10;
-  for (let i = 0; i < videoIds.length; i += BATCH) {
-    const batch = videoIds.slice(i, i + BATCH);
-    await Promise.all(batch.map(async (id) => {
-      const thumbKey = `yarden_${id}_thumb.jpg`;
-      if (await headExists(thumbKey)) { skipped++; return; }
-      const data = await get(`https://${baseHost}/${id}?fields=thumbnail_url,media_url&access_token=${token}`);
-      const thumbSrc = data.thumbnail_url || data.media_url;
-      if (!thumbSrc) { console.log(`No thumb for ${id}`); failed++; return; }
-      try {
-        const buf = await downloadBuffer(thumbSrc);
-        const r = await uploadToR2(buf, thumbKey, "image/jpeg");
-        if (r.status === 200) { done++; console.log(`✓ ${id} (${done})`); }
-        else { console.error(`✗ upload ${id}: ${r.status}`); failed++; }
-      } catch(e) { console.error(`✗ ${id}: ${e.message}`); failed++; }
-    }));
-  }
-
-  // Update thumb fields in gallery-data.js
-  for (const e of entries) {
-    if (e.video && e.item_id) e.thumb = `${R2_IMAGES.publicUrl}/yarden_${e.item_id}_thumb.jpg`;
-  }
-  const heroMatch = galleryRaw.match(/(\nconst HERO_[\s\S]*)/);
-  const heroLine = heroMatch ? heroMatch[1] : "";
-  const safe = s => s.replace(/[\uD800-\uDFFF]/g,"");
-  fs.writeFileSync("preview/gallery-data.js", safe(`// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(entries, null, 2)};${heroLine}`), "utf8");
-  console.log(`Done:${done} Skipped:${skipped} Failed:${failed}`);
+// Build the small 600px WebP grid thumbnail (same template as the image grid in fix.js).
+function makeThumb(buffer) {
+  const sharp = require("sharp");
+  return sharp(buffer).resize({ width: 600, withoutEnlargement: true }).webp({ quality: 72 }).toBuffer();
 }
-main().catch(console.error);
+
+// Data-driven, R2-only backfill. Reads the ROOT gallery-data.js purely for the list of
+// item ids + types, then ensures EVERY item has a yarden_<id>_thumb.webp on R2 so the grid
+// (which derives _thumb.webp from the id) never falls back to a full-resolution file or a
+// brown placeholder. No Instagram dependency, no gallery-data.js rewrite, no commit — it only
+// uploads missing thumbnails to R2. Resumable: skips any item whose _thumb.webp already exists.
+//   - image: downscale the existing full yarden_<id>.webp
+//   - video: downscale the existing _thumb.jpg, or (if missing) extract the first frame of the
+//            R2 .mp4 with ffmpeg and create both _thumb.jpg (poster/OG) and _thumb.webp.
+async function main() {
+  try { require("sharp"); } catch(e) { console.log("installing sharp..."); execSync("npm install sharp", { stdio: "inherit" }); }
+  let hasFfmpeg = false;
+  try { execSync("which ffmpeg", { stdio: "pipe" }); hasFfmpeg = true; } catch(e) {}
+  console.log("ffmpeg:", hasFfmpeg);
+
+  const raw = fs.readFileSync("gallery-data.js", "utf8");
+  const m = raw.match(/GALLERY_IMAGES\s*=\s*(\[[\s\S]*?\])\s*;/);
+  if (!m) { console.error("Could not parse gallery-data.js"); process.exit(1); }
+  const entries = JSON.parse(m[1]);
+
+  const items = [];
+  const seen = new Set();
+  for (const e of entries) {
+    const id = e.item_id || (String(e.u||"").match(/yarden_(\d+)/) || [])[1];
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    items.push({ id, video: !!e.video });
+  }
+  const vids = items.filter(i => i.video).length;
+  console.log(`${items.length} items (${vids} videos, ${items.length - vids} images) to ensure`);
+
+  let done = 0, skipped = 0, failed = 0, i = 0;
+  for (const it of items) {
+    i++;
+    const webpKey = `yarden_${it.id}_thumb.webp`;
+    try {
+      if (await headExists(webpKey)) { skipped++; continue; }
+      let srcBuf = null;
+      if (it.video) {
+        const jpgKey = `yarden_${it.id}_thumb.jpg`;
+        if (await headExists(jpgKey)) {
+          srcBuf = await downloadBuffer(`${R2_IMAGES.publicUrl}/${jpgKey}`);
+        } else if (hasFfmpeg) {
+          const tin = `/tmp/bf_${it.id}.mp4`, tfr = `/tmp/bf_${it.id}.jpg`;
+          fs.writeFileSync(tin, await downloadBuffer(`${VIDEOS_PUBLIC}/yarden_${it.id}.mp4`));
+          execSync(`ffmpeg -y -i "${tin}" -vf "select=eq(n\\,0)" -vframes 1 "${tfr}"`, { stdio: "pipe", timeout: 60000 });
+          srcBuf = fs.readFileSync(tfr);
+          await uploadToR2(srcBuf, jpgKey, "image/jpeg");   // restore the missing poster/OG jpg too
+          try { fs.unlinkSync(tin); fs.unlinkSync(tfr); } catch(_) {}
+        }
+      } else {
+        srcBuf = await downloadBuffer(`${R2_IMAGES.publicUrl}/yarden_${it.id}.webp`);
+      }
+      if (!srcBuf || !srcBuf.length) { failed++; console.log(`no source for ${it.id}`); continue; }
+      const webp = await makeThumb(srcBuf);
+      const r = await uploadToR2(webp, webpKey, "image/webp");
+      if (r.status === 200) { done++; if (done % 25 === 0) console.log(`...created ${done} (at ${i}/${items.length})`); }
+      else { failed++; console.error(`upload ${it.id}: ${r.status}`); }
+    } catch(err) { failed++; console.error(`fail ${it.id}: ${err.message}`); }
+  }
+  console.log(`Backfill complete. created:${done} skipped:${skipped} failed:${failed}`);
+}
+main().catch(e => { console.error(e); process.exit(1); });

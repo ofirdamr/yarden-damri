@@ -1,4 +1,9 @@
-name: Backfill Video Thumbnails
+name: Backfill Grid Thumbnails
+
+# One-shot, resumable backfill that guarantees every gallery item (image AND video) has a
+# small yarden_<id>_thumb.webp on R2, so the grid never loads a full-resolution file or shows
+# a brown placeholder. Reads ROOT gallery-data.js for the id list and pulls every source frame
+# from our own R2 — no Instagram dependency. Re-run until "created" reaches 0 (fully resumable).
 
 on:
   workflow_dispatch:
@@ -6,30 +11,20 @@ on:
 jobs:
   backfill:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Run backfill
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - name: Backfill thumbnails to R2
         env:
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         run: node backfill-thumbs.js
-      - name: Commit updated gallery-data.js
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp preview/gallery-data.js gallery-data.js
-          git add preview/gallery-data.js gallery-data.js
-          git diff --staged --quiet && exit 0
-          git pull --rebase
-          git commit -m "Backfill video thumbnails"
-          git push origin HEAD:main
