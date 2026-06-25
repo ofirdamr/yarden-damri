@@ -2,6 +2,22 @@
 
 ## ✅ Completed
 
+## 2026-06-25 (session 4) — Gallery grid speed: small WebP thumbnails for videos
+- **Diagnosed slow grid.** Video grid tiles loaded the full **720×1280 JPG** `_thumb.jpg`
+  (37–71KB each), while images used a proper **600px WebP** `_thumb.webp` (23–35KB). With 301
+  videos, scrolling pulled many heavy 720p JPGs → the brown `#1a1008` placeholder lingered.
+- **Fix (source).** `fix.js` now builds **two** thumbnails per video, mirroring the image template:
+  `_thumb.jpg` (720p, kept for the share OG card + hero/lightbox poster) **and** `_thumb.webp`
+  (600px, via `compressImageThumb`) for the GRID. The gallery-data `thumb` field points at the webp.
+- **Backfill for the existing 301 videos.** New `--reprocess-video-thumbs` mode (+ workflow input
+  `reprocess_video_thumbs`) downscales each existing `_thumb.jpg` → `_thumb.webp` (no ffmpeg/video
+  re-download) and repoints `thumb`. Resumable (skips videos that already have the webp).
+- **Frontend.** Video tiles in `index.html` + `gallery.html` get `decoding="async"` and a defensive
+  WebP→JPG `onerror` fallback (covers any video without a webp yet). No other change needed — both
+  pages already render `item.thumb`, so they pick up the smaller webp automatically.
+- **Expected:** video grid thumbnails ~half the bytes (≈40–48KB → and smaller on mobile via lazy),
+  WebP format, consistent with images. Run the backfill workflow, then the grid stops flashing brown.
+
 ## 2026-06-25 (session 4) — Hero flash: true root cause found and fixed (video + image)
 - **Found the real cause of the recurring hero flash.** `fix.js` read `settings.admin.heroVideo`
   (`""`) instead of the top-level `settings.heroVideo` (the real admin choice

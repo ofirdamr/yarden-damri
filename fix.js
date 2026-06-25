@@ -7,6 +7,7 @@ const { execSync } = require("child_process");
 const TARGET_PREVIEW = process.argv.includes("--target=preview");
 const FIX_AUDIO = process.argv.includes("--fix-audio"); // one-time: re-upload all videos incl. hidden ones to restore audio
 const IMG_REPROCESS = process.argv.includes("--reprocess-images"); // re-fetch existing photos at Instagram-max + build the small grid thumb (resumable: skips any image whose _thumb.webp already exists on R2)
+const VID_THUMB_REPROCESS = process.argv.includes("--reprocess-video-thumbs"); // build a small _thumb.webp grid thumbnail for existing videos (downscaled from the existing 720p _thumb.jpg). Resumable: skips any video whose _thumb.webp already exists on R2.
 const GALLERY_FILE = TARGET_PREVIEW ? "preview/gallery-data.js" : "gallery-data.js";
 console.log("Target:", GALLERY_FILE);
 
@@ -295,6 +296,21 @@ function safeWrite(filePath, data) {
           if (await urlExists(thumbUrl)) { e.thumb = thumbUrl; }
           else { needsUpgrade = true; }
         }
+        // Video grid-thumbnail backfill: build the small _thumb.webp from the existing 720p
+        // _thumb.jpg (no ffmpeg/video re-download needed) so the grid stops loading heavy JPGs.
+        // Resumable — skip if the webp already exists. Point the entry's `thumb` at the webp.
+        if (VID_THUMB_REPROCESS && isVideo) {
+          const webpUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
+          if (await urlExists(webpUrl)) { e.thumb = webpUrl; }
+          else {
+            try {
+              const { buffer } = await downloadBuffer(`${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`);
+              const webpBuf = await compressImageThumb(buffer);
+              const wr = await uploadToR2(R2_IMAGES, webpBuf, `yarden_${item.id}_thumb.webp`, "image/webp");
+              if (wr.status === 200) { e.thumb = webpUrl; process.stdout.write("w"); }
+            } catch(we) { console.log(`\nVideo thumb backfill failed ${item.id}: ${we.message}`); }
+          }
+        }
         if (!needsUpgrade) {
           e.post_id = item.post_id || item.id;
           e.a = cleanCaption(item.caption);
@@ -316,22 +332,33 @@ function safeWrite(filePath, data) {
         fs.writeFileSync(tmpIn, buffer);
         try { await compressVideo(tmpIn, tmpOut); } catch(fe) { fs.copyFileSync(tmpIn, tmpOut); }
         const compressed = fs.readFileSync(tmpOut);
-        // Extract thumbnail before deleting tmpOut
-        let thumbUrl = "";
+        // Extract thumbnail before deleting tmpOut.
+        // Two thumbnails per video, mirroring the image template:
+        //   _thumb.jpg  (full ~720p frame) — used by the share OG card + hero/lightbox poster
+        //               (social scrapers need a real JPG; posters benefit from the higher res).
+        //   _thumb.webp (small ~600px)     — the GRID thumbnail. The grid shows 40+ tiles, so a
+        //               small webp here is what keeps the gallery fast (the gallery-data `thumb`
+        //               field points here). Without it the grid downloaded heavy 720p JPGs.
+        let posterJpgUrl = "", gridThumbUrl = "";
         try {
           const thumbOut = `/tmp/thumb_${item.id}.jpg`;
           execSync(`ffmpeg -y -i "${tmpOut}" -vf "select=eq(n\\,0)" -vframes 1 "${thumbOut}"`, { stdio: "pipe", timeout: 30000 });
           const thumbBuf = fs.readFileSync(thumbOut);
           fs.unlinkSync(thumbOut);
           const tr = await uploadToR2(R2_IMAGES, thumbBuf, `yarden_${item.id}_thumb.jpg`, "image/jpeg");
-          if (tr.status === 200) thumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`;
+          if (tr.status === 200) posterJpgUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg`;
+          try {
+            const webpBuf = await compressImageThumb(thumbBuf);
+            const wr = await uploadToR2(R2_IMAGES, webpBuf, `yarden_${item.id}_thumb.webp`, "image/webp");
+            if (wr.status === 200) gridThumbUrl = `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.webp`;
+          } catch(we) { console.log(`Video webp thumb failed: ${we.message}`); }
         } catch(te) { console.log(`Thumb failed: ${te.message}`); }
         try { fs.unlinkSync(tmpIn); fs.unlinkSync(tmpOut); } catch(e) {}
         const r2Result = await uploadToR2(R2_VIDEOS, compressed, `yarden_${item.id}.mp4`, "video/mp4");
         if (r2Result.status === 200) {
-          const entry = stampMeta({ u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: thumbUrl }, item);
+          const entry = stampMeta({ u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: gridThumbUrl || posterJpgUrl }, item);
           if (!seenUrls.has(entry.u)) { seenUrls.add(entry.u); gallery.push(entry); }
-          console.log(`Video OK: yarden_${item.id}.mp4${thumbUrl ? ' +thumb' : ''}`);
+          console.log(`Video OK: yarden_${item.id}.mp4${posterJpgUrl ? ' +jpg' : ''}${gridThumbUrl ? ' +webp' : ''}`);
         } else {
           console.error(`Video R2 failed (${r2Result.status}): ${r2Result.body.substring(0, 300)}`);
         }
