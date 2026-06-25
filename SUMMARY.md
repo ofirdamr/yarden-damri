@@ -6,10 +6,12 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-**⛔ MODEL: Use Opus.** Sonnet was used this session and caused too many mistakes (wrong branch at start, premature "done", missing SUMMARY.md details, HSTS jumped too early). Start next session on `claude-opus-4-8`.
+**▶ START:** invoke the **`universal-framework`** skill — it runs session bootstrap (read CLAUDE.md+SUMMARY, switch to `main`, Token-Economist consult).
+
+**⛔ MODEL: per-task, not blanket.** The Token Economist picks per task — Haiku (mechanical) / Sonnet (standard build + copy) / Opus (architecture, multi-discipline, security, root-cause). Don't sit on Opus for everything; switch via `/model`.
 
 **⛔ BRANCH (first action, non-negotiable):** run `git branch --show-current`. Work on **`main` ONLY**.
-Claude Code on the web opens the session on a `claude/...` branch — **IGNORE THAT**; if not on `main`, `git checkout -B main origin/main`.
+Claude Code on the web opens the session on a `claude/...` branch — **IGNORE THAT**; switch immediately (do not defer until "there's work to commit"): `git checkout -B main origin/main`.
 
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
 
