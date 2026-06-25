@@ -1,24 +1,27 @@
 /* copywriter-endpoint.js — DROP-IN for the Cloudflare Worker (api.yardendamri.co.il)
  * ────────────────────────────────────────────────────────────────────────────
  * Adds  POST /copywriter  — the admin "🤖 ייעוץ קופירייטר" feature.
- * Takes the current text of a section + a style prompt, asks Claude for Hebrew
- * copy suggestions, returns { ok:true, suggestions:[ "...", "...", "..." ] }.
+ * Uses GOOGLE GEMINI (free tier — Google AI Studio). Takes the current text of a
+ * section + a style prompt, returns { ok:true, suggestions:[ "...", "...", "..." ] }.
  *
  * INTEGRATION (do these 3 things in your existing Worker):
- *   1. Add a Worker secret:   wrangler secret put ANTHROPIC_API_KEY
- *      (Anthropic console → API keys. The key NEVER goes in the repo or frontend.)
+ *   1. Get a FREE Gemini key at  https://aistudio.google.com/apikey  (no credit card).
+ *      Set it as a Worker secret:   wrangler secret put GEMINI_API_KEY
+ *      (or Cloudflare dashboard → Worker → Settings → Variables and Secrets → add
+ *       a SECRET named GEMINI_API_KEY). The key NEVER goes in the repo or frontend.
  *   2. In your fetch() router, before the 404, add:
  *        if (request.method === 'POST' && url.pathname === '/copywriter') {
  *          return handleCopywriter(request, env);
  *        }
- *   3. Reuse YOUR existing auth: replace `verifyToken(...)` below with the same
+ *   3. Reuse YOUR existing auth: replace `env.SESSIONS.get(token)` below with the same
  *      SESSIONS-KV Bearer-token check the /settings POST route already uses.
  *
- * CORS: this returns the same CORS headers your other endpoints use. If you have
- * a shared corsHeaders(request) helper, swap CORS below for it.
+ * CORS: returns the same CORS headers your other endpoints use. If you have a shared
+ * corsHeaders(request) helper, swap CORS below for it.
  */
 
-const COPY_MODEL = 'claude-sonnet-4-6'; // good Hebrew + cost/quality. Swap to claude-opus-4-8 for top quality.
+// Free-tier Gemini model. Swap if you like (e.g. 'gemini-2.0-flash').
+const GEMINI_MODEL = 'gemini-2.5-flash';
 
 function corsHeaders(request) {
   const origin = request.headers.get('Origin') || 'https://yardendamri.co.il';
@@ -52,7 +55,7 @@ async function handleCopywriter(request, env) {
   const system =
     'את קופירייטרית מקצועית שכותבת בעברית טבעית, חמה ומדויקת עבור מותג יוקרה של מאפרת כלות וערב. ' +
     'המאפרת ממוקמת באילת ומגיעה לכלות בכל רחבי הארץ. הטון: נשי, אלגנטי, אישי ומזמין — לא מתורגם, לא מליצי מדי, ' +
-    'נטול קלישאות שיווקיות זולות. כתבי בעברית תקנית עם ניקוד מינימלי בלבד. שמרי על אורך דומה לטקסט המקורי ועל אותו תפקיד ' +
+    'נטול קלישאות שיווקיות זולות. כתבי בעברית תקנית. שמרי על אורך דומה לטקסט המקורי ועל אותו תפקיד ' +
     '(כותרת קצרה / תת-כותרת / פסקה / כפתור). אל תוסיפי מרכאות, כוכביות או סימוני עיצוב. ' +
     'החזירי אך ורק JSON תקין בפורמט: {"suggestions":["נוסח 1","נוסח 2","נוסח 3"]}.';
 
@@ -62,20 +65,18 @@ async function handleCopywriter(request, env) {
     (prompt ? ('בקשת הסגנון של המנהלת: ' + prompt + '\n\n') : '') +
     'הציעי 3 ניסוחים חלופיים מצוינים לשדה הזה.';
 
+  const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/' +
+    GEMINI_MODEL + ':generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
+
   let aiRes;
   try {
-    aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+    aiRes = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'x-api-key': env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: COPY_MODEL,
-        max_tokens: 1024,
-        system,
-        messages: [{ role: 'user', content: userMsg }],
+        system_instruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: userMsg }] }],
+        generationConfig: { temperature: 0.9, maxOutputTokens: 1024, responseMimeType: 'application/json' },
       }),
     });
   } catch (e) {
@@ -90,7 +91,7 @@ async function handleCopywriter(request, env) {
   }
 
   const data = await aiRes.json();
-  const text = (data.content && data.content[0] && data.content[0].text) || '';
+  const text = (((data.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
 
   // Parse the JSON the model returned; fall back to line-splitting if needed.
   let suggestions = [];
@@ -106,6 +107,5 @@ async function handleCopywriter(request, env) {
     { headers: { ...cors, 'Content-Type': 'application/json' } });
 }
 
-// If your Worker uses module syntax and a single export, just call handleCopywriter
-// from your existing router. Exported here for convenience / testing.
+// Exported for convenience / testing — call handleCopywriter from your existing router.
 export { handleCopywriter, corsHeaders };
