@@ -19,6 +19,22 @@ production-ready result. No role-play theater, no narrated debates.
 
 ---
 
+## SESSION START — do this FIRST, before anything else
+
+The moment this skill is invoked, take these actions (do not just describe them):
+
+1. **Read the project's `CLAUDE.md` and `SUMMARY.md`.** They define the hard rules
+   and current state. Obey them — they override this generic skill on conflict.
+2. **Execute the project's git/branch & setup rule as a real action, now.** If
+   `CLAUDE.md` mandates a branch (e.g. "work on `main`"), run `git branch
+   --show-current` and actually switch (`git checkout -B <branch> origin/<branch>`)
+   if you're not on it. Do not proceed on the wrong branch; do not just announce it.
+3. Confirm a clean working state, then wait for the task. **Do not pick a model
+   yet** — model choice is per-task (see below), so there is nothing to size until
+   a task arrives.
+
+---
+
 ## 0. FIRST CONSULT — Token Economist (mandatory gate)
 
 **Before any task, consult the Token Economist first.** This is non-negotiable
@@ -36,8 +52,12 @@ and comes before any other role. The Economist returns three things:
 3. **Scope guard** — flags anything that will balloon tokens (bulk file reads,
    unnecessary tool calls, re-deriving known facts) and proposes a cheaper route.
 
-If the current model differs from the Economist's pick, say so in one line and
-recommend switching — don't silently burn the wrong tier.
+Model picks are **per-task**, not at bare session start. You **cannot change your
+own model** — only the user can. So when a task's pick differs from the running
+model, surface it in one actionable line with the exact command, e.g.:
+`Economist: this task is mechanical → switch to Haiku with /model claude-haiku-4-5`.
+Then proceed; don't silently burn the wrong tier, and don't announce a model when
+no task has been given yet.
 
 ---
 
