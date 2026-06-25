@@ -11,6 +11,9 @@
   (Haiku/Sonnet/Opus) per task and flags token-wasteful steps.
 - Rationale documented in-skill: skills are lazy-loaded (cost ~0 until invoked) vs `CLAUDE.md`
   which loads every session — so heavy rules belong in skills, always-on files stay lean.
+- Trimmed `CLAUDE.md` 209→159 lines: universal methodology (RULES 4–9, team/workflow prose) moved
+  to the skill; kept project-only rules (branch/root/live-QA), team specializations, architecture,
+  CSS/nav/admin/media/credentials/routines. Lower per-session token cost, nothing project-critical lost.
 
 ## 2026-06-25 (session 4) — Gallery + hero media: brown fixed, autoplay kept, robust reveal
 - **Brown placeholder → light cream.** The shimmer/`#1a1008` I added WAS the brown the user reported;

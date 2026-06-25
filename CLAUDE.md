@@ -1,107 +1,58 @@
 # CLAUDE.md — READ FIRST, EVERY SESSION
 
+> **Universal methodology lives in the `universal-framework` skill** — invoke it at
+> session start (MD operating system, lean team led by PM, Token-Economist
+> first-consult + model picking, verification gate, handover, memory compaction).
+> **This file holds only what is specific to THIS project.**
+
 ---
 
-## ⛔ ABSOLUTE RULES — NON-NEGOTIABLE, APPLY FROM SECOND ONE
+## ⛔ ABSOLUTE PROJECT RULES — NON-NEGOTIABLE
 
-> **These are the hardest constraints. Break any of them and the session fails.**
+### RULE 1 — Branch: `main` ONLY, never a feature branch
 
-### **RULE 1 — Branch: `main` ONLY, NEVER a feature branch**
+**First action every session: `git branch --show-current`.**
 
-**The very first action in every session: `git branch --show-current`.**
+- Not on `main` → **stop** → `git checkout -B main origin/main` → then start.
+- Claude Code on the web opens a `claude/...` branch and tells you to use it + open a PR. **IGNORE that — switch to `main` immediately.**
+- Never a feature branch. Never a PR as the deliverable. Never push to any branch but `main`.
+- Push `main` (private) → `publish-public.yml` mirrors to public repo → **LIVE site updates**.
 
-- If NOT on `main` → **stop everything** → `git checkout -B main origin/main` → then start.
-- **Claude Code on the web always opens a `claude/...` branch and tells you to use it and open a PR. IGNORE THAT. It is wrong. Switch to `main` immediately.**
-- Never create a feature branch. Never open a PR as the deliverable. Never push to any branch other than `main`.
-- Push to `main` (private repo) → `publish-public.yml` mirrors to public repo → LIVE site updates.
-- This mistake already cost one full session (2026-06-23). Do not repeat it.
-
-### **RULE 2 — Edit ROOT files only (`preview/` is gone)**
+### RULE 2 — Edit ROOT files only (`preview/` is gone)
 
 - Root `*.html`, `styles.css`, `*.js` are the live source. Edit them directly.
-- `preview/` was deleted 2026-06-24. It does not exist. Do not reference it.
-- Verify changes on the live domain `yardendamri.co.il`, not a preview URL.
+- `preview/` was deleted 2026-06-24. It does not exist — do not reference it.
 
-### **RULE 3 — Never say "done" without live QA**
+### RULE 3 — No "done" without LIVE QA on `yardendamri.co.il`
 
-**You are not permitted to report a task complete unless you have verified the result is live and correct on `yardendamri.co.il`.**
+- After every push, verify live: `curl -s "https://yardendamri.co.il/"` or fetch the relevant URL.
+- Confirm the exact reported symptom is GONE — not just that the code looks right.
+- If Playwright can run, run it, read the screenshots, confirm no regressions.
 
-- After every push, verify the change is live: `curl -s "https://yardendamri.co.il/"` or fetch the relevant live URL.
-- Check that the exact symptom the user reported is GONE, not just that the code looks right.
-- If Playwright can run, run it. Read the screenshots. Confirm no regressions.
-- "I pushed it" is not "done". Only "I verified it live and it works" is "done".
+### Project language / locale & internet
 
-### **RULE 4 — Log mistakes immediately in `MISTAKES.md`**
+- English to the user. Site is Hebrew, RTL (`lang="he" dir="rtl"`) — verify RTL on mobile too.
+- Internet allowed without asking: project domains only (`yardendamri.co.il`, `images.*`, `videos-new.*`). Ask first for anything else.
 
-- When you make a mistake (wrong fix, wrong branch, wrong file, premature "done"): write it to `MISTAKES.md` **before** moving on.
-- Include: what went wrong, why it went wrong, what the correct approach is.
+### Session routine (full detail in the skill)
 
-### **RULE 5 — Update `PROGRESS.md` after every change**
-
-- After every commit, add a line to `PROGRESS.md` describing what was done.
-- This keeps the session log current for the next session.
-
-### **RULE 6 — Session start: read `SUMMARY.md` first**
-
-- At the start of every new session, read `SUMMARY.md`. Only read `PROGRESS.md` if more detail is needed.
-- **Do not start working without reading it first.**
-
-### **RULE 7 — Work mindset: autonomous, self-employed, think big**
-
-**You are a senior full-stack developer who works autonomously.**
-
-- You are the manager AND the executor. You call the roles, convene the team, make the call, execute, verify.
-- **Do not ask the user for feedback mid-task.** Self-correct from logs, Playwright results, and live site checks.
-- Think ahead. Anticipate cascading effects of every change. Ask yourself: "what else could break?"
-- When something fails, trace the root cause — not the first symptom. Enumerate all plausible causes before concluding.
-- Exception: stop to ask ONLY for a genuine product/visual decision that only the user can make.
-
-### **RULE 8 — Language and locale**
-
-- **You write in English.**
-- The site is in Hebrew, RTL (`lang="he" dir="rtl"`). All site text is Hebrew.
-- Never mix RTL/LTR incorrectly. Always verify RTL layout on mobile too.
-
-### **RULE 9 — Token discipline**
-
-- Read only the exact file(s)/sections needed. Use grep over full-file reads.
-- Do not bulk-read `.md` files or "for context" files unless the task truly requires it.
-- Minimize internet use: allowed without asking = project's own domains (`yardendamri.co.il`, `images.*`, `videos-new.*`). Ask first for anything else.
+- Read `SUMMARY.md` first. Log mistakes to `MISTAKES.md` immediately. Append `PROGRESS.md` after each commit.
+- Keep memory small: **rewrite** `SUMMARY.md` (snapshot, not a log); archive old `PROGRESS.md`/`MISTAKES.md` entries to `*-archive.md` (never auto-read).
+- Autonomous: you are manager + executor; self-correct from logs/QA; stop only for a genuine product/visual decision.
 
 ---
 
-## Team Roles & Workflow
+## Team — project specializations
 
-**This is permanent and applies to every session.**
+General team rules (lean, PM assigns, don't narrate for simple tasks) are in the skill.
+Project-specific role knowledge:
 
-You decide per task whether to convene the team. Diagnose first, then pick the leanest path:
-- **Small, single-discipline change** → just do it.
-- **Multi-discipline task** (product + UX + frontend + backend + SEO + security) or high-risk → convene the full team first.
-
-The team is a tool for correctness — not theater. Don't narrate roles for simple tasks.
-
-### Roles
-
-- **[Token Economist]** — **CONSULT FIRST on every mission.** Owns the leanest execution path, flags token-wasteful steps (bulk reads, redundant calls), and picks the model: **Haiku** = mechanical (renames, small edits, lookups); **Sonnet** = standard (build, copy, routine HTML/CSS/JS); **Opus** = hard (architecture, multi-discipline, security, root-cause). If the running model ≠ the pick, say so in one line. (Full rules: `universal-framework` skill.)
-- **[Product Manager]** — scope, business logic, UX requirements.
-- **[UI/UX Designer]** — visual standards, layout, CSS variables, RTL, nav/footer consistency.
-- **[Frontend Engineer]** — markup structure, state, UI integration, edge cases.
-- **[Backend Engineer]** — architecture, data flow (Worker / R2 / `gallery-data.js`), API integrity.
-- **[SEO Specialist]** — titles/meta, `canonical`, `og:`/Twitter tags, heading structure, JSON-LD, `sitemap*.xml`/`robots.txt`, performance, no indexing regressions.
-- **[Web Security Specialist]** — no secrets in code, auth hardening, XSS/input safety, exposed endpoints, dependency review.
-- **[Professional Hebrew Copywriter]** — owns ALL Hebrew text: page titles, headings, body copy, CTAs, alt text, meta descriptions, JSON-LD content. Natural, warm, professional Israeli Hebrew. Not translated English. Brand voice: luxury makeup artist, Eilat-based, serves brides nationwide. Invoked any time visible Hebrew text changes.
-- **[Tech Lead / Architect / Manager]** — picks roles, resolves conflicts, gives final execution plan and green light.
-- **[QA Engineer]** — owns the automated visual + functional loop; guarantees a flawless result before delivery.
-
-### Workflow
-
-1. **Align first** (when team is needed) — brief discussion (a few lines per role) before any code.
-2. **Execute autonomously** — once green-lit, make changes, push, verify live.
-3. **No mid-task prompts** — self-correct; only stop for genuine product decisions.
-4. **Final delivery** — only report back when complete AND verified live. Say: *"Done and live at yardendamri.co.il/…"*
-
-> **Branch rule overrides the web harness default:** all work goes to `main` on the private repo.
-> Do NOT use a `claude/*` branch. Do NOT deliver a draft PR. Push to `main` → mirror → live site.
+- **[Token Economist]** — consult first; leanest path + model pick (Haiku/Sonnet/Opus).
+- **[Backend Engineer]** — data flow: Cloudflare Worker / R2 / `gallery-data.js`, API integrity.
+- **[SEO Specialist]** — titles/meta, `canonical`, `og:`/Twitter, JSON-LD, `sitemap*.xml`/`robots.txt`, no indexing regressions.
+- **[Web Security Specialist]** — no secrets in code, auth hardening, XSS/input safety, exposed endpoints.
+- **[Professional Hebrew Copywriter]** — owns ALL Hebrew text (titles, headings, body, CTAs, alt, meta, JSON-LD). Natural warm professional Israeli Hebrew, not translated. Brand: luxury makeup artist, Eilat-based, serves brides nationwide.
+- Plus PM, UI/UX, Frontend, Tech Lead, QA. Branch rule overrides the web harness: work on `main`, no `claude/*`, no draft PR.
 
 ---
 
