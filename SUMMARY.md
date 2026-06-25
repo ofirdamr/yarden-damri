@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-24 (session 3). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-25 (session 4). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -23,10 +23,28 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ---
 
-## ✅ DONE this session (2026-06-24, session 3)
+## ✅ DONE this session (2026-06-25, session 4)
 
-- **Hero video flash (Bug 1) — fixed and verified live.**
-  - Baked correct admin-chosen hero (`yarden_18094353658922515.mp4` + `_thumb.jpg` poster) directly into `index.html`.
+- **Hero flash — TRUE root cause found and fixed (video + image). Verified live + render-tested.**
+  - Real cause (session 3's "fix" regressed within 6h): `fix.js` read `settings.admin.heroVideo` (`""`)
+    instead of the **top-level** `settings.heroVideo` (the real admin choice `18094353658922515`). Every
+    6h sync re-baked the wrong default `18100404782127411` into `index.html`; the frontend (reads
+    top-level) then swapped it at runtime → old-thumb → new-thumb → video multi-stage flash. A leftover
+    duplicate `poster=""` made it worse.
+  - **Fix:** (1) `fix.js` reads top-level hero fields first; (2) `index.html` baked `<source>`+single
+    `poster` corrected to `18094353658922515`, duplicate poster removed; (3) `applyHeroMediaFromState`
+    compares by item ID (ignores `_mobile`/`_hd`/ext) so a matching baked hero never reloads — no flash
+    on mobile either; (4) `fix.js` baking now idempotent + bakes `<img>` state so **image heroes** paint
+    correctly on first load too.
+  - **QA:** live HTML confirmed `posters=1 src=yarden_18094353658922515.mp4`; offline Playwright render
+    (real index.html + real gallery-settings.json) PASSES on desktop + mobile — hero stays on the chosen
+    video the entire load, zero swap. (Chromium can't traverse the agent proxy, so render was done against
+    a local server with the live settings intercepted — fully deterministic.)
+
+## ✅ DONE earlier (2026-06-24, session 3)
+
+- **Hero video flash (Bug 1) — attempted, REGRESSED (see session 4 above for the real fix).**
+  - Baked admin-chosen hero (`yarden_18094353658922515.mp4` + `_thumb.jpg` poster) into `index.html`.
   - Fixed `fix.js` to bake the correct hero on every future sync.
   - Fixed mobile `<source>` error handler: was on `v` (video element, never fires for source errors) → moved to `s` (source element) so `_mobile.mp4` 404 correctly falls back to base URL.
 - **Browser HTML caching fixed (Cloudflare).** Added Transform Rule: `Cache-Control: no-cache` on all `*.html` pages and `/`. Browsers now revalidate HTML on every visit. Verified live.
