@@ -26,14 +26,11 @@ which returns **404 until you deploy the endpoint**. The admin handles that grac
    - Dashboard: Worker → **Settings → Variables and Secrets → Add** → type **Secret**,
      name `GEMINI_API_KEY`, paste the key, **Deploy**.
    - or CLI: `wrangler secret put GEMINI_API_KEY`
-3. **Add the endpoint** from `worker/copywriter-endpoint.js`:
-   - Copy `handleCopywriter` (+ `corsHeaders`) into your Worker.
-   - In your router, before the 404:
-     ```js
-     if (request.method === 'POST' && url.pathname === '/copywriter') return handleCopywriter(request, env);
-     ```
-   - **Replace the auth stub** (`env.SESSIONS.get(token)`) with the exact same Bearer/session
-     check your `/settings` POST already uses — match your KV binding name and session shape.
+3. **Paste the ROUTE BLOCK** from `worker/copywriter-endpoint.js` into `worker-temp.js`,
+   inside the `try {…}`, immediately **before** the line
+   `return json({ error: 'not_found' }, 404, {}, origin);`.
+   (It reuses the Worker's existing `validateSession()`, `json()`, and `origin` — no other
+   changes; OPTIONS/CORS are already handled globally.)
 4. **Deploy** the Worker. Done — the 🤖 button now returns 3 Hebrew suggestions per field.
 
 - **Cost: free.** Gemini's free tier (model `gemini-2.5-flash`) covers a manager clicking now and then.
