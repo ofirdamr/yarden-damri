@@ -15,19 +15,17 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ✅ Open / pending tasks (in priority order)
 
-0. **⏳ IN-FLIGHT (session 4): gallery thumbnail backfill.** Goal: every one of the 1548 gallery
-   items (301 videos + 1247 images) must have a small `yarden_<id>_thumb.webp` on R2 so the grid
-   never loads a full-res file or shows a brown placeholder. Driver: **`backfill-thumbs.js`** via
-   workflow **`backfill-thumbs.yml`** (workflow_dispatch). It's **R2-only (no Instagram), data-driven,
-   resumable, and does NOT commit** — it only uploads missing thumbs to R2. The frontend grid
-   (index.html + gallery.html) **derives** `_thumb.webp` from the id for both images and videos, so
-   tiles use the webp automatically as it lands.
-   **TO FINISH/VERIFY:** re-run `backfill-thumbs.yml` until its log says `created:0` (fully done).
-   Then verify live: a broad random sample of item ids should ALL return 200 for
-   `https://images.yardendamri.co.il/yarden_<id>_thumb.webp`, and the gallery grid should show no
-   brown/full-res tiles on mobile + desktop. (As of last check ~80% present and climbing.)
-   Note: `fix.js` already generates both thumbs for NEW media going forward, so this backfill is a
-   one-time catch-up for the existing library.
+0. **✅ DONE (session 4): gallery thumbnail backfill — 1547/1547 covered, verified live.**
+   Every gallery item (301 videos + 1247 images) now has a small `yarden_<id>_thumb.webp` on R2.
+   `backfill-thumbs.js` (R2-only, data-driven, resumable) generated the ~773 that were missing
+   (images from the full `.webp`; videos via ffmpeg first-frame read straight from the R2 mp4 URL —
+   buffering the whole video truncated it = `moov atom not found`). Grid weight ↓ ~63%.
+   The frontend (index.html + gallery.html) derives `_thumb.webp` from the id for images + videos,
+   plus a shimmer skeleton + fade-in (Instagram-style). **Fixed a regression** the fade-in caused:
+   the img→video swap copied `opacity:0`, leaving video tiles invisible (brown) — now forces the
+   swapped `<video>` to `opacity:1`. `fix.js` already makes both thumbnails for NEW media every sync,
+   so this stays fixed going forward. (Re-verify after any future grid change: full id scan should be
+   100% `_thumb.webp`, and a render must show no brown/invisible video tiles.)
 
 1. **"Another problem" — UNRESOLVED.** User reported a second bug during hero-video investigation but never named it. I never found it. QA the live site on mobile and desktop: check the lightbox, gallery, and all visible UI for obvious issues.
 2. **Bug 2 (lightbox desktop actions) — UNVERIFIED LIVE.** The repositioning JS (`_repositionLbActionsDesktop` / `repositionLbActionsDesktop`) is in the live HTML but was never visually confirmed (Playwright browsers couldn't install in this environment). Verify by opening a gallery item on desktop and confirming the action bar is next to the media, not at screen far-right.
