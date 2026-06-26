@@ -973,3 +973,12 @@ Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedde
 - Added 🎤 dictation button to the AI copywriter prompt box too.
 - Deployed via Deploy Worker workflow. Verified: /transcribe=401 (live), admin has new mic.
 - NOTE earlier fix: AI copywriter is gemini-2.5-flash + thinkingBudget:0 (gemini-2.0-flash 429'd — key has no free quota for it).
+
+## 2026-06-26 — session 5 (cont.): Editable text expanded to ALL pages
+- Tagged every page with data-edit/data-edit-label and registered all in CONTENT_PAGES:
+  index 75, about 21, services 28, bride 28, bridal-guide 23, pricing 13, contact 15,
+  reviews 21, gallery 5, disclaimer/accessibility/cookies 3 each. Total ~238 fields.
+- site-content.js injected into every page <head>. Tagging done via Node string-replace
+  (avoids Edit stale-state churn). Validated: no leaked attributes (`> data-edit=`), 1 applier/page.
+- Verified live: subpages HTTP 200 with applier + fields. Editor auto-discovers each page's fields.
+- Dynamic content left as-is (JS-rendered pricing packages, Google reviews grid, gallery grid).
