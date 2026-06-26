@@ -982,3 +982,11 @@ Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedde
   (avoids Edit stale-state churn). Validated: no leaked attributes (`> data-edit=`), 1 applier/page.
 - Verified live: subpages HTTP 200 with applier + fields. Editor auto-discovers each page's fields.
 - Dynamic content left as-is (JS-rendered pricing packages, Google reviews grid, gallery grid).
+
+## 2026-06-26 — session 5 (cont.): SEO-aware AI copywriter
+- /copywriter is now field-aware: SEO system prompt on *.meta.title / *.meta.description (keywords +
+  length limits), copywriter prompt on body. Page-aware Eilat logic: home/bride/guide → lead with
+  "מאפרת כלות / איפור כלות / בכל הארץ", NO אילת (nationwide bridal intent); local pages keep אילת.
+- Admin: live char-count hint on SEO title (~60) / description (~160). Worker redeployed, /copywriter=401 OK.
+- Key SEO fact captured: title+description show AS-IS in Google SERP; one page = one snippet for all queries
+  → intent targeting is per-PAGE, not per-searcher.
