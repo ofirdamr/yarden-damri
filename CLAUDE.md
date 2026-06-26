@@ -81,10 +81,13 @@ A static website for Yarden Damri, makeup artist based in Eilat, Israel. `yarden
 |------|---------|
 | `index.html` | Homepage |
 | `styles.css` | All CSS for `index.html` + shared rules for subpages |
-| `admin.html` | Admin panel (self-contained, inline styles) |
+| `admin.html` | Admin panel (self-contained, inline styles); 📝 תוכן tab = CMS editor |
+| `site-content.js` | CMS applier — applies editable-text overrides on every page |
+| `worker/worker.js` | Cloudflare Worker source (repo-managed; NOT auto-deployed) |
 | `fix.js` | Instagram API → R2 upload → writes `gallery-data.js` |
 | `.github/workflows/sync-auto.yml` | Runs `node fix.js` every 6h; timeout 120 min |
 | `.github/workflows/publish-public.yml` | One-way mirror: private root → public repo |
+| `.github/workflows/deploy-worker.yml` | Deploys `worker/worker.js` to Cloudflare (manual `workflow_dispatch`) |
 
 Subpages: `about.html`, `services.html`, `gallery.html`, `bride.html`, `bridal-guide.html`, `pricing.html`, `contact.html`, `reviews.html`, `disclaimer.html`, `accessibility-statement.html` — each has inline `<style>` but uses shared patterns from `styles.css`.
 
@@ -116,8 +119,20 @@ Use the canonical `<footer role="contentinfo">` from `index.html`. No custom inl
 ## Admin panel
 
 - SHA-256 password hashing (no plain-text passwords in code)
-- `switchTab()` controls panels; tab IDs: `['gallery', 'cats', 'pricing', 'settings', 'analytics']`
+- `switchTab()` controls panels; tab IDs: `['gallery', 'cats', 'analytics', 'pricing', 'content', 'settings']`
 - Pricing data in `localStorage` under `pricingData`
+
+## CMS — editable site text (📝 תוכן tab)
+
+- **Every page's text is manager-editable.** Elements tagged `data-edit="<page>.<section>.<field>"` + `data-edit-label="<Hebrew>"`. `site-content.js` (in each page `<head>`, in the publish allowlist) fetches `gallery-settings.json` and applies the `content` overrides on load — **fails safe to baked HTML**, XSS-safe (`\n`→`<br>`). SEO-critical `<title>`/`meta description` are tagged too (JS-applied).
+- Admin 📝 תוכן tab **auto-discovers** fields per page from `CONTENT_PAGES` (fetches the page, reads `[data-edit]`). **Add a field = just tag it in the HTML** — no admin code change. Saves to `gallery-settings.json` `content` via the Worker `/settings`.
+- Don't tag JS-rendered content (pricing packages, Google-reviews grid, gallery grid).
+- **AI = free Google Gemini `gemini-2.5-flash` + `thinkingBudget:0`** (NOT 2.0-flash — key lacks free quota; NOT Anthropic). Worker `/copywriter` = 3 Hebrew suggestions; `/transcribe` = voice→clean Hebrew.
+
+## Cloudflare Worker (api.yardendamri.co.il) — REPO-MANAGED
+
+- Source is **`worker/worker.js`** in this repo (private, not published). **Do NOT hand-edit the Cloudflare dashboard** — edit the file and run the **`Deploy Worker`** workflow (`workflow_dispatch`).
+- Deploy uses CF API; binds KV `SESSIONS` + inherits secrets `ADMIN_PASSWORD` / `GH_TOKEN` / `GEMINI_API_KEY`. Routes: `/login /logout /settings /social /s/* /copywriter /transcribe`.
 
 ## Media
 
