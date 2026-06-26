@@ -47,7 +47,7 @@ jobs:
           KV_ID: ${{ steps.kv.outputs.kv_id }}
         run: |
           # Copy with the exact name used as main_module
-          cp preview/worker.js worker.js
+          cp worker/worker.js worker.js
 
           METADATA=$(python3 -c "
           import json, os
@@ -57,7 +57,8 @@ jobs:
             'bindings': [
               {'type': 'kv_namespace', 'name': 'SESSIONS', 'namespace_id': os.environ['KV_ID']},
               {'type': 'inherit', 'name': 'ADMIN_PASSWORD'},
-              {'type': 'inherit', 'name': 'GH_TOKEN'}
+              {'type': 'inherit', 'name': 'GH_TOKEN'},
+              {'type': 'inherit', 'name': 'GEMINI_API_KEY'}
             ]
           }))")
 
