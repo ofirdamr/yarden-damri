@@ -461,6 +461,42 @@ export default {
         return json({ ok: true, suggestions }, 200, {}, origin);
       }
 
+      // ── POST /transcribe — speech-to-text via Gemini (requires session token) ──
+      if (request.method === 'POST' && path === '/transcribe') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        if (!env.GEMINI_API_KEY) return json({ error: 'ai_not_configured' }, 503, {}, origin);
+
+        let body;
+        try { body = await request.json(); } catch { return json({ error: 'bad_body' }, 400, {}, origin); }
+        const audio = (body && body.audio) || '';
+        const mime  = (body && body.mime)  || 'audio/wav';
+        if (!audio) return json({ error: 'no_audio' }, 400, {}, origin);
+
+        const instruction =
+          'תמללי את ההקלטה לעברית בצורה מדויקת וטבעית. תקני שגיאות זיהוי דיבור, הוסיפי סימני פיסוק נכונים, ' +
+          'והתאימי את הטקסט להקשר. החזירי אך ורק את הטקסט המתומלל — בלי הסברים, בלי מרכאות, בלי הקדמות.';
+        const gURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
+        const gRes = await fetch(gURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [
+              { inline_data: { mime_type: mime, data: audio } },
+              { text: instruction },
+            ] }],
+            generationConfig: { temperature: 0.2, maxOutputTokens: 1024, thinkingConfig: { thinkingBudget: 0 } },
+          }),
+        });
+        if (!gRes.ok) {
+          const detail = await gRes.text().catch(() => '');
+          return json({ error: 'upstream_' + gRes.status, detail: detail.slice(0, 200) }, 502, {}, origin);
+        }
+        const gData = await gRes.json();
+        const text = (((gData.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
+        return json({ ok: true, text: text.trim() }, 200, {}, origin);
+      }
+
       return json({ error: 'not_found' }, 404, {}, origin);
 
     } catch (e) {
