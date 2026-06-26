@@ -420,6 +420,7 @@ export default {
 
         let body;
         try { body = await request.json(); } catch { return json({ error: 'bad_body' }, 400, {}, origin); }
+        const key     = String((body && body.key)     || '');
         const label   = String((body && body.label)   || 'טקסט באתר').slice(0, 200);
         const current = String((body && body.current) || '').slice(0, 4000);
         const prompt  = String((body && body.prompt)  || '').slice(0, 1000);
