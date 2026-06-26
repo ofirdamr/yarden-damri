@@ -955,3 +955,13 @@ Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedde
 - `admin.html`: new 📝 תוכן tab. Auto-discovers fields from the live page, grouped by section. Manual edit + 🎤 Hebrew voice dictation (Web Speech API) + ↺ reset + 🤖 AI copywriter consult. Saves via existing Worker /settings under `content` (no Worker change for editing).
 - `worker/copywriter-endpoint.js` (new, private): drop-in `POST /copywriter` → Claude (claude-sonnet-4-6) → 3 Hebrew suggestions. `worker/HANDOVER-content-editor.md`: deploy steps + ANTHROPIC_API_KEY secret. AI button shows graceful "not deployed yet" until the user deploys it.
 - QA: node --check passed on all 3 JS pieces; text round-trip verified; data-edit keys unique (75); div structure balanced. Live QA on device pending (proxy blocks live site from this env).
+
+## 2026-06-26 — session 5 (cont.): Worker AI endpoint LIVE via repo-managed deploy
+- Discovered `Deploy Worker` workflow deployed from `preview/worker.js` (deleted 2026-06-24) → broken since.
+- Restored live Worker source to `worker/worker.js` (from user's dashboard paste) + added clean `/copywriter`
+  route (Gemini, **gemini-2.0-flash**, 2048 tokens — fixes the 2.5-flash thinking-truncation that returned
+  cut-off/raw-JSON suggestions). Fixed `deploy-worker.yml` to deploy from `worker/worker.js` + inherit
+  `GEMINI_API_KEY`. Triggered deploy → success. Verified: POST /copywriter=401 (route live), GET /settings=200 (base intact).
+- Worker is now REPO-MANAGED: future fixes = edit worker/worker.js + run Deploy Worker workflow (no dashboard editing).
+- Admin hardened: recovers clean suggestions from raw/partial JSON; surfaces upstream error detail on failure.
+- Earlier garbage test-edits (3 fields) cleaned from gallery-settings.json.
