@@ -965,3 +965,11 @@ Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedde
 - Worker is now REPO-MANAGED: future fixes = edit worker/worker.js + run Deploy Worker workflow (no dashboard editing).
 - Admin hardened: recovers clean suggestions from raw/partial JSON; surfaces upstream error detail on failure.
 - Earlier garbage test-edits (3 fields) cleaned from gallery-settings.json.
+
+## 2026-06-26 — session 5 (cont.): AI voice transcription + prompt mic
+- Replaced browser Web Speech dictation (low Hebrew quality) with record→Gemini transcription:
+  admin records audio (MediaRecorder), decodes to mono WAV client-side, POSTs to new Worker
+  `/transcribe` route → Gemini (gemini-2.5-flash, thinkingBudget:0) returns clean punctuated Hebrew.
+- Added 🎤 dictation button to the AI copywriter prompt box too.
+- Deployed via Deploy Worker workflow. Verified: /transcribe=401 (live), admin has new mic.
+- NOTE earlier fix: AI copywriter is gemini-2.5-flash + thinkingBudget:0 (gemini-2.0-flash 429'd — key has no free quota for it).
