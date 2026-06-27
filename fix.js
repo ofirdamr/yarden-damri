@@ -151,6 +151,58 @@ function safeWrite(filePath, data) {
   fs.writeFileSync(filePath, safe, 'utf8');
 }
 
+// ── Media sitemap (Google image + video indexing) ──────────────────────────
+// Built from the live gallery so the URLs are the REAL, crawlable R2 files
+// (images.* / videos-new.*) and never go stale. Replaces the old hand-made
+// sitemap that pointed at a dead Cloudinary account (every URL 401 -> nothing
+// indexable). Hidden items are excluded. No em dash (project RULE 5).
+function _smClean(s) {
+  return String(s || '')
+    .replace(/[\u0000-\u001F\u200B-\u200F\u2060-\u2069\uFEFF]/g, ' ')
+    .replace(/—/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 150);
+}
+function _smEsc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+function buildMediaSitemap(items) {
+  const SITE = 'https://yardendamri.co.il';
+  const TITLE = 'ירדן דמרי, מאפרת מקצועית';
+  let imgs = '', vids = '';
+  for (const it of items) {
+    if (it.hidden || !it.u) continue;
+    const cap = _smEsc(_smClean(it.a)) || TITLE;
+    if (it.video) {
+      const thumb = (it.thumb || '').replace(/_thumb\.webp$/, '_thumb.jpg')
+        || it.u.replace(/\.mp4$/, '_thumb.jpg');
+      vids += `    <video:video>\n`
+        + `      <video:thumbnail_loc>${_smEsc(thumb)}</video:thumbnail_loc>\n`
+        + `      <video:title>${cap}</video:title>\n`
+        + `      <video:description>${cap}</video:description>\n`
+        + `      <video:content_loc>${_smEsc(it.u)}</video:content_loc>\n`
+        + `    </video:video>\n`;
+    } else {
+      imgs += `    <image:image>\n`
+        + `      <image:loc>${_smEsc(it.u)}</image:loc>\n`
+        + `      <image:caption>${cap}</image:caption>\n`
+        + `      <image:title>${_smEsc(TITLE)}</image:title>\n`
+        + `    </image:image>\n`;
+    }
+  }
+  return `<?xml version="1.0" encoding="UTF-8"?>\n`
+    + `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`
+    + `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n`
+    + `        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n`
+    + `  <url>\n`
+    + `    <loc>${SITE}/gallery.html</loc>\n`
+    + imgs + vids
+    + `  </url>\n`
+    + `</urlset>\n`;
+}
+
 (async () => {
   const token = process.env.INSTAGRAM_TOKEN;
   if (!token) { console.error("ERROR: No INSTAGRAM_TOKEN"); return; }
@@ -441,6 +493,22 @@ function safeWrite(filePath, data) {
 
   console.log(`\nSaving ${gallery.length} items to ${GALLERY_FILE}`);
   safeWrite(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);
+
+  // Rebuild the media sitemap from the fresh gallery so Google always sees
+  // the real, crawlable image/video URLs (never stale, never a dead host).
+  if (!TARGET_PREVIEW) {
+    try {
+      safeWrite("sitemap-media.xml", buildMediaSitemap(gallery));
+      const today = new Date().toISOString().slice(0, 10);
+      if (fs.existsSync("sitemap-index.xml")) {
+        const idx = fs.readFileSync("sitemap-index.xml", "utf8")
+          .replace(/(<loc>[^<]*sitemap-media\.xml<\/loc>\s*<lastmod>)[^<]*(<\/lastmod>)/, `$1${today}$2`);
+        fs.writeFileSync("sitemap-index.xml", idx, "utf8");
+      }
+      const vis = gallery.filter(g => !g.hidden);
+      console.log(`Rebuilt sitemap-media.xml: ${vis.filter(g => !g.video).length} images + ${vis.filter(g => g.video).length} videos.`);
+    } catch (e) { console.error("sitemap-media build failed:", e.message); }
+  }
 
   // Bump gallery-data.js version in every page that loads it, so browsers don't serve stale cache
   const htmlFiles = TARGET_PREVIEW
