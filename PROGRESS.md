@@ -990,3 +990,10 @@ Updated SUMMARY.md (handoff rewritten: all preview work done & verified; embedde
 - Admin: live char-count hint on SEO title (~60) / description (~160). Worker redeployed, /copywriter=401 OK.
 - Key SEO fact captured: title+description show AS-IS in Google SERP; one page = one snippet for all queries
   → intent targeting is per-PAGE, not per-searcher.
+
+## 2026-06-26 — session 5 (cont.): SEO-aware AI, mic policy, SEO setup, hero+nav fixes, architecture lock
+- AI field-aware: SEO prompt on meta.title/description (page-aware Eilat logic) + char counters; no AI on name fields; no-invent-names guard; no em dash (prompt+strip); auto-save (2.5s); editor reads fresh from Worker; AI panel close button.
+- Mic blocked site-wide by Permissions-Policy microphone=() → changed CF Transform Rule to microphone=(self) via CF API (user token, revoked). Covers future visitor AI assistant too.
+- SEO: WebSite+Organization JSON-LD; sitemap lastmod bumped. Owner: Search Console verified (domain) + sitemap submitted; Business Profile exists. Admin keywords panel → direct Search Console queries link.
+- Hero blank-on-mobile fixed (#heroImage display:block behind video). Nav overlap on 13-15" fixed (.nav-brand-center hidden 1081-1500px; Playwright-verified). Installed playwright locally (gitignored); @playwright/test already in package.json.
+- LOCKED media reveal architecture as CLAUDE.md RULE 4 (owner-permission-only) + RULE 5 (no em dash). Verified grid architecture 100% intact; hero now conforms to it.

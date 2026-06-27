@@ -17,21 +17,34 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ✅ Open / pending tasks (in priority order)
 
-- **✅ DONE (session 5): Site-wide CMS — editable text on EVERY page + AI copywriter + AI voice. LIVE.**
-  - Admin → 📝 **תוכן** tab: pick a page from the dropdown → edit every text field. **~238 fields** tagged
-    `data-edit`/`data-edit-label` across all 12 pages (index 75, about 21, services 28, bride 28,
-    bridal-guide 23, pricing 13, contact 15, reviews 21, gallery 5, + 3 legal pages ×3). All pages listed
-    in `CONTENT_PAGES` (admin.html); the editor **auto-discovers** each page's fields (fetches the page,
-    reads `[data-edit]`). Add a field later = just tag it in the HTML; no admin code change.
-  - **Storage:** edits saved into `gallery-settings.json` under `content` (via existing Worker `/settings`).
-    `site-content.js` (in every page `<head>`, in publish allowlist) applies overrides on load, **fails
-    safe to baked text**, XSS-safe (`\n`→`<br>`). Dynamic content NOT tagged (JS-rendered pricing packages,
-    Google-reviews grid, gallery grid).
-  - **🤖 AI copywriter + 🎤 AI voice are LIVE — free Google Gemini** (`gemini-2.5-flash` + `thinkingBudget:0`;
-    NOT 2.0-flash — that key has no free quota for 2.0; NOT Anthropic). Worker routes `/copywriter`
-    (3 Hebrew suggestions) and `/transcribe` (record→clean punctuated Hebrew, replaces low-quality Web Speech).
-  - **Per-task model note:** this expansion was mechanical → Sonnet-tier (was done on Opus).
-  - **NEXT:** the **recopywriting mission** — rewrite the Hebrew copy page-by-page using this editor + AI.
+- **✅ DONE (session 5): Site-wide CMS + AI copywriter + AI voice + SEO setup + bug fixes. ALL LIVE.**
+  - **CMS:** Admin → 📝 **תוכן** tab, page dropdown → edit every text field. **~238 fields** tagged
+    `data-edit`/`data-edit-label` across all 12 pages. Editor **auto-discovers** fields per page from
+    `CONTENT_PAGES`. Add a field = just tag it in HTML. Stored in `gallery-settings.json` `content` via
+    Worker `/settings`; `site-content.js` applies on load, fails safe to baked text. Dynamic content NOT
+    tagged (pricing packages, Google-reviews grid, gallery grid).
+  - **Editor UX:** **auto-save** (2.5s debounce, "✓ נשמר אוטומטית"); manual save still there; reads freshest
+    content from Worker on open (no stale revert); AI panel ✕ סגור; live char-count on SEO title/description.
+  - **🤖 AI copywriter + 🎤 AI voice — free Google Gemini `gemini-2.5-flash` + `thinkingBudget:0`** (NOT 2.0-flash:
+    key has no free quota; NOT Anthropic). Worker `/copywriter` + `/transcribe`. **Field-aware:** SEO prompt on
+    `*.meta.title/description` (keywords+length; **page-aware Eilat**: home/bride/guide avoid leading with אילת,
+    local pages keep it), copywriter prompt elsewhere. **No 🤖 on name fields**; never invent names / replace
+    "ירדן דמרי". **No em dash** (prompt + strip). All AI logic = `worker/worker.js` → run **Deploy Worker** workflow.
+  - **Mic fix:** site sent `Permissions-Policy: microphone=()` (blocked mic on ALL pages). Changed the CF Transform
+    Rule (zone `745a6f759dbdf0930afbf8349d2d4835`, ruleset `ea5be0259ede4cf9852576da6ae22df2`, rule
+    `b4e62d875ca24b7787f7c6cf525e5629`) → `microphone=(self)` via CF API w/ user-supplied token (revoked).
+  - **SEO:** added `WebSite`+`Organization` JSON-LD to index.html; bumped sitemap `lastmod`. Owner already did
+    Search Console **verified (domain)** + sitemap submitted; **Google Business Profile** exists (5.0★). Admin
+    keywords panel now links straight to Search Console queries.
+  - **Bug fixes (verified):** hero blank-on-mobile (`#heroImage` poster `display:none`→`display:block` behind
+    video = matches locked RULE 4); **nav overlap** 13–15" (centered name hidden 1081–1500px via
+    `.nav-brand-center`; Playwright-measured no overlap 1280–1680).
+  - **Playwright** = permanent dep (`@playwright/test@1.49` + CI). Local browser
+    `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`. **Env limits:** headless has NO H.264 (can't watch
+    video playback); proxy blocks Playwright from the LIVE site (use `file://`/local http-server; curl works for live).
+  - **NEXT: the recopywriting mission** — rewrite Hebrew copy page-by-page via the editor + AI. Start with
+    **bride.html SEO title** (leads with "אילת" — shouldn't, it's the bridal page).
+  - **Open:** hero change kept (matches locked RULE 4). Owner can say "revert the hero" to restore old behavior.
 
 0. **✅ DONE (session 4): gallery + hero media — fast thumbnails, no brown, autoplay kept. Live.**
    - **Thumbnails: 1547/1547 covered.** Every item (301 videos + 1247 images) has a small
