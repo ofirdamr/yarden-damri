@@ -100,6 +100,62 @@ async function clearRateLimit(env, ip) {
   await env.SESSIONS.delete('rl:' + ip);
 }
 
+// ── TOTP (RFC 6238) ─────────────────────────────────────────────
+
+const BASE32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+function base32Encode(bytes) {
+  let bits = 0, val = 0, out = '';
+  for (let i = 0; i < bytes.length; i++) {
+    val = (val << 8) | bytes[i];
+    bits += 8;
+    while (bits >= 5) { out += BASE32[(val >>> (bits - 5)) & 31]; bits -= 5; }
+  }
+  if (bits > 0) out += BASE32[(val << (5 - bits)) & 31];
+  return out;
+}
+
+function base32Decode(str) {
+  str = str.toUpperCase().replace(/[^A-Z2-7]/g, '');
+  const bytes = [];
+  let bits = 0, val = 0;
+  for (const c of str) {
+    val = (val << 5) | BASE32.indexOf(c);
+    bits += 5;
+    if (bits >= 8) { bytes.push((val >>> (bits - 8)) & 0xff); bits -= 8; }
+  }
+  return new Uint8Array(bytes);
+}
+
+async function totpCode(secret, counter) {
+  const key = await crypto.subtle.importKey(
+    'raw', base32Decode(secret),
+    { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']
+  );
+  const buf = new Uint8Array(8);
+  let c = counter;
+  for (let i = 7; i >= 0; i--) { buf[i] = c & 0xff; c = Math.floor(c / 256); }
+  const sig = new Uint8Array(await crypto.subtle.sign('HMAC', key, buf));
+  const off = sig[19] & 0xf;
+  const otp = (((sig[off] & 0x7f) << 24) | (sig[off+1] << 16) | (sig[off+2] << 8) | sig[off+3]) % 1_000_000;
+  return otp.toString().padStart(6, '0');
+}
+
+async function verifyTotp(secret, code) {
+  if (!/^\d{6}$/.test(code)) return false;
+  const t = Math.floor(Date.now() / 30000);
+  for (const d of [-1, 0, 1]) {
+    if (await totpCode(secret, t + d) === code) return true;
+  }
+  return false;
+}
+
+function totpUri(secret) {
+  const label = encodeURIComponent('Yarden Damri Admin');
+  const issuer = encodeURIComponent('Yarden Damri');
+  return `otpauth://totp/${label}?secret=${secret}&issuer=${issuer}&algorithm=SHA1&digits=6&period=30`;
+}
+
 // ── Session management ──────────────────────────────────────────
 
 function generateToken() {
@@ -275,10 +331,19 @@ export default {
         let body;
         try { body = await request.json(); } catch { return json({ error: 'bad_body' }, 400, {}, origin); }
 
-        const { password } = body || {};
+        const { password, totpCode: code } = body || {};
         if (!password || password !== env.ADMIN_PASSWORD) {
           await recordFailedAttempt(env, ip);
           return json({ error: 'unauthorized' }, 401, {}, origin);
+        }
+
+        const totpSecret = env.SESSIONS ? await env.SESSIONS.get('totp:secret') : null;
+        if (totpSecret) {
+          if (!code) return json({ needsTotp: true }, 200, {}, origin);
+          if (!await verifyTotp(totpSecret, code)) {
+            await recordFailedAttempt(env, ip);
+            return json({ error: 'invalid_totp' }, 401, {}, origin);
+          }
         }
 
         await clearRateLimit(env, ip);
@@ -410,6 +475,45 @@ export default {
 </head><body><div><p>מעבירה אותך לגלריה…</p><p><a href="${esc(target)}">להמשך לחצי כאן</a></p>
 <script>location.replace(${JSON.stringify(target)});</script></div></body></html>`;
         return new Response(htmlBody, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300', 'Access-Control-Allow-Origin': '*' } });
+      }
+
+      // ── GET /totp-setup — generate a new TOTP secret (requires session) ──
+      if (request.method === 'GET' && path === '/totp-setup') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const enabled = env.SESSIONS ? !!(await env.SESSIONS.get('totp:secret')) : false;
+        const tempBytes = new Uint8Array(20);
+        crypto.getRandomValues(tempBytes);
+        const secret = base32Encode(tempBytes);
+        return json({ secret, uri: totpUri(secret), enabled }, 200, {}, origin);
+      }
+
+      // ── POST /totp-setup — verify code and save secret (requires session) ──
+      if (request.method === 'POST' && path === '/totp-setup') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        let body;
+        try { body = await request.json(); } catch { return json({ error: 'bad_body' }, 400, {}, origin); }
+        const { secret, code } = body || {};
+        if (!secret || !code) return json({ error: 'missing_fields' }, 400, {}, origin);
+        if (!/^[A-Z2-7]{32,}$/.test(secret)) return json({ error: 'invalid_secret' }, 400, {}, origin);
+        if (!await verifyTotp(secret, code)) return json({ error: 'invalid_totp' }, 400, {}, origin);
+        if (env.SESSIONS) await env.SESSIONS.put('totp:secret', secret);
+        return json({ ok: true }, 200, {}, origin);
+      }
+
+      // ── POST /totp-disable — verify current TOTP and remove secret (requires session) ──
+      if (request.method === 'POST' && path === '/totp-disable') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        let body;
+        try { body = await request.json(); } catch { return json({ error: 'bad_body' }, 400, {}, origin); }
+        const { code } = body || {};
+        const totpSecret = env.SESSIONS ? await env.SESSIONS.get('totp:secret') : null;
+        if (!totpSecret) return json({ error: 'totp_not_enabled' }, 400, {}, origin);
+        if (!code || !await verifyTotp(totpSecret, code)) return json({ error: 'invalid_totp' }, 401, {}, origin);
+        await env.SESSIONS.delete('totp:secret');
+        return json({ ok: true }, 200, {}, origin);
       }
 
       // ── POST /copywriter — AI copy suggestions (Gemini, requires session token) ──
