@@ -52,3 +52,10 @@
 - SEO: WebSite+Organization JSON-LD; sitemap lastmod bumped. Owner: Search Console verified (domain) + sitemap submitted; Business Profile exists. Admin keywords panel → direct Search Console queries link.
 - Hero blank-on-mobile fixed (#heroImage display:block behind video). Nav overlap on 13-15" fixed (.nav-brand-center hidden 1081-1500px; Playwright-verified). Installed playwright locally (gitignored); @playwright/test already in package.json.
 - LOCKED media reveal architecture as CLAUDE.md RULE 4 (owner-permission-only) + RULE 5 (no em dash). Verified grid architecture 100% intact; hero now conforms to it.
+
+## 2026-06-27 — session 6: media-indexing root cause + friendly AI errors
+- ADMIN AI errors made human: admin.html now maps Worker/Gemini failures to short Hebrew via aiErrMsg() (rate-limit / service busy / temporary / network) for both /copywriter and /transcribe. No more raw JSON dumps (was showing upstream_503 ... UNAVAILABLE). Live-verified.
+- MEDIA NOT INDEXED — root cause found + fixed: sitemap-media.xml listed Cloudinary URLs (res.cloudinary.com/dfjwxc1cw/...) for ALL 160 img + 60 vid entries, every one HTTP 401 → Google could fetch nothing. Real media is on R2 (images.*/videos-new.*) and was never in the sitemap. Rebuilt with real crawlable URLs: 611 images + 165 videos (hidden excluded), valid XML; sampled URLs 200/206. Live-verified (Cloudinary gone, R2 present).
+- AUTO-GEN: fix.js now rebuilds sitemap-media.xml from gallery-data.js after every 6h sync (buildMediaSitemap) + bumps sitemap-index lastmod → never stale again. Sitemap already in publish allowlist.
+- Search Console: all 3 sitemaps submitted + being read (user confirmed via screenshot). media.xml last-read 26 Jun = OLD broken version; Google will refetch the fixed one.
+- VideoObject schema: DEFERRED (decided not now). Sitemap already makes videos eligible. Doing it right needs uploadDate (required) + duration not currently stored → would need fix.js capture + backfill 165 vids; half-done triggers SC errors. Revisit ONLY if, after sitemap re-read, videos still not indexed.

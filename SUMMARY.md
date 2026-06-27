@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-25 (session 5). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-27 (session 6). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -16,6 +16,19 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
 
 ### ✅ Open / pending tasks (in priority order)
+
+- **✅ DONE (session 6, 2026-06-27): media-indexing root cause + friendly AI errors. LIVE.**
+  - **Media not indexed — ROOT CAUSE:** `sitemap-media.xml` pointed at a dead Cloudinary host
+    (`res.cloudinary.com/dfjwxc1cw/...`), every one of 160 img + 60 vid URLs = HTTP 401, so Google
+    indexed nothing. Real media is on R2. **Rebuilt** with real crawlable URLs (611 img + 165 vid,
+    hidden excluded) and **wired auto-gen into `fix.js`** (`buildMediaSitemap`) so it rebuilds every
+    6h sync + bumps `sitemap-index` lastmod. Live-verified. Search Console: 3 sitemaps submitted +
+    read; Google still needs to refetch the fixed media sitemap (was last-read 26 Jun = old version).
+  - **Admin AI errors → human Hebrew:** `aiErrMsg()` in admin.html (rate-limit/busy/temporary/network)
+    for `/copywriter` + `/transcribe`; no more raw JSON. Live-verified.
+  - **VideoObject schema = DEFERRED** (deliberate). Sitemap already makes videos eligible. Only revisit
+    if, after Google re-reads the fixed sitemap, videos still aren't indexed — then add `uploadDate`
+    (required) + `duration` capture to `fix.js`, backfill 165 videos, emit clean JSON-LD.
 
 - **✅ DONE (session 5): Site-wide CMS + AI copywriter + AI voice + SEO setup + bug fixes. ALL LIVE.**
   - **CMS:** Admin → 📝 **תוכן** tab, page dropdown → edit every text field. **~238 fields** tagged
