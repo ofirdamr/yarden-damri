@@ -17,12 +17,11 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ✅ Open / pending tasks (in priority order)
 
-- **⚠️ DONE (session 7, 2026-06-27): TOTP 2FA — code pushed, awaiting Deploy Worker.**
-  - Worker: TOTP engine (RFC 6238, HMAC-SHA1 via Web Crypto), 3 new endpoints (`GET/POST /totp-setup`, `POST /totp-disable`), `/login` now checks KV for `totp:secret` and demands a 6-digit code as a second step when 2FA is active.
-  - `cloud-storage.js`: `login()` handles two-step flow + `needsTotp` signal; `totpGetSetup / totpEnable / totpDisable` methods exposed.
-  - `admin.html`: login UI switches to TOTP code field after password; new 🔐 אימות דו-שלבי section in ⚙️ Settings tab to set up or disable via authenticator app (Google Authenticator / Authy — free).
-  - **⚠️ ACTION REQUIRED: run "Deploy Worker" GitHub Action (`workflow_dispatch`) to push worker changes live.** Until then the worker still has the old code and 2FA is not active.
-  - After deploy: admin → ⚙️ הגדרות → 🔐 אימות דו-שלבי → טעני הגדרות 2FA → copy secret into authenticator app → enter 6-digit code to activate.
+- **✅ DONE (session 7, 2026-06-27): TOTP 2FA — LIVE and active.**
+  - Worker: TOTP engine (RFC 6238, HMAC-SHA1 via Web Crypto), 3 endpoints (`GET/POST /totp-setup`, `POST /totp-disable`), `/login` requires 6-digit code as second step when 2FA is active.
+  - `cloud-storage.js`: two-step login flow; `totpGetSetup / totpEnable / totpDisable` methods.
+  - `admin.html`: TOTP code step in login screen; 🔐 אימות דו-שלבי section in ⚙️ Settings tab to enable/disable.
+  - Deployed via "Deploy Worker" workflow. 2FA enabled and verified live.
 
 - **✅ DONE (session 6, 2026-06-27): media-indexing root cause + friendly AI errors. LIVE.**
   - **Media not indexed — ROOT CAUSE:** `sitemap-media.xml` pointed at a dead Cloudinary host
