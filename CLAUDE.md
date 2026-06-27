@@ -29,6 +29,30 @@
 - Confirm the exact reported symptom is GONE — not just that the code looks right.
 - If Playwright can run, run it, read the screenshots, confirm no regressions.
 
+### RULE 4 — Media reveal architecture is 🔒 LOCKED (change ONLY with explicit owner permission)
+
+The grid AND hero share one deliberate, approved "Instagram-polished" pattern: the still **image
+shows instantly** (no background flash), the **video lays on top and fades in only once it actually
+plays**. This look is final. **Do NOT modify it** — markup, CSS, opacity/`display`/z-index, the
+`'playing'` reveal, the IntersectionObserver, or `tilefade` — **without the owner explicitly saying so.**
+
+- **Grid** (`renderGrid` + `observeGalleryVideos` in `index.html`): tile cream placeholder `#efe7df`
+  → thumbnail `<img>` (`_thumb.webp`, `onerror`→`_thumb.jpg`) fades in via `animation:tilefade`,
+  `object-fit:cover`, and **always stays**. An IntersectionObserver (threshold 0.2) lays an
+  autoplaying `<video>` (`muted` `loop` `playsinline` `autoplay` `preload=metadata`) **on top**,
+  `opacity:0` → `opacity:1` **only on the `'playing'` event**; paused + `opacity:0` when off-screen.
+  Autoplay-blocked → thumbnail stays, a tile **NEVER goes blank**. Many videos autoplay at once **on purpose** (works on mobile).
+- **Hero** (`#heroMediaWrap`): `#heroImage` (poster `_thumb.jpg`) = `display:block`, `z-index:0`,
+  **always behind**. `#heroVideo` = `opacity:0` → `opacity:1` on `'playing'`, `z-index:1` on top.
+  **Never `display:none` the poster** (that re-creates the blank/dark hero when autoplay is blocked).
+- If a task seems to need touching this, **STOP and ask the owner first.**
+
+### RULE 5 — No em dash (`—`) anywhere
+
+The em dash reads as AI-written, not human. Never use `—` in Hebrew copy, titles, meta, or AI
+output. Use a comma, period, or a regular hyphen `-`. (Enforced in the Worker `/copywriter` prompt
++ a strip step; keep it that way.)
+
 ### Project language / locale & internet
 
 - English to the user. Site is Hebrew, RTL (`lang="he" dir="rtl"`) — verify RTL on mobile too.
