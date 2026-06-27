@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-27 (session 6). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-27 (session 7). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -16,6 +16,13 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
 
 ### ✅ Open / pending tasks (in priority order)
+
+- **⚠️ DONE (session 7, 2026-06-27): TOTP 2FA — code pushed, awaiting Deploy Worker.**
+  - Worker: TOTP engine (RFC 6238, HMAC-SHA1 via Web Crypto), 3 new endpoints (`GET/POST /totp-setup`, `POST /totp-disable`), `/login` now checks KV for `totp:secret` and demands a 6-digit code as a second step when 2FA is active.
+  - `cloud-storage.js`: `login()` handles two-step flow + `needsTotp` signal; `totpGetSetup / totpEnable / totpDisable` methods exposed.
+  - `admin.html`: login UI switches to TOTP code field after password; new 🔐 אימות דו-שלבי section in ⚙️ Settings tab to set up or disable via authenticator app (Google Authenticator / Authy — free).
+  - **⚠️ ACTION REQUIRED: run "Deploy Worker" GitHub Action (`workflow_dispatch`) to push worker changes live.** Until then the worker still has the old code and 2FA is not active.
+  - After deploy: admin → ⚙️ הגדרות → 🔐 אימות דו-שלבי → טעני הגדרות 2FA → copy secret into authenticator app → enter 6-digit code to activate.
 
 - **✅ DONE (session 6, 2026-06-27): media-indexing root cause + friendly AI errors. LIVE.**
   - **Media not indexed — ROOT CAUSE:** `sitemap-media.xml` pointed at a dead Cloudinary host
