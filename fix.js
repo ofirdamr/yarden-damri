@@ -551,11 +551,13 @@ function buildMediaSitemap(items) {
           if (!bakedHeroIsVid) t = t.replace(/(style="[^"]*?)(")/, '$1display:none;$2');
           return t;
         });
-        // Bake the <img id="heroImage"> too: an image hero shows it (src + display:block);
-        // a video hero keeps it empty + hidden so it never paints.
-        html = html.replace(/(<img id="heroImage" src=")[^"]*(")/, `$1${bakedHeroIsVid ? '' : bakedHeroSrc}$2`);
+        // Bake the <img id="heroImage"> too. The still must ALWAYS stay visible behind the
+        // media (RULE 4): an image hero shows the image; a video hero shows the video's poster
+        // (_thumb.jpg) so the hero is never a dark box while the video loads or when autoplay
+        // is blocked. The <video> still fades in on top once it actually plays ('playing').
+        html = html.replace(/(<img id="heroImage" src=")[^"]*(")/, `$1${bakedHeroIsVid ? bakedHeroPoster : bakedHeroSrc}$2`);
         html = html.replace(/(<img id="heroImage"[^>]*style="[^"]*?)display:\s*(?:none|block);([^"]*")/,
-          `$1display:${bakedHeroIsVid ? 'none' : 'block'};$2`);
+          `$1display:block;$2`);
         console.log(`Baked hero ${bakedHeroIsVid ? 'video' : 'image'} (yarden_${bakedHeroId}) into ${htmlFile}`);
       }
       fs.writeFileSync(htmlFile, html, "utf8");

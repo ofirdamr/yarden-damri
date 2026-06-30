@@ -28,6 +28,14 @@
 - After every push, verify live: `curl -s "https://yardendamri.co.il/"` or fetch the relevant URL.
 - Confirm the exact reported symptom is GONE — not just that the code looks right.
 - If Playwright can run, run it, read the screenshots, confirm no regressions.
+- **Gallery/hero changes ALWAYS require a VISUAL render check before saying "done"** (owner
+  standing order). Render the page (local server + Chromium, or live) and READ the screenshot
+  on BOTH desktop and mobile. Test the worst case (e.g. autoplay-blocked = video aborted, so
+  the poster still must show, never a dark/blank box). Never declare a gallery/hero fix done
+  on code inspection alone.
+- Browser proxy note: Chromium must use the CURRENT `$HTTPS_PROXY` (the port changes between
+  sessions). External CDN images (`images.*`) may fail through the proxy in headless — fetch
+  the asset with `curl` and serve it via Playwright `page.route(...fulfill)` to render it.
 
 ### RULE 4 — Media reveal architecture is 🔒 LOCKED (change ONLY with explicit owner permission)
 
