@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-27T06:25:23.462Z",
+  "updatedAt": "2026-06-29T07:11:40.812Z",
   "admin": {
     "hidden": [
       "https://images.yardendamri.co.il/yarden_17843112559037829.webp",
@@ -774,7 +774,8 @@
       "https://images.yardendamri.co.il/yarden_17873247067139583.webp",
       "https://images.yardendamri.co.il/yarden_17900434600014653.webp",
       "https://videos-new.yardendamri.co.il/yarden_17892239260111120.mp4",
-      "https://images.yardendamri.co.il/yarden_17882731123017167.webp"
+      "https://images.yardendamri.co.il/yarden_17882731123017167.webp",
+      "https://videos-new.yardendamri.co.il/yarden_18153908050468263.mp4"
     ],
     "pinned": [],
     "order": [
@@ -3223,7 +3224,9 @@
       "https://videos-new.yardendamri.co.il/yarden_17926049950524424.mp4": "מוסתרות",
       "https://videos-new.yardendamri.co.il/yarden_17943323485429342.mp4": "מוסתרות",
       "https://videos-new.yardendamri.co.il/yarden_18100404782127411.mp4": "איפור ערב",
-      "https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4": "איפור ערב"
+      "https://videos-new.yardendamri.co.il/yarden_17972187162071494.mp4": "איפור ערב",
+      "https://videos-new.yardendamri.co.il/yarden_18153908050468263.mp4": "תמונות שלי",
+      "https://videos-new.yardendamri.co.il/yarden_18106863977287938.mp4": "איפור ערב"
     },
     "catList": [
       "כלות/חתונות",
@@ -3253,7 +3256,7 @@
     ],
     "heroZoom": 50
   },
-  "heroVideo": "https://videos-new.yardendamri.co.il/yarden_18094353658922515.mp4",
+  "heroVideo": "https://videos-new.yardendamri.co.il/yarden_17881563132435942.mp4",
   "pricing": [
     {
       "icon": "💍",
