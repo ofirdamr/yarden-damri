@@ -2,6 +2,35 @@
 
 > Older entries archived to PROGRESS-archive.md (not auto-read).
 
+## 2026-06-30 — session 9: Pre-marketing QA pass (Hybrid: 4 parallel audits → merge → fix)
+- Token-Economist call: Hybrid mode — 4 independent parallel audit subagents (SEO/meta, code health,
+  visual/Playwright, Hebrew content+RTL), merged findings into one prioritized list, fixed directly.
+- **bride.html SEO**: title/description/JSON-LD no longer lead with "אילת" (was contradicting the
+  nationwide-bride positioning); `areaServed` changed City→Country.
+- **RULE 5 (em dash) violations removed** from live runtime Hebrew copy: index.html (alt-text builder,
+  reviews-empty-state, share title), gallery.html (alt-text builder, share title, comments-empty-state),
+  pricing.html (package desc + bullet glyph), reviews.html (share title). 9 real violations found and
+  fixed; many more "—" hits in the codebase were CSS/JS comments, correctly left alone.
+- **reviews.html**: fixed malformed JSON-LD phone (`+9720547...`→`+972547...`).
+- **og:image added** to about/services/gallery/pricing/contact/reviews.html (was missing on 7/11 pages;
+  reused existing root `share-preview.jpg`).
+- **`.github/workflows/fix-audio.yml`**: removed dead `preview/` references (retired 2026-06-24), aligned
+  with `sync-auto.yml`'s root-only existence-guarded commit pattern.
+- **Deleted orphan files**: `worker/copywriter-endpoint.js` + `worker/HANDOVER-content-editor.md` — both
+  superseded since session 5/6 (the live `/copywriter` route is in `worker/worker.js`, repo-managed,
+  deployed via the `Deploy Worker` workflow). Confirmed zero live references before deleting.
+- **Visual QA (Playwright)**: hero poster, gallery thumbnails, lightbox desktop action-bar all PASS, no
+  regressions. Bug-2 (lightbox action bar position, open since session 3) now confirmed fixed: measured
+  ~10px gap from media edge, not pushed to screen far-right.
+- **Playwright couldn't run natively in this sandbox** — pre-installed Chromium (1194) doesn't match the
+  installed `@playwright/test` version's expected build (1228) + WebKit isn't installed at all. Worked
+  around per-audit with a scratchpad-only config pointing at the installed binary; nothing committed to
+  repo. CI installs the correct versions itself, so this is sandbox-only, not a real defect.
+- Committed `81512f2`, pushed to `main`, mirror→live verified via curl on 4 distinct fixed pages.
+- **Flagged, not auto-fixed** (low priority / needs owner call): missing Twitter Card tags repo-wide;
+  no JSON-LD on pricing/legal pages; `sitemap-media.xml` missing `lastmod`; orphan `patch-stats.js`
+  (no workflow/script references it — confirm with owner before deleting).
+
 ## 2026-06-25 — session 5: Editable site text (CMS pilot) + AI copywriter backend
 - Backend mission (before the recopywriting mission): made all homepage marketing text manager-editable.
 - Architecture (decided with user): JSON-overrides-on-load, homepage pilot, editing+voice now / AI endpoint written for user to deploy.

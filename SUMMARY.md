@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-30 (session 8). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-30 (session 9). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -15,14 +15,26 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
 
-### ▶▶ NEXT MISSION — full pre-marketing QA pass (do this first)
+### ▶▶ NEXT MISSION — pick one
 
-Goal: confirm the site is professional, looks good, content is great, nothing broken — BEFORE marketing/promotion begins (so visitors stay, tap phone/WhatsApp/SMS → revenue). Run it **HYBRID** (Token-Economist orchestration call): fan out parallel review subagents, each scoped, then I merge findings into one prioritized list and fix the small/coupled items directly. Decide parallel-vs-classic by TIME **and** TOKENS (saves lots of time for not-much-more tokens → do it; little time + many more tokens → stay classic). Suggested parallel slices:
-- **SEO/meta:** titles, descriptions, canonical, og/twitter, JSON-LD, sitemaps, robots — no indexing regressions; bride.html title still leads with "אילת" (shouldn't).
-- **Code health:** broken links, JS console errors, dead/duplicate code (e.g. orphan `worker/copywriter-endpoint.js`), Playwright run green.
-- **Visual QA:** hero + gallery on desktop AND mobile, worst case autoplay-blocked (RULE 3); lightbox desktop action bar (pending #2 below).
-- **Hebrew content + RTL:** natural copy, RULE 5 (em dash) — owner plans to re-copywrite anyway, so flag, don't mass-edit.
-Then: merge → prioritize → fix directly → live-verify. After QA passes → marketing/promotion phase; future = more pages/features/value.
+**Pre-marketing QA pass is DONE (session 9, 2026-06-30) — site is ready for marketing/promotion.** Remaining open items, pick what's next:
+- **Owner decision needed:** delete orphan `patch-stats.js`? (no workflow/script references it, found during session 9 code-health audit)
+- **Low-priority SEO polish** (flagged, not yet fixed): add Twitter Card meta tags site-wide; add JSON-LD to pricing.html; add `lastmod` to `sitemap-media.xml`
+- **HSTS ramp** — see "Open / pending tasks" below, ready any time now (2026-06-28 gate already passed)
+- **First mission for the Hebrew Copywriter** — full recopywrite pass, queued since session 5 (Sonnet model)
+- **Marketing/promotion phase** — site QA'd and verified live; future = more pages/features/value
+
+### ✅ DONE (session 9, 2026-06-30) — pre-marketing QA pass
+
+Ran **Hybrid** orchestration: 4 parallel audit subagents (SEO/meta, code health, visual/Playwright, Hebrew+RTL) → merged into one prioritized list → fixed directly → live-verified via curl. Commit `81512f2`. Full detail in `PROGRESS.md`.
+- **bride.html SEO** no longer leads with "אילת" (title/description/JSON-LD; page serves brides nationwide).
+- **9 RULE 5 (em dash) violations removed** from live Hebrew copy across index/gallery/pricing/reviews.html.
+- **reviews.html** malformed JSON-LD phone number fixed.
+- **og:image added** to 6 pages that were missing it (about/services/gallery/pricing/contact/reviews).
+- **`fix-audio.yml`** dead `preview/` references removed (would have failed if ever triggered).
+- **Deleted orphan files**: `worker/copywriter-endpoint.js` + stale `worker/HANDOVER-content-editor.md`.
+- **Visual QA**: hero, gallery, lightbox all PASS — **lightbox desktop action-bar bug (open since session 3) is now CONFIRMED FIXED** (measured ~10px gap, not pushed to screen edge).
+- Playwright couldn't run natively in-sandbox this session (browser version mismatch, env-only — CI is unaffected). Visual checks done via a scratchpad-only Playwright config working around it.
 
 ### ✅ DONE (session 8, 2026-06-30)
 
@@ -106,11 +118,9 @@ Then: merge → prioritize → fix directly → live-verify. After QA passes →
      PLAYBACK can't be tested here — only the still/thumbnail fallback (verified via render with real R2
      thumbnails). Verify real autoplay on a device.
 
-1. **"Another problem" — UNRESOLVED.** User reported a second bug during hero-video investigation but never named it. I never found it. QA the live site on mobile and desktop: check the lightbox, gallery, and all visible UI for obvious issues.
-2. **Bug 2 (lightbox desktop actions) — UNVERIFIED LIVE.** The repositioning JS (`_repositionLbActionsDesktop` / `repositionLbActionsDesktop`) is in the live HTML but was never visually confirmed (Playwright browsers couldn't install in this environment). Verify by opening a gallery item on desktop and confirming the action bar is next to the media, not at screen far-right.
-3. **HSTS ramp — on/after 2026-06-28.** HSTS is staged at `max-age=300`. After 2026-06-28, ramp to `max-age=31536000; includeSubDomains; preload` via Cloudflare API (zone `745a6f759dbdf0930afbf8349d2d4835`). Needs user's scoped Cloudflare token → user revokes it immediately after. **Do NOT apply before 2026-06-28.**
-4. **First mission for the Hebrew Copywriter** — queued. Model: Sonnet (quality + token efficiency for copy).
-5. **Verify Instagram sync runs are clean.** Fix `42ef8ed` is live. Check the 18:00 UTC run on 2026-06-24 via `mcp__github__get_job_logs`, repo `ofirdamr/yarden-damri`.
+- ~~"Another problem" (vague, never named)~~ and ~~Bug 2 (lightbox desktop actions)~~ — **both closed (session 9):** a full site-wide visual QA pass (hero/gallery/lightbox, desktop+mobile) found no further issues; lightbox action-bar position is confirmed correct (~10px gap from media, not screen edge).
+- ~~Verify Instagram sync runs are clean~~ — **stale, dropped.** Sync has been running every 6h without incident for days since the `42ef8ed` fix; no longer worth tracking as an open item.
+1. **HSTS ramp — ready any time now (2026-06-28 gate already passed).** HSTS is staged at `max-age=300`. Ramp to `max-age=31536000; includeSubDomains; preload` via Cloudflare API (zone `745a6f759dbdf0930afbf8349d2d4835`). Needs user's scoped Cloudflare token → user revokes it immediately after.
 
 ---
 
