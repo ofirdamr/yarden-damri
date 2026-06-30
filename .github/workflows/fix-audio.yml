@@ -25,14 +25,15 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-        run: node fix.js --target=preview --fix-audio
+        run: node fix.js --fix-audio
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp instagram-stats.json preview/instagram-stats.json
-          cp preview/gallery-data.js gallery-data.js
-          git add preview/gallery-data.js gallery-data.js instagram-stats.json preview/instagram-stats.json
+          # Root-only since preview/ was retired (2026-06-24).
+          for f in gallery-data.js instagram-stats.json index.html gallery.html; do
+            if [ -e "$f" ]; then git add "$f"; fi
+          done
           git diff --staged --quiet && exit 0
           git commit -m "Re-uploaded all videos with audio"
           git push origin HEAD:main
