@@ -52,6 +52,21 @@ and comes before any other role. The Economist returns three things:
 3. **Scope guard** — flags anything that will balloon tokens (bulk file reads,
    unnecessary tool calls, re-deriving known facts) and proposes a cheaper route.
 
+4. **Orchestration mode** — picks HOW the work runs, per task:
+   | Mode | What it is | Use when |
+   |------|-----------|----------|
+   | **Classic** (default) | One Claude, internal roles, sequential | Small / coupled / sequential tasks; most work on this project |
+   | **Parallel (fan-out)** | Real subagents, separate context windows, run at once, merge | Big, independent, breadth work (audits, multi-area QA, wide search) |
+   | **Hybrid** | Fan-out the broad/independent parts → merge → do the small/coupled fixes Classic | Mixed jobs (e.g. a full QA pass: parallel audit, then fix directly) |
+
+   **Decide on TWO elements, time AND tokens — both matter; tokens are money.**
+   Net rule: parallel/hybrid is worth it only when it saves a LOT of time for
+   not-much-more tokens. If it saves little time but costs many more tokens
+   (each subagent starts cold and re-reads context), DON'T — stay Classic.
+   Real subagents save wall-clock time and keep context clean; they do NOT save
+   total tokens. Never fan out tiny or tightly-coupled tasks. Only spawn subagents
+   when the task genuinely splits into independent slices.
+
 Model picks are **per-task**, not at bare session start. You **cannot change your
 own model** — only the user can. So when a task's pick differs from the running
 model, surface it in one actionable line with the exact command, e.g.:

@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-27 (session 7). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-06-30 (session 8). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -14,6 +14,24 @@
 Claude Code on the web opens the session on a `claude/...` branch — **IGNORE THAT**; switch immediately (do not defer until "there's work to commit"): `git checkout -B main origin/main`.
 
 **⛔ EDIT THE ROOT FILES.** `preview/` was **deleted (2026-06-24)**. Root `*.html` / `styles.css` / `*.js` ARE the live source. Push to `main` → `publish-public.yml` mirrors to public repo → live site updates.
+
+### ▶▶ NEXT MISSION — full pre-marketing QA pass (do this first)
+
+Goal: confirm the site is professional, looks good, content is great, nothing broken — BEFORE marketing/promotion begins (so visitors stay, tap phone/WhatsApp/SMS → revenue). Run it **HYBRID** (Token-Economist orchestration call): fan out parallel review subagents, each scoped, then I merge findings into one prioritized list and fix the small/coupled items directly. Decide parallel-vs-classic by TIME **and** TOKENS (saves lots of time for not-much-more tokens → do it; little time + many more tokens → stay classic). Suggested parallel slices:
+- **SEO/meta:** titles, descriptions, canonical, og/twitter, JSON-LD, sitemaps, robots — no indexing regressions; bride.html title still leads with "אילת" (shouldn't).
+- **Code health:** broken links, JS console errors, dead/duplicate code (e.g. orphan `worker/copywriter-endpoint.js`), Playwright run green.
+- **Visual QA:** hero + gallery on desktop AND mobile, worst case autoplay-blocked (RULE 3); lightbox desktop action bar (pending #2 below).
+- **Hebrew content + RTL:** natural copy, RULE 5 (em dash) — owner plans to re-copywrite anyway, so flag, don't mass-edit.
+Then: merge → prioritize → fix directly → live-verify. After QA passes → marketing/promotion phase; future = more pages/features/value.
+
+### ✅ DONE (session 8, 2026-06-30)
+
+- **Admin media reorder (drag) — LIVE.** Desktop HTML5 drag + mobile long-press (400ms) touch drag. iOS hijack fixed: `draggable` only on non-touch + `-webkit-user-drag:none`; `display:none` clone during `elementFromPoint`. Saved order applied on public site (`applyAdminSettings` sorts by `s.order`; un-arranged/new items kept at top in natural order). `admin.html`, `index.html`, `gallery.html`.
+- **Videos "disappeared" — FIXED.** A stale/auto-generated `order` had pushed all videos to the end → homepage page 1 showed 0 videos. Reset `admin.order=[]` (everything else byte-identical) → natural newest-first restored.
+- **Dark hero — ROOT FIX.** `fix.js` was re-baking the video-hero `#heroImage` poster as `src="" display:none` every 6h sync → dark box when autoplay blocked. Now bakes poster `_thumb.jpg` + `display:block`; `index.html` poster restored + runtime guard. Visual-QA'd desktop+mobile autoplay-blocked. **CLAUDE.md RULE 3 now mandates a visual render check for gallery/hero before "done".**
+- **Copywriter context — DEPLOYED.** `/copywriter` + SEO prompts now prepend a factual brand brief (bio, profession, Eilat studio + nationwide bridal travel, full service list, premium long-wear products, differentiators) + native-Israeli-Hebrew/RTL/feminine-singular voice. Writes with knowledge now, not blind rewrites. (Worker deployed via workflow.)
+- **CI fixed.** Playwright runs were red only on artifact-storage-quota (tests passed). Uploads now `if: failure()` + `continue-on-error` + 3-day retention → green.
+- **Methodology:** Token-Economist now also picks **orchestration mode** (Classic / Parallel fan-out / Hybrid) per task, on a time+tokens tradeoff (skill updated).
 
 ### ✅ Open / pending tasks (in priority order)
 
