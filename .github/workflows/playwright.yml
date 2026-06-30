@@ -35,18 +35,22 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      # Only upload artifacts when tests fail, with short retention, and never let
+      # an artifact-storage-quota error mark the whole run red (continue-on-error).
       - name: Upload HTML report
-        if: ${{ !cancelled() }}
+        if: ${{ failure() }}
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 14
+          retention-days: 3
 
       - name: Upload screenshots
-        if: ${{ !cancelled() }}
+        if: ${{ failure() }}
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: screenshots/
-          retention-days: 14
+          retention-days: 3
