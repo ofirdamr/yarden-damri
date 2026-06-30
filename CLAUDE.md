@@ -57,20 +57,18 @@ plays**. This look is final. **Do NOT modify it** — markup, CSS, opacity/`disp
 
 ### RULE 5 — No em dash (`—`) anywhere
 
-The em dash reads as AI-written, not human. Never use `—` in Hebrew copy, titles, meta, or AI
-output. Use a comma, period, or a regular hyphen `-`. (Enforced in the Worker `/copywriter` prompt
-+ a strip step; keep it that way.)
+(Generic rule lives in the skill.) Enforced here in the Worker `/copywriter` prompt + a strip
+step; keep it that way.
 
 ### Project language / locale & internet
 
 - English to the user. Site is Hebrew, RTL (`lang="he" dir="rtl"`) — verify RTL on mobile too.
 - Internet allowed without asking: project domains only (`yardendamri.co.il`, `images.*`, `videos-new.*`). Ask first for anything else.
 
-### Session routine (full detail in the skill)
+### Session routine
 
-- Read `SUMMARY.md` first. Log mistakes to `MISTAKES.md` immediately. Append `PROGRESS.md` after each commit.
-- Keep memory small: **rewrite** `SUMMARY.md` (snapshot, not a log); archive old `PROGRESS.md`/`MISTAKES.md` entries to `*-archive.md` (never auto-read).
-- Autonomous: you are manager + executor; self-correct from logs/QA; stop only for a genuine product/visual decision.
+(MD operating system + memory compaction: see skill.) Autonomous: self-correct from logs/QA;
+stop only for a genuine product/visual decision.
 
 ---
 
@@ -88,14 +86,12 @@ Project-specific role knowledge:
 
 ---
 
-## Automated QA Pipeline (Playwright) — the QA Engineer's "eyes"
+## Automated QA Pipeline (Playwright)
 
 - **Config:** `playwright.config.js` — serves repo root with `http-server`; two engines: `desktop-chromium` (1440×900) and `mobile-safari` (iPhone 13 / WebKit — where most bugs have lived). Override target with `BASE_URL`.
 - **Tests:** `tests/visual.spec.js` — for each key page: HTTP < 400, `lang="he" dir="rtl"`, visible `nav[role="navigation"]`, non-empty `<title>`, no horizontal overflow, no JS errors, full-page screenshot. Mobile menu open/close on WebKit.
 - **Run locally:** `npm install && npx playwright install chromium webkit` then `npm run test:e2e`
 - **CI:** `.github/workflows/playwright.yml` runs on every push.
-
-**QA loop:** at start of every task, check the latest Playwright run (CI artifacts or local). Fix regressions at the root source — never a band-aid. Re-run before delivering.
 
 ---
 
@@ -186,9 +182,6 @@ After pushing, check output for `rejected` or `fetch first`. The sync workflow c
 
 ## Routines — apply EVERY session
 
-- **Before deleting any file/folder:** grep ALL workflows (`.github/`) and scripts for references to it first.
-- **Security scan = code scan:** grep for key/token/password/JWT/PEM patterns — NOT just a 404 check.
-- **Viewing a video (`.mp4`):** install ffmpeg, extract frames, Read the PNGs. Still images and PDFs read natively.
 - **Alt text:** bride/`כלות` category — NEVER include `אילת` (she travels nationwide). Evening/general media — use `באילת`.
 - **Cloudflare security lives outside the repo** — Transform Rule on zone `745a6f759dbdf0930afbf8349d2d4835`.
 
@@ -198,9 +191,3 @@ After pushing, check output for `rejected` or `fetch first`. The sync workflow c
 
 1. New pages: use `index.html` + `styles.css` as template. Copy structure, same CSS variables and nav.
 2. Change only the content of the new page. Never change the nav.
-3. Don't rewrite from scratch. Find the relevant block and change only that block.
-4. Never create patches. Fix the root cause in the source file directly.
-5. Read only what is needed. Don't over-read.
-6. Don't explain what you did. Just do it.
-7. When user writes **"summary"** → create/update `SUMMARY.md`: what started, what done, what still to do.
-8. If there is a better way or tool, say so before doing it.

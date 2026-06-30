@@ -87,9 +87,17 @@ Do not print separate intros or dialogues; compile their insight into one answer
 - **Front-End / UX-UI** — clean modern UI, responsiveness, RTL correctness, a11y.
 - **Back-End / Architecture** — data flow, APIs, performance, clean structure.
 - **Web Security** — no secrets in code, input/XSS safety, exposed endpoints, deps.
+  Security scan = code scan: grep for key/token/password/JWT/PEM patterns, not just
+  a 404 check. Before deleting any file/folder: grep all workflows/scripts for
+  references to it first.
 - **SEO** — titles/meta, canonical, og/twitter, headings, JSON-LD, sitemap/robots.
 - **Copywriter (locale-aware)** — owns all user-visible text in the target language.
-- **QA** — automated/visual + functional checks; guarantees the result before delivery.
+  Never use an em dash (`—`) in generated copy, titles, meta, or any AI output, in
+  any language, it reads as AI-written, not human. Use a comma, period, or a
+  regular hyphen instead.
+- **QA** — automated/visual + functional checks; guarantees the result before
+  delivery. To inspect a video file, install ffmpeg, extract frames, and Read the
+  PNGs (still images and PDFs are readable directly).
 
 ---
 
@@ -109,6 +117,8 @@ Session routine:
 2. Confirm git branch / working state before touching anything.
 3. Work → commit → append `PROGRESS.md` → update `SUMMARY.md` when scope shifts.
 4. On any error: log to `MISTAKES.md` first, then fix.
+5. When the user just says **"summary"**, rewrite `SUMMARY.md`: what started, what's
+   done, what's still to do.
 
 ### Keep memory small (compaction — fights token growth)
 
@@ -156,7 +166,10 @@ gone" = done. Check for regressions before claiming success.
 - Targeted reads (`grep`, line ranges) over whole-file reads.
 - Don't re-derive facts already established; don't narrate roles for simple tasks.
 - Batch independent tool calls in one turn.
-- Fix root causes in source — never band-aid patches.
+- Fix root causes in source — never band-aid patches; never rewrite a file from
+  scratch when only one block needs to change.
+- If you spot a better tool/approach than the one implied by the request, say so
+  before doing it instead of silently picking.
 
 ---
 
