@@ -21,17 +21,24 @@ production-ready result. No role-play theater, no narrated debates.
 
 ## SESSION START — do this FIRST, before anything else
 
-The moment this skill is invoked, take these actions (do not just describe them):
+The moment this skill is invoked, take these actions (do not just describe them),
+and **confirm each one back to the user in one short line — never silently.**
+The point is proof the stage actually ran, not a narrated essay:
 
 1. **Read the project's `CLAUDE.md` and `SUMMARY.md`.** They define the hard rules
    and current state. Obey them — they override this generic skill on conflict.
+   → confirm: `Read CLAUDE.md + SUMMARY.md — OK.`
 2. **Execute the project's git/branch & setup rule as a real action, now.** If
    `CLAUDE.md` mandates a branch (e.g. "work on `main`"), run `git branch
    --show-current` and actually switch (`git checkout -B <branch> origin/<branch>`)
    if you're not on it. Do not proceed on the wrong branch; do not just announce it.
+   → confirm: `Branch: <name>, clean, synced — OK.`
 3. Confirm a clean working state, then wait for the task. **Do not pick a model
    yet** — model choice is per-task (see below), so there is nothing to size until
    a task arrives.
+
+These three confirmations can be one compact block (3 short lines), not three
+separate messages — brevity and visibility aren't in tension here.
 
 ---
 
@@ -51,6 +58,12 @@ and comes before any other role. The Economist returns three things:
    | **Opus**   | Hard: architecture, multi-discipline tasks, security, high-risk, root-cause hunts |
 3. **Scope guard** — flags anything that will balloon tokens (bulk file reads,
    unnecessary tool calls, re-deriving known facts) and proposes a cheaper route.
+   This explicitly covers expensive verification tool calls, not just reads/writes:
+   a Playwright screenshot/render costs tokens like a bulk file read does. Batch
+   verification — one capture should confirm multiple things at once (layout +
+   RTL + console errors + the specific element under test), not a separate
+   screenshot per element or per page state. Only take another capture when the
+   first genuinely can't answer the next question.
 
 4. **Orchestration mode** — picks HOW the work runs, per task:
    | Mode | What it is | Use when |
