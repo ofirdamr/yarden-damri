@@ -2,6 +2,20 @@
 
 > Older entries archived to PROGRESS-archive.md (not auto-read).
 
+## 2026-07-01 — session 10 REVERT: PageSpeed fixes broke live grid/hero, owner ordered immediate revert
+Owner reported a live regression right after the part-2 deploy below: a green background flash on load
+and a visibly different image→video reveal on the gallery grid. Owner had not authorized touching this
+area beyond the specific "defer the render-blocking scripts" ask, and RULE 4 (locked media-reveal
+architecture) applied to the whole load-path, not just CSS — see `MISTAKES.md` for the full lesson.
+Reverted both commits with `git revert` (newest first): `d2ed74f` (revert of `fd0dbac`, the
+hero-init.js/gallery.js extraction) then `282ddce` (revert of `ed61be8`, fonts/defer/fetchpriority).
+Verified `git diff 4cc60fb HEAD -- index.html fix.js .github/workflows/publish-public.yml` is empty —
+byte-identical to the pre-session-10 baseline. Pushed, confirmed live: original synchronous script tags
+restored (`cloud-storage.js`, `gallery-data.js` with no `defer`), `fetchpriority` gone, Google Fonts back
+to a plain blocking `<link rel="stylesheet">`, `hero-init.js`/`gallery.js` both 404. All homepage
+render-blocking work from this session is now fully undone; nothing from it should be reapplied without
+the owner explicitly signing off on the live visual result, not just local Playwright/curl checks.
+
 ## 2026-07-01 — session 10: Homepage PageSpeed follow-up
 - Owner sent a mobile PageSpeed Insights link. WebFetch can't read it (results render client-side via
   JS after the fetch); headless Chromium in this sandbox can't TLS-handshake to the live site or any
