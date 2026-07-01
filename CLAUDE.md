@@ -33,6 +33,13 @@
   on BOTH desktop and mobile. Test the worst case (e.g. autoplay-blocked = video aborted, so
   the poster still must show, never a dark/blank box). Never declare a gallery/hero fix done
   on code inspection alone.
+- **Know your verification tooling's blind spots BEFORE you ship, not after.** If this sandbox
+  cannot actually observe the real result of THIS change (e.g. headless Chromium has no H.264
+  decoder → can't watch real video autoplay/reveal; proxy blocks reaching the live site) — say so
+  explicitly up front. Local Playwright/DOM/curl checks that don't cover the actual visual behavior
+  do NOT make the change "done" — treat it as unverified-in-practice and say so, then get the
+  owner's live confirmation, instead of reporting success on partial checks (session 10 lesson,
+  see `MISTAKES.md` 2026-07-01).
 - Browser proxy note: Chromium must use the CURRENT `$HTTPS_PROXY` (the port changes between
   sessions). External CDN images (`images.*`) may fail through the proxy in headless — fetch
   the asset with `curl` and serve it via Playwright `page.route(...fulfill)` to render it.
@@ -53,7 +60,17 @@ plays**. This look is final. **Do NOT modify it** — markup, CSS, opacity/`disp
 - **Hero** (`#heroMediaWrap`): `#heroImage` (poster `_thumb.jpg`) = `display:block`, `z-index:0`,
   **always behind**. `#heroVideo` = `opacity:0` → `opacity:1` on `'playing'`, `z-index:1` on top.
   **Never `display:none` the poster** (that re-creates the blank/dark hero when autoplay is blocked).
+- **Locked scope includes script loading order/timing, not just CSS/markup.** `defer`/`async`,
+  extracting inline scripts, or reordering anything in the gallery/hero load path counts as touching
+  this rule if it changes WHEN or HOW the reveal fires — timing is not a loophole around "markup/CSS".
 - If a task seems to need touching this, **STOP and ask the owner first.**
+- **"Do it" on a scoped, named task is not blanket permission to also reinterpret this rule's
+  boundary.** If the task sits adjacent to RULE 4 (e.g. it touches script timing for the
+  gallery/hero path), name that boundary explicitly and get an explicit yes on THAT specific
+  point before proceeding — don't decide unilaterally that your interpretation of "locked" is
+  narrower than the rule as written (session 10 lesson, see `MISTAKES.md` 2026-07-01: a "do it"
+  for a render-blocking-scripts fix was over-extended into a live-breaking hero/gallery timing
+  change that had to be reverted).
 
 ### RULE 5 — No em dash (`—`) anywhere
 

@@ -152,3 +152,9 @@ the owner explicitly signing off on the live visual result, not just local Playw
 - AUTO-GEN: fix.js now rebuilds sitemap-media.xml from gallery-data.js after every 6h sync (buildMediaSitemap) + bumps sitemap-index lastmod → never stale again. Sitemap already in publish allowlist.
 - Search Console: all 3 sitemaps submitted + being read (user confirmed via screenshot). media.xml last-read 26 Jun = OLD broken version; Google will refetch the fixed one.
 - VideoObject schema: DEFERRED (decided not now). Sitemap already makes videos eligible. Doing it right needs uploadDate (required) + duration not currently stored → would need fix.js capture + backfill 165 vids; half-done triggers SC errors. Revisit ONLY if, after sitemap re-read, videos still not indexed.
+
+## 2026-07-01 (session 11) — hardened CLAUDE.md RULE 3/4 + skill after session-10 revert
+- Owner flagged that session 10's revert (unauthorized script-timing change into the locked hero/gallery path, shipped as "done" on checks that could not actually see the real regression) must never repeat, and that responses were too long/token-heavy.
+- CLAUDE.md RULE 4: explicitly extended locked scope to script loading order/timing (not just markup/CSS/JS reveal logic), and added that a scoped "do it" does not authorize unilaterally narrowing what RULE 4 covers - name the boundary and get an explicit yes on it.
+- CLAUDE.md RULE 3: added explicit "know your verification blind spots before shipping" clause (no H.264 codec / proxy blocks live = say so up front, treat as unverified-in-practice, not "done").
+- universal-framework skill (Section 4 Quality Gate): generalized both lessons for any project. Section 5 Token Conservation: added explicit "keep replies short by default" line.

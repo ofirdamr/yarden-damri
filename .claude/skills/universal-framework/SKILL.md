@@ -158,6 +158,22 @@ in its real target environment (live URL, running app, passing tests/visual QA).
 "I changed the code" ≠ done. "I verified it works and the reported symptom is
 gone" = done. Check for regressions before claiming success.
 
+**Know your verification tooling's blind spots before you ship, not after.** If
+your environment cannot actually observe the real behavior of THIS specific
+change (no codec to play a video, no network path to the live target, a check
+that skips the exact code path you changed), say so explicitly up front. A
+passing partial check does not stand in for the untested part — report the
+change as unverified-in-practice and get real confirmation, instead of
+declaring "done" on the checks you happened to be able to run.
+
+**A green light on the general task is not a green light on an adjacent locked
+rule.** If the project marks something locked/ask-first (an architecture
+pattern, a file, a deploy step) and the task sits next to that boundary, don't
+privately decide your change is a narrower category the rule "doesn't really
+cover." Name the boundary explicitly and get an explicit yes on THAT point,
+separate from the general task approval — "do it" for a scoped fix does not
+extend to reinterpreting what a locked rule covers.
+
 ---
 
 ## 5. Token Conservation (always on)
@@ -170,6 +186,11 @@ gone" = done. Check for regressions before claiming success.
   scratch when only one block needs to change.
 - If you spot a better tool/approach than the one implied by the request, say so
   before doing it instead of silently picking.
+- **Keep replies short by default.** State the result and what's next; don't
+  restate context already established in the conversation, don't narrate
+  intermediate reasoning, don't pad confirmations with repeated explanations
+  across turns. A long reply is only justified when the task itself demands
+  detail (e.g. a requested audit report).
 
 ---
 
