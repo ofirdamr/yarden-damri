@@ -1,6 +1,6 @@
 # Project Summary — Yarden Damri Website
 
-> Last updated: 2026-06-30 (session 9). **Read this first every new session** (PROGRESS.md only if more detail needed).
+> Last updated: 2026-07-01 (session 10). **Read this first every new session** (PROGRESS.md only if more detail needed).
 
 ---
 
@@ -17,29 +17,38 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 
 ### ▶▶ NEXT MISSION — pick one
 
-**Pre-marketing QA pass is DONE (session 9, 2026-06-30) — site is ready for marketing/promotion.** Remaining open items, pick what's next:
-- **Homepage perf — the real remaining win:** `gallery-data.js` (512KB) + `cloud-storage.js` load
-  synchronously and the very next inline `<script>` reads `GALLERY_IMAGES`/`RemoteState` at **top level**
-  (not gated on DOMContentLoaded) — so naive `defer` breaks gallery render + hero remote-override on
-  first load. Needs: extract the hero-init and gallery-render inline `<script>` blocks to external files,
-  mark all 4 scripts `defer` (order-preserving). Do as its own reviewed task — this exact code has a
-  hero/gallery regression history (sessions 3, 4, 8). See PROGRESS.md session 10 for full detail.
+**Pre-marketing QA pass is DONE (session 9, 2026-06-30) — site is ready for marketing/promotion.** Homepage
+render-blocking perf is now also DONE (session 10). Remaining open items, pick what's next:
 - **Owner decision needed:** delete orphan `patch-stats.js`? (no workflow/script references it, found during session 9 code-health audit)
 - **Low-priority SEO polish** (flagged, not yet fixed): add Twitter Card meta tags site-wide; add JSON-LD to pricing.html; add `lastmod` to `sitemap-media.xml`
 - **HSTS ramp** — see "Open / pending tasks" below, ready any time now (2026-06-28 gate already passed)
 - **First mission for the Hebrew Copywriter** — full recopywrite pass, queued since session 5 (Sonnet model)
 - **Marketing/promotion phase** — site QA'd and verified live; future = more pages/features/value
+- **Same defer treatment for other pages** (`gallery.html` etc. load `gallery-data.js`/`cloud-storage.js`
+  too) if it's worth repeating the pattern there — not requested yet, homepage was the reported page.
 
-### ✅ DONE (session 10, 2026-07-01) — homepage PageSpeed fixes
+### ✅ DONE (session 10, 2026-07-01) — homepage PageSpeed fixes, including the big one
 
 Owner shared a mobile PageSpeed Insights link. Lighthouse/Playwright can't run against the live domain
 in this sandbox (proxy TLS handshake fails even with the CA imported into NSS trust) — did a manual
-curl-based audit instead. Fixed the 3 safe render-blocking issues on `index.html` (commit `ed61be8`):
-Google Fonts stylesheet → preload+swap async pattern; `site-content.js` → `defer` (zero-risk, was
-already DOMContentLoaded-gated internally); `#heroImage` (LCP element) → `fetchpriority="high"`.
-Verified locally via Playwright (desktop+mobile, hero renders instantly, gallery still populates, no
-console errors) and live post-deploy (all 3 changes confirmed in served HTML, 200 OK). Bigger win
-(deferring `gallery-data.js`) intentionally NOT done — see next-mission item above, needs its own pass.
+curl-based audit instead. Two commits:
+1. `ed61be8` — the 3 safe render-blocking fixes: Google Fonts stylesheet → preload+swap async pattern;
+   `site-content.js` → `defer` (zero-risk, was already DOMContentLoaded-gated internally); `#heroImage`
+   (LCP element) → `fetchpriority="high"`.
+2. `fd0dbac` — the big one: `gallery-data.js` (512KB) + `cloud-storage.js` were loading synchronously,
+   and the inline `<script>` right after read `GALLERY_IMAGES`/`RemoteState` at top level, so naive
+   `defer` would've silently emptied the gallery grid and skipped the hero's remote-override fetch on
+   first load. Fixed properly: extracted the hero-init and gallery-render inline blocks to
+   `hero-init.js` and `gallery.js`, marked all 4 scripts `defer` (document order preserved = same
+   execution order, just non-blocking). Added both new files to `publish-public.yml`'s allowlist (it's
+   an explicit list, not a wildcard — easy to miss). Also **caught and fixed a real bug this uncovered**:
+   `fix.js`'s hero `<img>` src-baking regex assumed `id="heroImage"` was immediately followed by
+   `src="..."`, which broke once `fetchpriority="high"` sat between them (commit `ed61be8`) — the next
+   6h sync would have silently stopped updating the hero image. Widened the regex to allow attributes
+   in between.
+Verified locally via Playwright both times (desktop+mobile: hero renders instantly, gallery grid
+populates — 48 tiles, correct structure — no console/page errors) and live post-deploy (all script tags
++ new files confirmed served, 200 OK).
 
 ### ✅ DONE (session 9, 2026-06-30) — pre-marketing QA pass
 

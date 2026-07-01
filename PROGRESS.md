@@ -21,19 +21,36 @@
     `page.route` fulfill since cross-origin CDN fetches also fail through this sandbox's proxy): hero
     renders instantly (no dark/blank box), gallery grid still populates (48 tiles), zero console errors.
     Verified live post-deploy: all 3 changes present in served HTML, 200 OK.
-- **NOT fixed, flagged for a dedicated pass:** `gallery-data.js` (512KB raw / 70KB br) loads via a
-  synchronous `<script src>` mid-body, and — unlike site-content.js — the very next inline `<script>`
-  block reads `GALLERY_IMAGES` in **top-level, non-deferred code** (`let lbAll = ... applyAdminSettings(GALLERY_IMAGES)`
-  at top level, plus an immediately-invoked `(async()=>{ await window.RemoteState.fetchPublic(); ... })()`
-  that silently no-ops if `window.RemoteState` — from `cloud-storage.js`, also sync — isn't loaded yet).
-  Blindly adding `defer` to `gallery-data.js`/`cloud-storage.js` would silently break gallery rendering
-  and the hero's remote-admin-override fetch on first load (empty grid until the later re-render call
-  fires; hero could stop picking up admin's live hero video/image choice). The correct fix is extracting
-  the two big inline `<script>` blocks (hero-init ~line 767–864, gallery-render ~line 867–1650) to
-  external files and marking all of `cloud-storage.js` + `gallery-data.js` + the two extracted files
-  `defer` (defer preserves document-order execution, so this is safe) — real but nontrivial work, given
-  this exact code has a history of hero/gallery regressions (sessions 3, 4, 8). Do this as its own
-  reviewed task, not folded into a quick perf pass.
+- Flagged (not fixed in this commit): `gallery-data.js` (512KB) + `cloud-storage.js` load synchronously,
+  and the inline `<script>` right after reads `GALLERY_IMAGES`/`RemoteState` at **top level** — naive
+  `defer` would silently break gallery render + hero remote-override on first load. See below — fixed
+  properly later this same session, owner asked for it after I explained the tradeoff.
+
+### Same session, part 2: the gallery-data.js/cloud-storage.js defer, done properly (commit `fd0dbac`)
+- Extracted the two inline `<script>` blocks that immediately consume `GALLERY_IMAGES`/`RemoteState`
+  into external files: `hero-init.js` (was the ~96-line hero-init block, lines 769–864) and `gallery.js`
+  (was the ~737-line gallery-render block, lines 869–1605). Used `sed -n` to slice exact line ranges
+  into the new files (not retyped) to avoid transcription errors, then `node --check` on both.
+- Marked all 4 scripts `defer` in document order: `cloud-storage.js`, `hero-init.js`,
+  `gallery-data.js?v=...`, `gallery.js` — same relative order as before, so deferred execution order
+  matches the old synchronous order exactly. `defer` scripts still populate global scope (function
+  declarations become `window.x` same as inline), so the `onclick="toggleMobileMenu()"` etc. handlers
+  elsewhere in the HTML keep working — confirmed no `onclick` handler could fire before these scripts
+  finish (defer always completes before DOMContentLoaded, long before a user could plausibly click).
+- **Caught a real bug in the process:** `publish-public.yml`'s file list is an explicit allowlist, not
+  a wildcard — the two new files would have 404'd on the live site if not added. Added
+  `hero-init.js gallery.js` to the `FILES` var.
+- **Caught a second real bug:** `fix.js`'s hero-baking regex `/(<img id="heroImage" src=")[^"]*(")/`
+  assumed `src=` immediately follows `id="heroImage"` — broke silently once `fetchpriority="high"` (added
+  earlier this session, commit `ed61be8`) sat between them. Every future 6h sync would have stopped
+  updating the baked hero `<img src>` with no error, just a silent no-op replace. Widened to
+  `/(<img id="heroImage"[^>]*\bsrc=")[^"]*(")/` and verified against the actual current markup with a
+  one-off `node -e` regex test.
+- Verified locally via Playwright (desktop + mobile): hero renders instantly (fetchpriority preserved,
+  `display:block`), gallery grid populates (48 `.tile`/`img`/`video` elements — same count as before the
+  refactor), zero console/page errors. Also screenshotted the gallery grid itself scrolled into view to
+  visually confirm tile structure (video-play icons, carousel checkboxes) rendered correctly, not just
+  the element count. Verified live post-deploy: all 4 script tags + both new files served, 200 OK.
 
 ## 2026-06-30 — session 9: Pre-marketing QA pass (Hybrid: 4 parallel audits → merge → fix)
 - Token-Economist call: Hybrid mode — 4 independent parallel audit subagents (SEO/meta, code health,
