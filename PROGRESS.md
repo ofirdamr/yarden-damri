@@ -2,6 +2,39 @@
 
 > Older entries archived to PROGRESS-archive.md (not auto-read).
 
+## 2026-07-01 — session 10: Homepage PageSpeed follow-up
+- Owner sent a mobile PageSpeed Insights link. WebFetch can't read it (results render client-side via
+  JS after the fetch); headless Chromium in this sandbox can't TLS-handshake to the live site or any
+  external host through the agent proxy even after importing the proxy CA into the NSS trust store
+  (`certutil -A -d sql:~/.pki/nssdb -n agent-proxy-ca -t "C,," -i /root/.ccr/agent-proxy-ca.crt` — worth
+  keeping for future sessions, but didn't fix the handshake). Lighthouse/Playwright against the live
+  domain remains blocked here; **curl-based manual audit is the reliable path** (already known per
+  RULE 3, now confirmed for Lighthouse-style checks too).
+- Manual audit (curl on live index.html + resources) found real render-blocking issues, fixed the safe
+  ones, commit `ed61be8`:
+  - Google Fonts `<link rel="stylesheet">` was fully render-blocking → preload+swap async pattern
+    (+ `<noscript>` fallback).
+  - `site-content.js` was a blocking `<head>` script that only ever runs on `DOMContentLoaded` anyway
+    (verified: no synchronous consumers elsewhere in index.html) → added `defer`, zero behavior change.
+  - `#heroImage` (the LCP element) got `fetchpriority="high"`.
+  - Verified locally via Playwright (desktop 1440×900 + mobile iPhone 13, hero image content faked via
+    `page.route` fulfill since cross-origin CDN fetches also fail through this sandbox's proxy): hero
+    renders instantly (no dark/blank box), gallery grid still populates (48 tiles), zero console errors.
+    Verified live post-deploy: all 3 changes present in served HTML, 200 OK.
+- **NOT fixed, flagged for a dedicated pass:** `gallery-data.js` (512KB raw / 70KB br) loads via a
+  synchronous `<script src>` mid-body, and — unlike site-content.js — the very next inline `<script>`
+  block reads `GALLERY_IMAGES` in **top-level, non-deferred code** (`let lbAll = ... applyAdminSettings(GALLERY_IMAGES)`
+  at top level, plus an immediately-invoked `(async()=>{ await window.RemoteState.fetchPublic(); ... })()`
+  that silently no-ops if `window.RemoteState` — from `cloud-storage.js`, also sync — isn't loaded yet).
+  Blindly adding `defer` to `gallery-data.js`/`cloud-storage.js` would silently break gallery rendering
+  and the hero's remote-admin-override fetch on first load (empty grid until the later re-render call
+  fires; hero could stop picking up admin's live hero video/image choice). The correct fix is extracting
+  the two big inline `<script>` blocks (hero-init ~line 767–864, gallery-render ~line 867–1650) to
+  external files and marking all of `cloud-storage.js` + `gallery-data.js` + the two extracted files
+  `defer` (defer preserves document-order execution, so this is safe) — real but nontrivial work, given
+  this exact code has a history of hero/gallery regressions (sessions 3, 4, 8). Do this as its own
+  reviewed task, not folded into a quick perf pass.
+
 ## 2026-06-30 — session 9: Pre-marketing QA pass (Hybrid: 4 parallel audits → merge → fix)
 - Token-Economist call: Hybrid mode — 4 independent parallel audit subagents (SEO/meta, code health,
   visual/Playwright, Hebrew content+RTL), merged findings into one prioritized list, fixed directly.

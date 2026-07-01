@@ -18,11 +18,28 @@ Claude Code on the web opens the session on a `claude/...` branch — **IGNORE T
 ### ▶▶ NEXT MISSION — pick one
 
 **Pre-marketing QA pass is DONE (session 9, 2026-06-30) — site is ready for marketing/promotion.** Remaining open items, pick what's next:
+- **Homepage perf — the real remaining win:** `gallery-data.js` (512KB) + `cloud-storage.js` load
+  synchronously and the very next inline `<script>` reads `GALLERY_IMAGES`/`RemoteState` at **top level**
+  (not gated on DOMContentLoaded) — so naive `defer` breaks gallery render + hero remote-override on
+  first load. Needs: extract the hero-init and gallery-render inline `<script>` blocks to external files,
+  mark all 4 scripts `defer` (order-preserving). Do as its own reviewed task — this exact code has a
+  hero/gallery regression history (sessions 3, 4, 8). See PROGRESS.md session 10 for full detail.
 - **Owner decision needed:** delete orphan `patch-stats.js`? (no workflow/script references it, found during session 9 code-health audit)
 - **Low-priority SEO polish** (flagged, not yet fixed): add Twitter Card meta tags site-wide; add JSON-LD to pricing.html; add `lastmod` to `sitemap-media.xml`
 - **HSTS ramp** — see "Open / pending tasks" below, ready any time now (2026-06-28 gate already passed)
 - **First mission for the Hebrew Copywriter** — full recopywrite pass, queued since session 5 (Sonnet model)
 - **Marketing/promotion phase** — site QA'd and verified live; future = more pages/features/value
+
+### ✅ DONE (session 10, 2026-07-01) — homepage PageSpeed fixes
+
+Owner shared a mobile PageSpeed Insights link. Lighthouse/Playwright can't run against the live domain
+in this sandbox (proxy TLS handshake fails even with the CA imported into NSS trust) — did a manual
+curl-based audit instead. Fixed the 3 safe render-blocking issues on `index.html` (commit `ed61be8`):
+Google Fonts stylesheet → preload+swap async pattern; `site-content.js` → `defer` (zero-risk, was
+already DOMContentLoaded-gated internally); `#heroImage` (LCP element) → `fetchpriority="high"`.
+Verified locally via Playwright (desktop+mobile, hero renders instantly, gallery still populates, no
+console errors) and live post-deploy (all 3 changes confirmed in served HTML, 200 OK). Bigger win
+(deferring `gallery-data.js`) intentionally NOT done — see next-mission item above, needs its own pass.
 
 ### ✅ DONE (session 9, 2026-06-30) — pre-marketing QA pass
 
