@@ -555,7 +555,7 @@ function buildMediaSitemap(items) {
         // media (RULE 4): an image hero shows the image; a video hero shows the video's poster
         // (_thumb.jpg) so the hero is never a dark box while the video loads or when autoplay
         // is blocked. The <video> still fades in on top once it actually plays ('playing').
-        html = html.replace(/(<img id="heroImage" src=")[^"]*(")/, `$1${bakedHeroIsVid ? bakedHeroPoster : bakedHeroSrc}$2`);
+        html = html.replace(/(<img id="heroImage"[^>]*\bsrc=")[^"]*(")/, `$1${bakedHeroIsVid ? bakedHeroPoster : bakedHeroSrc}$2`);
         html = html.replace(/(<img id="heroImage"[^>]*style="[^"]*?)display:\s*(?:none|block);([^"]*")/,
           `$1display:block;$2`);
         console.log(`Baked hero ${bakedHeroIsVid ? 'video' : 'image'} (yarden_${bakedHeroId}) into ${htmlFile}`);
