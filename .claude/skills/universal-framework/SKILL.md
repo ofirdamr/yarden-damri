@@ -179,6 +179,18 @@ passing partial check does not stand in for the untested part — report the
 change as unverified-in-practice and get real confirmation, instead of
 declaring "done" on the checks you happened to be able to run.
 
+**A blind spot is what remains AFTER you exhausted the mandated tooling, not an
+excuse to skip it.** If the project requires a visual/browser check (Playwright,
+a render), you must actually make that tool work before claiming you can't. A
+headless browser HANGING or erroring is a setup problem to solve, not proof that
+"rendering is impossible" — install the runner, point it at the pre-installed
+browser via `executablePath`, and intercept/stub the requests that hang it
+(route: serve local, `fulfill` the key asset with real bytes you fetched
+separately, `abort` the rest). Do NOT downgrade to a weaker check (curl, static
+grep, "it looks right in code") and call it verified. Only report a check as
+impossible AFTER the required method has genuinely been tried and failed — and
+say exactly what you tried.
+
 **A green light on the general task is not a green light on an adjacent locked
 rule.** If the project marks something locked/ask-first (an architecture
 pattern, a file, a deploy step) and the task sits next to that boundary, don't
