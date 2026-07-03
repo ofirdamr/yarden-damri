@@ -108,6 +108,12 @@ Project-specific role knowledge:
 - **Config:** `playwright.config.js` — serves repo root with `http-server`; two engines: `desktop-chromium` (1440×900) and `mobile-safari` (iPhone 13 / WebKit — where most bugs have lived). Override target with `BASE_URL`.
 - **Tests:** `tests/visual.spec.js` — for each key page: HTTP < 400, `lang="he" dir="rtl"`, visible `nav[role="navigation"]`, non-empty `<title>`, no horizontal overflow, no JS errors, full-page screenshot. Mobile menu open/close on WebKit.
 - **Run locally:** `npm install && npx playwright install chromium webkit` then `npm run test:e2e`
+- **⛔ In-sandbox render (do NOT skip Playwright):** raw `chrome --screenshot` on this site ALWAYS hangs
+  (external media/fonts through the blocked proxy). That hang is NOT "rendering is impossible" — do NOT
+  downgrade to curl-only QA. Working method: `npm i playwright-core` → launch `/opt/pw-browsers/.../chrome`
+  via `executablePath` → `page.route('**/*')`: local `127.0.0.1` continue, hero poster `fulfill` with curl'd
+  bytes, everything else `abort` (can't hang). Only claim a visual check is impossible AFTER this fails.
+  See `MISTAKES.md` 2026-07-03 and `scratchpad/shot.js`.
 - **CI:** `.github/workflows/playwright.yml` runs on every push.
 
 ---

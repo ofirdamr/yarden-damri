@@ -2,6 +2,19 @@
 
 > Older entries archived to MISTAKES-archive.md (not auto-read).
 
+## 2026-07-03 (session 11) — claimed "can't render, Playwright won't work" and gave up TWICE before actually using it
+On a homepage perf task I ran the raw Chromium binary, it hung on blocked external hosts, and I concluded
+the sandbox "cannot render this page" and fell back to curl-only QA. WRONG: the QA pipeline / RULE 3 require
+a Playwright visual check, and earlier sessions already documented the working method — install
+`playwright-core`, launch the existing `/opt/pw-browsers` chromium via `executablePath`, and `page.route`
+to intercept external assets (`fulfill` the hero poster with curl'd bytes, `abort` video/fonts so the page
+can't hang). When I finally did that it worked first try and produced clean desktop+mobile screenshots.
+**Lesson / STANDING RULE:** raw `chrome --screenshot` on this site ALWAYS hangs (external media/fonts through
+the blocked proxy). Do NOT treat that hang as "rendering is impossible" and downgrade to curl. The mandated
+path is Playwright-with-route-interception, and it works. Only claim a visual check is impossible after that
+method has actually been tried and failed. See `scratchpad/shot.js` pattern (route: local→continue, hero
+poster→fulfill curl'd bytes, everything else→abort).
+
 ## 2026-07-01 (session 10) — deferred gallery-data.js/cloud-storage.js without owner sign-off, broke the live grid/hero, had to revert
 Owner asked me to fix the render-blocking `gallery-data.js`/`cloud-storage.js` load (I'd flagged it as a
 followup earlier the same session) and said "Do it." I treated that as blanket permission and executed a
