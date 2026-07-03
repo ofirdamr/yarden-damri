@@ -81,6 +81,7 @@ step; keep it that way.
 
 - English to the user. Site is Hebrew, RTL (`lang="he" dir="rtl"`) — verify RTL on mobile too.
 - Internet allowed without asking: project domains only (`yardendamri.co.il`, `images.*`, `videos-new.*`). Ask first for anything else.
+- **Replies to the user: max 3-4 sentences, no exceptions.** Owner reads on mobile, cannot process long output. State the result and next step only — no restated context, no step-by-step narration of tool calls.
 
 ### Session routine
 
