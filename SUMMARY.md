@@ -234,3 +234,10 @@ Zone `745a6f759dbdf0930afbf8349d2d4835`, ruleset `ea5be0259ede4cf9852576da6ae22d
 |------|-----------|--------|
 | Security Headers | `true` | X-Frame-Options, Referrer-Policy, Permissions-Policy, X-Content-Type-Options, HSTS max-age=300 |
 | No browser cache for HTML | `/` or `*.html` | Cache-Control: no-cache |
+
+**Cache Rules** (separate ruleset `e07bb24e96754125b53a5374be4268e2`, phase `http_request_cache_settings`):
+
+| Rule | Expression | Effect |
+|------|-----------|--------|
+| Videos long edge cache | `videos.yardendamri.co.il/*` | edge_ttl 7d |
+| Static assets 1yr cache (added 2026-07-03, session 11) | `http.request.uri.path.extension in {css js webp jpg jpeg png svg woff woff2 ico mp4 avif gif}` | browser+edge TTL = 31536000 (1yr). Fixes PageSpeed "efficient cache lifetimes". HTML excluded (no extension) so it stays no-cache. Assets are fingerprinted (unique media IDs / `?v=`), safe to cache long. |
