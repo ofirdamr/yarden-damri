@@ -1,7 +1,12 @@
-name: Fix Audio — Re-upload all videos with audio
+name: Fix Audio — Re-upload videos with audio
 
 on:
   workflow_dispatch:
+    inputs:
+      item_ids:
+        description: 'Comma-separated Instagram item IDs to re-upload (fast, targeted). Leave empty to re-upload the ENTIRE library (slow, ~6hr).'
+        required: false
+        default: ''
 
 jobs:
   fix-audio:
@@ -18,14 +23,20 @@ jobs:
           node-version: 20
       - name: Install ffmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
-      - name: Re-upload all videos with audio
+      - name: Re-upload videos with audio
         timeout-minutes: 340
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-        run: node fix.js --fix-audio
+          ITEM_IDS: ${{ github.event.inputs.item_ids }}
+        run: |
+          if [ -n "$ITEM_IDS" ]; then
+            node fix.js --fix-audio-ids="$ITEM_IDS"
+          else
+            node fix.js --fix-audio
+          fi
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

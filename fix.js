@@ -6,6 +6,8 @@ const { execSync } = require("child_process");
 
 const TARGET_PREVIEW = process.argv.includes("--target=preview");
 const FIX_AUDIO = process.argv.includes("--fix-audio"); // one-time: re-upload all videos incl. hidden ones to restore audio
+const FIX_AUDIO_IDS_ARG = process.argv.find(a => a.startsWith("--fix-audio-ids="));
+const FIX_AUDIO_IDS = FIX_AUDIO_IDS_ARG ? new Set(FIX_AUDIO_IDS_ARG.slice("--fix-audio-ids=".length).split(",").map(s => s.trim()).filter(Boolean)) : null; // targeted: re-upload only these item IDs (fast — skips the full-library scan re-download)
 const IMG_REPROCESS = process.argv.includes("--reprocess-images"); // re-fetch existing photos at Instagram-max + build the small grid thumb (resumable: skips any image whose _thumb.webp already exists on R2)
 const VID_THUMB_REPROCESS = process.argv.includes("--reprocess-video-thumbs"); // build a small _thumb.webp grid thumbnail for existing videos (downscaled from the existing 720p _thumb.jpg). Resumable: skips any video whose _thumb.webp already exists on R2.
 const IMG_THUMB_FILL = process.argv.includes("--fill-image-thumbs"); // build the small _thumb.webp grid thumbnail for existing IMAGES that are missing it (downscaled from the existing full yarden_<id>.webp on R2 — no Instagram re-fetch). Resumable. Faster, lighter alternative to --reprocess-images when only thumbnails are missing.
@@ -335,7 +337,7 @@ function buildMediaSitemap(items) {
       process.stdout.write("h"); continue;
     }
 
-    if (!FIX_AUDIO && existingById[item.id]) {
+    if (!FIX_AUDIO && !(FIX_AUDIO_IDS && FIX_AUDIO_IDS.has(item.id)) && existingById[item.id]) {
       const e = existingById[item.id];
       const isNewR2 = (isVideo && e.u && e.u.includes("videos-new.yardendamri")) ||
                       (!isVideo && e.u && e.u.includes("images.yardendamri"));
