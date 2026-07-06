@@ -816,6 +816,8 @@
         const itemId = newId;
         const poster = `https://images.yardendamri.co.il/yarden_${itemId}_thumb.jpg`;
         videoEl.setAttribute('poster', poster);
+        imgEl.src = poster;
+        imgEl.style.display = 'block';
         s.src = vidUrl;
         videoEl.src = vidUrl;
         videoEl.load();
