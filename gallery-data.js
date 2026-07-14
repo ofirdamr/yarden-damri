@@ -1,6 +1,26 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://images.yardendamri.co.il/yarden_18007377452947544.webp",
+    "a": "ככה נראת כלה שאוהבת את עצמה במקסימום ביום שלה! \nאני פה בשביל להפוך אותך לגרסה הכ",
+    "item_id": "18007377452947544",
+    "post_id": "17929890432124131",
+    "thumb": "https://images.yardendamri.co.il/yarden_18007377452947544_thumb.webp",
+    "carousel": true,
+    "cidx": 0,
+    "ccount": 2
+  },
+  {
+    "u": "https://images.yardendamri.co.il/yarden_18008689913744579.webp",
+    "a": "ככה נראת כלה שאוהבת את עצמה במקסימום ביום שלה! \nאני פה בשביל להפוך אותך לגרסה הכ",
+    "item_id": "18008689913744579",
+    "post_id": "17929890432124131",
+    "thumb": "https://images.yardendamri.co.il/yarden_18008689913744579_thumb.webp",
+    "carousel": true,
+    "cidx": 1,
+    "ccount": 2
+  },
+  {
     "u": "https://videos-new.yardendamri.co.il/yarden_18111523847316671.mp4",
     "a": "אחד הדברים שאני הכי אוהבת בעבודה שלי\nזה לקחת השראה מתקופה אחרת ולהפוך אותה למשהו",
     "item_id": "18111523847316671",
