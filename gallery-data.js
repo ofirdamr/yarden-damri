@@ -1,6 +1,14 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://videos-new.yardendamri.co.il/yarden_17877090570683119.mp4",
+    "a": "Zendaya inspired makeup look on Titi ✨\n\n@zendaya @titiayenew @korenmalihe \n@beph",
+    "item_id": "17877090570683119",
+    "post_id": "17877090570683119",
+    "video": true,
+    "thumb": "https://images.yardendamri.co.il/yarden_17877090570683119_thumb.webp"
+  },
+  {
     "u": "https://images.yardendamri.co.il/yarden_18007377452947544.webp",
     "a": "ככה נראת כלה שאוהבת את עצמה במקסימום ביום שלה! \nאני פה בשביל להפוך אותך לגרסה הכ",
     "item_id": "18007377452947544",
