@@ -48,7 +48,7 @@ jobs:
           # Root-only since preview/ was retired (2026-06-24). fix.js writes the root
           # gallery-data.js and bumps the cache version in root index.html / gallery.html.
           # Stage only files that exist so a missing one never aborts the sync.
-          for f in gallery-data.js instagram-stats.json index.html gallery.html; do
+          for f in gallery-data.js instagram-stats.json index.html gallery.html admin.html; do
             if [ -e "$f" ]; then git add "$f"; fi
           done
           git diff --staged --quiet && exit 0
