@@ -688,11 +688,10 @@ export default {
         }
 
         const id = 'manual_' + Date.now();
-        const imageKey = `yarden_${id}.${ext}`;
-        const thumbKey = `yarden_${id}_thumb.jpg`;
-
-        await env.R2_IMAGES.put(imageKey, buf, { httpMetadata: { contentType: mime } });
-        await env.R2_IMAGES.put(thumbKey, buf, { httpMetadata: { contentType: mime } });
+        // Store original as _orig.{ext} — fix.js compresses to _thumb.webp (600px) and
+        // .webp (1080px) on the next sync, matching the Instagram media architecture exactly.
+        const origKey = `yarden_${id}_orig.${ext}`;
+        await env.R2_IMAGES.put(origKey, buf, { httpMetadata: { contentType: mime } });
 
         manifest.uploads = manifest.uploads || [];
         manifest.uploads.push({ id, hash, ext, alt, uploaded_at: new Date().toISOString() });
@@ -700,7 +699,8 @@ export default {
           httpMetadata: { contentType: 'application/json' },
         });
 
-        // Trigger sync-auto.yml to rebuild gallery-data.js and generate _thumb.webp
+        // Trigger sync-auto.yml — fix.js will compress orig → .webp + _thumb.webp
+        // and rebuild gallery-data.js so the photo appears on the live site.
         try {
           await fetch(`https://api.github.com/repos/${GH_REPO}/actions/workflows/sync-auto.yml/dispatches`, {
             method: 'POST',
@@ -716,9 +716,8 @@ export default {
           console.error('sync dispatch failed:', e.message);
         }
 
-        const imageUrl = `https://images.yardendamri.co.il/${imageKey}`;
-        const thumbUrl = `https://images.yardendamri.co.il/${thumbKey}`;
-        return json({ ok: true, id, url: imageUrl, thumb: thumbUrl }, 200, {}, origin);
+        const origUrl = `https://images.yardendamri.co.il/${origKey}`;
+        return json({ ok: true, id, url: origUrl }, 200, {}, origin);
       }
 
       return json({ error: 'not_found' }, 404, {}, origin);

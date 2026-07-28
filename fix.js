@@ -506,28 +506,42 @@ function buildMediaSitemap(items) {
       for (const entry of uploads) {
         const id = entry.id;
         const ext = entry.ext || 'jpg';
-        const imageUrl = `${R2_IMAGES.publicUrl}/yarden_${id}.${ext}`;
-        if (seenUrls.has(imageUrl)) { process.stdout.write('d'); continue; }
+        // Architecture mirrors Instagram images exactly:
+        //   _orig.{ext}  — raw upload (source; never served to site visitors)
+        //   .webp        — 1080px compressed (lightbox / u field)
+        //   _thumb.webp  — 600px compressed (grid / thumb field)
+        const origUrl    = `${R2_IMAGES.publicUrl}/yarden_${id}_orig.${ext}`;
+        const fullWebpKey = `yarden_${id}.webp`;
+        const fullWebpUrl = `${R2_IMAGES.publicUrl}/${fullWebpKey}`;
+        const thumbKey    = `yarden_${id}_thumb.webp`;
+        const thumbUrl    = `${R2_IMAGES.publicUrl}/${thumbKey}`;
 
-        // Upgrade thumb to _thumb.webp if not yet generated
-        const thumbWebpKey = `yarden_${id}_thumb.webp`;
-        const thumbWebpUrl = `${R2_IMAGES.publicUrl}/${thumbWebpKey}`;
-        const thumbJpgUrl  = `${R2_IMAGES.publicUrl}/yarden_${id}_thumb.jpg`;
-        let thumbUrl = thumbJpgUrl;
-        if (await urlExists(thumbWebpUrl)) {
-          thumbUrl = thumbWebpUrl;
-        } else {
+        if (seenUrls.has(fullWebpUrl)) { process.stdout.write('d'); continue; }
+
+        // Compress and upload any missing derived files (resumable: skips existing ones).
+        const needsFull  = !await urlExists(fullWebpUrl);
+        const needsThumb = !await urlExists(thumbUrl);
+        if (needsFull || needsThumb) {
           try {
-            const { buffer } = await downloadBuffer(thumbJpgUrl);
-            const webpBuf = await compressImageThumb(buffer);
-            const wr = await uploadToR2(R2_IMAGES, webpBuf, thumbWebpKey, 'image/webp');
-            if (wr.status === 200) { thumbUrl = thumbWebpUrl; process.stdout.write('T'); }
-          } catch (te) { console.log(`\nManual thumb webp failed ${id}: ${te.message}`); }
+            const { buffer } = await downloadBuffer(origUrl);
+            if (needsFull) {
+              const full = await compressImage(buffer);
+              const fr = await uploadToR2(R2_IMAGES, full, fullWebpKey, 'image/webp');
+              if (fr.status !== 200) console.log(`\nManual full webp upload failed ${id}: ${fr.status}`);
+              else process.stdout.write('W');
+            }
+            if (needsThumb) {
+              const thumb = await compressImageThumb(buffer);
+              const tr = await uploadToR2(R2_IMAGES, thumb, thumbKey, 'image/webp');
+              if (tr.status !== 200) console.log(`\nManual thumb webp upload failed ${id}: ${tr.status}`);
+              else process.stdout.write('T');
+            }
+          } catch (ce) { console.log(`\nManual compress/upload failed ${id}: ${ce.message}`); }
         }
 
-        seenUrls.add(imageUrl);
+        seenUrls.add(fullWebpUrl);
         gallery.push({
-          u: imageUrl,
+          u: fullWebpUrl,
           a: entry.alt || '',
           item_id: id,
           post_id: id,
