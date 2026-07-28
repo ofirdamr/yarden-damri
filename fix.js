@@ -579,7 +579,7 @@ function buildMediaSitemap(items) {
   // Bump gallery-data.js version in every page that loads it, so browsers don't serve stale cache
   const htmlFiles = TARGET_PREVIEW
     ? ["preview/index.html", "preview/gallery.html"]
-    : ["index.html", "gallery.html"];
+    : ["index.html", "gallery.html", "admin.html"];
   // Determine current hero for baking into index.html (prevents flash of wrong video on first load)
   const hvm = (heroVideoUrl||'').match(/yarden_(\d+)\.mp4/);
   const him = (heroImageUrl||'').match(/yarden_(\d+)\.webp/);
