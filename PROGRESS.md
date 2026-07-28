@@ -2,6 +2,14 @@
 
 > Older entries archived to PROGRESS-archive.md (not auto-read).
 
+## 2026-07-28 — session 12: manual photo upload in admin gallery panel (ec08038)
+Built full manual upload pipeline: admin modal -> Worker -> R2 -> fix.js sync.
+4 files changed, 243 lines added. Owner must run "Deploy Worker" workflow to activate the endpoint.
+Worker endpoint: POST /upload-image (session-authed, multipart, SHA-256 dedup, dispatches sync-auto.yml).
+fix.js: reads manual-uploads-manifest.json from public R2, generates _thumb.webp, appends manual:true entries.
+admin.html: upload button in gallery toolbar, modal with file input, alt text, progress, thumbnail preview, Hebrew errors.
+Live curl QA blocked by sandbox proxy (known limitation for this domain) -- not a site regression.
+
 ## 2026-07-01 — session 10 REVERT: PageSpeed fixes broke live grid/hero, owner ordered immediate revert
 Owner reported a live regression right after the part-2 deploy below: a green background flash on load
 and a visibly different image→video reveal on the gallery grid. Owner had not authorized touching this
