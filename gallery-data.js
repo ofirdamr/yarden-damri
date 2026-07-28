@@ -1,6 +1,14 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://videos-new.yardendamri.co.il/yarden_18117236173851808.mp4",
+    "a": "POV : הרגע הזה שאת מבינה שזה בול מה שרצית\n@edenswisa___ \n@dheeune",
+    "item_id": "18117236173851808",
+    "post_id": "18117236173851808",
+    "video": true,
+    "thumb": "https://images.yardendamri.co.il/yarden_18117236173851808_thumb.webp"
+  },
+  {
     "u": "https://images.yardendamri.co.il/yarden_17931838686356880.webp",
     "a": "⁨\tלא כל איפור צריך להיות טרנדי.\nיש לוקים שפשוט עובדים.\n\nהפעם בחרנו במראה נקי, זו",
     "item_id": "17931838686356880",
