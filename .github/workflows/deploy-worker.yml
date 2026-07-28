@@ -58,7 +58,8 @@ jobs:
               {'type': 'kv_namespace', 'name': 'SESSIONS', 'namespace_id': os.environ['KV_ID']},
               {'type': 'inherit', 'name': 'ADMIN_PASSWORD'},
               {'type': 'inherit', 'name': 'GH_TOKEN'},
-              {'type': 'inherit', 'name': 'GEMINI_API_KEY'}
+              {'type': 'inherit', 'name': 'GEMINI_API_KEY'},
+              {'type': 'r2_bucket', 'name': 'R2_IMAGES', 'bucket_name': 'yarden-images'}
             ]
           }))")
 

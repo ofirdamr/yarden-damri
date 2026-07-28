@@ -483,6 +483,7 @@ function buildMediaSitemap(items) {
   let carried = 0;
   for (const e of existing) {
     if (!e || !e.u) continue;
+    if (e.manual) continue; // manual entries are re-sourced from the manifest each run
     if (seenIds.has(e.item_id) || seenUrls.has(e.u)) continue;
     // Respect current hidden settings for carried-forward items too
     const idMatch = (e.u.match(/yarden_(?:makeup_)?(\d+)\./) || [])[1];
@@ -492,6 +493,55 @@ function buildMediaSitemap(items) {
     carried++;
   }
   if (carried) console.log(`Carried forward ${carried} previously-synced item(s) the API did not return this run.`);
+
+  // ── Manual uploads ──────────────────────────────────────────────────────────
+  // Read manifest from R2 (public bucket URL). Manual entries are re-sourced
+  // from the manifest on every run so that removing an entry from the manifest
+  // immediately drops it from the gallery (not carried forward).
+  if (!TARGET_PREVIEW) {
+    try {
+      const manifest = await getJSON('https://images.yardendamri.co.il/manual-uploads-manifest.json', 10000, 2);
+      const uploads = (manifest.uploads || []).filter(e => e && !e.removed);
+      let manualAdded = 0;
+      for (const entry of uploads) {
+        const id = entry.id;
+        const ext = entry.ext || 'jpg';
+        const imageUrl = `${R2_IMAGES.publicUrl}/yarden_${id}.${ext}`;
+        if (seenUrls.has(imageUrl)) { process.stdout.write('d'); continue; }
+
+        // Upgrade thumb to _thumb.webp if not yet generated
+        const thumbWebpKey = `yarden_${id}_thumb.webp`;
+        const thumbWebpUrl = `${R2_IMAGES.publicUrl}/${thumbWebpKey}`;
+        const thumbJpgUrl  = `${R2_IMAGES.publicUrl}/yarden_${id}_thumb.jpg`;
+        let thumbUrl = thumbJpgUrl;
+        if (await urlExists(thumbWebpUrl)) {
+          thumbUrl = thumbWebpUrl;
+        } else {
+          try {
+            const { buffer } = await downloadBuffer(thumbJpgUrl);
+            const webpBuf = await compressImageThumb(buffer);
+            const wr = await uploadToR2(R2_IMAGES, webpBuf, thumbWebpKey, 'image/webp');
+            if (wr.status === 200) { thumbUrl = thumbWebpUrl; process.stdout.write('T'); }
+          } catch (te) { console.log(`\nManual thumb webp failed ${id}: ${te.message}`); }
+        }
+
+        seenUrls.add(imageUrl);
+        gallery.push({
+          u: imageUrl,
+          a: entry.alt || '',
+          item_id: id,
+          post_id: id,
+          thumb: thumbUrl,
+          manual: true,
+        });
+        manualAdded++;
+        process.stdout.write('M');
+      }
+      if (uploads.length) console.log(`\nManual uploads: ${manualAdded} included.`);
+    } catch (me) {
+      console.warn('Manual uploads manifest unavailable:', me.message);
+    }
+  }
 
   console.log(`\nSaving ${gallery.length} items to ${GALLERY_FILE}`);
   safeWrite(GALLERY_FILE, `// Auto-generated gallery data\nconst GALLERY_IMAGES = ${JSON.stringify(gallery, null, 2)};`);

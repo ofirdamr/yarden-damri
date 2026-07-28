@@ -648,6 +648,79 @@ export default {
         return json({ ok: true, text: text.trim() }, 200, {}, origin);
       }
 
+      // ── POST /upload-image — manual photo upload → R2 (requires session) ──
+      if (request.method === 'POST' && path === '/upload-image') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        if (!env.R2_IMAGES) return json({ error: 'r2_not_configured' }, 503, {}, origin);
+
+        let file, alt = '';
+        try {
+          const form = await request.formData();
+          file = form.get('file');
+          alt = String(form.get('alt') || '').replace(/[\uD800-\uDFFF​-‏‪-‮]/g, '').slice(0, 80).trim();
+        } catch (e) {
+          return json({ error: 'bad_form' }, 400, {}, origin);
+        }
+
+        if (!file || !file.size) return json({ error: 'no_file' }, 400, {}, origin);
+        if (file.size > 20 * 1024 * 1024) return json({ error: 'file_too_large' }, 413, {}, origin);
+
+        const mime = (file.type || '').toLowerCase();
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(mime)) {
+          return json({ error: 'unsupported_type' }, 400, {}, origin);
+        }
+        const ext = mime === 'image/webp' ? 'webp' : mime === 'image/png' ? 'png' : 'jpg';
+
+        const buf = await file.arrayBuffer();
+
+        const hashBuf = await crypto.subtle.digest('SHA-256', buf);
+        const hash = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+        let manifest = { uploads: [] };
+        try {
+          const obj = await env.R2_IMAGES.get('manual-uploads-manifest.json');
+          if (obj) manifest = JSON.parse(await obj.text());
+        } catch (e) {}
+
+        if ((manifest.uploads || []).some(u => u.hash === hash)) {
+          return json({ error: 'duplicate', message: 'תמונה זו כבר קיימת בגלריה' }, 409, {}, origin);
+        }
+
+        const id = 'manual_' + Date.now();
+        const imageKey = `yarden_${id}.${ext}`;
+        const thumbKey = `yarden_${id}_thumb.jpg`;
+
+        await env.R2_IMAGES.put(imageKey, buf, { httpMetadata: { contentType: mime } });
+        await env.R2_IMAGES.put(thumbKey, buf, { httpMetadata: { contentType: mime } });
+
+        manifest.uploads = manifest.uploads || [];
+        manifest.uploads.push({ id, hash, ext, alt, uploaded_at: new Date().toISOString() });
+        await env.R2_IMAGES.put('manual-uploads-manifest.json', JSON.stringify(manifest, null, 2), {
+          httpMetadata: { contentType: 'application/json' },
+        });
+
+        // Trigger sync-auto.yml to rebuild gallery-data.js and generate _thumb.webp
+        try {
+          await fetch(`https://api.github.com/repos/${GH_REPO}/actions/workflows/sync-auto.yml/dispatches`, {
+            method: 'POST',
+            headers: {
+              Authorization: 'token ' + env.GH_TOKEN,
+              Accept: 'application/vnd.github+json',
+              'Content-Type': 'application/json',
+              'User-Agent': 'yarden-damri-worker',
+            },
+            body: JSON.stringify({ ref: GH_BRANCH }),
+          });
+        } catch (e) {
+          console.error('sync dispatch failed:', e.message);
+        }
+
+        const imageUrl = `https://images.yardendamri.co.il/${imageKey}`;
+        const thumbUrl = `https://images.yardendamri.co.il/${thumbKey}`;
+        return json({ ok: true, id, url: imageUrl, thumb: thumbUrl }, 200, {}, origin);
+      }
+
       return json({ error: 'not_found' }, 404, {}, origin);
 
     } catch (e) {
