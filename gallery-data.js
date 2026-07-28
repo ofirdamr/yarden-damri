@@ -2,7 +2,7 @@
 const GALLERY_IMAGES = [
   {
     "u": "https://videos-new.yardendamri.co.il/yarden_18117236173851808.mp4",
-    "a": "POV : הרגע הזה שאת מבינה שזה בול מה שרצית\n@edenswisa___ \n@dheeune",
+    "a": "⁨\tPOV : הרגע הזה שאת מבינה שזה בול מה שרצית\n@edenswisa___@dheeunene⁩",
     "item_id": "18117236173851808",
     "post_id": "18117236173851808",
     "video": true,
@@ -1334,7 +1334,8 @@ const GALLERY_IMAGES = [
     "item_id": "17979040103924723",
     "post_id": "17979040103924723",
     "video": true,
-    "thumb": "https://images.yardendamri.co.il/yarden_17979040103924723_thumb.webp"
+    "thumb": "https://images.yardendamri.co.il/yarden_17979040103924723_thumb.webp",
+    "hidden": true
   },
   {
     "u": "https://videos-new.yardendamri.co.il/yarden_18050220944354024.mp4",
@@ -7199,7 +7200,8 @@ const GALLERY_IMAGES = [
     "a": "איפור שלי ללירון ויצמן המהממת \nחולצה של @boutique_hen ❣️\n\n#מאפרתבאילת #איפורמקצו",
     "item_id": "17955074080661075",
     "post_id": "17955074080661075",
-    "thumb": "https://images.yardendamri.co.il/yarden_17955074080661075_thumb.webp"
+    "thumb": "https://images.yardendamri.co.il/yarden_17955074080661075_thumb.webp",
+    "hidden": true
   },
   {
     "u": "https://videos-new.yardendamri.co.il/yarden_18204678247182721.mp4",
