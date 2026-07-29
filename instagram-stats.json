@@ -65089,5 +65089,31 @@
         "timestamp": "2026-07-27T16:43:29+0000"
       }
     ]
+  },
+  "18099662804167139": {
+    "likes": 10,
+    "comments_count": 6,
+    "comments": [
+      {
+        "username": "adigolov1",
+        "text": "באלי הכל ירדייייי",
+        "timestamp": "2026-07-29T18:23:32+0000"
+      },
+      {
+        "username": "sharon_nhamani",
+        "text": "מושלםםם עשית לי חשק לקנות ",
+        "timestamp": "2026-07-29T18:22:43+0000"
+      },
+      {
+        "username": "ziv.interiordesign",
+        "text": "קשה לבחור כי אהבתי הכל ",
+        "timestamp": "2026-07-29T17:56:32+0000"
+      },
+      {
+        "username": "meshi_levy",
+        "text": "מושלם ירדן בא לי הכל",
+        "timestamp": "2026-07-29T17:30:42+0000"
+      }
+    ]
   }
 }
