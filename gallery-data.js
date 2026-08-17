@@ -1,6 +1,26 @@
 // Auto-generated gallery data
 const GALLERY_IMAGES = [
   {
+    "u": "https://images.yardendamri.co.il/yarden_17997286073801584.webp",
+    "a": "זה הגיוני שכל הלקוחות שלי דוגמניות? \n@orian_m2000 @hayay.social",
+    "item_id": "17997286073801584",
+    "post_id": "18222461965328468",
+    "thumb": "https://images.yardendamri.co.il/yarden_17997286073801584_thumb.webp",
+    "carousel": true,
+    "cidx": 0,
+    "ccount": 2
+  },
+  {
+    "u": "https://images.yardendamri.co.il/yarden_18112800268786999.webp",
+    "a": "זה הגיוני שכל הלקוחות שלי דוגמניות? \n@orian_m2000 @hayay.social",
+    "item_id": "18112800268786999",
+    "post_id": "18222461965328468",
+    "thumb": "https://images.yardendamri.co.il/yarden_18112800268786999_thumb.webp",
+    "carousel": true,
+    "cidx": 1,
+    "ccount": 2
+  },
+  {
     "u": "https://videos-new.yardendamri.co.il/yarden_18119939422851227.mp4",
     "a": "@_ayayosef_  פשוט מדהימה!\n@korenmalihe \n@yarden_damri_makeup",
     "item_id": "18119939422851227",
