@@ -311,6 +311,7 @@ function buildMediaSitemap(items) {
   // Tag carousel children so the gallery can show a "multiple media" badge / group them.
   const stampMeta = (entry, item) => {
     if (item.carousel) { entry.carousel = true; entry.post_id = item.post_id || item.id; entry.cidx = item.cidx; entry.ccount = item.ccount; }
+    if (item.timestamp) entry.ts = item.timestamp;
     return entry;
   };
 
@@ -326,6 +327,7 @@ function buildMediaSitemap(items) {
       if (entry) {
         entry.post_id = item.post_id || item.id;
         entry.a = cleanCaption(item.caption);
+        if (item.timestamp) entry.ts = item.timestamp;
       } else if (isVideo) {
         entry = { u: `${R2_VIDEOS.publicUrl}/yarden_${item.id}.mp4`, a: cleanCaption(item.caption), item_id: item.id, post_id: item.post_id || item.id, video: true, thumb: `${R2_IMAGES.publicUrl}/yarden_${item.id}_thumb.jpg` };
       } else {
