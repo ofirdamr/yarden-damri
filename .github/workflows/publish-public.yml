@@ -29,7 +29,7 @@ jobs:
           set -e
           # The clean allowlist — exactly what the live site needs, nothing else.
           FILES="index.html about.html services.html gallery.html bride.html \
-            bridal-guide.html pricing.html contact.html reviews.html \
+            bridal-guide.html pricing.html contact.html reviews.html quiz.html \
             disclaimer.html accessibility-statement.html cookies-policy.html \
             admin.html styles.css a11y.js cloud-storage.js cookie-banner.js \
             remote-state.js site-content.js gallery-data.js instagram-stats.json \
