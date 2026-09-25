@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T23:36:29.050Z",
+  "updatedAt": "2026-09-25T23:42:35.005Z",
   "admin": {
     "hidden": [
       "https://images.yardendamri.co.il/yarden_17843112559037829.webp",
@@ -4044,8 +4044,8 @@
     }
   ],
   "reviews": [],
-  "heroImage": null,
-  "heroPosition": null,
+  "heroImage": "https://images.yardendamri.co.il/yarden_17852854302593480.webp",
+  "heroPosition": "36% 50%",
   "heroZoom": 100,
   "likes": {
     "aHR0cHM6Ly92": 0
@@ -4116,8 +4116,8 @@
   },
   "landingMedia": {
     "big": {
-      "url": "https://videos-new.yardendamri.co.il/yarden_18119939422851227.mp4",
-      "type": "video"
+      "url": "https://images.yardendamri.co.il/yarden_18410542126086544.webp",
+      "type": "image"
     },
     "sm1": {
       "url": "https://images.yardendamri.co.il/yarden_18094933328435557.webp",
