@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T23:05:20.726Z",
+  "updatedAt": "2026-09-25T23:17:09.416Z",
   "admin": {
     "hidden": [
       "https://images.yardendamri.co.il/yarden_17843112559037829.webp",
@@ -4113,5 +4113,19 @@
     "landing.hero.sub": "איפור שמחזיק כל הערב, מראה טבעי ומדויק לכל כלה. מגיעה עד אלייך לכל מקום בישראל.",
     "landing.reviews.r1_text": "ירדן היא פשוט קסמים. האיפור שלי לחתונה היה מושלם, החזיק כל הערב ונראה בדיוק כמו שחלמתי. כל הצלמים עצרו לשאול של מי האיפור. ממליצה בחום לכל כלה!",
     "landing.reviews.r2_text": "ירדן הבינה בדיוק מה אני מחפשת גם בלי שידעתי להסביר. המראה היה טבעי, זוהר ומושלם. מעולם לא יצאתי מאיפור כל כך מאושרת כמו הפעם !"
+  },
+  "landingMedia": {
+    "big": {
+      "url": "https://images.yardendamri.co.il/yarden_17990362986062792.webp",
+      "type": "image"
+    },
+    "sm1": {
+      "url": "https://images.yardendamri.co.il/yarden_18094933328435557.webp",
+      "type": "image"
+    },
+    "sm2": {
+      "url": "https://images.yardendamri.co.il/yarden_17931838686356880.webp",
+      "type": "image"
+    }
   }
 }
