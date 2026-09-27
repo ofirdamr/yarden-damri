@@ -59,6 +59,10 @@ jobs:
               {'type': 'inherit', 'name': 'ADMIN_PASSWORD'},
               {'type': 'inherit', 'name': 'GH_TOKEN'},
               {'type': 'inherit', 'name': 'GEMINI_API_KEY'},
+              {'type': 'inherit', 'name': 'GOOGLE_ADS_CLIENT_ID'},
+              {'type': 'inherit', 'name': 'GOOGLE_ADS_CLIENT_SECRET'},
+              {'type': 'inherit', 'name': 'GOOGLE_ADS_DEVELOPER_TOKEN'},
+              {'type': 'inherit', 'name': 'GOOGLE_ADS_CUSTOMER_ID'},
               {'type': 'r2_bucket', 'name': 'R2_IMAGES', 'bucket_name': 'yarden-images'}
             ]
           }))")
