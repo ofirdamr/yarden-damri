@@ -260,7 +260,7 @@ async function patchIndexHtml(env, videoUrl) {
     /(<source id="heroVideoSource" src=")[^"]*(")/,
     `$1${videoUrl}$2`
   );
-  html = html.replace(/(<video id="heroVideo"[^>]*?)(\s+src="[^"]*")/, `$1`);
+  html = html.replace(/(< video id="heroVideo"[^>]*?)(\s+src="[^"]*")/, `$1`);
   const putBody = {
     message: 'admin: bake hero video into index.html',
     content: btoa(unescape(encodeURIComponent(html))),
@@ -473,7 +473,7 @@ export default {
 <meta http-equiv="refresh" content="0;url=${esc(target)}">
 <style>body{margin:0;background:#fdf8f5;font-family:Heebo,Arial,sans-serif;color:#7A4A34;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}a{color:#B07060;font-weight:600}</style>
 </head><body><div><p>מעבירה אותך לגלריה…</p><p><a href="${esc(target)}">להמשך לחצי כאן</a></p>
-<script>location.replace(${JSON.stringify(target)});</script></div></body></html>`;
+<script>location.replace(${JSON.stringify(target)});<\/script></div></body></html>`;
         return new Response(htmlBody, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300', 'Access-Control-Allow-Origin': '*' } });
       }
 
@@ -718,6 +718,90 @@ export default {
 
         const origUrl = `https://images.yardendamri.co.il/${origKey}`;
         return json({ ok: true, id, url: origUrl }, 200, {}, origin);
+      }
+
+      // ── GET /google-ads/auth-url — generate OAuth consent URL (requires session) ──
+      if (request.method === 'GET' && path === '/google-ads/auth-url') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        if (!env.GOOGLE_ADS_CLIENT_ID) return json({ error: 'google_ads_not_configured' }, 503, {}, origin);
+
+        const params = new URLSearchParams({
+          client_id:     env.GOOGLE_ADS_CLIENT_ID,
+          redirect_uri:  'https://api.yardendamri.co.il/google-ads/callback',
+          response_type: 'code',
+          scope:         'https://www.googleapis.com/auth/adwords',
+          access_type:   'offline',
+          prompt:        'consent',
+        });
+        return json({ url: 'https://accounts.google.com/o/oauth2/v2/auth?' + params.toString() }, 200, {}, origin);
+      }
+
+      // ── GET /google-ads/callback — exchange auth code for tokens, store refresh_token ──
+      if (request.method === 'GET' && path === '/google-ads/callback') {
+        const code  = url.searchParams.get('code');
+        const error = url.searchParams.get('error');
+
+        if (error || !code) {
+          const msg = encodeURIComponent(error || 'missing_code');
+          return Response.redirect(`https://yardendamri.co.il/admin.html?gads_error=${msg}`, 302);
+        }
+        if (!env.GOOGLE_ADS_CLIENT_ID || !env.GOOGLE_ADS_CLIENT_SECRET) {
+          return Response.redirect('https://yardendamri.co.il/admin.html?gads_error=not_configured', 302);
+        }
+
+        const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            code,
+            client_id:     env.GOOGLE_ADS_CLIENT_ID,
+            client_secret: env.GOOGLE_ADS_CLIENT_SECRET,
+            redirect_uri:  'https://api.yardendamri.co.il/google-ads/callback',
+            grant_type:    'authorization_code',
+          }).toString(),
+        });
+
+        if (!tokenRes.ok) {
+          const detail = await tokenRes.text().catch(() => '');
+          console.error('google-ads token exchange failed:', tokenRes.status, detail.slice(0, 200));
+          return Response.redirect('https://yardendamri.co.il/admin.html?gads_error=token_exchange_failed', 302);
+        }
+
+        const tokens = await tokenRes.json();
+        if (!tokens.refresh_token) {
+          return Response.redirect('https://yardendamri.co.il/admin.html?gads_error=no_refresh_token', 302);
+        }
+
+        if (env.SESSIONS) {
+          await env.SESSIONS.put('gads:refresh_token', tokens.refresh_token);
+          await env.SESSIONS.put('gads:connected_at', new Date().toISOString());
+        }
+
+        return Response.redirect('https://yardendamri.co.il/admin.html?gads_connected=1', 302);
+      }
+
+      // ── GET /google-ads/status — connection status (requires session) ──
+      if (request.method === 'GET' && path === '/google-ads/status') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+
+        const configured = !!(env.GOOGLE_ADS_CLIENT_ID && env.GOOGLE_ADS_CLIENT_SECRET);
+        const refreshToken  = env.SESSIONS ? await env.SESSIONS.get('gads:refresh_token') : null;
+        const connectedAt   = env.SESSIONS ? await env.SESSIONS.get('gads:connected_at')  : null;
+        return json({ configured, connected: !!refreshToken, connectedAt }, 200, {}, origin);
+      }
+
+      // ── POST /google-ads/disconnect — remove stored tokens (requires session) ──
+      if (request.method === 'POST' && path === '/google-ads/disconnect') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+
+        if (env.SESSIONS) {
+          await env.SESSIONS.delete('gads:refresh_token');
+          await env.SESSIONS.delete('gads:connected_at');
+        }
+        return json({ ok: true }, 200, {}, origin);
       }
 
       return json({ error: 'not_found' }, 404, {}, origin);

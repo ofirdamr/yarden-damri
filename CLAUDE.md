@@ -90,6 +90,28 @@ stop only for a genuine product/visual decision.
 
 ---
 
+## 🎯 STANDING MISSION — Google Ads full control
+
+**Goal:** Claude executes Google Ads actions directly on behalf of the owner. Owner gives a direction ("pause campaign X", "increase budget", "optimize", "show performance") — Claude calls the API and does it. No admin UI needed.
+
+**Architecture:**
+- OAuth refresh token stored in Cloudflare KV (`gads:refresh_token`) — set up via `admin.html` settings tab
+- Worker (`worker/worker.js`) proxies all Google Ads API calls: exchanges refresh token → access token, calls `https://googleads.googleapis.com/`
+- Claude calls Worker endpoints with Bearer session token to execute actions
+- Worker env vars needed: `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET`, `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_CUSTOMER_ID`
+
+**Status (2026-09-27):**
+- OAuth auth code exchange: DONE (PR #5, deployed)
+- Google Ads action routes (list/pause/budget/report): NOT YET BUILT
+- Next session: build Worker routes for campaign management + reporting, then Claude can act directly
+
+**How Claude executes actions in a session:**
+1. Get session token: ask owner for admin password or use stored Bearer token
+2. Call `https://api.yardendamri.co.il/google-ads/<action>` with Bearer token
+3. Report result back to owner
+
+---
+
 ## Team — project specializations
 
 General team rules (lean, PM assigns, don't narrate for simple tasks) are in the skill.
