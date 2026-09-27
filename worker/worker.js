@@ -688,8 +688,6 @@ export default {
         }
 
         const id = 'manual_' + Date.now();
-        // Store original as _orig.{ext} — fix.js compresses to _thumb.webp (600px) and
-        // .webp (1080px) on the next sync, matching the Instagram media architecture exactly.
         const origKey = `yarden_${id}_orig.${ext}`;
         await env.R2_IMAGES.put(origKey, buf, { httpMetadata: { contentType: mime } });
 
@@ -699,8 +697,6 @@ export default {
           httpMetadata: { contentType: 'application/json' },
         });
 
-        // Trigger sync-auto.yml — fix.js will compress orig → .webp + _thumb.webp
-        // and rebuild gallery-data.js so the photo appears on the live site.
         try {
           await fetch(`https://api.github.com/repos/${GH_REPO}/actions/workflows/sync-auto.yml/dispatches`, {
             method: 'POST',
@@ -802,6 +798,157 @@ export default {
           await env.SESSIONS.delete('gads:connected_at');
         }
         return json({ ok: true }, 200, {}, origin);
+      }
+
+      // ── Google Ads API helper ────────────────────────────────────────────────
+      async function gadsAccessToken(env) {
+        const refreshToken = env.SESSIONS ? await env.SESSIONS.get('gads:refresh_token') : null;
+        if (!refreshToken) throw new Error('not_connected');
+        const r = await fetch('https://oauth2.googleapis.com/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            client_id:     env.GOOGLE_ADS_CLIENT_ID,
+            client_secret: env.GOOGLE_ADS_CLIENT_SECRET,
+            refresh_token: refreshToken,
+            grant_type:    'refresh_token',
+          }).toString(),
+        });
+        if (!r.ok) throw new Error('token_refresh_failed');
+        const t = await r.json();
+        return t.access_token;
+      }
+
+      async function gadsRequest(method, endpoint, body, env) {
+        const accessToken = await gadsAccessToken(env);
+        const customerId = env.GOOGLE_ADS_CUSTOMER_ID ? env.GOOGLE_ADS_CUSTOMER_ID.replace(/-/g, '') : null;
+        if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not configured');
+        const url = `https://googleads.googleapis.com/v17/customers/${customerId}${endpoint}`;
+        const opts = {
+          method,
+          headers: {
+            'Authorization':        'Bearer ' + accessToken,
+            'developer-token':      env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
+            'Content-Type':         'application/json',
+          },
+        };
+        if (body) opts.body = JSON.stringify(body);
+        const res = await fetch(url, opts);
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = { raw: text }; }
+        if (!res.ok) throw Object.assign(new Error('google_ads_api_error'), { status: res.status, data });
+        return data;
+      }
+
+      // ── GET /google-ads/campaigns — list all campaigns ──────────────────────
+      if (request.method === 'GET' && path === '/google-ads/campaigns') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        try {
+          const data = await gadsRequest('POST', '/googleAds:searchStream', {
+            query: `SELECT campaign.id, campaign.name, campaign.status, campaign.advertising_channel_type,
+                           campaign_budget.amount_micros, metrics.impressions, metrics.clicks,
+                           metrics.cost_micros, metrics.conversions
+                    FROM campaign
+                    WHERE segments.date DURING LAST_30_DAYS
+                    ORDER BY metrics.cost_micros DESC`,
+          }, env);
+          const campaigns = [];
+          for (const batch of (data || [])) {
+            for (const row of (batch.results || [])) {
+              campaigns.push({
+                id:           row.campaign?.id,
+                name:         row.campaign?.name,
+                status:       row.campaign?.status,
+                type:         row.campaign?.advertisingChannelType,
+                budgetMicros: row.campaignBudget?.amountMicros,
+                impressions:  row.metrics?.impressions,
+                clicks:       row.metrics?.clicks,
+                costMicros:   row.metrics?.costMicros,
+                conversions:  row.metrics?.conversions,
+              });
+            }
+          }
+          return json({ campaigns }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
+      }
+
+      // ── POST /google-ads/campaigns/:id/status — pause or enable ─────────────
+      if (request.method === 'POST' && /^\/google-ads\/campaigns\/\d+\/status$/.test(path)) {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const campaignId = path.split('/')[3];
+        const body = await request.json().catch(() => ({}));
+        const status = body.status; // 'ENABLED' or 'PAUSED'
+        if (!['ENABLED', 'PAUSED'].includes(status)) return json({ error: 'invalid_status' }, 400, {}, origin);
+        try {
+          const customerId = (env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/-/g, '');
+          await gadsRequest('POST', '/campaigns:mutate', {
+            operations: [{ update: { resourceName: `customers/${customerId}/campaigns/${campaignId}`, status }, updateMask: 'status' }],
+          }, env);
+          return json({ ok: true, campaignId, status }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
+      }
+
+      // ── POST /google-ads/campaigns/:id/budget — update daily budget ──────────
+      if (request.method === 'POST' && /^\/google-ads\/campaigns\/\d+\/budget$/.test(path)) {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const campaignId = path.split('/')[3];
+        const body = await request.json().catch(() => ({}));
+        const dailyBudgetILS = parseFloat(body.dailyBudgetILS);
+        if (!dailyBudgetILS || dailyBudgetILS <= 0) return json({ error: 'invalid_budget' }, 400, {}, origin);
+        const amountMicros = Math.round(dailyBudgetILS * 1_000_000);
+        try {
+          const customerId = (env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/-/g, '');
+          const streamData = await gadsRequest('POST', '/googleAds:searchStream', {
+            query: `SELECT campaign.id, campaign_budget.resource_name FROM campaign WHERE campaign.id = ${campaignId}`,
+          }, env);
+          const budgetResourceName = streamData?.[0]?.results?.[0]?.campaignBudget?.resourceName;
+          if (!budgetResourceName) return json({ error: 'budget_not_found' }, 404, {}, origin);
+          await gadsRequest('POST', '/campaignBudgets:mutate', {
+            operations: [{ update: { resourceName: budgetResourceName, amountMicros }, updateMask: 'amount_micros' }],
+          }, env);
+          return json({ ok: true, campaignId, dailyBudgetILS, amountMicros }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
+      }
+
+      // ── GET /google-ads/report — performance summary (last 30 days) ──────────
+      if (request.method === 'GET' && path === '/google-ads/report') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const period = url.searchParams.get('period') || 'LAST_30_DAYS';
+        const allowedPeriods = ['LAST_7_DAYS','LAST_14_DAYS','LAST_30_DAYS','THIS_MONTH','LAST_MONTH'];
+        if (!allowedPeriods.includes(period)) return json({ error: 'invalid_period' }, 400, {}, origin);
+        try {
+          const data = await gadsRequest('POST', '/googleAds:searchStream', {
+            query: `SELECT metrics.impressions, metrics.clicks, metrics.cost_micros,
+                           metrics.conversions, metrics.ctr, metrics.average_cpc,
+                           metrics.cost_per_conversion
+                    FROM customer
+                    WHERE segments.date DURING ${period}`,
+          }, env);
+          const m = data?.[0]?.results?.[0]?.metrics || {};
+          return json({
+            period,
+            impressions:        m.impressions || 0,
+            clicks:             m.clicks || 0,
+            costILS:            (m.costMicros || 0) / 1_000_000,
+            conversions:        m.conversions || 0,
+            ctr:                m.ctr || 0,
+            avgCpcILS:          (m.averageCpc || 0) / 1_000_000,
+            costPerConversion:  (m.costPerConversion || 0) / 1_000_000,
+          }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
       }
 
       return json({ error: 'not_found' }, 404, {}, origin);
