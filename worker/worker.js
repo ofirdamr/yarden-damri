@@ -36,7 +36,7 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500',
 ];
 
-// ── Security & CORS headers ─────────────────────────────────────
+// ── Security & CORS headers ────────────────────────────────────────────
 
 function securityHeaders() {
   return {
@@ -100,7 +100,7 @@ async function clearRateLimit(env, ip) {
   await env.SESSIONS.delete('rl:' + ip);
 }
 
-// ── TOTP (RFC 6238) ─────────────────────────────────────────────
+// ── TOTP (RFC 6238) ───────────────────────────────────────────────────
 
 const BASE32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 
@@ -156,7 +156,7 @@ function totpUri(secret) {
   return `otpauth://totp/${label}?secret=${secret}&issuer=${issuer}&algorithm=SHA1&digits=6&period=30`;
 }
 
-// ── Session management ──────────────────────────────────────────
+// ── Session management ───────────────────────────────────────────────
 
 function generateToken() {
   const bytes = new Uint8Array(32);
@@ -195,7 +195,7 @@ async function deleteSession(request, env) {
   }
 }
 
-// ── GitHub helpers ──────────────────────────────────────────────
+// ── GitHub helpers ────────────────────────────────────────────────
 
 async function ghGet(env, file) {
   const r = await fetch(
@@ -293,7 +293,7 @@ function deepMerge(target, source) {
   return out;
 }
 
-// ── Google Ads helpers ──────────────────────────────────────────
+// ── Google Ads helpers ──────────────────────────────────────────────
 
 async function gadsConfig(env) {
   const kv = env.SESSIONS;
@@ -346,7 +346,7 @@ async function gadsRequest(method, endpoint, body, env) {
   return data;
 }
 
-// ── Request handler ─────────────────────────────────────────────
+// ── Request handler ─────────────────────────────────────────────────
 
 export default {
   async fetch(request, env) {
@@ -592,11 +592,11 @@ export default {
         const brief =
           'רקע על העסק (עובדות, אל תמציאי מעבר לזה):\n' +
           'את כותבת עבור ירדן דמרי, מאפרת מקצועית. מתמחה באיפור כלות ובאיפור ערב ואירועים. ' +
-          'הסטודיו באילת, אך היא מגיעה עד הכלה בכל רחבי הארץ ביום החתונה (לבית, למלון, לווילה, לצימר). ' +
-          'שירותים: איפור כלה (כולל פגישת ניסיון בסטודיו, הגעה ביום החתונה, הדבקת ריסים, ערכת טאצ\'-אפ קטנה במתנה); ' +
-          'איפור ערב ואירועים (בסטודיו באילת, ומחוץ לאילת לקבוצות של 3 ומעלה); איפור מלוות, אמהות ואחיות עם הנחות לקבוצות; ' +
-          'סדנת איפור אישית של שעתיים אחד-על-אחד עם חוברת סיכום דיגיטלית; ניסיון עשיר בעבודה מול מצלמה (צילומי אופנה, קליפים, פרסומות, אמנים ואנשי ציבור); ' +
-          'וגם ימי הולדת, איפור פורים ואירועים מיוחדים. ' +
+          'הסטודיו באילת, אך היא מגיעה עד הכלה בכל רחבי הארץ ביום החתונה (לבית, למלון, לוילה, לצימר). ' +
+          'שירותים: איפור כלה (כולל פגישת ניסיון בסטודיו, הגעה ביום החתונה, הדבקת ריסים, ערכת טאץ׳-אפ קטנה במתנה); ' +
+          'איפור ערב ואירועים (בסטודיו באילת, ומחוץ לאילת לקבוצות של 3 ומעלה); איפור מלווות, אמהות ואחיות עם הנחות לקבוצות; ' +
+          'סדנאת איפור אישית של שעתיים אחד-על-אחד עם חוברת סיכום דיגיטלית; ניסיון עשיר בעבודה מול מצלמה (צילומי אופנה, קליפים, פרסומות, אמנים ואנשי ציבור); ' +
+          'וגם ימי הולדות, איפור פורים ואירועים מיוחדים. ' +
           'שימוש במוצרי איפור מקצועיים ויוקרתיים, עמידים, שמחזיקים יום שלם וריקודים. ' +
           'בידול: יחס אישי, סבלנות, רוגע ונוכחות מלאה מהפגישה הראשונה ועד סוף האירוע, התאמת הלוק לפנים, לשמלה ולסגנון של הלקוחה.\n' +
           'כתיבה: עברית ישראלית טבעית ויומיומית כמו שאדם מקומי מדבר (לא תרגום, לא מליצי), נשית, חמה ואלגנטית, פונה ללקוחה בלשון נקבה יחיד ("את"/"אלייך"), מתאימה ל-RTL.\n\n';
@@ -635,7 +635,7 @@ export default {
             'שדה: ' + label + '\n' +
             'הטקסט הנוכחי:\n"""' + (current || '(ריק)') + '"""\n\n' +
             (prompt ? ('בקשת הסגנון של המנהלת: ' + prompt + '\n\n') : '') +
-            'הציעי 3 ניסוחים חלופיים מצוינים לשדה הזה.';
+            'הציעי 3 ניסוחים חלופיים מצויינים לשדה הזה.';
         }
 
         const gURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
@@ -679,7 +679,7 @@ export default {
 
         const instruction =
           'תמללי את ההקלטה לעברית בצורה מדויקת וטבעית. תקני שגיאות זיהוי דיבור, הוסיפי סימני פיסוק נכונים, ' +
-          'והתאימי את הטקסט להקשר. החזירי אך ורק את הטקסט המתומלל — בלי הסברים, בלי מרכאות, בלי הקדמות.';
+          'והתאמי את הטקסט להקשר. החזירי אך ורק את הטקסט המתומלל — בלי הסברים, בלי מרכאות, בלי הקדמות.';
         const gURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
         const gRes = await fetch(gURL, {
           method: 'POST',
@@ -870,7 +870,7 @@ export default {
         return json({ ok: true }, 200, {}, origin);
       }
 
-      // ── GET /google-ads/campaigns — list all campaigns ──────────────────────
+      // ── GET /google-ads/campaigns — list all campaigns ──────────────────────────────
       if (request.method === 'GET' && path === '/google-ads/campaigns') {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
@@ -905,7 +905,7 @@ export default {
         }
       }
 
-      // ── POST /google-ads/campaigns/:id/status — pause or enable ─────────────
+      // ── POST /google-ads/campaigns/:id/status — pause or enable ─────────────────────
       if (request.method === 'POST' && /^\/google-ads\/campaigns\/\d+\/status$/.test(path)) {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
@@ -925,7 +925,7 @@ export default {
         }
       }
 
-      // ── POST /google-ads/campaigns/:id/budget — update daily budget ──────────
+      // ── POST /google-ads/campaigns/:id/budget — update daily budget ──────────────────
       if (request.method === 'POST' && /^\/google-ads\/campaigns\/\d+\/budget$/.test(path)) {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
@@ -949,7 +949,7 @@ export default {
         }
       }
 
-      // ── GET /google-ads/report — performance summary (last 30 days) ──────────
+      // ── GET /google-ads/report — performance summary (last 30 days) ─────────────────
       if (request.method === 'GET' && path === '/google-ads/report') {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
