@@ -293,6 +293,59 @@ function deepMerge(target, source) {
   return out;
 }
 
+// ── Google Ads helpers ──────────────────────────────────────────
+
+async function gadsConfig(env) {
+  const kv = env.SESSIONS;
+  const clientId     = (kv && await kv.get('gads:client_id'))      || env.GOOGLE_ADS_CLIENT_ID      || '';
+  const clientSecret = (kv && await kv.get('gads:client_secret'))   || env.GOOGLE_ADS_CLIENT_SECRET  || '';
+  const devToken     = (kv && await kv.get('gads:developer_token')) || env.GOOGLE_ADS_DEVELOPER_TOKEN || '';
+  const customerId   = (kv && await kv.get('gads:customer_id'))     || env.GOOGLE_ADS_CUSTOMER_ID    || '';
+  return { clientId, clientSecret, devToken, customerId };
+}
+
+async function gadsAccessToken(env) {
+  const refreshToken = env.SESSIONS ? await env.SESSIONS.get('gads:refresh_token') : null;
+  if (!refreshToken) throw new Error('not_connected');
+  const { clientId, clientSecret } = await gadsConfig(env);
+  const r = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id:     clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+      grant_type:    'refresh_token',
+    }).toString(),
+  });
+  if (!r.ok) throw new Error('token_refresh_failed');
+  const t = await r.json();
+  return t.access_token;
+}
+
+async function gadsRequest(method, endpoint, body, env) {
+  const accessToken = await gadsAccessToken(env);
+  const { devToken, customerId: rawCustomerId } = await gadsConfig(env);
+  const customerId = rawCustomerId ? rawCustomerId.replace(/-/g, '') : null;
+  if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not configured');
+  const reqUrl = `https://googleads.googleapis.com/v17/customers/${customerId}${endpoint}`;
+  const opts = {
+    method,
+    headers: {
+      'Authorization':   'Bearer ' + accessToken,
+      'developer-token': devToken,
+      'Content-Type':    'application/json',
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(reqUrl, opts);
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = { raw: text }; }
+  if (!res.ok) throw Object.assign(new Error('google_ads_api_error'), { status: res.status, data });
+  return data;
+}
+
 // ── Request handler ─────────────────────────────────────────────
 
 export default {
@@ -720,10 +773,11 @@ export default {
       if (request.method === 'GET' && path === '/google-ads/auth-url') {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
-        if (!env.GOOGLE_ADS_CLIENT_ID) return json({ error: 'google_ads_not_configured' }, 503, {}, origin);
+        const cfg = await gadsConfig(env);
+        if (!cfg.clientId) return json({ error: 'google_ads_not_configured' }, 503, {}, origin);
 
         const params = new URLSearchParams({
-          client_id:     env.GOOGLE_ADS_CLIENT_ID,
+          client_id:     cfg.clientId,
           redirect_uri:  'https://api.yardendamri.co.il/google-ads/callback',
           response_type: 'code',
           scope:         'https://www.googleapis.com/auth/adwords',
@@ -742,7 +796,8 @@ export default {
           const msg = encodeURIComponent(error || 'missing_code');
           return Response.redirect(`https://yardendamri.co.il/admin.html?gads_error=${msg}`, 302);
         }
-        if (!env.GOOGLE_ADS_CLIENT_ID || !env.GOOGLE_ADS_CLIENT_SECRET) {
+        const cbCfg = await gadsConfig(env);
+        if (!cbCfg.clientId || !cbCfg.clientSecret) {
           return Response.redirect('https://yardendamri.co.il/admin.html?gads_error=not_configured', 302);
         }
 
@@ -751,8 +806,8 @@ export default {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams({
             code,
-            client_id:     env.GOOGLE_ADS_CLIENT_ID,
-            client_secret: env.GOOGLE_ADS_CLIENT_SECRET,
+            client_id:     cbCfg.clientId,
+            client_secret: cbCfg.clientSecret,
             redirect_uri:  'https://api.yardendamri.co.il/google-ads/callback',
             grant_type:    'authorization_code',
           }).toString(),
@@ -782,7 +837,8 @@ export default {
         const valid = await validateSession(request, env);
         if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
 
-        const configured = !!(env.GOOGLE_ADS_CLIENT_ID && env.GOOGLE_ADS_CLIENT_SECRET);
+        const stCfg = await gadsConfig(env);
+        const configured = !!(stCfg.clientId && stCfg.clientSecret);
         const refreshToken  = env.SESSIONS ? await env.SESSIONS.get('gads:refresh_token') : null;
         const connectedAt   = env.SESSIONS ? await env.SESSIONS.get('gads:connected_at')  : null;
         return json({ configured, connected: !!refreshToken, connectedAt }, 200, {}, origin);
@@ -800,45 +856,18 @@ export default {
         return json({ ok: true }, 200, {}, origin);
       }
 
-      // ── Google Ads API helper ────────────────────────────────────────────────
-      async function gadsAccessToken(env) {
-        const refreshToken = env.SESSIONS ? await env.SESSIONS.get('gads:refresh_token') : null;
-        if (!refreshToken) throw new Error('not_connected');
-        const r = await fetch('https://oauth2.googleapis.com/token', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            client_id:     env.GOOGLE_ADS_CLIENT_ID,
-            client_secret: env.GOOGLE_ADS_CLIENT_SECRET,
-            refresh_token: refreshToken,
-            grant_type:    'refresh_token',
-          }).toString(),
-        });
-        if (!r.ok) throw new Error('token_refresh_failed');
-        const t = await r.json();
-        return t.access_token;
-      }
-
-      async function gadsRequest(method, endpoint, body, env) {
-        const accessToken = await gadsAccessToken(env);
-        const customerId = env.GOOGLE_ADS_CUSTOMER_ID ? env.GOOGLE_ADS_CUSTOMER_ID.replace(/-/g, '') : null;
-        if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not configured');
-        const url = `https://googleads.googleapis.com/v17/customers/${customerId}${endpoint}`;
-        const opts = {
-          method,
-          headers: {
-            'Authorization':        'Bearer ' + accessToken,
-            'developer-token':      env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
-            'Content-Type':         'application/json',
-          },
-        };
-        if (body) opts.body = JSON.stringify(body);
-        const res = await fetch(url, opts);
-        const text = await res.text();
-        let data;
-        try { data = JSON.parse(text); } catch { data = { raw: text }; }
-        if (!res.ok) throw Object.assign(new Error('google_ads_api_error'), { status: res.status, data });
-        return data;
+      // ── POST /google-ads/config — store credentials in KV (requires session) ──
+      if (request.method === 'POST' && path === '/google-ads/config') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const body = await request.json().catch(() => ({}));
+        const kv = env.SESSIONS;
+        if (!kv) return json({ error: 'kv_unavailable' }, 503, {}, origin);
+        if (body.client_id)      await kv.put('gads:client_id',      body.client_id);
+        if (body.client_secret)  await kv.put('gads:client_secret',  body.client_secret);
+        if (body.developer_token)await kv.put('gads:developer_token',body.developer_token);
+        if (body.customer_id)    await kv.put('gads:customer_id',    body.customer_id);
+        return json({ ok: true }, 200, {}, origin);
       }
 
       // ── GET /google-ads/campaigns — list all campaigns ──────────────────────
@@ -885,7 +914,8 @@ export default {
         const status = body.status; // 'ENABLED' or 'PAUSED'
         if (!['ENABLED', 'PAUSED'].includes(status)) return json({ error: 'invalid_status' }, 400, {}, origin);
         try {
-          const customerId = (env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/-/g, '');
+          const { customerId: rawCid } = await gadsConfig(env);
+          const customerId = (rawCid || '').replace(/-/g, '');
           await gadsRequest('POST', '/campaigns:mutate', {
             operations: [{ update: { resourceName: `customers/${customerId}/campaigns/${campaignId}`, status }, updateMask: 'status' }],
           }, env);
@@ -905,7 +935,6 @@ export default {
         if (!dailyBudgetILS || dailyBudgetILS <= 0) return json({ error: 'invalid_budget' }, 400, {}, origin);
         const amountMicros = Math.round(dailyBudgetILS * 1_000_000);
         try {
-          const customerId = (env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/-/g, '');
           const streamData = await gadsRequest('POST', '/googleAds:searchStream', {
             query: `SELECT campaign.id, campaign_budget.resource_name FROM campaign WHERE campaign.id = ${campaignId}`,
           }, env);
