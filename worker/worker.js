@@ -298,7 +298,7 @@ function deepMerge(target, source) {
 async function gadsConfig(env) {
   const kv = env.SESSIONS;
   const clientId     = (kv && await kv.get('gads:client_id'))      || env.GOOGLE_ADS_CLIENT_ID      || '';
-  const clientSecret = (kv && await kv.get('gads:client_secret'))   || env.GOOGLE_ADS_CLIENT_SECRET  || '';
+  const clientSecret = env.GOOGLE_ADS_CLIENT_SECRET || (kv && await kv.get('gads:client_secret')) || '';
   const devToken     = (kv && await kv.get('gads:developer_token')) || env.GOOGLE_ADS_DEVELOPER_TOKEN || '';
   const customerId   = (kv && await kv.get('gads:customer_id'))     || env.GOOGLE_ADS_CUSTOMER_ID    || '';
   return { clientId, clientSecret, devToken, customerId };
