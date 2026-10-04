@@ -328,7 +328,8 @@ async function gadsRequest(method, endpoint, body, env) {
   const { devToken, customerId: rawCustomerId } = await gadsConfig(env);
   const customerId = rawCustomerId ? rawCustomerId.replace(/-/g, '') : null;
   if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not configured');
-  const reqUrl = `https://googleads.googleapis.com/v19/customers/${customerId}${endpoint}`;
+  const apiVersion = (env.SESSIONS && await env.SESSIONS.get('gads:api_version')) || env.GOOGLE_ADS_API_VERSION || 'v19';
+  const reqUrl = `https://googleads.googleapis.com/${apiVersion}/customers/${customerId}${endpoint}`;
   const opts = {
     method,
     headers: {
@@ -863,11 +864,15 @@ export default {
         const body = await request.json().catch(() => ({}));
         const kv = env.SESSIONS;
         if (!kv) return json({ error: 'kv_unavailable' }, 503, {}, origin);
-        const kvSet = async (key, val) => val === null ? kv.delete(key) : (val && kv.put(key, val));
-        await kvSet('gads:client_id',      body.client_id      ?? undefined);
-        await kvSet('gads:client_secret',  body.client_secret  ?? undefined);
-        await kvSet('gads:developer_token',body.developer_token ?? undefined);
-        await kvSet('gads:customer_id',    body.customer_id    ?? undefined);
+        const kvSet = async (key, val) => {
+          if (val === null) return kv.delete(key);
+          if (val !== undefined && val !== '') return kv.put(key, String(val));
+        };
+        await kvSet('gads:client_id',      body.client_id);
+        await kvSet('gads:client_secret',  body.client_secret);
+        await kvSet('gads:developer_token',body.developer_token);
+        await kvSet('gads:customer_id',    body.customer_id);
+        await kvSet('gads:api_version',    body.api_version);
         return json({ ok: true }, 200, {}, origin);
       }
 
