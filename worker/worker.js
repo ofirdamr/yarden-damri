@@ -328,7 +328,7 @@ async function gadsRequest(method, endpoint, body, env) {
   const { devToken, customerId: rawCustomerId } = await gadsConfig(env);
   const customerId = rawCustomerId ? rawCustomerId.replace(/-/g, '') : null;
   if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not configured');
-  const reqUrl = `https://googleads.googleapis.com/v17/customers/${customerId}${endpoint}`;
+  const reqUrl = `https://googleads.googleapis.com/v19/customers/${customerId}${endpoint}`;
   const opts = {
     method,
     headers: {
