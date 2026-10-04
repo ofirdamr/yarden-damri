@@ -986,6 +986,37 @@ export default {
         }
       }
 
+      // ── POST /google-ads/query — run a read-only GAQL query ──────────────────────────
+      if (request.method === 'POST' && path === '/google-ads/query') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const body = await request.json().catch(() => ({}));
+        const query = (body.query || '').trim();
+        if (!query || !/^SELECT\s/i.test(query)) return json({ error: 'only SELECT queries allowed' }, 400, {}, origin);
+        try {
+          const data = await gadsRequest('POST', '/googleAds:searchStream', { query }, env);
+          const results = [];
+          for (const batch of (data || [])) for (const row of (batch.results || [])) results.push(row);
+          return json({ results }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
+      }
+
+      // ── POST /google-ads/mutate — apply campaign/keyword mutations ────────────────────
+      if (request.method === 'POST' && path === '/google-ads/mutate') {
+        const valid = await validateSession(request, env);
+        if (!valid) return json({ error: 'unauthorized' }, 401, {}, origin);
+        const body = await request.json().catch(() => ({}));
+        if (!body.resource || !body.operations) return json({ error: 'resource and operations required' }, 400, {}, origin);
+        try {
+          const data = await gadsRequest('POST', `/${body.resource}:mutate`, { operations: body.operations }, env);
+          return json({ ok: true, data }, 200, {}, origin);
+        } catch (e) {
+          return json({ error: e.message, detail: e.data }, e.status || 500, {}, origin);
+        }
+      }
+
       return json({ error: 'not_found' }, 404, {}, origin);
 
     } catch (e) {
